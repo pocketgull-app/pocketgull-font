@@ -37,9 +37,9 @@
 
 <br/>
 
-**PocketGull** is an open-source clinical sans-serif, display, and telemetry monospace typeface superfamily designed by Phil Gear. Engineered to bridge tactile humanist warmth with zero-error clinical precision, PocketGull solves a life-critical challenge in medical software: eliminating medication administration errors while providing an organic, fatigue-resistant texture that soothes the reader's eyes during 12-hour hospital shifts.
+**PocketGull** is an open-source clinical sans-serif, display, slab, and telemetry monospace typeface superfamily designed by Phil Gear. Originating from felt marker lettering created on physical cardstock, PocketGull blends warm humanist stroke dynamics with clear character disambiguation (ISMP standards), Louise Sloan 5:1 optotypic legibility, and fixed 600 UPM telemetry monospace.
 
-Originating from spontaneous felt marker lettering created on physical cardstock, PocketGull synthesizes organic stroke dynamism with the Institute for Safe Medication Practices (ISMP) character disambiguation rules and Louise Sloan 5:1 optotypic legibility standards.
+Designed for comfortable long-form reading, clinical charts, dashboards, and developer telemetry, PocketGull is built on a standard 1000 UPM em-square with extensive multi-script and tactile Braille support.
 
 ---
 
@@ -64,6 +64,7 @@ PocketGull is engineered on a standardized 1000 UPM grid. In strict typographic 
 | **PocketGull Bold** | `Pocket Gull Bold` | `PocketGull-Bold.woff2` / `.ttf` | `PocketGull-Bold` | 700 / 800 | Proportional | Prescription markers, Bionic reading anchors, alarms |
 | **PocketGull Fineliner** | `Pocket Gull Regular` | `PocketGull-Regular.woff2` / `.ttf` (`PocketGull-Fineliner`) | `PocketGull-Regular` | 400 | Proportional | Long-form clinical notes, EHR charts, patient leaflets |
 | **PocketGull Chiseltip** | `Pocket Gull Black` | `PocketGull-Black.woff2` / `.ttf` (`PocketGull-Chiseltip`) | `PocketGull-Black` | 900 | Proportional | Expressive signage, trauma alerts, high-contrast placards |
+| **PocketGull Slab** | `Pocket Gull Slab` | `PocketGull-Slab-Regular.woff2` / `.ttf` | `PocketGull-Slab-Regular` | 400 / 700 | Proportional | Sturdy humanist slab serifs, display titling, editorial reading |
 | **PocketGull Mono** | `Pocket Gull Mono Regular` | `PocketGullMono-Regular.woff2` / `.ttf` | `PocketGullMono-Regular` | 400 / 500 | Fixed 600 UPM | ICU telemetry, tabular vitals, gapless box drawing |
 | **PocketGull Outline** | `Pocket Gull Outline` | `PocketGull-Outline.woff2` / `.ttf` | `PocketGull-Outline` | Display | Locked to Bold | Multi-color lithography, header silhouettes, hollow display |
 | **PocketGull Inline** | `Pocket Gull Inline` | `PocketGull-Inline.woff2` / `.ttf` | `PocketGull-Inline` | Display | Locked to Bold | Engraved titling, hairline center grooves, layered signage |
@@ -72,15 +73,15 @@ PocketGull is engineered on a standardized 1000 UPM grid. In strict typographic 
 
 ---
 
-## 🔬 Core Innovations
+## 🔬 Core Highlights
 
-* **🫀 ISMP & FDA Disambiguation**: Native OpenType layout feature tables for slashed zero (`cv08`), curved lowercase `l` (`cv05`), serifed uppercase `I` (`ss02`), and tabular numbers (`tnum`).
-* **❤️ The Healer Font (Hearts for i's)**: Humanist heart-shaped tittles on lowercase *i* (`.philocardia-heart`, cv09 alternate) paired with 60/72 BPM cardiopulmonary pacing to soothe sympathetic tone and reduce visual fatigue during clinical charting.
-* **⠃ Optically Grounded Braille Block (`U+2800`–`U+28FF`)**: 256-glyph ISO/TR 11548 tactile matrix calibrated with Dot 3 tangent to baseline ($y = 0$), Dot 1 tangent to English x-height ($y = 540$), and dot radius boosted to $r = 78\text{ UPM}$ to match Latin stroke weight without floating or shrinking.
-* **𛰀 Optical x-Height Calibration for Chinuk Pipa**: Duployan Shorthand vowels and consonant stems normalized to Latin lowercase waist ($y = 270\text{ UPM}$) and x-height ($y = 540\text{ UPM}$), transforming minute stenographic specks into clear, legible characters beside English medical text.
-* **👁️ Sloan 5:1 Optotypes & Bouma Spacing**: Calibrated for LogMAR 0.0 acuity and Herman Bouma peripheral anti-crowding at 50–70 cm reading distance.
-* **💻 ICU Medical Terminal & Oh My Posh**: Strict 600 UPM gapless box drawing (`U+2500`–`U+257F`) and sub-cell ECG waveforms with native prompt theme (`pocketgull-ophthalmic.omp.json`).
-* **🎨 Zero-Registration Chromatic Layering Engine**: Exact-matching advance widths (`hmtx.advanceWidth`) across Solid Base Fill, 45° Ben-Day Halftone, Hairline Inline, and Vector Outline cuts, allowing zero-drift ($0.000\text{px}$) multi-color lithography in web layouts and desktop publishing applications.
+* **🔍 Character Disambiguation Suite**: Native OpenType layout feature tables for slashed zero (`cv08`), curved lowercase `l` (`cv05`), serifed uppercase `I` (`ss02`), and tabular numbers (`tnum`).
+* **❤️ The Healer Alternate (Hearts for i's)**: Playful heart-shaped tittles on lowercase *i* (`.philocardia-heart`, cv09 alternate) bringing warmth, friendliness, and distinctive personality to headings.
+* **⠃ Tactile Braille Block (`U+2800`–`U+28FF`)**: Full 256-glyph ISO/TR 11548 tactile matrix calibrated with standard negative space and Latin baseline alignment.
+* **𛰀 Optical Proportioning for Chinuk Pipa**: Duployan shorthand loops and stems proportioned to harmonize naturally alongside Latin text.
+* **👁️ Sloan 5:1 Optotypes**: Proportioned for high legibility, comfortable reading distances, and anti-crowding clarity.
+* **💻 Fixed 600 UPM Monospace**: Strict 600 UPM gapless box drawing (`U+2500`–`U+257F`), sub-cell waveforms, and clean developer telemetry.
+* **🎨 Chromatic Layering Engine**: Exact-matching advance widths across Solid Base, Halftone, Hairline Inline, and Outline cuts for multi-color lithography and design work.
 
 ---
 
@@ -192,27 +193,23 @@ If you use the PocketGull Typeface Superfamily in your clinical research, health
 
 ## 🙏 Acknowledgements & Thanks
 
-We extend our sincere gratitude to the people and projects that make PocketGull possible:
-* **The Dart Programming Language & Google Engineering** ([dart.dev](https://dart.dev)): For providing the soundly-typed, high-performance standalone tooling and scripting platform that powers our procedural vector synthesis, phonological data matrices, and headless specimen rendering pipelines.
-* **Emma**: For foundational linguistic research, sovereign orthography case study specifications, and character curation across Chinuk Pipa, Neo-Tifinagh, Cherokee, Ethiopic Geʻez, and West African Adlam & Vai.
-* **Randal L. Schwartz**: For decades of foundational contributions to open-source software, developer education, Perl and Dart advocacy, and inspiring rigorous command-line tooling standards.
-* **Sovereign Indigenous Language Keepers & Clinicians**: For their enduring cultural stewardship across the 574+ sovereign tribes, First Nations, and circumpolar councils.
-* **Vision Science & Patient Safety Pioneers**: Louise L. Sloan (5:1 optotypes), Herman Bouma (visual crowding), and the Institute for Safe Medication Practices (ISMP).
+We extend our sincere gratitude to the people and open-source projects that help make PocketGull possible:
+* **The Dart Programming Language & Google Engineering** ([dart.dev](https://dart.dev)): For providing the clean, high-performance tooling and scripting platform that powers our procedural vector synthesis and build pipelines.
+* **Open Source Typography Communities**: For decades of foundational contributions to open-source software, font development, and Unicode typography.
+* **Vision Science Pioneers**: Louise L. Sloan (5:1 optotypes), Herman Bouma (visual anti-crowding), and the Institute for Safe Medication Practices (ISMP) for character disambiguation guidance.
 
-See **[THANKS.md](THANKS.md)** for our full dedication and acknowledgements.
+See **[THANKS.md](THANKS.md)** for our full dedication and community acknowledgements.
 
 ---
 
-## 📜 License, Trademarks & Security
+## 📜 License & Open Source Standards
 
-PocketGull font binaries and source code are distributed under the **[Apache License, Version 2.0](LICENSE.txt)** (Zero Reserved Font Names).  
+PocketGull font binaries and source code are distributed under the **[Apache License, Version 2.0](LICENSE.txt)** (and SIL Open Font License 1.1).  
 Free for personal, academic, clinical, and commercial use.
 
-* **Trademark Policy**: See [TRADEMARKS.md](TRADEMARKS.md) for brand protection and Lanham Act § 43(a) coexistence terms.
-* **Security & Regulatory Compliance**: See [SECURITY.md](SECURITY.md) for OpenSSF binary integrity, HIPAA/COPPA safe harbor, and FDA 21 U.S.C. § 360j(o) non-device declarations.
-* **Governance**: See [GOVERNANCE.md](GOVERNANCE.md) for foundry governance, quality pillars, and open-source release standards.
+* **Documentation**: See [GOVERNANCE.md](GOVERNANCE.md) and [SECURITY.md](SECURITY.md) for build verification, quality pillars, and open-source release standards.
 
 **Copyright (c) 2026 The PocketGull Project Authors** ([GitHub Repository](https://github.com/pocketgull-app/pocketgull-typeface)).  
-*Rooted in empirical science. Engineered for life. 🕊️*
+*Crafted with care. Engineered for clarity. 🕊️*
 
 
