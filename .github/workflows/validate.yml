@@ -63,7 +63,7 @@ jobs:
 
       - name: Upload Fontbakery Report Artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: fontbakery-qa-report
           path: fontbakery-report.md
