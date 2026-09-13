@@ -1,4 +1,4 @@
-import 'dart:io';
+﻿import 'dart:io';
 import 'dart:typed_data';
 
 /// Severity level for FoundrySpector check results.
@@ -260,7 +260,7 @@ class FoundrySpector {
     final nameId6 = nameRecords[6] ?? '';
 
     // 6. NameID 0 (Copyright match)
-    final expectedCopyright = oflExpectedLine1 ?? 'Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-typeface)';
+    final expectedCopyright = oflExpectedLine1 ?? 'Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)';
     if (nameId0.trim() == expectedCopyright.trim()) {
       checks.add(SpectorCheckResult(
         checkId: 'name_copyright_match',

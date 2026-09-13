@@ -1,4 +1,4 @@
-import 'dart:io';
+﻿import 'dart:io';
 import 'sfnt_transformer.dart';
 import 'phinney_auditor.dart';
 
@@ -184,7 +184,7 @@ fonts {
   filename: "PocketGull-Regular.ttf"
   post_script_name: "PocketGull-Regular"
   full_name: "Pocket Gull Regular"
-  copyright: "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-typeface)"
+  copyright: "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)"
 }
 fonts {
   name: "Pocket Gull"
@@ -193,7 +193,7 @@ fonts {
   filename: "PocketGull-Bold.ttf"
   post_script_name: "PocketGull-Bold"
   full_name: "Pocket Gull Bold"
-  copyright: "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-typeface)"
+  copyright: "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)"
 }
 fonts {
   name: "Pocket Gull"
@@ -202,7 +202,7 @@ fonts {
   filename: "PocketGull-Black.ttf"
   post_script_name: "PocketGull-Black"
   full_name: "Pocket Gull Black"
-  copyright: "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-typeface)"
+  copyright: "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)"
 }
 subsets: "cyrillic"
 subsets: "cyrillic-ext"
@@ -218,7 +218,7 @@ classifications: "SANS_SERIF"
 classifications: "DISPLAY"
 minisite_url: "https://pocketgull.app"
 source {
-  repository_url: "https://github.com/pocketgull-app/pocketgull-typeface"
+  repository_url: "https://github.com/pocketgull-app/pocketgull-font"
   branch: "main"
 }
 ''');
@@ -238,7 +238,7 @@ fonts {
   filename: "PocketGullMono-Regular.ttf"
   post_script_name: "PocketGullMono-Regular"
   full_name: "Pocket Gull Mono Regular"
-  copyright: "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-typeface)"
+  copyright: "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)"
 }
 subsets: "cyrillic"
 subsets: "cyrillic-ext"
@@ -253,7 +253,7 @@ stroke: "MONOSPACE"
 classifications: "MONOSPACE"
 minisite_url: "https://pocketgull.app"
 source {
-  repository_url: "https://github.com/pocketgull-app/pocketgull-typeface"
+  repository_url: "https://github.com/pocketgull-app/pocketgull-font"
   branch: "main"
 }
 ''');
@@ -261,7 +261,7 @@ source {
 
     // 3. ofl/pocketgull/upstream.yaml
     final pgUpstream = File('${root.path}/ofl/pocketgull/upstream.yaml');
-    pgUpstream.writeAsStringSync('''archive: https://github.com/pocketgull-app/pocketgull-typeface/archive/refs/tags/v3.000.zip
+    pgUpstream.writeAsStringSync('''archive: https://github.com/pocketgull-app/pocketgull-font/archive/refs/tags/v3.000.zip
 branch: main
 files:
   PocketGull-Regular.ttf: fonts/ttf/PocketGull-Regular.ttf
@@ -272,7 +272,7 @@ files:
 
     // 4. ofl/pocketgullmono/upstream.yaml
     final monoUpstream = File('${root.path}/ofl/pocketgullmono/upstream.yaml');
-    monoUpstream.writeAsStringSync('''archive: https://github.com/pocketgull-app/pocketgull-typeface/archive/refs/tags/v3.000.zip
+    monoUpstream.writeAsStringSync('''archive: https://github.com/pocketgull-app/pocketgull-font/archive/refs/tags/v3.000.zip
 branch: main
 files:
   PocketGullMono-Regular.ttf: fonts/ttf/PocketGullMono-Regular.ttf

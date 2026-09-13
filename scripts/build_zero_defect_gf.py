@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 scripts/build_zero_defect_gf.py
 ================================
@@ -185,7 +185,7 @@ vf['name'].names = [n for n in vf['name'].names if n.nameID not in [0, 1, 2, 3, 
 def add_n(nid, val):
     vf['name'].addMultilingualName({'en': val}, vf, nameID=nid)
 
-add_n(0, "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-typeface)")
+add_n(0, "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)")
 add_n(1, "Pocket Gull")
 add_n(2, "Regular")
 add_n(3, "3.100;GOOG;PocketGull-Regular")
@@ -194,7 +194,7 @@ add_n(5, "Version 3.100; The PocketGull Project Authors; OFL 1.1")
 add_n(6, "PocketGull-Regular")
 add_n(8, "Phil Gear")
 add_n(9, "Phil Gear")
-add_n(11, "https://github.com/pocketgull-app/pocketgull-typeface")
+add_n(11, "https://github.com/pocketgull-app/pocketgull-font")
 add_n(12, "https://orcid.org/0009-0008-1372-5381")
 add_n(25, "PocketGull")
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2026, The PocketGull Project Authors.
+﻿// Copyright (c) 2026, The PocketGull Project Authors.
 // All rights reserved. Use of this source code is governed by an OFL 1.1 license.
 
 /// Chinuk Pipa Specimen Generator
@@ -744,7 +744,7 @@ String generatePrintExhibition(String kellsBase64) {
 
       <g transform="translate(30, 260)" class="font-mono" font-size="12" fill="#57534E">
         <text x="0" y="0">COLOPHON ATTRIBUTION:</text>
-        <text x="0" y="24">Compiled into PocketGull Typeface Superfamily across 4 concrete weights in 11,358.73 ms.</text>
+        <text x="0" y="24">Compiled into PocketGull Font Superfamily across 4 concrete weights in 11,358.73 ms.</text>
         <text x="0" y="44">Preserved with guidance from the Confederated Tribes of Grand Ronde language archives.</text>
         <text x="0" y="64">100% Free &amp; Open-Source under the SIL Open Font License 1.1.</text>
       </g>

@@ -1,5 +1,5 @@
-/**
- * PocketGull Typeface Superfamily
+﻿/**
+ * PocketGull Font Superfamily
  * Canonical Monograph Case Studies Data
  * Generated automatically from documentation/case_studies/*.md
  */

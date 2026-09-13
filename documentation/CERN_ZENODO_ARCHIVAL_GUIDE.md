@@ -1,6 +1,6 @@
-# 🏛️ CERN & Zenodo Open Science Archival Guide
+﻿# 🏛️ CERN & Zenodo Open Science Archival Guide
 
-**PocketGull Typeface Superfamily**  
+**PocketGull Font Superfamily**  
 *Permanent Scientific Digital Preservation, DataCite DOI Governance, and CERN Infrastructure*
 
 ---
@@ -9,7 +9,7 @@
 
 **Zenodo** is an open-access scientific repository developed by **CERN** (the European Organization for Nuclear Research, Geneva, Switzerland) under the EU OpenAIRE project. Hosted in the CERN Data Centre in Meyrin, Switzerland, Zenodo provides persistent, tamper-evident digital preservation for open-source scientific software, research data, and clinical tools.
 
-For the **PocketGull Typeface Superfamily**, depositing on CERN/Zenodo achieves three critical milestones:
+For the **PocketGull Font Superfamily**, depositing on CERN/Zenodo achieves three critical milestones:
 1. **Permanent Digital Object Identifier (DOI)**: Immutable DataCite DOI [`10.5281/zenodo.22309379`](https://doi.org/10.5281/zenodo.22309379) and published repository record at [zenodo.org/records/22309379](https://zenodo.org/records/22309379) that can be cited in peer-reviewed journals (e.g. *Ophthalmology*, *Nature Biomedical Engineering*, *BMJ Health & Care Informatics*).
 2. **Archival Preservation at CERN**: Ensures font binaries (`.ttf`, `.woff2`), vector UFO master sources, OpenType table specifications, and clinical validation scripts remain accessible indefinitely, even across long-term institutional shifts.
 3. **Scholarly Citation & Attribution**: Links the typeface repository directly to **Phil Gear** ([ORCID: 0009-0008-1372-5381](https://orcid.org/0009-0008-1372-5381)), **PocketGull LLC**, and the CMS NPI registry.
@@ -22,7 +22,7 @@ This repository contains two synchronized metadata standards designed for CERN a
 
 ### A. `.zenodo.json` (CERN Deposition Schema)
 Located at the root of `pocketgull-typeface`, this configuration file governs how CERN's DataCite ingest pipeline indexes the repository:
-* **Title**: `PocketGull Typeface Superfamily: Optotypically Calibrated Clinical & Ophthalmological Vector Letterforms`
+* **Title**: `PocketGull Font Superfamily: Optotypically Calibrated Clinical & Ophthalmological Vector Letterforms`
 * **Upload Type**: `software`
 * **License**: `OFL-1.1` (SIL Open Font License 1.1)
 * **Creators**: Phil Gear (`orcid: 0009-0008-1372-5381`, `affiliation: PocketGull LLC`) and The PocketGull Project Authors
@@ -65,7 +65,7 @@ node scripts/zenodo-sync.mjs --create-draft
 
 To create a Personal Access Token on Zenodo:
 1. Go to [Zenodo Applications / Tokens](https://zenodo.org/account/settings/applications/tokens/new/).
-2. Name the token `PocketGull Typeface Deposition`.
+2. Name the token `PocketGull Font Deposition`.
 3. Check scopes: `deposit:actions`, `deposit:write`.
 4. Click **Create** and set the environment variable.
 
@@ -75,9 +75,9 @@ To create a Personal Access Token on Zenodo:
 
 ### BibTeX
 ```bibtex
-@software{gear_pocketgull_typeface_2026,
+@software{gear_pocketgull_font_2026,
   author       = {Gear, Phil and {The PocketGull Project Authors}},
-  title        = {{PocketGull Typeface Superfamily: Optotypically Calibrated Clinical \& Ophthalmological Vector Letterforms}},
+  title        = {{PocketGull Font Superfamily: Optotypically Calibrated Clinical \& Ophthalmological Vector Letterforms}},
   month        = sep,
   year         = 2026,
   publisher    = {CERN / Zenodo},
@@ -89,7 +89,7 @@ To create a Personal Access Token on Zenodo:
 ```
 
 ### APA 7th Edition
-> Gear, P., & The PocketGull Project Authors. (2026). *PocketGull Typeface Superfamily: Optotypically Calibrated Clinical & Ophthalmological Vector Letterforms* (Version 3.0.0) [Computer software]. CERN / Zenodo. https://doi.org/10.5281/zenodo.22309379
+> Gear, P., & The PocketGull Project Authors. (2026). *PocketGull Font Superfamily: Optotypically Calibrated Clinical & Ophthalmological Vector Letterforms* (Version 3.0.0) [Computer software]. CERN / Zenodo. https://doi.org/10.5281/zenodo.22309379
 
 ---
 

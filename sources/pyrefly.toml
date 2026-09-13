@@ -1,4 +1,4 @@
-# pyrefly.toml — PocketGull Typeface scripts
+﻿# pyrefly.toml — PocketGull Font scripts
 # Tells pyrefly where to find third-party packages (fontTools, etc.)
 
 [python]

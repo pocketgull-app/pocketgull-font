@@ -1,4 +1,4 @@
-/* PocketGull Specimen Interactive Engine */
+﻿/* PocketGull Specimen Interactive Engine */
 
 
     // 1. Tri-Modal Theme System: Washi Papercraft (和紙), Clinical Obsidian, and 670nm PBM
@@ -1375,17 +1375,17 @@ struct MedicationOrderView: View {
   font-display: swap;
 }`,
       npm: `// Install via Package Manager
-npm install @pocketgull/typeface
+npm install @pocketgull/font
 # or
-pnpm add @pocketgull/typeface
+pnpm add @pocketgull/font
 # or
-yarn add @pocketgull/typeface
+yarn add @pocketgull/font
 
 // 1. In your application entry point (main.tsx / index.js / App.vue):
-import '@pocketgull/typeface';
+import '@pocketgull/font';
 
 // 2. Or in your CSS / SCSS stylesheet:
-@import '@pocketgull/typeface';
+@import '@pocketgull/font';
 
 // 3. Usage in CSS:
 body {
@@ -1502,7 +1502,7 @@ SUBJECT: Request for Installation of PocketGull Clinical Font Superfamily on Cli
 
 Dear [CMIO / IT Director / Clinical Systems Administrator],
 
-I am writing to formally request the installation and whitelisting of the open-source PocketGull typeface superfamily on our clinic and hospital workstations, including ambulatory exam rooms, Citrix virtual desktop endpoints, and mobile Computer on Wheels (COW) carts.
+I am writing to formally request the installation and whitelisting of the open-source PocketGull Font Superfamily on our clinic and hospital workstations, including ambulatory exam rooms, Citrix virtual desktop endpoints, and mobile Computer on Wheels (COW) carts.
 
 1. THE CLINICAL RATIONALE & PATIENT SAFETY
 Standard operating system fonts (such as Arial, Calibri, and Segoe UI) are designed for general corporate office productivity rather than high-acuity medical care. During prolonged 12-hour shifts and under low-contrast or off-axis monitor viewing, standard fonts contribute significantly to cognitive visual fatigue and introduce life-critical medication transcription risks:
@@ -1511,7 +1511,7 @@ Standard operating system fonts (such as Arial, Calibri, and Segoe UI) are desig
   • Peripheral Crowding: Under Bouma’s Law of Lateral Crowding (r ≈ 0.5 × eccentricity), peripheral vitals numbers blend together during surgical or emergency room focus.
 
 2. HOW POCKETGULL RESOLVES THESE HAZARDS
-PocketGull is an open-source, mathematically standardized 1000 UPM clinical typeface superfamily engineered specifically for medical EHRs, bedside vitals monitors, and diagnostic HUDs:
+PocketGull is an open-source, mathematically standardized 1000 UPM clinical font superfamily engineered specifically for medical EHRs, bedside vitals monitors, and diagnostic HUDs:
   • ISMP & FDA Life-Critical Disambiguation: Natively enforces OpenType slashed zeroes (cv08), curved lowercase "l" (cv05), and serifed uppercase "I" (ss02), completely eliminating character collisions.
   • Louise Sloan 5:1 Optotypic Proportion: Engineered to the Johns Hopkins Wilmer Eye Institute standard (5 arcminutes total height, 1 arcminute stroke width and counter aperture at 55 cm reading distance), guaranteeing maximum optical legibility during fatigue.
   • Bedside 203 DPI Interoperability: Quantized to 8 dots/mm integer stems, rendering razor-sharp medication orders on direct-thermal Zebra wristband and IV bag printers with zero dithering.
@@ -1532,7 +1532,7 @@ We request approval to install the three core TrueType font binaries:
 I would be happy to coordinate a brief 30-day pilot within our department or floor to demonstrate the reduction in visual strain and enhanced legibility across our clinical team.
 
 Documentation & Interactive Verification Specimen: https://font.pocketgull.app
-Open Source Repository: https://github.com/pocketgull-app/pocketgull-typeface
+Open Source Repository: https://github.com/pocketgull-app/pocketgull-font
 
 Thank you for your dedication to our clinical staff's ergonomics and patient safety.
 
@@ -4624,7 +4624,7 @@ Sincerely,
         if (apiKey) {
           try {
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-            const systemPrompt = `You are the PocketGull Doc Drill educator embedded in the official PocketGull Typeface specification.
+            const systemPrompt = `You are the PocketGull Doc Drill educator embedded in the official PocketGull Font specification.
 Explain concepts concisely, highlighting clinical safety, ophthalmology, and typeface engineering:
 - Louise Sloan 5:1 optotype invariant (5' arc height / 1' stroke)
 - Herman Bouma lateral crowding law (r ≈ 0.5 × eccentricity)

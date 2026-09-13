@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 scripts/v4/build_16_axis_vf.py
 ================================
@@ -402,7 +402,7 @@ def build_16_axis_vf():
     family_name = "PocketGull VF"
     ps_name = "PocketGull-VF"
     version_str = "Version 3.100; The PocketGull Project Authors; Apache 2.0"
-    copyright_str = "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-typeface)"
+    copyright_str = "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)"
 
     name_table.names = [n for n in name_table.names if n.nameID not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 25]]
     def add_n(nid, val):
@@ -418,7 +418,7 @@ def build_16_axis_vf():
     add_n(7, "PocketGull is a trademark of Phil Gear.")
     add_n(8, "Phil Gear")
     add_n(9, "Phil Gear")
-    add_n(11, "https://github.com/pocketgull-app/pocketgull-typeface")
+    add_n(11, "https://github.com/pocketgull-app/pocketgull-font")
     add_n(12, "https://orcid.org/0009-0008-1372-5381")
     add_n(13, "Licensed under the Apache License, Version 2.0")
     add_n(14, "http://www.apache.org/licenses/LICENSE-2.0")

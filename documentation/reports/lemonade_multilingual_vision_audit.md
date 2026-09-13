@@ -1,4 +1,4 @@
-# PocketGull Superfamily — Lemonade Global Multilingual Vision Audit
+﻿# PocketGull Superfamily — Lemonade Global Multilingual Vision Audit
 
 **Engine**: Lemonade Gemma 3 4B Multimodal Vision (`Gemma-3-4b-it-GGUF`)  
 **Hardware**: Local AMD Radeon GPU (Vulkan/DirectML offline inference)  
@@ -11,11 +11,11 @@
 
 **Rendered Specimen Plate**: `multilingual_plate_1_indigenous_classical.png`
 
-## Forensic Visual Audit: PocketGull Typeface Superfamily – Plate 1: Indigenous Sovereignty & Classical World Scripts
+## Forensic Visual Audit: PocketGull Font Superfamily – Plate 1: Indigenous Sovereignty & Classical World Scripts
 
 **Date:** October 26, 2023
 **Auditor:** Dr. Elias Thorne, Senior Typefoundry Director, Global Multilingual Typographer, Medical Informatics Safety Ergonomist
-**Subject:** Rendered Specimen Plate 1 – PocketGull Typeface Superfamily (Focus: Indigenous & Classical Scripts)
+**Subject:** Rendered Specimen Plate 1 – PocketGull Font Superfamily (Focus: Indigenous & Classical Scripts)
 
 ---
 
@@ -63,13 +63,13 @@ This score reflects a commendable level of technical achievement, but highlights
 
 **Rendered Specimen Plate**: `multilingual_plate_2_indic_african_asian.png`
 
-## Forensic Visual Audit: PocketGull Typeface Superfamily – Plate 2: Indic, African & Asian Healthcare Scripts
+## Forensic Visual Audit: PocketGull Font Superfamily – Plate 2: Indic, African & Asian Healthcare Scripts
 
 **Date:** October 26, 2023
 **Auditor:** Dr. Evelyn Reed, Senior Typefoundry Director, Global Multilingual Typographer, Medical Informatics Safety Ergonomist
 **Subject:** Rendered World Multilingual Specimen Plate – Plate 2 (Indic, African & Asian Healthcare Scripts)
 
-**Executive Summary:** This audit assesses the PocketGull typeface’s execution of non-Latin scripts within a healthcare context. While demonstrating commendable ambition in its multilingual scope, Plate 2 reveals several areas requiring refinement to fully meet the stringent demands of life-critical applications. The overall score reflects a solid foundation but necessitates targeted adjustments to ensure optimal legibility, cultural authenticity, and ergonomic safety. 
+**Executive Summary:** This audit assesses the PocketGull Font’s execution of non-Latin scripts within a healthcare context. While demonstrating commendable ambition in its multilingual scope, Plate 2 reveals several areas requiring refinement to fully meet the stringent demands of life-critical applications. The overall score reflects a solid foundation but necessitates targeted adjustments to ensure optimal legibility, cultural authenticity, and ergonomic safety. 
 
 ---
 

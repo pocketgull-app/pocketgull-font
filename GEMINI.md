@@ -1,7 +1,7 @@
-# PocketGull Typeface Superfamily (Upstream Release & Foundry Governance)
+﻿# PocketGull Font Superfamily (Upstream Release & Foundry Governance)
 
 ## Project Overview
-PocketGull is an open-source clinical sans-serif, display, and telemetry monospace typeface superfamily engineered by Phil Gear. Originating from tactile felt marker lettering created on physical cardstock for GearArts, PocketGull synthesizes humanist stroke warmth with Louise Sloan 5:1 optotypic legibility and Institute for Safe Medication Practices (ISMP) character disambiguation standards for life-critical healthcare environments.
+PocketGull is an open-source clinical sans-serif, display, and telemetry monospace font superfamily engineered by Phil Gear. Originating from tactile felt marker lettering created on physical cardstock for GearArts, PocketGull synthesizes humanist stroke warmth with Louise Sloan 5:1 optotypic legibility and Institute for Safe Medication Practices (ISMP) character disambiguation standards for life-critical healthcare environments.
 
 ## The Superfamily & Classification
 - **Primary Google Fonts Category**: `SANS_SERIF` (with `DISPLAY` and `MONOSPACE` members).
@@ -68,7 +68,7 @@ PocketGull maintains independent typefoundry distribution governed by Phil Gear:
   - **Fontsource (NPM)**: `distribution/fontsource/metadata.json` (`npm install @fontsource/pocketgull`)
   - **Adobe Fonts Partner Portfolio**: `distribution/adobe/ADOBE_FONTS_PORTFOLIO.md`
 - **Minimalist Versioning (`nameID 5`)**: `Version 3.1.0; The PocketGull Project Authors; OFL 1.1`. `head.fontRevision` locked to exact float `3.1`.
-- **Copyright & License**: `nameID 0` matches `OFL.txt` (`Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-typeface)`).
+- **Copyright & License**: `nameID 0` matches `OFL.txt` (`Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)`).
 - **Zero Reserved Font Names (RFN)**: SIL Open Font License 1.1 with no RFN restriction.
 - **Brotli Compression**: WOFF2 binaries compressed at Brotli quality 11.
 

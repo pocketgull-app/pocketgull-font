@@ -1,4 +1,4 @@
-archive: https://github.com/pocketgull-app/pocketgull-typeface/archive/refs/tags/v3.000.zip
+﻿archive: https://github.com/pocketgull-app/pocketgull-font/archive/refs/tags/v3.000.zip
 branch: main
 files:
   PocketGull-Regular.ttf: fonts/ttf/PocketGull-Regular.ttf

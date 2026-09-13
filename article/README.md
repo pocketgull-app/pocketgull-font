@@ -1,4 +1,4 @@
-# 🖋️ PocketGull: The Living Typeface & Brand System
+﻿# 🖋️ PocketGull: The Living Typeface & Brand System
 ### *An Open-Source Journey from Hand-Drawn Felt Marker to Parametric Typefoundry*
 
 ---
@@ -114,4 +114,4 @@ For ICU telemetry monitors, bedside EHR tablets, and dense clinical diagnostic r
 
 Released under the **[SIL Open Font License 1.1 (OFL)](../OFL.txt)**.  
 Reserved Font Name: `PocketGull`  
-Copyright © 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-typeface)
+Copyright © 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)

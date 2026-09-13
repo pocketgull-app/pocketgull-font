@@ -1,13 +1,13 @@
-# Project Governance & Typographic Oversight Policy
+﻿# Project Governance & Typographic Oversight Policy
 
-**PocketGull Typeface Superfamily**  
+**PocketGull Font Superfamily**  
 *Open Source Governance, Clinical & Ophthalmological Typography Review Board, and Release Protocol*
 
 ---
 
 ## 🏛️ 1. Governance Principles
 
-PocketGull Typeface Superfamily is an open-source medical, ophthalmological, and Pan-Tribal typography project developed by **PocketGull LLC** in collaboration with clinical researchers, optometrists, vision scientists, type designers, and Indigenous language keepers.
+PocketGull Font Superfamily is an open-source medical, ophthalmological, and Pan-Tribal typography project developed by **PocketGull LLC** in collaboration with clinical researchers, optometrists, vision scientists, type designers, and Indigenous language keepers.
 
 Our governance model ensures:
 1. **Ophthalmological Rigor & Evidence Grounding**: All letterform metrics, stroke contrasts, x-height ratios, and counter spaces must be grounded in peer-reviewed vision science literature (Louise Sloan 5:1 acuity, Hermann Bouma crowding coefficients, ISO/TR 11548 Braille dimensions, DIN 1450 legibility standards).

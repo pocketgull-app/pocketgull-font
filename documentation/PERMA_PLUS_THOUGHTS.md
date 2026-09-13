@@ -1,4 +1,4 @@
-# PERMA+ Thoughts: The Architecture of Positive Psychology & Clinical Typography
+﻿# PERMA+ Thoughts: The Architecture of Positive Psychology & Clinical Typography
 
 ```
     (P) → (E) → (R) → (M) → (A) → (+)
@@ -11,7 +11,7 @@
 
 In clinical medicine, palliative care, and telehealth, human recovery is multidimensional. While elementary arithmetic relies on mathematical mnemonics (PEMDAS), **medical care planning and clinical typography are rooted in Martin Seligman’s foundational Positive Psychology framework: PERMA+**.
 
-Designed by Phil Gear and the PocketGull Project Authors, **PERMA+ Thoughts** connects the geometry of the **PocketGull** clinical typeface superfamily with living psychosomatic resilience. Every writing system integrated into PocketGull—beginning with **Canadian Aboriginal Syllabics (Inuktitut)** and **Chinuk Pipa (Duployan)**—uses the six PERMA+ pillars to teach the script through clinically validated medical and physiological concepts.
+Designed by Phil Gear and the PocketGull Project Authors, **PERMA+ Thoughts** connects the geometry of the **PocketGull** clinical font superfamily with living psychosomatic resilience. Every writing system integrated into PocketGull—beginning with **Canadian Aboriginal Syllabics (Inuktitut)** and **Chinuk Pipa (Duployan)**—uses the six PERMA+ pillars to teach the script through clinically validated medical and physiological concepts.
 
 ---
 
@@ -74,4 +74,4 @@ Designed by Phil Gear and the PocketGull Project Authors, **PERMA+ Thoughts** co
 
 ---
 
-*Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-typeface)*
+*Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)*

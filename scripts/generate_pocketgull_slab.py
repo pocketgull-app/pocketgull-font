@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 PocketGull Typefoundry: PocketGull Slab Generator v2.0
 =====================================================
@@ -445,7 +445,7 @@ def process_slab_font(src_name, family_name="PocketGull Slab", ps_family="Pocket
     # 4. OpenType Option 5 Metadata
     print("Updating OpenType metadata & Option 5 naming table...")
     version_str = "Version 3.000; The PocketGull Project Authors; OFL 1.1"
-    copyright_str = "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-typeface)"
+    copyright_str = "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)"
 
     name_table = font['name']
     name_table.names = [n for n in name_table.names if n.nameID not in [1, 2, 3, 4, 5, 6, 16, 17]]

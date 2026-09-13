@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 PocketGull Typefoundry - Global Multilingual & Multi-Script Optical Linter (v2 Masterwork)
 ========================================================================================
@@ -229,7 +229,7 @@ def audit_plate_with_lemonade(plate_path: Path, plate_name: str, focus_desc: str
 
     system_prompt = (
         "You are Dr. Evelyn Reed and Dr. Elias Thorne, Senior Typefoundry Directors, Global Multilingual Typographers, and Medical Informatics Safety Ergonomists. "
-        "You are conducting a strict, forensic visual re-evaluation of the revised world multilingual specimen proof plates from the PocketGull Typeface Superfamily. "
+        "You are conducting a strict, forensic visual re-evaluation of the revised world multilingual specimen proof plates from the PocketGull Font Superfamily. "
         "Review the evidence on the specimen plate carefully for the resolution of all previous directives:\n"
         "1. Bengali Kerning & Density: Verify that +15% breathing room has been applied, the 'ং' glyph has been reinforced with high contrast, and character density is balanced.\n"
         "2. Yi Syllables Refinement: Verify that Yi glyphs are scaled proportionally to Latin x-height with crisp, open counters and no visual clutter.\n"

@@ -1,7 +1,7 @@
-{
-  "title": "PocketGull Typeface Superfamily: Optotypically Calibrated Clinical & Ophthalmological Vector Letterforms",
+﻿{
+  "title": "PocketGull Font Superfamily: Optotypically Calibrated Clinical & Ophthalmological Vector Letterforms",
   "upload_type": "software",
-  "description": "PocketGull is an open-source clinical, ophthalmological, and telemetry monospace typeface superfamily designed for digital health applications, critical care patient monitoring, and sovereign multi-script literacy. Engineered on a 1000 UPM grid conforming to ISO/IEC 14496-22 and Google Fonts specifications with LogMAR 0.0 Louise Sloan 5:1 optotypic legibility, PocketGull features 256 Unicode Braille patterns (U+2800..U+28FF), ISMP/FDA numeral disambiguation (slashed zero cv08, curved lowercase l cv05, serifed capital I ss02), Herman Bouma lateral anti-crowding spacing, 670nm Retinal PBM night mode, and native multi-script support for Canadian Aboriginal Syllabics (Inuktitut), Chinuk Pipa, Cherokee Syllabary, Neo-Tifinagh, Ethiopic Ge'ez, Adlam, Vai, and Pan-Tribal North American Indigenous orthographies under the CARE Principles for Indigenous Data Sovereignty.",
+  "description": "PocketGull is an open-source clinical, ophthalmological, and telemetry monospace font superfamily designed for digital health applications, critical care patient monitoring, and sovereign multi-script literacy. Engineered on a 1000 UPM grid conforming to ISO/IEC 14496-22 and Google Fonts specifications with LogMAR 0.0 Louise Sloan 5:1 optotypic legibility, PocketGull features 256 Unicode Braille patterns (U+2800..U+28FF), ISMP/FDA numeral disambiguation (slashed zero cv08, curved lowercase l cv05, serifed capital I ss02), Herman Bouma lateral anti-crowding spacing, 670nm Retinal PBM night mode, and native multi-script support for Canadian Aboriginal Syllabics (Inuktitut), Chinuk Pipa, Cherokee Syllabary, Neo-Tifinagh, Ethiopic Ge'ez, Adlam, Vai, and Pan-Tribal North American Indigenous orthographies under the CARE Principles for Indigenous Data Sovereignty.",
   "creators": [
     {
       "name": "Gear, Phil",

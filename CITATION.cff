@@ -1,12 +1,12 @@
-cff-version: 1.2.0
-message: "If you use the PocketGull Typeface Superfamily in clinical software, medical informatics, vision science research, or assistive reading systems, please cite it as below."
-title: "PocketGull Typeface Superfamily: Optotypically Calibrated Clinical & Ophthalmological Vector Letterforms"
-abstract: "PocketGull is an open-source clinical, ophthalmological, and telemetry monospace typeface superfamily bridging tactile humanist warmth with zero-error clinical precision. Engineered on a 1000 UPM grid with LogMAR 0.0 Snellen optotypic geometry, PocketGull incorporates 256 Unicode Braille patterns (U+2800..U+28FF), ISMP/FDA numeral disambiguation (slashed zero, curved lowercase l, serifed capital I), Louise Sloan 5:1 proportional legibility, 670nm Retinal Photobiomodulation (PBM) mode, and native multi-script support for Canadian Aboriginal Syllabics, Chinuk Pipa, Cherokee Syllabary, Neo-Tifinagh, Ethiopic Ge'ez, Adlam, Vai, and Pan-Tribal North American Indigenous orthographies under the CARE Principles for Indigenous Data Sovereignty."
+﻿cff-version: 1.2.0
+message: "If you use the PocketGull Font Superfamily in clinical software, medical informatics, vision science research, or assistive reading systems, please cite it as below."
+title: "PocketGull Font Superfamily: Optotypically Calibrated Clinical & Ophthalmological Vector Letterforms"
+abstract: "PocketGull is an open-source clinical, ophthalmological, and telemetry monospace font superfamily bridging tactile humanist warmth with zero-error clinical precision. Engineered on a 1000 UPM grid with LogMAR 0.0 Snellen optotypic geometry, PocketGull incorporates 256 Unicode Braille patterns (U+2800..U+28FF), ISMP/FDA numeral disambiguation (slashed zero, curved lowercase l, serifed capital I), Louise Sloan 5:1 proportional legibility, 670nm Retinal Photobiomodulation (PBM) mode, and native multi-script support for Canadian Aboriginal Syllabics, Chinuk Pipa, Cherokee Syllabary, Neo-Tifinagh, Ethiopic Ge'ez, Adlam, Vai, and Pan-Tribal North American Indigenous orthographies under the CARE Principles for Indigenous Data Sovereignty."
 version: 3.0.0
 date-released: "2026-09-04"
 license: Apache-2.0
 doi: "10.5281/zenodo.22309379"
-repository-code: "https://github.com/pocketgull-app/pocketgull-typeface"
+repository-code: "https://github.com/pocketgull-app/pocketgull-font"
 url: "https://font.pocketgull.app"
 authors:
   - family-names: "Gear"
@@ -63,7 +63,7 @@ keywords:
   - "neo-tifinagh"
 preferred-citation:
   type: software
-  title: "PocketGull Typeface Superfamily: Optotypically Calibrated Clinical & Ophthalmological Vector Letterforms"
+  title: "PocketGull Font Superfamily: Optotypically Calibrated Clinical & Ophthalmological Vector Letterforms"
   authors:
     - family-names: "Gear"
       given-names: "Phil"
@@ -75,6 +75,6 @@ preferred-citation:
   version: "3.0.0"
   doi: "10.5281/zenodo.22309379"
   url: "https://font.pocketgull.app"
-  repository-code: "https://github.com/pocketgull-app/pocketgull-typeface"
+  repository-code: "https://github.com/pocketgull-app/pocketgull-font"
   license: "Apache-2.0"
   notes: "Released under the SIL Open Font License 1.1 for medical informatics, clinical safety, and low-vision accessibility under CARE Indigenous Data Sovereignty."

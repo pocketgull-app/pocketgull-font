@@ -1,4 +1,4 @@
-# Adobe Fonts Foundry Partner Submission Dossier
+﻿# Adobe Fonts Foundry Partner Submission Dossier
 
 **Superfamily**: PocketGull  
 **Foundry**: PocketGull Clinical Typefoundry / GearArts  
@@ -11,7 +11,7 @@
 
 ## 1. Executive Summary & Design Vision
 
-PocketGull is a life-critical, optotypically calibrated clinical and telemetry typeface superfamily engineered by Phil Gear. Originating from tactile felt marker lettering created on physical cardstock for GearArts, PocketGull bridges humanist stroke warmth with Louise Sloan 5:1 optotypic legibility (the gold standard in clinical ophthalmology) and Institute for Safe Medication Practices (ISMP) character disambiguation.
+PocketGull is a life-critical, optotypically calibrated clinical and telemetry font superfamily engineered by Phil Gear. Originating from tactile felt marker lettering created on physical cardstock for GearArts, PocketGull bridges humanist stroke warmth with Louise Sloan 5:1 optotypic legibility (the gold standard in clinical ophthalmology) and Institute for Safe Medication Practices (ISMP) character disambiguation.
 
 While corporate medical environments have historically relied on sterile, mechanical grotesque typefaces (e.g., Arial, Helvetica) that exhibit high error rates during dosage comprehension, PocketGull introduces **Aggressive Gentleness**—a design philosophy proving that life-saving legibility does not require clinical sterility.
 
@@ -79,5 +79,5 @@ PocketGull undergoes rigorous automated and forensic validation before any relea
 ## 6. Submission Contacts & Links
 
 * **Foundry Website**: [https://font.pocketgull.app](https://font.pocketgull.app)
-* **GitHub Repository**: [https://github.com/pocketgull-app/pocketgull-typeface](https://github.com/pocketgull-app/pocketgull-typeface)
+* **GitHub Repository**: [https://github.com/pocketgull-app/pocketgull-font](https://github.com/pocketgull-app/pocketgull-font)
 * **Inquiry Email**: philgear@gmail.com

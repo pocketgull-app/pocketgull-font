@@ -1,4 +1,4 @@
-name: "Pocket Gull"
+﻿name: "Pocket Gull"
 designer: "Phil Gear"
 license: "APACHE2"
 category: "SANS_SERIF"
@@ -10,7 +10,7 @@ fonts {
   filename: "PocketGull-Regular.ttf"
   post_script_name: "PocketGull-Regular"
   full_name: "Pocket Gull Regular"
-  copyright: "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-typeface)"
+  copyright: "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)"
 }
 fonts {
   name: "Pocket Gull"
@@ -19,7 +19,7 @@ fonts {
   filename: "PocketGull-Bold.ttf"
   post_script_name: "PocketGull-Bold"
   full_name: "Pocket Gull Bold"
-  copyright: "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-typeface)"
+  copyright: "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)"
 }
 fonts {
   name: "Pocket Gull"
@@ -28,7 +28,7 @@ fonts {
   filename: "PocketGull-Black.ttf"
   post_script_name: "PocketGull-Black"
   full_name: "Pocket Gull Black"
-  copyright: "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-typeface)"
+  copyright: "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)"
 }
 subsets: "cyrillic"
 subsets: "cyrillic-ext"
@@ -44,7 +44,7 @@ classifications: "SANS_SERIF"
 classifications: "DISPLAY"
 minisite_url: "https://pocketgull.app"
 source {
-  repository_url: "https://github.com/pocketgull-app/pocketgull-typeface"
+  repository_url: "https://github.com/pocketgull-app/pocketgull-font"
   branch: "main"
   files {
     source_file: "LICENSE.txt"

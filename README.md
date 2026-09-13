@@ -1,6 +1,6 @@
-<div align="center">
+﻿<div align="center">
 
-# 🕊️ PocketGull Typeface Superfamily
+# 🕊️ PocketGull Font Superfamily
 
 [![Apache 2.0 License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=flat-square)](LICENSE.txt)
 [![SemVer 3.0.0](https://img.shields.io/badge/SemVer-3.0.0-blue.svg?style=flat-square)](CHANGELOG.md)
@@ -37,7 +37,7 @@
 
 <br/>
 
-**PocketGull** is an open-source clinical sans-serif, display, slab, and telemetry monospace typeface superfamily designed by Phil Gear. Originating from felt marker lettering created on physical cardstock, PocketGull blends warm humanist stroke dynamics with clear character disambiguation (ISMP standards), Louise Sloan 5:1 optotypic legibility, and fixed 600 UPM telemetry monospace.
+**PocketGull** is an open-source clinical sans-serif, display, slab, and telemetry monospace font superfamily designed by Phil Gear. Originating from felt marker lettering created on physical cardstock, PocketGull blends warm humanist stroke dynamics with clear character disambiguation (ISMP standards), Louise Sloan 5:1 optotypic legibility, and fixed 600 UPM telemetry monospace.
 
 Designed for comfortable long-form reading, clinical charts, dashboards, and developer telemetry, PocketGull is built on a standard 1000 UPM em-square with extensive multi-script and tactile Braille support.
 
@@ -173,12 +173,12 @@ Enable clinical dosage disambiguation:
 * **Companion Clinical Suite DOI**: [`10.5281/zenodo.20647514`](https://doi.org/10.5281/zenodo.20647514)
 * **Preservation Archive**: CERN Data Centre (Geneva, Switzerland)
 
-If you use the PocketGull Typeface Superfamily in your clinical research, healthcare software, or vision science publications, please cite it using [`CITATION.cff`](CITATION.cff) or the BibTeX entry below:
+If you use the PocketGull Font Superfamily in your clinical research, healthcare software, or vision science publications, please cite it using [`CITATION.cff`](CITATION.cff) or the BibTeX entry below:
 
 ```bibtex
-@software{gear_pocketgull_typeface_2026,
+@software{gear_pocketgull_font_2026,
   author       = {Gear, Phil and {The PocketGull Project Authors}},
-  title        = {{PocketGull Typeface Superfamily: Optotypically Calibrated Clinical \& Ophthalmological Vector Letterforms}},
+  title        = {{PocketGull Font Superfamily: Optotypically Calibrated Clinical \& Ophthalmological Vector Letterforms}},
   month        = sep,
   year         = 2026,
   publisher    = {CERN / Zenodo},
@@ -209,7 +209,7 @@ Free for personal, academic, clinical, and commercial use.
 
 * **Documentation**: See [GOVERNANCE.md](GOVERNANCE.md) and [SECURITY.md](SECURITY.md) for build verification, quality pillars, and open-source release standards.
 
-**Copyright (c) 2026 The PocketGull Project Authors** ([GitHub Repository](https://github.com/pocketgull-app/pocketgull-typeface)).  
+**Copyright (c) 2026 The PocketGull Project Authors** ([GitHub Repository](https://github.com/pocketgull-app/pocketgull-font)).  
 *Crafted with care. Engineered for clarity. 🕊️*
 
 

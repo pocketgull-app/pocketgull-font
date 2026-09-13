@@ -1,5 +1,5 @@
-# 🕊️ The Radical Clinical Inclusion Charter
-## PocketGull Typeface Superfamily — The Founding Typographic Covenant
+﻿# 🕊️ The Radical Clinical Inclusion Charter
+## PocketGull Font Superfamily — The Founding Typographic Covenant
 **Lead Type Designer & Foundry Director:** Phil Gear  
 **Classification:** Universal Clinical Sans-Serif, Display, and Telemetry Monospace Superfamily  
 **License:** SIL Open Font License 1.1 (Zero Reserved Font Name Debt)  
@@ -15,7 +15,7 @@
 
 Modern institutional typography was born of cold industrial metal, designed for corporate balance sheets and bureaucratic legibility. In a hospital, that coldness is not merely an aesthetic deficit—it is an active iatrogenic hazard. It alienates vulnerable patients, increases cognitive load for exhausted clinicians under adrenaline, and truncates life-critical medication names on cramped medical device viewports.
 
-The **PocketGull Typeface Superfamily** was born from a different origin: the tactile humanist warmth of hand-cut felt marker lettering on physical cardstock, synthesized with Louise Sloan 5:1 optotypic science, Institute for Safe Medication Practices (ISMP) character disambiguation, and respectful multi-script typographic design.
+The **PocketGull Font Superfamily** was born from a different origin: the tactile humanist warmth of hand-cut felt marker lettering on physical cardstock, synthesized with Louise Sloan 5:1 optotypic science, Institute for Safe Medication Practices (ISMP) character disambiguation, and respectful multi-script typographic design.
 
 This Charter establishes the permanent, non-negotiable architectural and ethical commitments of the PocketGull Typefoundry.
 
@@ -90,7 +90,7 @@ PocketGull Variable Font encapsulates the superfamily into a single, cohesive en
 
 ## 📜 The Foundry Covenant
 
-We, the authors, contributors, and stewards of the PocketGull Typeface Superfamily, pledge:
+We, the authors, contributors, and stewards of the PocketGull Font Superfamily, pledge:
 1. **Never to monetize safety:** The fonts, variable axes, webfont subsets, and disambiguation engines shall remain permanently free, open-source, and unencumbered under the SIL Open Font License 1.1.
 2. **Never to compromise binary memory safety:** Every binary released into the public domain shall pass 100% of W3C OTS memory checks, TrueType word-alignment invariants, and Google Fonts pre-flight specifications.
 3. **Never to forget the human being behind the chart:** In every vector node we draw, every OpenType lookup we compile, and every variable axis we calibrate, we stand in service of the patient in the bed, the nurse on the night shift, the elder reading their native tongue, and the child looking up at the monitor hoping for good news.

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 scripts/build_production_vf.py
 ==============================
@@ -84,7 +84,7 @@ def compile_production_vf():
     def add_n(nid, val):
         name_table.addMultilingualName({'en': val}, vf, nameID=nid)
 
-    add_n(0, "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-typeface)")
+    add_n(0, "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)")
     add_n(1, "Pocket Gull")
     add_n(2, "Regular")
     add_n(3, "3.100;PKGL;PocketGull-VF")

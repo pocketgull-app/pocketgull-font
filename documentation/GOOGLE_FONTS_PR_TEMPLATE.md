@@ -1,4 +1,4 @@
-# Google Fonts Pull Request Blueprint
+﻿# Google Fonts Pull Request Blueprint
 
 Use this template when opening a PR to [`google/fonts`](https://github.com/google/fonts) to onboard the PocketGull superfamily.
 
@@ -12,7 +12,7 @@ Use this template when opening a PR to [`google/fonts`](https://github.com/googl
 ## Pull Request Description
 ```markdown
 ### Summary
-This PR onboards the **PocketGull** typeface superfamily, an open-source clinical and handwriting typeface designed by Phil Gear. Originating from hand-inked felt marker lettering created on physical cardstock for GearArts, the superfamily bridges tactile humanist warmth with Louise Sloan 5:1 optotypic legibility and Institute for Safe Medication Practices (ISMP) disambiguation standards.
+This PR onboards the **PocketGull** font superfamily, an open-source clinical and handwriting typeface designed by Phil Gear. Originating from hand-inked felt marker lettering created on physical cardstock for GearArts, the superfamily bridges tactile humanist warmth with Louise Sloan 5:1 optotypic legibility and Institute for Safe Medication Practices (ISMP) disambiguation standards.
 
 - **Family Name**: `PocketGull` & `PocketGull Mono`
 - **Styles**: 
@@ -21,7 +21,7 @@ This PR onboards the **PocketGull** typeface superfamily, an open-source clinica
   - `PocketGull-Chiseltip.ttf` (Weight: 900 Black Calligraphic Display)
   - `PocketGullMono-Regular.ttf` (Weight: 400 Monospace Telemetry, 600 UPM pitch)
 - **License**: SIL Open Font License, Version 1.1 (zero Reserved Font Names)
-- **Upstream Repository**: https://github.com/pocketgull-app/pocketgull-typeface
+- **Upstream Repository**: https://github.com/pocketgull-app/pocketgull-font
 - **Interactive Specimen**: https://pocketgull.app (or local index.html)
 
 ### Technical Specifications & Quality Assurance

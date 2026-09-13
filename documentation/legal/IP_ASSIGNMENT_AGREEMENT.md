@@ -1,4 +1,4 @@
-# INTELLECTUAL PROPERTY ASSIGNMENT AGREEMENT
+﻿# INTELLECTUAL PROPERTY ASSIGNMENT AGREEMENT
 
 This **Intellectual Property Assignment Agreement** (the "Agreement") is entered into and made effective as of **June 15, 2026** (the "Effective Date"), by and between:
 
@@ -25,7 +25,7 @@ This **Intellectual Property Assignment Agreement** (the "Agreement") is entered
 Assignor hereby irrevocably sells, assigns, transfers, grants, and conveys to Assignee, its successors, and assigns, forever, all of Assignor’s worldwide right, title, and interest in and to the following (collectively, the "Assigned Property"):
 * **Trademarks & Brand Assets**: All trademarks, service marks, trade names, logos, slogans, and wordmarks for **"PocketGull"**, **"GearArts"**, and the PocketGull avian insignia, whether registered or arising under common law, together with the goodwill of the business symbolized thereby and all rights to sue for past, present, or future infringement.
 * **Domain Names & Accounts**: All rights, title, and administrative control over the domain names `pocketgull.app` and `font.pocketgull.app`, the GitHub organization `pocketgull-app`, the Zenodo archive DOI allocations, and associated cloud/web infrastructure.
-* **Copyrights & Font Software**: All original works of authorship, copyrights, and copyright applications/registrations in the **PocketGull Typeface Superfamily**, including without limitation TrueType (`.ttf`) binaries, Web Open Font Format (`.woff2`) binaries, Unified Font Object (`UFO3`) sources, Glyphs sources, vector SVG plates, documentation, and all associated build engines (`pocketgull_foundry.dart`, `foundry_spector.dart`).
+* **Copyrights & Font Software**: All original works of authorship, copyrights, and copyright applications/registrations in the **PocketGull Font Superfamily**, including without limitation TrueType (`.ttf`) binaries, Web Open Font Format (`.woff2`) binaries, Unified Font Object (`UFO3`) sources, Glyphs sources, vector SVG plates, documentation, and all associated build engines (`pocketgull_foundry.dart`, `foundry_spector.dart`).
 * **Clinical & Telemetry Designs**: All proprietary typographic formulas, Louise Sloan 5:1 optotypic geometries, ISMP character disambiguation layouts, sub-cell ICU waveforms, and related technical specifications.
 
 #### 2. Open Source Licensing Covenant

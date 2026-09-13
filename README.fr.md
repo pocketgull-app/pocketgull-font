@@ -1,4 +1,4 @@
-<div align="center">
+﻿<div align="center">
 
 # 🕊️ Superfamille Typographique PocketGull
 
@@ -126,7 +126,7 @@ Activation de la sécurité posologique clinique :
 Si vous intégrez la superfamille typographique PocketGull dans vos recherches cliniques, vos dispositifs médicaux logiciels ou vos publications scientifiques en ophtalmologie, veuillez citer le projet via le fichier [`CITATION.cff`](CITATION.cff) ou la notice BibTeX ci-dessous :
 
 ```bibtex
-@software{gear_pocketgull_typeface_2026,
+@software{gear_pocketgull_font_2026,
   author       = {Gear, Phil and {Les auteurs du projet PocketGull}},
   title        = {{Superfamille Typographique PocketGull : Tracés Vectoriels Cliniques et Ophtalmologiques à Calibrage Optotypique}},
   month        = sep,
@@ -158,5 +158,5 @@ Consultez **[THANKS.md](THANKS.md)** pour l'ensemble des hommages et dédicaces.
 PocketGull est distribuée sous la **[Licence SIL Open Font, Version 1.1](OFL.txt)**.  
 Utilisation libre et gratuite pour les projets personnels, académiques et commerciaux.
 
-**Copyright (c) 2026 Les Auteurs du Projet PocketGull** ([Dépôt GitHub](https://github.com/pocketgull-app/pocketgull-typeface)).  
+**Copyright (c) 2026 Les Auteurs du Projet PocketGull** ([Dépôt GitHub](https://github.com/pocketgull-app/pocketgull-font)).  
 *Ancrée dans la science empirique. Conçue pour la vie. 🕊️*

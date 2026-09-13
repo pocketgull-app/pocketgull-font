@@ -1,4 +1,4 @@
-name: "Release & Publish Typeface Package"
+﻿name: "Release & Publish Typeface Package"
 
 on:
   push:
@@ -63,7 +63,7 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v3
         with:
-          name: "PocketGull Typeface ${{ github.ref_name }}"
+          name: "PocketGull Font ${{ github.ref_name }}"
           generate_release_notes: true
           draft: false
           prerelease: false
@@ -71,7 +71,7 @@ jobs:
             pocketgull-typeface-*.zip
             SHA256SUMS.txt
           body: |
-            ## 🕊️ PocketGull Typeface Superfamily Release
+            ## 🕊️ PocketGull Font Superfamily Release
 
             ### 📦 Included Deliverables
             - **TrueType (.ttf)**: `PocketGull-Bold.ttf`, `PocketGull-Fineliner.ttf`, `PocketGull-Chiseltip.ttf`, `PocketGullMono-Regular.ttf`

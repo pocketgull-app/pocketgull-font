@@ -1,10 +1,10 @@
-import fs from 'node:fs';
+﻿import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 /**
- * PocketGull Typeface CERN / Zenodo Open Science Deposition Synchronizer
- * Connects PocketGull Typeface releases with CERN Data Centre & Zenodo REST API.
+ * PocketGull Font CERN / Zenodo Open Science Deposition Synchronizer
+ * Connects PocketGull Font releases with CERN Data Centre & Zenodo REST API.
  * 
  * Usage:
  *   node scripts/zenodo-sync.mjs [--validate|--status|--create-draft|--sandbox]
@@ -59,7 +59,7 @@ async function validateCitationCff() {
     }
     const content = fs.readFileSync(cffPath, 'utf8');
     const hasOrcid = content.includes('0009-0008-1372-5381');
-    const hasTitle = content.includes('PocketGull Typeface Superfamily');
+    const hasTitle = content.includes('PocketGull Font Superfamily');
     const hasLicense = content.includes('OFL-1.1');
     const hasPrefCitation = content.includes('preferred-citation:');
 
@@ -160,7 +160,7 @@ async function createDraft(metadata) {
 
 async function main() {
     console.log('╔══════════════════════════════════════════════════════════════════════════╗');
-    console.log('║   🕊️  PocketGull Typeface CERN / Zenodo Open Science Synchronizer        ║');
+    console.log('║   🕊️  PocketGull Font CERN / Zenodo Open Science Synchronizer        ║');
     console.log('║   Operated under CERN Data Centre & OpenAIRE Infrastructure             ║');
     console.log('╚══════════════════════════════════════════════════════════════════════════╝');
 

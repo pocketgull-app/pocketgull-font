@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 scripts/v4/build_superfamily_expansion.py
 =========================================
@@ -162,7 +162,7 @@ def clean_glyph_binary_health(glyph, glyf_table):
 def update_font_metadata(font, family_name, style_name, ps_name, weight_class=400):
     """Sets OpenType metadata, Apache 2.0 license, and Phil Gear attribution."""
     version_str = "Version 3.100; The PocketGull Project Authors; Apache 2.0"
-    copyright_str = "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-typeface)"
+    copyright_str = "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)"
     full_name = f"{family_name} {style_name}" if style_name != "Regular" else family_name
 
     name_table = font["name"]
@@ -181,7 +181,7 @@ def update_font_metadata(font, family_name, style_name, ps_name, weight_class=40
     add_n(7, "PocketGull is a trademark of Phil Gear.")
     add_n(8, "Phil Gear")
     add_n(9, "Phil Gear")
-    add_n(11, "https://github.com/pocketgull-app/pocketgull-typeface")
+    add_n(11, "https://github.com/pocketgull-app/pocketgull-font")
     add_n(12, "https://orcid.org/0009-0008-1372-5381")
     add_n(13, "Licensed under the Apache License, Version 2.0")
     add_n(14, "http://www.apache.org/licenses/LICENSE-2.0")

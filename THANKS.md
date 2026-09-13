@@ -1,6 +1,6 @@
-# 🙏 Acknowledgements & Thanks
+﻿# 🙏 Acknowledgements & Thanks
 
-The PocketGull Typeface Superfamily is an open-source clinical, optotypic, and sovereign multi-script typography initiative dedicated to patient safety, health equity, and world language preservation.
+The PocketGull Font Superfamily is an open-source clinical, optotypic, and sovereign multi-script typography initiative dedicated to patient safety, health equity, and world language preservation.
 
 This work stands upon the shoulders of brilliant software engineers, linguistic scholars, clinical researchers, and open-source advocates. We express our deepest appreciation and gratitude to:
 

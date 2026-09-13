@@ -1,8 +1,8 @@
-# PocketGull Typeface Superfamily: Public Release Statement & Charter
+﻿# PocketGull Font Superfamily: Public Release Statement & Charter
 
 **Version:** 2.0.0  
 **License:** SIL Open Font License 1.1 (OFL)  
-**Primary Distribution:** [github.com/pocketgull-app/PocketGull-typeface](https://github.com/pocketgull-app/PocketGull-typeface)  
+**Primary Distribution:** [github.com/pocketgull-app/pocketgull-font](https://github.com/pocketgull-app/pocketgull-font)  
 **Interactive Specimen:** [font.pocketgull.app](https://font.pocketgull.app)  
 **Author & Foundry:** Phil Gear & The PocketGull Project Authors (GearArts)  
 

@@ -1,4 +1,4 @@
-# Security Policy
+﻿# Security Policy
 
 At **PocketGull**, security, cryptographic determinism, and typography asset integrity are foundational. We adhere to **OpenSSF (Open Source Security Foundation)** standards and treat font binary compilation, glyph parsing safety, and supply chain provenance as safety-critical engineering disciplines.
 
@@ -16,12 +16,12 @@ We follow strict Semantic Versioning (`MAJOR.MINOR.PATCH`). Active production re
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability, memory corruption risk, buffer handling flaw, or malicious font binary condition within PocketGull Typeface, please do **not** disclose it publicly.
+If you discover a security vulnerability, memory corruption risk, buffer handling flaw, or malicious font binary condition within PocketGull Font, please do **not** disclose it publicly.
 
 Please report vulnerabilities through our coordinated private disclosure channels:
 
 1. **GitHub Private Vulnerability Reporting (Preferred)**:
-   [Submit a Private Advisory via GitHub Security](https://github.com/pocketgull-app/PocketGull-typeface/security/advisories/new)
+   [Submit a Private Advisory via GitHub Security](https://github.com/pocketgull-app/pocketgull-font/security/advisories/new)
 2. **Security & Data Protection Officer**:
    PocketGull LLC, 101 SW Madison St #1664, Portland, Oregon 97207 USA  
    Email: **dpo@pocketgull.app** or **philgear@gmail.com**.
@@ -66,7 +66,7 @@ Please report vulnerabilities through our coordinated private disclosure channel
 ## ⚖️ FDA Regulatory Classification & Medical Software Liability Disclaimer
 
 ### 1. Non-Device Clinical Decision Support (21 U.S.C. § 360j(o))
-* **Statutory Classification**: PocketGull Typeface Superfamily is typographical rendering software and visual communication infrastructure. Under **Section 3060 of the 21st Century Cures Act** (amending the Federal Food, Drug, and Cosmetic Act at 21 U.S.C. § 360j(o)) and the **FDA Final Guidance on Clinical Decision Support Software (September 2022)**, typographical display libraries are explicitly classified as non-device software functions.
+* **Statutory Classification**: PocketGull Font Superfamily is typographical rendering software and visual communication infrastructure. Under **Section 3060 of the 21st Century Cures Act** (amending the Federal Food, Drug, and Cosmetic Act at 21 U.S.C. § 360j(o)) and the **FDA Final Guidance on Clinical Decision Support Software (September 2022)**, typographical display libraries are explicitly classified as non-device software functions.
 * **No Autonomous Diagnostic Function**: PocketGull does not analyze, process, interpret, or calculate patient physiological parameters, diagnostic conclusions, or therapeutic regimens. It serves solely as an optical presentation layer for human clinical review.
 * **CDRH Human Factors Alignment**: While exempt from 510(k) premarket notification and 21 CFR Part 820 Quality System Regulations (QSR), PocketGull's stroke geometry, Louise Sloan 5:1 optotypes, and character disambiguation strictly adhere to **FDA CDRH Human Factors Engineering guidelines (ANSI/AAMI HE75:2009/(R)2018)**.
 

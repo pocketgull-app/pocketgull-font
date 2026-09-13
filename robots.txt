@@ -1,5 +1,5 @@
-# ==============================================================================
-# POCKETGULL TYPEFACE SUPERFAMILY — ROBOTS.TXT
+﻿# ==============================================================================
+# PocketGull Font Superfamily — ROBOTS.TXT
 # ==============================================================================
 # Standard Web Crawlers & Search Indexing (Googlebot, Bingbot, DuckDuckBot):
 # Permitted for search discoverability, academic citation, and open-source accessibility.

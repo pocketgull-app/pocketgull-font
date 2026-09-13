@@ -1,4 +1,4 @@
-name: "Pocket Gull Mono"
+﻿name: "Pocket Gull Mono"
 designer: "Phil Gear"
 license: "APACHE2"
 category: "MONOSPACE"
@@ -10,7 +10,7 @@ fonts {
   filename: "PocketGullMono-Regular.ttf"
   post_script_name: "PocketGullMono-Regular"
   full_name: "Pocket Gull Mono Regular"
-  copyright: "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-typeface)"
+  copyright: "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)"
 }
 subsets: "latin"
 subsets: "latin-ext"
@@ -20,7 +20,7 @@ stroke: "SANS_SERIF"
 classifications: "MONOSPACE"
 minisite_url: "https://pocketgull.app"
 source {
-  repository_url: "https://github.com/pocketgull-app/pocketgull-typeface"
+  repository_url: "https://github.com/pocketgull-app/pocketgull-font"
   branch: "main"
   files {
     source_file: "LICENSE.txt"

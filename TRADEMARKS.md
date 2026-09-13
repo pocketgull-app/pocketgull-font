@@ -1,13 +1,13 @@
-# Trademark Policy & Brand Guidelines
+﻿# Trademark Policy & Brand Guidelines
 
-**PocketGull Typeface Superfamily**  
+**PocketGull Font Superfamily**  
 *Open Source Licensing Coexistence & Lanham Act § 43(a) Policy*
 
 ---
 
 ## 🏛️ 1. Overview & Coexistence Principle
 
-PocketGull Typeface Superfamily is dedicated to radical open-source typography. The font software itself is released under the **Apache License 2.0** with **Zero Reserved Font Names (No RFN)** to ensure frictionless upstream distribution across Google Fonts, Linux distributions, web browsers, and healthcare EHR platforms.
+PocketGull Font Superfamily is dedicated to radical open-source typography. The font software itself is released under the **Apache License 2.0** with **Zero Reserved Font Names (No RFN)** to ensure frictionless upstream distribution across Google Fonts, Linux distributions, web browsers, and healthcare EHR platforms.
 
 This document establishes the coexistence boundary between **Open Source Copyright Licensing (Apache 2.0)** and **Trademark Protection (Lanham Act § 43(a))**:
 

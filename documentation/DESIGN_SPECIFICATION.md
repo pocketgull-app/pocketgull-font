@@ -1,8 +1,8 @@
-# PocketGull Typeface Design Specification (v4.0.0)
+﻿# PocketGull Font Design Specification (v4.0.0)
 
 ## 1. Design Vision
 
-**PocketGull** is an open-source, mathematically unified clinical vector typeface superfamily. Engineered for life-critical healthcare computing, digital health platforms, and high-stress clinical environments, PocketGull harmonizes tactile humanist warmth with zero-error ophthalmological legibility.
+**PocketGull** is an open-source, mathematically unified clinical vector font superfamily. Engineered for life-critical healthcare computing, digital health platforms, and high-stress clinical environments, PocketGull harmonizes tactile humanist warmth with zero-error ophthalmological legibility.
 
 ### Current Status (v4.0.0 — Production Google Fonts Standard)
 

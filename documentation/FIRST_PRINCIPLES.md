@@ -1,4 +1,4 @@
-# First Principles: Stripping Away False Constraints in Typography & Typefoundry Engineering
+﻿# First Principles: Stripping Away False Constraints in Typography & Typefoundry Engineering
 
 > *"Rather than fixing downstream bugs in runtime memory, system architecture must make entire classes of bugs impossible by structural construction."*  
 > — Eskil Steenberg, *Debugging and the art of avoiding bugs*
@@ -7,7 +7,7 @@
 
 ## Overview: The Living Typographic Charter
 
-As the PocketGull Typeface Superfamily matured from felt-marker cardstock drawings into a multi-script clinical and telemetry typefoundry, it accrued numerous rigid technical rules. Upon forensic re-examination from first principles, we recognized where well-intentioned geometric constraints can fight the authentic nature of human language and writing systems.
+As the PocketGull Font Superfamily matured from felt-marker cardstock drawings into a multi-script clinical and telemetry typefoundry, it accrued numerous rigid technical rules. Upon forensic re-examination from first principles, we recognized where well-intentioned geometric constraints can fight the authentic nature of human language and writing systems.
 
 This document establishes the foundational critique and the resulting **Living Typographic Charter**.
 

@@ -1,4 +1,4 @@
-/* PocketGull Specimen - Modular Stylesheet */
+﻿/* PocketGull Specimen - Modular Stylesheet */
 
 /* --- Inspector & UI Controls --- */
 
@@ -378,7 +378,7 @@
       --md-sys-color-outline: #272732;
       --md-sys-color-outline-variant: #3f3f4e;
 
-      /* Material Design 3 Typography Roles Mapped to PocketGull Typeface */
+      /* Material Design 3 Typography Roles Mapped to PocketGull Font */
       --md-sys-typescale-display-large-font: 'PocketGull', sans-serif;
       --md-sys-typescale-headline-medium-font: 'PocketGull', sans-serif;
       --md-sys-typescale-title-medium-font: 'PocketGull', sans-serif;

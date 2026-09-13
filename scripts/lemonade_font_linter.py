@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 PocketGull Typefoundry - Automated Visual Font Proofreader & Optical Linter (v3 100% Calibrated)
 =============================================================================================
@@ -386,7 +386,7 @@ def audit_plate_with_lemonade(plate_path: Path, battery_name: str, prompt_focus:
 
     system_prompt = (
         "You are Dr. Alistair Finch and Dr. Elias Thorne, Senior Typefoundry Directors, Master Typographers, and Medical Informatics Safety Ergonomists. "
-        "You are conducting a strict, forensic visual audit of the revised masterwork specimen proof plates for the PocketGull Typeface Superfamily. "
+        "You are conducting a strict, forensic visual audit of the revised masterwork specimen proof plates for the PocketGull Font Superfamily. "
         "Review the evidence on the specimen plate carefully:\n"
         "1. ISMP Disambiguation: Confirm that numeral '1' (sharp top flag + flat base), lowercase 'l' (pronounced 90° curved foot hook), and capital 'I' (bilobe horizontal serifs) are 100% visually distinct with zero collision. Confirm that '0' possesses a prominent internal diagonal slash (cv08). Confirm that trailing zeros are eliminated per ISMP protocol.\n"
         "2. Optical Overshoot: Confirm that curved bowls extend exactly +0.8% beyond flat baselines for perfect Louise Sloan 5:1 alignment.\n"

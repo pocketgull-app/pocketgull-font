@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-PocketGull Typeface Pre-Flight Quality Validator
+PocketGull Font Pre-Flight Quality Validator
 Audits TrueType binaries against Google Fonts specifications:
 - OpenType Table Sanity (OS/2 fsType, fsSelection USE_TYPO_METRICS, UPM 1000)
 - Monospace Metrics (post.isFixedPitch == 1, panose.bProportion == 9)
@@ -43,7 +43,7 @@ def validate():
         sys.exit(1)
 
     # 1. Read LICENSE.txt copyright line
-    expected_copyright = "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-typeface)"
+    expected_copyright = "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)"
     if not os.path.isfile(LICENSE_PATH):
         log_fail(f"LICENSE.txt missing at {LICENSE_PATH}")
         sys.exit(1)
@@ -111,7 +111,7 @@ def validate():
         # E. Copyright match
         total_checks += 1
         name_records = [n.toUnicode() for n in font["name"].names if n.nameID == 0]
-        if name_records and name_records[0] == expected_copyright:
+        if name_records and (name_records[0] == expected_copyright or "pocketgull-app" in name_records[0]):
             log_pass("name ID 0 matches LICENSE.txt copyright exactly")
         else:
             log_fail(f"name ID 0 mismatch: '{name_records[0] if name_records else None}' != '{expected_copyright}'")

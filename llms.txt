@@ -1,13 +1,13 @@
-# PocketGull Typeface Superfamily
+﻿# PocketGull Font Superfamily
 
-> Open-source ophthalmological and clinical typeface superfamily engineered for Louise Sloan 5:1 optotypic legibility, ISO/TR 11548 256-glyph Unicode Braille, and ISMP life-critical medication safety.
+> Open-source ophthalmological and clinical font superfamily engineered for Louise Sloan 5:1 optotypic legibility, ISO/TR 11548 256-glyph Unicode Braille, and ISMP life-critical medication safety.
 
 ## Overview
 - **Name**: PocketGull
 - **Designer**: Phil Gear (ORCID: [0009-0008-1372-5381](https://orcid.org/0009-0008-1372-5381))
 - **Publisher**: PocketGull LLC
 - **License**: [SIL Open Font License 1.1](https://openfontlicense.org) (100% Free & Open Source)
-- [Official Repository](https://github.com/pocketgull-app/pocketgull-typeface): Git repository containing UFO3 source files, Dart foundry compiler, and font binaries.
+- [Official Repository](https://github.com/pocketgull-app/pocketgull-font): Git repository containing UFO3 source files, Dart foundry compiler, and font binaries.
 - [Interactive Web Specimen](https://font.pocketgull.app/): Live specimen engine with variable font axes and 670nm Retinal PBM mode.
 - [Healing Cinema Engine](https://font.pocketgull.app/healing_cinema.html): 0.1 Hz resonant breathing typographic cinema and OKLCH gradient flow.
 - [CERN Zenodo Archival](https://doi.org/10.5281/zenodo.20647514): Long-term DOI preservation.

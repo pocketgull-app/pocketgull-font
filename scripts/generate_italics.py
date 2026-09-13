@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 PocketGull Typefoundry - Italic Varieties Generator
 Generates true mathematical italic cuts for the PocketGull Superfamily:
@@ -71,7 +71,7 @@ def load_ofl_line1():
     if OFL_PATH.exists():
         with open(OFL_PATH, "r", encoding="utf-8") as f:
             return f.readline().strip()
-    return "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-typeface)"
+    return "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)"
 
 def set_name_record(font, name_id, text):
     """Sets a name record for Mac (1, 0, 0) and Windows Unicode (3, 1, 0x409)."""

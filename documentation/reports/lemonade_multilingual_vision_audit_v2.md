@@ -1,4 +1,4 @@
-# PocketGull Superfamily — Lemonade Global Multilingual Vision Audit (v2 Perfect Score)
+﻿# PocketGull Superfamily — Lemonade Global Multilingual Vision Audit (v2 Perfect Score)
 
 **Engine**: Lemonade Gemma 3 4B Multimodal Vision (`Gemma-3-4b-it-GGUF`)  
 **Hardware**: Local AMD Radeon GPU (Vulkan/DirectML offline inference)  
@@ -11,7 +11,7 @@
 
 **Rendered Specimen Plate**: `multilingual_plate_1_indigenous_classical.png`
 
-## Forensic Visual Re-Evaluation: PocketGull Typeface Superfamily – Plate 1 Audit
+## Forensic Visual Re-Evaluation: PocketGull Font Superfamily – Plate 1 Audit
 
 **Date:** October 26, 2023
 **Evaluators:** Dr. Evelyn Reed, Dr. Elias Thorne
@@ -58,7 +58,7 @@ This exceptional score reflects the near-perfect execution of all directives acr
 
 **Rendered Specimen Plate**: `multilingual_plate_2_indic_african_asian.png`
 
-## Forensic Visual Re-Evaluation: PocketGull Typeface Superfamily – Plate 2: Indic, African & Asian Healthcare Scripts
+## Forensic Visual Re-Evaluation: PocketGull Font Superfamily – Plate 2: Indic, African & Asian Healthcare Scripts
 
 **Date:** October 26, 2023
 **Evaluators:** Dr. Evelyn Reed, Dr. Elias Thorne

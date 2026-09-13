@@ -1,4 +1,4 @@
-import 'dart:io';
+﻿import 'dart:io';
 import 'foundry/sfnt_builder.dart';
 import 'foundry/sfnt_transformer.dart';
 import 'foundry/specimen_embedder.dart';
@@ -279,7 +279,7 @@ void runEmbed() {
 
   SpecimenEmbedder.embedFonts(typefaceDir: typefaceRoot, htmlFile: htmlFile);
 
-  final dlFile = File(r'C:\Users\philg\Downloads\PocketGull — The Clinical Typeface Superfamily & Interactive Specimen.html1.html');
+  final dlFile = File(r'C:\Users\philg\Downloads\PocketGull — The Clinical font superfamily & Interactive Specimen.html1.html');
   if (dlFile.existsSync()) {
     SpecimenEmbedder.embedFonts(typefaceDir: typefaceRoot, htmlFile: dlFile);
     print('  [SUCCESS] Also embedded fonts into ${dlFile.path}');

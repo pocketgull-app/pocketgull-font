@@ -1,6 +1,6 @@
-# PocketGull Charter on Responsible Typography, Multi-Script Sovereignty & Clinical Life-Safety
+﻿# PocketGull Charter on Responsible Typography, Multi-Script Sovereignty & Clinical Life-Safety
 
-**The PocketGull Typeface Superfamily**  
+**The PocketGull Font Superfamily**  
 *An Open-Source Ethical Framework for Human Factors Precision, Vision Science Invariants, and Indigenous Script Sovereignty*
 
 **Lead Architect**: Phil Gear & The PocketGull Project Authors  
@@ -19,7 +19,7 @@ A blurred numeral on a high-throughput thermal patient wristband, a missing deci
 
 PocketGull was born from the conviction that **letterforms must protect life**. Originating from an authentic hand-drawn felt-tip marker drawing created on heavyweight cotton cardstock for GearArts, PocketGull elevates the organic warmth, compassion, and human breath of analog handwriting into a mathematically deterministic, optotypically calibrated, multi-script typefoundry.
 
-This charter sets forth the seven irrevocable pillars governing the creation, validation, and distribution of the PocketGull Typeface Superfamily.
+This charter sets forth the seven irrevocable pillars governing the creation, validation, and distribution of the PocketGull Font Superfamily.
 
 ---
 
@@ -223,7 +223,7 @@ To ensure **everyone feels heard, equal, and protected**, PocketGull enforces th
 *“Typography in medicine is a quiet promise: that the words written with care will be read with certainty, and that no human being will be harmed by the silence of an ambiguous letter.”*
 
 **The PocketGull Project Authors**  
-[pocketgull.app](https://pocketgull.app) • [github.com/pocketgull-app/pocketgull-typeface](https://github.com/pocketgull-app/pocketgull-typeface)
+[pocketgull.app](https://pocketgull.app) • [github.com/pocketgull-app/pocketgull-font](https://github.com/pocketgull-app/pocketgull-font)
 
 </div>
 

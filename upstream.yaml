@@ -1,6 +1,6 @@
-name: PocketGull
+﻿name: PocketGull
 branch: main
-repository: https://github.com/pocketgull-app/pocketgull-typeface
+repository: https://github.com/pocketgull-app/pocketgull-font
 archive: ""
 files:
   PocketGull-Regular.ttf: fonts/ttf/PocketGull-Regular.ttf

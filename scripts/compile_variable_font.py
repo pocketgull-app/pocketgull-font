@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 PocketGull Typefoundry: Universal Variable Font Compiler
 =========================================================
@@ -139,7 +139,7 @@ def compile_variable_font():
     family_name = "PocketGull VF"
     ps_name = "PocketGull-VF"
     version_str = "Version 3.100; The PocketGull Project Authors; OFL 1.1"
-    copyright_str = "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-typeface)"
+    copyright_str = "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)"
 
     name_table.names = [n for n in name_table.names if n.nameID not in [1, 2, 3, 4, 5, 6, 16, 17]]
     def add_n(nid, val):

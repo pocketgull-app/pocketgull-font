@@ -1,8 +1,8 @@
-# Contributing to PocketGull Typeface
+﻿# Contributing to PocketGull Font
 
-Thank you for your interest in contributing to the **PocketGull Typeface Superfamily**! 
+Thank you for your interest in contributing to the **PocketGull Font Superfamily**! 
 
-PocketGull is an open-source clinical and ophthalmological typeface superfamily engineered to bridge tactile humanist warmth with life-critical clinical precision. We welcome contributions from type designers, font developers, clinical informaticians, and accessibility advocates.
+PocketGull is an open-source clinical and ophthalmological font superfamily engineered to bridge tactile humanist warmth with life-critical clinical precision. We welcome contributions from type designers, font developers, clinical informaticians, and accessibility advocates.
 
 ---
 

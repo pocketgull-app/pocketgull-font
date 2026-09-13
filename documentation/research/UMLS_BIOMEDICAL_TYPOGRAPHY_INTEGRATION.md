@@ -1,4 +1,4 @@
-# Unified Medical Language System (UMLS) & PocketGull Clinical Typography Architecture
+﻿# Unified Medical Language System (UMLS) & PocketGull Clinical Typography Architecture
 
 **The PocketGull Project Authors & Typefoundry Engineering Team**  
 *In Collaboration with Clinical Informatics, Biomedical Ergonomics & Font Engineering*  
@@ -17,7 +17,7 @@ However, clinical informatics systems encounter a dangerous **"last-meter" rende
 - 203 DPI direct-thermal bedside patient wristbands and barcode labels subject to thermal bleeding.
 - Telemetry central station monitors displaying high-density multilead waveforms alongside micro-unit measurements ($\mu\text{g/kg/min}$, $\text{mEq/L}$, $\text{mOsm/kg}$).
 
-The **PocketGull Typeface Superfamily** provides the world's first open-source, W3C OTS memory-safe typography engine purpose-built for the **three UMLS Knowledge Sources**:
+The **PocketGull Font Superfamily** provides the world's first open-source, W3C OTS memory-safe typography engine purpose-built for the **three UMLS Knowledge Sources**:
 1. **The Metathesaurus**: Linking Concept Unique Identifiers (CUIs), RxNorm (RxCUIs), and LOINC codes to optotypically disambiguated glyph vectors.
 2. **The Semantic Network**: Enforcing semantic-level visual hierarchy between *Pharmacologic Substance* (`T121`), *Clinical Drug* (`T200`), and *Laboratory Procedure / Finding* (`T034` / `T059`).
 3. **The SPECIALIST Lexicon**: Eliminating fatal collisions across biomedical abbreviations, normalized strings, Greek biochemical prefixes ($\alpha, \beta, \Delta$), and scientific numerical exponents.
@@ -179,7 +179,7 @@ PocketGull acknowledges the National Library of Medicine (NLM) as the authoritat
 - Citation of NLM or UMLS does not in any way indicate or imply that NLM, the Department of Health and Human Services (HHS), the U.S. Government, or any organization whose vocabulary sources are included in the UMLS has endorsed the PocketGull Project, its authors, or its typographic software products.
 
 ### 6.4 Open-Source Separation & Scope of Distribution (Section 3)
-The PocketGull Typeface Superfamily is licensed under the **SIL Open Font License 1.1 (OFL)**. PocketGull binaries (`.ttf`, `.woff2`) contain vector outlines, font tables, and typographic shaping rules; **they do not bundle, repackage, or redistribute proprietary UMLS Metathesaurus databases**. All clinical identifiers (CUIs, RxCUIs, LOINC numbers) in PocketGull research tools are evaluated at runtime solely as testing inputs for legibility, optotypic contrast, and memory-safe glyph rendering.
+The PocketGull Font Superfamily is licensed under the **SIL Open Font License 1.1 (OFL)**. PocketGull binaries (`.ttf`, `.woff2`) contain vector outlines, font tables, and typographic shaping rules; **they do not bundle, repackage, or redistribute proprietary UMLS Metathesaurus databases**. All clinical identifiers (CUIs, RxCUIs, LOINC numbers) in PocketGull research tools are evaluated at runtime solely as testing inputs for legibility, optotypic contrast, and memory-safe glyph rendering.
 
 ### 6.5 SNOMED CT® Affiliate License Compliance (Appendix 2, Clause 8.3.1)
 In accordance with Appendix 2, Clause 8.3.1 of the UMLS Metathesaurus Agreement:
