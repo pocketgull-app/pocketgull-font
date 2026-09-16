@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pocketgull-math"
+version = "3.1.0"
+description = "1-Line Matplotlib & Scientific Visualization Integration for PocketGull Math"
+readme = "README.md"
+authors = [
+  { name = "Phil Gear", email = "phil@geararts.com" },
+  { name = "The PocketGull Project Authors" }
+]
+license = { text = "OFL-1.1" }
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Healthcare Industry",
+  "Topic :: Scientific/Engineering :: Visualization",
+  "Topic :: Scientific/Engineering :: Medical Science Apps.",
+  "License :: OSI Approved :: SIL Open Font License 1.1 (OFL-1.1)",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12"
+]
+dependencies = [
+  "matplotlib>=3.5.0"
+]
+
+[project.urls]
+Homepage = "https://font.pocketgull.app"
+Repository = "https://github.com/pocketgull-app/pocketgull-font"
+Documentation = "https://github.com/pocketgull-app/pocketgull-font/blob/main/documentation/POCKETGULL_MATH_TELEMETRY_GUIDE.md"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pocketgull_math*"]
+
+[tool.setuptools.package-data]
+pocketgull_math = ["fonts/*.ttf", "styles/*.mplstyle"]

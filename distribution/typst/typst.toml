@@ -1,0 +1,17 @@
+[package]
+name = "pocketgull-math"
+version = "3.1.0"
+entrypoint = "lib.typ"
+authors = ["Phil Gear", "The PocketGull Project Authors"]
+license = "OFL-1.1"
+description = "PocketGull Math: Publication-grade clinical & telemetry humanist sans-serif math font for Typst."
+repository = "https://github.com/pocketgull-app/pocketgull-font"
+homepage = "https://font.pocketgull.app"
+keywords = ["font", "math", "clinical", "telemetry", "typography", "opentype-math"]
+categories = ["languages", "utility"]
+disciplines = ["mathematics", "computer-science", "medicine"]
+
+[template]
+path = "example.typ"
+entrypoint = "example.typ"
+thumbnail = "thumbnail.png"

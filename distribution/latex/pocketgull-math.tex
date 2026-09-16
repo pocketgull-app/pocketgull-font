@@ -1,0 +1,69 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+% Load PocketGull Math package
+\usepackage[slashedzero,curvedl,serifedI,fontpath=../../fonts/ttf/]{pocketgull-math}
+
+\title{\textbf{PocketGull Math: LaTeX Integration \& Specimen}}
+\author{The PocketGull Project Authors \\ \url{https://github.com/pocketgull-app/pocketgull-font}}
+\date{Version 3.100 --- September 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This document demonstrates the integration of \textbf{PocketGull Math} into LuaLaTeX and XeLaTeX workflows via the \texttt{unicode-math} engine and the \texttt{pocketgull-math.sty} package. PocketGull Math is the world's first humanist clinical sans-serif OpenType math font, delivering ISO/IEC 14496-22 \texttt{MATH} table compliance, Louise Sloan 5:1 optotypic clarity, and ISMP life-critical character disambiguation.
+\end{abstract}
+
+\section{Introduction \& Package Loading}
+To use PocketGull Math in your academic documents, compile with LuaLaTeX or XeLaTeX:
+\begin{verbatim}
+\documentclass{article}
+\usepackage{amsmath, mathtools}
+\usepackage[slashedzero, curvedl, serifedI]{pocketgull-math}
+\end{verbatim}
+
+\section{Core Mathematical Expressions}
+
+\subsection{Multi-Label Asymmetric Focal Loss ($\LASL$)}
+Used for training high-capacity clinical deep neural networks under extreme positive-negative class imbalance:
+\begin{equation}
+\LASL = - \sum_{k=1}^{K} \left[ y_k (1 - p_k)^{\gamma_+} \log(p_k) + (1 - y_k) (p_{m,k})^{\gamma_-} \log(1 - p_{m,k}) \right]
+\end{equation}
+where $\gamma_+ = 1.0$ and $\gamma_- = 5.0$.
+
+\subsection{Cosine Metaplasticity Annealing}
+The time-varying learning rate $\eta_t$ during the critical training window satisfies:
+\begin{equation}
+\eta_t = \etaMin + \frac{1}{2}(\etaMax - \etaMin) \left[ 1 + \cos\left( \frac{\pi t}{T_{\max}} \right) \right]
+\end{equation}
+
+\subsection{Two-Compartment Pharmacokinetic Bolus Decay}
+Plasma drug concentration $\Cp{t}$ following IV bolus administration:
+\begin{equation}
+\Cp{t} = \left[ \frac{D \cdot \ka}{\Vd \cdot (\ka - \ke)} \right] \left( e^{-\ke \cdot t} - e^{-\ka \cdot t} \right)
+\end{equation}
+
+\section{Blackboard Bold Mathematical Sets}
+PocketGull Math provides native blackboard bold glyphs for standard set theory:
+\begin{equation}
+\forall x \in \Rset, \quad \Prob(X \le x) = \int_{-\infty}^{x} f_X(u) \, du, \quad \Expect[X] \in \Cset
+\end{equation}
+
+\section{Clinical Clearance Units}
+Safe clinical dosages avoid ambiguous decimal points or letterforms:
+\begin{itemize}
+    \item Pediatric Fentanyl: $0.5 \mcg / \kg$
+    \item Vancomycin Trough: $15 \mg / \Litre$
+    \item Estimated GFR: $\eGFR \ge 60 \mL / \min / 1.73 \, \text{m}^2$
+\end{itemize}
+
+\end{document}

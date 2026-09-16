@@ -1,0 +1,58 @@
+# PocketGull Astro: Monochromatic Red Night-Vision Matplotlib Stylesheet
+# Engineered for Astronomical Observatories (Mauna Kea, Paranal, Dark Sky Preserves)
+# Strictly preserves scotopic dark adaptation (630-650 nm red emission on pitch black)
+
+# Fonts
+font.family: PocketGull Math, PocketGull Mono, monospace
+mathtext.fontset: custom
+mathtext.rm: PocketGull Math
+mathtext.it: PocketGull Math:italic
+mathtext.bf: PocketGull Math:bold
+
+# Canvas & Background (Pure Pitch Black to prevent ambient light leakage)
+figure.facecolor: 000000
+figure.edgecolor: 000000
+axes.facecolor: 000000
+axes.edgecolor: 800000
+axes.linewidth: 1.5
+
+# Monochromatic Scotopic Red Typography & Labels
+text.color: ff3333
+axes.labelcolor: cc2929
+axes.labelsize: 11
+axes.titlesize: 13
+axes.titlecolor: ff4d4d
+axes.titlepad: 14
+
+# Ticks (Tabular Alignment for RA / Dec / Ephemeris)
+xtick.color: b32424
+ytick.color: b32424
+xtick.labelsize: 10
+ytick.labelsize: 10
+xtick.direction: out
+ytick.direction: out
+
+# Grids (Faint Deep Red for Astrometric WCS Coordinates)
+axes.grid: True
+grid.color: 4d0000
+grid.linestyle: :
+grid.linewidth: 0.8
+grid.alpha: 0.8
+
+# Astrometric Photometry Cycles (Red Spectral Intensities)
+lines.linewidth: 1.8
+lines.solid_capstyle: round
+axes.prop_cycle: cycler('color', ['ff3333', 'ff6666', 'cc0000', 'ff9999', 'e62e2e', 'ff1a1a'])
+
+# Legend
+legend.facecolor: 000000
+legend.edgecolor: 660000
+legend.framealpha: 0.95
+legend.fontsize: 10
+legend.labelcolor: ff4d4d
+
+# Vector & PDF Output
+svg.fonttype: path
+pdf.fonttype: 42
+savefig.bbox: tight
+savefig.pad_inches: 0.1

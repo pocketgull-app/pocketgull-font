@@ -1,0 +1,59 @@
+# PocketGull Math: Dark Obsidian Clinical Telemetry Matplotlib Stylesheet
+# Designed for high-contrast dark mode HUDs and EHR dashboards
+
+# Fonts
+font.family: PocketGull Math, PocketGull Mono, monospace
+mathtext.fontset: custom
+mathtext.rm: PocketGull Math
+mathtext.it: PocketGull Math:italic
+mathtext.bf: PocketGull Math:bold
+mathtext.sf: PocketGull Math
+
+# Canvas & Background
+figure.facecolor: 09090b
+figure.edgecolor: 09090b
+axes.facecolor: 121217
+axes.edgecolor: 272732
+axes.linewidth: 1.5
+
+# Colors & Typography
+text.color: f4f4f5
+axes.labelcolor: a1a1aa
+axes.labelsize: 11
+axes.titlesize: 13
+axes.titlecolor: f4f4f5
+axes.titlepad: 14
+
+# Ticks
+xtick.color: a1a1aa
+ytick.color: a1a1aa
+xtick.labelsize: 10
+ytick.labelsize: 10
+xtick.direction: out
+ytick.direction: out
+
+# Grids
+axes.grid: True
+grid.color: 272732
+grid.linestyle: --
+grid.linewidth: 0.8
+grid.alpha: 0.7
+
+# Lines & Scatters
+lines.linewidth: 2.0
+lines.solid_capstyle: round
+axes.prop_cycle: cycler('color', ['14b8a6', '38bdf8', 'f59e0b', 'ec4899', 'a855f7', '34d399'])
+
+# Legend
+legend.facecolor: 181820
+legend.edgecolor: 272732
+legend.framealpha: 0.95
+legend.fontsize: 10
+legend.labelcolor: f4f4f5
+
+# Vector Export
+svg.fonttype: path
+pdf.fonttype: 42
+ps.fonttype: 42
+savefig.bbox: tight
+savefig.pad_inches: 0.1

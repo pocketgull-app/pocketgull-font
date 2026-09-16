@@ -38,13 +38,21 @@ def draw_rect(pen, x0, y0, x1, y1):
     pen.lineTo((x0, y1))
     pen.closePath()
 
-def draw_circle(pen, cx, cy, r):
-    pen.moveTo((cx + r, cy))
-    pen.qCurveTo((cx + r, cy + r), (cx, cy + r))
-    pen.qCurveTo((cx - r, cy + r), (cx - r, cy))
-    pen.qCurveTo((cx - r, cy - r), (cx, cy - r))
-    pen.qCurveTo((cx + r, cy - r), (cx + r, cy))
-    pen.closePath()
+def draw_circle(pen, cx, cy, r, clockwise=False):
+    if clockwise:
+        pen.moveTo((cx + r, cy))
+        pen.qCurveTo((cx + r, cy - r), (cx, cy - r))
+        pen.qCurveTo((cx - r, cy - r), (cx - r, cy))
+        pen.qCurveTo((cx - r, cy + r), (cx, cy + r))
+        pen.qCurveTo((cx + r, cy + r), (cx + r, cy))
+        pen.closePath()
+    else:
+        pen.moveTo((cx + r, cy))
+        pen.qCurveTo((cx + r, cy + r), (cx, cy + r))
+        pen.qCurveTo((cx - r, cy + r), (cx - r, cy))
+        pen.qCurveTo((cx - r, cy - r), (cx, cy - r))
+        pen.qCurveTo((cx + r, cy - r), (cx + r, cy))
+        pen.closePath()
 
 def create_glyph_from_pen(pen):
     return pen.glyph()
@@ -538,6 +546,82 @@ def build_math_font():
     pen.closePath()
     register_op("Rightarrow", [0x21D2], pen, 600)
 
+    # Operator 25B: left-right arrow (↔) U+2194
+    pen = TTGlyphPen(None)
+    draw_rect(pen, 100, AXIS_HEIGHT - hw, 500, AXIS_HEIGHT + hw)
+    pen.moveTo((540, AXIS_HEIGHT))
+    pen.lineTo((400, AXIS_HEIGHT + 140))
+    pen.lineTo((400, AXIS_HEIGHT + 140 - STROKE_W))
+    pen.lineTo((480, AXIS_HEIGHT))
+    pen.lineTo((400, AXIS_HEIGHT - 140 + STROKE_W))
+    pen.lineTo((400, AXIS_HEIGHT - 140))
+    pen.closePath()
+    pen.moveTo((60, AXIS_HEIGHT))
+    pen.lineTo((200, AXIS_HEIGHT + 140))
+    pen.lineTo((200, AXIS_HEIGHT + 140 - STROKE_W))
+    pen.lineTo((120, AXIS_HEIGHT))
+    pen.lineTo((200, AXIS_HEIGHT - 140 + STROKE_W))
+    pen.lineTo((200, AXIS_HEIGHT - 140))
+    pen.closePath()
+    register_op("leftrightarrow", [0x2194], pen, 600)
+
+    # Operator 25C: chemical equilibrium paired harpoons (⇌) U+21CC & U+21CB
+    pen = TTGlyphPen(None)
+    y_up = AXIS_HEIGHT + 50
+    draw_rect(pen, 80, y_up - hw, 480, y_up + hw)
+    pen.moveTo((500, y_up))
+    pen.lineTo((360, y_up + 120))
+    pen.lineTo((360, y_up + 120 - STROKE_W))
+    pen.lineTo((440, y_up))
+    pen.closePath()
+    y_dn = AXIS_HEIGHT - 50
+    draw_rect(pen, 100, y_dn - hw, 500, y_dn + hw)
+    pen.moveTo((80, y_dn))
+    pen.lineTo((220, y_dn - 120))
+    pen.lineTo((220, y_dn - 120 + STROKE_W))
+    pen.lineTo((140, y_dn))
+    pen.closePath()
+    register_op("equilibrium", [0x21CC, 0x21CB], pen, 580)
+
+    # Operator 25D: circled dot / Sun (⊙ / ☉) U+2299 & U+2609
+    pen = TTGlyphPen(None)
+    draw_circle(pen, 300, AXIS_HEIGHT, 170, clockwise=False)
+    draw_circle(pen, 300, AXIS_HEIGHT, 170 - STROKE_W, clockwise=True)
+    draw_circle(pen, 300, AXIS_HEIGHT, 48, clockwise=False)
+    register_op("circdot_sun", [0x2299, 0x2609], pen, 600)
+
+    # Operator 25E: circled plus / Earth (⊕ / ♁) U+2295 & U+2641
+    pen = TTGlyphPen(None)
+    draw_circle(pen, 300, AXIS_HEIGHT, 170, clockwise=False)
+    draw_circle(pen, 300, AXIS_HEIGHT, 170 - STROKE_W, clockwise=True)
+    draw_rect(pen, 300 - 170 + STROKE_W, AXIS_HEIGHT - hw, 300 + 170 - STROKE_W, AXIS_HEIGHT + hw)
+    draw_rect(pen, 300 - hw, AXIS_HEIGHT - 170 + STROKE_W, 300 + hw, AXIS_HEIGHT + 170 - STROKE_W)
+    register_op("circplus_earth", [0x2295, 0x2641], pen, 600)
+
+    # Operator 25F: Jupiter symbol (♃) U+2643
+    pen = TTGlyphPen(None)
+    draw_rect(pen, 360 - hw, -60, 360 + hw, 600)
+    draw_rect(pen, 200, 380 - hw, 480, 380 + hw)
+    pen.moveTo((120, 200))
+    pen.qCurveTo((120, 480), (360, 480))
+    pen.lineTo((360, 480 - STROKE_W))
+    pen.qCurveTo((120 + STROKE_W, 480 - STROKE_W), (120 + STROKE_W, 200))
+    pen.closePath()
+    register_op("jupiter", [0x2643], pen, 560)
+
+    # Operator 25G: Saturn symbol (♄) U+2644
+    pen = TTGlyphPen(None)
+    draw_rect(pen, 200 - hw, 260, 200 + hw, 660)
+    draw_rect(pen, 100, 520 - hw, 300, 520 + hw)
+    pen.moveTo((200, 260))
+    pen.qCurveTo((200, -60), (360, -60))
+    pen.qCurveTo((480, -60), (480, 120))
+    pen.lineTo((480 - STROKE_W, 120))
+    pen.qCurveTo((480 - STROKE_W, -60 + STROKE_W), (360, -60 + STROKE_W))
+    pen.qCurveTo((200 + STROKE_W, -60 + STROKE_W), (200 + STROKE_W, 260))
+    pen.closePath()
+    register_op("saturn", [0x2644], pen, 560)
+
     # Operator 26: Blackboard Bold (R, N, Z, C, Q)
     # R (Reals) U+211D
     pen = TTGlyphPen(None)
@@ -982,15 +1066,33 @@ def build_math_font():
         font["OS/2"].fsSelection = 0x1c0
 
     # 6. Save TTF and Brotli Q11 WOFF2
-    print("\n6. Serializing TrueType binary and compressing Brotli Q11 WOFF2...")
+    print("\n6. Serializing TrueType binary and realigning loca/glyf to 2-byte boundaries...")
     tmp_ttf = OUT_TTF + ".tmp"
     font.save(tmp_ttf)
     font.close()
+
+    # Re-align loca/glyf to 2-byte word boundaries (Quality Pillar 2)
+    font = TTFont(tmp_ttf)
+    glyf = font['glyf']
+    for gname in font.getGlyphOrder():
+        glyph = glyf[gname]
+        if hasattr(glyph, 'data') and glyph.data and len(glyph.data) % 2 != 0:
+            glyph.data = glyph.data + b'\x00'
+    font.save(tmp_ttf)
+    font.close()
+
     os.replace(tmp_ttf, OUT_TTF)
     shutil.copyfile(OUT_TTF, ROOT_TTF)
 
+    # Sync to public web directory if present
+    public_fonts = r"c:\Users\philg\Pocketgull\pocketgull\public\fonts"
+    if os.path.isdir(public_fonts):
+        shutil.copyfile(OUT_TTF, os.path.join(public_fonts, "PocketGull-Math.ttf"))
+
     compress(OUT_TTF, OUT_WOFF2)
     shutil.copyfile(OUT_WOFF2, ROOT_WOFF2)
+    if os.path.isdir(public_fonts):
+        shutil.copyfile(OUT_WOFF2, os.path.join(public_fonts, "PocketGull-Math.woff2"))
 
     ttf_sz = os.path.getsize(OUT_TTF)
     woff2_sz = os.path.getsize(OUT_WOFF2)

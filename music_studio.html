@@ -6,6 +6,9 @@
   <meta name="description" content="PocketGull Music Scriptorium: Interactive Web Audio synthesizer, live SMuFL sheet music engraving, and real-time Music Genome Project analysis.">
   <title>PocketGull · Music Scriptorium &amp; Music Genome Studio</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preload" href="fonts/woff2/PocketGull-Music.woff2?v=3.100" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/woff2/PocketGull-Bold.woff2?v=3.3.0" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/woff2/PocketGull-Fineliner.woff2?v=3.3.0" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="fonts.css?v=3.3.0">
   <style>
     :root {
@@ -14,20 +17,20 @@
       --card-border: #1e293b;
       --surface-inner: #090d16;
       --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --indigo: #6366f1;
-      --indigo-glow: rgba(99, 102, 241, 0.2);
-      --cyan: #06b6d4;
-      --cyan-glow: rgba(6, 182, 212, 0.2);
-      --emerald: #10b981;
-      --emerald-glow: rgba(16, 185, 129, 0.2);
-      --amber: #f59e0b;
-      --rose: #fb7185;
-      --purple: #a855f7;
-      --nav-bg: rgba(7, 11, 18, 0.92);
-      --nav-border: rgba(30, 41, 59, 0.8);
+      --text-muted: #cbd5e1; /* Enhanced for WCAG 2.1 AAA (>= 7:1) contrast */
+      --indigo: #a5b4fc;
+      --indigo-glow: rgba(165, 180, 252, 0.25);
+      --cyan: #67e8f9;
+      --cyan-glow: rgba(103, 232, 249, 0.25);
+      --emerald: #6ee7b7;
+      --emerald-glow: rgba(110, 231, 183, 0.25);
+      --amber: #fcd34d;
+      --rose: #fda4af;
+      --purple: #d8b4fe;
+      --nav-bg: rgba(7, 11, 18, 0.94);
+      --nav-border: rgba(30, 41, 59, 0.85);
       --sample-text: #ffffff;
-      --staff-line: rgba(255, 255, 255, 0.35);
+      --staff-line: rgba(255, 255, 255, 0.4);
       --staff-note: #67e8f9;
       --piano-white: #f8fafc;
       --piano-white-active: #c7d2fe;
@@ -41,20 +44,20 @@
       --card-border: #d4c9b5;
       --surface-inner: #fdfbf7;
       --text-main: #1c1917;
-      --text-muted: #6b6357;
-      --indigo: #4338ca;
-      --indigo-glow: rgba(67, 56, 202, 0.15);
-      --cyan: #0d9488;
-      --cyan-glow: rgba(13, 148, 136, 0.15);
-      --emerald: #059669;
-      --emerald-glow: rgba(5, 150, 105, 0.15);
+      --text-muted: #44403c; /* Enhanced for WCAG 2.1 AAA (>= 7:1) contrast */
+      --indigo: #3730a3;
+      --indigo-glow: rgba(55, 48, 163, 0.18);
+      --cyan: #0f766e;
+      --cyan-glow: rgba(15, 118, 110, 0.18);
+      --emerald: #047857;
+      --emerald-glow: rgba(4, 120, 87, 0.18);
       --amber: #b45309;
-      --rose: #e11d48;
-      --purple: #7e22ce;
+      --rose: #be123c;
+      --purple: #6b21a8;
       --nav-bg: rgba(245, 240, 230, 0.94);
       --nav-border: rgba(212, 201, 181, 0.9);
       --sample-text: #1c1917;
-      --staff-line: rgba(28, 25, 23, 0.4);
+      --staff-line: rgba(28, 25, 23, 0.5);
       --staff-note: #0f766e;
       --piano-white: #ffffff;
       --piano-white-active: #fed7aa;
@@ -238,21 +241,39 @@
     }
 
     .badge.indigo {
-      background: rgba(99, 102, 241, 0.15);
-      color: var(--indigo);
-      border: 1px solid rgba(99, 102, 241, 0.3);
+      background: rgba(99, 102, 241, 0.22);
+      color: #c7d2fe;
+      border: 1px solid rgba(199, 210, 254, 0.4);
     }
 
     .badge.emerald {
-      background: rgba(16, 185, 129, 0.15);
-      color: var(--emerald);
-      border: 1px solid rgba(16, 185, 129, 0.3);
+      background: rgba(16, 185, 129, 0.22);
+      color: #a7f3d0;
+      border: 1px solid rgba(167, 243, 208, 0.4);
     }
 
     .badge.cyan {
-      background: rgba(6, 182, 212, 0.15);
-      color: var(--cyan);
-      border: 1px solid rgba(6, 182, 212, 0.3);
+      background: rgba(6, 182, 212, 0.22);
+      color: #a5f3fc;
+      border: 1px solid rgba(165, 243, 252, 0.4);
+    }
+
+    [data-theme="washi"] .badge.indigo {
+      background: rgba(67, 56, 202, 0.12);
+      color: #312e81;
+      border: 1px solid #4338ca;
+    }
+
+    [data-theme="washi"] .badge.emerald {
+      background: rgba(5, 150, 105, 0.12);
+      color: #064e3b;
+      border: 1px solid #047857;
+    }
+
+    [data-theme="washi"] .badge.cyan {
+      background: rgba(13, 148, 136, 0.12);
+      color: #134e4a;
+      border: 1px solid #0f766e;
     }
 
     /* Live Sheet Music Staff Canvas */
@@ -260,18 +281,17 @@
       background: var(--surface-inner);
       border: 1px solid var(--card-border);
       border-radius: 10px;
-      padding: 20px 24px;
-      min-height: 190px;
-      position: relative;
-      overflow-x: auto;
-      overflow-y: hidden;
+      padding: 24px 20px;
       margin-bottom: 16px;
+      overflow-x: auto;
+      position: relative;
     }
 
     .staff-display {
       position: relative;
-      height: 130px;
-      min-width: 600px;
+      height: 140px;
+      min-width: 100%;
+      width: max-content;
       display: flex;
       align-items: center;
     }
@@ -280,8 +300,8 @@
       position: absolute;
       left: 0;
       right: 0;
-      top: 25px;
-      height: 80px;
+      top: 30px;
+      bottom: 30px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -300,7 +320,7 @@
       display: flex;
       align-items: center;
       height: 100%;
-      font-family: 'PocketGull Music', sans-serif;
+      font-family: 'PocketGull Music', 'PocketGull Genome', 'PocketGull', -apple-system, sans-serif;
       font-size: 54px;
       color: var(--sample-text);
       white-space: nowrap;
@@ -554,7 +574,10 @@
       <div class="brand-title">POCKETGULL <span>MUSIC</span></div>
     </a>
     <div class="nav-actions">
-      <button type="button" class="nav-btn" id="themeToggleBtn">🎨 Theme</button>
+      <button type="button" class="nav-btn" id="themeToggleBtn" aria-label="Toggle Color Theme">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+        Theme
+      </button>
       <a href="index.html" class="nav-btn">← Master Specimen</a>
       <a href="https://github.com/pocketgull-app/pocketgull-font" target="_blank" rel="noopener" class="nav-btn">GitHub</a>
     </div>
@@ -579,7 +602,8 @@
         <div class="card" style="margin-bottom: 20px;">
           <div class="card-header">
             <div class="card-title">
-              <span>🎼</span> Live W3C SMuFL Five-Line Staff Engraver
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--cyan);"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+              Live W3C SMuFL Five-Line Staff Engraver
             </div>
             <div style="display: flex; gap: 8px;">
               <span class="badge indigo" id="activeClefBadge">Treble G-Clef</span>
@@ -599,19 +623,25 @@
               </div>
               <!-- Glyph Stream -->
               <div class="staff-glyph-stream" id="staffGlyphs">
-                <span class="staff-note-entry" style="font-size: 54px; margin-right: 18px;" title="Treble Clef (U+E050)">&#xe050;</span>
-                <span class="staff-note-entry" style="font-size: 42px; margin-right: 22px;" title="Common Time 4/4 (U+E942)">&#xe942;</span>
+                <span class="staff-note-entry" style="font-size: 56px; margin-right: 18px; line-height: 1; display: inline-flex; align-items: center;" title="Treble Clef (U+E050)">&#xe050;</span>
+                <span class="staff-note-entry" style="font-size: 58px; margin-right: 22px; line-height: 1; display: inline-flex; align-items: center;" title="Common Time 4/4 (U+E942)">&#xe942;</span>
               </div>
             </div>
           </div>
 
           <!-- Staff Controls -->
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <button type="button" class="control-btn" id="clearStaffBtn">🗑️ Clear Staff</button>
-            <button type="button" class="control-btn" id="insertBarlineBtn">| Insert Barline</button>
-            <button type="button" class="control-btn" id="insertDoubleBarBtn">|| Double Bar</button>
-            <button type="button" class="control-btn" id="insertRestBtn">𝄽 Quarter Rest</button>
-            <button type="button" class="control-btn" id="toggleClefBtn">Clef: Treble / Bass</button>
+            <button type="button" class="control-btn" id="clearStaffBtn" aria-label="Clear Staff">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right: 4px; vertical-align: -2px;"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              Clear Staff
+            </button>
+            <button type="button" class="control-btn" id="insertBarlineBtn" aria-label="Insert Single Barline">| Insert Barline</button>
+            <button type="button" class="control-btn" id="insertDoubleBarBtn" aria-label="Insert Double Barline">|| Double Bar</button>
+            <button type="button" class="control-btn" id="insertRestBtn" aria-label="Insert Quarter Rest">
+              <span style="font-family: 'PocketGull Music'; font-size: 20px; line-height: 1; display: inline-block; vertical-align: -2px; margin-right: 4px;" aria-hidden="true">&#xe4e5;</span>
+              Quarter Rest
+            </button>
+            <button type="button" class="control-btn" id="toggleClefBtn" aria-label="Toggle Clef between Treble and Bass">Clef: Treble / Bass</button>
           </div>
         </div>
 
@@ -619,7 +649,8 @@
         <div class="card">
           <div class="card-header">
             <div class="card-title">
-              <span>🎹</span> Type-to-Play QWERTY Keyboard
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--indigo);"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="6" y1="5" x2="6" y2="12"/><line x1="10" y1="5" x2="10" y2="12"/><line x1="14" y1="5" x2="14" y2="12"/><line x1="18" y1="5" x2="18" y2="12"/></svg>
+              Type-to-Play QWERTY Keyboard
             </div>
             <span class="badge emerald" id="audioStateBadge">Audio: Ready</span>
           </div>
@@ -637,8 +668,8 @@
           <!-- Synthesizer Controls -->
           <div class="controls-grid">
             <div class="control-item">
-              <label class="control-label">Acoustic Sound Engine</label>
-              <select class="control-select" id="engineSelect">
+              <label for="engineSelect" id="label-engine" class="control-label">Acoustic Sound Engine</label>
+              <select class="control-select" id="engineSelect" aria-labelledby="label-engine" aria-label="Acoustic Sound Engine">
                 <option value="piano">Concert Grand Piano (Harmonic)</option>
                 <option value="rhodes">Rhodes EP / Vibraphone (FM Bell)</option>
                 <option value="entrainment">40 Hz Gamma Binaural (MIT Protocol)</option>
@@ -647,20 +678,20 @@
             </div>
 
             <div class="control-item">
-              <label class="control-label">Meter (Time Signature)</label>
-              <select class="control-select" id="meterSelect">
-                <option value="4_4">4/4 Standard (Stacked &#xe942;)</option>
-                <option value="3_4">3/4 Waltz (Stacked &#xe941;)</option>
-                <option value="6_8">6/8 Compound (Stacked &#xe943;)</option>
-                <option value="7_8">7/8 Asymmetric (Stacked &#xe944;)</option>
-                <option value="common">Common Time (&#xe08a;)</option>
-                <option value="cut">Cut Time Alla Breve (&#xe08b;)</option>
+              <label for="meterSelect" id="label-meter" class="control-label">Meter (Time Signature)</label>
+              <select class="control-select" id="meterSelect" aria-labelledby="label-meter" aria-label="Meter (Time Signature)">
+                <option value="4_4">4/4 Standard (Stacked Gould)</option>
+                <option value="3_4">3/4 Waltz (Stacked Gould)</option>
+                <option value="6_8">6/8 Compound (Stacked Gould)</option>
+                <option value="7_8">7/8 Asymmetric (Stacked Gould)</option>
+                <option value="common">Common Time (C)</option>
+                <option value="cut">Cut Time (Alla Breve C|)</option>
               </select>
             </div>
 
             <div class="control-item">
-              <label class="control-label">Octave Shift</label>
-              <select class="control-select" id="octaveSelect">
+              <label for="octaveSelect" id="label-octave" class="control-label">Octave Shift</label>
+              <select class="control-select" id="octaveSelect" aria-labelledby="label-octave" aria-label="Octave Shift">
                 <option value="3">Octave 3 (Low Bass)</option>
                 <option value="4" selected>Octave 4 (Middle C)</option>
                 <option value="5">Octave 5 (High Treble)</option>
@@ -668,8 +699,8 @@
             </div>
 
             <div class="control-item">
-              <label class="control-label">Master Volume</label>
-              <input type="range" id="volumeSlider" min="0" max="100" value="70" style="width: 100%; margin-top: 8px;">
+              <label for="volumeSlider" id="label-volume" class="control-label">Master Volume</label>
+              <input type="range" id="volumeSlider" min="0" max="100" value="70" aria-labelledby="label-volume" aria-label="Master Volume" style="width: 100%; margin-top: 8px;">
             </div>
           </div>
         </div>
@@ -683,7 +714,8 @@
         <div class="card" style="margin-bottom: 20px;">
           <div class="card-header">
             <div class="card-title">
-              <span>🧬</span> Music Genome Project Telemetry
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--cyan);"><path d="M4 12c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8-8-3.6-8-8z"/><path d="M8 8l8 8M16 8l-8 8"/></svg>
+              Music Genome Project Telemetry
             </div>
             <span class="badge cyan">450 Gene Vector</span>
           </div>
@@ -735,7 +767,8 @@
         <div class="card" style="margin-bottom: 20px;">
           <div class="card-header">
             <div class="card-title">
-              <span>🔬</span> DNA Codon Sonification (PocketGull Genome)
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--emerald);"><path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0-7-7"/><circle cx="10" cy="10" r="2"/><path d="m14 10 3-3 2 2-3 3"/><path d="m18 5 2-2"/></svg>
+              DNA Codon Sonification (PocketGull Genome)
             </div>
             <span class="badge emerald">CRISPR sgRNA</span>
           </div>
@@ -749,8 +782,14 @@
           </div>
 
           <div style="display: flex; gap: 8px;">
-            <button type="button" class="control-btn" id="playDnaBtn">▶ Play DNA Sequence</button>
-            <button type="button" class="control-btn" id="crisprCutBtn">✂ CRISPR-Cas9 DSB Cut</button>
+            <button type="button" class="control-btn" id="playDnaBtn" aria-label="Play DNA Sequence">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="margin-right: 4px; vertical-align: -1px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Play DNA Sequence
+            </button>
+            <button type="button" class="control-btn" id="crisprCutBtn" aria-label="Execute CRISPR-Cas9 Cleavage">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right: 4px; vertical-align: -2px;"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+              CRISPR-Cas9 DSB Cut
+            </button>
           </div>
         </div>
 
@@ -758,9 +797,10 @@
         <div class="card">
           <div class="card-header">
             <div class="card-title">
-              <span>📜</span> Performance Event Log
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--purple);"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+              Performance Event Log
             </div>
-            <button type="button" class="nav-btn" style="padding: 2px 8px; font-size: 11px;" id="copyLogBtn">Copy Log</button>
+            <button type="button" class="nav-btn" style="padding: 2px 8px; font-size: 11px;" id="copyLogBtn" aria-label="Copy Event Log to Clipboard">Copy Log</button>
           </div>
           <div class="score-transcript" id="scoreTranscript">
             <div class="score-entry-item">
@@ -1152,12 +1192,14 @@
     document.getElementById('clearStaffBtn').addEventListener('click', clearStaff);
     function clearStaff() {
       const staff = document.getElementById('staffGlyphs');
+      const clefGlyph = (currentClef === 'treble') ? '&#xe050;' : '&#xe062;';
+      const clefTitle = (currentClef === 'treble') ? 'Treble Clef (U+E050)' : 'Bass Clef (U+E062)';
       staff.innerHTML = `
-        <span class="staff-note-entry" style="font-size: 54px; margin-right: 18px;" title="Treble Clef (U+E050)">&#xe050;</span>
-        <span class="staff-note-entry" style="font-size: 42px; margin-right: 22px;" title="Common Time 4/4 (U+E942)">&#xe942;</span>
+        <span class="staff-note-entry" style="font-size: 56px; margin-right: 18px; line-height: 1; display: inline-flex; align-items: center;" title="${clefTitle}">${clefGlyph}</span>
+        <span class="staff-note-entry" style="font-size: 58px; margin-right: 22px; line-height: 1; display: inline-flex; align-items: center;" title="Common Time 4/4 (U+E942)">&#xe942;</span>
       `;
       measureNoteCount = 0;
-      logEvent('Staff cleared', 'Reset to Treble G-Clef + 4/4 meter');
+      logEvent('Staff cleared', `Reset to ${currentClef === 'treble' ? 'Treble' : 'Bass'} Clef + 4/4 meter`);
     }
 
     document.getElementById('insertBarlineBtn').addEventListener('click', () => {
@@ -1204,28 +1246,25 @@
       const badge = document.getElementById('activeClefBadge');
       badge.textContent = (currentClef === 'treble') ? 'Treble G-Clef' : 'Bass F-Clef';
       clearStaff();
-      const firstGlyph = document.querySelector('#staffGlyphs .staff-note-entry');
-      if (firstGlyph) {
-        firstGlyph.innerHTML = (currentClef === 'treble') ? '&#xe050;' : '&#xe062;';
-      }
       logEvent(`Clef toggled to ${currentClef}`, currentClef === 'treble' ? 'G-Clef (U+E050)' : 'F-Clef (U+E062)');
     });
 
     // Meter Select
     document.getElementById('meterSelect').addEventListener('change', (e) => {
       const meterMap = {
-        '4_4': { badge: '4/4 Meter', glyph: '&#xe942;' },
-        '3_4': { badge: '3/4 Waltz', glyph: '&#xe941;' },
-        '6_8': { badge: '6/8 Compound', glyph: '&#xe943;' },
-        '7_8': { badge: '7/8 Asymmetric', glyph: '&#xe944;' },
-        'common': { badge: 'Common Time', glyph: '&#xe08a;' },
-        'cut': { badge: 'Cut Time C|', glyph: '&#xe08b;' }
+        '4_4': { badge: '4/4 Meter', glyph: '&#xe942;', size: '58px' },
+        '3_4': { badge: '3/4 Waltz', glyph: '&#xe941;', size: '58px' },
+        '6_8': { badge: '6/8 Compound', glyph: '&#xe943;', size: '58px' },
+        '7_8': { badge: '7/8 Asymmetric', glyph: '&#xe944;', size: '58px' },
+        'common': { badge: 'Common Time', glyph: '&#xe08a;', size: '48px' },
+        'cut': { badge: 'Cut Time C|', glyph: '&#xe08b;', size: '48px' }
       };
       const m = meterMap[e.target.value] || meterMap['4_4'];
       document.getElementById('activeMeterBadge').textContent = m.badge;
       const secondGlyph = document.querySelectorAll('#staffGlyphs .staff-note-entry')[1];
       if (secondGlyph) {
         secondGlyph.innerHTML = m.glyph;
+        secondGlyph.style.fontSize = m.size;
       }
       logEvent(`Time signature set to ${m.badge}`, 'Stacked 2-story glyph (no slash)');
     });
@@ -1260,8 +1299,9 @@
       const staff = document.getElementById('staffGlyphs');
       const cut = document.createElement('span');
       cut.className = 'staff-note-entry';
-      cut.style.fontSize = '36px';
+      cut.style.fontSize = '30px';
       cut.style.color = 'var(--rose)';
+      cut.style.fontFamily = "'PocketGull Genome', 'PocketGull', monospace";
       cut.innerHTML = '&#x2702; [Cas9 DSB]';
       staff.appendChild(cut);
       logEvent('CRISPR DSB Cleavage', 'sgRNA targeted double-strand break executed');

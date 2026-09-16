@@ -1,0 +1,56 @@
+# PocketGull Bio: Clinical Bioinformatics & Single-Cell Genomics Stylesheet
+# Engineered for scRNA-seq UMAPs, Volcanoplots, and High-Throughput Sequencing
+
+# Fonts
+font.family: PocketGull Mono, monospace
+mathtext.fontset: custom
+mathtext.rm: PocketGull Math
+mathtext.it: PocketGull Math:italic
+mathtext.bf: PocketGull Math:bold
+
+# Canvas & Background (Clinical Deep Slate)
+figure.facecolor: 0b0f19
+figure.edgecolor: 0b0f19
+axes.facecolor: 111827
+axes.edgecolor: 1f2937
+axes.linewidth: 1.2
+
+# Typography & Labels
+text.color: f9fafb
+axes.labelcolor: 9ca3af
+axes.labelsize: 11
+axes.titlesize: 13
+axes.titlecolor: f9fafb
+axes.titlepad: 14
+
+# Ticks
+xtick.color: 9ca3af
+ytick.color: 9ca3af
+xtick.labelsize: 10
+ytick.labelsize: 10
+xtick.direction: out
+ytick.direction: out
+
+# Grids
+axes.grid: False
+grid.color: 1f2937
+grid.linestyle: --
+grid.linewidth: 0.8
+
+# Bioinformatics Color Cycle (A=Green, C=Blue, G=Orange/Gold, T=Red, U=Rose, Clustal)
+lines.linewidth: 2.0
+lines.solid_capstyle: round
+axes.prop_cycle: cycler('color', ['10b981', '38bdf8', 'f59e0b', 'ef4444', 'a855f7', '14b8a6'])
+
+# Legend
+legend.facecolor: 111827
+legend.edgecolor: 1f2937
+legend.framealpha: 0.95
+legend.fontsize: 10
+legend.labelcolor: f9fafb
+
+# Vector & PDF Output
+svg.fonttype: path
+pdf.fonttype: 42
+savefig.bbox: tight
+savefig.pad_inches: 0.1

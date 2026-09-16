@@ -1,0 +1,20 @@
+---
+title: "Clinical Telemetry & Pharmacokinetic Modeling with PocketGull Math"
+author: "The PocketGull Project Authors"
+format:
+  pocketgull-math-pdf: default
+  pocketgull-math-html: default
+---
+
+# Introduction
+This reproducible scientific report is formatted using the **PocketGull Math** Quarto extension, providing optotypic clinical legibility and OpenType math rendering.
+
+# Pharmacokinetic Equations
+The intravenous bolus decay curve follows:
+
+$$C_p(t) = \left[ \frac{D \cdot k_a}{V_d \cdot (k_a - k_e)} \right] \left( e^{-k_e t} - e^{-k_a t} \right)$$
+
+# Telemetry Confidence Intervals
+Under DINOv2 feature representations, the test AUC achieved:
+
+$$\mathrm{AUC} = 0.854 \quad (95\% \text{ CI } [0.832, 0.876], \ p < 0.001)$$

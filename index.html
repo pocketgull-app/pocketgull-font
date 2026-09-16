@@ -10,6 +10,7 @@
   <link rel="preload" href="fonts/woff2/PocketGull-Fineliner.woff2?v=3.3.0" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/woff2/PocketGull-Bold.woff2?v=3.3.0" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/woff2/PocketGullMono-Regular.woff2?v=3.3.0" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/woff2/PocketGull-Math.woff2?v=3.100" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="fonts.css?v=3.3.0">
   <style>
     :root {
@@ -1274,6 +1275,121 @@
       margin-top: 20px;
     }
 
+    /* Scientific & Telemetry Laboratory Styles */
+    .sci-tab-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .sci-tab-btn {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .sci-tab-btn:hover {
+      border-color: #60a5fa;
+      color: var(--text-main);
+    }
+    .sci-tab-btn.active {
+      background: rgba(96, 165, 250, 0.15);
+      border-color: #60a5fa;
+      color: #60a5fa;
+      box-shadow: 0 0 14px rgba(96, 165, 250, 0.2);
+    }
+    .sci-panel {
+      display: none;
+      animation: sciFadeIn 0.25s ease forwards;
+    }
+    .sci-panel.active {
+      display: block;
+    }
+    @keyframes sciFadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .scotopic-container {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .scotopic-container.scotopic-active {
+      background: #000000 !important;
+      border-color: #8b0000 !important;
+      color: #ff3333 !important;
+      box-shadow: 0 0 35px rgba(255, 0, 0, 0.22) inset, 0 0 18px rgba(255, 0, 0, 0.2);
+    }
+    .scotopic-container.scotopic-active * {
+      color: #ff3333 !important;
+      border-color: rgba(255, 51, 51, 0.35) !important;
+    }
+    .scotopic-container.scotopic-active .badge {
+      background: rgba(255, 0, 0, 0.15) !important;
+      color: #ff6666 !important;
+      border-color: rgba(255, 51, 51, 0.5) !important;
+    }
+    .scotopic-container.scotopic-active pre,
+    .scotopic-container.scotopic-active code,
+    .scotopic-container.scotopic-active .fits-terminal {
+      background: #080000 !important;
+      color: #ff3333 !important;
+      text-shadow: 0 0 4px rgba(255, 51, 51, 0.4);
+    }
+    .astro-mode-btn {
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: #f87171;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .astro-mode-btn:hover {
+      background: rgba(239, 68, 68, 0.25);
+      border-color: #ef4444;
+      color: #ffffff;
+    }
+    .fits-terminal {
+      font-family: 'PocketGull Mono', monospace;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 12px;
+      line-height: 1.45;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .math-formula-stage {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 24px;
+      text-align: center;
+      margin: 16px 0;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
     @media (max-width: 900px) {
       .nav-links {
         display: none;
@@ -1338,6 +1454,7 @@
       <a href="#variable" class="nav-link">Variable Font</a>
       <a href="#ismp" class="nav-link">ISMP Safety</a>
       <a href="#telemetry" class="nav-link">ICU Telemetry</a>
+      <a href="#scientific-lab" class="nav-link" style="color: #60a5fa; font-weight: 700;">Scientific Lab 🔬</a>
       <a href="#ecological" class="nav-link" style="color: var(--emerald);">Eco &amp; Battery</a>
       <a href="#scripts" class="nav-link">SMoE Scripts</a>
       <a href="#box-geometry" class="nav-link" style="color: var(--cyan);">Box Geometry</a>
@@ -1391,6 +1508,9 @@
         </a>
         <a href="#telemetry" class="hero-btn-secondary">
           ICU Telemetry HUD
+        </a>
+        <a href="#scientific-lab" class="hero-btn-secondary" style="border-color: rgba(96, 165, 250, 0.5); color: #60a5fa;">
+          🔬 Scientific &amp; Telemetry Lab
         </a>
         <a href="#box-geometry" class="hero-btn-secondary" style="border-color: rgba(6, 182, 212, 0.4); color: var(--cyan);">
           Box Geometry &amp; Telemetry
@@ -1796,6 +1916,174 @@
       <!-- Tactile Braille Strip -->
       <div class="braille-strip">
         ⠁⠍⠕⠭⠊⠉⠊⠇⠇⠊⠝⠀⠼⠑⠚⠚⠀⠍⠛⠀•⠀Full 256 Unicode Braille Coverage (U+2800–U+28FF)
+      </div>
+    </section>
+
+    <!-- 5.5 Scientific, Astronomical & Mathematical Telemetry Laboratory -->
+    <section class="specimen-card" id="scientific-lab" style="border-color: rgba(96, 165, 250, 0.4); background: radial-gradient(circle at top right, rgba(96, 165, 250, 0.06) 0%, var(--card-bg) 100%);">
+      <div class="section-label" style="color: #60a5fa;">Scientific Superfamily Expansion &bull; Zero-Shear Telemetry</div>
+      <h2 class="section-title">
+        <span>Scientific, Astronomical &amp; Mathematical Laboratory</span>
+        <small>Scotopic Night Red HUD &bull; 68 UPM Stem Math Formulas &bull; Zero-Shear FITS Telemetry</small>
+      </h2>
+      
+      <p style="color: var(--text-muted); font-size: 14px; max-width: 920px; line-height: 1.6; margin-bottom: 20px;">
+        Engineered for observational astronomers, physical scientists, and mathematicians: solving the critical legibility failures of academic publishing and dark-room telemetry—namely, dark-mode hairline collapse, unaligned tick numerals, and scotopic night-vision degradation in telescope control rooms.
+      </p>
+
+      <!-- Lab Tab Navigation -->
+      <div class="sci-tab-bar">
+        <button type="button" class="sci-tab-btn active" id="tabAstroBtn" onclick="switchSciTab('astro')">
+          🔭 Scotopic Night Astronomy HUD
+        </button>
+        <button type="button" class="sci-tab-btn" id="tabMathBtn" onclick="switchSciTab('math')">
+          📐 Academic Mathematics &amp; Pharmacokinetics
+        </button>
+      </div>
+
+      <!-- Tab 1: Scotopic Night Astronomy HUD -->
+      <div class="sci-panel active" id="sciPanelAstro">
+        <div class="scotopic-container" id="scotopicContainer">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--card-border);">
+            <div>
+              <span class="badge" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.4); margin-bottom: 4px;">Dark-Sky Observatory Telemetry</span>
+              <h3 style="font-family: 'PocketGull Bold'; font-size: 20px; margin-top: 4px;">650nm Scotopic Observational Console</h3>
+            </div>
+            <button type="button" class="astro-mode-btn" id="scotopicToggleBtn" onclick="toggleScotopicNight()">
+              <span id="scotopicIcon">🔴</span> <span id="scotopicLabel">Activate 650nm Scotopic Red Mode</span>
+            </button>
+          </div>
+
+          <p style="font-size: 13px; line-height: 1.6; margin-bottom: 18px;">
+            In deep-sky telescope environments (Mauna Kea, Roque de los Muchachos, Paranal), any stray white light triggers rhodopsin photobleaching, destroying 30+ minutes of dark adaptation. PocketGull's scotopic red mode isolates photons above 650nm, while its 600 UPM fixed pitch keeps coordinate tables, ephemerides, and FITS headers razor sharp without horizontal drift.
+          </p>
+
+          <!-- Interactive Equatorial Sliders -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 20px; background: rgba(0,0,0,0.25); padding: 16px; border-radius: 8px; border: 1px solid var(--card-border);">
+            <div>
+              <label style="display: flex; justify-content: space-between; font-size: 11px; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">
+                <span>Right Ascension (&alpha;)</span>
+                <span id="valAstroRA" style="font-family: 'PocketGull Mono'; font-weight: 700;">12h 30m 49.4s</span>
+              </label>
+              <input type="range" id="sliderAstroRA" min="0" max="360" step="0.5" value="187.7" style="width: 100%; accent-color: #ef4444; cursor: pointer;" oninput="updateAstroTelemetry()">
+            </div>
+            <div>
+              <label style="display: flex; justify-content: space-between; font-size: 11px; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">
+                <span>Declination (&delta;)</span>
+                <span id="valAstroDec" style="font-family: 'PocketGull Mono'; font-weight: 700;">+12&deg; 23' 28"</span>
+              </label>
+              <input type="range" id="sliderAstroDec" min="-90" max="90" step="0.5" value="12.39" style="width: 100%; accent-color: #ef4444; cursor: pointer;" oninput="updateAstroTelemetry()">
+            </div>
+            <div>
+              <label style="display: flex; justify-content: space-between; font-size: 11px; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">
+                <span>Air Mass (X)</span>
+                <span id="valAstroAirmass" style="font-family: 'PocketGull Mono'; font-weight: 700;">1.04</span>
+              </label>
+              <input type="range" id="sliderAstroAirmass" min="1.00" max="3.00" step="0.01" value="1.04" style="width: 100%; accent-color: #ef4444; cursor: pointer;" oninput="updateAstroTelemetry()">
+            </div>
+          </div>
+
+          <!-- Planetary Constants Matrix with Procedural Glyph Operators -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px;">
+            <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); border-radius: 8px; padding: 12px;">
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Solar Mass (M<sub>&#x2299;</sub>)</div>
+              <div style="font-family: 'PocketGull Math', 'PocketGull Mono'; font-size: 18px; font-weight: 700;">&#x2299; 1.9884&times;10<sup>30</sup> kg</div>
+              <div style="font-size: 10px; opacity: 0.7;">R<sub>&#x2299;</sub> = 6.957&times;10<sup>8</sup> m</div>
+            </div>
+            <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); border-radius: 8px; padding: 12px;">
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Earth Mass (M<sub>&#x2295;</sub>)</div>
+              <div style="font-family: 'PocketGull Math', 'PocketGull Mono'; font-size: 18px; font-weight: 700;">&#x2295; 5.9722&times;10<sup>24</sup> kg</div>
+              <div style="font-size: 10px; opacity: 0.7;">R<sub>&#x2295;</sub> = 6.3781&times;10<sup>6</sup> m</div>
+            </div>
+            <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); border-radius: 8px; padding: 12px;">
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Jupiter Mass (M<sub>&#x2643;</sub>)</div>
+              <div style="font-family: 'PocketGull Math', 'PocketGull Mono'; font-size: 18px; font-weight: 700;">&#x2643; 1.8981&times;10<sup>27</sup> kg</div>
+              <div style="font-size: 10px; opacity: 0.7;">317.8 M<sub>&#x2295;</sub> Nominal</div>
+            </div>
+            <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); border-radius: 8px; padding: 12px;">
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Saturn Mass (M<sub>&#x2644;</sub>)</div>
+              <div style="font-family: 'PocketGull Math', 'PocketGull Mono'; font-size: 18px; font-weight: 700;">&#x2644; 5.6834&times;10<sup>26</sup> kg</div>
+              <div style="font-size: 10px; opacity: 0.7;">95.16 M<sub>&#x2295;</sub> Nominal</div>
+            </div>
+          </div>
+
+          <!-- 80-Column FITS Header Terminal -->
+          <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;">
+            Standard 80-Column FITS Header Telemetry (Zero-Shear PocketGull Mono):
+          </div>
+          <pre class="fits-terminal" id="fitsTerminalBlock">╭──────────────────────────────────────────────────────────────────────────────╮
+│ SIMPLE  =                    T / file conforms to FITS standard              │
+│ BITPIX  =                  -64 / IEEE 754 64-bit floating point              │
+│ NAXIS   =                    2 / 2-dimensional optical image matrix          │
+│ NAXIS1  =                 4096 / fast array axis pixel length                │
+│ NAXIS2  =                 4096 / slow array axis pixel length                │
+│ CRVAL1  =           187.705930 / [deg] RA at reference pixel                 │
+│ CRVAL2  =            12.391120 / [deg] Dec at reference pixel                │
+│ TELESCOP= 'Keck-I 10m Optical' / Mauna Kea High-Altitude Observatory         │
+│ AIRMASS =                 1.04 / optical path length through atmosphere      │
+│ EQUINOX =              2000.00 / mean equinox of celestial coordinates       │
+╰──────────────────────────────────────────────────────────────────────────────╯</pre>
+        </div>
+      </div>
+
+      <!-- Tab 2: Academic Mathematics & Pharmacokinetics HUD -->
+      <div class="sci-panel" id="sciPanelMath">
+        <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 12px; padding: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--card-border);">
+            <div>
+              <span class="badge" style="color: #60a5fa; border-color: rgba(96, 165, 250, 0.4); margin-bottom: 4px;">Peer-Reviewed Typesetting</span>
+              <h3 style="font-family: 'PocketGull Bold'; font-size: 20px; margin-top: 4px;">68 UPM Stem Weight vs. Dark-Mode Hairline Collapse</h3>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;" id="mathFormulaTabs">
+              <button type="button" class="sci-tab-btn active" style="font-size: 11px; padding: 6px 12px;" onclick="selectMathFormula('asl', this)">ℒ_ASL Loss</button>
+              <button type="button" class="sci-tab-btn" style="font-size: 11px; padding: 6px 12px;" onclick="selectMathFormula('enzyme', this)">Enzyme Kinetics</button>
+              <button type="button" class="sci-tab-btn" style="font-size: 11px; padding: 6px 12px;" onclick="selectMathFormula('pkpd', this)">PK/PD Bolus Decay</button>
+              <button type="button" class="sci-tab-btn" style="font-size: 11px; padding: 6px 12px;" onclick="selectMathFormula('delims', this)">Stepped Brackets</button>
+            </div>
+          </div>
+
+          <p style="font-size: 13px; line-height: 1.6; color: var(--text-muted); margin-bottom: 18px;">
+            Standard LaTeX math typefaces (like Computer Modern) feature ultra-thin 28 UPM vertical stems designed for 19th-century letterpress ink squash on paper. In modern clinical dark-mode EHRs and presentation monitors, their exponents and fraction bars collapse into hairlines and disappear. PocketGull Math stabilizes stroke geometry at <strong>68 UPM</strong>, guaranteeing universal legibility across all contrast states.
+          </p>
+
+          <!-- Dynamic Formula Display Stage -->
+          <div class="math-formula-stage" id="mathFormulaStage" style="font-family: 'PocketGull Math', 'PocketGull', sans-serif; font-size: clamp(18px, 2.8vw, 32px); color: var(--sample-text); letter-spacing: 0.02em;">
+            <!-- Formula injected dynamically via JS -->
+          </div>
+
+          <!-- OpenType Features & Stem Comparison Controls -->
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--card-border);">
+            <div style="display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--text-muted);">
+              <label style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+                <input type="checkbox" id="mathFeatZero" checked onchange="updateMathFeatures()">
+                <strong style="color: var(--sample-text);">zero</strong> (ISMP Slashed Zero)
+              </label>
+              <label style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+                <input type="checkbox" id="mathFeatL" checked onchange="updateMathFeatures()">
+                <strong style="color: var(--sample-text);">cv05</strong> (Curved Foot l)
+              </label>
+              <label style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+                <input type="checkbox" id="mathFeatI" checked onchange="updateMathFeatures()">
+                <strong style="color: var(--sample-text);">ss02</strong> (Serifed Capital I)
+              </label>
+              <label style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+                <input type="checkbox" id="mathFeatTnum" checked onchange="updateMathFeatures()">
+                <strong style="color: var(--sample-text);">tnum</strong> (Tabular Figures)
+              </label>
+            </div>
+            <div style="font-size: 11px; font-family: 'PocketGull Mono'; color: #60a5fa;">
+              Font-weight: 400 &bull; Stem: 68 UPM &bull; 1000 UPM Em
+            </div>
+          </div>
+
+          <!-- LaTeX Code Snippet Preview -->
+          <div style="margin-top: 18px;">
+            <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px;">
+              LaTeX / Typst Source Snippet:
+            </div>
+            <pre style="font-family: 'PocketGull Mono', monospace; background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); border-radius: 8px; padding: 12px; font-size: 12px; color: #93c5fd; overflow-x: auto;" id="mathLatexSnippet">\usepackage[slashedzero,curvedl,serifedI,tabular]{pocketgull-math}</pre>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -4051,6 +4339,184 @@
           `;
         }).join('');
       };
+
+      // --- Scientific & Telemetry Laboratory Controllers ---
+      window.switchSciTab = function(tabName) {
+        const astroBtn = document.getElementById('tabAstroBtn');
+        const mathBtn = document.getElementById('tabMathBtn');
+        const astroPanel = document.getElementById('sciPanelAstro');
+        const mathPanel = document.getElementById('sciPanelMath');
+
+        if (tabName === 'astro') {
+          astroBtn?.classList.add('active');
+          mathBtn?.classList.remove('active');
+          astroPanel?.classList.add('active');
+          mathPanel?.classList.remove('active');
+        } else if (tabName === 'math') {
+          mathBtn?.classList.add('active');
+          astroBtn?.classList.remove('active');
+          mathPanel?.classList.add('active');
+          astroPanel?.classList.remove('active');
+        }
+      };
+
+      let isScotopicActive = false;
+      window.toggleScotopicNight = function() {
+        const container = document.getElementById('scotopicContainer');
+        const icon = document.getElementById('scotopicIcon');
+        const label = document.getElementById('scotopicLabel');
+        isScotopicActive = !isScotopicActive;
+
+        if (container) {
+          if (isScotopicActive) {
+            container.classList.add('scotopic-active');
+            if (icon) icon.textContent = '⚪';
+            if (label) label.textContent = 'Deactivate Scotopic Red Mode';
+          } else {
+            container.classList.remove('scotopic-active');
+            if (icon) icon.textContent = '🔴';
+            if (label) label.textContent = 'Activate 650nm Scotopic Red Mode';
+          }
+        }
+      };
+
+      window.updateAstroTelemetry = function() {
+        const raSlider = document.getElementById('sliderAstroRA');
+        const decSlider = document.getElementById('sliderAstroDec');
+        const airmassSlider = document.getElementById('sliderAstroAirmass');
+
+        const valRA = document.getElementById('valAstroRA');
+        const valDec = document.getElementById('valAstroDec');
+        const valAirmass = document.getElementById('valAstroAirmass');
+        const fitsTerminal = document.getElementById('fitsTerminalBlock');
+
+        if (!raSlider || !decSlider || !airmassSlider) return;
+
+        const raDeg = parseFloat(raSlider.value);
+        const decDeg = parseFloat(decSlider.value);
+        const airmass = parseFloat(airmassSlider.value);
+
+        // Convert RA deg to hours, mins, secs
+        const raHoursTotal = raDeg / 15.0;
+        const raH = Math.floor(raHoursTotal);
+        const raM = Math.floor((raHoursTotal - raH) * 60);
+        const raS = (((raHoursTotal - raH) * 60 - raM) * 60).toFixed(1);
+        const raStr = `${raH.toString().padStart(2, '0')}h ${raM.toString().padStart(2, '0')}m ${raS.padStart(4, '0')}s`;
+
+        // Convert Dec deg to deg, arcmin, arcsec
+        const decSign = decDeg >= 0 ? '+' : '-';
+        const absDec = Math.abs(decDeg);
+        const decD = Math.floor(absDec);
+        const decM = Math.floor((absDec - decD) * 60);
+        const decS = Math.round(((absDec - decD) * 60 - decM) * 60);
+        const decStr = `${decSign}${decD.toString().padStart(2, '0')}° ${decM.toString().padStart(2, '0')}' ${decS.toString().padStart(2, '0')}"`;
+
+        if (valRA) valRA.textContent = raStr;
+        if (valDec) valDec.textContent = decStr;
+        if (valAirmass) valAirmass.textContent = airmass.toFixed(2);
+
+        if (fitsTerminal) {
+          fitsTerminal.textContent = `╭──────────────────────────────────────────────────────────────────────────────╮
+│ SIMPLE  =                    T / file conforms to FITS standard              │
+│ BITPIX  =                  -64 / IEEE 754 64-bit floating point              │
+│ NAXIS   =                    2 / 2-dimensional optical image matrix          │
+│ NAXIS1  =                 4096 / fast array axis pixel length                │
+│ NAXIS2  =                 4096 / slow array axis pixel length                │
+│ CRVAL1  =           ${raDeg.toFixed(6).padStart(10, ' ')} / [deg] RA at reference pixel                 │
+│ CRVAL2  =           ${decDeg.toFixed(6).padStart(10, ' ')} / [deg] Dec at reference pixel                │
+│ TELESCOP= 'Keck-I 10m Optical' / Mauna Kea High-Altitude Observatory         │
+│ AIRMASS =                 ${airmass.toFixed(2).padStart(4, ' ')} / optical path length through atmosphere      │
+│ EQUINOX =              2000.00 / mean equinox of celestial coordinates       │
+╰──────────────────────────────────────────────────────────────────────────────╯`;
+        }
+      };
+
+      const mathFormulas = {
+        asl: {
+          html: `<div style="line-height: 1.8;">
+                   ℒ<sub>ASL</sub>(&theta;) = <span style="font-size: 1.25em;">&frac1N;</span> &sum;<sub>i=1</sub><sup>N</sup> &rho;<sub>&tau;</sub>(y<sub>i</sub> &minus; f<sub>&theta;</sub>(x<sub>i</sub>)) + &lambda; ||&theta;||<sub>2</sub><sup>2</sup>
+                 </div>
+                 <div style="font-size: 13px; color: var(--text-muted); margin-top: 10px; font-family: 'PocketGull', sans-serif;">
+                   Asymmetric Laplace Pinball Quantile Loss (&tau; = 0.50 median, &tau; = 0.95 extreme upper bound)
+                 </div>`,
+          latex: `\\mathcal{L}_{\\mathrm{ASL}}(\\theta) = \\frac{1}{N} \\sum_{i=1}^N \\rho_\\tau(y_i - f_\\theta(x_i)) + \\lambda \\|\\theta\\|_2^2`
+        },
+        enzyme: {
+          html: `<div style="line-height: 1.8;">
+                   v = <span style="font-size: 1.15em;">(V<sub>max</sub> [S]) / (K<sub>m</sub> + [S])</span> &nbsp;&hArr;&nbsp; 
+                   <span style="font-size: 1.15em;">&frac1v;</span> = (<span style="font-size: 1.15em;">K<sub>m</sub> / V<sub>max</sub></span>) &middot; <span style="font-size: 1.15em;">&frac1{[S]}</span> + <span style="font-size: 1.15em;">&frac1{V<sub>max</sub>}</span>
+                 </div>
+                 <div style="font-size: 13px; color: var(--text-muted); margin-top: 10px; font-family: 'PocketGull', sans-serif;">
+                   Michaelis-Menten & Lineweaver-Burk Double-Reciprocal Enzyme Saturation Kinetics
+                 </div>`,
+          latex: `v = \\frac{V_{\\max} [S]}{K_m + [S]} \\iff \\frac{1}{v} = \\left( \\frac{K_m}{V_{\\max}} \\right) \\frac{1}{[S]} + \\frac{1}{V_{\\max}}`
+        },
+        pkpd: {
+          html: `<div style="line-height: 1.8;">
+                   C<sub>p</sub>(t) = A &middot; e<sup>&minus;&alpha;t</sup> + B &middot; e<sup>&minus;&beta;t</sup>, &emsp;
+                   CL = <span style="font-size: 1.15em;">Dose / AUC<sub>0&rarr;&infin;</sub></span>, &emsp;
+                   t<sub>&frac12;&beta;</sub> = <span style="font-size: 1.15em;">ln(2) / &beta;</span>
+                 </div>
+                 <div style="font-size: 13px; color: var(--text-muted); margin-top: 10px; font-family: 'PocketGull', sans-serif;">
+                   Two-Compartment Intravenous Bolus Pharmacokinetic Clearance & Elimination Half-Life
+                 </div>`,
+          latex: `C_p(t) = A e^{-\\alpha t} + B e^{-\\beta t}, \\quad \\mathrm{CL} = \\frac{\\mathrm{Dose}}{\\mathrm{AUC}_{0 \\to \\infty}}, \\quad t_{1/2,\\beta} = \\frac{\\ln 2}{\\beta}`
+        },
+        delims: {
+          html: `<div style="line-height: 1.8; font-size: 1.1em;">
+                   <span style="font-size: 1.6em;">[</span>
+                   <span style="font-size: 1.35em;">(</span>
+                   <span style="font-size: 1.15em;">{</span>
+                   x<sub>i,j</sub> &middot; 0̸.75 &plusmn; 0̸.02
+                   <span style="font-size: 1.15em;">}</span>
+                   <span style="font-size: 1.35em;">)</span>
+                   <span style="font-size: 1.6em;">]</span>
+                   &emsp;
+                   <span style="font-size: 0.85em; opacity: 0.9;">0̸ &ne; O &emsp; 1 &ne; l &ne; I &emsp; Z &ne; 2</span>
+                 </div>
+                 <div style="font-size: 13px; color: var(--text-muted); margin-top: 10px; font-family: 'PocketGull', sans-serif;">
+                   Stepped Delimiters (.v1 1000 UPM &rarr; .v4 2200 UPM) & ISMP Clinical Disambiguation Matrix
+                 </div>`,
+          latex: `\\Biggl[ \\biggl( \\Bigl\\{ x_{i,j} \\cdot 0.75 \\pm 0.02 \\Bigr\\} \\biggr) \\Biggr] \\quad 0̸ \\neq \\mathrm{O}, \\quad 1 \\neq \\mathrm{l} \\neq \\mathrm{I}, \\quad \\mathrm{Z} \\neq 2`
+        }
+      };
+
+      window.selectMathFormula = function(type, btn) {
+        const stage = document.getElementById('mathFormulaStage');
+        const snippet = document.getElementById('mathLatexSnippet');
+        const container = document.getElementById('mathFormulaTabs');
+
+        if (container) {
+          container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        }
+        if (btn) btn.classList.add('active');
+
+        const formula = mathFormulas[type] || mathFormulas.asl;
+        if (stage) stage.innerHTML = formula.html;
+        if (snippet) snippet.textContent = formula.latex;
+      };
+
+      window.updateMathFeatures = function() {
+        const stage = document.getElementById('mathFormulaStage');
+        if (!stage) return;
+
+        const zero = document.getElementById('mathFeatZero')?.checked;
+        const cv05 = document.getElementById('mathFeatL')?.checked;
+        const ss02 = document.getElementById('mathFeatI')?.checked;
+        const tnum = document.getElementById('mathFeatTnum')?.checked;
+
+        const feats = [];
+        if (zero) feats.push('"zero" 1');
+        if (cv05) feats.push('"cv05" 1');
+        if (ss02) feats.push('"ss02" 1');
+        if (tnum) feats.push('"tnum" 1');
+
+        stage.style.fontFeatureSettings = feats.join(', ');
+      };
+
+      // Initial call to load formula and features
+      selectMathFormula('asl', null);
+      updateMathFeatures();
 
       updateChromaticRender();
 

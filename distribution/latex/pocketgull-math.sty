@@ -3,7 +3,7 @@
 %% OpenType MATH table support via unicode-math for LuaLaTeX and XeLaTeX
 %%
 %% Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)
-%% Licensed under the Apache License, Version 2.0
+%% Licensed under the Apache License, Version 2.0 and SIL Open Font License 1.1
 
 \NeedsTeXFormat{LaTeX2E}[2020/01/01]
 \ProvidesPackage{pocketgull-math}[2026/09/15 v3.1.0 PocketGull Humanist Clinical Math Font Package]
@@ -18,14 +18,65 @@
   }
 \fi
 
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=PGM,
+  prefix=PGM@
+}
+
+\DeclareBoolOption[false]{slashedzero}
+\DeclareBoolOption[false]{curvedl}
+\DeclareBoolOption[false]{serifedI}
+\DeclareBoolOption[false]{tabular}
+\DeclareStringOption[]{fontpath}
+\ProcessKeyvalOptions*
+
 \RequirePackage{unicode-math}
 
-% Declare PocketGull Math as the primary OpenType math font
-\setmathfont{PocketGull-Math.ttf}[
-  Scale=MatchLowercase,
-  Path=fonts/ttf/,
-  Extension=.ttf,
-]
+% Assemble OpenType RawFeatures based on package options
+\def\PGM@features{}
+\ifPGM@slashedzero
+  \edef\PGM@features{\PGM@features+cv08;}
+\fi
+\ifPGM@curvedl
+  \edef\PGM@features{\PGM@features+cv05;}
+\fi
+\ifPGM@serifedI
+  \edef\PGM@features{\PGM@features+ss02;}
+\fi
+\ifPGM@tabular
+  \edef\PGM@features{\PGM@features+tnum;}
+\fi
+
+% Primary OpenType Math Font Declaration
+\ifx\PGM@fontpath\@empty
+  \setmathfont{PocketGull-Math.ttf}[
+    Scale=MatchLowercase,
+    RawFeature={\PGM@features}
+  ]
+\else
+  \setmathfont{PocketGull-Math.ttf}[
+    Scale=MatchLowercase,
+    Path=\PGM@fontpath,
+    RawFeature={\PGM@features}
+  ]
+\fi
+
+% Blackboard Bold Standard Mathematical Sets
+\newcommand{\Rset}{\symbb{R}}
+\newcommand{\Nset}{\symbb{N}}
+\newcommand{\Zset}{\symbb{Z}}
+\newcommand{\Cset}{\symbb{C}}
+\newcommand{\Qset}{\symbb{Q}}
+\newcommand{\Prob}{\symbb{P}}
+\newcommand{\Expect}{\symbb{E}}
+\newcommand{\Indicator}{\symbb{1}}
+
+% Machine Learning & Objective Optimization Macros
+\newcommand{\LASL}{\mathcal{L}_{\mathrm{ASL}}}
+\newcommand{\Loss}{\mathcal{L}}
+\newcommand{\etaMax}{\eta_{\max}}
+\newcommand{\etaMin}{\eta_{\min}}
 
 % Clinical Pharmacokinetic & Pharmacodynamic (PK/PD) Macros
 \newcommand{\Cp}[1]{C_{\text{p}}(#1)}

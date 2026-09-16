@@ -315,7 +315,7 @@
   font-weight: 400 500;
   font-style: normal;
   font-display: swap;
-  unicode-range: U+0370-03FF, U+2070-209F, U+2100-214F, U+2190-21FF, U+2200-22FF, U+1D400-1D7FF;
+  unicode-range: U+0020-007E, U+00A0-00FF, U+0370-03FF, U+2070-209F, U+2100-214F, U+2190-21FF, U+2200-22FF, U+2600-26FF, U+27C0-27EF, U+2980-29FF, U+1D400-1D7FF;
 }
 
 /* PocketGull Chem (Clinical Chemistry, Pharmacological & Molecular Typeface) */
@@ -341,7 +341,7 @@
   font-weight: 400 500;
   font-style: normal;
   font-display: swap;
-  unicode-range: U+0020-007E, U+2702, U+E920-E92C;
+  unicode-range: U+0020-007E, U+2702, U+E000-F8FF;
 }
 
 /* PocketGull Music (W3C SMuFL Notation, Music Therapy & Audiology Telemetry Typeface) */
@@ -354,7 +354,7 @@
   font-weight: 400 500;
   font-style: normal;
   font-display: swap;
-  unicode-range: U+0020-007E, U+1D100-1D1FF, U+266D-266F, U+E010-E0FF, U+E260-E27F, U+E4E0-E54F, U+E8E0-E8EF, U+E930-E94F;
+  unicode-range: U+0020-007E, U+1D100-1D1FF, U+2660-267F, U+E000-F8FF;
 }
 
 /* PocketGull Superfamily Expansion: Chromatic & Textured Series */

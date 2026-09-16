@@ -1,0 +1,17 @@
+title: PocketGull Math Academic Format
+author: The PocketGull Project Authors
+version: 3.1.0
+quarto-required: ">=1.4.0"
+contributes:
+  formats:
+    html:
+      theme: [cosmo, pocketgull-math.scss]
+      mainfont: "PocketGull"
+      monofont: "PocketGull Mono"
+    pdf:
+      documentclass: article
+      pdf-engine: xelatex
+      include-in-header:
+        - text: |
+            \usepackage{unicode-math}
+            \setmathfont{PocketGull-Math.ttf}[Scale=MatchLowercase]

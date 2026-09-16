@@ -1,0 +1,59 @@
+# PocketGull Math: Light Medical Publication Matplotlib Stylesheet
+# Designed for printed journal articles and white background reports
+
+# Fonts
+font.family: PocketGull Math, PocketGull Mono, monospace
+mathtext.fontset: custom
+mathtext.rm: PocketGull Math
+mathtext.it: PocketGull Math:italic
+mathtext.bf: PocketGull Math:bold
+mathtext.sf: PocketGull Math
+
+# Canvas & Background
+figure.facecolor: ffffff
+figure.edgecolor: ffffff
+axes.facecolor: f8fafc
+axes.edgecolor: e2e8f0
+axes.linewidth: 1.2
+
+# Colors & Typography
+text.color: 0f172a
+axes.labelcolor: 475569
+axes.labelsize: 11
+axes.titlesize: 13
+axes.titlecolor: 0f172a
+axes.titlepad: 14
+
+# Ticks
+xtick.color: 475569
+ytick.color: 475569
+xtick.labelsize: 10
+ytick.labelsize: 10
+xtick.direction: out
+ytick.direction: out
+
+# Grids
+axes.grid: True
+grid.color: e2e8f0
+grid.linestyle: --
+grid.linewidth: 0.8
+grid.alpha: 0.8
+
+# Lines & Scatters
+lines.linewidth: 2.0
+lines.solid_capstyle: round
+axes.prop_cycle: cycler('color', ['0d9488', '0284c7', 'd97706', 'db2777', '9333ea', '059669'])
+
+# Legend
+legend.facecolor: ffffff
+legend.edgecolor: e2e8f0
+legend.framealpha: 0.95
+legend.fontsize: 10
+legend.labelcolor: 0f172a
+
+# Vector Export
+svg.fonttype: path
+pdf.fonttype: 42
+ps.fonttype: 42
+savefig.bbox: tight
+savefig.pad_inches: 0.1
