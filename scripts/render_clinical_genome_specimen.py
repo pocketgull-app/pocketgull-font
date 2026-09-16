@@ -64,6 +64,7 @@ def render_genome_plate():
             "seq2": "Read 1: A T G G C C A T T G T A A T G G G C C G C T G A C T G A\nRead 2: A T G G C C A T T G T A A T G G G C - G C T G A C T G A\nRead 3: A T G G C C A T T G T A A T T G C C G C T G A C T G A  [SNP: C>T, Q38]",
             "clinical": "Phred Q38 base call quality (P_error < 0.00016). ISMP-disambiguated C vs. G eliminates indel false positives.",
             "color": CYAN_ACCENT,
+            "is_multiline": True,
             "y": 480
         },
         {
@@ -94,9 +95,17 @@ def render_genome_plate():
 
         draw.text((140, y0 + 16), card["title"], font=font_section, fill=card["color"])
         draw.text((140, y0 + 48), card["subtitle"], font=font_subtitle, fill=MUTED_TEXT)
-        draw.text((140, y0 + 88), card["seq1"], font=font_seq_med, fill=TEXT_WHITE)
-        draw.text((140, y0 + 138), card["seq2"], font=font_seq_med, fill=TEAL_ACCENT)
-        draw.text((140, y0 + 230), f"\u00bb Clinical Context: {card['clinical']}", font=font_meta, fill=(203, 213, 225))
+        if card.get("is_multiline"):
+            font_align = ImageFont.truetype(FONT_GENOME, 21)
+            draw.text((140, y0 + 74), card["seq1"], font=font_align, fill=TEXT_WHITE)
+            reads = card["seq2"].split("\n")
+            for r_idx, r_text in enumerate(reads):
+                draw.text((140, y0 + 101 + r_idx * 27), r_text, font=font_align, fill=CYAN_ACCENT)
+            draw.text((140, y0 + 236), f"\u00bb Clinical Context: {card['clinical']}", font=font_meta, fill=(203, 213, 225))
+        else:
+            draw.text((140, y0 + 88), card["seq1"], font=font_seq_med, fill=TEXT_WHITE)
+            draw.text((140, y0 + 138), card["seq2"], font=font_seq_med, fill=TEAL_ACCENT)
+            draw.text((140, y0 + 230), f"\u00bb Clinical Context: {card['clinical']}", font=font_meta, fill=(203, 213, 225))
 
     # Bottom Banner: Specialized Genomics Glyph Set
     draw.rounded_rectangle([(100, 1370), (1900, 1515)], radius=12, fill=CARD_BG, outline=CARD_BORDER, width=1)
