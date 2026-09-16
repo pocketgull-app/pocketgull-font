@@ -27,6 +27,8 @@ cask "font-pocketgull" do
   font "fonts/ttf/PocketGull-Slab-Regular.ttf"
   font "fonts/ttf/PocketGull-Math.ttf"
   font "fonts/ttf/PocketGull-Chem.ttf"
+  font "fonts/ttf/PocketGull-Genome.ttf"
+  font "fonts/ttf/PocketGull-Music.ttf"
   font "fonts/ttf/PocketGull-Soft.ttf"
   font "fonts/ttf/PocketGull-Soft-Bold.ttf"
   font "fonts/ttf/PocketGull-Soft-Regular.ttf"

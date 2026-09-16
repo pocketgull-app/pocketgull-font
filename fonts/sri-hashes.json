@@ -34,6 +34,11 @@
     "sha256": "f0fffb0d188e68ed3e2de5dbc149e797683ff89f79bb4ce2f32d4fac34b76cfe",
     "sri": "sha384-UDGR6L36jOfVu7bP3S6SuVggOzWTtfZQsqmpUjta4U6JB9rHt1zJEW4levXv87Jv"
   },
+  "fonts/ttf/PocketGull-Genome.ttf": {
+    "size": 689940,
+    "sha256": "de1674f8cb709b804bc40b8c14d1f638250226aa1ca5819dc388d1498eb14b82",
+    "sri": "sha384-wrZa0QsItsnGzZdirV0A3Lh2pSQv2lWgBqC6zMWrJf+Nud20XKlUg0C77bDtcmRN"
+  },
   "fonts/ttf/PocketGull-Halftone.ttf": {
     "size": 32865480,
     "sha256": "681ac5a0e6ca530f6dc462027b50d94b993fc629e5575786791f400a298ca401",
@@ -63,6 +68,11 @@
     "size": 2499720,
     "sha256": "e6161c184294adad3b5e281f7ea9a22044a54618e81958d8ad78dfc60dd6fe6b",
     "sri": "sha384-67gql14xx7LFXLotTU3SKLlUMvB5s4vNkH4TrUJRAF6CDCxMuMeZnNbDtF3+kwg2"
+  },
+  "fonts/ttf/PocketGull-Music.ttf": {
+    "size": 1881192,
+    "sha256": "4c6e1d669a60e2db0834b68e46bf3321b0e2f85ca8a996f5c4f1a7115cea6929",
+    "sri": "sha384-ixnnQtqBSzRowh4yIKameaSdZ3lEzmExIwrH6iSU+waPBre36w3ROazImYqIWIV/"
   },
   "fonts/ttf/PocketGull-Outline.ttf": {
     "size": 5722956,
@@ -179,6 +189,11 @@
     "sha256": "e9d8b3e5ba18d963dcefd8311292ad5ca2b3b910d6fec6589becd87b84b58888",
     "sri": "sha384-Ya8+9FuKQniSunj9wmw9BU7axWHVLVfx5K1zGFMhouQYhhFCuCehfqfVUhwZqVgI"
   },
+  "fonts/woff2/PocketGull-Genome.woff2": {
+    "size": 241640,
+    "sha256": "192924bd1c8143a84e386c54cacb6275ff5dba7ece0b4111b4815380a7405b3c",
+    "sri": "sha384-umcc3ypZdZc4PkIM/7ZOkgdDmjMlY1/BzZ1edXb1/fc+OjL0KKQTzfvOUz2WJmW7"
+  },
   "fonts/woff2/PocketGull-Halftone.woff2": {
     "size": 3841604,
     "sha256": "11ca1119f14603b910b090fddc40a77a5c063127b1565fbea35688048a963dce",
@@ -213,6 +228,11 @@
     "size": 758260,
     "sha256": "a79aba0df311cfe36dd1fb919632e3c83a7a52c7ad8f10f04a9c94ee08017b9e",
     "sri": "sha384-eUMOG7i+dn2Q3qfMtfF5i4BhEQpz4/VwL4BQ4RiJ4IqORgMT/O216WsWpQJqCLOG"
+  },
+  "fonts/woff2/PocketGull-Music.woff2": {
+    "size": 674624,
+    "sha256": "a5b9ecc14c526b5d114758ca53cb866465e7c161a068702af3c0dedd595d42d6",
+    "sri": "sha384-TZJRAVIVj5Inx4WgLpeuszCqzylKsT/amCpsNhwBdiYtPh8nZ7r+1ERZkVTYqLt0"
   },
   "fonts/woff2/PocketGull-Numerics.woff2": {
     "size": 97432,

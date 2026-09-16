@@ -31,6 +31,8 @@ Tags:
   - braille
   - math
   - chemistry
+  - genomics
+  - music
 ReleaseDate: 2026-09-12
 ManifestType: defaultLocale
 ManifestVersion: 1.6.0
@@ -59,6 +61,8 @@ Installers:
       - RelativeFilePath: fonts/ttf/PocketGull-Soft-Bold.ttf
       - RelativeFilePath: fonts/ttf/PocketGull-Math.ttf
       - RelativeFilePath: fonts/ttf/PocketGull-Chem.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Genome.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Music.ttf
       - RelativeFilePath: fonts/ttf/PocketGullMono-Regular.ttf
       - RelativeFilePath: fonts/ttf/PocketGullMono-Bold.ttf
 ManifestType: installer

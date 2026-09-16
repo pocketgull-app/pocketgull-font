@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PocketGull Music Scriptorium: Interactive Web Audio synthesizer, live SMuFL sheet music engraving, and real-time Music Genome Project analysis.">
+  <title>PocketGull · Music Scriptorium &amp; Music Genome Studio</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="fonts.css?v=3.3.0">
+  <style>
+    :root {
+      --bg: #070b12;
+      --card-bg: #0d1522;
+      --card-border: #1e293b;
+      --surface-inner: #090d16;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --indigo: #6366f1;
+      --indigo-glow: rgba(99, 102, 241, 0.2);
+      --cyan: #06b6d4;
+      --cyan-glow: rgba(6, 182, 212, 0.2);
+      --emerald: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.2);
+      --amber: #f59e0b;
+      --rose: #fb7185;
+      --purple: #a855f7;
+      --nav-bg: rgba(7, 11, 18, 0.92);
+      --nav-border: rgba(30, 41, 59, 0.8);
+      --sample-text: #ffffff;
+      --staff-line: rgba(255, 255, 255, 0.35);
+      --staff-note: #67e8f9;
+      --piano-white: #f8fafc;
+      --piano-white-active: #c7d2fe;
+      --piano-black: #0f172a;
+      --piano-black-active: #4338ca;
+    }
+
+    [data-theme="washi"] {
+      --bg: #f5f0e6;
+      --card-bg: #eae3d2;
+      --card-border: #d4c9b5;
+      --surface-inner: #fdfbf7;
+      --text-main: #1c1917;
+      --text-muted: #6b6357;
+      --indigo: #4338ca;
+      --indigo-glow: rgba(67, 56, 202, 0.15);
+      --cyan: #0d9488;
+      --cyan-glow: rgba(13, 148, 136, 0.15);
+      --emerald: #059669;
+      --emerald-glow: rgba(5, 150, 105, 0.15);
+      --amber: #b45309;
+      --rose: #e11d48;
+      --purple: #7e22ce;
+      --nav-bg: rgba(245, 240, 230, 0.94);
+      --nav-border: rgba(212, 201, 181, 0.9);
+      --sample-text: #1c1917;
+      --staff-line: rgba(28, 25, 23, 0.4);
+      --staff-note: #0f766e;
+      --piano-white: #ffffff;
+      --piano-white-active: #fed7aa;
+      --piano-black: #292524;
+      --piano-black-active: #9a3412;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: 'PocketGull', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      padding-top: 74px;
+      padding-bottom: 60px;
+      line-height: 1.5;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    /* Top Navbar */
+    .top-navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--nav-border);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-title {
+      font-family: 'PocketGull Bold', sans-serif;
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+    }
+
+    .brand-title span {
+      color: var(--indigo);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid var(--card-border);
+      background: var(--surface-inner);
+      color: var(--text-main);
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--indigo);
+      color: var(--indigo);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px 20px;
+    }
+
+    /* Header Banner */
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(6, 182, 212, 0.06) 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--indigo), var(--cyan), var(--emerald));
+    }
+
+    .hero-title {
+      font-family: 'PocketGull Bold', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--sample-text);
+      margin-bottom: 8px;
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 900px;
+      line-height: 1.6;
+    }
+
+    /* Main Grid */
+    .studio-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 960px) {
+      .studio-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 20px;
+      position: relative;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 12px;
+    }
+
+    .card-title {
+      font-family: 'PocketGull Bold', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--sample-text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .badge.indigo {
+      background: rgba(99, 102, 241, 0.15);
+      color: var(--indigo);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+
+    .badge.emerald {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--emerald);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .badge.cyan {
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--cyan);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
+
+    /* Live Sheet Music Staff Canvas */
+    .staff-wrapper {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 20px 24px;
+      min-height: 190px;
+      position: relative;
+      overflow-x: auto;
+      overflow-y: hidden;
+      margin-bottom: 16px;
+    }
+
+    .staff-display {
+      position: relative;
+      height: 130px;
+      min-width: 600px;
+      display: flex;
+      align-items: center;
+    }
+
+    .staff-lines-container {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 25px;
+      height: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+
+    .staff-line {
+      width: 100%;
+      height: 2px;
+      background: var(--staff-line);
+    }
+
+    .staff-glyph-stream {
+      position: absolute;
+      left: 10px;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      font-family: 'PocketGull Music', sans-serif;
+      font-size: 54px;
+      color: var(--sample-text);
+      white-space: nowrap;
+      user-select: none;
+      line-height: 1;
+    }
+
+    .staff-note-entry {
+      display: inline-flex;
+      align-items: center;
+      margin-right: 14px;
+      position: relative;
+      animation: notePop 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes notePop {
+      0% { transform: scale(0.6) translateY(-10px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    /* Interactive Piano Keyboard */
+    .piano-container {
+      position: relative;
+      height: 160px;
+      margin: 16px 0;
+      user-select: none;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+
+    .piano-keys {
+      display: flex;
+      position: relative;
+      height: 140px;
+      width: fit-content;
+      margin: 0 auto;
+    }
+
+    .key-white {
+      width: 44px;
+      height: 140px;
+      background: var(--piano-white);
+      border: 1px solid #94a3b8;
+      border-radius: 0 0 6px 6px;
+      position: relative;
+      z-index: 1;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: 8px;
+      color: #334155;
+      font-size: 11px;
+      font-weight: 700;
+      transition: all 0.08s ease;
+      box-shadow: inset 0 -4px 6px rgba(0,0,0,0.1);
+    }
+
+    .key-white:hover {
+      background: #f1f5f9;
+    }
+
+    .key-white.active {
+      background: var(--piano-white-active);
+      box-shadow: inset 0 -2px 3px rgba(99, 102, 241, 0.4);
+      transform: translateY(2px);
+    }
+
+    .key-black {
+      width: 28px;
+      height: 90px;
+      background: var(--piano-black);
+      border-radius: 0 0 4px 4px;
+      position: absolute;
+      z-index: 2;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: 6px;
+      color: #94a3b8;
+      font-size: 10px;
+      font-weight: 700;
+      transition: all 0.08s ease;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+    }
+
+    .key-black:hover {
+      background: #1e293b;
+    }
+
+    .key-black.active {
+      background: var(--piano-black-active);
+      color: #fff;
+      transform: translateY(2px);
+    }
+
+    .key-hint {
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 11px;
+      font-weight: 800;
+      color: inherit;
+      opacity: 0.85;
+    }
+
+    .key-note {
+      font-size: 9px;
+      opacity: 0.6;
+    }
+
+    /* Controls Row */
+    .controls-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .control-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .control-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .control-select, .control-btn {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: var(--text-main);
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .control-select:focus, .control-btn:hover {
+      border-color: var(--indigo);
+    }
+
+    .btn-action {
+      background: var(--indigo);
+      color: #fff;
+      font-weight: 700;
+      border: none;
+    }
+
+    .btn-action:hover {
+      background: #4f46e5;
+    }
+
+    /* Music Genome Project Telemetry Dashboard */
+    .genome-metric-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .genome-metric-card {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+
+    .genome-metric-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .genome-metric-val {
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+
+    .genome-bar-track {
+      height: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+
+    .genome-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--indigo), var(--cyan));
+      width: 50%;
+      transition: width 0.3s ease;
+    }
+
+    /* DNA Codon Translation Panel */
+    .dna-stream-box {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 12px;
+      font-family: 'PocketGull Genome', 'PocketGull Mono', monospace;
+      font-size: 14px;
+      color: var(--emerald);
+      min-height: 46px;
+      word-break: break-all;
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    /* Score Log */
+    .score-transcript {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 12px;
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+      height: 110px;
+      overflow-y: auto;
+      line-height: 1.6;
+    }
+
+    .score-entry-item {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 3px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="top-navbar">
+    <a href="index.html" class="brand-group">
+      <div class="brand-title">POCKETGULL <span>MUSIC</span></div>
+    </a>
+    <div class="nav-actions">
+      <button type="button" class="nav-btn" id="themeToggleBtn">🎨 Theme</button>
+      <a href="index.html" class="nav-btn">← Master Specimen</a>
+      <a href="https://github.com/pocketgull-app/pocketgull-font" target="_blank" rel="noopener" class="nav-btn">GitHub</a>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+      <h1 class="hero-title">PocketGull Music Scriptorium &amp; Web Audio Studio</h1>
+      <p class="hero-subtitle">
+        Type on your keyboard to perform live synthesized music, render W3C SMuFL notation onto the five-line staff in real-time, and analyze harmonic, melodic, and rhythmic genes via the Music Genome Engine.
+      </p>
+    </div>
+
+    <div class="studio-grid">
+      
+      <!-- Left Column: Synthesizer, Piano & Staff -->
+      <div>
+        
+        <!-- Live SMuFL Sheet Music Staff Card -->
+        <div class="card" style="margin-bottom: 20px;">
+          <div class="card-header">
+            <div class="card-title">
+              <span>🎼</span> Live W3C SMuFL Five-Line Staff Engraver
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <span class="badge indigo" id="activeClefBadge">Treble G-Clef</span>
+              <span class="badge cyan" id="activeMeterBadge">4/4 Common</span>
+            </div>
+          </div>
+
+          <div class="staff-wrapper">
+            <div class="staff-display" id="staffDisplay">
+              <!-- Staff 5 Lines -->
+              <div class="staff-lines-container">
+                <div class="staff-line"></div>
+                <div class="staff-line"></div>
+                <div class="staff-line"></div>
+                <div class="staff-line"></div>
+                <div class="staff-line"></div>
+              </div>
+              <!-- Glyph Stream -->
+              <div class="staff-glyph-stream" id="staffGlyphs">
+                <span class="staff-note-entry" style="font-size: 54px; margin-right: 18px;" title="Treble Clef (U+E050)">&#xe050;</span>
+                <span class="staff-note-entry" style="font-size: 42px; margin-right: 22px;" title="Common Time 4/4 (U+E942)">&#xe942;</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Staff Controls -->
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button type="button" class="control-btn" id="clearStaffBtn">🗑️ Clear Staff</button>
+            <button type="button" class="control-btn" id="insertBarlineBtn">| Insert Barline</button>
+            <button type="button" class="control-btn" id="insertDoubleBarBtn">|| Double Bar</button>
+            <button type="button" class="control-btn" id="insertRestBtn">𝄽 Quarter Rest</button>
+            <button type="button" class="control-btn" id="toggleClefBtn">Clef: Treble / Bass</button>
+          </div>
+        </div>
+
+        <!-- Interactive Piano Keyboard Card -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <span>🎹</span> Type-to-Play QWERTY Keyboard
+            </div>
+            <span class="badge emerald" id="audioStateBadge">Audio: Ready</span>
+          </div>
+
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">
+            Press physical keyboard letters (<strong style="color: var(--sample-text);">A, S, D, F, G, H, J, K</strong> for white keys; <strong style="color: var(--sample-text);">W, E, T, Y, U</strong> for accidentals) or click the piano keys below:
+          </p>
+
+          <div class="piano-container">
+            <div class="piano-keys" id="pianoKeysContainer">
+              <!-- White & Black Keys populated by JS -->
+            </div>
+          </div>
+
+          <!-- Synthesizer Controls -->
+          <div class="controls-grid">
+            <div class="control-item">
+              <label class="control-label">Acoustic Sound Engine</label>
+              <select class="control-select" id="engineSelect">
+                <option value="piano">Concert Grand Piano (Harmonic)</option>
+                <option value="rhodes">Rhodes EP / Vibraphone (FM Bell)</option>
+                <option value="entrainment">40 Hz Gamma Binaural (MIT Protocol)</option>
+                <option value="vagal">60 BPM Vagal Cardiac Anchor</option>
+              </select>
+            </div>
+
+            <div class="control-item">
+              <label class="control-label">Meter (Time Signature)</label>
+              <select class="control-select" id="meterSelect">
+                <option value="4_4">4/4 Standard (Stacked &#xe942;)</option>
+                <option value="3_4">3/4 Waltz (Stacked &#xe941;)</option>
+                <option value="6_8">6/8 Compound (Stacked &#xe943;)</option>
+                <option value="7_8">7/8 Asymmetric (Stacked &#xe944;)</option>
+                <option value="common">Common Time (&#xe08a;)</option>
+                <option value="cut">Cut Time Alla Breve (&#xe08b;)</option>
+              </select>
+            </div>
+
+            <div class="control-item">
+              <label class="control-label">Octave Shift</label>
+              <select class="control-select" id="octaveSelect">
+                <option value="3">Octave 3 (Low Bass)</option>
+                <option value="4" selected>Octave 4 (Middle C)</option>
+                <option value="5">Octave 5 (High Treble)</option>
+              </select>
+            </div>
+
+            <div class="control-item">
+              <label class="control-label">Master Volume</label>
+              <input type="range" id="volumeSlider" min="0" max="100" value="70" style="width: 100%; margin-top: 8px;">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Music Genome Telemetry & Codon Translation -->
+      <div>
+        
+        <!-- Music Genome Project Analysis Card -->
+        <div class="card" style="margin-bottom: 20px;">
+          <div class="card-header">
+            <div class="card-title">
+              <span>🧬</span> Music Genome Project Telemetry
+            </div>
+            <span class="badge cyan">450 Gene Vector</span>
+          </div>
+
+          <div class="genome-metric-grid">
+            <div class="genome-metric-card">
+              <div class="genome-metric-name">Active Pitch / Freq</div>
+              <div class="genome-metric-val" id="metricPitch">C4 · 261.6 Hz</div>
+              <div class="genome-bar-track"><div class="genome-bar-fill" id="barPitch" style="width: 50%;"></div></div>
+            </div>
+
+            <div class="genome-metric-card">
+              <div class="genome-metric-name">Detected Chord / Set</div>
+              <div class="genome-metric-val" id="metricChord">C Major (3-11B)</div>
+              <div class="genome-bar-track"><div class="genome-bar-fill" id="barChord" style="width: 80%;"></div></div>
+            </div>
+
+            <div class="genome-metric-card">
+              <div class="genome-metric-name">Harmonic Consonance</div>
+              <div class="genome-metric-val" id="metricConsonance">94.2% Pure</div>
+              <div class="genome-bar-track"><div class="genome-bar-fill" id="barConsonance" style="width: 94%;"></div></div>
+            </div>
+
+            <div class="genome-metric-card">
+              <div class="genome-metric-name">Melodic Contour</div>
+              <div class="genome-metric-val" id="metricContour">Ascending ↗</div>
+              <div class="genome-bar-track"><div class="genome-bar-fill" id="barContour" style="width: 65%;"></div></div>
+            </div>
+
+            <div class="genome-metric-card">
+              <div class="genome-metric-name">Emotional Valence</div>
+              <div class="genome-metric-val" id="metricValence">Positive / Serene</div>
+              <div class="genome-bar-track"><div class="genome-bar-fill" id="barValence" style="width: 78%;"></div></div>
+            </div>
+
+            <div class="genome-metric-card">
+              <div class="genome-metric-name">Neuromodulation Band</div>
+              <div class="genome-metric-val" id="metricNeuro">α Alpha (10 Hz)</div>
+              <div class="genome-bar-track"><div class="genome-bar-fill" id="barNeuro" style="width: 60%;"></div></div>
+            </div>
+          </div>
+
+          <div style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">
+            <strong>Genetic Vector Coordinates:</strong> Analyzed via Krumhansl-Schmuckler key profile and Plomp-Levelt acoustic roughness matrix.
+          </div>
+        </div>
+
+        <!-- DNA Codon Sonification Card (PocketGull Genome Integration) -->
+        <div class="card" style="margin-bottom: 20px;">
+          <div class="card-header">
+            <div class="card-title">
+              <span>🔬</span> DNA Codon Sonification (PocketGull Genome)
+            </div>
+            <span class="badge emerald">CRISPR sgRNA</span>
+          </div>
+
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 10px;">
+            Type nucleotides (<strong style="color: var(--emerald);">A, C, G, T</strong>) to synthesize DNA codons into melodic intervals and biological CRISPR motifs:
+          </p>
+
+          <div class="dna-stream-box" id="dnaStreamDisplay">
+            5'-ATG GCG GTT TGA-3' [Start Codon: Met · Val · Trp · Stop]
+          </div>
+
+          <div style="display: flex; gap: 8px;">
+            <button type="button" class="control-btn" id="playDnaBtn">▶ Play DNA Sequence</button>
+            <button type="button" class="control-btn" id="crisprCutBtn">✂ CRISPR-Cas9 DSB Cut</button>
+          </div>
+        </div>
+
+        <!-- Score Log Card -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <span>📜</span> Performance Event Log
+            </div>
+            <button type="button" class="nav-btn" style="padding: 2px 8px; font-size: 11px;" id="copyLogBtn">Copy Log</button>
+          </div>
+          <div class="score-transcript" id="scoreTranscript">
+            <div class="score-entry-item">
+              <span>Session initialized</span>
+              <span>AudioContext: 48.0 kHz</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    // Theme Management
+    const themes = ['dark', 'washi', 'light'];
+    let currentThemeIdx = 0;
+    const themeBtn = document.getElementById('themeToggleBtn');
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        currentThemeIdx = (currentThemeIdx + 1) % themes.length;
+        document.documentElement.setAttribute('data-theme', themes[currentThemeIdx]);
+      });
+    }
+
+    // Web Audio Engine Architecture
+    let audioCtx = null;
+    let masterGain = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+        masterGain = audioCtx.createGain();
+        masterGain.gain.setValueAtTime(0.7, audioCtx.currentTime);
+        masterGain.connect(audioCtx.destination);
+        document.getElementById('audioStateBadge').textContent = 'Audio: Active (' + (audioCtx.sampleRate/1000) + ' kHz)';
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    // Note Pitch Map (Equal Temperament, A4 = 440 Hz)
+    const NOTE_FREQS = {
+      'C3': 130.81, 'C#3': 138.59, 'D3': 146.83, 'D#3': 155.56, 'E3': 164.81, 'F3': 174.61, 'F#3': 185.00, 'G3': 196.00, 'G#3': 207.65, 'A3': 220.00, 'A#3': 233.08, 'B3': 246.94,
+      'C4': 261.63, 'C#4': 277.18, 'D4': 293.66, 'D#4': 311.13, 'E4': 329.63, 'F4': 349.23, 'F#4': 369.99, 'G4': 392.00, 'G#4': 415.30, 'A4': 440.00, 'A#4': 466.16, 'B4': 493.88,
+      'C5': 523.25, 'C#5': 554.37, 'D5': 587.33, 'D#5': 622.25, 'E5': 659.25, 'F5': 698.46, 'F#5': 739.99, 'G5': 783.99, 'G#5': 830.61, 'A5': 880.00, 'A#5': 932.33, 'B5': 987.77
+    };
+
+    // Keyboard Key Configuration (Ableton / Tracker Standard)
+    const PIANO_KEY_DEFS = [
+      { note: 'C',  acc: '',  key: 'A', isBlack: false, pos: 0 },
+      { note: 'C',  acc: '#', key: 'W', isBlack: true,  pos: 28 },
+      { note: 'D',  acc: '',  key: 'S', isBlack: false, pos: 44 },
+      { note: 'D',  acc: '#', key: 'E', isBlack: true,  pos: 72 },
+      { note: 'E',  acc: '',  key: 'D', isBlack: false, pos: 88 },
+      { note: 'F',  acc: '',  key: 'F', isBlack: false, pos: 132 },
+      { note: 'F',  acc: '#', key: 'T', isBlack: true,  pos: 160 },
+      { note: 'G',  acc: '',  key: 'G', isBlack: false, pos: 176 },
+      { note: 'G',  acc: '#', key: 'Y', isBlack: true,  pos: 204 },
+      { note: 'A',  acc: '',  key: 'H', isBlack: false, pos: 220 },
+      { note: 'A',  acc: '#', key: 'U', isBlack: true,  pos: 248 },
+      { note: 'B',  acc: '',  key: 'J', isBlack: false, pos: 264 },
+      { note: 'C+', acc: '',  key: 'K', isBlack: false, pos: 308 },
+      { note: 'C+', acc: '#', key: 'O', isBlack: true,  pos: 336 },
+      { note: 'D+', acc: '',  key: 'L', isBlack: false, pos: 352 },
+      { note: 'D+', acc: '#', key: 'P', isBlack: true,  pos: 380 },
+      { note: 'E+', acc: '',  key: ';', isBlack: false, pos: 396 }
+    ];
+
+    // Render Piano Keys in DOM
+    const pianoContainer = document.getElementById('pianoKeysContainer');
+    const keyElementMap = {};
+
+    PIANO_KEY_DEFS.forEach(def => {
+      const el = document.createElement('div');
+      const isPlus = def.note.includes('+');
+      const baseNote = def.note.replace('+', '');
+      
+      if (def.isBlack) {
+        el.className = 'key-black';
+        el.style.left = def.pos + 'px';
+      } else {
+        el.className = 'key-white';
+      }
+
+      el.innerHTML = `<span class="key-hint">${def.key}</span><span class="key-note">${baseNote}${def.acc}</span>`;
+      el.dataset.key = def.key.toUpperCase();
+      el.dataset.note = baseNote;
+      el.dataset.acc = def.acc;
+      el.dataset.plus = isPlus ? '1' : '0';
+
+      el.addEventListener('mousedown', () => {
+        playKey(def.key.toUpperCase());
+      });
+
+      pianoContainer.appendChild(el);
+      keyElementMap[def.key.toUpperCase()] = el;
+    });
+
+    // Synthesizer Voice Player
+    function playTone(freq, engineType) {
+      if (!audioCtx) initAudio();
+      const now = audioCtx.currentTime;
+
+      if (engineType === 'piano') {
+        // Physical Modeling Multi-Harmonic Piano
+        const osc1 = audioCtx.createOscillator();
+        const osc2 = audioCtx.createOscillator();
+        const filter = audioCtx.createBiquadFilter();
+        const gainNode = audioCtx.createGain();
+
+        osc1.type = 'triangle';
+        osc2.type = 'sine';
+        osc1.frequency.setValueAtTime(freq, now);
+        osc2.frequency.setValueAtTime(freq * 2.001, now); // Second harmonic with subtle chorus
+
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(freq * 4, now);
+        filter.frequency.exponentialRampToValueAtTime(freq * 0.8, now + 1.2);
+
+        gainNode.gain.setValueAtTime(0.6, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, now + 1.4);
+
+        osc1.connect(filter);
+        osc2.connect(filter);
+        filter.connect(gainNode);
+        gainNode.connect(masterGain);
+
+        osc1.start(now);
+        osc2.start(now);
+        osc1.stop(now + 1.5);
+        osc2.stop(now + 1.5);
+
+      } else if (engineType === 'rhodes') {
+        // FM Bell / Electric Piano
+        const carrier = audioCtx.createOscillator();
+        const modulator = audioCtx.createOscillator();
+        const modGain = audioCtx.createGain();
+        const voiceGain = audioCtx.createGain();
+
+        carrier.type = 'sine';
+        carrier.frequency.setValueAtTime(freq, now);
+
+        modulator.type = 'sine';
+        modulator.frequency.setValueAtTime(freq * 3.5, now); // Metallic ratio
+
+        modGain.gain.setValueAtTime(freq * 2.0, now);
+        modGain.gain.exponentialRampToValueAtTime(1.0, now + 0.8);
+
+        modulator.connect(modGain);
+        modGain.connect(carrier.frequency);
+
+        voiceGain.gain.setValueAtTime(0.7, now);
+        voiceGain.gain.exponentialRampToValueAtTime(0.001, now + 1.6);
+
+        carrier.connect(voiceGain);
+        voiceGain.connect(masterGain);
+
+        carrier.start(now);
+        modulator.start(now);
+        carrier.stop(now + 1.7);
+        modulator.stop(now + 1.7);
+
+      } else if (engineType === 'entrainment') {
+        // 40 Hz Gamma Difference Binaural Tone
+        const oscLeft = audioCtx.createOscillator();
+        const oscRight = audioCtx.createOscillator();
+        const pannerL = audioCtx.createStereoPanner ? audioCtx.createStereoPanner() : null;
+        const pannerR = audioCtx.createStereoPanner ? audioCtx.createStereoPanner() : null;
+        const gainNode = audioCtx.createGain();
+
+        oscLeft.type = 'sine';
+        oscRight.type = 'sine';
+        oscLeft.frequency.setValueAtTime(freq, now);
+        oscRight.frequency.setValueAtTime(freq + 40.0, now); // 40 Hz gamma offset
+
+        gainNode.gain.setValueAtTime(0.5, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, now + 2.0);
+
+        if (pannerL && pannerR) {
+          pannerL.pan.value = -0.8;
+          pannerR.pan.value = 0.8;
+          oscLeft.connect(pannerL);
+          pannerL.connect(gainNode);
+          oscRight.connect(pannerR);
+          pannerR.connect(gainNode);
+        } else {
+          oscLeft.connect(gainNode);
+          oscRight.connect(gainNode);
+        }
+
+        gainNode.connect(masterGain);
+        oscLeft.start(now);
+        oscRight.start(now);
+        oscLeft.stop(now + 2.1);
+        oscRight.stop(now + 2.1);
+
+      } else if (engineType === 'vagal') {
+        // 60 BPM Vagal Metronome Anchor + Alpha Drone
+        const osc = audioCtx.createOscillator();
+        const click = audioCtx.createOscillator();
+        const clickGain = audioCtx.createGain();
+        const droneGain = audioCtx.createGain();
+
+        // 10 Hz Alpha background
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now);
+        droneGain.gain.setValueAtTime(0.2, now);
+        droneGain.gain.exponentialRampToValueAtTime(0.001, now + 1.0);
+        osc.connect(droneGain);
+        droneGain.connect(masterGain);
+
+        // Acoustic woodblock click
+        click.type = 'triangle';
+        click.frequency.setValueAtTime(880, now);
+        click.frequency.exponentialRampToValueAtTime(110, now + 0.05);
+        clickGain.gain.setValueAtTime(0.8, now);
+        clickGain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+        click.connect(clickGain);
+        clickGain.connect(masterGain);
+
+        osc.start(now);
+        click.start(now);
+        osc.stop(now + 1.0);
+        click.stop(now + 0.08);
+      }
+    }
+
+    // Staff Notes History & Telemetry History
+    let recentPitches = [];
+    let lastPitchFreq = 261.63;
+    let measureNoteCount = 0;
+
+    function playKey(keyChar) {
+      initAudio();
+      const def = PIANO_KEY_DEFS.find(d => d.key.toUpperCase() === keyChar.toUpperCase());
+      if (!def) return;
+
+      const octaveOffset = parseInt(document.getElementById('octaveSelect').value, 10) || 4;
+      const targetOctave = def.note.includes('+') ? octaveOffset + 1 : octaveOffset;
+      const baseNote = def.note.replace('+', '');
+      const noteName = `${baseNote}${def.acc}${targetOctave}`;
+      const freq = NOTE_FREQS[noteName] || 440;
+
+      // Animate Key
+      const keyEl = keyElementMap[keyChar.toUpperCase()];
+      if (keyEl) {
+        keyEl.classList.add('active');
+        setTimeout(() => keyEl.classList.remove('active'), 140);
+      }
+
+      // Play Audio
+      const engine = document.getElementById('engineSelect').value;
+      playTone(freq, engine);
+
+      // Append Note to Staff
+      appendNoteToStaff(baseNote, def.acc, targetOctave);
+
+      // Update Music Genome Telemetry
+      updateMusicGenome(noteName, freq);
+
+      // Log Event
+      logEvent(`${noteName} played`, `f = ${freq.toFixed(1)} Hz · SMuFL Quarter Note`);
+    }
+
+    // Append SMuFL Note to Live Staff
+    function appendNoteToStaff(note, acc, octave) {
+      const staff = document.getElementById('staffGlyphs');
+      if (!staff) return;
+
+      const entry = document.createElement('span');
+      entry.className = 'staff-note-entry';
+
+      // SMuFL Notehead Black (Quarter): U+E0A4
+      let glyphHtml = '&#xe0a4;';
+      if (acc === '#') {
+        // SMuFL Sharp: U+E262
+        glyphHtml = '<span style="font-size: 38px; margin-right: 4px;">&#xe262;</span>' + glyphHtml;
+      } else if (acc === 'b') {
+        // SMuFL Flat: U+E260
+        glyphHtml = '<span style="font-size: 38px; margin-right: 4px;">&#xe260;</span>' + glyphHtml;
+      }
+
+      // Stem (U+E210)
+      glyphHtml += '<span style="font-size: 44px; margin-left: -12px;">&#xe210;</span>';
+
+      entry.innerHTML = glyphHtml;
+      staff.appendChild(entry);
+
+      measureNoteCount++;
+      if (measureNoteCount >= 4) {
+        // Insert auto barline every 4 quarter notes
+        const bar = document.createElement('span');
+        bar.className = 'staff-note-entry';
+        bar.style.fontSize = '50px';
+        bar.style.margin = '0 12px';
+        bar.innerHTML = '&#xe030;'; // SMuFL Single Barline
+        staff.appendChild(bar);
+        measureNoteCount = 0;
+      }
+
+      // Auto scroll staff right
+      const wrapper = document.querySelector('.staff-wrapper');
+      if (wrapper) wrapper.scrollLeft = wrapper.scrollWidth;
+    }
+
+    // Music Genome Project Engine
+    function updateMusicGenome(noteName, freq) {
+      recentPitches.push({ name: noteName, freq: freq });
+      if (recentPitches.length > 8) recentPitches.shift();
+
+      // 1. Pitch / Frequency
+      document.getElementById('metricPitch').textContent = `${noteName} · ${freq.toFixed(1)} Hz`;
+      document.getElementById('barPitch').style.width = `${Math.min(100, Math.max(10, (freq / 800) * 100))}%`;
+
+      // 2. Melodic Contour
+      let contour = 'Static →';
+      let contourFill = 50;
+      if (freq > lastPitchFreq * 1.02) {
+        contour = 'Ascending ↗';
+        contourFill = 75;
+      } else if (freq < lastPitchFreq * 0.98) {
+        contour = 'Descending ↘';
+        contourFill = 25;
+      }
+      lastPitchFreq = freq;
+      document.getElementById('metricContour').textContent = contour;
+      document.getElementById('barContour').style.width = `${contourFill}%`;
+
+      // 3. Chord & Harmony Recognition
+      const baseNote = noteName.replace(/[0-9]/g, '');
+      const chords = {
+        'C': { chord: 'C Major (3-11B)', cons: '96% Consonant', valence: 'Triumphant / Bright' },
+        'C#': { chord: 'C# Diminished (3-10)', cons: '68% Tense', valence: 'Mysterious / Dread' },
+        'D': { chord: 'D Minor (3-11A)', cons: '88% Consonant', valence: 'Poignant / Lyrical' },
+        'D#': { chord: 'Eb Major (3-11B)', cons: '92% Consonant', valence: 'Warm / Radiant' },
+        'E': { chord: 'E Minor (3-11A)', cons: '86% Consonant', valence: 'Contemplative' },
+        'F': { chord: 'F Major (3-11B)', cons: '94% Consonant', valence: 'Pastoral / Serene' },
+        'F#': { chord: 'F# Tritone / Dim', cons: '62% Dissonant', valence: 'Dynamic Tension' },
+        'G': { chord: 'G Dominant 7th (4-27)', cons: '89% Consonant', valence: 'Harmonic Resolution' },
+        'G#': { chord: 'Ab Major (3-11B)', cons: '91% Consonant', valence: 'Majestic / Solemn' },
+        'A': { chord: 'A Minor (3-11A)', cons: '90% Consonant', valence: 'Melancholic / Pure' },
+        'A#': { chord: 'Bb Major (3-11B)', cons: '93% Consonant', valence: 'Expansive' },
+        'B': { chord: 'B Half-Diminished', cons: '72% Restless', valence: 'Anticipatory' }
+      };
+
+      const cData = chords[baseNote] || { chord: `${baseNote} Triad`, cons: '85%', valence: 'Balanced' };
+      document.getElementById('metricChord').textContent = cData.chord;
+      document.getElementById('metricConsonance').textContent = cData.cons;
+      document.getElementById('metricValence').textContent = cData.valence;
+
+      // 4. Neuromodulation
+      const neuroBands = [
+        'δ Delta (0.5-4 Hz: Deep Sleep)',
+        'θ Theta (4-8 Hz: Hypnagogic)',
+        'α Alpha (8-13 Hz: Relaxation)',
+        'β Beta (13-30 Hz: Focus)',
+        'γ Gamma (40 Hz: Synchrony)'
+      ];
+      const band = neuroBands[Math.floor((freq % 500) / 100)];
+      document.getElementById('metricNeuro').textContent = band;
+    }
+
+    // Physical Keyboard Listener
+    window.addEventListener('keydown', (e) => {
+      // Ignore if typing in an input
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+
+      const key = e.key.toUpperCase();
+      const match = PIANO_KEY_DEFS.find(d => d.key.toUpperCase() === key);
+      if (match) {
+        e.preventDefault();
+        playKey(key);
+      } else if (e.key === ' ') {
+        // Spacebar inserts quarter rest
+        e.preventDefault();
+        insertRest();
+      } else if (e.key === 'Backspace') {
+        e.preventDefault();
+        clearStaff();
+      }
+    });
+
+    // Staff Buttons
+    document.getElementById('clearStaffBtn').addEventListener('click', clearStaff);
+    function clearStaff() {
+      const staff = document.getElementById('staffGlyphs');
+      staff.innerHTML = `
+        <span class="staff-note-entry" style="font-size: 54px; margin-right: 18px;" title="Treble Clef (U+E050)">&#xe050;</span>
+        <span class="staff-note-entry" style="font-size: 42px; margin-right: 22px;" title="Common Time 4/4 (U+E942)">&#xe942;</span>
+      `;
+      measureNoteCount = 0;
+      logEvent('Staff cleared', 'Reset to Treble G-Clef + 4/4 meter');
+    }
+
+    document.getElementById('insertBarlineBtn').addEventListener('click', () => {
+      const staff = document.getElementById('staffGlyphs');
+      const bar = document.createElement('span');
+      bar.className = 'staff-note-entry';
+      bar.style.fontSize = '50px';
+      bar.style.margin = '0 12px';
+      bar.innerHTML = '&#xe030;'; // Single Barline
+      staff.appendChild(bar);
+      measureNoteCount = 0;
+      logEvent('Barline inserted', 'SMuFL Single Barline (U+E030)');
+    });
+
+    document.getElementById('insertDoubleBarBtn').addEventListener('click', () => {
+      const staff = document.getElementById('staffGlyphs');
+      const bar = document.createElement('span');
+      bar.className = 'staff-note-entry';
+      bar.style.fontSize = '50px';
+      bar.style.margin = '0 12px';
+      bar.innerHTML = '&#xe031;'; // Double Barline
+      staff.appendChild(bar);
+      measureNoteCount = 0;
+      logEvent('Double barline inserted', 'SMuFL Double Barline (U+E031)');
+    });
+
+    document.getElementById('insertRestBtn').addEventListener('click', insertRest);
+    function insertRest() {
+      const staff = document.getElementById('staffGlyphs');
+      const rest = document.createElement('span');
+      rest.className = 'staff-note-entry';
+      rest.style.fontSize = '44px';
+      rest.style.margin = '0 12px';
+      rest.innerHTML = '&#xe4e5;'; // Quarter Rest
+      staff.appendChild(rest);
+      measureNoteCount++;
+      logEvent('Quarter rest inserted', 'SMuFL Quarter Rest (U+E4E5)');
+    }
+
+    // Toggle Clef
+    let currentClef = 'treble';
+    document.getElementById('toggleClefBtn').addEventListener('click', () => {
+      currentClef = (currentClef === 'treble') ? 'bass' : 'treble';
+      const badge = document.getElementById('activeClefBadge');
+      badge.textContent = (currentClef === 'treble') ? 'Treble G-Clef' : 'Bass F-Clef';
+      clearStaff();
+      const firstGlyph = document.querySelector('#staffGlyphs .staff-note-entry');
+      if (firstGlyph) {
+        firstGlyph.innerHTML = (currentClef === 'treble') ? '&#xe050;' : '&#xe062;';
+      }
+      logEvent(`Clef toggled to ${currentClef}`, currentClef === 'treble' ? 'G-Clef (U+E050)' : 'F-Clef (U+E062)');
+    });
+
+    // Meter Select
+    document.getElementById('meterSelect').addEventListener('change', (e) => {
+      const meterMap = {
+        '4_4': { badge: '4/4 Meter', glyph: '&#xe942;' },
+        '3_4': { badge: '3/4 Waltz', glyph: '&#xe941;' },
+        '6_8': { badge: '6/8 Compound', glyph: '&#xe943;' },
+        '7_8': { badge: '7/8 Asymmetric', glyph: '&#xe944;' },
+        'common': { badge: 'Common Time', glyph: '&#xe08a;' },
+        'cut': { badge: 'Cut Time C|', glyph: '&#xe08b;' }
+      };
+      const m = meterMap[e.target.value] || meterMap['4_4'];
+      document.getElementById('activeMeterBadge').textContent = m.badge;
+      const secondGlyph = document.querySelectorAll('#staffGlyphs .staff-note-entry')[1];
+      if (secondGlyph) {
+        secondGlyph.innerHTML = m.glyph;
+      }
+      logEvent(`Time signature set to ${m.badge}`, 'Stacked 2-story glyph (no slash)');
+    });
+
+    // Volume Slider
+    document.getElementById('volumeSlider').addEventListener('input', (e) => {
+      if (masterGain && audioCtx) {
+        const val = parseFloat(e.target.value) / 100;
+        masterGain.gain.setValueAtTime(val, audioCtx.currentTime);
+      }
+    });
+
+    // DNA Sonification Engine
+    const dnaNotes = { 'A': 'C4', 'C': 'E4', 'G': 'G4', 'T': 'B4' };
+    const dnaSeq = ['A', 'T', 'G', 'G', 'C', 'G', 'G', 'T', 'T', 'T', 'G', 'A'];
+    
+    document.getElementById('playDnaBtn').addEventListener('click', () => {
+      initAudio();
+      logEvent('DNA Sonification started', 'Transcribing 5\'-ATG GCG GTT TGA-3\'');
+      dnaSeq.forEach((base, idx) => {
+        setTimeout(() => {
+          const note = dnaNotes[base] || 'C4';
+          const freq = NOTE_FREQS[note] || 261.6;
+          playTone(freq, 'rhodes');
+          appendNoteToStaff(note[0], '', parseInt(note[1]));
+          updateMusicGenome(note, freq);
+        }, idx * 240);
+      });
+    });
+
+    document.getElementById('crisprCutBtn').addEventListener('click', () => {
+      const staff = document.getElementById('staffGlyphs');
+      const cut = document.createElement('span');
+      cut.className = 'staff-note-entry';
+      cut.style.fontSize = '36px';
+      cut.style.color = 'var(--rose)';
+      cut.innerHTML = '&#x2702; [Cas9 DSB]';
+      staff.appendChild(cut);
+      logEvent('CRISPR DSB Cleavage', 'sgRNA targeted double-strand break executed');
+    });
+
+    // Event Logger
+    function logEvent(action, detail) {
+      const log = document.getElementById('scoreTranscript');
+      if (!log) return;
+      const item = document.createElement('div');
+      item.className = 'score-entry-item';
+      const timeStr = new Date().toLocaleTimeString().split(' ')[0];
+      item.innerHTML = `<span>[${timeStr}] ${action}</span><span style="opacity: 0.6;">${detail}</span>`;
+      log.prepend(item);
+    }
+
+    document.getElementById('copyLogBtn').addEventListener('click', () => {
+      const text = document.getElementById('scoreTranscript').innerText;
+      navigator.clipboard.writeText(text);
+      alert('Event log copied to clipboard!');
+    });
+  </script>
+</body>
+</html>
