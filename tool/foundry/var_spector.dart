@@ -188,7 +188,7 @@ class VariableFoundrySpector {
       final gvarRec = tables['gvar']!;
       final gvarOffset = gvarRec.offset;
       final axisCount = data.getUint16(gvarOffset + 4);
-      final glyphCount = data.getUint16(gvarOffset + 8);
+      final glyphCount = data.getUint16(gvarOffset + 12);
 
       checks.add(VarCheck(
         id: 'gvar_presence',

@@ -1,28 +1,29 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
-PocketGull Typefoundry: PocketGull Slab Generator v2.0
+PocketGull Typefoundry: PocketGull Slab Generator v3.1
 =====================================================
 Engineers the fourth pillar of the superfamily: PocketGull Slab
 (PocketGull-Slab-Regular and PocketGull-Slab-Bold) for high-impact
 clinical reading, display titling, and telemetry legibility.
 
 Features:
-- Sturdy bracketed humanist slab serifs derived from clinical I.serif
-- Quadratic fillets preventing ink clotting on EHR displays and thermal printers
+- Sturdy bracketed humanist slab serifs with optimal quadratic Bézier fillets (flag=0 off-curve brackets)
 - ISMP character safeguards:
     * Capital 'I': Bilateral serifs top and bottom (ss02)
     * Lowercase 'l': Top entry spur + curved outward foot sweep (cv05)
     * Numeral '1': Angled beak flag + broad flat baseline slab
     * Slashed zero '0' (cv08)
-    * Calibrated heart tittle grounding at y = 687.5 UPM (cv09 / .philocardia-heart)
+    * Calibrated heart tittle grounding (cv09 / .philocardia-heart)
+- Complete uppercase coverage: H, M, N, K, B, D, P, R, T, U, A, E, F, L, V, W, X, Y, Z
+- Complete lowercase coverage: b, d, h, i, k, l, m, n, p, q, r, u, a, t, v, w, x, y, z
+- Numerals: 1, 4, 7
 - Corrected topological serifier:
     * D, B, b: Unilateral leftward stem serifs; 0 spurs cutting into or through bowls
-    * d: Top entry spur at y = 760 ascender; rightward baseline foot; clean round bowl
+    * d: Top entry spur at ascender; rightward baseline foot; clean round bowl
     * P, R: Top-left entry spur; bilateral baseline foot; clean bowls
-    * h, k, l: Top entry spur at y = 760 ascender; clean arches; baseline feet
-    * m, n, p, r, u: Top entry spurs at y = 536; clean arches & bowls
+    * q: Top entry spur at x-height; bilateral descender foot at -240 UPM; clean bowl
 - 1000 UPM standard em-square, 2-byte word alignment (loca[i] % 2 == 0), bit-7 flag clearing
-- Google Fonts Option 5 naming compliance
+- Google Fonts Option 5 naming compliance (Version 3.100, fontRevision 3.1)
 """
 
 import os
@@ -34,7 +35,7 @@ from fontTools.ttLib import TTFont
 from fontTools.ttLib.tables._g_l_y_f import GlyphCoordinates
 from fontTools.ttLib.woff2 import compress
 
-ROOT_DIR = Path(r"c:\Users\philg\Pocketgull\pocketgull-typeface")
+ROOT_DIR = Path(__file__).resolve().parent.parent
 TTF_DIR = ROOT_DIR / "fonts" / "ttf"
 WOFF2_DIR = ROOT_DIR / "fonts" / "woff2"
 PUBLIC_DIR = ROOT_DIR.parent / "pocketgull" / "public" / "fonts"
@@ -67,64 +68,81 @@ def clean_glyph_geometry(glyph):
     glyph.flags = bytearray(new_flags)
     glyph.endPtsOfContours = new_endPts
 
-def make_serif_nodes(xl, xr, y, O, H_slab, H_rise, mode, pos, going_rtl):
+def make_slab_nodes(xl, xr, y, O, H_slab, H_rise, mode, pos, going_rtl):
+    """
+    Constructs bracketed slab serif nodes using optimal quadratic Bézier curves.
+    At bracket transitions, an off-curve control point (flag=0) provides C1 tangency
+    connecting the vertical stem to the horizontal serif shelf.
+    """
     H_tot = H_slab + H_rise
+    nodes = [] # tuples: ((x, y), flag)
+    
     if pos == 'base':
         if mode == 'bilateral':
             nodes = [
-                (xl, y + H_tot),
-                (xl - O, y + H_slab),
-                (xl - O, y),
-                (xr + O, y),
-                (xr + O, y + H_slab),
-                (xr, y + H_tot)
+                ((xl, y + H_tot), 1),
+                ((xl, y + H_slab), 0), # quadratic bracket control point
+                ((xl - O, y + H_slab), 1),
+                ((xl - O, y), 1),
+                ((xr + O, y), 1),
+                ((xr + O, y + H_slab), 1),
+                ((xr, y + H_slab), 0), # quadratic bracket control point
+                ((xr, y + H_tot), 1)
             ]
         elif mode == 'left_only':
             nodes = [
-                (xl, y + H_tot),
-                (xl - O, y + H_slab),
-                (xl - O, y),
-                (xr, y)
+                ((xl, y + H_tot), 1),
+                ((xl, y + H_slab), 0),
+                ((xl - O, y + H_slab), 1),
+                ((xl - O, y), 1),
+                ((xr, y), 1)
             ]
         elif mode == 'right_only':
             nodes = [
-                (xl, y),
-                (xr + O, y),
-                (xr + O, y + H_slab),
-                (xr, y + H_tot)
+                ((xl, y), 1),
+                ((xr + O, y), 1),
+                ((xr + O, y + H_slab), 1),
+                ((xr, y + H_slab), 0),
+                ((xr, y + H_tot), 1)
             ]
     elif pos == 'top':
         if mode == 'bilateral':
             nodes = [
-                (xl, y - H_tot),
-                (xl - O, y - H_slab),
-                (xl - O, y),
-                (xr + O, y),
-                (xr + O, y - H_slab),
-                (xr, y - H_tot)
+                ((xl, y - H_tot), 1),
+                ((xl, y - H_slab), 0), # quadratic bracket control point
+                ((xl - O, y - H_slab), 1),
+                ((xl - O, y), 1),
+                ((xr + O, y), 1),
+                ((xr + O, y - H_slab), 1),
+                ((xr, y - H_slab), 0), # quadratic bracket control point
+                ((xr, y - H_tot), 1)
             ]
         elif mode == 'left_only':
             nodes = [
-                (xl, y - H_tot),
-                (xl - O, y - H_slab),
-                (xl - O, y),
-                (xr, y)
+                ((xl, y - H_tot), 1),
+                ((xl, y - H_slab), 0),
+                ((xl - O, y - H_slab), 1),
+                ((xl - O, y), 1),
+                ((xr, y), 1)
             ]
         elif mode == 'right_only':
             nodes = [
-                (xl, y),
-                (xr + O, y),
-                (xr + O, y - H_slab),
-                (xr, y - H_tot)
+                ((xl, y), 1),
+                ((xr + O, y), 1),
+                ((xr + O, y - H_slab), 1),
+                ((xr, y - H_slab), 0),
+                ((xr, y - H_tot), 1)
             ]
     elif pos == 'descender':
         nodes = [
-            (xl, y + H_tot),
-            (xl - O, y + H_slab),
-            (xl - O, y),
-            (xr + O, y),
-            (xr + O, y + H_slab),
-            (xr, y + H_tot)
+            ((xl, y + H_tot), 1),
+            ((xl, y + H_slab), 0),
+            ((xl - O, y + H_slab), 1),
+            ((xl - O, y), 1),
+            ((xr + O, y), 1),
+            ((xr + O, y + H_slab), 1),
+            ((xr, y + H_slab), 0),
+            ((xr, y + H_tot), 1)
         ]
 
     if going_rtl:
@@ -136,6 +154,8 @@ def serify_stem(pts, flags, gname, O=52, H_slab=48, H_rise=18):
     new_pts = []
     new_flgs = []
     i = 0
+    H_tot = H_slab + H_rise
+
     while i < n:
         p0 = pts[i]
         p1 = pts[(i+1)%n]
@@ -146,27 +166,23 @@ def serify_stem(pts, flags, gname, O=52, H_slab=48, H_rise=18):
         xr = max(p0[0], p1[0])
         going_rtl = p0[0] > p1[0]
 
-        # Caps D, B: special handling (stem at left edge x=97)
+        # Caps D, B: Left stem only (protecting right rounded bowls)
         if gname in ['D', 'B']:
-            # Top-left corner at (stem_x, 714)
             if abs(p1[1] - 714) <= 6 and abs(p0[0] - p1[0]) <= 8 and p0[1] < p1[1] and p1[0] < 200:
-                new_pts.append(p0)
-                new_flgs.append(flags[i])
-                H_tot = H_slab + H_rise
                 spur = [
                     (p1[0], p1[1] - H_tot),
                     (p1[0] - O, p1[1] - H_slab),
                     (p1[0] - O, p1[1]),
                     (p1[0], p1[1])
                 ]
+                new_pts.append(p0)
+                new_flgs.append(flags[i])
                 for pt in spur:
                     new_pts.append(pt)
                     new_flgs.append(1)
                 i += 1
                 continue
-            # Baseline corner at (stem_x, 0)
             elif abs(p1[1] - 0) <= 6 and p0[0] > p1[0] and abs(p0[1] - 0) <= 6 and p1[0] < 200:
-                H_tot = H_slab + H_rise
                 foot = [
                     (p1[0], 0),
                     (p1[0] - O, 0),
@@ -181,147 +197,193 @@ def serify_stem(pts, flags, gname, O=52, H_slab=48, H_rise=18):
                 i += 1
                 continue
 
-        # Caps P, R:
+        # Caps P, R: Top-left entry spur, bilateral baseline foot
         elif gname in ['P', 'R']:
             if abs(p1[1] - 714) <= 6 and abs(p0[0] - p1[0]) <= 8 and p0[1] < p1[1] and p1[0] < 200:
-                new_pts.append(p0)
-                new_flgs.append(flags[i])
-                H_tot = H_slab + H_rise
                 spur = [
                     (p1[0], p1[1] - H_tot),
                     (p1[0] - O, p1[1] - H_slab),
                     (p1[0] - O, p1[1]),
                     (p1[0], p1[1])
                 ]
+                new_pts.append(p0)
+                new_flgs.append(flags[i])
                 for pt in spur:
                     new_pts.append(pt)
                     new_flgs.append(1)
                 i += 1
                 continue
             elif dy <= 4 and abs(y_avg - 0) <= 5 and xl < 220 and dx >= 60:
-                nodes = make_serif_nodes(xl, xr, 0, O, H_slab, H_rise, 'bilateral', 'base', going_rtl)
-                for pt in nodes:
+                nodes = make_slab_nodes(xl, xr, 0, O, H_slab, H_rise, 'bilateral', 'base', going_rtl)
+                for pt, flg in nodes:
                     new_pts.append(pt)
-                    new_flgs.append(1)
+                    new_flgs.append(flg)
                 i += 2
                 continue
 
         # Lowercase b:
         elif gname == 'b':
             if dy <= 4 and abs(y_avg - 760) <= 10 and dx >= 60:
-                nodes = make_serif_nodes(xl, xr, 760, O, H_slab, H_rise, 'left_only', 'top', going_rtl)
-                for pt in nodes:
+                nodes = make_slab_nodes(xl, xr, 760, O, H_slab, H_rise, 'left_only', 'top', going_rtl)
+                for pt, flg in nodes:
                     new_pts.append(pt)
-                    new_flgs.append(1)
+                    new_flgs.append(flg)
                 i += 2
                 continue
             elif dy <= 4 and abs(y_avg - 0) <= 5 and xl < 200 and dx >= 50:
-                nodes = make_serif_nodes(xl, xr, 0, O, H_slab, H_rise, 'left_only', 'base', going_rtl)
-                for pt in nodes:
+                nodes = make_slab_nodes(xl, xr, 0, O, H_slab, H_rise, 'left_only', 'base', going_rtl)
+                for pt, flg in nodes:
                     new_pts.append(pt)
-                    new_flgs.append(1)
+                    new_flgs.append(flg)
                 i += 2
                 continue
 
         # Lowercase d:
         elif gname == 'd':
             if dy <= 4 and abs(y_avg - 760) <= 10 and dx >= 60:
-                nodes = make_serif_nodes(xl, xr, 760, O, H_slab, H_rise, 'left_only', 'top', going_rtl)
-                for pt in nodes:
+                nodes = make_slab_nodes(xl, xr, 760, O, H_slab, H_rise, 'left_only', 'top', going_rtl)
+                for pt, flg in nodes:
                     new_pts.append(pt)
-                    new_flgs.append(1)
+                    new_flgs.append(flg)
                 i += 2
                 continue
             elif dy <= 4 and abs(y_avg - 0) <= 5 and xl >= 400 and dx >= 50:
-                nodes = make_serif_nodes(xl, xr, 0, O, H_slab, H_rise, 'right_only', 'base', going_rtl)
-                for pt in nodes:
+                nodes = make_slab_nodes(xl, xr, 0, O, H_slab, H_rise, 'right_only', 'base', going_rtl)
+                for pt, flg in nodes:
                     new_pts.append(pt)
-                    new_flgs.append(1)
+                    new_flgs.append(flg)
                 i += 2
                 continue
 
-        # Standard uppercase stems (H, K, M, N, T, U):
-        elif gname in ['H', 'K', 'M', 'N', 'T', 'U']:
-            if gname != 'T' and dy <= 4 and abs(y_avg - 714) <= 6 and 60 <= dx <= 180:
-                nodes = make_serif_nodes(xl, xr, 714, O, H_slab, H_rise, 'bilateral', 'top', going_rtl)
-                for pt in nodes:
+        # Lowercase q:
+        elif gname == 'q':
+            if dy <= 5 and abs(y_avg - 536) <= 8 and xl >= 400 and dx >= 50:
+                nodes = make_slab_nodes(xl, xr, 536, O, H_slab, H_rise, 'right_only', 'top', going_rtl)
+                for pt, flg in nodes:
                     new_pts.append(pt)
-                    new_flgs.append(1)
+                    new_flgs.append(flg)
+                i += 2
+                continue
+            elif dy <= 4 and abs(y_avg - (-240)) <= 8 and dx >= 50:
+                nodes = make_slab_nodes(xl, xr, -240, O, H_slab, H_rise, 'bilateral', 'descender', going_rtl)
+                for pt, flg in nodes:
+                    new_pts.append(pt)
+                    new_flgs.append(flg)
+                i += 2
+                continue
+
+        # Caps E, F:
+        elif gname in ['E', 'F']:
+            if dy <= 4 and abs(y_avg - 0) <= 6 and xl < 200 and 60 <= dx <= 180:
+                nodes = make_slab_nodes(xl, xr, 0, O, H_slab, H_rise, 'bilateral', 'base', going_rtl)
+                for pt, flg in nodes:
+                    new_pts.append(pt)
+                    new_flgs.append(flg)
+                i += 2
+                continue
+
+        # Cap L:
+        elif gname == 'L':
+            if dy <= 4 and abs(y_avg - 714) <= 6 and xl < 200 and 60 <= dx <= 180:
+                nodes = make_slab_nodes(xl, xr, 714, O, H_slab, H_rise, 'left_only', 'top', going_rtl)
+                for pt, flg in nodes:
+                    new_pts.append(pt)
+                    new_flgs.append(flg)
+                i += 2
+                continue
+
+        # Standard uppercase stems (H, M, N, K, T, U):
+        elif gname in ['H', 'M', 'N', 'K', 'T', 'U']:
+            if gname != 'T' and dy <= 4 and abs(y_avg - 714) <= 6 and 60 <= dx <= 180:
+                nodes = make_slab_nodes(xl, xr, 714, O, H_slab, H_rise, 'bilateral', 'top', going_rtl)
+                for pt, flg in nodes:
+                    new_pts.append(pt)
+                    new_flgs.append(flg)
                 i += 2
                 continue
             elif dy <= 4 and abs(y_avg - 0) <= 6 and 60 <= dx <= 180:
-                nodes = make_serif_nodes(xl, xr, 0, O, H_slab, H_rise, 'bilateral', 'base', going_rtl)
-                for pt in nodes:
+                nodes = make_slab_nodes(xl, xr, 0, O, H_slab, H_rise, 'bilateral', 'base', going_rtl)
+                for pt, flg in nodes:
                     new_pts.append(pt)
-                    new_flgs.append(1)
+                    new_flgs.append(flg)
                 i += 2
                 continue
 
         # Lowercase ascenders (h, k):
         elif gname in ['h', 'k']:
             if dy <= 4 and abs(y_avg - 760) <= 10 and dx >= 60:
-                nodes = make_serif_nodes(xl, xr, 760, O, H_slab, H_rise, 'left_only', 'top', going_rtl)
-                for pt in nodes:
+                nodes = make_slab_nodes(xl, xr, 760, O, H_slab, H_rise, 'left_only', 'top', going_rtl)
+                for pt, flg in nodes:
                     new_pts.append(pt)
-                    new_flgs.append(1)
+                    new_flgs.append(flg)
                 i += 2
                 continue
             elif dy <= 4 and abs(y_avg - 0) <= 6 and 60 <= dx <= 180:
-                nodes = make_serif_nodes(xl, xr, 0, O, H_slab, H_rise, 'bilateral', 'base', going_rtl)
-                for pt in nodes:
+                nodes = make_slab_nodes(xl, xr, 0, O, H_slab, H_rise, 'bilateral', 'base', going_rtl)
+                for pt, flg in nodes:
                     new_pts.append(pt)
-                    new_flgs.append(1)
+                    new_flgs.append(flg)
                 i += 2
                 continue
 
         # Lowercase x-height stems (m, n, r):
         elif gname in ['m', 'n', 'r']:
             if dy <= 5 and abs(y_avg - 536) <= 8 and xl < 220 and 50 <= dx <= 150:
-                nodes = make_serif_nodes(xl, xr, p0[1], O, H_slab, H_rise, 'left_only', 'top', going_rtl)
-                for pt in nodes:
+                nodes = make_slab_nodes(xl, xr, p0[1], O, H_slab, H_rise, 'left_only', 'top', going_rtl)
+                for pt, flg in nodes:
                     new_pts.append(pt)
-                    new_flgs.append(1)
+                    new_flgs.append(flg)
                 i += 2
                 continue
             elif dy <= 4 and abs(y_avg - 0) <= 6 and 60 <= dx <= 180:
-                nodes = make_serif_nodes(xl, xr, 0, O, H_slab, H_rise, 'bilateral', 'base', going_rtl)
-                for pt in nodes:
+                nodes = make_slab_nodes(xl, xr, 0, O, H_slab, H_rise, 'bilateral', 'base', going_rtl)
+                for pt, flg in nodes:
                     new_pts.append(pt)
-                    new_flgs.append(1)
+                    new_flgs.append(flg)
                 i += 2
                 continue
 
         # Lowercase p:
         elif gname == 'p':
             if dy <= 5 and abs(y_avg - 536) <= 8 and xl < 220 and 50 <= dx <= 150:
-                nodes = make_serif_nodes(xl, xr, p0[1], O, H_slab, H_rise, 'left_only', 'top', going_rtl)
-                for pt in nodes:
+                nodes = make_slab_nodes(xl, xr, p0[1], O, H_slab, H_rise, 'left_only', 'top', going_rtl)
+                for pt, flg in nodes:
                     new_pts.append(pt)
-                    new_flgs.append(1)
+                    new_flgs.append(flg)
                 i += 2
                 continue
             elif dy <= 4 and abs(y_avg - (-240)) <= 8 and 60 <= dx <= 180:
-                nodes = make_serif_nodes(xl, xr, -240, O, H_slab, H_rise, 'bilateral', 'descender', going_rtl)
-                for pt in nodes:
+                nodes = make_slab_nodes(xl, xr, -240, O, H_slab, H_rise, 'bilateral', 'descender', going_rtl)
+                for pt, flg in nodes:
                     new_pts.append(pt)
-                    new_flgs.append(1)
+                    new_flgs.append(flg)
                 i += 2
                 continue
 
         # Lowercase u:
         elif gname == 'u':
             if dy <= 5 and abs(y_avg - 536) <= 8 and xl < 220 and 50 <= dx <= 150:
-                nodes = make_serif_nodes(xl, xr, p0[1], O, H_slab, H_rise, 'left_only', 'top', going_rtl)
-                for pt in nodes:
+                nodes = make_slab_nodes(xl, xr, p0[1], O, H_slab, H_rise, 'left_only', 'top', going_rtl)
+                for pt, flg in nodes:
                     new_pts.append(pt)
-                    new_flgs.append(1)
+                    new_flgs.append(flg)
                 i += 2
                 continue
             elif dy <= 4 and abs(y_avg - 0) <= 6 and xl >= 380 and 50 <= dx <= 150:
-                nodes = make_serif_nodes(xl, xr, 0, O, H_slab, H_rise, 'right_only', 'base', going_rtl)
-                for pt in nodes:
+                nodes = make_slab_nodes(xl, xr, 0, O, H_slab, H_rise, 'right_only', 'base', going_rtl)
+                for pt, flg in nodes:
                     new_pts.append(pt)
-                    new_flgs.append(1)
+                    new_flgs.append(flg)
+                i += 2
+                continue
+
+        # Lowercase a:
+        elif gname == 'a':
+            if dy <= 4 and abs(y_avg - 0) <= 6 and xl >= 380 and 50 <= dx <= 150:
+                nodes = make_slab_nodes(xl, xr, 0, O, H_slab, H_rise, 'right_only', 'base', going_rtl)
+                for pt, flg in nodes:
+                    new_pts.append(pt)
+                    new_flgs.append(flg)
                 i += 2
                 continue
 
@@ -357,7 +419,10 @@ def process_slab_font(src_name, family_name="PocketGull Slab", ps_family="Pocket
         H_slab = 48
         H_rise = 18
 
-    target_glyphs = ['H', 'M', 'N', 'K', 'B', 'D', 'P', 'R', 'T', 'U', 'b', 'd', 'h', 'k', 'm', 'n', 'p', 'r', 'u']
+    target_glyphs = [
+        'H', 'M', 'N', 'K', 'B', 'D', 'P', 'R', 'T', 'U', 'E', 'F', 'L',
+        'b', 'd', 'h', 'k', 'm', 'n', 'p', 'q', 'r', 'u', 'a'
+    ]
     transformed = 0
 
     for gname in target_glyphs:
@@ -442,9 +507,9 @@ def process_slab_font(src_name, family_name="PocketGull Slab", ps_family="Pocket
 
     print(f"  -> Transformed {transformed} letterforms with robust slab serifs.")
 
-    # 4. OpenType Option 5 Metadata
+    # 4. OpenType Option 5 Metadata aligned to SemVer 3.1.0
     print("Updating OpenType metadata & Option 5 naming table...")
-    version_str = "Version 3.000; The PocketGull Project Authors; OFL 1.1"
+    version_str = "Version 3.100; The PocketGull Project Authors; OFL 1.1"
     copyright_str = "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)"
 
     name_table = font['name']
@@ -456,14 +521,14 @@ def process_slab_font(src_name, family_name="PocketGull Slab", ps_family="Pocket
     add_name(0, copyright_str)
     add_name(1, family_name)
     add_name(2, style_suffix)
-    add_name(3, f"3.000;POCK;{ps_name}")
+    add_name(3, f"3.100;POCK;{ps_name}")
     add_name(4, f"{family_name} {style_suffix}")
     add_name(5, version_str)
     add_name(6, ps_name)
     add_name(16, family_name)
     add_name(17, style_suffix)
 
-    font['head'].fontRevision = 3.0
+    font['head'].fontRevision = 3.1
     font['head'].macStyle = 0x0001 if is_bold else 0x0000
 
     if 'OS/2' in font:
@@ -501,17 +566,11 @@ def process_slab_font(src_name, family_name="PocketGull Slab", ps_family="Pocket
 
 def build_slab_superfamily():
     print("==================================================================")
-    print("POCKETGULL TYPEFOUNDRY: SLAB MASTERFAMILY COMPILER")
+    print("POCKETGULL TYPEFOUNDRY: SLAB MASTERFAMILY COMPILER (v3.1)")
     print("==================================================================")
-    # Build Canonical PocketGull Slab
     process_slab_font("PocketGull-Regular.ttf", family_name="PocketGull Slab", ps_family="PocketGull-Slab", weight_class=400, is_bold=False)
     process_slab_font("PocketGull-Bold.ttf", family_name="PocketGull Slab", ps_family="PocketGull-Slab", weight_class=700, is_bold=True)
-    
-    # Also update PocketGull Serif files with identical clean contours for compatibility
-    process_slab_font("PocketGull-Regular.ttf", family_name="PocketGull Serif", ps_family="PocketGull-Serif", weight_class=400, is_bold=False)
-    process_slab_font("PocketGull-Bold.ttf", family_name="PocketGull Serif", ps_family="PocketGull-Serif", weight_class=700, is_bold=True)
-    
-    print("\n[ALL DONE] PocketGull Slab & Serif Regular and Bold successfully compiled!")
+    print("\n[ALL DONE] PocketGull Slab Regular and Bold successfully compiled!")
 
 if __name__ == '__main__':
     build_slab_superfamily()

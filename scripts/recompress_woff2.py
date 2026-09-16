@@ -18,31 +18,20 @@ WOFF2_DIRS = [
     ROOT_DIR.parent / "pocketgull" / "public" / "fonts",
 ]
 
-stems = [
-    "PocketGull-Regular",
-    "PocketGull-Bold",
-    "PocketGull-Black",
-    "PocketGull-BoldItalic",
-    "PocketGull-Fineliner",
-    "PocketGull-Italic",
-    "PocketGull-Chiseltip",
-    "PocketGull-MarkerRaw",
-    "PocketGull-CondensedBold",
-    "PocketGull-Micro",
-    "PocketGull-Soft",
-    "PocketGullMono-Regular",
-    "PocketGullMono-Bold",
-    "PocketGullMono-Italic",
-    "PocketGull-Serif-Regular",
-    "PocketGull-Serif-Bold",
-    "PocketGull-VF",
-]
+force = "--force" in sys.argv or "-f" in sys.argv
 
-for stem in stems:
-    src = TTF_DIR / f"{stem}.ttf"
-    if src.is_file():
-        for woff2_dir in WOFF2_DIRS:
-            if woff2_dir.exists():
-                dst = woff2_dir / f"{stem}.woff2"
+# Dynamically discover all TTF font files
+ttf_files = sorted(TTF_DIR.glob("*.ttf"))
+
+compressed_count = 0
+for src in ttf_files:
+    stem = src.stem
+    for woff2_dir in WOFF2_DIRS:
+        if woff2_dir.exists():
+            dst = woff2_dir / f"{stem}.woff2"
+            if force or not dst.exists() or src.stat().st_mtime > dst.stat().st_mtime:
                 compress(str(src), str(dst))
+                compressed_count += 1
                 print(f"  • {stem}.woff2 -> {dst} ({dst.stat().st_size} bytes)")
+
+print(f"\n[WOFF2] Recompression complete: {compressed_count} webfonts updated.")

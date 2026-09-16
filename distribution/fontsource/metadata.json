@@ -4,12 +4,15 @@
   "subsets": [
     "latin",
     "latin-ext",
+    "arabic",
     "cherokee",
     "ethiopic",
     "canadian-aboriginal",
     "tifinagh",
     "vai",
-    "braille"
+    "braille",
+    "duployan",
+    "math"
   ],
   "weights": [400, 500, 700, 800, 900],
   "styles": ["normal", "italic"],
@@ -34,9 +37,9 @@
       "step": 1
     }
   },
-  "lastModified": "2026-09-09",
+  "lastModified": "2026-09-15",
   "version": "v3.1.0",
   "category": "sans-serif",
-  "license": "Apache-2.0",
+  "license": "OFL-1.1",
   "type": "other"
 }

@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'dart:typed_data';
 
 /// Pure Dart 3.11 Clinical Arabic Positional Specification.
 /// Maps base Arabic/Persian characters to authentic positional variants (.init, .medi, .fina, .isol)

@@ -1,4 +1,4 @@
-﻿# yaml-language-server: $schema=https://aka.ms/winget-manifest.version.1.6.0.schema.json
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.version.1.6.0.schema.json
 PackageIdentifier: PocketGull.Font
 PackageVersion: 3.1.0
 DefaultLocale: en-US
@@ -14,8 +14,8 @@ PublisherUrl: https://github.com/pocketgull-app
 PublisherSupportUrl: https://github.com/pocketgull-app/pocketgull-font/issues
 PackageName: PocketGull Font
 PackageUrl: https://font.pocketgull.app
-License: Apache-2.0
-LicenseUrl: https://raw.githubusercontent.com/pocketgull-app/pocketgull-font/main/LICENSE.txt
+License: OFL-1.1
+LicenseUrl: https://raw.githubusercontent.com/pocketgull-app/pocketgull-font/main/OFL.txt
 ShortDescription: Humanist sans-serif, display, slab, and telemetry monospace font superfamily.
 Description: |
   PocketGull is an open-source clinical sans-serif, display, slab, and telemetry monospace
@@ -29,6 +29,7 @@ Tags:
   - monospace
   - clinical
   - braille
+  - math
 ReleaseDate: 2026-09-12
 ManifestType: defaultLocale
 ManifestVersion: 1.6.0
@@ -52,6 +53,10 @@ Installers:
       - RelativeFilePath: fonts/ttf/PocketGull-Slab-Bold.ttf
       - RelativeFilePath: fonts/ttf/PocketGull-Serif-Regular.ttf
       - RelativeFilePath: fonts/ttf/PocketGull-Serif-Bold.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Soft.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Soft-Regular.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Soft-Bold.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Math.ttf
       - RelativeFilePath: fonts/ttf/PocketGullMono-Regular.ttf
       - RelativeFilePath: fonts/ttf/PocketGullMono-Bold.ttf
 ManifestType: installer

@@ -1,0 +1,51 @@
+%% pocketgull-math.sty
+%% Comprehensive LaTeX package for the PocketGull Humanist Clinical Math Font
+%% OpenType MATH table support via unicode-math for LuaLaTeX and XeLaTeX
+%%
+%% Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)
+%% Licensed under the Apache License, Version 2.0
+
+\NeedsTeXFormat{LaTeX2E}[2020/01/01]
+\ProvidesPackage{pocketgull-math}[2026/09/15 v3.1.0 PocketGull Humanist Clinical Math Font Package]
+
+\RequirePackage{iftex}
+
+\ifPDFTeX
+  \PackageError{pocketgull-math}{%
+    pocketgull-math requires an OpenType-capable engine (LuaLaTeX or XeLaTeX)%
+  }{%
+    Please compile this document using lualatex or xelatex instead of pdflatex.%
+  }
+\fi
+
+\RequirePackage{unicode-math}
+
+% Declare PocketGull Math as the primary OpenType math font
+\setmathfont{PocketGull-Math.ttf}[
+  Scale=MatchLowercase,
+  Path=fonts/ttf/,
+  Extension=.ttf,
+]
+
+% Clinical Pharmacokinetic & Pharmacodynamic (PK/PD) Macros
+\newcommand{\Cp}[1]{C_{\text{p}}(#1)}
+\newcommand{\Cmax}{C_{\max}}
+\newcommand{\Cmin}{C_{\min}}
+\newcommand{\Vd}{V_{\text{d}}}
+\newcommand{\ke}{k_{\text{e}}}
+\newcommand{\ka}{k_{\text{a}}}
+\newcommand{\thalf}{t_{1/2}}
+\newcommand{\AUC}[1]{\text{AUC}_{#1}}
+\newcommand{\Clcr}{\text{Cl}_{\text{cr}}}
+\newcommand{\eGFR}{\text{eGFR}}
+
+% Clinical Dosage & Safe Punctuation Commands (ISMP Clearance)
+\newcommand{\mcg}{\,\text{mcg}}
+\newcommand{\mg}{\,\text{mg}}
+\newcommand{\mL}{\,\text{mL}}
+\newcommand{\kg}{\,\text{kg}}
+\newcommand{\dL}{\,\text{dL}}
+\newcommand{\mmol}{\,\text{mmol}}
+\newcommand{\Litre}{\,\text{L}}
+
+\endinput

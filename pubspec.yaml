@@ -1,6 +1,6 @@
-﻿name: pocketgull_font
+name: pocketgull_font
 description: Optotypically calibrated clinical and ophthalmological vector font superfamily bridging tactile humanist warmth with zero-error clinical precision.
-version: 3.0.0
+version: 3.1.0
 homepage: https://font.pocketgull.app
 repository: https://github.com/pocketgull-app/pocketgull-font
 
@@ -22,19 +22,30 @@ flutter:
           weight: 900
         - asset: fonts/ttf/PocketGull-Chiseltip.ttf
           weight: 900
-    - family: Pocket Gull
+    - family: PocketGull Soft
       fonts:
-        - asset: fonts/ttf/PocketGull-Regular.ttf
+        - asset: fonts/ttf/PocketGull-Soft-Regular.ttf
           weight: 400
-        - asset: fonts/ttf/PocketGull-Bold.ttf
+        - asset: fonts/ttf/PocketGull-Soft-Bold.ttf
           weight: 700
-        - asset: fonts/ttf/PocketGull-Black.ttf
-          weight: 900
+    - family: PocketGull Slab
+      fonts:
+        - asset: fonts/ttf/PocketGull-Slab-Regular.ttf
+          weight: 400
+        - asset: fonts/ttf/PocketGull-Slab-Bold.ttf
+          weight: 700
+    - family: PocketGull Serif
+      fonts:
+        - asset: fonts/ttf/PocketGull-Serif-Regular.ttf
+          weight: 400
+        - asset: fonts/ttf/PocketGull-Serif-Bold.ttf
+          weight: 700
     - family: PocketGull Mono
       fonts:
         - asset: fonts/ttf/PocketGullMono-Regular.ttf
           weight: 400
-    - family: Pocket Gull Mono
-      fonts:
-        - asset: fonts/ttf/PocketGullMono-Regular.ttf
+        - asset: fonts/ttf/PocketGullMono-Bold.ttf
+          weight: 700
+        - asset: fonts/ttf/PocketGullMono-Italic.ttf
           weight: 400
+          style: italic

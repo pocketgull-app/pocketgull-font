@@ -1,7 +1,4 @@
-import 'dart:io';
-import 'dart:typed_data';
 import 'models.dart';
-import 'arabic_spec.dart';
 
 /// Pure Dart 3.11 Clinical Arabic Outline & OpenType GSUB Builder.
 /// Synthesizes optical Naskh letterforms and wires standard OpenType

@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 scripts/v4/build_16_axis_vf.py
 ================================
@@ -172,6 +172,14 @@ def build_16_axis_vf():
         ("Grand Ronde Sovereign Pipa", make_coords({"wght": 700.0, "APTR": 1.0}), 360),
         ("Tactile Blister Pack Braille", make_coords({"wght": 700.0, "BRLS": 96.0, "APTR": 1.0}), 361),
         ("Persian Penicillin Safe MAR", make_coords({"wght": 700.0, "NUQT": 1.0, "THRM": 1.0, "SMRN": 1.0}), 362),
+
+        # --- Editorial & Physical Masters ("In Addition To") ---
+        ("Slab Regular", make_coords({"wght": 400.0, "opsz": 14.0}), 363),
+        ("Slab Bold", make_coords({"wght": 700.0, "opsz": 14.0}), 364),
+        ("Serif Regular", make_coords({"wght": 400.0, "opsz": 14.0}), 365),
+        ("Serif Bold", make_coords({"wght": 700.0, "opsz": 14.0}), 366),
+        ("Italic", make_coords({"wght": 400.0, "slnt": -10.5, "opsz": 14.0}), 367),
+        ("Bold Italic", make_coords({"wght": 700.0, "slnt": -10.5, "opsz": 14.0}), 368),
     ]
 
     for iname, coords, nid in named_instances_def:
@@ -197,7 +205,9 @@ def build_16_axis_vf():
     comp_count = 0
     empty_count = 0
 
-    for gname in glyph_order:
+    for idx, gname in enumerate(glyph_order):
+        if idx > 0 and idx % 1500 == 0:
+            print(f"   • Synthesized deltas for {idx:,}/{num_glyphs:,} glyphs...", flush=True)
         glyph = glyf_table[gname]
         adv, lsb = hmtx_table[gname]
 
@@ -430,6 +440,57 @@ def build_16_axis_vf():
         vf["OS/2"].achVendID = "PKGL"
         vf["OS/2"].usWeightClass = 400
         vf["OS/2"].fsSelection = 0x1c0 # Bit 7 USE_TYPO_METRICS enabled
+
+    # Rebuild STAT table with canonical OpenType 1.8+ design axes
+    print("   • Rebuilding STAT table with canonical OpenType 1.8+ design axes...")
+    from fontTools.otlLib.builder import buildStatTable
+    stat_axes = [
+        dict(
+            tag="wght",
+            name="Weight",
+            ordering=0,
+            values=[
+                dict(value=100, name="Hairline"),
+                dict(value=200, name="Thin"),
+                dict(value=300, name="Light"),
+                dict(value=400, name="Regular", flags=0x2),
+                dict(value=500, name="Medium"),
+                dict(value=600, name="SemiBold"),
+                dict(value=700, name="Bold"),
+                dict(value=800, name="ExtraBold"),
+                dict(value=900, name="Black"),
+            ],
+        ),
+        dict(
+            tag="wdth",
+            name="Width",
+            ordering=1,
+            values=[
+                dict(value=75, name="Condensed"),
+                dict(value=100, name="Normal", flags=0x2),
+            ],
+        ),
+        dict(
+            tag="slnt",
+            name="Slant",
+            ordering=2,
+            values=[
+                dict(value=0, name="Upright", flags=0x2),
+                dict(value=-10.5, name="Italic"),
+            ],
+        ),
+        dict(
+            tag="opsz",
+            name="Optical Size",
+            ordering=3,
+            values=[
+                dict(value=6, name="Micro"),
+                dict(value=14, name="Text", flags=0x2),
+                dict(value=72, name="Display"),
+            ],
+        ),
+    ]
+    buildStatTable(vf, stat_axes)
 
     for t in ["HVAR", "MVAR"]:
         if t in vf:
