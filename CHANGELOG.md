@@ -1,9 +1,33 @@
-﻿# Changelog
+# Changelog
 
 All notable changes to the **PocketGull Font Superfamily** will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) (`v3.0.0`).
+
+## [3.100] - 2026-09-15
+
+### Added
+- **PocketGull Math Superfamily Member & OpenType Scientific Engine**:
+  - Full OpenType `MATH` table architecture with 8,026 glyphs, 68 UPM robust vertical stems (preventing dark-mode hairline collapse), stepped delimiters (`.v1` to `.v4`), and optical sub/superscript kerning.
+  - Procedural astronomical and celestial operators: Sun $\odot$ (`U+2299`, `U+2609`), Earth $\oplus$ (`U+2295`, `U+2641`), Jupiter $\jupiter$ (`U+2643`), Saturn $\saturn$ (`U+2644`), equilibrium harpoons $\rightleftharpoons$ (`U+21CC`, `U+21CB`), and reversible reaction arrow $\leftrightarrow$ (`U+2194`).
+  - Strict 2-byte word boundary alignment (`loca[i] % 2 == 0`) and Bit-7 flag masking across all binaries.
+- **Scientific, Astronomical & Mathematical Laboratory HUD (`index.html`)**:
+  - Interactive **650nm Scotopic Red Mode** observatory console preserving human dark adaptation (rhodopsin) at deep-sky telescopes.
+  - Real-time **Equatorial Coordinate Sliders** ($\alpha$ Right Ascension, $\delta$ Declination, $X$ Air Mass) driving live 80-column FITS standard header cards with zero column shear.
+  - Interactive **Mathematical & Pharmacokinetics Formula Stage** showcasing $\mathcal{L}_{\mathrm{ASL}}$ quantile loss, Michaelis-Menten kinetics, two-compartment $C_p(t)$ bolus decay, and stepped brackets with OpenType feature switches.
+- **PocketGull Live Terminal Telemetry CLI (`scripts/pocketgull_telemetry_cli.py`)**:
+  - Real-time streaming terminal monitor supporting `--mode clinical`, `--mode astro`, and `--mode system`.
+  - Sub-cell waveforms (`_/\_`, pleth bars), rounded box drawing, and zero-flicker differential ANSI updates.
+- **Multi-Format Scientific Distribution Packages**:
+  - **Matplotlib**: 4 production stylesheets (`pocketgull-dark`, `pocketgull-light`, `pocketgull-astro-night`, `pocketgull-bio`).
+  - **Python / PyPI**: Hermetically built wheel and sdist (`pocketgull-math-3.1.0`).
+  - **LaTeX / CTAN**: `pocketgull-math.sty` with keyval options and upload archive `pocketgull-math.zip` (1.2 MB).
+  - **Typst Package Repository**: `@preview/pocketgull-math:3.1.0` with verified 800×600 PNG preview `thumbnail.png`.
+  - **Quarto**: Scientific publishing extension and SCSS theme.
+- **Global Package Registries Synchronization**:
+  - Updated Homebrew Cask (`distribution/homebrew/font-pocketgull.rb`) and Windows Package Manager (`distribution/winget/PocketGull.Font.yaml`) with verified SHA256 checksums (`30a2d7de46e4b1391c528c63a3a7f7dfcc0df1c24160dff93e7d1d7422f3deca`).
+  - Master release archive `PocketGull-v3.1.0-Superfamily.zip` (72.70 MB).
 
 ## [3.1.0] - 2026-09-06
 

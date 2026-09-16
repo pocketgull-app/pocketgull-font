@@ -357,6 +357,58 @@
   unicode-range: U+0020-007E, U+1D100-1D1FF, U+2660-267F, U+E000-F8FF;
 }
 
+/* PocketGull Algo (Computer Science, AST Graphs & Algorithm Monospace Typeface) */
+@font-face {
+  font-family: 'PocketGull Algo';
+  src: url('fonts/woff2/PocketGull-Algo.woff2?v=3.100') format('woff2'),
+       url('PocketGull-Algo.woff2?v=3.100') format('woff2'),
+       url('fonts/ttf/PocketGull-Algo.ttf?v=3.100') format('truetype'),
+       url('PocketGull-Algo.ttf?v=3.100') format('truetype');
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+03BB, U+2190-21FF, U+22A2, U+22A8, U+2500-257F, U+27E6-27E7, U+E000-F8FF;
+}
+
+/* PocketGull Learn (K-12 Elementary Literacy, Dyslexia Grounded & TouchMath Typeface) */
+@font-face {
+  font-family: 'PocketGull Learn';
+  src: url('fonts/woff2/PocketGull-Learn.woff2?v=3.100') format('woff2'),
+       url('PocketGull-Learn.woff2?v=3.100') format('woff2'),
+       url('fonts/ttf/PocketGull-Learn.ttf?v=3.100') format('truetype'),
+       url('PocketGull-Learn.ttf?v=3.100') format('truetype');
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0-00FF, U+E000-F8FF;
+}
+
+/* PocketGull Lab (Clinical Laboratory, Pathology SOPs & Diagnostics Typeface) */
+@font-face {
+  font-family: 'PocketGull Lab';
+  src: url('fonts/woff2/PocketGull-Lab.woff2?v=3.100') format('woff2'),
+       url('PocketGull-Lab.woff2?v=3.100') format('woff2'),
+       url('fonts/ttf/PocketGull-Lab.ttf?v=3.100') format('truetype'),
+       url('PocketGull-Lab.ttf?v=3.100') format('truetype');
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0-00FF, U+00D7, U+2070-209F, U+E000-F8FF;
+}
+
+/* PocketGull Press (Print Production, Packaging Dielines, GD&T CAD & 3D Printing Typeface) */
+@font-face {
+  font-family: 'PocketGull Press';
+  src: url('fonts/woff2/PocketGull-Press.woff2?v=3.100') format('woff2'),
+       url('PocketGull-Press.woff2?v=3.100') format('woff2'),
+       url('fonts/ttf/PocketGull-Press.ttf?v=3.100') format('truetype'),
+       url('PocketGull-Press.ttf?v=3.100') format('truetype');
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+21A7, U+2300, U+232D, U+2334-2335, U+23E5, U+E000-F8FF;
+}
+
 /* PocketGull Superfamily Expansion: Chromatic & Textured Series */
 @font-face {
   font-family: 'PocketGull Outline';
@@ -1547,4 +1599,25 @@ body.eco-dark-canopy {
 .chromatic-layer.layer-base {
   position: relative;
   pointer-events: auto;
+}
+
+/* ==========================================================================
+   Specialized STEM, Education, Lab & Manufacturing Utilities
+   ========================================================================== */
+.font-algo {
+  font-family: 'PocketGull Algo', 'PocketGull Mono', monospace !important;
+  font-feature-settings: "calt" 1, "liga" 1;
+}
+
+.font-learn {
+  font-family: 'PocketGull Learn', 'PocketGull', sans-serif !important;
+}
+
+.font-lab {
+  font-family: 'PocketGull Lab', 'PocketGull', sans-serif !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.font-press {
+  font-family: 'PocketGull Press', 'PocketGull', sans-serif !important;
 }
