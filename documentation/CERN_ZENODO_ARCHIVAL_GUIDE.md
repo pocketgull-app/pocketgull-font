@@ -1,4 +1,4 @@
-﻿# 🏛️ CERN & Zenodo Open Science Archival Guide
+# 🏛️ CERN & Zenodo Open Science Archival Guide
 
 **PocketGull Font Superfamily**  
 *Permanent Scientific Digital Preservation, DataCite DOI Governance, and CERN Infrastructure*
@@ -36,11 +36,11 @@ Powers GitHub’s native **"Cite this repository"** sidebar button, exporting in
 
 ## 🚀 3. Step-by-Step Activation Instructions
 
-You can establish the dedicated CERN/Zenodo record for `pocketgull-typeface` via either of the following two pathways:
+You can establish the dedicated CERN/Zenodo record for `pocketgull-font` via either of the following two pathways:
 
 ### Option 1: Automatic GitHub Release Webhook (Recommended)
 1. Navigate to [Zenodo GitHub Settings](https://zenodo.org/account/settings/github/).
-2. Locate `pocketgull-app/pocketgull-typeface` in your repository list.
+2. Locate `pocketgull-app/pocketgull-font` in your repository list.
 3. Toggle the switch to **ON** (Enables the CERN webhook).
 4. Whenever a new GitHub Release (e.g. `v2.0.0`) is published, CERN Zenodo will:
    * Download the release archive.

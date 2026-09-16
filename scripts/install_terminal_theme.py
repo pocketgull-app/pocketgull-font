@@ -108,7 +108,7 @@ def main():
             "commandline": "powershell.exe",
             "colorScheme": "PocketGull Healing Cinema",
             "font": {
-                "face": "PocketGull Mono",
+                "face": "Pocket Gull Mono",
                 "size": 11.5,
                 "weight": "medium",
                 "features": {

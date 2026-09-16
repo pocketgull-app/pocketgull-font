@@ -1,4 +1,4 @@
-﻿# Security Policy
+# Security Policy
 
 At **PocketGull**, security, cryptographic determinism, and typography asset integrity are foundational. We adhere to **OpenSSF (Open Source Security Foundation)** standards and treat font binary compilation, glyph parsing safety, and supply chain provenance as safety-critical engineering disciplines.
 
@@ -95,4 +95,8 @@ To satisfy **Executive Order 14028** and **NIST SP 800-218 Secure Software Devel
    ```
 3. **Reproducible Compilation Pipeline**:
    TrueType binaries are compiled using deterministic SFNT builders with static timestamps, guaranteeing bit-for-bit reproducibility across independent audit environments.
+4. **SLSA Level 2+ Cryptographic Artifact Attestations**:
+   Release packages (`pocketgull-font-*.zip` and `SHA256SUMS.txt`) are cryptographically attested at build time using GitHub's OIDC root of trust and Sigstore transparency logs (`actions/attest-build-provenance`), allowing downstream health IT consumers to verify build provenance via `gh attestation verify`.
+5. **OpenSSF Scorecard & CodeQL SAST**:
+   Repository security posture is monitored continuously via automated OpenSSF Scorecard audits and GitHub CodeQL static application security testing (`codeql.yml`).
 

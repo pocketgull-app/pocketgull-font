@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PocketGull ICU Telemetry & Monospace Terminal</title>
+  <style>
+    @font-face {
+      font-family: "PocketGull Mono";
+      src: url("../../../Pocketgull/pocketgull-typeface/fonts/woff2/PocketGullMono-Regular.woff2") format("woff2");
+      font-weight: 400;
+    }
+    @font-face {
+      font-family: "PocketGull Mono";
+      src: url("../../../Pocketgull/pocketgull-typeface/fonts/woff2/PocketGullMono-Bold.woff2") format("woff2");
+      font-weight: 700;
+    }
+    * { box-sizing: border-box; }
+    body {
+      background: #030712;
+      margin: 0;
+      padding: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: "PocketGull Mono", monospace;
+      -webkit-font-smoothing: antialiased;
+    }
+    .terminal {
+      width: 1140px;
+      background: #050811;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 40px rgba(45, 212, 191, 0.12);
+      overflow: hidden;
+    }
+    .titlebar {
+      background: #0f172a;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #1e293b;
+    }
+    .traffic-lights {
+      display: flex;
+      gap: 8px;
+    }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+    .titlebar-text {
+      color: #94a3b8;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+    .terminal-body {
+      padding: 24px;
+      color: #e2e8f0;
+      font-size: 13.5px;
+      line-height: 1.45;
+      font-feature-settings: "cv05" 1, "cv08" 1, "ss02" 1, "cv11" 1, "tnum" 1, "zero" 1;
+    }
+    .cyan { color: #2dd4bf; }
+    .blue { color: #38bdf8; }
+    .emerald { color: #34d399; }
+    .amber { color: #fbbf24; }
+    .dim { color: #64748b; }
+    .bold { font-weight: 700; }
+    .white { color: #f8fafc; }
+    .prompt-bar {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      font-size: 13px;
+    }
+    .seg-teal { background: #0f766e; color: #ffffff; padding: 3px 10px; }
+    .seg-dark { background: #18181b; color: #faf8f2; padding: 3px 10px; }
+    .seg-green { background: #059669; color: #ffffff; padding: 3px 10px; }
+    .seg-braille { background: #18181b; color: #2dd4bf; padding: 3px 10px; margin-left: auto; }
+  </style>
+</head>
+<body>
+  <div class="terminal">
+    <div class="titlebar">
+      <div class="traffic-lights">
+        <div class="dot dot-red"></div>
+        <div class="dot dot-yellow"></div>
+        <div class="dot dot-green"></div>
+      </div>
+      <div class="titlebar-text">⚕ POCKETGULL ICU BEDSIDE TELEMETRY CONSOLE • 600 UPM MONOSPACE (ISMP DISAMBIGUATED)</div>
+      <div class="dim" style="font-size: 11px;">1000 UPM EM • W3C OTS 100%</div>
+    </div>
+    <div class="terminal-body">
+<pre style="margin:0; font-family:inherit;">
+<span class="cyan">╭─────────────────────────────────────────────────────────────────────────────────────────────────────────────╮</span>
+<span class="cyan">│</span> <span class="bold white">NEURO-ICU CRITICAL TELEMETRY • BED 0̸4A</span>               <span class="dim">PATIENT: GEAR, P. [MRN: 90̸8-412-X0̸]</span>      <span class="cyan">21:35:0̸0̸.0̸0̸0̸Z</span> <span class="cyan">│</span>
+<span class="cyan">├─────────────────────────────────────────────────────────────────────────────────────────────────────────────┤</span>
+<span class="cyan">│</span> <span class="bold white">HEART RATE</span>  <span class="emerald bold">0̸72 BPM</span>  <span class="dim">[NORMAL SINUS]</span>    <span class="bold white">SpO2</span> <span class="blue bold">0̸98%</span>  <span class="dim">[ROOM AIR]</span>    <span class="bold white">ART-BP</span> <span class="amber bold">120̸/0̸80̸</span> <span class="dim">(0̸93 mmHg MAP)</span>      <span class="cyan">│</span>
+<span class="cyan">│</span> <span class="emerald">ECG II:  ──/\_/\───/\_/\───/\_/\───/\_/\───/\_/\───/\_/\───/\_/\───/\_/\───/\_/\───/\_/\───/\_/\───/\_/\───</span>  <span class="cyan">│</span>
+<span class="cyan">│</span> <span class="blue">PLETH:   ∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿</span>  <span class="cyan">│</span>
+<span class="cyan">├─────────────────────────────────────────────────────────────────────────────────────────────────────────────┤</span>
+<span class="cyan">│</span> <span class="bold white">ISMP SAFE MEDICATION DOSAGE AUDIT:</span>                                                                         <span class="cyan">│</span>
+<span class="cyan">│</span>   ◈ <span class="white">INFUSION 1:</span>  <span class="cyan bold">PROPOFOL</span>          <span class="amber">0̸50̸0̸ mg / 0̸50̸ mL</span>  <span class="dim">rate:</span> <span class="white bold">0̸25.0̸ mcg/kg/min</span>   <span class="emerald">[ZERO CLOTTING PASS]</span>       <span class="cyan">│</span>
+<span class="cyan">│</span>   ◈ <span class="white">INFUSION 2:</span>  <span class="cyan bold">NOREPINEPHRINE</span>    <span class="amber">0̸0̸0̸4 mg / 0̸250̸ mL</span> <span class="dim">rate:</span> <span class="white bold">0̸0̸0̸.0̸8 mcg/kg/min</span>  <span class="emerald">[TITRATING STABLE]</span>         <span class="cyan">│</span>
+<span class="cyan">│</span>   ◈ <span class="white">DISAMBIG:</span>    <span class="white">0̸</span> (slashed zero) vs <span class="white">O</span> (capital O) • <span class="white">1</span> (one) vs <span class="white">l</span> (curved foot) vs <span class="white">I</span> (bilobe serifed) <span class="cyan">│</span>
+<span class="cyan">├─────────────────────────────────────────────────────────────────────────────────────────────────────────────┤</span>
+<span class="cyan">│</span> <span class="bold white">TELEMETRY MONOSPACE FOUNDRY METRICS:</span>                                                                        <span class="cyan">│</span>
+<span class="cyan">│</span>   ◈ Pitch Invariant: <span class="emerald bold">60̸0̸ UPM</span> fixed advance (0̸.0̸0̸0̸px column shear)  ◈ Memory Alignment: <span class="emerald bold">loca[i] % 2 == 0̸</span>   <span class="cyan">│</span>
+<span class="cyan">│</span>   ◈ Optotypic Form:  <span class="cyan bold">Louise Sloan 5:1</span> stroke-to-height ratio      ◈ Tactile Matrix:   <span class="emerald bold">256 / 256 Braille</span>    <span class="cyan">│</span>
+<span class="cyan">╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────╯</span>
+</pre>
+      <div class="prompt-bar">
+        <span class="cyan"></span><span class="seg-teal">⚕ POCKETGULL</span><span class="cyan" style="margin-right:6px;"></span>
+        <span class="dim"></span><span class="seg-dark">~/icu/neuro-telemetry</span><span class="dim" style="margin-right:6px;"></span>
+        <span class="emerald"></span><span class="seg-green"> main</span><span class="emerald"></span>
+        <span class="seg-braille">⠠⠏⠕⠉⠅⠑⠞⠠⠛⠥⠇⠇ ⠠⠍⠕⠝⠕</span><span class="dim"></span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

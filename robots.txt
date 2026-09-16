@@ -1,4 +1,4 @@
-﻿# ==============================================================================
+# ==============================================================================
 # PocketGull Font Superfamily — ROBOTS.TXT
 # ==============================================================================
 # Standard Web Crawlers & Search Indexing (Googlebot, Bingbot, DuckDuckBot):
@@ -77,4 +77,4 @@ Disallow: /
 
 # Discovery & Sitemaps
 Sitemap: https://font.pocketgull.app/sitemap.xml
-Sitemap: https://pocketgull-app.github.io/PocketGull-typeface/sitemap.xml
+Sitemap: https://pocketgull-app.github.io/pocketgull-font/sitemap.xml

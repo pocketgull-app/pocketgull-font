@@ -43,8 +43,8 @@ PackageVersion: 3.1.0
 Installers:
   - Architecture: neutral
     InstallerType: zip
-    InstallerUrl: https://github.com/pocketgull-app/pocketgull-font/releases/download/v3.1.0/pocketgull-typeface-v3.1.0.zip
-    InstallerSha256: 93DB9EAA528D9E80B4D400FE7EF71474D0AC3778258B42D1293BD9C9A302B5A7
+    InstallerUrl: https://github.com/pocketgull-app/pocketgull-font/releases/download/v3.1.0/pocketgull-font-v3.1.0.zip
+    InstallerSha256: 980077E342AA54ECD48E074D666B26230BABD86667AF2B0468AD411F352B00FE
     NestedInstallerType: portable
     NestedInstallerFiles:
       - RelativeFilePath: fonts/ttf/PocketGull-Regular.ttf
@@ -63,6 +63,10 @@ Installers:
       - RelativeFilePath: fonts/ttf/PocketGull-Chem.ttf
       - RelativeFilePath: fonts/ttf/PocketGull-Genome.ttf
       - RelativeFilePath: fonts/ttf/PocketGull-Music.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Algo.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Learn.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Lab.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Press.ttf
       - RelativeFilePath: fonts/ttf/PocketGullMono-Regular.ttf
       - RelativeFilePath: fonts/ttf/PocketGullMono-Bold.ttf
 ManifestType: installer

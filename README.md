@@ -1,9 +1,9 @@
-﻿<div align="center">
+<div align="center">
 
 # 🕊️ PocketGull Font Superfamily
 
-[![Apache 2.0 License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=flat-square)](LICENSE.txt)
-[![SemVer 3.0.0](https://img.shields.io/badge/SemVer-3.0.0-blue.svg?style=flat-square)](CHANGELOG.md)
+[![OFL 1.1 License](https://img.shields.io/badge/License-SIL_OFL_1.1-blue.svg?style=flat-square)](OFL.txt)
+[![SemVer 3.1.0](https://img.shields.io/badge/SemVer-3.1.0-blue.svg?style=flat-square)](CHANGELOG.md)
 [![W3C OTS Validated](https://img.shields.io/badge/W3C_OTS-100%25_Valid-emerald.svg?style=flat-square)](https://github.com/googlefonts/ots)
 [![Fontbakery QA](https://img.shields.io/badge/Fontbakery-711%2F711_Passed-brightgreen.svg?style=flat-square)](https://github.com/googlefonts/fontbakery)
 [![ORCID](https://img.shields.io/badge/ORCID-0009--0008--1372--5381-A6C900?style=flat-square&logo=orcid&logoColor=white)](https://orcid.org/0009-0008-1372-5381)
@@ -11,10 +11,7 @@
 [![CERN Zenodo](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22309379-024c9c.svg?style=flat-square)](https://zenodo.org/records/22309379)
 [![WCAG 2.1 AAA](https://img.shields.io/badge/WCAG_2.1-AAA_100%25-emerald.svg?style=flat-square)](index.html)
 
-<br/>
-
-### 🌐 [Live Interactive Specimen](https://font.pocketgull.app) &nbsp;•&nbsp; 🕊️ [First Principles &amp; Charter](documentation/FIRST_PRINCIPLES.md) &nbsp;•&nbsp; 💾 [Download Fonts (.ZIP)](fonts/PocketGull-v3.0.0-Complete-Superfamily.zip) &nbsp;•&nbsp; 🇫🇷 [Version Française](README.fr.md) &nbsp;•&nbsp; 📦 [UFO Sources](sources/) &nbsp;•&nbsp; 📄 [Apache 2.0 License](LICENSE.txt) &nbsp;•&nbsp; 🏛️ [CERN Archival](documentation/CERN_ZENODO_ARCHIVAL_GUIDE.md)
-
+### 🌐 [Live Interactive Specimen](https://font.pocketgull.app) &nbsp;•&nbsp; 🛠️ [STEM &amp; Fabrication Studio](stem_studio.html) &nbsp;•&nbsp; 🎼 [Music Studio](music_studio.html) &nbsp;•&nbsp; 🕊️ [First Principles](documentation/FIRST_PRINCIPLES.md) &nbsp;•&nbsp; 💾 [Download Fonts (.ZIP)](pocketgull-font-v3.1.0.zip) &nbsp;•&nbsp; 📦 [UFO Sources](sources/) &nbsp;•&nbsp; 📄 [OFL 1.1 License](OFL.txt)
 
 </div>
 
@@ -29,6 +26,16 @@
     <td width="50%" align="center">
       <img src="documentation/images/pocketgull_telemetry_terminal.jpg" alt="PocketGull Telemetry Monospace & Box Drawing" width="100%" />
       <br/><sub><strong>PocketGull Mono: 600 UPM ICU Telemetry &amp; ECG</strong></sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <img src="documentation/images/math_comparison_plate.png" alt="PocketGull Math vs Computer Modern" width="100%" />
+      <br/><sub><strong>PocketGull Math: 68 UPM Stem Weight (Zero Dark-Mode Hairline Collapse)</strong></sub>
+    </td>
+    <td width="50%" align="center">
+      <img src="documentation/images/astronomy_night_telemetry_plate.png" alt="PocketGull Scotopic 650nm Night Vision HUD" width="100%" />
+      <br/><sub><strong>Scotopic 650nm Red Mode: Zero-Photobleaching FITS Observational Console</strong></sub>
     </td>
   </tr>
 </table>
@@ -69,6 +76,10 @@ PocketGull is engineered on a standardized 1000 UPM grid. In strict typographic 
 | **PocketGull Outline** | `Pocket Gull Outline` | `PocketGull-Outline.woff2` / `.ttf` | `PocketGull-Outline` | Display | Locked to Bold | Multi-color lithography, header silhouettes, hollow display |
 | **PocketGull Inline** | `Pocket Gull Inline` | `PocketGull-Inline.woff2` / `.ttf` | `PocketGull-Inline` | Display | Locked to Bold | Engraved titling, hairline center grooves, layered signage |
 | **PocketGull Halftone** | `Pocket Gull Halftone` | `PocketGull-Halftone.woff2` / `.ttf` | `PocketGull-Halftone` | Display | Locked to Bold | 45° Ben-Day screen tone lithography, zero-registration multi-color print |
+| **PocketGull Algo** | `Pocket Gull Algo` | `PocketGull-Algo.woff2` / `.ttf` | `PocketGull-Algo` | 400 / 500 | Fixed 600 UPM | Computer science, AST & DAG tree graphs, Big-O complexity, formal semantics, memory inspection |
+| **PocketGull Learn** | `Pocket Gull Learn` | `PocketGull-Learn.woff2` / `.ttf` | `PocketGull-Learn` | 400 | Proportional | K-12 education, D'Nealian continuous guidelines (ss06), dyslexia basal grounding, TouchMath dots |
+| **PocketGull Lab** | `Pocket Gull Lab` | `PocketGull-Lab.woff2` / `.ttf` | `PocketGull-Lab` | 400 | Proportional | Clinical pathology SOPs, RCF centrifugation (×g), micropipette badges (P10–P1000), BSL badges |
+| **PocketGull Press** | `Pocket Gull Press` | `PocketGull-Press.woff2` / `.ttf` | `PocketGull-Press` | 400 | Proportional | 3D Printing (FDM/SLA nozzle badges, fits, infills, overhangs), paper dot-gain, packaging dielines, CAD GD&T |
 | **PocketGull VF** | `Pocket Gull Variable` | `PocketGull-VF.woff2` / `.ttf` | `PocketGull-VF` | 100–900 | Variable | 16 continuous axes: Hairline to Black, Softness, Sloan 5:1, ISMP |
 
 ---
@@ -95,8 +106,8 @@ PocketGull adheres to strict engineering, typographic, and open-source standards
 * **Forensic Table Verification**: 100% pass across all SFNT tables with zero reserved flags set.
 
 ### 🌐 Open Source & Upstream Delivery
-* **Apache 2.0 Licensed**: Free for commercial and open-source use with zero licensing fees.
-* **Specification Parity**: Exact SemVer parity across `head.fontRevision == 3.0` and `nameID 5 == "Version 3.000; The PocketGull Project Authors; Apache 2.0"`.
+* **SIL Open Font License 1.1**: Free for personal, commercial, academic, and clinical use with zero licensing fees and zero RFN debt.
+* **Specification Parity**: Exact SemVer parity across `head.fontRevision == 3.1` and `nameID 5 == "Version 3.100; The PocketGull Project Authors; OFL 1.1"`.
 * **Clean Single Source of Truth**: Lightweight vector sources and reproducible build toolchains.
 
 ### 🕊️ Grounded Multi-Script Design
@@ -148,6 +159,21 @@ Enable clinical dosage disambiguation:
   font-feature-settings: "zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "tnum" 1;
 }
 ```
+
+---
+
+## 📦 Global Package Registries & Distribution
+
+PocketGull maintains independent foundry distribution across major system package managers and scientific ecosystems:
+
+| Platform / Ecosystem | Command / Package | Description |
+| :--- | :--- | :--- |
+| **macOS / Homebrew** | `brew install --cask font-pocketgull` | Complete 29-style TrueType superfamily |
+| **Windows / Winget** | `winget install PocketGull.Font` | Native portable Windows font installation |
+| **Node.js / NPM** | `npm install @fontsource/pocketgull` | Zero-CLS self-hosted webfonts |
+| **Python / PyPI** | `pip install pocketgull-math` | Matplotlib stylesheets & scientific telemetry |
+| **Typst Universe** | `#import "@preview/pocketgull-math:3.1.0": *` | Academic STEM paper typesetting |
+| **LaTeX / CTAN** | `\usepackage{pocketgull-math}` | 68 UPM robust stem formulas |
 
 ---
 

@@ -1,4 +1,4 @@
-﻿# PocketGull Font Superfamily (Upstream Release & Foundry Governance)
+# PocketGull Font Superfamily (Upstream Release & Foundry Governance)
 
 ## Project Overview
 PocketGull is an open-source clinical sans-serif, display, and telemetry monospace font superfamily engineered by Phil Gear. Originating from tactile felt marker lettering created on physical cardstock for GearArts, PocketGull synthesizes humanist stroke warmth with Louise Sloan 5:1 optotypic legibility and Institute for Safe Medication Practices (ISMP) character disambiguation standards for life-critical healthcare environments.
@@ -56,6 +56,23 @@ PocketGull is an open-source clinical sans-serif, display, and telemetry monospa
 ### 8. Multi-Script Proportions & Grounding
 - **Unicode Braille (`U+2800`–`U+28FF`)**: Respects ISO/TR 11548 & ISO 17049 standard 8-dot tactile dome geometry ($r=60\text{ UPM}$, $2.5\text{ mm}$ pitch, authentic negative space), grounded on Latin baseline ($y = 0$) to prevent floating cell artifacts.
 - **Duployan / Chinuk Pipa (`U+1BC00`–`U+1BC9F`)**: Respects phonemic size ratios ($130\text{ UPM}$ vowel loops vs. consonant stems), anchored along the optical waist ($y = 270\text{ UPM}$) to harmonize with Latin x-height.
+
+---
+
+## 📐 Dieter Rams & Human-Computer Interaction (HCI) Design Invariants
+
+All future glyphs, icons, indicators, and symbols synthesized into PocketGull must strictly adhere to the Ten Ramsian & HCI Laws:
+
+1. **Innovative (Avoid Bugs by Construction)**: No gratuitous curves. Every contour must satisfy 2-byte word boundaries (`loca[i] % 2 == 0`), bit-7 flag clearing, and zero consecutive identical nodes.
+2. **Useful (Life-Critical Acuity)**: Every glyph must maximize recognition under fatigue, stress, and low light (Louise Sloan 5:1 optotype ratio, ISMP disambiguation).
+3. **Aesthetic (Harmonic Felt-Marker Warmth)**: Stroke weights and terminal corner radii (locked to 25 UPM) must harmonize with Phil Gear's humanist felt-marker cardstock DNA.
+4. **Understandable (Archetypal Semiosis)**: Self-explanatory pictograms (Susan Kare principle). An icon is a hieroglyph, not an illustration. Eliminate ambiguity immediately.
+5. **Unobtrusive (Zero Cognitive Friction)**: Monochromatic vector glyphs sharing the luminance and weight of surrounding text. Prohibit multi-color cartoon emoji fallback that hijacks the fovea.
+6. **Honest (True to the Vector Engine)**: Pure closed quadratic TrueType contours (`glyf`). No fake skeuomorphic chrome or unhinted micro-artifacts.
+7. **Long-Lasting (Timeless Geometry)**: Resist ephemeral stylistic fads. Anchor designs in enduring geometric archetypes (the circle, the golden proportion, the Sloan ratio).
+8. **Thorough Down to the Last Detail**: Every coordinate, advance width, side bearing, and bounding box is mathematically intentional. 0 redundant control points (Casey Muratori semantic compression).
+9. **Ecological (Digital & Human Energy Conservation)**: Minimal vertex count for O(1) rasterizer performance; Brotli Q11 compression; Scotopic 650nm red mode for zero rhodopsin bleaching and OLED battery conservation.
+10. **As Little Design as Possible (Weniger, aber besser)**: Strictly eliminate micro-ticks, decorative filigree, and visual clutter (Edward Tufte 1+1=3 noise) that collapse into blur at <= 16px.
 
 ---
 

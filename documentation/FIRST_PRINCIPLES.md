@@ -1,4 +1,4 @@
-﻿# First Principles: Stripping Away False Constraints in Typography & Typefoundry Engineering
+# First Principles: Stripping Away False Constraints in Typography & Typefoundry Engineering
 
 > *"Rather than fixing downstream bugs in runtime memory, system architecture must make entire classes of bugs impossible by structural construction."*  
 > — Eskil Steenberg, *Debugging and the art of avoiding bugs*
@@ -81,3 +81,21 @@ As Eskil Steenberg teaches, **good engineering is about clarity of purpose and s
 3. **Let Braille be Braille**: Preserve standard tactile cell geometries and negative space (ISO/TR 11548 & ISO 17049).
 4. **Let Shorthand be Shorthand**: Respect the phonemic size ratios of stenography without forcing it into Roman metal boxes.
 5. **Keep the binary engine clean**: Pad bytes to keep OTS happy (`loca[i] % 2 == 0`), but don't confuse memory alignment with typographic beauty.
+
+---
+
+## 📐 Dieter Rams & Human-Computer Interaction (HCI) Typographic Governance
+
+All future glyphs, icons, indicators, and symbols synthesized into PocketGull must strictly adhere to the Ten Ramsian & HCI Laws:
+
+1. **Innovative (Avoid Bugs by Construction)**: No gratuitous curves. Every contour must satisfy 2-byte word boundaries (`loca[i] % 2 == 0`), bit-7 flag clearing, and zero consecutive identical nodes.
+2. **Useful (Life-Critical Acuity)**: Every glyph must maximize recognition under fatigue, stress, and low light (Louise Sloan 5:1 optotype ratio, ISMP disambiguation).
+3. **Aesthetic (Harmonic Felt-Marker Warmth)**: Stroke weights and terminal corner radii (locked to $25\text{ UPM}$) must harmonize with Phil Gear's humanist felt-marker cardstock DNA.
+4. **Understandable (Archetypal Semiosis)**: Self-explanatory pictograms (Susan Kare principle). An icon is a hieroglyph, not an illustration. Eliminate ambiguity immediately.
+5. **Unobtrusive (Zero Cognitive Friction)**: Monochromatic vector glyphs sharing the luminance and weight of surrounding text. Prohibit multi-color cartoon emoji fallback that hijacks the fovea (Alan Cooper cognitive friction avoidance).
+6. **Honest (True to the Vector Engine)**: Pure closed quadratic TrueType contours (`glyf`). No fake skeuomorphic chrome or unhinted micro-artifacts.
+7. **Long-Lasting (Timeless Geometry)**: Resist ephemeral stylistic fads. Anchor designs in enduring geometric archetypes (the circle, the golden proportion, the Sloan ratio).
+8. **Thorough Down to the Last Detail**: Every coordinate, advance width, side bearing, and bounding box is mathematically intentional. 0 redundant control points (Casey Muratori semantic compression).
+9. **Ecological (Digital & Human Energy Conservation)**: Minimal vertex count for $O(1)$ rasterizer performance; Brotli Q11 compression; Scotopic 650nm red mode for zero rhodopsin bleaching and OLED battery conservation.
+10. **As Little Design as Possible (Weniger, aber besser)**: Strictly eliminate micro-ticks, decorative filigree, and visual clutter (Edward Tufte $1+1=3$ noise) that collapse into blur at $\le 16\text{px}$.
+
