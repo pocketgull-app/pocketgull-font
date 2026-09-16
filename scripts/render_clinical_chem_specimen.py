@@ -55,7 +55,7 @@ def render_chem_plate():
             "subtitle": "Solid & hashed wedged bonds prevent catastrophic optical confusion between enantiomers",
             "formula": "(R)-Thalidomide [Sedative]  vs.  (S)-Thalidomide [Teratogen: Phocomelia Risk]",
             "bonds": "C\u25C0NH\u2082  [Solid Wedge Outward]     C \ue902 OH  [Hashed Wedge Inward Receding]",
-            "clinical": "Racemizes in vivo (t_1/2 = 4.5 h). Preserves Louise Sloan 5:1 optical proportion for pregnancy warnings.",
+            "clinical": "In vivo racemization (t_\u00bd = 4.5 h) causes phocomelia. Sloan 5:1 acuity ensures instant recognition on FDA Black Box pregnancy contraindications & REMS packaging.",
             "color": ROSE_ACCENT,
             "y": 180
         },
