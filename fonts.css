@@ -318,6 +318,19 @@
   unicode-range: U+0370-03FF, U+2070-209F, U+2100-214F, U+2190-21FF, U+2200-22FF, U+1D400-1D7FF;
 }
 
+/* PocketGull Chem (Clinical Chemistry, Pharmacological & Molecular Typeface) */
+@font-face {
+  font-family: 'PocketGull Chem';
+  src: url('fonts/woff2/PocketGull-Chem.woff2?v=3.100') format('woff2'),
+       url('PocketGull-Chem.woff2?v=3.100') format('woff2'),
+       url('fonts/ttf/PocketGull-Chem.ttf?v=3.100') format('truetype'),
+       url('PocketGull-Chem.ttf?v=3.100') format('truetype');
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+00B0, U+00B2-00B3, U+00B9, U+2014, U+2021, U+2070-209F, U+2190-21FF, U+2200-22FF, U+25B6, U+25C0, U+27F0-27FF, U+2900-297F, U+2B21, U+E900-E90C;
+}
+
 /* PocketGull Superfamily Expansion: Chromatic & Textured Series */
 @font-face {
   font-family: 'PocketGull Outline';

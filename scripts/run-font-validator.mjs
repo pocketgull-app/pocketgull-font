@@ -25,7 +25,11 @@ const typefaceDir = path.resolve(scriptDir, '..');
 console.log(`🔤 [Font Validator] Target: ${scriptPath}`);
 
 // Strategy 1: Test native Python with fontTools
-const pythonCmds = ['python', 'py'];
+const pythonCmds = [
+  'C:\\Users\\philg\\anaconda3\\python.exe',
+  'python',
+  'py',
+];
 let executed = false;
 
 for (const py of pythonCmds) {

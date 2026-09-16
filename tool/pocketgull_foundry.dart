@@ -44,6 +44,7 @@ const fontStems = [
   'PocketGull-Halftone',
   'PocketGull-VF',
   'PocketGull-Math',
+  'PocketGull-Chem',
 ];
 
 Directory findTypefaceDir() {

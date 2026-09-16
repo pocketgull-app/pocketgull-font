@@ -14,6 +14,11 @@
     "sha256": "39df3e96b915b93c88127df728d3b759cff3431c2f6e82a463249f7ea1774a84",
     "sri": "sha384-j36RjmJd7C9WPDdfgr56mLZ0ByYpq7g1HiKMFgfpf2bCYdF2x0rztMOwhcer5aAL"
   },
+  "fonts/ttf/PocketGull-Chem.ttf": {
+    "size": 1879804,
+    "sha256": "05c2055cfedc12d9158c8a4270a9d6d338dc95c900b525a77de87d5ef9ecbec2",
+    "sri": "sha384-+KBSL5+a3ujYJl1eZ6oKvrOWp5tJvnNQpomJxGjWY0t+5RkewcgaO7SkdOnt6tlS"
+  },
   "fonts/ttf/PocketGull-Chiseltip.ttf": {
     "size": 1864664,
     "sha256": "49abae4a5a148da37a0a80843956e27e5980aeb0ecdce2640dfde9cff3908e71",
@@ -149,6 +154,11 @@
     "sha256": "545f49977190108e6fd06f73a501848f697d8d5bd3c404eae6e0b718e87aee31",
     "sri": "sha384-FuLB6RjQewy+CNypQvt79m4r6nAZRv1mUPOZiaZajOHu7cs8h28RA0286dsBMO4F"
   },
+  "fonts/woff2/PocketGull-Chem.woff2": {
+    "size": 674356,
+    "sha256": "6411f79538204cecf033fc2c0ea94ec7f03bcefd55521098f55777e90ae4c4bb",
+    "sri": "sha384-8o08wqAsT7AtlxO1sKYAyZ39bgi9ixxIuZrcb+i1lrUvwA9S0Sfdq04E1uhLowX/"
+  },
   "fonts/woff2/PocketGull-Chiseltip.woff2": {
     "size": 667356,
     "sha256": "8246282eb591b8ef918d97cb0af5e2794c6c10ff09a5104b8a1a3612d68fbeb2",
@@ -278,10 +288,5 @@
     "size": 241312,
     "sha256": "f406e5b16b6f22d9062320aeefc820ff6af7874bef7df837335958a4e2f653ff",
     "sri": "sha384-IuDaCNHoNASOQDyHH8nPGLVVScqWG/ZITPjx+JpRHMxc3yg2qsjROYbz8deR0XQy"
-  },
-  "fonts/woff2/test_math.woff2": {
-    "size": 678628,
-    "sha256": "7d8177b00131542c3466a2732a5a448b1d167adfb28b07ad9700157bbba6df01",
-    "sri": "sha384-7jRFfRbZSSodCoGT9V54F6fe2NnYLvRFcXxsIgJxep9AlX6CeMqiB6MDD6rQp7Hv"
   }
 }
