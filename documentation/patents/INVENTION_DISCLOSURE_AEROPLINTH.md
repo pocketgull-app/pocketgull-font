@@ -30,14 +30,14 @@ The present invention relates generally to commercial aircraft passenger service
 Long-duration passenger transit (commercial aviation flights ranging from 3 to 16 hours) subjects passengers to severe sensory, physiological, and psychological stressors:
 1. **Sensory Entrapment & Boredom**: Passengers are confined to a static seated posture for extended durations with monotonous acoustic stimulation (continuous $\sim 80\text{ dB}$ cabin turbofan engine rumble).
 2. **Circadian Desynchrony & Jet Lag**: Conventional seatback in-flight entertainment (IFE) screens emit high concentrations of short-wavelength blue light ($\sim 450\text{ nm}$), which aggressively suppresses pineal melatonin secretion, disrupting circadian rhythm and exacerbating post-flight fatigue.
-3. **Visual Fatigue & Retinal Hypoxia**: Airplane cabins are typically pressurized to an equivalent altitude of $6{,}000\text{ to }8{,}000\text{ feet}$ above sea level, reducing arterial oxygen saturation ($\text{SpO}_2$) to $90\%\text{–}93\%$. This hypobaric hypoxia impairs retinal mitochondrial respiration, causing ocular fatigue, dry eyes, and headaches.
+3. **Visual Fatigue & Retinal Hypoxia**: Airplane cabins are typically pressurized to an equivalent altitude of $6{,}000\text{ to }8{,}000\text{ feet}$ above sea level, reducing arterial oxygen saturation ($\text{SpO}_2$) to $90\%\text{--}93\%$. This hypobaric hypoxia impairs retinal mitochondrial respiration, causing ocular fatigue, dry eyes, and headaches.
 4. **Lack of Tactile Agency**: Existing IFE systems are overwhelmingly passive (passengers passively watch pre-recorded movies or play clunky touchscreen games). There is no outlet for tactile creative expression, manual mindfulness, or somatic grounding.
 
 ### 4.2 Inherent Failures of Existing Solutions
 * **Seatback Video Displays (LCD/OLED IFE)**:
   - Add enormous weight ($\sim 4.5\text{ kg}$ per seat including display, structural reinforcement, seat electronics box, and copper wiring harnesses).
   - High capital expenditure ($\$2{,}500\text{ to }\$5{,}000$ per seat).
-  - Continuous electrical draw ($15\text{–}30\text{ W}$ per seat), generating parasitic heat that burdens cabin environmental control systems.
+  - Continuous electrical draw ($15\text{--}30\text{ W}$ per seat), generating parasitic heat that burdens cabin environmental control systems.
 * **Physical Print Media (e.g., SkyMall, In-Flight Magazines)**:
   - Static, passive, non-interactive, and generates substantial physical waste and logistic weight penalties.
 * **Conventional Laser & Projection Systems**:
@@ -54,9 +54,9 @@ There is an acute unmet need for an ultra-lightweight ($<0.2\text{ kg}$ per seat
 
 The present invention solves the aforementioned deficiencies by introducing an integrated optoelectronic ecosystem comprising:
 1. **An Overhead Beam-Steering Engine (PSU Module)**: A miniaturized, solid-state laser module retrofitted into an existing aircraft Passenger Service Unit (PSU) reading light aperture. The module incorporates a dual-wavelength solid-state laser diode source ($405\text{ nm}$ persistent phosphor charging + $670\text{ nm}$ photobiomodulation), a 2-axis micro-electro-mechanical system (MEMS) resonant/quasi-static scanning mirror, a custom doublet aspheric collimator, and an internal knife-edge optical aperture mask that geometrically confines all projected photons strictly to the rectangular boundary of the passenger's personal tray table.
-2. **A Photoluminescent Interactive Plinth (Tray Table Surface)**: A multi-layer composite plinth permanently or removably laminated to the upper surface of a passenger tray table. The plinth comprises a sintered alkaline earth aluminate phosphor layer ($\text{SrAl}_2\text{O}_4:\text{Eu}^{2+},\text{Dy}^{3+}$) encapsulated beneath a micro-etched, oleophobic matte polycarbonate hardcoat conforming to FAA FAR 25.853 flammability standards. When excited by the $405\text{ nm}$ beam, the surface emits an intense, soothing aquamarine afterglow ($490\text{ nm}$) that persists for $45\text{–}90\text{ seconds}$, enabling real-time optical calligraphy and vector drawing without requiring continuous photon emission.
+2. **A Photoluminescent Interactive Plinth (Tray Table Surface)**: A multi-layer composite plinth permanently or removably laminated to the upper surface of a passenger tray table. The plinth comprises a sintered alkaline earth aluminate phosphor layer ($\text{SrAl}_2\text{O}_4:\text{Eu}^{2+},\text{Dy}^{3+}$) encapsulated beneath a micro-etched, oleophobic matte polycarbonate hardcoat conforming to FAA FAR 25.853 flammability standards. When excited by the $405\text{ nm}$ beam, the surface emits an intense, soothing aquamarine afterglow ($490\text{ nm}$) that persists for $45\text{--}90\text{ seconds}$, enabling real-time optical calligraphy and vector drawing without requiring continuous photon emission.
 3. **An Embedded Real-Time Kinematic Trajectory Processor**:
-   - Executes a factory-calibrated $3 \times 3$ affine projective homography matrix in hardware fixed-point arithmetic, perfectly rectifying oblique keystone distortion ($20^\circ\text{–}35^\circ$ projection angle) across the entire tray plinth.
+   - Executes a factory-calibrated $3 \times 3$ affine projective homography matrix in hardware fixed-point arithmetic, perfectly rectifying oblique keystone distortion ($20^\circ\text{--}35^\circ$ projection angle) across the entire tray plinth.
    - Executes a 3rd-order jerk-limited S-curve look-ahead algorithm that injects microsecond laser blanking and dwell times at geometric vertices, preserving razor-sharp corners on serif typography, syllabics, and line graphics without mirror ringing.
    - Modulates laser traverse velocity inversely to stroke width ($v \propto 1/\text{energy density}$), allowing the system to render variable-weight humanist calligraphic strokes (thick downstrokes, hairline flourishes) without requiring analog laser diode power modulation.
 4. **Autonomous Telemetry & Circadian Biofeedback Entrainment**:
@@ -128,7 +128,7 @@ The overhead projection module is dimensioned to fit within the standard circula
 * **Collimation Optics**:
   - An anti-reflective coated optical glass doublet lens with a numerical aperture of $0.25$, configured to focus the combined beam to a waist diameter of $w_0 \le 0.28\text{ mm}$ at a working distance of $D = 650\text{ mm} \pm 75\text{ mm}$ (the nominal distance from the overhead reading unit to the deployed tray table).
 * **Scanning Mechanism**:
-  - A single two-axis MEMS mirror fabricated from single-crystal silicon, featuring electrostatic or piezoelectric actuation. The fast axis ($X$) operates in resonant oscillation at $18\text{–}24\text{ kHz}$, while the slow axis ($Y$) operates in quasi-static linear deflection from $0\text{ to }60\text{ Hz}$.
+  - A single two-axis MEMS mirror fabricated from single-crystal silicon, featuring electrostatic or piezoelectric actuation. The fast axis ($X$) operates in resonant oscillation at $18\text{--}24\text{ kHz}$, while the slow axis ($Y$) operates in quasi-static linear deflection from $0\text{ to }60\text{ Hz}$.
 * **Zero-Spill Knife-Edge Mask**:
   - Located at the exit pupil of the module is an anodized aluminum optical field stop mask. The aperture geometry is laser-cut to match the exact angular subtense of the deployed tray table ($380\text{ mm} \times 250\text{ mm}$ at $D = 650\text{ mm}$). Any light ray exceeding the tray perimeter is physically intercepted and absorbed by the mask, preventing illumination of adjacent seat occupants.
 
@@ -139,7 +139,7 @@ The tray table plinth comprises a three-layer co-extruded or laminated composite
    - Complete suppression of specular reflections from overhead cabin lights.
    - Oleophobic resistance against human skin oils and food grease.
    - High chemical resistance against airline sanitization solvents (including $70\%$ isopropanol, quaternary ammonium, and bleach).
-2. **Layer 2 (Phosphorescent Core)**: A $120\text{–}180\,\mu\text{m}$ thick elastomeric layer containing microscopic crystals of strontium aluminate co-doped with europium and dysprosium ($\text{SrAl}_2\text{O}_4:\text{Eu}^{2+},\text{Dy}^{3+}$). The particle size distribution is tightly controlled between $15\,\mu\text{m}$ and $35\,\mu\text{m}$ to maximize packing density ($>65\%$ by weight) while preventing optical scatter. Upon exposure to $405\text{ nm}$ photons, the crystals trap energy within long-lived metastable states and release photons through quantum luminescence with a principal peak at $490\text{ nm}$ (aquamarine) and a persistent half-life of $52\text{ seconds}$.
+2. **Layer 2 (Phosphorescent Core)**: A $120\text{--}180\,\mu\text{m}$ thick elastomeric layer containing microscopic crystals of strontium aluminate co-doped with europium and dysprosium ($\text{SrAl}_2\text{O}_4:\text{Eu}^{2+},\text{Dy}^{3+}$). The particle size distribution is tightly controlled between $15\,\mu\text{m}$ and $35\,\mu\text{m}$ to maximize packing density ($>65\%$ by weight) while preventing optical scatter. Upon exposure to $405\text{ nm}$ photons, the crystals trap energy within long-lived metastable states and release photons through quantum luminescence with a principal peak at $490\text{ nm}$ (aquamarine) and a persistent half-life of $52\text{ seconds}$.
 3. **Layer 3 (Aviation Substrate)**: A $1.5\text{ mm}$ structural backing sheet of thermoplastic sheet (Sekisui Kydex 6565 or Boltaron 4335) formulated to satisfy FAA FAR 25.853 Appendix F Part I (vertical 12-second flammability test) and OSU heat release rate standards.
 
 ### 7.3 Velocity-Modulated Calligraphy Algorithm
@@ -153,8 +153,8 @@ The present invention solves this by maintaining the laser diode at a constant, 
   $$L(t) = L_{\max} \left(1 - e^{-k \cdot F}\right)$$
   the initial afterglow luminance $L(t)$ is directly controlled by modulating $v(t)$.
 * When rendering a calligraphic vector stroke (such as an expanding stroke of a font glyph or drawing path):
-  - For broad, heavy strokes (downstrokes), the microcontroller decelerates the MEMS mirrors to a lower velocity $v_{\text{low}}$ ($50\text{–}150\text{ mm/s}$), depositing high energy density ($F \ge 0.15\text{ J/cm}^2$) and inducing saturated, wide-blooming phosphorescent luminescence.
-  - For delicate hairline strokes (upstrokes, serifs), the microcontroller accelerates the MEMS mirrors to a higher velocity $v_{\text{high}}$ ($600\text{–}1200\text{ mm/s}$), depositing lower energy density ($F \le 0.03\text{ J/cm}^2$) and producing a razor-sharp, whisper-thin glowing line.
+  - For broad, heavy strokes (downstrokes), the microcontroller decelerates the MEMS mirrors to a lower velocity $v_{\text{low}}$ ($50\text{--}150\text{ mm/s}$), depositing high energy density ($F \ge 0.15\text{ J/cm}^2$) and inducing saturated, wide-blooming phosphorescent luminescence.
+  - For delicate hairline strokes (upstrokes, serifs), the microcontroller accelerates the MEMS mirrors to a higher velocity $v_{\text{high}}$ ($600\text{--}1200\text{ mm/s}$), depositing lower energy density ($F \le 0.03\text{ J/cm}^2$) and producing a razor-sharp, whisper-thin glowing line.
 
 ### 7.4 Oblique Keystone Homography Matrix Calibration
 Because the overhead reading pod is mounted at an angle $\theta = 28^\circ \pm 7^\circ$ relative to the tray table normal vector, an uncorrected square would project as an elongated trapezoid.
@@ -213,7 +213,7 @@ The system connects to the aircraft’s ARINC 429 / Ethernet avionics data bus t
 - a safety interlock subsystem comprising an obstruction sensor, wherein said interlock subsystem automatically interrupts power to said laser source within $2\text{ milliseconds}$ upon detecting an object within a predetermined safety distance of said housing or upon detecting stowing of said tray table plinth.
 
 **9. The system of claim 2, wherein:**
-- said controller is configured to receive aircraft flight telemetry comprising altitude and solar elevation data, and wherein said controller automatically disables said first laser diode and activates said second laser diode ($660\text{–}680\text{ nm}$) during nocturnal flight conditions to provide circadian photobiomodulation without melatonin suppression.
+- said controller is configured to receive aircraft flight telemetry comprising altitude and solar elevation data, and wherein said controller automatically disables said first laser diode and activates said second laser diode ($660\text{--}680\text{ nm}$) during nocturnal flight conditions to provide circadian photobiomodulation without melatonin suppression.
 
 **10. A method for providing localized interactive vector graphics and biofeedback in a passenger cabin, comprising:**
 - projecting a steerable laser beam from an overhead passenger service unit toward a deployable tray table plinth comprising a persistent photoluminescent substrate;

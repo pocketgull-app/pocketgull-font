@@ -54,8 +54,8 @@ PocketGull is an open-source clinical sans-serif, display, and telemetry monospa
 - Version 1 `gasp` table mapping `0xFFFF` to `GASP_DOGRAY` (0x02) and `GASP_SYMMETRIC_SMOOTHING` (0x04).
 
 ### 8. Multi-Script Proportions & Grounding
-- **Unicode Braille (`U+2800`–`U+28FF`)**: Respects ISO/TR 11548 & ISO 17049 standard 8-dot tactile dome geometry ($r=60\text{ UPM}$, $2.5\text{ mm}$ pitch, authentic negative space), grounded on Latin baseline ($y = 0$) to prevent floating cell artifacts.
-- **Duployan / Chinuk Pipa (`U+1BC00`–`U+1BC9F`)**: Respects phonemic size ratios ($130\text{ UPM}$ vowel loops vs. consonant stems), anchored along the optical waist ($y = 270\text{ UPM}$) to harmonize with Latin x-height.
+- **Unicode Braille (`U+2800`–`U+28FF`)**: Respects ISO/TR 11548 & ISO 17049 standard 8-dot tactile dome geometry (r = 60 UPM, 2.5 mm pitch, authentic negative space), grounded on Latin baseline (y = 0) to prevent floating cell artifacts.
+- **Duployan / Chinuk Pipa (`U+1BC00`–`U+1BC9F`)**: Respects phonemic size ratios (130 UPM vowel loops vs. consonant stems), anchored along the optical waist (y = 270 UPM) to harmonize with Latin x-height.
 
 ---
 

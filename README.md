@@ -13,28 +13,11 @@
 
 <br/>
 
-<table>
-  <tr>
-    <td width="50%" align="center">
-      <img src="documentation/images/pocketgull_healer_hero.jpg" alt="PocketGull The Healer (Hearts for i's)" width="100%" />
-      <br/><sub><strong>Humanist Cardstock DNA: Hand-drawn felt-marker lettering</strong></sub>
-    </td>
-    <td width="50%" align="center">
-      <img src="documentation/images/pocketgull_telemetry_terminal.jpg" alt="PocketGull Telemetry Monospace & Box Drawing" width="100%" />
-      <br/><sub><strong>PocketGull Mono: 600 UPM fixed-pitch ICU telemetry &amp; ECG</strong></sub>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" align="center">
-      <img src="documentation/images/math_comparison_plate.png" alt="PocketGull Math vs Computer Modern" width="100%" />
-      <br/><sub><strong>PocketGull Math: 68 UPM robust stem weight on high-contrast OLED</strong></sub>
-    </td>
-    <td width="50%" align="center">
-      <img src="documentation/images/astronomy_night_telemetry_plate.png" alt="PocketGull Scotopic 650nm Night Vision HUD" width="100%" />
-      <br/><sub><strong>Scotopic 650nm Mode: Zero-photobleaching dark-room observational console</strong></sub>
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <img src="documentation/images/pocketgull_healer_hero.jpg" alt="PocketGull The Healer — Humanist Felt-Marker Lettering on Cardstock" width="100%" style="border-radius: 8px;" />
+  <br/>
+  <sub><strong>Humanist Cardstock DNA: Hand-drawn felt-marker lettering engineered for clinical clarity.</strong></sub>
+</p>
 
 </div>
 
@@ -82,6 +65,21 @@ Apply safe dosage disambiguation to patient charts and medical calculators:
 ---
 
 <details>
+<summary><strong>🖼️ Specimen Gallery &amp; Telemetry Plates (Click to expand)</strong></summary>
+<br/>
+
+### PocketGull Mono: 600 UPM ICU Intensive Care Telemetry
+![PocketGull Telemetry Monospace & Box Drawing](documentation/images/pocketgull_telemetry_terminal.jpg)
+
+### PocketGull Math: 68 UPM Robust Stem Acuity on High-Contrast Displays
+![PocketGull Math vs Computer Modern](documentation/images/math_comparison_plate.png)
+
+### Scotopic 650nm Night Vision Observational Console
+![PocketGull Scotopic 650nm Night Vision HUD](documentation/images/astronomy_night_telemetry_plate.png)
+
+</details>
+
+<details>
 <summary><strong>🗂️ Superfamily Architecture (Click to expand)</strong></summary>
 <br/>
 
@@ -96,7 +94,7 @@ PocketGull is engineered on a standardized 1000 UPM em-square across 14 speciali
 | **PocketGull Mono** | `PocketGullMono-Regular` | 400 / 500 | Fixed 600 UPM | ICU telemetry, tabular vitals, gapless box drawing |
 | **PocketGull Math** | `PocketGull-Math` | 400 (68 UPM stem) | Monospace / Math | LaTeX/Typst formulas, ISO/IEC 14496-22 MATH table |
 | **PocketGull Learn** | `PocketGull-Learn` | 400 | Proportional | K-12 education, continuous guidelines, TouchMath |
-| **PocketGull Lab** | `PocketGull-Lab` | 400 | Proportional | Pathology SOPs, RCF centrifugation ($\times$g), BSL badges |
+| **PocketGull Lab** | `PocketGull-Lab` | 400 | Proportional | Pathology SOPs, RCF centrifugation (×g), BSL badges |
 | **PocketGull Press** | `PocketGull-Press` | 400 | Proportional | 3D Printing, nozzle badges, CAD GD&amp;T |
 | **PocketGull Outline** | `PocketGull-Outline` | Display | Proportional | Multi-color lithography, header silhouettes |
 | **PocketGull Inline** | `PocketGull-Inline` | Display | Proportional | Engraved titling, hairline center grooves |

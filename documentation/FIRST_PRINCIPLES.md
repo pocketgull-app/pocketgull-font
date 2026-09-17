@@ -18,7 +18,7 @@ This document establishes the foundational critique and the resulting **Living T
 ### 1. "Making Everything Plumb" vs. The Reality of the Calligraphic Hand
 * **The Rule**: All tittles, nuqṭas, and diacritics must sit strictly at $0^\circ$ (zero slant, true vertical gravity).
 * **Where it doesn't make sense**:
-  * **In Arabic (Nuqṭa)**: A nuqṭa in traditional Arabic calligraphy (*Naskh*, *Ruq‘ah*, *Thuluth*) is literally the footprint of a reed pen (*qalam*) cut at a deliberate angle ($45^\circ\text{–}70^\circ$). Rotating a nuqṭa to $0^\circ$ turns it into a sterile diamond or square, stripping away the natural biomechanics of the hand. To native readers, it can look rigid, computerized, or foreign.
+  * **In Arabic (Nuqṭa)**: A nuqṭa in traditional Arabic calligraphy (*Naskh*, *Ruq‘ah*, *Thuluth*) is literally the footprint of a reed pen (*qalam*) cut at a deliberate angle ($45^\circ\text{--}70^\circ$). Rotating a nuqṭa to $0^\circ$ turns it into a sterile diamond or square, stripping away the natural biomechanics of the hand. To native readers, it can look rigid, computerized, or foreign.
   * **The PocketGull Origin**: PocketGull originated from **felt marker on physical cardstock**. Human handwriting is never $0^\circ$ plumb—it has natural slant, rhythm, and cadence. Demanding absolute mathematical zero-degree plumbness fights the humanist warmth the font was born with.
 
 ---

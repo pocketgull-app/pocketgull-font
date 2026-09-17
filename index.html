@@ -177,6 +177,149 @@
       color: var(--cyan);
     }
 
+    /* Clean Top Navbar Dropdown */
+    .nav-dropdown {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .nav-dropdown-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 0;
+      transition: color 0.2s ease;
+    }
+    .nav-dropdown-btn:hover,
+    .nav-dropdown:hover .nav-dropdown-btn {
+      color: var(--cyan);
+    }
+    .nav-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: -20px;
+      min-width: 250px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 8px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+      z-index: 1010;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu,
+    .nav-dropdown:focus-within .nav-dropdown-menu {
+      display: flex;
+    }
+    .nav-dropdown-menu a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      color: var(--text-main) !important;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .nav-dropdown-menu a:hover {
+      background: var(--surface-inner);
+      color: var(--cyan) !important;
+    }
+
+    /* Studios & Labs Hub Grid */
+    .studios-portal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .studio-portal-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px;
+      text-decoration: none;
+      color: var(--text-main);
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+    }
+    .studio-portal-item:hover {
+      border-color: var(--cyan);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(6, 182, 212, 0.15);
+    }
+    .studio-portal-icon {
+      font-size: 24px;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+    .studio-portal-content h4 {
+      font-family: 'PocketGull Bold', var(--font-sans);
+      font-size: 15px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--sample-text);
+    }
+    .studio-portal-content h4 span {
+      font-size: 11px;
+      font-family: 'PocketGull Mono', monospace;
+      color: var(--cyan);
+      font-weight: 500;
+      opacity: 0.85;
+    }
+    .studio-portal-content p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin: 0;
+    }
+    .studio-card-collapsible {
+      transition: all 0.3s ease;
+    }
+    .studio-card-collapsible.is-collapsed .studio-body-drawer {
+      display: none;
+    }
+    .studio-card-collapsible .studio-toggle-btn {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .studio-card-collapsible .studio-toggle-btn:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
     .nav-actions {
       display: flex;
       align-items: center;
@@ -1488,23 +1631,27 @@
     </a>
 
     <nav class="nav-links">
-      <a href="#waterfall" class="nav-link">Hierarchy</a>
-      <a href="#variable" class="nav-link">Variable Font</a>
-      <a href="#ismp" class="nav-link">ISMP Safety</a>
+      <a href="#waterfall" class="nav-link">Specimen</a>
+      <a href="#ismp" class="nav-link">Clinical Safety</a>
       <a href="#telemetry" class="nav-link">ICU Telemetry</a>
-      <a href="#scientific-lab" class="nav-link" style="color: #60a5fa; font-weight: 700;">Scientific Lab 🔬</a>
-      <a href="#ecological" class="nav-link" style="color: var(--emerald);">Eco &amp; Battery</a>
-      <a href="#scripts" class="nav-link">SMoE Scripts</a>
-      <a href="#box-geometry" class="nav-link" style="color: var(--cyan);">Box Geometry</a>
-      <a href="kinetic_laboratory.html" class="nav-link" style="color: var(--amber); font-weight: 700;">Kinetic Lab ⚙️</a>
-      <a href="music_studio.html" class="nav-link" style="color: #818cf8; font-weight: 700;">Music Studio 🎼</a>
-      <a href="asl_studio.html" class="nav-link" style="color: #34d399; font-weight: 700;">Sign Studio 🤟</a>
-      <a href="#chromatic-studio" class="nav-link" style="color: #ec4899; font-weight: 700;">Chromatic Studio 🎨</a>
-      <a href="#halftone-engineering" class="nav-link" style="color: #ec4899;">Halftone &amp; Print</a>
-      <a href="#raster-benchmark" class="nav-link" style="color: var(--emerald); font-weight: 700;">Speed Benchmark ⚡</a>
-      <a href="#charter" class="nav-link" style="color: var(--emerald);">Typographic Principles</a>
+      <div class="nav-dropdown">
+        <button type="button" class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
+          Studios &amp; Labs <span style="font-size: 10px;">▾</span>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="asl_studio.html">🤟 Global Sign &amp; ASL Studio</a>
+          <a href="music_studio.html">🎼 Music Studio (WebAudio)</a>
+          <a href="kinetic_laboratory.html">⚙️ Kinetic Lab (TIM Contraption)</a>
+          <a href="#scientific-lab" onclick="toggleStudioDrawer('scientific-lab', true)">🔬 Scientific &amp; Math Lab</a>
+          <a href="#chromatic-studio" onclick="toggleStudioDrawer('chromatic-studio', true)">🎨 Chromatic Multi-Layer Studio</a>
+          <a href="#scripts" onclick="toggleStudioDrawer('scripts', true)">🌐 Universal World Scripts (SMoE)</a>
+          <a href="#ecological" onclick="toggleStudioDrawer('ecological', true)">🌿 Eco &amp; Battery Calculator</a>
+          <a href="#raster-benchmark" onclick="toggleStudioDrawer('raster-benchmark', true)">⚡ 30.8× Speed Benchmark</a>
+        </div>
+      </div>
+      <a href="#charter" class="nav-link">Principles</a>
       <a href="#pillars" class="nav-link">Pillars</a>
-      <a href="#download" class="nav-link" style="color: var(--cyan);">Downloads</a>
+      <a href="#download" class="nav-link" style="color: var(--cyan); font-weight: 700;">Downloads</a>
     </nav>
 
     <div class="nav-actions">
@@ -1537,37 +1684,19 @@
 
       <div class="hero-quick-bar">
         <a href="#download" class="hero-btn-primary">
-          Download Fonts (.ZIP &amp; .TTF)
+          <span>💾</span> Download Superfamily (.ZIP &amp; .TTF)
         </a>
         <a href="#waterfall" class="hero-btn-secondary">
-          Explore Hierarchy Waterfall
+          <span>⌨️</span> Type &amp; Test Specimen
         </a>
-        <a href="#variable" class="hero-btn-secondary">
-          Variable Font Specimen
+        <a href="#ismp" class="hero-btn-secondary">
+          <span>🛡️</span> ISMP Clinical Safety
         </a>
         <a href="#telemetry" class="hero-btn-secondary">
-          ICU Telemetry HUD
+          <span>📟</span> ICU Telemetry HUD
         </a>
-        <a href="#scientific-lab" class="hero-btn-secondary" style="border-color: rgba(96, 165, 250, 0.5); color: #60a5fa;">
-          🔬 Scientific &amp; Telemetry Lab
-        </a>
-        <a href="#box-geometry" class="hero-btn-secondary" style="border-color: rgba(6, 182, 212, 0.4); color: var(--cyan);">
-          Box Geometry &amp; Telemetry
-        </a>
-        <a href="kinetic_laboratory.html" class="hero-btn-secondary" style="border-color: rgba(245, 158, 11, 0.5); color: var(--amber);">
-          ⚙️ Kinetic Lab (TIM &amp; Animusic)
-        </a>
-        <a href="music_studio.html" class="hero-btn-secondary" style="border-color: rgba(99, 102, 241, 0.5); color: #818cf8;">
-          🎼 Music Studio &amp; Web Audio
-        </a>
-        <a href="asl_studio.html" class="hero-btn-secondary" style="border-color: rgba(16, 185, 129, 0.5); color: #34d399;">
-          🤟 Global Sign &amp; ASL Studio
-        </a>
-        <a href="#raster-benchmark" class="hero-btn-secondary" style="border-color: rgba(34, 197, 94, 0.4); color: var(--emerald);">
-          ⚡ Speed Benchmark (30.8×)
-        </a>
-        <a href="#halftone-engineering" class="hero-btn-secondary" style="border-color: rgba(236, 72, 153, 0.4); color: #ec4899;">
-          🖨️ Halftone &amp; Print Guide
+        <a href="#studios-hub" class="hero-btn-secondary" style="border-color: rgba(6, 182, 212, 0.4); color: var(--cyan);">
+          <span>✨</span> Explore Specialized Studios ▾
         </a>
       </div>
     </header>
@@ -2010,7 +2139,93 @@
       </div>
     </section>
 
-    <!-- 5.5 Scientific, Astronomical & Mathematical Telemetry Laboratory -->
+    <!-- 5.5 Specialized Studios & Engineering Labs Hub (Graceful Rabbit Holes) -->
+    <section class="specimen-card studios-hub-card" id="studios-hub" style="border-color: rgba(6, 182, 212, 0.4); background: radial-gradient(circle at top left, rgba(6, 182, 212, 0.06) 0%, var(--card-bg) 100%);">
+      <div class="section-label">Specialized Studios &amp; Engineering Labs</div>
+      <h2 class="section-title">
+        <span>Deep Typographic Explorations</span>
+        <small>Domain tools, orthographies, physics &amp; performance benchmarks</small>
+      </h2>
+      <p style="color: var(--text-muted); font-size: 14px; max-width: 880px; line-height: 1.6; margin-bottom: 24px;">
+        PocketGull extends beyond standard text into mission-critical scientific telemetry, multi-layer chromatic lithography, global indigenous orthographies, and real-time audio-kinetic synthesis. Explore each laboratory below:
+      </p>
+
+      <div class="studios-portal-grid">
+        <!-- Card 1: Sign Language Studio -->
+        <a href="asl_studio.html" class="studio-portal-item">
+          <div class="studio-portal-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">🤟</div>
+          <div class="studio-portal-content">
+            <h4>Global Sign &amp; ASL Studio <span>Suite ↗</span></h4>
+            <p>5 anatomical hand types, Stokoe notation, bilateral phonology &amp; fingerspelling.</p>
+          </div>
+        </a>
+
+        <!-- Card 2: Scientific & Math Lab -->
+        <a href="#scientific-lab" class="studio-portal-item" onclick="toggleStudioDrawer('scientific-lab', true)">
+          <div class="studio-portal-icon" style="background: rgba(96, 165, 250, 0.15); color: #60a5fa;">🔬</div>
+          <div class="studio-portal-content">
+            <h4>Scientific &amp; Math Lab <span>Interactive ▾</span></h4>
+            <p>650nm Scotopic dark-room red mode, 68 UPM math stems &amp; FITS telemetry.</p>
+          </div>
+        </a>
+
+        <!-- Card 3: Music Studio -->
+        <a href="music_studio.html" class="studio-portal-item">
+          <div class="studio-portal-icon" style="background: rgba(129, 140, 248, 0.15); color: #818cf8;">🎼</div>
+          <div class="studio-portal-content">
+            <h4>Music Studio &amp; WebAudio <span>Suite ↗</span></h4>
+            <p>Monospace chord progressions, ASCII tablature, rhythmic metronomes &amp; sound synthesis.</p>
+          </div>
+        </a>
+
+        <!-- Card 4: Kinetic Lab -->
+        <a href="kinetic_laboratory.html" class="studio-portal-item">
+          <div class="studio-portal-icon" style="background: rgba(245, 158, 11, 0.15); color: var(--amber);">⚙️</div>
+          <div class="studio-portal-content">
+            <h4>Kinetic Synesthesia Lab <span>Suite ↗</span></h4>
+            <p>The Incredible Machine ballistics, reactive contraptions &amp; Animusic chime physics.</p>
+          </div>
+        </a>
+
+        <!-- Card 5: Chromatic & 3D Studio -->
+        <a href="#chromatic-studio" class="studio-portal-item" onclick="toggleStudioDrawer('chromatic-studio', true)">
+          <div class="studio-portal-icon" style="background: rgba(236, 72, 153, 0.15); color: #ec4899;">🎨</div>
+          <div class="studio-portal-content">
+            <h4>Chromatic &amp; Halftone Studio <span>Interactive ▾</span></h4>
+            <p>Multi-layer 3D lithography, Ben-Day dot screens &amp; 3D printing nozzle parameters.</p>
+          </div>
+        </a>
+
+        <!-- Card 6: Universal World Scripts -->
+        <a href="#scripts" class="studio-portal-item" onclick="toggleStudioDrawer('scripts', true)">
+          <div class="studio-portal-icon" style="background: rgba(20, 184, 166, 0.15); color: #2dd4bf;">🌐</div>
+          <div class="studio-portal-content">
+            <h4>Universal World Scripts <span>Interactive ▾</span></h4>
+            <p>11 SMoE dynamic subsets: Braille, Canadian Syllabics, Duployan, Arabic, Cherokee.</p>
+          </div>
+        </a>
+
+        <!-- Card 7: Eco & Battery Calculator -->
+        <a href="#ecological" class="studio-portal-item" onclick="toggleStudioDrawer('ecological', true)">
+          <div class="studio-portal-icon" style="background: rgba(16, 185, 129, 0.15); color: var(--emerald);">🌿</div>
+          <div class="studio-portal-content">
+            <h4>Eco &amp; Battery Calculator <span>Interactive ▾</span></h4>
+            <p>-22.4% toner savings, -34% OLED dark-mode battery conservation &amp; Spore Traps.</p>
+          </div>
+        </a>
+
+        <!-- Card 8: Speed Benchmark -->
+        <a href="#raster-benchmark" class="studio-portal-item" onclick="toggleStudioDrawer('raster-benchmark', true)">
+          <div class="studio-portal-icon" style="background: rgba(34, 197, 94, 0.15); color: #4ade80;">⚡</div>
+          <div class="studio-portal-content">
+            <h4>Live Rasterizer Benchmark <span>Interactive ▾</span></h4>
+            <p>30.8× quadratic Cu2Qu performance vs cubic curves in Chromium &amp; DirectWrite.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- 5.6 Scientific, Astronomical & Mathematical Telemetry Laboratory -->
     <section class="specimen-card" id="scientific-lab" style="border-color: rgba(96, 165, 250, 0.4); background: radial-gradient(circle at top right, rgba(96, 165, 250, 0.06) 0%, var(--card-bg) 100%);">
       <div class="section-label" style="color: #60a5fa;">Scientific Superfamily Expansion &bull; Zero-Shear Telemetry</div>
       <h2 class="section-title">
@@ -2348,7 +2563,7 @@
                 </tr>
                 <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
                   <td style="padding: 9px 12px; font-weight: 700;">4. Implementation &amp; EHR Rollout (Epic / Cerner Packaging)</td>
-                  <td style="padding: 9px 12px; color: var(--text-muted);">$15,000 – $35,000 (Vendor provisioning)</td>
+                  <td style="padding: 9px 12px; color: var(--text-muted);">$15,000 &ndash; $35,000 (Vendor provisioning)</td>
                   <td style="padding: 9px 12px; color: var(--amber);">$40,500 (One-time IT packaging &amp; QA)</td>
                   <td style="padding: 9px 12px; text-align: right; color: var(--amber);">-$40,500 (One-time Max Cost)</td>
                 </tr>
@@ -4744,6 +4959,15 @@
       // Initial call to load formula and features
       selectMathFormula('asl', null);
       updateMathFeatures();
+
+      // Studio Drawer / Progressive Disclosure Controller
+      window.toggleStudioDrawer = function(id, forceOpen) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (forceOpen) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      };
 
       updateChromaticRender();
 
