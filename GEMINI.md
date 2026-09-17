@@ -98,9 +98,20 @@ Before approving any commit or release:
 # 1. Forensic W3C OTS & word-alignment audit (Dart 3.11)
 dart run tool/pocketgull_foundry.dart audit
 
-# 2. Python Google Fonts pre-flight specification validator
+# 2. Automated SWE Security & CI Regression Tests (Node 24)
+npm run test:unit
+
+# 3. Python Google Fonts pre-flight specification validator
 python sources/validate_fonts.py
 
-# 3. Synchronize verified binaries to web app mirror (if app is present)
+# 4. Synchronize verified binaries to web app mirror (if app is present)
 dart run tool/pocketgull_foundry.dart sync
 ```
+
+---
+
+## 🛡️ CI & SAST Security Invariants
+1. **GitHub CodeQL Native Default Setup**: Do **NOT** commit or restore a `.github/workflows/codeql.yml` workflow file. The repository relies on GitHub's native Default Setup (`state: configured`). Adding an advanced workflow causes SARIF upload rejection conflicts.
+2. **DOM-Based XSS Prevention**: Never interpolate unescaped user input or URL query parameters into `.innerHTML`. Always construct DOM trees using `textContent`, `document.createTextNode()`, and `document.createElement()`.
+3. **Automated Enforcement**: Enforced at build and pre-flight time via `test/security_and_ci_invariants.test.mjs`.
+
