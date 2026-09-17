@@ -4152,20 +4152,34 @@
           const classJ = pacingClass ? `philocardia-j ${pacingClass}` : 'philocardia-j';
           const classExcl = pacingClass ? `philocardia-excl ${pacingClass}` : 'philocardia-excl';
           
-          let formatted = '';
+          textEl.textContent = '';
           for (let char of raw) {
-            if (char === 'i') formatted += `<span class="${classI}">ı</span>`;
-            else if (char === 'j') formatted += `<span class="${classJ}">ȷ</span>`;
-            else if (char === '!') formatted += `<span class="${classExcl}">!</span>`;
-            else formatted += char;
+            if (char === 'i' || char === 'j' || char === '!') {
+              const span = document.createElement('span');
+              span.className = (char === 'i') ? classI : (char === 'j') ? classJ : classExcl;
+              span.textContent = (char === 'i') ? 'ı' : (char === 'j') ? 'ȷ' : '!';
+              textEl.appendChild(span);
+            } else {
+              textEl.appendChild(document.createTextNode(char));
+            }
           }
-          textEl.innerHTML = formatted;
         }
 
         const compEl = document.getElementById('ismpHeartComparison');
         if (compEl) {
           const classI = pacingClass ? `philocardia-heart ${pacingClass}` : 'philocardia-heart';
-          compEl.innerHTML = `cl<span class="${classI}">ı</span>n<span class="${classI}">ı</span>cal`;
+          compEl.textContent = '';
+          compEl.appendChild(document.createTextNode('cl'));
+          const span1 = document.createElement('span');
+          span1.className = classI;
+          span1.textContent = 'ı';
+          compEl.appendChild(span1);
+          compEl.appendChild(document.createTextNode('n'));
+          const span2 = document.createElement('span');
+          span2.className = classI;
+          span2.textContent = 'ı';
+          compEl.appendChild(span2);
+          compEl.appendChild(document.createTextNode('cal'));
         }
       }
 
@@ -4433,9 +4447,13 @@
             const g = key.getAttribute('data-glyph');
             const cp = key.getAttribute('data-cp');
             const name = key.getAttribute('data-name');
-            const role = key.getAttribute('data-role');
-            boxGlyphInspectorInfo.innerHTML = `<strong style="color: var(--cyan);">[${g}] ${cp} ${name}</strong><br>Pitch: 600 UPM fixed &bull; Role: ${role} &bull; Alignment: 100% gapless continuous bounding box`;
-          });
+            boxGlyphInspectorInfo.textContent = '';
+            const strongEl = document.createElement('strong');
+            strongEl.style.color = 'var(--cyan)';
+            strongEl.textContent = `[${g}] ${cp} ${name}`;
+            boxGlyphInspectorInfo.appendChild(strongEl);
+            boxGlyphInspectorInfo.appendChild(document.createElement('br'));
+            boxGlyphInspectorInfo.appendChild(document.createTextNode(`Pitch: 600 UPM fixed • Role: ${role} • Alignment: 100% gapless continuous bounding box`));
         });
       }
       // 6. Chromatic Layering Studio Interactive Engine

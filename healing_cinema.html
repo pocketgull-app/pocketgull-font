@@ -1494,44 +1494,38 @@
         requestAnimationFrame(this.loop);
       }
 
-      formatBionic(text) {
+      renderBionic(container, text) {
+        if (!container) return;
+        container.textContent = '';
         if (!this.isBionic) {
-          return String(text)
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#39;');
+          container.textContent = String(text);
+          return;
         }
-        return String(text).split(/(\s+)/).map(token => {
-          if (!token || /^\s+$/.test(token)) return token;
-          if (/^[^\w\u00C0-\u024F\u1400-\u167F\u13A0-\u13FF\u1BC00-\u1BC9F]+$/.test(token)) {
-            return token
-              .replace(/&/g, '&amp;')
-              .replace(/</g, '&lt;')
-              .replace(/>/g, '&gt;')
-              .replace(/"/g, '&quot;')
-              .replace(/'/g, '&#39;');
+        const tokens = String(text).split(/(\s+)/);
+        for (const token of tokens) {
+          if (!token) continue;
+          if (/^\s+$/.test(token)) {
+            container.appendChild(document.createTextNode(token));
+            continue;
           }
           const match = token.match(/^([^\w\u00C0-\u024F\u1400-\u167F\u13A0-\u13FF\u1BC00-\u1BC9F]*)([\w\u00C0-\u024F\u1400-\u167F\u13A0-\u13FF\u1BC00-\u1BC9F]+)([^\w\u00C0-\u024F\u1400-\u167F\u13A0-\u13FF\u1BC00-\u1BC9F]*)$/u);
           if (!match) {
-            return token
-              .replace(/&/g, '&amp;')
-              .replace(/</g, '&lt;')
-              .replace(/>/g, '&gt;')
-              .replace(/"/g, '&quot;')
-              .replace(/'/g, '&#39;');
+            container.appendChild(document.createTextNode(token));
+            continue;
           }
           const [, lead, core, trail] = match;
-          const escLead = lead.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-          const escTrail = trail.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          if (lead) container.appendChild(document.createTextNode(lead));
           
-          if (core.length <= 3) {
-            return `${escLead}<span class="bionic-anchor">${core}</span>${escTrail}`;
+          const mid = core.length <= 3 ? core.length : Math.ceil(core.length * 0.45);
+          const anchorSpan = document.createElement('span');
+          anchorSpan.className = 'bionic-anchor';
+          anchorSpan.textContent = core.slice(0, mid);
+          container.appendChild(anchorSpan);
+          if (mid < core.length) {
+            container.appendChild(document.createTextNode(core.slice(mid)));
           }
-          const mid = Math.ceil(core.length * 0.45);
-          return `${escLead}<span class="bionic-anchor">${core.slice(0, mid)}</span>${core.slice(mid)}${escTrail}`;
-        }).join("");
+          if (trail) container.appendChild(document.createTextNode(trail));
+        }
       }
 
       nextMovement() {
@@ -1550,8 +1544,8 @@
         if (!this.isSovereignProtocol) {
           this.actTag.innerText = m.act;
         }
-        this.heroText.innerHTML = this.formatBionic(m.headline);
-        this.subText.innerHTML = this.formatBionic(m.subtext);
+        this.renderBionic(this.heroText, m.headline);
+        this.renderBionic(this.subText, m.subtext);
       }
 
       updateHeroFilters() {
@@ -2055,7 +2049,7 @@
       if (input.trim()) {
         cinema.isCustomText = true;
         document.getElementById("actTag").innerText = "Interactive Custom Projection";
-        document.getElementById("heroText").innerHTML = cinema.formatBionic(input);
+        cinema.renderBionic(document.getElementById("heroText"), input);
         document.getElementById("subText").innerText = "Custom user typography modulating through 0.1 Hz respiratory entrainment and OKLCH spectral flow.";
         toggleCustomDrawer();
       }

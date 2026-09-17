@@ -1543,7 +1543,8 @@
         {
           num: 1,
           badge: 'CHAPTER 01',
-          text: '<strong>Ground Your Breath:</strong> Check your pulse. Steady your breathing to 72 BPM before opening charts or emails.',
+          title: 'Ground Your Breath:',
+          desc: 'Check your pulse. Steady your breathing to 72 BPM before opening charts or emails.',
           time: 5.0,
           rotX: -10,
           rotY: 0
@@ -1551,7 +1552,8 @@
         {
           num: 2,
           badge: 'CHAPTER 02',
-          text: '<strong>Plant Your Seed:</strong> Choose a tittle variety to hold your daily intention for healthcare, ecology, or craft.',
+          title: 'Plant Your Seed:',
+          desc: 'Choose a tittle variety to hold your daily intention for healthcare, ecology, or craft.',
           time: 15.0,
           rotX: -90,
           rotY: 0
@@ -1559,7 +1561,8 @@
         {
           num: 3,
           badge: 'CHAPTER 03',
-          text: '<strong>Travel Lightly:</strong> Ephemeralization — cut 22% of ink mass and 34% of OLED battery draw to let the Earth breathe.',
+          title: 'Travel Lightly:',
+          desc: 'Ephemeralization — cut 22% of ink mass and 34% of OLED battery draw to let the Earth breathe.',
           time: 25.0,
           rotX: -10,
           rotY: -90
@@ -1567,7 +1570,8 @@
         {
           num: 4,
           badge: 'CHAPTER 04',
-          text: '<strong>Linguistic Dignity:</strong> Respect Unicode character integrity without forcing world writing systems into Roman molds.',
+          title: 'Linguistic Dignity:',
+          desc: 'Respect Unicode character integrity without forcing world writing systems into Roman molds.',
           time: 35.0,
           rotX: -10,
           rotY: 90
@@ -1575,7 +1579,8 @@
         {
           num: 5,
           badge: 'CHAPTER 05',
-          text: '<strong>Protect the Vulnerable:</strong> ISMP life-critical disambiguation. Slashed zero (0 vs O) eliminates fatal 10× prescription errors.',
+          title: 'Protect the Vulnerable:',
+          desc: 'ISMP life-critical disambiguation. Slashed zero (0 vs O) eliminates fatal 10× prescription errors.',
           time: 45.0,
           rotX: -10,
           rotY: 180
@@ -1583,7 +1588,8 @@
         {
           num: 6,
           badge: 'CHAPTER 06',
-          text: '<strong>Leave No One Behind:</strong> Full 256-glyph Unicode Braille matrix grounded on the baseline so all hands can read.',
+          title: 'Leave No One Behind:',
+          desc: 'Full 256-glyph Unicode Braille matrix grounded on the baseline so all hands can read.',
           time: 55.0,
           rotX: 90,
           rotY: 0
@@ -1662,14 +1668,22 @@
         activeChapterIdx = Math.max(0, Math.min(CHAPTERS.length - 1, idx));
         const ch = CHAPTERS[activeChapterIdx];
         directiveBadge.textContent = ch.badge;
-        directiveText.innerHTML = ch.text;
+        directiveText.textContent = '';
+        const dtStrong = document.createElement('strong');
+        dtStrong.textContent = ch.title;
+        directiveText.appendChild(dtStrong);
+        directiveText.appendChild(document.createTextNode(' ' + ch.desc));
         chapPills.forEach((p, i) => p.classList.toggle('active', i === activeChapterIdx));
 
         if (smoothRotate && !isUnfolded && !isDragging) {
           targetRotX = ch.rotX;
           targetRotY = ch.rotY;
         }
-        markerCaption.innerHTML = `<strong>${ch.badge}</strong> — ${ch.text.replace(/<[^>]*>?/gm, '')}`;
+        markerCaption.textContent = '';
+        const mcStrong = document.createElement('strong');
+        mcStrong.textContent = ch.badge;
+        markerCaption.appendChild(mcStrong);
+        markerCaption.appendChild(document.createTextNode(` — ${ch.title} ${ch.desc}`));
         if (fromUser) triggerHaptic(15);
       }
 

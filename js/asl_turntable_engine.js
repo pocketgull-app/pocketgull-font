@@ -539,7 +539,10 @@ class ASLTurntable {
   }
 
   setChar(char) {
-    this.currentChar = char.toUpperCase();
+    if (typeof char !== 'string') return;
+    const sanitized = char.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 4);
+    if (!sanitized) return;
+    this.currentChar = sanitized;
     this.updateKinematicsUI();
     this.drawTurntable();
   }
@@ -552,17 +555,24 @@ class ASLTurntable {
     if (!gimbal || !layerFront || !layerMid || !layerBack) return;
 
     // Fetch base SVG for character & current hand model
-    let svgRaw = '';
+    layerFront.textContent = '';
     if (typeof ASL_MORPH_DATA !== 'undefined' && ASL_MORPH_DATA[this.currentModel] && ASL_MORPH_DATA[this.currentModel][this.currentChar]) {
-      svgRaw = ASL_MORPH_DATA[this.currentModel][this.currentChar];
+      layerFront.innerHTML = ASL_MORPH_DATA[this.currentModel][this.currentChar];
     } else if (typeof ASL_SVG_DATA !== 'undefined' && ASL_SVG_DATA[this.currentChar]) {
-      svgRaw = ASL_SVG_DATA[this.currentChar];
+      layerFront.innerHTML = ASL_SVG_DATA[this.currentChar];
     } else {
-      svgRaw = `<svg viewBox="0 0 100 120"><text x="50" y="70" font-size="48" text-anchor="middle" fill="var(--cyan)">${this.currentChar}</text></svg>`;
+      const svgEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svgEl.setAttribute('viewBox', '0 0 100 120');
+      const textEl = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      textEl.setAttribute('x', '50');
+      textEl.setAttribute('y', '70');
+      textEl.setAttribute('font-size', '48');
+      textEl.setAttribute('text-anchor', 'middle');
+      textEl.setAttribute('fill', 'var(--cyan)');
+      textEl.textContent = this.currentChar;
+      svgEl.appendChild(textEl);
+      layerFront.appendChild(svgEl);
     }
-
-    // LAYER 1: Front Coronal Skin & Nails
-    layerFront.innerHTML = svgRaw;
 
     // LAYER 2: Core Osteological Skeleton & Kinematic Rings
     const kd = ASL_KINEMATICS_DATA[this.currentChar] || { mcp: 80, pip: 90, dip: 70 };

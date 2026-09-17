@@ -1301,28 +1301,53 @@
         card.className = 'hand-card';
         card.dataset.index = i;
 
-        let svgContent = '';
-        if (typeof ASL_MORPH_DATA !== 'undefined' && ASL_MORPH_DATA[currentHandModel] && ASL_MORPH_DATA[currentHandModel][char]) {
-          svgContent = ASL_MORPH_DATA[currentHandModel][char];
-        } else if (typeof ASL_SVG_DATA !== 'undefined' && ASL_SVG_DATA[char]) {
-          svgContent = ASL_SVG_DATA[char];
-        } else {
-          svgContent = `<div style="font-family: var(--font-sign); font-size: 52px; display: flex; align-items: center; justify-content: center; height: 100%;">${char}</div>`;
-        }
-
-        let modelBadge = '';
         if (currentHandModel !== 'sloan' && typeof FIVE_HAND_TYPES !== 'undefined' && FIVE_HAND_TYPES[currentHandModel]) {
           const m = FIVE_HAND_TYPES[currentHandModel];
-          modelBadge = `<div style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: ${m.color}; letter-spacing: 0.06em; margin-bottom: 3px;">${m.geometricArchetype.split('/')[0].trim()}</div>`;
+          const badge = document.createElement('div');
+          badge.style.fontSize = '0.65rem';
+          badge.style.fontWeight = '800';
+          badge.style.textTransform = 'uppercase';
+          badge.style.color = m.color;
+          badge.style.letterSpacing = '0.06em';
+          badge.style.marginBottom = '3px';
+          badge.textContent = m.geometricArchetype.split('/')[0].trim();
+          card.appendChild(badge);
         }
 
-        card.innerHTML = `
-          ${modelBadge}
-          <div class="hand-vector-wrap">${svgContent}</div>
-          <div class="hand-char-label">${char}</div>
-          <div class="hand-posture-desc">${data.desc}</div>
-          <div class="palm-tag">${data.palm}</div>
-        `;
+        const vectorWrap = document.createElement('div');
+        vectorWrap.className = 'hand-vector-wrap';
+        if (typeof ASL_MORPH_DATA !== 'undefined' && ASL_MORPH_DATA[currentHandModel] && ASL_MORPH_DATA[currentHandModel][char]) {
+          vectorWrap.innerHTML = ASL_MORPH_DATA[currentHandModel][char];
+        } else if (typeof ASL_SVG_DATA !== 'undefined' && ASL_SVG_DATA[char]) {
+          vectorWrap.innerHTML = ASL_SVG_DATA[char];
+        } else {
+          const fallbackDiv = document.createElement('div');
+          fallbackDiv.style.fontFamily = 'var(--font-sign)';
+          fallbackDiv.style.fontSize = '52px';
+          fallbackDiv.style.display = 'flex';
+          fallbackDiv.style.alignItems = 'center';
+          fallbackDiv.style.justifyContent = 'center';
+          fallbackDiv.style.height = '100%';
+          fallbackDiv.textContent = char;
+          vectorWrap.appendChild(fallbackDiv);
+        }
+        card.appendChild(vectorWrap);
+
+        const charLabel = document.createElement('div');
+        charLabel.className = 'hand-char-label';
+        charLabel.textContent = char;
+        card.appendChild(charLabel);
+
+        const postureDesc = document.createElement('div');
+        postureDesc.className = 'hand-posture-desc';
+        postureDesc.textContent = data.desc;
+        card.appendChild(postureDesc);
+
+        const palmTag = document.createElement('div');
+        palmTag.className = 'palm-tag';
+        palmTag.textContent = data.palm;
+        card.appendChild(palmTag);
+
         card.style.cursor = 'pointer';
         card.title = `Click to inspect '${char}' in 360° Turntable & ROM Inspector`;
         card.addEventListener('click', () => {
@@ -1348,24 +1373,48 @@
       compASL.textContent = text;
 
       // BSL comparative
-      let bslHtml = '';
+      compBSL.textContent = '';
+      let hasBsl = false;
       for (let i = 0; i < Math.min(text.length, 6); i++) {
         const ch = text[i];
         if (BSL_DATA[ch]) {
-          bslHtml += `<div style="margin-bottom: 6px;"><strong>${ch}:</strong> ${BSL_DATA[ch]}</div>`;
+          hasBsl = true;
+          const row = document.createElement('div');
+          row.style.marginBottom = '6px';
+          const strong = document.createElement('strong');
+          strong.textContent = ch + ': ';
+          row.appendChild(strong);
+          row.appendChild(document.createTextNode(BSL_DATA[ch]));
+          compBSL.appendChild(row);
         }
       }
-      compBSL.innerHTML = bslHtml || '<em>Enter text to view BSL two-handed letter mechanics.</em>';
+      if (!hasBsl) {
+        const em = document.createElement('em');
+        em.textContent = 'Enter text to view BSL two-handed letter mechanics.';
+        compBSL.appendChild(em);
+      }
 
       // JSL comparative
-      let jslHtml = '';
+      compJSL.textContent = '';
+      let hasJsl = false;
       for (let i = 0; i < Math.min(text.length, 5); i++) {
         const ch = text[i];
         if (JSL_DATA[ch]) {
-          jslHtml += `<div style="margin-bottom: 6px;"><strong>${ch}:</strong> ${JSL_DATA[ch]}</div>`;
+          hasJsl = true;
+          const row = document.createElement('div');
+          row.style.marginBottom = '6px';
+          const strong = document.createElement('strong');
+          strong.textContent = ch + ': ';
+          row.appendChild(strong);
+          row.appendChild(document.createTextNode(JSL_DATA[ch]));
+          compJSL.appendChild(row);
         }
       }
-      compJSL.innerHTML = jslHtml || '<em>Yubimoji syllabary mappings active for Japanese Kana transliterations.</em>';
+      if (!hasJsl) {
+        const em = document.createElement('em');
+        em.textContent = 'Yubimoji syllabary mappings active for Japanese Kana transliterations.';
+        compJSL.appendChild(em);
+      }
     }
 
     // ---------------------------------------------------------------------------
@@ -1813,7 +1862,10 @@ ${comments}
       }
       const charParam = urlParams.get('char');
       if (charParam && typeof GLOBAL_TURNTABLE !== 'undefined' && GLOBAL_TURNTABLE) {
-        GLOBAL_TURNTABLE.setChar(charParam.toUpperCase());
+        const safeChar = charParam.replace(/[^A-Za-z0-9]/g, '').slice(0, 4);
+        if (safeChar) {
+          GLOBAL_TURNTABLE.setChar(safeChar.toUpperCase());
+        }
       }
     }
     nextQuizQuestion();

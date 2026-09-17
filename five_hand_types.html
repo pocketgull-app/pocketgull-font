@@ -1090,12 +1090,17 @@
         // Update ASL Practice Studio Deep Links
         const btnPracticeInStudio = document.getElementById('btnPracticeInStudio');
         if (btnPracticeInStudio) {
-          btnPracticeInStudio.href = `asl_studio.html?model=${currentType}`;
-          btnPracticeInStudio.innerHTML = `<span>🤟</span> Practice Fingerspelling with this ${data.name} in ASL Studio &rarr;`;
+          const safeType = encodeURIComponent(currentType);
+          btnPracticeInStudio.href = `asl_studio.html?model=${safeType}`;
+          btnPracticeInStudio.textContent = '';
+          const iconSpan = document.createElement('span');
+          iconSpan.textContent = '🤟 ';
+          btnPracticeInStudio.appendChild(iconSpan);
+          btnPracticeInStudio.appendChild(document.createTextNode(`Practice Fingerspelling with this ${data.name} in ASL Studio →`));
         }
         const btnTurntablePractice = document.getElementById('btnTurntablePractice');
         if (btnTurntablePractice) {
-          btnTurntablePractice.href = `asl_studio.html?model=${currentType}`;
+          btnTurntablePractice.href = `asl_studio.html?model=${encodeURIComponent(currentType)}`;
         }
 
         // Sync 3D Volumetric Turntable Model
