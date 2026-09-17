@@ -1978,6 +1978,16 @@
           <span style="font-size: 12px; font-weight: 700; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.05em;">Interactive Specimen</span>
           <span id="vf-playground-readout" style="font-family: 'PocketGull Mono'; font-size: 11px; color: #34d399; background: rgba(52, 211, 153, 0.1); padding: 3px 8px; border-radius: 4px;">font-variation-settings: 'wght' 600, 'wdth' 100, 'slnt' 0, 'opsz' 36</span>
         </div>
+        <!-- Quick Domain Sample Text Chips -->
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; align-items: center;">
+          <span style="font-size: 11px; color: var(--text-muted); font-family: 'PocketGull Mono'; margin-right: 4px;">Quick Insert:</span>
+          <button type="button" class="vf-chip" onclick="setVfSample('braille')" style="font-family: 'PocketGull VF', 'PocketGull', system-ui, sans-serif; font-size: 11px; font-weight: 700; padding: 4px 10px; background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.4); color: #c084fc; border-radius: 6px; cursor: pointer;">⠁⠃⠉ Tactile Braille</button>
+          <button type="button" class="vf-chip" onclick="setVfSample('hearts')" style="font-family: 'PocketGull VF', 'PocketGull', system-ui, sans-serif; font-size: 11px; font-weight: 700; padding: 4px 10px; background: rgba(251, 113, 133, 0.15); border: 1px solid rgba(251, 113, 133, 0.4); color: #fb7185; border-radius: 6px; cursor: pointer;">💖 Philocardia Hearts</button>
+          <button type="button" class="vf-chip" onclick="setVfSample('ismp')" style="font-family: 'PocketGull VF', 'PocketGull', system-ui, sans-serif; font-size: 11px; font-weight: 700; padding: 4px 10px; background: rgba(6, 182, 212, 0.15); border: 1px solid rgba(6, 182, 212, 0.4); color: var(--cyan); border-radius: 6px; cursor: pointer;">0̸ Slashed Zero &amp; Dosage</button>
+          <button type="button" class="vf-chip" onclick="setVfSample('sloan')" style="font-family: 'PocketGull VF', 'PocketGull', system-ui, sans-serif; font-size: 11px; font-weight: 700; padding: 4px 10px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: var(--emerald); border-radius: 6px; cursor: pointer;">👁️ Sloan 5:1 Acuity</button>
+          <button type="button" class="vf-chip" onclick="setVfSample('inuktitut')" style="font-family: 'PocketGull VF', 'PocketGull', system-ui, sans-serif; font-size: 11px; font-weight: 700; padding: 4px 10px; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8; border-radius: 6px; cursor: pointer;">ᐃ Inuktitut Syllabics</button>
+          <button type="button" class="vf-chip" onclick="setVfSample('arabic')" style="font-family: 'PocketGull VF', 'PocketGull', system-ui, sans-serif; font-size: 11px; font-weight: 700; padding: 4px 10px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); color: var(--amber); border-radius: 6px; cursor: pointer;">نقطة Arabic Nuqta</button>
+        </div>
         <div id="vf-playground-text" contenteditable="true" spellcheck="false" style="font-family: 'PocketGull VF'; font-size: 36px; line-height: 1.3; color: var(--sample-text); font-variation-settings: 'wght' 600, 'wdth' 100, 'slnt' 0, 'opsz' 36; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 8px; border: 1px dashed var(--card-border); outline: none; min-height: 80px; text-align: left;">
           Vitals Restored: Peaceful Sinus Rhythm 72 bpm • Amoxicillin 500 mg Completed • BP 120/80 mmHg
         </div>
@@ -3964,6 +3974,9 @@
         let wghtVal = 400;
         let wdthVal = 100;
         let slntVal = 0;
+        let boumVal = 0;
+        let hlngVal = 0;
+        let smrnVal = 0;
 
         axes.forEach(a => {
           const slider = document.getElementById(a.el);
@@ -3976,6 +3989,9 @@
             if (a.id === 'wght') wghtVal = num;
             if (a.id === 'wdth') wdthVal = num;
             if (a.id === 'slnt') slntVal = num;
+            if (a.id === 'BOUM') boumVal = num;
+            if (a.id === 'HLNG') hlngVal = num;
+            if (a.id === 'SMRN') smrnVal = num;
           }
         });
 
@@ -3986,7 +4002,18 @@
         vfText.style.fontStretch = wdthVal + '%';
         vfText.style.fontStyle = slntVal === 0 ? 'normal' : `oblique ${Math.abs(slntVal)}deg`;
         vfText.style.fontSize = Math.min(Math.max(opszVal, 16), 48) + 'px';
-        
+
+        if (boumVal > 0) {
+          vfText.style.letterSpacing = (boumVal * 0.08) + 'em';
+        } else {
+          vfText.style.letterSpacing = 'normal';
+        }
+
+        const feats = [];
+        if (smrnVal >= 0.5) feats.push('"zero" 1', '"cv08" 1', '"cv05" 1', '"cv11" 1', '"ss02" 1');
+        if (hlngVal >= 0.5) feats.push('"ss07" 1', '"cv09" 1');
+        vfText.style.fontFeatureSettings = feats.join(', ');
+
         if (readout) {
           readout.innerHTML = `Active 16-Axis Engine: <strong style="color: var(--cyan);">${parts.slice(0, 4).join(', ')}</strong> | <span style="color: #34d399;">${parts.slice(4, 9).join(', ')}</span><br><code style="font-size: 10px; color: var(--text-muted);">font-variation-settings: ${fvs}</code>`;
         }
@@ -4011,25 +4038,76 @@
         }
       });
 
-      // Presets across 16 Axes
+      // Presets across 16 Axes with Domain Sample Text
       const presets = {
-        healing:      { wght: 500, wdth: 100, slnt: 0, opsz: 36, SOFT: 0.2, HLNG: 1.0, APTR: 0.8, SMRN: 0.5, THRM: 0, BION: 0, GRAV: 0, BOUM: 0.6, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
-        heading_home: { wght: 400, wdth: 100, slnt: 0, opsz: 32, SOFT: 0.3, HLNG: 1.0, APTR: 0.6, SMRN: 0.4, THRM: 0, BION: 0, GRAV: 0, BOUM: 0.5, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
-        philocardia:  { wght: 500, wdth: 100, slnt: 0, opsz: 36, SOFT: 0.4, HLNG: 1.0, APTR: 0.8, SMRN: 0.8, THRM: 0, BION: 0, GRAV: 0, BOUM: 0.6, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
-        hairline:     { wght: 100, wdth: 100, slnt: 0, opsz: 36, SOFT: 0,   HLNG: 0,   APTR: 0,   SMRN: 0,   THRM: 0, BION: 0, GRAV: 0, BOUM: 0,   CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
-        thin:         { wght: 200, wdth: 100, slnt: 0, opsz: 36, SOFT: 0,   HLNG: 0,   APTR: 0,   SMRN: 0,   THRM: 0, BION: 0, GRAV: 0, BOUM: 0,   CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
-        fineliner:    { wght: 400, wdth: 100, slnt: 0, opsz: 36, SOFT: 0,   HLNG: 0,   APTR: 0,   SMRN: 0,   THRM: 0, BION: 0, GRAV: 0, BOUM: 0,   CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
-        regular:      { wght: 500, wdth: 100, slnt: 0, opsz: 36, SOFT: 0,   HLNG: 0,   APTR: 0,   SMRN: 0,   THRM: 0, BION: 0, GRAV: 0, BOUM: 0,   CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
-        bold:         { wght: 700, wdth: 100, slnt: 0, opsz: 36, SOFT: 0,   HLNG: 0,   APTR: 0,   SMRN: 0,   THRM: 0, BION: 0, GRAV: 0, BOUM: 0,   CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
-        chiseltip:    { wght: 900, wdth: 100, slnt: 0, opsz: 48, SOFT: 0,   HLNG: 0,   APTR: 0,   SMRN: 0,   THRM: 0, BION: 0, GRAV: 0, BOUM: 0,   CHIS: 45,NUQT: 0, INUK: 0, BRLS: 78 },
-        soft_regular: { wght: 400, wdth: 100, slnt: 0, opsz: 36, SOFT: 1.0, HLNG: 0.3, APTR: 0.5, SMRN: 0,   THRM: 0, BION: 0, GRAV: 0, BOUM: 0.2, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
-        soft_bold:    { wght: 700, wdth: 100, slnt: 0, opsz: 36, SOFT: 1.0, HLNG: 0.3, APTR: 0.5, SMRN: 0,   THRM: 0, BION: 0, GRAV: 0, BOUM: 0.2, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
-        soft_black:   { wght: 900, wdth: 100, slnt: 0, opsz: 48, SOFT: 1.0, HLNG: 0.3, APTR: 0.5, SMRN: 0,   THRM: 0, BION: 0, GRAV: 0, BOUM: 0.2, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
-        aperture:     { wght: 600, wdth: 100, slnt: 0, opsz: 36, SOFT: 0,   HLNG: 0.5, APTR: 1.0, SMRN: 1.0, THRM: 0, BION: 0, GRAV: 0, BOUM: 0.5, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
-        gravity:      { wght: 550, wdth: 100, slnt: 0, opsz: 36, SOFT: 0,   HLNG: 0,   APTR: 0,   SMRN: 0,   THRM: 0, BION: 0, GRAV: 1.0, BOUM: 0.8,CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
-        bionic:       { wght: 600, wdth: 100, slnt: 0, opsz: 36, SOFT: 0,   HLNG: 0,   APTR: 0,   SMRN: 0,   THRM: 0, BION: 1.0,GRAV: 0, BOUM: 0.5, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
-        thermal:      { wght: 700, wdth: 100, slnt: 0, opsz: 14, SOFT: 0,   HLNG: 0,   APTR: 1.0, SMRN: 1.0, THRM: 1.0,BION: 0, GRAV: 0, BOUM: 0,   CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
-        braille:      { wght: 700, wdth: 100, slnt: 0, opsz: 36, SOFT: 0,   HLNG: 0,   APTR: 1.0, SMRN: 0,   THRM: 0, BION: 0, GRAV: 0, BOUM: 0,   CHIS: 0, NUQT: 0, INUK: 0, BRLS: 96 }
+        healing: {
+          axes: { wght: 500, wdth: 100, slnt: 0, opsz: 36, SOFT: 0.4, HLNG: 1.0, APTR: 0.8, SMRN: 0.5, THRM: 0, BION: 0, GRAV: 0, BOUM: 0.6, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
+          text: "Vitals Restored: Peaceful Sinus Rhythm 72 bpm • Amoxicillin 500 mg Completed • BP 120/80 mmHg"
+        },
+        heading_home: {
+          axes: { wght: 400, wdth: 100, slnt: 0, opsz: 32, SOFT: 0.3, HLNG: 1.0, APTR: 0.6, SMRN: 0.4, THRM: 0, BION: 0, GRAV: 0, BOUM: 0.5, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
+          text: "Discharge Confirmed: Recovery Complete • Heading Home Sanctuary • Cadence: 72 bpm"
+        },
+        philocardia: {
+          axes: { wght: 500, wdth: 100, slnt: 0, opsz: 36, SOFT: 0.4, HLNG: 1.0, APTR: 0.8, SMRN: 0.8, THRM: 0, BION: 0, GRAV: 0, BOUM: 0.6, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
+          text: "Clinical Care • Flight Sanctuary! Pediatric Healing (Lovingkindness & Hearts for i's)"
+        },
+        hairline: {
+          axes: { wght: 100, wdth: 100, slnt: 0, opsz: 36, SOFT: 0, HLNG: 0, APTR: 0, SMRN: 0, THRM: 0, BION: 0, GRAV: 0, BOUM: 0, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
+          text: "PocketGull Hairline 100: Delicate Display Titling & Architectural Drafting"
+        },
+        thin: {
+          axes: { wght: 200, wdth: 100, slnt: 0, opsz: 36, SOFT: 0, HLNG: 0, APTR: 0, SMRN: 0, THRM: 0, BION: 0, GRAV: 0, BOUM: 0, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
+          text: "PocketGull Thin 200: Elegant Humanist Proportions & Editorial Air"
+        },
+        fineliner: {
+          axes: { wght: 400, wdth: 100, slnt: 0, opsz: 36, SOFT: 0, HLNG: 0, APTR: 0, SMRN: 0, THRM: 0, BION: 0, GRAV: 0, BOUM: 0, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
+          text: "PocketGull Fineliner 400: Clear EHR Clinical Notes & Long-Form Reading"
+        },
+        regular: {
+          axes: { wght: 500, wdth: 100, slnt: 0, opsz: 36, SOFT: 0, HLNG: 0, APTR: 0, SMRN: 0, THRM: 0, BION: 0, GRAV: 0, BOUM: 0, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
+          text: "PocketGull Regular 500: Universal Humanist Balance & Optimal Optical Rhythm"
+        },
+        bold: {
+          axes: { wght: 700, wdth: 100, slnt: 0, opsz: 36, SOFT: 0, HLNG: 0, APTR: 0, SMRN: 0, THRM: 0, BION: 0, GRAV: 0, BOUM: 0, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
+          text: "PocketGull Bold 700: High-Acuity Clinical Alarms & Emergency Resuscitation"
+        },
+        chiseltip: {
+          axes: { wght: 900, wdth: 100, slnt: 0, opsz: 48, SOFT: 0, HLNG: 0, APTR: 0, SMRN: 0, THRM: 0, BION: 0, GRAV: 0, BOUM: 0, CHIS: 45, NUQT: 0, INUK: 0, BRLS: 78 },
+          text: "SANCTUARY OF RENEWAL • CHISELTIP 900 CALLIGRAPHIC PLACARD"
+        },
+        soft_regular: {
+          axes: { wght: 400, wdth: 100, slnt: 0, opsz: 36, SOFT: 1.0, HLNG: 0.3, APTR: 0.5, SMRN: 0, THRM: 0, BION: 0, GRAV: 0, BOUM: 0.2, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
+          text: "PocketGull Soft 400: Rounded Felt Cushion Terminals De-Escalate Patient Anxiety"
+        },
+        soft_bold: {
+          axes: { wght: 700, wdth: 100, slnt: 0, opsz: 36, SOFT: 1.0, HLNG: 0.3, APTR: 0.5, SMRN: 0, THRM: 0, BION: 0, GRAV: 0, BOUM: 0.2, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
+          text: "STAT Pediatric Protocol: Gentle Rounded Stroke Terminals Confirm Care"
+        },
+        soft_black: {
+          axes: { wght: 900, wdth: 100, slnt: 0, opsz: 48, SOFT: 1.0, HLNG: 0.3, APTR: 0.5, SMRN: 0, THRM: 0, BION: 0, GRAV: 0, BOUM: 0.2, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
+          text: "HEALING WARMTH • MAXIMUM FELT CUSHION BLACK 900"
+        },
+        aperture: {
+          axes: { wght: 600, wdth: 100, slnt: 0, opsz: 36, SOFT: 0, HLNG: 0.5, APTR: 1.0, SMRN: 1.0, THRM: 0, BION: 0, GRAV: 0, BOUM: 0.5, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
+          text: "Louise Sloan 5:1 Acuity: C D E F L O P T Z • Wide Apertures Prevent Ink Clotting"
+        },
+        gravity: {
+          axes: { wght: 550, wdth: 100, slnt: 0, opsz: 36, SOFT: 0, HLNG: 0, APTR: 0, SMRN: 0, THRM: 0, BION: 0, GRAV: 1.0, BOUM: 0.8, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
+          text: "Dyslexia Gravity Anchor: Weighted Baselines Anchor Letters Against Visual Flipping"
+        },
+        bionic: {
+          axes: { wght: 600, wdth: 100, slnt: 0, opsz: 36, SOFT: 0, HLNG: 0, APTR: 0, SMRN: 0, THRM: 0, BION: 1.0, GRAV: 0, BOUM: 0.5, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
+          text: "Epi·neph·rine 10·mcg • Vit·als Res·tored • Saccadic Fixation Guidance"
+        },
+        thermal: {
+          axes: { wght: 700, wdth: 100, slnt: 0, opsz: 14, SOFT: 0, HLNG: 0, APTR: 1.0, SMRN: 1.0, THRM: 1.0, BION: 0, GRAV: 0, BOUM: 0, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
+          text: "RX #9842-01 STAT • CEFAZOLIN 2G IV • 203 DPI THERMAL LABEL INSET PROTOCOL"
+        },
+        braille: {
+          axes: { wght: 700, wdth: 100, slnt: 0, opsz: 36, SOFT: 0, HLNG: 0, APTR: 1.0, SMRN: 0, THRM: 0, BION: 0, GRAV: 0, BOUM: 0, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 96 },
+          text: "⠁⠍⠕⠭⠊⠉⠊⠇⠇⠊⠝⠀⠼⠑⠚⠚⠀⠍⠛⠀•⠀(Amoxicillin 500 mg • 72 bpm)"
+        }
       };
 
       document.querySelectorAll('#vfPresetControls .preset-pill').forEach(btn => {
@@ -4054,15 +4132,54 @@
             btn.style.color = 'var(--cyan)';
           }
 
-          axes.forEach(a => {
-            const slider = document.getElementById(a.el);
-            if (slider && p[a.id] !== undefined) {
-              slider.value = p[a.id];
-            }
-          });
+          if (p.axes) {
+            axes.forEach(a => {
+              const slider = document.getElementById(a.el);
+              if (slider && p.axes[a.id] !== undefined) {
+                slider.value = p.axes[a.id];
+              }
+            });
+          }
+          if (vfText && p.text) {
+            vfText.textContent = p.text;
+          }
           updateAllAxes();
         });
       });
+
+      // Quick Specimen Sample Inserter Helper
+      window.setVfSample = function(type) {
+        if (!vfText) return;
+        const samples = {
+          braille: "⠁⠍⠕⠭⠊⠉⠊⠇⠇⠊⠝⠀⠼⠑⠚⠚⠀⠍⠛⠀•⠀(Amoxicillin 500 mg • 72 bpm)",
+          hearts: "Clinical Care • Flight Sanctuary! Pediatric Healing (Lovingkindness & Hearts for i's)",
+          ismp: "Amoxicillin 500 mg • STAT 10 mcg • Morphine 0.5 mg • 0̸ vs O • l vs 1 • 2 vs Z",
+          sloan: "C D E F L O P T Z • 5:1 Louise Sloan Visual Acuity Ratio Standards",
+          inuktitut: "ᐃᓄᒃᑎᑐᑦ • Inuktitut Syllabics Apex Acuity Standards (Nunavut & Arctic Telehealth)",
+          arabic: "نقطة خط عربي • Arabic Nuqta Natural Calligraphic Pen Angle Footprint"
+        };
+        if (type === 'braille') {
+          const bBtn = document.querySelector('button[data-preset="braille"]');
+          if (bBtn) bBtn.click();
+        } else if (type === 'hearts') {
+          const pBtn = document.querySelector('button[data-preset="philocardia"]');
+          if (pBtn) pBtn.click();
+        } else if (type === 'ismp') {
+          const aBtn = document.querySelector('button[data-preset="aperture"]');
+          if (aBtn) aBtn.click();
+        } else if (type === 'inuktitut') {
+          const s = document.getElementById('slider-INUK');
+          if (s) { s.value = 1.0; }
+          updateAllAxes();
+        } else if (type === 'arabic') {
+          const s = document.getElementById('slider-NUQT');
+          if (s) { s.value = 1.0; }
+          updateAllAxes();
+        }
+        if (samples[type]) {
+          vfText.textContent = samples[type];
+        }
+      };
 
       // Robust Clipboard Helper with execCommand Fallback
       function copyText(text) {
