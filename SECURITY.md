@@ -98,5 +98,5 @@ To satisfy **Executive Order 14028** and **NIST SP 800-218 Secure Software Devel
 4. **SLSA Level 2+ Cryptographic Artifact Attestations**:
    Release packages (`pocketgull-font-*.zip` and `SHA256SUMS.txt`) are cryptographically attested at build time using GitHub's OIDC root of trust and Sigstore transparency logs (`actions/attest-build-provenance`), allowing downstream health IT consumers to verify build provenance via `gh attestation verify`.
 5. **OpenSSF Scorecard & CodeQL SAST**:
-   Repository security posture is monitored continuously via automated OpenSSF Scorecard audits and GitHub CodeQL static application security testing (`codeql.yml`).
+   Repository security posture is monitored continuously via automated OpenSSF Scorecard audits and GitHub CodeQL static application security testing (GitHub Default Setup).
 
