@@ -1,18 +1,18 @@
 {
   "daemon": "PocketGull Autonomous Biomedical Validator",
-  "status": "RUNNING",
-  "total_audited": 502500,
-  "uptime_seconds": 12118.8,
-  "audits_per_second": 41.46,
-  "mean_disambiguation_index": 78.36,
+  "status": "COMPLETED",
+  "total_audited": 1018500,
+  "uptime_seconds": 12435.5,
+  "audits_per_second": 81.9,
+  "mean_disambiguation_index": 77.32,
   "zero_tofu_rate_percent": 100.0,
   "anomalies_detected": 0,
   "last_audited": {
-    "category": "SOVEREIGN_SCRIPT",
-    "label": "[Neo-Tifinagh] \u2d4f \u2d53\u2d59\u2d3b\u2d33\u2d33\u2d3b\u2d3c \u2d5c\u2d30\u2d37\u2d53\u2d59\u2d49",
-    "metric": "Zero .notdef Tofu",
+    "category": "WHO_ESSENTIAL",
+    "label": "Artemether / Lumefantrine 20/120 mg oral",
+    "metric": "Antimalarial",
     "status": "PASS",
     "disambiguation": 100.0
   },
-  "last_heartbeat": "2026-09-09T00:42:10.182401"
+  "last_heartbeat": "2026-09-16T03:23:24.384146"
 }

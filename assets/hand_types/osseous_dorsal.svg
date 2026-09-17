@@ -1,0 +1,224 @@
+<svg viewBox="-100 0 680 520" class="hand-vector-svg" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="ossGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadowOss" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+    <filter id="badgeShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- LAYER 1: MASS SILHOUETTE -->
+  <g class="layer-mass">
+    <rect x="130" y="65" width="245" height="340" rx="4" fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.4"/>
+    <text x="245" y="38" text-anchor="middle" fill="#10b981" font-family="monospace" font-size="11" letter-spacing="1">GEOMETRIC ARCHETYPE: OBLONG / RECTANGLE</text>
+    <circle cx="245" cy="275" r="140" fill="url(#ossGlow)"/>
+  </g>
+
+  <!-- LAYER 2: UNDERLYING PRIMITIVES (Oblong Cylinders & Knotted Hinges) -->
+  <g class="layer-primitives" style="display: none;" stroke="#10b981" stroke-width="1.2" fill="#10b981" fill-opacity="0.08" stroke-dasharray="3 3">
+    <rect x="160" y="240" width="150" height="170"/>
+    <circle cx="160" cy="180" r="12"/>
+    <circle cx="160" cy="130" r="10"/>
+    <circle cx="215" cy="160" r="14"/>
+    <circle cx="215" cy="110" r="12"/>
+    <circle cx="275" cy="140" r="15"/>
+    <circle cx="275" cy="90" r="13"/>
+    <circle cx="335" cy="160" r="14"/>
+    <circle cx="335" cy="115" r="12"/>
+    <!-- Thumb Knuckle Knot & Cylinders -->
+    <circle cx="430" cy="315" r="16"/>
+    <circle cx="415" cy="245" r="13"/>
+  </g>
+
+  <!-- LAYER 3: RATIO & DIMENSION CALIPERS -->
+  <g class="layer-ratios caliper-guide" style="display: none;">
+      <line x1="140" y1="65" x2="80" y2="65" stroke="#10b981" stroke-width="1" stroke-dasharray="2 2" opacity="0.7"/>
+      <line x1="140" y1="235" x2="80" y2="235" stroke="#10b981" stroke-width="1" stroke-dasharray="2 2" opacity="0.7"/>
+      <line x1="90" y1="69" x2="90" y2="231" stroke="#10b981" stroke-width="1.5"/>
+      <polygon points="90,65 87,71 93,71" fill="#10b981"/>
+      <polygon points="90,235 87,229 93,229" fill="#10b981"/>
+      <rect x="45" y="136.0" width="90" height="26" rx="4" fill="#090d16" stroke="#10b981" stroke-width="1.2"/>
+      <text x="90" y="149.0" text-anchor="middle" fill="#10b981" font-family="system-ui" font-size="9.5" font-weight="bold">Digit III</text>
+      <text x="90" y="160.0" text-anchor="middle" fill="#cbd5e1" font-family="monospace" font-size="9">L = 170px</text>
+    </g>
+  <g class="layer-ratios caliper-guide" style="display: none;">
+      <line x1="140" y1="235" x2="80" y2="235" stroke="#10b981" stroke-width="1" stroke-dasharray="2 2" opacity="0.7"/>
+      <line x1="140" y1="450" x2="80" y2="450" stroke="#10b981" stroke-width="1" stroke-dasharray="2 2" opacity="0.7"/>
+      <line x1="90" y1="239" x2="90" y2="446" stroke="#10b981" stroke-width="1.5"/>
+      <polygon points="90,235 87,241 93,241" fill="#10b981"/>
+      <polygon points="90,450 87,444 93,444" fill="#10b981"/>
+      <rect x="45" y="328.5" width="90" height="26" rx="4" fill="#090d16" stroke="#10b981" stroke-width="1.2"/>
+      <text x="90" y="341.5" text-anchor="middle" fill="#10b981" font-family="system-ui" font-size="9.5" font-weight="bold">Palm Height</text>
+      <text x="90" y="352.5" text-anchor="middle" fill="#cbd5e1" font-family="monospace" font-size="9">H = 215px</text>
+    </g>
+  <g class="layer-ratios caliper-guide" style="display: none;">
+    <line x1="160" y1="450" x2="298" y2="450" stroke="#10b981" stroke-width="1.5"/>
+    <rect x="200" y="458" width="80" height="20" rx="3" fill="#090d16" stroke="#10b981" stroke-width="1"/>
+    <text x="240" y="472" text-anchor="middle" fill="#10b981" font-family="monospace" font-size="9">Wrist: 138px (0.85:1)</text>
+    <rect x="420" y="190" width="135" height="32" rx="4" fill="#090d16" stroke="#10b981" stroke-width="1.2"/>
+    <text x="487" y="204" text-anchor="middle" fill="#10b981" font-family="system-ui" font-size="9.5" font-weight="bold">PALM : FINGER RATIO</text>
+    <text x="487" y="216" text-anchor="middle" fill="#cbd5e1" font-family="monospace" font-size="9">1.00 : 1.08 (Elongated)</text>
+  </g>
+
+  <!-- LAYER 4: SLOAN 5x5 OPTOTYPE GRID -->
+  <g class="layer-sloan" style="display: none;">
+<line x1="77.5" y1="97.5" x2="77.5" y2="422.5" stroke="#38bdf8" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.35"/>
+<line x1="77.5" y1="97.5" x2="402.5" y2="97.5" stroke="#38bdf8" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.35"/>
+<line x1="142.5" y1="97.5" x2="142.5" y2="422.5" stroke="#38bdf8" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.35"/>
+<line x1="77.5" y1="162.5" x2="402.5" y2="162.5" stroke="#38bdf8" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.35"/>
+<line x1="207.5" y1="97.5" x2="207.5" y2="422.5" stroke="#38bdf8" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.35"/>
+<line x1="77.5" y1="227.5" x2="402.5" y2="227.5" stroke="#38bdf8" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.35"/>
+<line x1="272.5" y1="97.5" x2="272.5" y2="422.5" stroke="#38bdf8" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.35"/>
+<line x1="77.5" y1="292.5" x2="402.5" y2="292.5" stroke="#38bdf8" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.35"/>
+<line x1="337.5" y1="97.5" x2="337.5" y2="422.5" stroke="#38bdf8" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.35"/>
+<line x1="77.5" y1="357.5" x2="402.5" y2="357.5" stroke="#38bdf8" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.35"/>
+<line x1="402.5" y1="97.5" x2="402.5" y2="422.5" stroke="#38bdf8" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.35"/>
+<line x1="77.5" y1="422.5" x2="402.5" y2="422.5" stroke="#38bdf8" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.35"/>
+<rect x="77.5" y="75.5" width="165" height="18" rx="4" fill="#090d16" stroke="#38bdf8" stroke-width="1" opacity="0.8"/>
+<text x="83.5" y="88.5" fill="#38bdf8" font-family="monospace" font-size="10" font-weight="bold">SLOAN 5×5 OPTOTYPE GRID (1U=65px)</text>
+</g>
+
+  <!-- LAYER 5: MAIN HAND CONTOUR (Anatomical Left Hand Dorsal with Upward Knotty Thumb) -->
+  <g class="layer-contour">
+    <path d="M 160 450
+             C 145 442, 138 435, 146 418
+             C 150 385, 142 335, 148 275
+             C 138 250, 134 215, 142 188
+             C 136 172, 136 155, 146 132
+             C 156 118, 172 118, 180 132
+             C 188 155, 184 172, 178 188
+             C 186 215, 180 250, 186 270
+             C 192 245, 186 195, 196 162
+             C 188 144, 185 120, 198 96
+             C 208 80, 228 80, 238 96
+             C 250 120, 246 144, 238 162
+             C 248 195, 242 245, 246 268
+             C 252 235, 246 185, 258 145
+             C 250 128, 248 98, 262 72
+             C 272 58, 294 58, 304 72
+             C 316 98, 314 128, 306 145
+             C 316 185, 310 235, 314 268
+             C 320 240, 316 200, 326 170
+             C 320 152, 318 132, 330 110
+             C 340 96, 358 98, 366 112
+             C 374 132, 370 152, 362 170
+             C 370 200, 364 240, 358 272
+             C 352 288, 364 298, 378 288
+             C 390 276, 404 256, 416 240
+             C 426 226, 440 234, 436 250
+             C 430 275, 442 308, 432 328
+             C 420 348, 402 370, 375 395
+             C 352 418, 330 435, 298 450
+             Z"
+          fill="#1e293b" stroke="#10b981" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" filter="url(#shadowOss)"/>
+  </g>
+
+  <!-- LAYER 6: DETAILS (Knotty Joints, Oblong Nails, Upward Thumb Knot) -->
+  <g class="layer-details">
+    <path d="M 370 335 C 390 305, 405 275, 418 248" fill="none" stroke="#10b981" stroke-width="2" opacity="0.6"/>
+    <circle cx="430" cy="315" r="7" fill="#10b981" opacity="0.5"/>
+    <g transform="rotate(35, 424, 242)" class="nail-plate">
+          <rect x="416.0" y="232.0" width="16" height="20" rx="2"
+                fill="#10b981" fill-opacity="0.32" stroke="#10b981" stroke-width="1.9"/>
+          <line x1="415.0" y1="252.0" x2="433.0" y2="252.0"
+                stroke="#10b981" stroke-width="1.5" opacity="0.85"/>
+          <path d="M 418.6666666666667 252.0 Q 424 248.66666666666666 429.3333333333333 252.0"
+                fill="#10b981" fill-opacity="0.45"/>
+        </g>
+
+    <!-- Oblong Nails (Pinky, Ring, Middle, Index) -->
+    <g  class="nail-plate">
+          <rect x="155.5" y="118.0" width="13" height="16" rx="2"
+                fill="#10b981" fill-opacity="0.32" stroke="#10b981" stroke-width="1.9"/>
+          <line x1="154.5" y1="134.0" x2="169.5" y2="134.0"
+                stroke="#10b981" stroke-width="1.5" opacity="0.85"/>
+          <path d="M 157.66666666666666 134.0 Q 162 131.33333333333334 166.33333333333334 134.0"
+                fill="#10b981" fill-opacity="0.45"/>
+        </g>
+    <g  class="nail-plate">
+          <rect x="210.0" y="80.5" width="16" height="19" rx="2"
+                fill="#10b981" fill-opacity="0.32" stroke="#10b981" stroke-width="1.9"/>
+          <line x1="209.0" y1="99.5" x2="227.0" y2="99.5"
+                stroke="#10b981" stroke-width="1.5" opacity="0.85"/>
+          <path d="M 212.66666666666666 99.5 Q 218 96.33333333333333 223.33333333333334 99.5"
+                fill="#10b981" fill-opacity="0.45"/>
+        </g>
+    <g  class="nail-plate">
+          <rect x="274.5" y="55.5" width="17" height="21" rx="2"
+                fill="#10b981" fill-opacity="0.32" stroke="#10b981" stroke-width="1.9"/>
+          <line x1="273.5" y1="76.5" x2="292.5" y2="76.5"
+                stroke="#10b981" stroke-width="1.5" opacity="0.85"/>
+          <path d="M 277.3333333333333 76.5 Q 283 73.0 288.6666666666667 76.5"
+                fill="#10b981" fill-opacity="0.45"/>
+        </g>
+    <g  class="nail-plate">
+          <rect x="340.5" y="95.0" width="15" height="18" rx="2"
+                fill="#10b981" fill-opacity="0.32" stroke="#10b981" stroke-width="1.9"/>
+          <line x1="339.5" y1="113.0" x2="356.5" y2="113.0"
+                stroke="#10b981" stroke-width="1.5" opacity="0.85"/>
+          <path d="M 343.0 113.0 Q 348 110.0 353.0 113.0"
+                fill="#10b981" fill-opacity="0.45"/>
+        </g>
+
+    <!-- Bulging Interphalangeal Knots -->
+    <g fill="#10b981">
+      <ellipse cx="160" cy="142" rx="10" ry="5.5" opacity="0.5"/>
+      <ellipse cx="216" cy="108" rx="12" ry="6" opacity="0.5"/>
+      <ellipse cx="282" cy="82" rx="13" ry="6.5" opacity="0.5"/>
+      <ellipse cx="346" cy="120" rx="11" ry="5.5" opacity="0.5"/>
+      <ellipse cx="160" cy="195" rx="12" ry="7" opacity="0.6"/>
+      <ellipse cx="216" cy="170" rx="13" ry="7.5" opacity="0.6"/>
+      <ellipse cx="282" cy="150" rx="14" ry="8" opacity="0.6"/>
+      <ellipse cx="346" cy="178" rx="13" ry="7.5" opacity="0.6"/>
+    </g>
+  </g>
+
+  <!-- LAYER 7: LATERAL JOINT INSET PROFILE -->
+  <g class="layer-inset" style="display: none;" transform="translate(420, 80)">
+    <rect x="-10" y="-10" width="135" height="140" rx="8" fill="#090d16" stroke="#10b981" stroke-width="1.4" filter="url(#badgeShadow)"/>
+    <text x="57" y="10" text-anchor="middle" fill="#10b981" font-family="system-ui" font-size="10" font-weight="bold">LATERAL CUTAWAY</text>
+    <text x="57" y="22" text-anchor="middle" fill="#94a3b8" font-family="system-ui" font-size="8.5">Knotty Joint Profile</text>
+    <rect x="52" y="32" width="10" height="75" rx="2" fill="#64748b" opacity="0.6"/>
+    <path d="M 44 32 C 32 45, 30 55, 40 68 C 30 80, 32 90, 44 105 L 70 105 C 82 90, 84 80, 74 68 C 84 55, 82 45, 70 32 Z"
+          fill="#10b981" fill-opacity="0.25" stroke="#10b981" stroke-width="1.8"/>
+    <ellipse cx="57" cy="68" rx="18" ry="7" fill="#10b981" opacity="0.4"/>
+    <line x1="26" y1="68" x2="40" y2="68" stroke="#10b981" stroke-width="1.2"/>
+    <text x="23" y="71" text-anchor="end" fill="#10b981" font-family="monospace" font-size="8">Bulging</text>
+    <text x="23" y="79" text-anchor="end" fill="#94a3b8" font-family="monospace" font-size="7.5">Knots</text>
+  </g>
+
+  <!-- LAYER 8: UNCLIPPED CALLOUT BADGES -->
+  <g class="layer-callouts callout-badge">
+      <polyline points="282,82 80,82 80,60" fill="none" stroke="#10b981" stroke-width="1.4" opacity="0.8"/>
+      <circle cx="282" cy="82" r="3" fill="#10b981"/>
+      <rect x="-90" y="48" width="170" height="28" rx="5" fill="#0b1120" stroke="#10b981" stroke-width="1.2" filter="url(#badgeShadow)"/>
+      <text x="72" y="60" text-anchor="end" fill="#10b981" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold">Knotty Knuckles</text>
+      <text x="72" y="71" text-anchor="end" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">Joints = widest points</text>
+    </g>
+  <g class="layer-callouts callout-badge">
+      <polyline points="162,126 45,126 45,120" fill="none" stroke="#10b981" stroke-width="1.4" opacity="0.8"/>
+      <circle cx="162" cy="126" r="3" fill="#10b981"/>
+      <rect x="-90" y="108" width="135" height="28" rx="5" fill="#0b1120" stroke="#10b981" stroke-width="1.2" filter="url(#badgeShadow)"/>
+      <text x="37" y="120" text-anchor="end" fill="#10b981" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold">Oblong Nails</text>
+      <text x="37" y="131" text-anchor="end" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">Flat gnarled beds</text>
+    </g>
+  <g class="layer-callouts callout-badge">
+      <polyline points="424,242 390,242 390,235" fill="none" stroke="#10b981" stroke-width="1.4" opacity="0.8"/>
+      <circle cx="424" cy="242" r="3" fill="#10b981"/>
+      <rect x="390" y="223" width="170" height="28" rx="5" fill="#0b1120" stroke="#10b981" stroke-width="1.2" filter="url(#badgeShadow)"/>
+      <text x="398" y="235" text-anchor="start" fill="#10b981" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold">Knotty Upward Thumb</text>
+      <text x="398" y="246" text-anchor="start" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">Bulging MCP joint knot</text>
+    </g>
+  <g class="layer-callouts callout-badge">
+      <polyline points="146,418 80,418 80,410" fill="none" stroke="#10b981" stroke-width="1.4" opacity="0.8"/>
+      <circle cx="146" cy="418" r="3" fill="#10b981"/>
+      <rect x="-90" y="398" width="170" height="28" rx="5" fill="#0b1120" stroke="#10b981" stroke-width="1.2" filter="url(#badgeShadow)"/>
+      <text x="72" y="410" text-anchor="end" fill="#10b981" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold">Styloid Process</text>
+      <text x="72" y="421" text-anchor="end" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">Prominent head of ulna</text>
+    </g>
+</svg>

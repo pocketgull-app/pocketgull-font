@@ -1,0 +1,1822 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PocketGull Global Sign &amp; ASL Practice Studio: Interactive American Sign Language, BSL two-handed, JSL Yubimoji, emergency signals, and community consultation workbench.">
+  <title>PocketGull · Global Sign &amp; ASL Practice Studio</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preload" href="fonts/woff2/PocketGull-Sign.woff2?v=3.3.0" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/woff2/PocketGull-ASL.woff2?v=3.3.0" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/woff2/PocketGull-Bold.woff2?v=3.3.0" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/woff2/PocketGull-Fineliner.woff2?v=3.3.0" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="fonts.css?v=3.3.0">
+  <style>
+    :root {
+      --bg: #070b12;
+      --card-bg: #0d1522;
+      --card-border: #1e293b;
+      --surface-inner: #090d16;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --cyan: #06b6d4;
+      --cyan-glow: rgba(6, 182, 212, 0.2);
+      --emerald: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.2);
+      --amber: #f59e0b;
+      --amber-glow: rgba(245, 158, 11, 0.2);
+      --rose: #fb7185;
+      --purple: #a855f7;
+      --indigo: #818cf8;
+      --nav-bg: rgba(7, 11, 18, 0.94);
+      --nav-border: rgba(30, 41, 59, 0.85);
+      --font-sign: 'PocketGull Sign', 'PocketGull ASL', monospace;
+      --font-sans: 'PocketGull', system-ui, -apple-system, sans-serif;
+    }
+
+    [data-theme="washi"] {
+      --bg: #f5f0e6;
+      --card-bg: #eae3d2;
+      --card-border: #d4c9b5;
+      --surface-inner: #fdfbf7;
+      --text-main: #1c1917;
+      --text-muted: #6b6357;
+      --cyan: #0d9488;
+      --cyan-glow: rgba(13, 148, 136, 0.15);
+      --emerald: #059669;
+      --emerald-glow: rgba(5, 150, 105, 0.15);
+      --amber: #b45309;
+      --amber-glow: rgba(180, 83, 9, 0.15);
+      --rose: #e11d48;
+      --purple: #7e22ce;
+      --indigo: #4338ca;
+      --nav-bg: rgba(245, 240, 230, 0.94);
+      --nav-border: rgba(212, 201, 181, 0.9);
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --surface-inner: #f1f5f9;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --cyan: #0284c7;
+      --cyan-glow: rgba(2, 132, 199, 0.15);
+      --emerald: #059669;
+      --emerald-glow: rgba(5, 150, 105, 0.15);
+      --amber: #d97706;
+      --amber-glow: rgba(217, 119, 6, 0.15);
+      --rose: #e11d48;
+      --purple: #7c3aed;
+      --indigo: #4f46e5;
+      --nav-bg: rgba(248, 250, 252, 0.94);
+      --nav-border: rgba(226, 232, 240, 0.9);
+    }
+
+    [data-theme="scotopic"] {
+      --bg: #050000;
+      --card-bg: #140202;
+      --card-border: #4d0505;
+      --surface-inner: #0a0101;
+      --text-main: #ff3322;
+      --text-muted: #b32417;
+      --cyan: #ff4433;
+      --cyan-glow: rgba(255, 68, 51, 0.25);
+      --emerald: #ff5544;
+      --emerald-glow: rgba(255, 85, 68, 0.25);
+      --amber: #ff6655;
+      --amber-glow: rgba(255, 102, 85, 0.25);
+      --rose: #ff2211;
+      --purple: #ff4433;
+      --indigo: #ff5544;
+      --nav-bg: rgba(5, 0, 0, 0.96);
+      --nav-border: #4d0505;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      line-height: 1.6;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      padding-bottom: 80px;
+    }
+
+    /* Top Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--nav-border);
+      padding: 0.85rem 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+    .brand-logo {
+      width: 34px;
+      height: 34px;
+      background: linear-gradient(135deg, var(--cyan), var(--indigo));
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+      color: #070b12;
+      box-shadow: 0 2px 8px var(--cyan-glow);
+    }
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .brand-sub {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.25);
+      padding: 2px 7px;
+      border-radius: 5px;
+      margin-left: 6px;
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .btn-nav {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 0.45rem 0.85rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-nav:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      transform: translateY(-1px);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* Hero */
+    .hero {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--cyan);
+      background: var(--cyan-glow);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--cyan), var(--indigo));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 800px;
+      margin: 0 auto 1.5rem auto;
+    }
+
+    /* System / Language Selector Tabs */
+    .system-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .system-tab {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+    .system-tab:hover {
+      border-color: var(--cyan);
+      color: var(--text-main);
+    }
+    .system-tab.active {
+      background: var(--surface-inner);
+      border-color: var(--cyan);
+      color: var(--cyan);
+      box-shadow: 0 0 14px var(--cyan-glow);
+    }
+
+    /* Main Studio Grid */
+    .studio-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    @media (max-width: 1024px) {
+      .studio-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Card Panels */
+    .panel {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .panel-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Controls Row */
+    .controls-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+      align-items: center;
+    }
+
+    /* Input Area */
+    .transcribe-input-box {
+      width: 100%;
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      font-family: var(--font-sans);
+      font-size: 1.15rem;
+      color: var(--text-main);
+      margin-bottom: 1rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .transcribe-input-box:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 10px var(--cyan-glow);
+    }
+
+    /* Quick Presets */
+    .preset-pills {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+    .preset-pill {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 0.3rem 0.65rem;
+      border-radius: 5px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .preset-pill:hover {
+      border-color: var(--cyan);
+      color: var(--text-main);
+    }
+
+    /* Translation Vector Display */
+    .hand-cards-container {
+      display: flex;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+      min-height: 240px;
+      padding: 1rem;
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      transition: transform 0.2s ease;
+    }
+    .hand-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 0.9rem 0.65rem 0.75rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 140px;
+      min-height: 248px;
+      position: relative;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+    .hand-card:hover {
+      border-color: var(--cyan);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px var(--cyan-glow);
+    }
+    .hand-card.active-playback {
+      border-color: var(--cyan);
+      box-shadow: 0 0 20px var(--cyan-glow);
+      transform: translateY(-4px);
+    }
+    .hand-vector-wrap {
+      width: 96px;
+      height: 112px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-main);
+      user-select: none;
+      transition: transform 0.2s ease;
+    }
+    .asl-hand-svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
+    }
+    .flip-left .hand-vector-wrap {
+      transform: scaleX(-1);
+    }
+    .view-expressive .hand-vector-wrap {
+      transform: rotate(5deg) scale(0.96);
+    }
+    .hand-char-label {
+      font-size: 1.55rem;
+      font-weight: 900;
+      margin-top: 6px;
+      color: var(--cyan);
+      letter-spacing: -0.02em;
+    }
+    .hand-posture-desc {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 1.3;
+      margin-top: 4px;
+      min-height: 2.6em;
+    }
+    .palm-tag {
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* Player Controls */
+    .player-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 0.65rem 1rem;
+      flex-wrap: wrap;
+    }
+    .player-buttons {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .player-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+    .player-btn:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+    .speed-slider-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* Side-by-Side Comparative Section */
+    .comparative-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .comp-column {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    .comp-col-header {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--cyan);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* "Is It Okay to Use?" Section & Form */
+    .permission-hero {
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08), rgba(129, 140, 248, 0.08));
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-top: 2.5rem;
+      margin-bottom: 2rem;
+    }
+    .permission-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .permission-title span {
+      color: var(--amber);
+    }
+    .permission-intro {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .advisor-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .advisor-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--cyan);
+      margin-bottom: 0.75rem;
+    }
+    .advisor-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .advisor-card {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .advisor-card:hover {
+      border-color: var(--cyan);
+    }
+    .advisor-card.selected {
+      border-color: var(--cyan);
+      background: rgba(6, 182, 212, 0.08);
+    }
+    .advisor-card-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .advisor-card-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .advisor-output {
+      padding: 0.85rem;
+      border-radius: 6px;
+      background: var(--surface-inner);
+      border-left: 4px solid var(--emerald);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+    .advisor-output.warning {
+      border-left-color: var(--amber);
+    }
+
+    /* Consultation Form */
+    .consult-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+    @media (max-width: 768px) {
+      .consult-form { grid-template-columns: 1fr; }
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+    .form-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .form-input, .form-select, .form-textarea {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.65rem 0.85rem;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      color: var(--text-main);
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--cyan);
+    }
+    .form-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+    .btn-submit {
+      background: linear-gradient(135deg, var(--cyan), var(--indigo));
+      color: #070b12;
+      border: none;
+      padding: 0.65rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px var(--cyan-glow);
+    }
+    .btn-secondary {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 0.65rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+    .btn-secondary:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    
+    /* Morphological Hand Model Overrides (Benedict 1921) */
+    .hand-cards-container.model-alimentive .hand-card {
+      border-color: rgba(245, 158, 11, 0.45);
+      background: rgba(245, 158, 11, 0.05);
+    }
+    .hand-cards-container.model-alimentive .hand-card:hover {
+      border-color: #f59e0b;
+      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.25);
+    }
+    .hand-cards-container.model-alimentive .hand-char-label {
+      color: #f59e0b;
+    }
+    .hand-cards-container.model-alimentive .hand-vector-wrap svg {
+      stroke: #f59e0b !important;
+      stroke-width: 3.2px !important;
+    }
+    .hand-cards-container.model-alimentive .palm-tag {
+      color: #f59e0b;
+      border-color: rgba(245, 158, 11, 0.4);
+      background: rgba(245, 158, 11, 0.12);
+    }
+
+    .hand-cards-container.model-thoracic .hand-card {
+      border-color: rgba(236, 72, 153, 0.45);
+      background: rgba(236, 72, 153, 0.05);
+    }
+    .hand-cards-container.model-thoracic .hand-card:hover {
+      border-color: #ec4899;
+      box-shadow: 0 4px 20px rgba(236, 72, 153, 0.25);
+    }
+    .hand-cards-container.model-thoracic .hand-char-label {
+      color: #ec4899;
+    }
+    .hand-cards-container.model-thoracic .hand-vector-wrap svg {
+      stroke: #ec4899 !important;
+      stroke-width: 2.2px !important;
+      transform: scale(0.96, 1.05);
+    }
+    .hand-cards-container.model-thoracic .palm-tag {
+      color: #ec4899;
+      border-color: rgba(236, 72, 153, 0.4);
+      background: rgba(236, 72, 153, 0.12);
+    }
+
+    .hand-cards-container.model-muscular .hand-card {
+      border-color: rgba(6, 182, 212, 0.55);
+      background: rgba(6, 182, 212, 0.06);
+    }
+    .hand-cards-container.model-muscular .hand-card:hover {
+      border-color: #06b6d4;
+      box-shadow: 0 4px 20px rgba(6, 182, 212, 0.25);
+    }
+    .hand-cards-container.model-muscular .hand-char-label {
+      color: #06b6d4;
+    }
+    .hand-cards-container.model-muscular .hand-vector-wrap svg {
+      stroke: #06b6d4 !important;
+      stroke-width: 3.0px !important;
+    }
+    .hand-cards-container.model-muscular .palm-tag {
+      color: #06b6d4;
+      border-color: rgba(6, 182, 212, 0.4);
+      background: rgba(6, 182, 212, 0.12);
+    }
+
+    .hand-cards-container.model-osseous .hand-card {
+      border-color: rgba(16, 185, 129, 0.45);
+      background: rgba(16, 185, 129, 0.05);
+    }
+    .hand-cards-container.model-osseous .hand-card:hover {
+      border-color: #10b981;
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.25);
+    }
+    .hand-cards-container.model-osseous .hand-char-label {
+      color: #10b981;
+    }
+    .hand-cards-container.model-osseous .hand-vector-wrap svg {
+      stroke: #10b981 !important;
+      stroke-width: 2.6px !important;
+      filter: drop-shadow(0 0 1px #10b981);
+    }
+    .hand-cards-container.model-osseous .palm-tag {
+      color: #10b981;
+      border-color: rgba(16, 185, 129, 0.4);
+      background: rgba(16, 185, 129, 0.12);
+    }
+
+    .hand-cards-container.model-cerebral .hand-card {
+      border-color: rgba(139, 92, 246, 0.45);
+      background: rgba(139, 92, 246, 0.05);
+    }
+    .hand-cards-container.model-cerebral .hand-card:hover {
+      border-color: #8b5cf6;
+      box-shadow: 0 4px 20px rgba(139, 92, 246, 0.25);
+    }
+    .hand-cards-container.model-cerebral .hand-char-label {
+      color: #8b5cf6;
+    }
+    .hand-cards-container.model-cerebral .hand-vector-wrap svg {
+      stroke: #8b5cf6 !important;
+      stroke-width: 1.8px !important;
+      transform: scale(0.93, 1.04);
+    }
+    .hand-cards-container.model-cerebral .palm-tag {
+      color: #8b5cf6;
+      border-color: rgba(139, 92, 246, 0.4);
+      background: rgba(139, 92, 246, 0.12);
+    }
+
+    /* Receipt Card Output */
+    #receiptCard {
+      display: none;
+      grid-column: 1 / -1;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header>
+    <a href="index.html" class="brand">
+      <div class="brand-logo">🤟</div>
+      <div>
+        <div class="brand-title">PocketGull <span style="color: var(--cyan);">Sign</span><span class="brand-sub">Studio</span></div>
+      </div>
+    </a>
+    <div class="nav-actions">
+      <a href="index.html" class="btn-nav">🏛️ Broadside</a>
+      <a href="stem_studio.html" class="btn-nav">🛠️ STEM</a>
+      <a href="music_studio.html" class="btn-nav">🎼 Music</a>
+      <a href="five_hand_types.html" class="btn-nav" title="Five Human Hand Types (Benedict 1921)">🖐️ 5 Hand Types</a>
+      <button type="button" class="btn-nav" id="themeToggleBtn" title="Switch Theme">🌗 Theme</button>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Hero Header -->
+    <div class="hero">
+      <div class="hero-badge">🕊️ Leave No One Behind • Multi-Script Accessibility</div>
+      <h1>Global Sign &amp; <span>ASL Practice Studio</span></h1>
+      <p>
+        Real-time fingerspelling transcriber, two-handed BSL comparative engine, JSL Yubimoji, and clinical emergency hand signals. Built on the 1000 UPM PocketGull typefoundry grid with 25 UPM humanist felt-marker fillets.
+      </p>
+    </div>
+
+    <!-- System Selector Tabs -->
+    <div class="system-tabs" role="tablist">
+      <button type="button" class="system-tab active" data-system="asl" role="tab" aria-selected="true">
+        🤟 ASL (American Sign)
+      </button>
+      <button type="button" class="system-tab" data-system="bsl" role="tab" aria-selected="false">
+        👐 BSL / Auslan (Two-Handed)
+      </button>
+      <button type="button" class="system-tab" data-system="jsl" role="tab" aria-selected="false">
+        🇯🇵 JSL Yubimoji (Kana)
+      </button>
+      <button type="button" class="system-tab" data-system="emergency" role="tab" aria-selected="false">
+        🦺 Emergency &amp; Tactical
+      </button>
+      <button type="button" class="system-tab" data-system="compare" role="tab" aria-selected="false">
+        ⚖️ Side-by-Side Comparison
+      </button>
+      <a href="five_hand_types.html" class="system-tab" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;">
+        🖐️ 5 Hand Types (Benedict 1921)
+      </a>
+      <button type="button" class="system-tab" data-system="permission" role="tab" aria-selected="false">
+        📝 "Is It Okay to Use?" Form
+      </button>
+    </div>
+
+    <!-- Main Studio Grid -->
+    <div class="studio-grid" id="mainStudioSection">
+
+      <!-- Left Transcriber Area -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title" id="currentModeTitle">
+            🤟 Real-Time Text-to-ASL Fingerspelling Transcriber
+          </div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);" id="currentSystemDesc">
+            One-handed manual alphabet (1000 UPM / 600 UPM pitch)
+          </div>
+        </div>
+
+        <!-- Controls: Perspective & Hand -->
+        <div class="controls-row">
+          <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted);">Perspective:</label>
+          <button type="button" class="btn-nav" id="btnTogglePerspective" style="font-size: 0.78rem;">
+            👁️ Viewer (Receptive)
+          </button>
+          <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); margin-left: 8px;">Hand:</label>
+          <button type="button" class="btn-nav" id="btnToggleHand" style="font-size: 0.78rem;">
+            ✋ Right Hand
+          </button>
+          <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); margin-left: 8px;">Hand Model:</label>
+          <select id="selectHandModel" style="background: var(--surface-inner); color: var(--text-main); border: 1px solid var(--card-border); border-radius: 4px; padding: 3px 6px; font-size: 0.78rem;" title="Morphological Hand Model">
+            <option value="sloan">Louise Sloan 5:1 Standard</option>
+            <option value="alimentive">1. Alimentive (Plump / Dimpled)</option>
+            <option value="thoracic">2. Thoracic (Pointed / Long Middle)</option>
+            <option value="muscular">3. Muscular (Square / Spatulate)</option>
+            <option value="osseous">4. Osseous (Oblong / Knotty)</option>
+            <option value="cerebral">5. Cerebral (Triangular / Smooth)</option>
+          </select>
+          <a href="five_hand_types.html" id="analyzeModelLink" target="_blank" style="color: var(--cyan); font-size: 0.78rem; text-decoration: none; margin-left: 4px;" title="Open Five Hand Types Lab">🔬 Analyze</a>
+          <button type="button" class="btn-nav" id="btnCopyText" style="font-size: 0.78rem; margin-left: auto;">
+            📋 Copy ASL String
+          </button>
+        </div>
+
+        <!-- Input Box -->
+        <input type="text" class="transcribe-input-box" id="transcribeInput"
+               value="AMOXICILLIN 500 MG" placeholder="Type letters, numbers, or clinical terms..." autocomplete="off" spellcheck="false">
+
+        <!-- Quick Presets -->
+        <div class="preset-pills">
+          <span style="font-size: 0.75rem; color: var(--text-muted); align-self: center; margin-right: 4px;">Presets:</span>
+          <button type="button" class="preset-pill" data-preset="AMOXICILLIN 500 MG">💊 500 mg Amoxicillin</button>
+          <button type="button" class="preset-pill" data-preset="CODE BLUE">🚨 Code Blue</button>
+          <button type="button" class="preset-pill" data-preset="HELP STOP PAIN">🦺 Help Stop Pain</button>
+          <button type="button" class="preset-pill" data-preset="WATER">💧 Water</button>
+          <button type="button" class="preset-pill" data-preset="HELLO THANK YOU">👋 Hello Thank You</button>
+          <button type="button" class="preset-pill" data-preset="HEART RATE 72">❤️ HR 72</button>
+        </div>
+
+        <!-- Rendered Vector Hand Cards Container -->
+                <!-- Morphological Hand Model Telemetry Banner -->
+        <div id="handModelInfoBanner" style="display: none; margin-bottom: 1.25rem; background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 0.85rem 1.1rem; align-items: center; justify-content: space-between; gap: 1rem; transition: all 0.3s ease;">
+          <div style="display: flex; align-items: center; gap: 0.9rem;">
+            <div id="modelBannerThumbnail" style="width: 52px; height: 52px; border-radius: 6px; overflow: hidden; background: #090d16; border: 1px solid var(--card-border); flex-shrink: 0; display: flex; align-items: center; justify-content: center;"></div>
+            <div>
+              <div id="modelBannerTitle" style="font-size: 0.92rem; font-weight: 700; color: var(--text-main); margin-bottom: 2px;"></div>
+              <div id="modelBannerDesc" style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4;"></div>
+            </div>
+          </div>
+          <a id="modelBannerLink" href="five_hand_types.html" class="btn-nav" style="font-size: 0.78rem; text-decoration: none; flex-shrink: 0; white-space: nowrap;">
+            🔬 View Specimen →
+          </a>
+        </div>
+
+        <div class="hand-cards-container" id="handCardsDisplay">
+          <!-- Cards populated dynamically via JavaScript -->
+        </div>
+
+        <!-- Playback & Speed Bar -->
+        <!-- 360 Adobe-Style Turntable & ROM Kinematics -->
+        <div id="aslTurntableContainer"></div>
+
+        <div class="player-bar">
+          <div class="player-buttons">
+            <button type="button" class="player-btn" id="btnPlayFingerspell">▶️ Play Fingerspell</button>
+            <button type="button" class="player-btn" id="btnStepPrev">⏮️ Prev</button>
+            <button type="button" class="player-btn" id="btnStepNext">⏭️ Next</button>
+          </div>
+          <div class="speed-slider-wrap">
+            <span>Speed:</span>
+            <input type="range" id="speedSlider" min="10" max="60" value="25" step="5">
+            <span id="speedLabel" style="font-weight: 700; color: var(--cyan);">25 WPM</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Sidebar: Interactive Practice & Anatomy -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">🎯 Practice &amp; Disambiguation</div>
+        </div>
+
+        <!-- Flashcard Quiz Widget -->
+        <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 1rem; margin-bottom: 1.25rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.85rem; font-weight: 700; color: var(--emerald);">🃏 Quick Flashcard Quiz</span>
+            <span style="font-size: 0.72rem; font-weight: 700; color: var(--emerald); background: rgba(16, 185, 129, 0.12); padding: 2px 6px; border-radius: 4px;">Sloan 5:1 Acuity</span>
+          </div>
+          <div style="text-align: center; margin-bottom: 0.75rem;">
+            <div id="quizHandGlyph" style="height: 130px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+              A
+            </div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">Which character is this?</div>
+          </div>
+          <div id="quizOptions" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; margin-bottom: 0.5rem;">
+            <!-- Quiz option buttons populated dynamically -->
+          </div>
+          <div id="quizFeedback" style="font-size: 0.75rem; text-align: center; min-height: 1.2rem; font-weight: 700;"></div>
+        </div>
+
+        <!-- Clinical Disambiguation Notes -->
+        <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 1rem;">
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--amber); margin-bottom: 0.5rem;">
+            ⚠️ Critical Disambiguation
+          </div>
+          <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 0.5rem;">
+            • <strong>A vs. S vs. T</strong>: In <em>A</em>, thumb rests upright alongside index. In <em>S</em>, thumb folds across knuckles. In <em>T</em>, thumb pokes between index and middle.
+          </p>
+          <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 0.5rem;">
+            • <strong>D vs. 1</strong>: In ASL, numeral <em>1</em> and letter <em>D</em> share the upright index, but <em>D</em> forms a closed circular loop with the other fingers and thumb.
+          </p>
+          <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.5;">
+            • <strong>K vs. P</strong>: <em>K</em> points upright; <em>P</em> points downward toward the floor.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Side-by-Side Comparative Section (Hidden until tab selected or toggled) -->
+    <div class="panel" id="comparativeSection" style="display: none; margin-bottom: 2rem;">
+      <div class="panel-header">
+        <div class="panel-title">⚖️ Cross-Linguistic Side-by-Side Comparison</div>
+        <div style="font-size: 0.8rem; color: var(--text-muted);">Preventing international clinical transcription errors</div>
+      </div>
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+        Notice how the same English letter requires completely different motor plans: <strong>ASL</strong> utilizes one hand, while <strong>BSL</strong> utilizes two hands with distinct fingertip touch locations.
+      </p>
+      <div class="comparative-grid">
+        <div class="comp-column">
+          <div class="comp-col-header">
+            <span>🤟 ASL (One-Handed)</span>
+            <small style="color: var(--text-muted);">North America</small>
+          </div>
+          <div id="compDisplayASL" style="min-height: 120px; font-family: var(--font-sign); font-size: 42px; color: var(--cyan); display: flex; flex-wrap: wrap; gap: 6px;"></div>
+        </div>
+        <div class="comp-column">
+          <div class="comp-col-header">
+            <span>👐 BSL / Auslan (Two-Handed)</span>
+            <small style="color: var(--text-muted);">UK &amp; Australia</small>
+          </div>
+          <div id="compDisplayBSL" style="min-height: 120px; font-size: 0.85rem; line-height: 1.5; color: var(--text-main);"></div>
+        </div>
+        <div class="comp-column">
+          <div class="comp-col-header">
+            <span>🇯🇵 JSL Yubimoji (Kana)</span>
+            <small style="color: var(--text-muted);">Japan</small>
+          </div>
+          <div id="compDisplayJSL" style="min-height: 120px; font-size: 0.85rem; line-height: 1.5; color: var(--indigo);"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- "Is It Okay to Use?" Community Permission & Ethical Advisory Form -->
+    <div class="permission-hero" id="permissionSection">
+      <div class="permission-title">
+        📝 <span>"Is It Okay to Use?"</span> • Ethical &amp; Community Consultation
+      </div>
+      <p class="permission-intro">
+        In sign languages and visual-gestural cultures, authentic community consultation and clinical safeguards are essential. This interactive advisor clarifies when fingerspelling is appropriate versus when a certified human interpreter is required, while providing a feedback channel for Deaf educators and native signers.
+      </p>
+
+      <!-- Interactive Scope Advisor -->
+      <div class="advisor-box">
+        <div class="advisor-title">1. Context &amp; Legal Appropriateness Advisor</div>
+        <div class="advisor-options">
+          <div class="advisor-card selected" data-scope="personal">
+            <div class="advisor-card-title">📖 Personal Learning / Study</div>
+            <div class="advisor-card-desc">Practicing fingerspelling, personal vocabulary, and anatomy.</div>
+          </div>
+          <div class="advisor-card" data-scope="education">
+            <div class="advisor-card-title">🏫 Classroom / Educational Poster</div>
+            <div class="advisor-card-desc">Teaching students the manual alphabet or healthcare awareness.</div>
+          </div>
+          <div class="advisor-card" data-scope="clinical">
+            <div class="advisor-card-title">🏥 Clinical / Hospital Encounter</div>
+            <div class="advisor-card-desc">Communicating with a Deaf or hard-of-hearing patient in healthcare.</div>
+          </div>
+          <div class="advisor-card" data-scope="commercial">
+            <div class="advisor-card-title">💼 App, Software, or Commercial</div>
+            <div class="advisor-card-desc">Embedding font binaries or SVG icons into software products.</div>
+          </div>
+        </div>
+        <div class="advisor-output" id="advisorOutputText">
+          ✅ <strong>Personal Learning: 100% Encouraged!</strong> You are completely welcome to practice, learn, and use these handshapes for self-education. PocketGull is licensed under the SIL Open Font License (OFL 1.1).
+        </div>
+      </div>
+
+      <!-- Consultation & Community Review Form -->
+      <div class="consult-form">
+        <div style="grid-column: 1 / -1; margin-bottom: 0.5rem;">
+          <div style="font-size: 1rem; font-weight: 700; color: var(--indigo);">
+            2. Community Feedback &amp; Verification Form
+          </div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">
+            Are you a Deaf native signer, ASL educator, or clinical healthcare interpreter? Help us ensure anatomical fidelity.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="formSignerRole">Your Role / Background</label>
+          <select class="form-select" id="formSignerRole">
+            <option value="Deaf Native Signer">Deaf Native Signer</option>
+            <option value="Certified ASL/BSL Interpreter (RID/BEI)">Certified Sign Language Interpreter</option>
+            <option value="Deaf Educator / ASL Teacher">Deaf Educator / ASL Teacher</option>
+            <option value="Healthcare Clinician / Nurse / Physician">Healthcare Clinician / Nurse / Doctor</option>
+            <option value="ASL Student / Learner">ASL Student / Learner</option>
+            <option value="Other">Other Community Member</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="formLanguageTarget">Language / Sign System</label>
+          <select class="form-select" id="formLanguageTarget">
+            <option value="ASL (American Sign Language)">ASL (American Sign Language)</option>
+            <option value="BSL (British Sign Language)">BSL (British Sign Language)</option>
+            <option value="Auslan (Australian Sign Language)">Auslan (Australian Sign Language)</option>
+            <option value="JSL Yubimoji (Japanese)">JSL Yubimoji (Japanese)</option>
+            <option value="Emergency Tactical Signals">Emergency &amp; First-Responder Signals</option>
+            <option value="Plains Indian Sign Talk (PISL)">Plains Indian Sign Talk (PISL)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="formTargetLetter">Specific Letter or Sign Reviewed</label>
+          <input type="text" class="form-input" id="formTargetLetter" placeholder="e.g., Letter 'R', Numeral '3', or All">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="formClarityRating">Anatomical Clarity Rating (1-5)</label>
+          <select class="form-select" id="formClarityRating">
+            <option value="5 - Exceptionally clear and authentic">5 - Exceptionally clear and authentic</option>
+            <option value="4 - Clear, minor regional nuance">4 - Clear, minor regional nuance</option>
+            <option value="3 - Understandable, palm angle could improve">3 - Understandable, palm angle could improve</option>
+            <option value="2 - Ambiguous with another handshape">2 - Ambiguous with another handshape</option>
+            <option value="1 - Inaccurate posture">1 - Inaccurate posture</option>
+          </select>
+        </div>
+
+        <div class="form-group full-width">
+          <label class="form-label" for="formComments">Regional Variation Notes or Feedback</label>
+          <textarea class="form-textarea" id="formComments" rows="3" placeholder="Describe any thumb placement adjustments, palm orientation suggestions, or regional dialect notes..."></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-submit" id="btnDispatchEmail">
+            ✉️ Submit Feedback via Email
+          </button>
+          <button type="button" class="btn-secondary" id="btnGenerateIssue">
+            🐙 Open GitHub Feedback Issue
+          </button>
+          <button type="button" class="btn-secondary" id="btnDownloadReceipt">
+            📜 Generate Digital Usage Receipt (.JSON)
+          </button>
+        </div>
+
+        <!-- Receipt Card -->
+        <div id="receiptCard">
+          <div style="font-size: 0.95rem; font-weight: 700; color: var(--emerald); margin-bottom: 0.4rem;">
+            ✓ Verification Receipt Generated &amp; Recorded
+          </div>
+          <div id="receiptDetails" style="font-family: var(--font-mono, monospace); font-size: 0.8rem; color: var(--text-main); white-space: pre-wrap;"></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- High-Fidelity Anatomical ASL Vector SVG Library -->
+  <script src="js/five_hand_types_data.js"></script>
+  <script src="js/asl_svg_data.js"></script>
+  <script src="js/asl_morph_svg_data.js"></script>
+  <script src="js/asl_turntable_engine.js"></script>
+  <script>
+    // ---------------------------------------------------------------------------
+    // ASL MANUAL ALPHABET DATA & ANATOMICAL DESCRIPTIONS
+    // ---------------------------------------------------------------------------
+    const ASL_DATA = {
+      'A': { desc: "Fist closed, thumb resting upright against index knuckle", palm: "Outward" },
+      'B': { desc: "4 fingers straight upright touching, thumb folded across palm", palm: "Outward" },
+      'C': { desc: "Curved open arch, fingers and thumb facing right", palm: "Profile" },
+      'D': { desc: "Index finger upright, middle/ring/pinky touch thumb in loop", palm: "Outward" },
+      'E': { desc: "Fingers curled tight down, fingertips resting on tucked thumb", palm: "Outward" },
+      'F': { desc: "Index & thumb touch in circle; middle, ring, pinky spread upright", palm: "Outward" },
+      'G': { desc: "Hand horizontal, index pointing right, thumb parallel above", palm: "Inward" },
+      'H': { desc: "Hand horizontal, index and middle extended together", palm: "Inward" },
+      'I': { desc: "Pinky extended straight up, other fingers in fist with thumb across", palm: "Outward" },
+      'J': { desc: "Pinky extended tracing a downward sweeping J-hook in space", palm: "Outward" },
+      'K': { desc: "Index upright, middle tilted forward, thumb nestled between", palm: "Outward" },
+      'L': { desc: "Index upright, thumb pointing horizontally left at 90° angle", palm: "Outward" },
+      'M': { desc: "Fist with thumb tucked under 3 fingers (index, middle, ring)", palm: "Outward" },
+      'N': { desc: "Fist with thumb tucked under 2 fingers (index, middle)", palm: "Outward" },
+      'O': { desc: "All fingertips curled forward to touch thumb tip in an O-shape", palm: "Profile" },
+      'P': { desc: "Like 'K' pointing downward (index forward/down, middle down)", palm: "Downward" },
+      'Q': { desc: "Like 'G' pointing downward toward floor", palm: "Downward" },
+      'R': { desc: "Index and middle fingers crossed vertically", palm: "Outward" },
+      'S': { desc: "Fist with thumb wrapped across front of curled fingers", palm: "Outward" },
+      'T': { desc: "Fist with thumb tucked between index and middle fingers", palm: "Outward" },
+      'U': { desc: "Index and middle fingers held together straight upright", palm: "Outward" },
+      'V': { desc: "Index and middle fingers spread apart in peace / V-shape", palm: "Outward" },
+      'W': { desc: "Index, middle, ring fingers spread apart upright in a 'W'", palm: "Outward" },
+      'X': { desc: "Fist with index finger crooked/hooked at middle knuckle", palm: "Outward" },
+      'Y': { desc: "Shaka shape: thumb and pinky extended wide, middle 3 curled", palm: "Outward" },
+      'Z': { desc: "Index finger extended, tracing a 'Z' path in space", palm: "Outward" },
+      '0': { desc: "All fingertips touching thumb in 'O' shape", palm: "Profile" },
+      '1': { desc: "Index finger upright, other fingers curled in fist", palm: "Outward" },
+      '2': { desc: "Index and middle fingers upright spread apart", palm: "Outward" },
+      '3': { desc: "Thumb, index, and middle fingers extended (authentic ASL 3)", palm: "Outward" },
+      '4': { desc: "4 fingers upright spread, thumb tucked across palm", palm: "Outward" },
+      '5': { desc: "All 5 digits spread wide open", palm: "Outward" },
+      '6': { desc: "Pinky finger touches thumb tip; index, middle, ring upright", palm: "Outward" },
+      '7': { desc: "Ring finger touches thumb tip; index, middle, pinky upright", palm: "Outward" },
+      '8': { desc: "Middle finger touches thumb tip; index, ring, pinky upright", palm: "Outward" },
+      '9': { desc: "Index finger touches thumb tip (like F); middle, ring, pinky upright", palm: "Outward" }
+    };
+
+    // BSL Two-Handed Alphabet Reference Descriptions
+    const BSL_DATA = {
+      'A': "Index of dominant hand touches thumb tip of non-dominant flat hand.",
+      'B': "Both hands form circles touching each other (figure-8 / binoculars).",
+      'C': "Dominant hand forms curved C on non-dominant palm.",
+      'D': "Dominant index and thumb form loop touching non-dominant index finger.",
+      'E': "Dominant index touches index fingertip of non-dominant hand.",
+      'F': "Dominant index and middle cross non-dominant index and middle.",
+      'G': "Both hands in fists, dominant fist placed on top of non-dominant fist.",
+      'H': "Dominant flat palm sweeps across non-dominant flat palm.",
+      'I': "Dominant index touches middle fingertip of non-dominant hand.",
+      'J': "Dominant index touches non-dominant middle fingertip and sweeps down palm.",
+      'K': "Dominant hooked index hooks non-dominant index knuckle.",
+      'L': "Dominant index rests across non-dominant flat palm.",
+      'M': "Dominant 3 fingers (index, middle, ring) rest on non-dominant palm.",
+      'N': "Dominant 2 fingers (index, middle) rest on non-dominant palm.",
+      'O': "Dominant index touches ring fingertip of non-dominant hand.",
+      'P': "Dominant index & thumb loop touches non-dominant upright index.",
+      'Q': "Dominant thumb and fingers loop hooked around non-dominant thumb.",
+      'R': "Dominant hooked index touches non-dominant flat palm.",
+      'S': "Dominant pinky hooks non-dominant pinky.",
+      'T': "Dominant index touches inner edge of non-dominant palm.",
+      'U': "Dominant index touches pinky fingertip of non-dominant hand.",
+      'V': "Dominant index & middle in 'V' rest on non-dominant palm.",
+      'W': "Fingers of both hands interlock with palms facing.",
+      'X': "Dominant index crosses over non-dominant index in an 'X'.",
+      'Y': "Dominant index rests in the web between non-dominant index and thumb.",
+      'Z': "Dominant bent palm touches non-dominant fingertips."
+    };
+
+    // JSL Yubimoji Reference
+    const JSL_DATA = {
+      'A': "あ (A): Closed fist, thumb sticking out laterally.",
+      'I': "い (I): Pinky finger upright (like ASL 'I').",
+      'U': "う (U): Index and middle fingers upright together (like ASL 'U').",
+      'E': "え (E): All fingers curled flat at right angle (like ASL 'E').",
+      'O': "お (O): Fingers and thumb curled into an 'O' ring.",
+      'KA': "か (Ka): Index and thumb form curved 'L'.",
+      'SA': "さ (Sa): Three fingers upright spread.",
+      'TA': "た (Ta): Index pointing horizontally forward.",
+      'NA': "な (Na): Fist with thumb extended out.",
+      'HA': "は (Ha): Four fingers spread wide open.",
+      'MA': "ま (Ma): Flat open hand horizontal.",
+      'YA': "や (Ya): Thumb and index forming wide angle.",
+      'RA': "ら (Ra): Two fingers hooked forward.",
+      'WA': "わ (Wa): Circle formed by thumb and index."
+    };
+
+    // Emergency Gestures
+    const EMERGENCY_DATA = {
+      'HELP': "Non-dominant flat palm supports dominant fist with thumb upright; lifted together.",
+      'STOP': "Flat palm held upright facing directly forward like a barrier.",
+      'PAIN': "Both index fingers point directly toward each other with twisting pulse.",
+      'DOCTOR': "Dominant index and middle fingers tap the pulse on the non-dominant inner wrist.",
+      'WATER': "'W' handshape (3 fingers upright) tapped twice against the chin.",
+      'BREATHE': "Both flat open palms placed on chest, moving outward and inward synchronously."
+    };
+
+    // ---------------------------------------------------------------------------
+    // DOM ELEMENTS
+    // ---------------------------------------------------------------------------
+    const transcribeInput = document.getElementById('transcribeInput');
+    const handCardsDisplay = document.getElementById('handCardsDisplay');
+    const btnTogglePerspective = document.getElementById('btnTogglePerspective');
+    const btnToggleHand = document.getElementById('btnToggleHand');
+    const btnCopyText = document.getElementById('btnCopyText');
+    const btnPlayFingerspell = document.getElementById('btnPlayFingerspell');
+    const btnStepPrev = document.getElementById('btnStepPrev');
+    const btnStepNext = document.getElementById('btnStepNext');
+    const speedSlider = document.getElementById('speedSlider');
+    const speedLabel = document.getElementById('speedLabel');
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+
+    // System tabs
+    const systemTabs = document.querySelectorAll('.system-tab');
+    const selectHandModel = document.getElementById('selectHandModel');
+    const analyzeModelLink = document.getElementById('analyzeModelLink');
+    const handModelInfoBanner = document.getElementById('handModelInfoBanner');
+    const modelBannerThumbnail = document.getElementById('modelBannerThumbnail');
+    const modelBannerTitle = document.getElementById('modelBannerTitle');
+    const modelBannerDesc = document.getElementById('modelBannerDesc');
+    const modelBannerLink = document.getElementById('modelBannerLink');
+    let currentHandModel = 'sloan';
+    const mainStudioSection = document.getElementById('mainStudioSection');
+    const comparativeSection = document.getElementById('comparativeSection');
+    const permissionSection = document.getElementById('permissionSection');
+    const currentModeTitle = document.getElementById('currentModeTitle');
+    const currentSystemDesc = document.getElementById('currentSystemDesc');
+
+    let currentSystem = 'asl';
+    let isExpressive = false; // false = Receptive (Viewer), true = Expressive (Signer)
+    let isLeftHand = false;
+    let playbackInterval = null;
+    let activeCardIndex = -1;
+
+    // ---------------------------------------------------------------------------
+    // TRANSCRIBER RENDERING
+    // ---------------------------------------------------------------------------
+    function renderTranscriber() {
+      const text = (transcribeInput.value || '').toUpperCase();
+      handCardsDisplay.innerHTML = '';
+
+      if (!text.trim()) {
+        handCardsDisplay.innerHTML = `
+          <div style="color: var(--text-muted); font-size: 0.9rem; padding: 2rem; width: 100%; text-align: center;">
+            Type letters, words, or dosages above to see real-time hand signals.
+          </div>
+        `;
+        return;
+      }
+
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        if (char === ' ') {
+          const spaceCard = document.createElement('div');
+          spaceCard.style.cssText = 'width: 40px; display: flex; align-items: center; justify-content: center; color: var(--card-border); font-size: 24px;';
+          spaceCard.textContent = '␣';
+          spaceCard.title = 'Space / Word Separation';
+          handCardsDisplay.appendChild(spaceCard);
+          continue;
+        }
+
+        const data = ASL_DATA[char] || { desc: "Standard letter gesture", palm: "Outward" };
+        const card = document.createElement('div');
+        card.className = 'hand-card';
+        card.dataset.index = i;
+
+        let svgContent = '';
+        if (typeof ASL_MORPH_DATA !== 'undefined' && ASL_MORPH_DATA[currentHandModel] && ASL_MORPH_DATA[currentHandModel][char]) {
+          svgContent = ASL_MORPH_DATA[currentHandModel][char];
+        } else if (typeof ASL_SVG_DATA !== 'undefined' && ASL_SVG_DATA[char]) {
+          svgContent = ASL_SVG_DATA[char];
+        } else {
+          svgContent = `<div style="font-family: var(--font-sign); font-size: 52px; display: flex; align-items: center; justify-content: center; height: 100%;">${char}</div>`;
+        }
+
+        let modelBadge = '';
+        if (currentHandModel !== 'sloan' && typeof FIVE_HAND_TYPES !== 'undefined' && FIVE_HAND_TYPES[currentHandModel]) {
+          const m = FIVE_HAND_TYPES[currentHandModel];
+          modelBadge = `<div style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: ${m.color}; letter-spacing: 0.06em; margin-bottom: 3px;">${m.geometricArchetype.split('/')[0].trim()}</div>`;
+        }
+
+        card.innerHTML = `
+          ${modelBadge}
+          <div class="hand-vector-wrap">${svgContent}</div>
+          <div class="hand-char-label">${char}</div>
+          <div class="hand-posture-desc">${data.desc}</div>
+          <div class="palm-tag">${data.palm}</div>
+        `;
+        card.style.cursor = 'pointer';
+        card.title = `Click to inspect '${char}' in 360° Turntable & ROM Inspector`;
+        card.addEventListener('click', () => {
+          if (typeof GLOBAL_TURNTABLE !== 'undefined' && GLOBAL_TURNTABLE) {
+            GLOBAL_TURNTABLE.setChar(char);
+            document.getElementById('aslTurntableContainer')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        });
+        handCardsDisplay.appendChild(card);
+      }
+
+      updateComparativeView(text);
+    }
+
+    // ---------------------------------------------------------------------------
+    // COMPARATIVE VIEW UPDATE
+    // ---------------------------------------------------------------------------
+    function updateComparativeView(text) {
+      const compASL = document.getElementById('compDisplayASL');
+      const compBSL = document.getElementById('compDisplayBSL');
+      const compJSL = document.getElementById('compDisplayJSL');
+
+      compASL.textContent = text;
+
+      // BSL comparative
+      let bslHtml = '';
+      for (let i = 0; i < Math.min(text.length, 6); i++) {
+        const ch = text[i];
+        if (BSL_DATA[ch]) {
+          bslHtml += `<div style="margin-bottom: 6px;"><strong>${ch}:</strong> ${BSL_DATA[ch]}</div>`;
+        }
+      }
+      compBSL.innerHTML = bslHtml || '<em>Enter text to view BSL two-handed letter mechanics.</em>';
+
+      // JSL comparative
+      let jslHtml = '';
+      for (let i = 0; i < Math.min(text.length, 5); i++) {
+        const ch = text[i];
+        if (JSL_DATA[ch]) {
+          jslHtml += `<div style="margin-bottom: 6px;"><strong>${ch}:</strong> ${JSL_DATA[ch]}</div>`;
+        }
+      }
+      compJSL.innerHTML = jslHtml || '<em>Yubimoji syllabary mappings active for Japanese Kana transliterations.</em>';
+    }
+
+    // ---------------------------------------------------------------------------
+    // PLAYBACK & SPEED CONTROLS
+    // ---------------------------------------------------------------------------
+    function highlightCard(idx) {
+      const cards = handCardsDisplay.querySelectorAll('.hand-card');
+      cards.forEach((c, i) => {
+        if (i === idx) {
+          c.classList.add('active-playback');
+          c.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        } else {
+          c.classList.remove('active-playback');
+        }
+      });
+      activeCardIndex = idx;
+    }
+
+    function stopPlayback() {
+      if (playbackInterval) {
+        clearInterval(playbackInterval);
+        playbackInterval = null;
+      }
+      btnPlayFingerspell.textContent = '▶️ Play Fingerspell';
+    }
+
+    function startPlayback() {
+      stopPlayback();
+      const cards = handCardsDisplay.querySelectorAll('.hand-card');
+      if (cards.length === 0) return;
+
+      btnPlayFingerspell.textContent = '⏸️ Pause';
+      const wpm = parseInt(speedSlider.value, 10);
+      // Average 5 chars per word: ms per char = (60 / (wpm * 5)) * 1000
+      const delayMs = Math.max(120, Math.round((60 / (wpm * 4.5)) * 1000));
+
+      let current = 0;
+      highlightCard(current);
+
+      playbackInterval = setInterval(() => {
+        current++;
+        if (current >= cards.length) {
+          stopPlayback();
+          return;
+        }
+        highlightCard(current);
+      }, delayMs);
+    }
+
+    btnPlayFingerspell.addEventListener('click', () => {
+      if (playbackInterval) {
+        stopPlayback();
+      } else {
+        startPlayback();
+      }
+    });
+
+    btnStepNext.addEventListener('click', () => {
+      stopPlayback();
+      const cards = handCardsDisplay.querySelectorAll('.hand-card');
+      if (cards.length === 0) return;
+      activeCardIndex = (activeCardIndex + 1) % cards.length;
+      highlightCard(activeCardIndex);
+    });
+
+    btnStepPrev.addEventListener('click', () => {
+      stopPlayback();
+      const cards = handCardsDisplay.querySelectorAll('.hand-card');
+      if (cards.length === 0) return;
+      activeCardIndex = (activeCardIndex - 1 + cards.length) % cards.length;
+      highlightCard(activeCardIndex);
+    });
+
+    speedSlider.addEventListener('input', () => {
+      speedLabel.textContent = `${speedSlider.value} WPM`;
+      if (playbackInterval) {
+        startPlayback(); // restart with updated speed
+      }
+    });
+
+    // ---------------------------------------------------------------------------
+    // PERSPECTIVE & HAND TOGGLES
+    // ---------------------------------------------------------------------------
+    btnTogglePerspective.addEventListener('click', () => {
+      isExpressive = !isExpressive;
+      if (isExpressive) {
+        handCardsDisplay.classList.add('view-expressive');
+        btnTogglePerspective.textContent = '🙌 Signer (Expressive)';
+      } else {
+        handCardsDisplay.classList.remove('view-expressive');
+        btnTogglePerspective.textContent = '👁️ Viewer (Receptive)';
+      }
+    });
+
+    btnToggleHand.addEventListener('click', () => {
+      isLeftHand = !isLeftHand;
+      if (isLeftHand) {
+        handCardsDisplay.classList.add('flip-left');
+        btnToggleHand.textContent = '🤚 Left Hand (Mirrored)';
+      } else {
+        handCardsDisplay.classList.remove('flip-left');
+        btnToggleHand.textContent = '✋ Right Hand';
+      }
+    });
+
+    // ---------------------------------------------------------------------------
+    // MORPHOLOGICAL HAND MODEL CONTROLLER (Benedict 1921 & Sloan 5:1)
+    // ---------------------------------------------------------------------------
+    if (selectHandModel) {
+      selectHandModel.addEventListener('change', () => {
+        currentHandModel = selectHandModel.value;
+        updateHandModelUI();
+      });
+    }
+
+    function updateHandModelUI() {
+      handCardsDisplay.classList.remove('model-sloan', 'model-alimentive', 'model-thoracic', 'model-muscular', 'model-osseous', 'model-cerebral');
+      if (typeof GLOBAL_TURNTABLE !== 'undefined' && GLOBAL_TURNTABLE) {
+        GLOBAL_TURNTABLE.setModel(currentHandModel);
+      }
+      handCardsDisplay.classList.add(`model-${currentHandModel}`);
+
+      if (currentHandModel === 'sloan') {
+        if (handModelInfoBanner) handModelInfoBanner.style.display = 'none';
+        if (analyzeModelLink) {
+          analyzeModelLink.href = 'five_hand_types.html';
+          analyzeModelLink.style.color = 'var(--cyan)';
+        }
+      } else if (typeof FIVE_HAND_TYPES !== 'undefined' && FIVE_HAND_TYPES[currentHandModel]) {
+        const model = FIVE_HAND_TYPES[currentHandModel];
+        if (handModelInfoBanner) {
+          handModelInfoBanner.style.display = 'flex';
+          handModelInfoBanner.style.borderColor = `${model.color}66`;
+          modelBannerTitle.innerHTML = `<span style="color: ${model.color}; font-weight: 800;">${model.name}</span> &bull; ${model.subtitle}`;
+          modelBannerDesc.innerHTML = `<strong>Archetype:</strong> ${model.geometricArchetype} &bull; <strong>Ratio:</strong> ${model.ratios.fingerToPalm} &bull; <em>"${model.keyDiagnoses[0]}"</em>`;
+          modelBannerThumbnail.innerHTML = model.dorsalSvg;
+          const thumbSvg = modelBannerThumbnail.querySelector('svg');
+          if (thumbSvg) {
+            thumbSvg.setAttribute('viewBox', '80 30 380 430');
+            thumbSvg.style.width = '100%';
+            thumbSvg.style.height = '100%';
+          }
+          modelBannerLink.href = `five_hand_types.html`;
+          modelBannerLink.style.borderColor = model.color;
+          modelBannerLink.style.color = model.color;
+        }
+        if (analyzeModelLink) {
+          analyzeModelLink.href = `five_hand_types.html`;
+          analyzeModelLink.style.color = model.color;
+        }
+      }
+      renderTranscriber();
+    }
+
+    btnCopyText.addEventListener('click', () => {
+      const text = transcribeInput.value || '';
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btnCopyText.textContent;
+        btnCopyText.textContent = '✓ Copied!';
+        setTimeout(() => btnCopyText.textContent = orig, 1800);
+      });
+    });
+
+    // ---------------------------------------------------------------------------
+    // PRESETS
+    // ---------------------------------------------------------------------------
+    document.querySelectorAll('.preset-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        transcribeInput.value = btn.dataset.preset;
+        renderTranscriber();
+        startPlayback();
+      });
+    });
+
+    transcribeInput.addEventListener('input', () => {
+      stopPlayback();
+      renderTranscriber();
+    });
+
+    // ---------------------------------------------------------------------------
+    // SYSTEM SELECTOR TABS
+    // ---------------------------------------------------------------------------
+    systemTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        systemTabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        currentSystem = tab.dataset.system;
+
+        if (currentSystem === 'compare') {
+          mainStudioSection.style.display = 'grid';
+          comparativeSection.style.display = 'block';
+          permissionSection.style.display = 'none';
+          comparativeSection.scrollIntoView({ behavior: 'smooth' });
+        } else if (currentSystem === 'permission') {
+          mainStudioSection.style.display = 'none';
+          comparativeSection.style.display = 'none';
+          permissionSection.style.display = 'block';
+          permissionSection.scrollIntoView({ behavior: 'smooth' });
+        } else if (currentSystem === 'emergency') {
+          mainStudioSection.style.display = 'grid';
+          comparativeSection.style.display = 'none';
+          permissionSection.style.display = 'none';
+          currentModeTitle.textContent = '🦺 Clinical Emergency & First-Responder Signals';
+          currentSystemDesc.textContent = 'Life-critical tactical gestures (HELP, STOP, PAIN, DOCTOR, WATER)';
+          transcribeInput.value = 'HELP STOP PAIN DOCTOR WATER';
+          renderTranscriber();
+        } else if (currentSystem === 'bsl') {
+          mainStudioSection.style.display = 'grid';
+          comparativeSection.style.display = 'block';
+          permissionSection.style.display = 'none';
+          currentModeTitle.textContent = '👐 BSL / Auslan Two-Handed Fingerspelling Engine';
+          currentSystemDesc.textContent = 'Vowels touch fingertips: A (thumb), E (index), I (middle), O (ring), U (pinky)';
+          renderTranscriber();
+        } else if (currentSystem === 'jsl') {
+          mainStudioSection.style.display = 'grid';
+          comparativeSection.style.display = 'block';
+          permissionSection.style.display = 'none';
+          currentModeTitle.textContent = '🇯🇵 Japanese JSL Yubimoji (指文字)';
+          currentSystemDesc.textContent = 'Japanese Kana manual syllabary for clinical and transliterated terms';
+          transcribeInput.value = 'AIUEO';
+          renderTranscriber();
+        } else {
+          mainStudioSection.style.display = 'grid';
+          comparativeSection.style.display = 'none';
+          permissionSection.style.display = 'none';
+          currentModeTitle.textContent = '🤟 Real-Time Text-to-ASL Fingerspelling Transcriber';
+          currentSystemDesc.textContent = 'One-handed manual alphabet (1000 UPM / 600 UPM pitch)';
+          renderTranscriber();
+        }
+      });
+    });
+
+    // ---------------------------------------------------------------------------
+    // FLASHCARD QUIZ ENGINE
+    // ---------------------------------------------------------------------------
+    const quizHandGlyph = document.getElementById('quizHandGlyph');
+    const quizOptions = document.getElementById('quizOptions');
+    const quizFeedback = document.getElementById('quizFeedback');
+    const letters = Object.keys(ASL_DATA);
+    let quizTarget = 'A';
+
+    function nextQuizQuestion() {
+      quizTarget = letters[Math.floor(Math.random() * 26)]; // letters A-Z
+      const quizSvg = (typeof ASL_SVG_DATA !== 'undefined' && ASL_SVG_DATA[quizTarget])
+        ? ASL_SVG_DATA[quizTarget]
+        : `<div style="font-family: var(--font-sign); font-size: 64px;">${quizTarget}</div>`;
+      quizHandGlyph.innerHTML = `<div class="hand-vector-wrap" style="width: 110px; height: 126px;">${quizSvg}</div>`;
+      quizFeedback.textContent = '';
+
+      // Create 4 choices
+      const choices = new Set([quizTarget]);
+      while (choices.size < 4) {
+        choices.add(letters[Math.floor(Math.random() * 26)]);
+      }
+      const shuffled = Array.from(choices).sort(() => Math.random() - 0.5);
+
+      quizOptions.innerHTML = '';
+      shuffled.forEach(ch => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'btn-nav';
+        btn.style.cssText = 'justify-content: center; font-weight: 800; font-size: 1.1rem; padding: 0.5rem;';
+        btn.textContent = ch;
+        btn.addEventListener('click', () => {
+          if (ch === quizTarget) {
+            quizFeedback.style.color = 'var(--emerald)';
+            quizFeedback.textContent = `✓ Correct! ${quizTarget}: ${ASL_DATA[quizTarget].desc}`;
+            btn.style.borderColor = 'var(--emerald)';
+            btn.style.color = 'var(--emerald)';
+            setTimeout(nextQuizQuestion, 1200);
+          } else {
+            quizFeedback.style.color = 'var(--rose)';
+            quizFeedback.textContent = `✗ Not ${ch}. Try again!`;
+            btn.style.borderColor = 'var(--rose)';
+            btn.style.color = 'var(--rose)';
+          }
+        });
+        quizOptions.appendChild(btn);
+      });
+    }
+
+    // ---------------------------------------------------------------------------
+    // "IS IT OKAY TO USE?" INTERACTIVE ADVISOR & DISPATCH
+    // ---------------------------------------------------------------------------
+    const advisorCards = document.querySelectorAll('.advisor-card');
+    const advisorOutputText = document.getElementById('advisorOutputText');
+
+    const ADVISOR_MESSAGES = {
+      'personal': `
+        ✅ <strong>Personal Learning: 100% Encouraged!</strong><br>
+        You are completely welcome to practice, learn, and use these handshapes for self-study, flashcards, or language acquisition. PocketGull is an open-source foundry release licensed under the SIL Open Font License (OFL 1.1).
+      `,
+      'education': `
+        🏫 <strong>Educational &amp; Classroom Use: Great with Cultural Context!</strong><br>
+        Using fingerspelling posters and practice guides is encouraged. Best practice: educate students that fingerspelling is only one component of ASL (used for proper nouns, names, and loan words), and that ASL is a complete, natural language with its own rich grammar, culture, and community.
+      `,
+      'clinical': `
+        ⚠️ <strong>Hospital &amp; Clinical Encounters: Important Legal &amp; Patient Safety Rule:</strong><br>
+        Under <strong>Title III of the Americans with Disabilities Act (ADA)</strong> and <strong>Section 1557 of the Affordable Care Act (ACA)</strong>, healthcare providers are legally required to provide qualified human sign language interpreters for life-critical medical discussions, diagnoses, and informed consent. Fingerspelling charts may only be used as supplemental aids (e.g. spelling a medication name) and must never substitute for a licensed medical interpreter.
+      `,
+      'commercial': `
+        💼 <strong>Commercial &amp; App Integration: Free &amp; Royalty-Free!</strong><br>
+        PocketGull is distributed under the SIL OFL 1.1 license without Reserved Font Name restrictions. You may embed <code>PocketGull-Sign.woff2</code> and <code>PocketGull-ASL.woff2</code> into your applications, websites, and telemetry monitors without paying license fees.
+      `
+    };
+
+    advisorCards.forEach(card => {
+      card.addEventListener('click', () => {
+        advisorCards.forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        const scope = card.dataset.scope;
+        advisorOutputText.innerHTML = ADVISOR_MESSAGES[scope];
+        if (scope === 'clinical') {
+          advisorOutputText.classList.add('warning');
+        } else {
+          advisorOutputText.classList.remove('warning');
+        }
+      });
+    });
+
+    // Email Dispatch
+    document.getElementById('btnDispatchEmail').addEventListener('click', () => {
+      const role = document.getElementById('formSignerRole').value;
+      const lang = document.getElementById('formLanguageTarget').value;
+      const letter = document.getElementById('formTargetLetter').value || 'General System';
+      const rating = document.getElementById('formClarityRating').value;
+      const comments = document.getElementById('formComments').value || 'No additional comments provided.';
+
+      const subject = encodeURIComponent(`[PocketGull Sign Consultation] Review for ${lang} (${letter})`);
+      const body = encodeURIComponent(
+`PocketGull Sign Language Community Verification
+=================================================
+Reviewer Role: ${role}
+Language / System: ${lang}
+Specific Letter/Sign: ${letter}
+Anatomical Rating: ${rating}
+
+Reviewer Notes & Feedback:
+${comments}
+
+Timestamp: ${new Date().toISOString()}
+System: PocketGull Sign Foundry v3.3.0
+`
+      );
+      window.location.href = `mailto:phil@pocketgull.app?subject=${subject}&body=${body}`;
+    });
+
+    // GitHub Issue Generator
+    document.getElementById('btnGenerateIssue').addEventListener('click', () => {
+      const role = document.getElementById('formSignerRole').value;
+      const lang = document.getElementById('formLanguageTarget').value;
+      const letter = document.getElementById('formTargetLetter').value || 'All';
+      const rating = document.getElementById('formClarityRating').value;
+      const comments = document.getElementById('formComments').value || 'Community feedback review.';
+
+      const title = encodeURIComponent(`[Sign Review] ${lang}: ${letter} (${role})`);
+      const issueBody = encodeURIComponent(
+`### PocketGull Sign Language Community Review
+- **Reviewer Role**: ${role}
+- **Language / System**: ${lang}
+- **Target Letter / Sign**: ${letter}
+- **Clarity Score**: ${rating}
+
+### Feedback & Regional Notes
+${comments}
+
+---
+*Submitted via PocketGull Global Sign & ASL Practice Studio*`
+      );
+      window.open(`https://github.com/pocketgull-app/pocketgull-font/issues/new?title=${title}&body=${issueBody}`, '_blank');
+    });
+
+    // Digital Usage Receipt Generator
+    document.getElementById('btnDownloadReceipt').addEventListener('click', () => {
+      const role = document.getElementById('formSignerRole').value;
+      const lang = document.getElementById('formLanguageTarget').value;
+      const letter = document.getElementById('formTargetLetter').value || 'All Glyphs';
+      const rating = document.getElementById('formClarityRating').value;
+      const comments = document.getElementById('formComments').value || 'Guidelines reviewed and verified.';
+
+      const receiptObj = {
+        receiptId: "PG-SIGN-" + Date.now().toString(36).toUpperCase(),
+        project: "PocketGull Font Superfamily",
+        license: "SIL Open Font License 1.1",
+        verifiedAt: new Date().toISOString(),
+        system: lang,
+        scopeReview: {
+          reviewerRole: role,
+          targetLetter: letter,
+          rating: rating,
+          notes: comments
+        },
+        ethicalGuidelineAcknowledged: {
+          adaTitleIIICompliant: true,
+          acaSection1557Compliant: true,
+          communityConsultationEngaged: true
+        }
+      };
+
+      const receiptText = JSON.stringify(receiptObj, null, 2);
+      document.getElementById('receiptDetails').textContent = receiptText;
+      document.getElementById('receiptCard').style.display = 'block';
+
+      // Download file
+      const blob = new Blob([receiptText], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `PocketGull-Sign-Verification-${receiptObj.receiptId}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // ---------------------------------------------------------------------------
+    // THEME SWITCHER
+    // ---------------------------------------------------------------------------
+    const themes = ['dark', 'light', 'washi', 'scotopic'];
+    let currentThemeIdx = 0;
+    themeToggleBtn.addEventListener('click', () => {
+      currentThemeIdx = (currentThemeIdx + 1) % themes.length;
+      document.documentElement.setAttribute('data-theme', themes[currentThemeIdx]);
+      themeToggleBtn.textContent = themes[currentThemeIdx] === 'scotopic' ? '🔴 650nm Red' : '🌗 Theme';
+    });
+
+    // ---------------------------------------------------------------------------
+    // INITIALIZATION & DEEP LINKING (Benedict 1921 & Sloan 5:1)
+    // ---------------------------------------------------------------------------
+    const urlParams = new URLSearchParams(window.location.search);
+    const modelParam = urlParams.get('model');
+    if (modelParam && ['sloan', 'alimentive', 'thoracic', 'muscular', 'osseous', 'cerebral'].includes(modelParam.toLowerCase())) {
+      currentHandModel = modelParam.toLowerCase();
+      if (selectHandModel) selectHandModel.value = currentHandModel;
+      updateHandModelUI();
+    }
+
+    renderTranscriber();
+    if (typeof initASLTurntable === 'function') {
+      initASLTurntable('aslTurntableContainer');
+      if (currentHandModel && typeof GLOBAL_TURNTABLE !== 'undefined' && GLOBAL_TURNTABLE) {
+        GLOBAL_TURNTABLE.setModel(currentHandModel);
+      }
+      const charParam = urlParams.get('char');
+      if (charParam && typeof GLOBAL_TURNTABLE !== 'undefined' && GLOBAL_TURNTABLE) {
+        GLOBAL_TURNTABLE.setChar(charParam.toUpperCase());
+      }
+    }
+    nextQuizQuestion();
+  </script>
+</body>
+</html>

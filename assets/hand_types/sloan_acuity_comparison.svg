@@ -1,0 +1,75 @@
+<svg viewBox="0 0 900 320" class="sloan-vector-svg" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="320" fill="#090d16"/>
+  <defs>
+    <pattern id="sloanGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1e293b" stroke-width="0.8"/>
+    </pattern>
+  </defs>
+  <rect width="900" height="320" fill="url(#sloanGrid)"/>
+
+  <text x="450" y="30" text-anchor="middle" fill="#38bdf8" font-family="system-ui" font-size="13" font-weight="bold" letter-spacing="1">
+    LOUISE SLOAN 5:1 OPTOTYPE ASL TEST: MANUAL LETTER 'A' (FIST + THUMB UPRIGHT)
+  </text>
+  <text x="450" y="48" text-anchor="middle" fill="#64748b" font-family="system-ui" font-size="11">
+    How morphological variation alters optical counter-spaces and stroke disambiguation in clinical environments
+  </text>
+
+  <!-- Alimentive 'A' -->
+  <g transform="translate(90, 60)">
+    <rect x="-60" y="0" width="120" height="200" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.3"/>
+    <path d="M -30 180 C -45 130, -45 90, -25 70 C -15 60, 25 60, 35 75 C 45 90, 45 140, 30 180 Z" fill="#1e293b" stroke="#f59e0b" stroke-width="3"/>
+    <path d="M -30 150 C -45 140, -48 100, -35 80 C -25 65, -15 75, -20 110 Z" fill="#0f172a" stroke="#f59e0b" stroke-width="2.8"/>
+    <circle cx="-5" cy="100" r="2.5" fill="#f59e0b"/>
+    <circle cx="10" cy="98" r="2.5" fill="#f59e0b"/>
+    <circle cx="25" cy="102" r="2.5" fill="#f59e0b"/>
+    <text x="0" y="225" text-anchor="middle" fill="#f59e0b" font-weight="bold" font-size="12">Alimentive 'A'</text>
+    <text x="0" y="240" text-anchor="middle" fill="#94a3b8" font-size="10">High occlusion risk;</text>
+    <text x="0" y="252" text-anchor="middle" fill="#94a3b8" font-size="10">Needs 1-unit air gap</text>
+  </g>
+
+  <!-- Thoracic 'A' -->
+  <g transform="translate(270, 60)">
+    <rect x="-60" y="0" width="120" height="200" rx="8" fill="#1e293b" stroke="#ec4899" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.3"/>
+    <path d="M -25 180 C -35 130, -35 80, -15 65 C -5 55, 15 55, 25 70 C 35 85, 35 130, 25 180 Z" fill="#1e293b" stroke="#ec4899" stroke-width="3"/>
+    <path d="M -25 150 C -38 135, -40 85, -28 60 C -20 48, -10 55, -15 100 Z" fill="#0f172a" stroke="#ec4899" stroke-width="2.8"/>
+    <ellipse cx="0" cy="90" rx="4" ry="2" fill="#ec4899" opacity="0.7"/>
+    <text x="0" y="225" text-anchor="middle" fill="#ec4899" font-weight="bold" font-size="12">Thoracic 'A'</text>
+    <text x="0" y="240" text-anchor="middle" fill="#94a3b8" font-size="10">High vertical reach;</text>
+    <text x="0" y="252" text-anchor="middle" fill="#94a3b8" font-size="10">Sharp silhouette apex</text>
+  </g>
+
+  <!-- Muscular 'A' -->
+  <g transform="translate(450, 60)">
+    <rect x="-60" y="0" width="120" height="200" rx="8" fill="#1e293b" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.3"/>
+    <path d="M -30 180 L -30 85 C -30 75, -20 70, 0 70 C 20 70, 30 75, 30 85 L 30 180 Z" fill="#1e293b" stroke="#06b6d4" stroke-width="3.5"/>
+    <path d="M -30 160 C -45 150, -48 100, -36 75 C -28 60, -14 65, -18 115 Z" fill="#0f172a" stroke="#06b6d4" stroke-width="3"/>
+    <rect x="-18" y="90" width="36" height="5" rx="2" fill="#06b6d4" opacity="0.7"/>
+    <text x="0" y="225" text-anchor="middle" fill="#06b6d4" font-weight="bold" font-size="12">Muscular 'A'</text>
+    <text x="0" y="240" text-anchor="middle" fill="#94a3b8" font-size="10">Maximum optical mass;</text>
+    <text x="0" y="252" text-anchor="middle" fill="#94a3b8" font-size="10">Square baseline anchor</text>
+  </g>
+
+  <!-- Osseous 'A' -->
+  <g transform="translate(630, 60)">
+    <rect x="-60" y="0" width="120" height="200" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.3"/>
+    <path d="M -25 180 C -32 140, -38 100, -22 80 C -15 70, 15 70, 26 80 C 35 95, 30 140, 24 180 Z" fill="#1e293b" stroke="#10b981" stroke-width="3.2"/>
+    <path d="M -25 150 C -42 140, -45 90, -30 70 C -22 55, -10 60, -15 105 Z" fill="#0f172a" stroke="#10b981" stroke-width="2.8"/>
+    <circle cx="-12" cy="85" r="5" fill="#10b981" opacity="0.6"/>
+    <circle cx="2" cy="83" r="5.5" fill="#10b981" opacity="0.6"/>
+    <circle cx="16" cy="86" r="5" fill="#10b981" opacity="0.6"/>
+    <text x="0" y="225" text-anchor="middle" fill="#10b981" font-weight="bold" font-size="12">Osseous 'A'</text>
+    <text x="0" y="240" text-anchor="middle" fill="#94a3b8" font-size="10">Knots form clear anchors;</text>
+    <text x="0" y="252" text-anchor="middle" fill="#94a3b8" font-size="10">Zero digit miscounting</text>
+  </g>
+
+  <!-- Cerebral 'A' -->
+  <g transform="translate(810, 60)">
+    <rect x="-60" y="0" width="120" height="200" rx="8" fill="#1e293b" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.3"/>
+    <path d="M -20 180 L -20 85 C -20 70, -10 65, 0 65 C 10 65, 20 70, 20 85 L 20 180 Z" fill="#1e293b" stroke="#8b5cf6" stroke-width="2.6"/>
+    <path d="M -20 150 C -32 135, -35 85, -24 60 C -18 48, -8 55, -12 100 Z" fill="#0f172a" stroke="#8b5cf6" stroke-width="2.4"/>
+    <line x1="-12" y1="88" x2="12" y2="88" stroke="#8b5cf6" stroke-width="1.2" opacity="0.6"/>
+    <text x="0" y="225" text-anchor="middle" fill="#8b5cf6" font-weight="bold" font-size="12">Cerebral 'A'</text>
+    <text x="0" y="240" text-anchor="middle" fill="#94a3b8" font-size="10">High contour acuity;</text>
+    <text x="0" y="252" text-anchor="middle" fill="#94a3b8" font-size="10">Needs high lighting contrast</text>
+  </g>
+</svg>

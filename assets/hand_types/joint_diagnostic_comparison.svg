@@ -1,0 +1,111 @@
+<svg viewBox="0 0 900 360" class="diagnostic-vector-svg" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="diagGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#334155" stroke-width="0.5" opacity="0.3"/>
+    </pattern>
+  </defs>
+  <rect width="900" height="360" fill="#0f172a"/>
+  <rect width="900" height="360" fill="url(#diagGrid)"/>
+
+  <!-- Joint Reference Horizontal Lines -->
+  <line x1="40" y1="120" x2="860" y2="120" stroke="#475569" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="865" y="124" fill="#94a3b8" font-family="monospace" font-size="10">DIP Joint</text>
+  <line x1="40" y1="200" x2="860" y2="200" stroke="#475569" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="865" y="204" fill="#94a3b8" font-family="monospace" font-size="10">PIP Joint</text>
+  <line x1="40" y1="280" x2="860" y2="280" stroke="#475569" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="865" y="284" fill="#94a3b8" font-family="monospace" font-size="10">MCP Joint</text>
+
+  <!-- Column 1: Alimentive -->
+  <g transform="translate(100, 0)">
+    <text x="0" y="35" text-anchor="middle" fill="#f59e0b" font-family="system-ui" font-size="14" font-weight="bold">1. ALIMENTIVE</text>
+    <text x="0" y="52" text-anchor="middle" fill="#94a3b8" font-family="system-ui" font-size="11">Puffy / Narrow Joints</text>
+    <path d="M -18 300
+             C -24 280, -32 240, -18 200
+             C -30 160, -26 130, -14 120
+             C -20 100, -12 70, 0 65
+             C 12 70, 20 100, 14 120
+             C 26 130, 30 160, 18 200
+             C 32 240, 24 280, 18 300
+             Z"
+          fill="#1e293b" stroke="#f59e0b" stroke-width="3"/>
+    <text x="0" y="325" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="bold">Joints = Narrowest</text>
+    <text x="0" y="340" text-anchor="middle" fill="#94a3b8" font-size="10">Flesh puffs outward</text>
+  </g>
+
+  <!-- Column 2: Thoracic -->
+  <g transform="translate(270, 0)">
+    <text x="0" y="35" text-anchor="middle" fill="#ec4899" font-family="system-ui" font-size="14" font-weight="bold">2. THORACIC</text>
+    <text x="0" y="52" text-anchor="middle" fill="#94a3b8" font-family="system-ui" font-size="11">Pointed Wedge Cone</text>
+    <path d="M -18 300
+             L -15 200
+             L -12 120
+             L 0 45
+             L 12 120
+             L 15 200
+             L 18 300
+             Z"
+          fill="#1e293b" stroke="#ec4899" stroke-width="3"/>
+    <ellipse cx="0" cy="65" rx="5" ry="10" fill="#ec4899" opacity="0.4"/>
+    <text x="0" y="325" text-anchor="middle" fill="#ec4899" font-size="11" font-weight="bold">Tapering Arrow</text>
+    <text x="0" y="340" text-anchor="middle" fill="#94a3b8" font-size="10">Longest middle digit</text>
+  </g>
+
+  <!-- Column 3: Muscular -->
+  <g transform="translate(450, 0)">
+    <text x="0" y="35" text-anchor="middle" fill="#06b6d4" font-family="system-ui" font-size="14" font-weight="bold">3. MUSCULAR</text>
+    <text x="0" y="52" text-anchor="middle" fill="#94a3b8" font-family="system-ui" font-size="11">Spatulate Paddle Flare</text>
+    <path d="M -16 300
+             L -16 200
+             L -17 120
+             C -20 100, -25 75, -20 60
+             L 20 60
+             C 25 75, 20 100, 17 120
+             L 16 200
+             L 16 300
+             Z"
+          fill="#1e293b" stroke="#06b6d4" stroke-width="3"/>
+    <rect x="-14" y="68" width="28" height="18" rx="2" fill="#06b6d4" opacity="0.4" stroke="#06b6d4" stroke-width="1.5"/>
+    <text x="0" y="325" text-anchor="middle" fill="#06b6d4" font-size="11" font-weight="bold">Spatulate Flare</text>
+    <text x="0" y="340" text-anchor="middle" fill="#94a3b8" font-size="10">Broad paddle tips</text>
+  </g>
+
+  <!-- Column 4: Osseous -->
+  <g transform="translate(630, 0)">
+    <text x="0" y="35" text-anchor="middle" fill="#10b981" font-family="system-ui" font-size="14" font-weight="bold">4. OSSEOUS</text>
+    <text x="0" y="52" text-anchor="middle" fill="#94a3b8" font-family="system-ui" font-size="11">Knotty Nodes / Sunken</text>
+    <path d="M -16 300
+             C -25 280, -24 275, -12 240
+             C -26 200, -24 195, -10 160
+             C -22 120, -20 115, -12 75
+             L 12 75
+             C 20 115, 22 120, 10 160
+             C 24 195, 26 200, 12 240
+             C 24 275, 25 280, 16 300
+             Z"
+          fill="#1e293b" stroke="#10b981" stroke-width="3"/>
+    <ellipse cx="0" cy="120" rx="18" ry="6" fill="#10b981" opacity="0.4"/>
+    <ellipse cx="0" cy="200" rx="20" ry="7" fill="#10b981" opacity="0.5"/>
+    <ellipse cx="0" cy="280" rx="22" ry="8" fill="#10b981" opacity="0.6"/>
+    <text x="0" y="325" text-anchor="middle" fill="#10b981" font-size="11" font-weight="bold">Joints = Widest</text>
+    <text x="0" y="340" text-anchor="middle" fill="#94a3b8" font-size="10">Sunken inter-joint gaps</text>
+  </g>
+
+  <!-- Column 5: Cerebral -->
+  <g transform="translate(800, 0)">
+    <text x="0" y="35" text-anchor="middle" fill="#8b5cf6" font-family="system-ui" font-size="14" font-weight="bold">5. CEREBRAL</text>
+    <text x="0" y="52" text-anchor="middle" fill="#94a3b8" font-family="system-ui" font-size="11">"Smooth Fingers"</text>
+    <path d="M -12 300
+             L -12 200
+             L -12 120
+             C -12 75, -10 65, 0 60
+             C 10 65, 12 75, 12 120
+             L 12 200
+             L 12 300
+             Z"
+          fill="#1e293b" stroke="#8b5cf6" stroke-width="2.8"/>
+    <line x1="-15" y1="70" x2="-15" y2="300" stroke="#8b5cf6" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
+    <line x1="15" y1="70" x2="15" y2="300" stroke="#8b5cf6" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
+    <text x="0" y="325" text-anchor="middle" fill="#8b5cf6" font-size="11" font-weight="bold">Smooth Parallel Lines</text>
+    <text x="0" y="340" text-anchor="middle" fill="#94a3b8" font-size="10">No bulges, pads, or knots</text>
+  </g>
+</svg>

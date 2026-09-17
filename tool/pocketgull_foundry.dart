@@ -51,6 +51,9 @@ const fontStems = [
   'PocketGull-Learn',
   'PocketGull-Lab',
   'PocketGull-Press',
+  'PocketGull-Emoji',
+  'PocketGull-Sign',
+  'PocketGull-ASL',
 ];
 
 Directory findTypefaceDir() {

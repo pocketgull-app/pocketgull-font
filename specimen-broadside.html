@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -342,6 +342,39 @@
     .ismp-feat-tallman {
       font-feature-settings: "case" 1;
       letter-spacing: 0.05em;
+    }
+
+    .ismp-feat-heart {
+      color: var(--rose);
+      font-feature-settings: "ss07" 1;
+    }
+
+    .tittle-variety-mini-selector {
+      display: flex;
+      gap: 4px;
+      margin: 10px 0 6px 0;
+      flex-wrap: wrap;
+    }
+
+    .tittle-variety-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .tittle-variety-pill:hover,
+    .tittle-variety-pill.active {
+      background: rgba(251, 113, 133, 0.2);
+      border-color: var(--rose);
+      color: var(--rose);
     }
 
     .ismp-desc {
@@ -1072,6 +1105,27 @@
           </div>
           <p class="ismp-desc">Prevents fatal look-alike mixups between prednisolone and prednisone.</p>
         </div>
+
+        <!-- Philocardia Heart Tittle Card -->
+        <div class="ismp-card" id="ismpCardHeart" style="border-color: rgba(251, 113, 133, 0.35); background: linear-gradient(180deg, rgba(251, 113, 133, 0.05) 0%, var(--card-bg) 100%);">
+          <div class="ismp-title" style="color: var(--rose); display: flex; justify-content: space-between; align-items: center;">
+            <span>Philocardia Hearts (cv09 / ss07)</span>
+            <button type="button" id="broadsideHeartBpmBadge" title="72 BPM Sinus Rhythm" style="background: rgba(251, 113, 133, 0.18); border: 1px solid rgba(251, 113, 133, 0.4); color: var(--rose); font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; cursor: pointer;">72 BPM</button>
+          </div>
+          <div class="ismp-comparison">
+            <span class="ismp-standard">clinical</span>
+            <span class="ismp-safe ismp-feat-heart" id="broadsideHeartComparison" style="color: var(--rose);">cl<span class="philocardia-heart philocardia-pacing-72" title="Philocardia Heart Tittle">ı</span>n<span class="philocardia-heart philocardia-pacing-72" title="Philocardia Heart Tittle">ı</span>cal</span>
+          </div>
+          <div class="tittle-variety-mini-selector" id="broadsideTittleVarietyMini">
+            <button type="button" class="tittle-variety-pill active" data-v="heart" title="Heart (♥): Bedside warmth & lovingkindness">♥</button>
+            <button type="button" class="tittle-variety-pill" data-v="blossom" title="Blossom (✤): Ecological rebirth">✤</button>
+            <button type="button" class="tittle-variety-pill" data-v="nuqta" title="Nuqṭa (◆): Calligraphic reed-pen footprint">◆</button>
+            <button type="button" class="tittle-variety-pill" data-v="star" title="Star (✦): Orientation and calm">✦</button>
+            <button type="button" class="tittle-variety-pill" data-v="droplet" title="Droplet (💧): Hydration & watershed care">💧</button>
+            <button type="button" class="tittle-variety-pill" data-v="dot" title="Dot (●): Traditional clinical dot">●</button>
+          </div>
+          <p class="ismp-desc" id="broadsideTittleDesc">Bedside empathy & pediatric care: transforms circular dot tittles into calibrated sinus-rhythm heart forms.</p>
+        </div>
       </div>
     </section>
 
@@ -1464,7 +1518,7 @@
             <div class="guide-line baseline"></div>
             <span class="guide-tag base">BASELINE (0)</span>
 
-            <div class="specimen-text-guide" style="font-family: 'DejaVu Sans', sans-serif; color: #94a3b8; transform: translateY(-8px);">
+            <div class="specimen-text-guide" style="font-family: 'Segoe UI Symbol', 'Apple Symbols', 'DejaVu Sans', 'Noto Sans Symbols 2', 'PocketGull Fallback', sans-serif; color: #94a3b8; transform: translateY(-8px);">
               Rx: ⠁⠍⠕⠭ 500mg
             </div>
           </div>
@@ -1564,6 +1618,9 @@
         if (!vfText) return;
         const parts = [];
         let opszVal = 36;
+        let wghtVal = 600;
+        let wdthVal = 100;
+        let slntVal = 0;
 
         axes.forEach(a => {
           const slider = document.getElementById(a.el);
@@ -1573,11 +1630,17 @@
             if (valLabel) valLabel.textContent = num + a.unit;
             parts.push(`'${a.id}' ${num}`);
             if (a.id === 'opsz') opszVal = num;
+            if (a.id === 'wght') wghtVal = num;
+            if (a.id === 'wdth') wdthVal = num;
+            if (a.id === 'slnt') slntVal = num;
           }
         });
 
         const fvs = parts.join(', ');
         vfText.style.fontVariationSettings = fvs;
+        vfText.style.fontWeight = wghtVal;
+        vfText.style.fontStretch = wdthVal + '%';
+        vfText.style.fontStyle = slntVal === 0 ? 'normal' : `oblique ${Math.abs(slntVal)}deg`;
         vfText.style.fontSize = Math.min(Math.max(opszVal, 20), 48) + 'px';
         if (readout) {
           readout.textContent = `font-variation-settings: ${fvs}`;
@@ -1739,6 +1802,27 @@
           }
         });
       }
+
+      // Philocardia Tittle Varieties
+      const broadsideMeanings = {
+        heart: '💖 <strong>Philocardia:</strong> Bedside warmth, pediatric comfort, and lovingkindness.',
+        blossom: '🌸 <strong>Blossom:</strong> Re-wilding, ecological rebirth, and native pollinator sanctuaries.',
+        nuqta: '💎 <strong>Nuqṭa:</strong> Authentic calligraphic reed-pen footprint and sacred geometric origin.',
+        star: '✨ <strong>Star:</strong> Orientation and calm in dark, anxious times.',
+        droplet: '💧 <strong>Droplet:</strong> Watershed care, clean hydration, and patient comfort.',
+        dot: '⚪ <strong>Dot:</strong> Humble clarity and patient, steady clinical fundamentals.'
+      };
+
+      document.querySelectorAll('#broadsideTittleVarietyMini .tittle-variety-pill').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const v = btn.dataset.v;
+          document.querySelectorAll('#broadsideTittleVarietyMini .tittle-variety-pill').forEach(b => b.classList.toggle('active', b === btn));
+          const card = document.getElementById('ismpCardHeart');
+          if (card) card.setAttribute('data-tittle-variety', v);
+          const desc = document.getElementById('broadsideTittleDesc');
+          if (desc) desc.innerHTML = broadsideMeanings[v] || '';
+        });
+      });
 
       updateEcoCalc();
       updateAll();

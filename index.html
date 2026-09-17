@@ -763,6 +763,44 @@
       letter-spacing: 0.05em;
     }
 
+    .ismp-feat-heart {
+      color: var(--rose);
+      font-feature-settings: "ss07" 1;
+    }
+
+    .tittle-variety-mini-selector {
+      display: flex;
+      gap: 4px;
+      margin: 10px 0 6px 0;
+      flex-wrap: wrap;
+    }
+
+    .tittle-variety-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .tittle-variety-pill:hover,
+    .tittle-variety-pill.active {
+      background: rgba(251, 113, 133, 0.2);
+      border-color: var(--rose);
+      color: var(--rose);
+    }
+
+    .healer-cadence-btn,
+    .variety-btn {
+      transition: all 0.2s ease;
+    }
+
     .ismp-desc {
       font-size: 12px;
       color: var(--text-muted);
@@ -1460,6 +1498,7 @@
       <a href="#box-geometry" class="nav-link" style="color: var(--cyan);">Box Geometry</a>
       <a href="kinetic_laboratory.html" class="nav-link" style="color: var(--amber); font-weight: 700;">Kinetic Lab ⚙️</a>
       <a href="music_studio.html" class="nav-link" style="color: #818cf8; font-weight: 700;">Music Studio 🎼</a>
+      <a href="asl_studio.html" class="nav-link" style="color: #34d399; font-weight: 700;">Sign Studio 🤟</a>
       <a href="#chromatic-studio" class="nav-link" style="color: #ec4899; font-weight: 700;">Chromatic Studio 🎨</a>
       <a href="#halftone-engineering" class="nav-link" style="color: #ec4899;">Halftone &amp; Print</a>
       <a href="#raster-benchmark" class="nav-link" style="color: var(--emerald); font-weight: 700;">Speed Benchmark ⚡</a>
@@ -1520,6 +1559,9 @@
         </a>
         <a href="music_studio.html" class="hero-btn-secondary" style="border-color: rgba(99, 102, 241, 0.5); color: #818cf8;">
           🎼 Music Studio &amp; Web Audio
+        </a>
+        <a href="asl_studio.html" class="hero-btn-secondary" style="border-color: rgba(16, 185, 129, 0.5); color: #34d399;">
+          🤟 Global Sign &amp; ASL Studio
         </a>
         <a href="#raster-benchmark" class="hero-btn-secondary" style="border-color: rgba(34, 197, 94, 0.4); color: var(--emerald);">
           ⚡ Speed Benchmark (30.8×)
@@ -1627,6 +1669,7 @@
       <div id="vfPresetControls" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; justify-content: flex-start;">
         <button type="button" class="preset-pill active" data-preset="healing" style="background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.5); color: #34d399; padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer;">🌿 Happy &amp; Healing Sanctuary</button>
         <button type="button" class="preset-pill" data-preset="heading_home" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); color: var(--text-main); padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer;">🌱 Heading Home (72 bpm)</button>
+        <button type="button" class="preset-pill" data-preset="philocardia" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); color: #fb7185; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer;">💖 Philocardia (Hearts)</button>
         <button type="button" class="preset-pill" data-preset="hairline" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); color: var(--text-main); padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer;">Hairline 100</button>
         <button type="button" class="preset-pill" data-preset="thin" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); color: var(--text-main); padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer;">Thin 200</button>
         <button type="button" class="preset-pill" data-preset="fineliner" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); color: var(--text-main); padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer;">Fineliner 400</button>
@@ -1771,7 +1814,7 @@
         <div style="padding-top: 14px; border-top: 1px dashed var(--card-border);">
           <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #a855f7; letter-spacing: 0.06em; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
             <span>IV. World Scripts &amp; Braille</span>
-            <span style="font-size: 10px; color: var(--text-muted); font-weight: 400;">(Arabic &bull; Inuktitut &bull; Chinuk Pipa &bull; Braille)</span>
+            <span style="font-size: 10px; color: var(--text-muted); font-weight: 400;">(Arabic Nuqta &bull; Inuktitut Syllabics &bull; Tactile Braille)</span>
           </div>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;">
             <div>
@@ -1787,13 +1830,6 @@
                 <span id="val-INUK" style="font-family: 'PocketGull Mono'; color: #a855f7; font-weight: 700;">0.0</span>
               </label>
               <input type="range" id="slider-INUK" min="0" max="1" step="0.05" value="0" style="width: 100%; accent-color: #a855f7; cursor: pointer;">
-            </div>
-            <div>
-              <label for="slider-CHIN" style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 5px;">
-                <span>Chinuk Pipa Ratio (CHIN: 1.0 ↔ 2.0)</span>
-                <span id="val-CHIN" style="font-family: 'PocketGull Mono'; color: #a855f7; font-weight: 700;">1.0</span>
-              </label>
-              <input type="range" id="slider-CHIN" min="1.0" max="2.0" step="0.05" value="1.0" style="width: 100%; accent-color: #a855f7; cursor: pointer;">
             </div>
             <div>
               <label for="slider-BRLS" style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 5px;">
@@ -1883,6 +1919,61 @@
             <span><strong style="font-family: 'PocketGull Bold'; color: var(--rose);">Epi</strong>nephrine <strong style="font-family: 'PocketGull Bold'; color: var(--rose);">10</strong>mcg</span>
           </div>
           <p class="ismp-desc">Optically guides clinician saccadic eye fixation to prevent dosage oversights.</p>
+        </div>
+
+        <!-- Philocardia Heart Tittle Card -->
+        <div class="ismp-card" id="ismpCardHeart" style="border-color: rgba(251, 113, 133, 0.35); background: linear-gradient(180deg, rgba(251, 113, 133, 0.05) 0%, var(--card-bg) 100%);">
+          <div class="ismp-title" style="color: var(--rose); display: flex; justify-content: space-between; align-items: center;">
+            <span>Philocardia Hearts (cv09 / ss07)</span>
+            <button type="button" id="heartBpmBadge" title="Click to cycle cardiac pacing: 72 BPM -> 60 BPM -> Static" style="background: rgba(251, 113, 133, 0.18); border: 1px solid rgba(251, 113, 133, 0.4); color: var(--rose); font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; cursor: pointer;">72 BPM</button>
+          </div>
+          <div class="ismp-comparison">
+            <span class="ismp-standard">clinical</span>
+            <span class="ismp-safe ismp-feat-heart" id="ismpHeartComparison" style="color: var(--rose);">cl<span class="philocardia-heart philocardia-pacing-72" title="Philocardia Heart Tittle">ı</span>n<span class="philocardia-heart philocardia-pacing-72" title="Philocardia Heart Tittle">ı</span>cal</span>
+          </div>
+          <div class="tittle-variety-mini-selector" id="tittleVarietyMini">
+            <button type="button" class="tittle-variety-pill active" data-v="heart" title="Heart (♥): Bedside warmth & lovingkindness">♥</button>
+            <button type="button" class="tittle-variety-pill" data-v="blossom" title="Blossom (✤): Ecological rebirth">✤</button>
+            <button type="button" class="tittle-variety-pill" data-v="nuqta" title="Nuqṭa (◆): Calligraphic reed-pen footprint">◆</button>
+            <button type="button" class="tittle-variety-pill" data-v="star" title="Star (✦): Orientation and calm">✦</button>
+            <button type="button" class="tittle-variety-pill" data-v="droplet" title="Droplet (💧): Hydration & watershed care">💧</button>
+            <button type="button" class="tittle-variety-pill" data-v="dot" title="Dot (●): Traditional clinical dot">●</button>
+          </div>
+          <p class="ismp-desc" id="tittleVarietyDesc">Bedside empathy & pediatric care: transforms circular dot tittles into calibrated sinus-rhythm heart forms.</p>
+        </div>
+      </div>
+
+      <!-- Interactive Philocardia Healer Banner -->
+      <div class="philocardia-healer-banner" style="margin-top: 24px; padding: 20px 24px; background: rgba(251, 113, 133, 0.04); border: 1px solid rgba(251, 113, 133, 0.25); border-radius: 12px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
+        <div style="flex: 1 1 340px;">
+          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--rose); font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+            <span>❤️ The Healer Alternate • Live Heart Tittle Studio</span>
+          </div>
+          <div id="philocardiaInteractiveText" class="font-sample-bold" contenteditable="true" spellcheck="false" style="font-size: clamp(22px, 2.6vw, 32px); color: var(--sample-text); outline: none; line-height: 1.3;" title="Click to edit and test heart tittles in real time">
+            Ped<span class="philocardia-heart philocardia-pacing-72">ı</span>atr<span class="philocardia-heart philocardia-pacing-72">ı</span>c Care • Fl<span class="philocardia-heart philocardia-pacing-72">ı</span>ght Sanctuary!
+          </div>
+          <div style="font-size: 12px; color: var(--text-muted); margin-top: 8px;" id="healerBannerMeaning">
+            💖 <strong>Philocardia:</strong> Bedside warmth, pediatric comfort, and lovingkindness. Type lowercase <code>i</code>, <code>j</code>, or <code>!</code> above.
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-end;">
+          <div style="display: flex; gap: 6px; align-items: center;">
+            <span style="font-size: 12px; color: var(--text-muted); font-weight: 600;">Cadence:</span>
+            <button type="button" class="healer-cadence-btn active" data-cadence="72" style="background: rgba(251, 113, 133, 0.2); border: 1px solid var(--rose); color: var(--rose); padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer;">72 BPM</button>
+            <button type="button" class="healer-cadence-btn" data-cadence="60" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); color: var(--text-muted); padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer;">60 BPM</button>
+            <button type="button" class="healer-cadence-btn" data-cadence="static" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); color: var(--text-muted); padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer;">Static</button>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: center;">
+            <span style="font-size: 12px; color: var(--text-muted); font-weight: 600;">Variety:</span>
+            <div id="healerVarietyToolbar" style="display: flex; gap: 4px;">
+              <button type="button" class="variety-btn active" data-variety="heart" style="padding: 4px 9px; border-radius: 5px; border: 1px solid var(--rose); background: rgba(251,113,133,0.2); color: var(--rose); font-size: 13px; cursor: pointer;" title="Heart (♥)">♥</button>
+              <button type="button" class="variety-btn" data-variety="blossom" style="padding: 4px 9px; border-radius: 5px; border: 1px solid var(--card-border); background: rgba(255,255,255,0.05); color: var(--text-muted); font-size: 13px; cursor: pointer;" title="Blossom (✤)">✤</button>
+              <button type="button" class="variety-btn" data-variety="nuqta" style="padding: 4px 9px; border-radius: 5px; border: 1px solid var(--card-border); background: rgba(255,255,255,0.05); color: var(--text-muted); font-size: 13px; cursor: pointer;" title="Nuqta (◆)">◆</button>
+              <button type="button" class="variety-btn" data-variety="star" style="padding: 4px 9px; border-radius: 5px; border: 1px solid var(--card-border); background: rgba(255,255,255,0.05); color: var(--text-muted); font-size: 13px; cursor: pointer;" title="Star (✦)">✦</button>
+              <button type="button" class="variety-btn" data-variety="droplet" style="padding: 4px 9px; border-radius: 5px; border: 1px solid var(--card-border); background: rgba(255,255,255,0.05); color: var(--text-muted); font-size: 13px; cursor: pointer;" title="Droplet (💧)">💧</button>
+              <button type="button" class="variety-btn" data-variety="dot" style="padding: 4px 9px; border-radius: 5px; border: 1px solid var(--card-border); background: rgba(255,255,255,0.05); color: var(--text-muted); font-size: 13px; cursor: pointer;" title="Classic Dot (●)">●</button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -2443,6 +2534,14 @@
             <div style="font-size: 12px; font-weight: 700; color: var(--emerald); margin-bottom: 4px;">⠎ ISO/TR 11548 Braille (Tactile Pitch)</div>
             <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5; margin: 0;">
               Complete 256-cell Unicode coverage (U+2800–U+28FF) with standard 2.5 mm dot pitch (r = 60 UPM). Grounded on the Latin baseline (y = 0) to eliminate floating tactile artifacts.
+            </p>
+          </div>
+
+          <!-- Global Sign & ASL -->
+          <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 14px;">
+            <div style="font-size: 12px; font-weight: 700; color: #34d399; margin-bottom: 4px;">🤟 Global Sign &amp; ASL (<a href="asl_studio.html" style="color: #34d399; text-decoration: underline;">Sign Studio</a>)</div>
+            <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5; margin: 0;">
+              One-handed ASL fingerspelling, two-handed BSL comparative engine, and clinical emergency hand signals engineered on a 600 UPM telemetry grid with 25 UPM felt-marker fillets.
             </p>
           </div>
 
@@ -3648,6 +3747,8 @@
         const parts = [];
         let opszVal = 36;
         let wghtVal = 400;
+        let wdthVal = 100;
+        let slntVal = 0;
 
         axes.forEach(a => {
           const slider = document.getElementById(a.el);
@@ -3658,12 +3759,17 @@
             parts.push(`'${a.id}' ${num}`);
             if (a.id === 'opsz') opszVal = num;
             if (a.id === 'wght') wghtVal = num;
+            if (a.id === 'wdth') wdthVal = num;
+            if (a.id === 'slnt') slntVal = num;
           }
         });
 
         const fvs = parts.join(', ');
         vfText.style.fontVariationSettings = fvs;
         vfText.style.fontFamily = '"PocketGull VF", "PocketGull", sans-serif';
+        vfText.style.fontWeight = wghtVal;
+        vfText.style.fontStretch = wdthVal + '%';
+        vfText.style.fontStyle = slntVal === 0 ? 'normal' : `oblique ${Math.abs(slntVal)}deg`;
         vfText.style.fontSize = Math.min(Math.max(opszVal, 16), 48) + 'px';
         
         if (readout) {
@@ -3694,6 +3800,7 @@
       const presets = {
         healing:      { wght: 500, wdth: 100, slnt: 0, opsz: 36, SOFT: 0.2, HLNG: 1.0, APTR: 0.8, SMRN: 0.5, THRM: 0, BION: 0, GRAV: 0, BOUM: 0.6, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
         heading_home: { wght: 400, wdth: 100, slnt: 0, opsz: 32, SOFT: 0.3, HLNG: 1.0, APTR: 0.6, SMRN: 0.4, THRM: 0, BION: 0, GRAV: 0, BOUM: 0.5, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
+        philocardia:  { wght: 500, wdth: 100, slnt: 0, opsz: 36, SOFT: 0.4, HLNG: 1.0, APTR: 0.8, SMRN: 0.8, THRM: 0, BION: 0, GRAV: 0, BOUM: 0.6, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
         hairline:     { wght: 100, wdth: 100, slnt: 0, opsz: 36, SOFT: 0,   HLNG: 0,   APTR: 0,   SMRN: 0,   THRM: 0, BION: 0, GRAV: 0, BOUM: 0,   CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
         thin:         { wght: 200, wdth: 100, slnt: 0, opsz: 36, SOFT: 0,   HLNG: 0,   APTR: 0,   SMRN: 0,   THRM: 0, BION: 0, GRAV: 0, BOUM: 0,   CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
         fineliner:    { wght: 400, wdth: 100, slnt: 0, opsz: 36, SOFT: 0,   HLNG: 0,   APTR: 0,   SMRN: 0,   THRM: 0, BION: 0, GRAV: 0, BOUM: 0,   CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
@@ -3722,6 +3829,10 @@
             btn.style.background = 'rgba(16, 185, 129, 0.2)';
             btn.style.borderColor = 'rgba(16, 185, 129, 0.5)';
             btn.style.color = '#34d399';
+          } else if (key === 'philocardia') {
+            btn.style.background = 'rgba(251, 113, 133, 0.2)';
+            btn.style.borderColor = 'rgba(251, 113, 133, 0.5)';
+            btn.style.color = '#fb7185';
           } else {
             btn.style.background = 'rgba(56, 189, 248, 0.15)';
             btn.style.borderColor = 'rgba(56, 189, 248, 0.4)';
@@ -3792,6 +3903,122 @@
             copyMemoBtn.innerHTML = '<span>⚠</span> Copy Failed';
             setTimeout(() => { copyMemoBtn.innerHTML = '<span>📋</span> Copy Request Letter'; }, 2500);
           });
+        });
+      }
+
+      // 3.5 Philocardia Heart Tittles & Tittle Varieties Engine
+      const varietyMeanings = {
+        heart: '💖 <strong>Philocardia:</strong> Bedside warmth, pediatric comfort, and lovingkindness.',
+        blossom: '🌸 <strong>Blossom:</strong> Re-wilding, ecological rebirth, and native pollinator sanctuaries.',
+        nuqta: '💎 <strong>Nuqṭa:</strong> Authentic calligraphic reed-pen footprint and sacred geometric origin.',
+        star: '✨ <strong>Star:</strong> Orientation and calm in dark, anxious times.',
+        droplet: '💧 <strong>Droplet:</strong> Watershed care, clean hydration, and patient comfort.',
+        dot: '⚪ <strong>Dot:</strong> Humble clarity and patient, steady clinical fundamentals.'
+      };
+
+      let currentVariety = 'heart';
+      let currentCadence = '72';
+
+      function updateHealerSpecimen() {
+        const textEl = document.getElementById('philocardiaInteractiveText');
+        if (!textEl) return;
+
+        let pacingClass = '';
+        if (currentCadence === '72') pacingClass = 'philocardia-pacing-72';
+        else if (currentCadence === '60') pacingClass = 'philocardia-pacing-60';
+
+        let raw = textEl.textContent || '';
+        raw = raw.replace(/ı/g, 'i').replace(/ȷ/g, 'j');
+
+        if (currentVariety === 'dot') {
+          textEl.textContent = raw;
+        } else {
+          const classI = pacingClass ? `philocardia-heart ${pacingClass}` : 'philocardia-heart';
+          const classJ = pacingClass ? `philocardia-j ${pacingClass}` : 'philocardia-j';
+          const classExcl = pacingClass ? `philocardia-excl ${pacingClass}` : 'philocardia-excl';
+          
+          let formatted = '';
+          for (let char of raw) {
+            if (char === 'i') formatted += `<span class="${classI}">ı</span>`;
+            else if (char === 'j') formatted += `<span class="${classJ}">ȷ</span>`;
+            else if (char === '!') formatted += `<span class="${classExcl}">!</span>`;
+            else formatted += char;
+          }
+          textEl.innerHTML = formatted;
+        }
+
+        const compEl = document.getElementById('ismpHeartComparison');
+        if (compEl) {
+          const classI = pacingClass ? `philocardia-heart ${pacingClass}` : 'philocardia-heart';
+          compEl.innerHTML = `cl<span class="${classI}">ı</span>n<span class="${classI}">ı</span>cal`;
+        }
+      }
+
+      function setVariety(v) {
+        currentVariety = v;
+        document.documentElement.setAttribute('data-tittle-variety', v);
+
+        document.querySelectorAll('.tittle-variety-pill').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.v === v);
+        });
+        document.querySelectorAll('#healerVarietyToolbar .variety-btn').forEach(btn => {
+          const isMatch = btn.dataset.variety === v;
+          btn.classList.toggle('active', isMatch);
+          btn.style.background = isMatch ? 'rgba(251,113,133,0.2)' : 'rgba(255,255,255,0.05)';
+          btn.style.borderColor = isMatch ? 'var(--rose)' : 'var(--card-border)';
+          btn.style.color = isMatch ? 'var(--rose)' : 'var(--text-muted)';
+        });
+
+        const descEl = document.getElementById('tittleVarietyDesc');
+        if (descEl) descEl.innerHTML = varietyMeanings[v] || '';
+        const bannerDesc = document.getElementById('healerBannerMeaning');
+        if (bannerDesc) bannerDesc.innerHTML = `${varietyMeanings[v] || ''} Type lowercase <code>i</code>, <code>j</code>, or <code>!</code> above.`;
+
+        updateHealerSpecimen();
+      }
+
+      document.querySelectorAll('.tittle-variety-pill').forEach(btn => {
+        btn.addEventListener('click', () => setVariety(btn.dataset.v));
+      });
+
+      document.querySelectorAll('#healerVarietyToolbar .variety-btn').forEach(btn => {
+        btn.addEventListener('click', () => setVariety(btn.dataset.variety));
+      });
+
+      function setCadence(cadence) {
+        currentCadence = cadence;
+        const badge = document.getElementById('heartBpmBadge');
+        if (badge) {
+          badge.textContent = cadence === '72' ? '72 BPM' : cadence === '60' ? '60 BPM' : 'Static';
+        }
+
+        document.querySelectorAll('.healer-cadence-btn').forEach(btn => {
+          const isMatch = btn.dataset.cadence === cadence;
+          btn.classList.toggle('active', isMatch);
+          btn.style.background = isMatch ? 'rgba(251,113,133,0.2)' : 'rgba(255,255,255,0.05)';
+          btn.style.borderColor = isMatch ? 'var(--rose)' : 'var(--card-border)';
+          btn.style.color = isMatch ? 'var(--rose)' : 'var(--text-muted)';
+        });
+
+        updateHealerSpecimen();
+      }
+
+      document.querySelectorAll('.healer-cadence-btn').forEach(btn => {
+        btn.addEventListener('click', () => setCadence(btn.dataset.cadence));
+      });
+
+      const heartBadge = document.getElementById('heartBpmBadge');
+      if (heartBadge) {
+        heartBadge.addEventListener('click', () => {
+          const next = currentCadence === '72' ? '60' : currentCadence === '60' ? 'static' : '72';
+          setCadence(next);
+        });
+      }
+
+      const healerInput = document.getElementById('philocardiaInteractiveText');
+      if (healerInput) {
+        healerInput.addEventListener('blur', () => {
+          updateHealerSpecimen();
         });
       }
 
@@ -4522,6 +4749,8 @@
 
       updateEcoCalc();
       updateAllAxes();
+      setVariety('heart');
+      setCadence('72');
     })();
   </script>
 

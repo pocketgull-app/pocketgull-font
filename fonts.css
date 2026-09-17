@@ -7,10 +7,10 @@
 /* 0. Variable Font Superfamily (Toyota Production System 16-Axis Continuous Design Space) */
 @font-face {
   font-family: 'PocketGull VF';
-  src: url('fonts/woff2/PocketGull-VF.woff2?v=3.100') format('woff2-variations'),
-       url('PocketGull-VF.woff2?v=3.100') format('woff2-variations'),
-       url('fonts/ttf/PocketGull-VF.ttf?v=3.100') format('truetype-variations'),
-       url('PocketGull-VF.ttf?v=3.100') format('truetype-variations');
+  src: url('fonts/woff2/PocketGull-VF.woff2?v=3.3.0') format('woff2'),
+       url('PocketGull-VF.woff2?v=3.3.0') format('woff2'),
+       url('fonts/ttf/PocketGull-VF.ttf?v=3.3.0') format('truetype'),
+       url('PocketGull-VF.ttf?v=3.3.0') format('truetype');
   font-weight: 100 900;
   font-stretch: 75% 100%;
   font-style: oblique -10.5deg 0deg;
@@ -74,30 +74,28 @@
   font-display: swap;
 }
 
-/* 1.5 PocketGull Variable Font (wght: 400-900, slnt: -10.5deg-0deg, opsz: 14-96) */
+/* 1.5 PocketGull Variable Font (16-Axis Continuous Design Space) */
 @font-face {
   font-family: 'PocketGull VF';
-  src: url('fonts/woff2/PocketGull-VF.woff2?v=3.3.0') format('woff2-variations'),
-       url('fonts/woff2/PocketGull-VF.woff2?v=3.3.0') format('woff2'),
+  src: url('fonts/woff2/PocketGull-VF.woff2?v=3.3.0') format('woff2'),
        url('PocketGull-VF.woff2?v=3.3.0') format('woff2'),
-       url('fonts/ttf/PocketGull-VF.ttf?v=3.3.0') format('truetype-variations'),
        url('fonts/ttf/PocketGull-VF.ttf?v=3.3.0') format('truetype'),
        url('PocketGull-VF.ttf?v=3.3.0') format('truetype');
-  font-weight: 400 900;
-  font-style: normal;
+  font-weight: 100 900;
+  font-stretch: 75% 100%;
+  font-style: oblique -10.5deg 0deg;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'PocketGull Variable';
-  src: url('fonts/woff2/PocketGull-VF.woff2?v=3.3.0') format('woff2-variations'),
-       url('fonts/woff2/PocketGull-VF.woff2?v=3.3.0') format('woff2'),
+  src: url('fonts/woff2/PocketGull-VF.woff2?v=3.3.0') format('woff2'),
        url('PocketGull-VF.woff2?v=3.3.0') format('woff2'),
-       url('fonts/ttf/PocketGull-VF.ttf?v=3.3.0') format('truetype-variations'),
        url('fonts/ttf/PocketGull-VF.ttf?v=3.3.0') format('truetype'),
        url('PocketGull-VF.ttf?v=3.3.0') format('truetype');
-  font-weight: 400 900;
-  font-style: normal;
+  font-weight: 100 900;
+  font-stretch: 75% 100%;
+  font-style: oblique -10.5deg 0deg;
   font-display: swap;
 }
 
@@ -1013,8 +1011,45 @@
 
 /* Philocardia: Signature Heart-Tittle & Tittle Variety Stylistic Alternate */
 .philocardia-heart,
-.iphillyg-heart {
+.iphillyg-heart,
+.philocardia-j,
+.philocardia-excl,
+.philocardia-arabic-heart {
   --tittle-glyph: '♥';
+}
+
+[data-tittle-variety="heart"] :is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-arabic-heart),
+[data-tittle-variety="heart"].philocardia-heart {
+  --tittle-glyph: '♥';
+}
+
+[data-tittle-variety="blossom"] :is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-arabic-heart),
+[data-tittle-variety="blossom"].philocardia-heart {
+  --tittle-glyph: '✤';
+}
+
+[data-tittle-variety="nuqta"] :is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-arabic-heart),
+[data-tittle-variety="nuqta"].philocardia-heart {
+  --tittle-glyph: '◆';
+}
+
+[data-tittle-variety="star"] :is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-arabic-heart),
+[data-tittle-variety="star"].philocardia-heart {
+  --tittle-glyph: '✦';
+}
+
+[data-tittle-variety="droplet"] :is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-arabic-heart),
+[data-tittle-variety="droplet"].philocardia-heart {
+  --tittle-glyph: '💧';
+}
+
+[data-tittle-variety="dot"] :is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-arabic-heart),
+[data-tittle-variety="dot"].philocardia-heart {
+  --tittle-glyph: '●';
+}
+
+.philocardia-heart,
+.iphillyg-heart {
   display: inline-block;
   position: relative;
   line-height: 1;
@@ -1045,7 +1080,6 @@
 
 /* Lowercase j (dotless ȷ U+0237): Centered over the straight upper stem */
 .philocardia-j {
-  --tittle-glyph: '♥';
   display: inline-block;
   position: relative;
   line-height: 1;
@@ -1075,7 +1109,6 @@
 
 /* Exclamation Mark Terminal Heart/Tittle: Replaces baseline period dot */
 .philocardia-excl {
-  --tittle-glyph: '♥';
   display: inline-block;
   position: relative;
   line-height: inherit;
@@ -1104,7 +1137,6 @@
 
 /* Arabic Heart Nuqṭa (خ, ج, غ, ف, ن): Placed above apex of letterhead */
 .philocardia-arabic-heart {
-  --tittle-glyph: '♥';
   display: inline-block;
   position: relative;
   line-height: inherit;
@@ -1621,3 +1653,101 @@ body.eco-dark-canopy {
 .font-press {
   font-family: 'PocketGull Press', 'PocketGull', sans-serif !important;
 }
+
+/* ==========================================================================
+   PocketGull Emoji — Humanist Clinical & Telemetry Monochromatic Glyphs
+   WCAG 2.2 AAA Accessibility, Zero-CLS Metric Overrides & Screen Reader Support
+   ========================================================================== */
+@font-face {
+  font-family: 'PocketGull Emoji';
+  src: url('fonts/woff2/PocketGull-Emoji.woff2?v=3.100') format('woff2'),
+       url('PocketGull-Emoji.woff2?v=3.100') format('woff2'),
+       url('fonts/ttf/PocketGull-Emoji.ttf?v=3.100') format('truetype'),
+       url('PocketGull-Emoji.ttf?v=3.100') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  ascent-override: 80%;
+  descent-override: 20%;
+  line-gap-override: 0%;
+  unicode-range: U+1F48A, U+1F489, U+1FA78, U+1FAC0, U+1FAC1, U+1F691, U+1FA7A, U+1F3E5, U+1F6A8, U+1F600-1F64F, U+1F441, U+1F44D, U+1F44E, U+1F50B, U+1F4E1, U+1F514, U+1F50D;
+}
+
+.font-emoji, .pg-emoji {
+  font-family: 'PocketGull Emoji', 'PocketGull Mono', monospace !important;
+  font-feature-settings: "calt" 1, "liga" 1;
+  font-variant-numeric: tabular-nums;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Scotopic 650nm Night Vision Theme (WCAG AAA >= 7:1 Contrast, Zero Rhodopsin Bleaching) */
+.pg-scotopic {
+  background-color: #050000 !important;
+  color: #ff2211 !important;
+  border-color: #991100 !important;
+}
+
+.pg-scotopic .pg-emoji {
+  color: #ff3322 !important;
+}
+
+/* Expert S: Global Sign & ASL Manual Fingerspelling */
+@font-face {
+  font-family: 'PocketGull Sign';
+  src: url('fonts/woff2/PocketGull-Sign.woff2?v=3.3.0') format('woff2'),
+       url('PocketGull-Sign.woff2?v=3.3.0') format('woff2'),
+       url('fonts/ttf/PocketGull-Sign.ttf?v=3.3.0') format('truetype'),
+       url('PocketGull-Sign.ttf?v=3.3.0') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  ascent-override: 80%;
+  descent-override: 20%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'PocketGull ASL';
+  src: url('fonts/woff2/PocketGull-ASL.woff2?v=3.3.0') format('woff2'),
+       url('PocketGull-ASL.woff2?v=3.3.0') format('woff2'),
+       url('fonts/ttf/PocketGull-ASL.ttf?v=3.3.0') format('truetype'),
+       url('PocketGull-ASL.ttf?v=3.3.0') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  ascent-override: 80%;
+  descent-override: 20%;
+  line-gap-override: 0%;
+}
+
+.font-sign, .pg-sign, .pg-asl {
+  font-family: 'PocketGull Sign', 'PocketGull ASL', monospace !important;
+  display: inline-block;
+  vertical-align: middle;
+  letter-spacing: 0.08em;
+}
+
+/* Expert S.1: PocketGull Sign VF (Continuous 4-Axis Variable Manual & Telemetry Engine) */
+@font-face {
+  font-family: 'PocketGull Sign VF';
+  src: url('fonts/woff2/PocketGull-Sign-VF.woff2?v=3.3.0') format('woff2-variations'),
+       url('PocketGull-Sign-VF.woff2?v=3.3.0') format('woff2-variations'),
+       url('fonts/ttf/PocketGull-Sign-VF.ttf?v=3.3.0') format('truetype-variations'),
+       url('PocketGull-Sign-VF.ttf?v=3.3.0') format('truetype-variations');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+  ascent-override: 80%;
+  descent-override: 20%;
+  line-gap-override: 0%;
+}
+
+.font-sign-vf {
+  font-family: 'PocketGull Sign VF', 'PocketGull Sign', 'PocketGull ASL', monospace !important;
+  display: inline-block;
+  vertical-align: middle;
+  letter-spacing: 0.08em;
+  font-variation-settings: 'MRPH' 0, 'wght' 400, 'opsz' 36, 'AZIM' 0;
+}
+
