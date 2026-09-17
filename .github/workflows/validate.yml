@@ -37,13 +37,8 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: Install Python Dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install fonttools fontbakery gftools opentype-sanitizer
-
-      - name: Install NPM Dependencies
-        run: npm ci || npm install --package-lock-only
+      - name: Install Python Dependencies (Cryptographically Hash-Pinned)
+        run: python -m pip install --require-hashes -r requirements-ci.txt
 
       - name: 1. Thomas Phinney Forensic Font Invariant Audit (Dart 3.11)
         run: dart run tool/pocketgull_foundry.dart audit
