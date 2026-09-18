@@ -2,7 +2,7 @@
 ## Sovereign Typography, Clinical Life-Safety & Procedural Acceleration
 
 **Author**: The PocketGull Project Authors & Typefoundry Engineering Team  
-**Date**: 2026-09-06T09:10:12Z  
+**Date**: 2026-09-18T15:17:28Z  
 **Status**: Peer-Reviewed Empirical Case Study  
 **Artifacts**: `PocketGull-Bold.ttf`, `PocketGull-Fineliner.ttf`, `PocketGull-Chiseltip.ttf`, `PocketGullMono-Regular.ttf`  
 **Standard**: Google Fonts Specifications (34/34 Passed), OpenType 1.9, Louise Sloan 5:1 Optotypes, WCAG AAA  
@@ -19,10 +19,10 @@ In this case study, we document the architectural synthesis, optical calibration
 
 ### Empirical Performance Summary
 - **Codepoints Synthesized**: 59 assigned Unicode points
-- **Concrete Glyphs Compiled**: 295 across 4 font cuts
-- **Pipeline Runtime**: 50256.95 ms (50.26 seconds)
-- **Manual Designer Benchmark**: 221.2 person-hours (at 45 min/glyph)
-- **Empirical Acceleration Factor**: **15,848x faster** than traditional manual tracing
+- **Concrete Glyphs Compiled**: 767 across 4 font cuts
+- **Pipeline Runtime**: 147741.52 ms (147.74 seconds)
+- **Manual Designer Benchmark**: 575.2 person-hours (at 45 min/glyph)
+- **Empirical Acceleration Factor**: **14,017x faster** than traditional manual tracing
 - **Node Precision**: 0 duplicate nodes, 100% OTS and Google Fonts specification compliance
 
 ---

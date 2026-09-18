@@ -1,49 +1,105 @@
 {
-  "timestamp": "2026-09-06T09:11:07Z",
+  "timestamp": "2026-09-18T15:20:00Z",
   "case_study": 4,
   "script": "Cherokee Syllabary (Tsalagi Gawonihisdi)",
   "region": "North America / Cherokee Nation & EBCI",
   "clinical_focus": "Cherokee Nation health services, Hastings Hospital EHR, and rural health clinics.",
   "codepoints_synthesized": 172,
-  "total_glyphs_compiled": 860,
-  "runtime_ms": 54242.92,
-  "manual_hours_benchmark": 645.0,
-  "acceleration_factor": 42807,
+  "total_glyphs_compiled": 2236,
+  "runtime_ms": 151134.94,
+  "manual_hours_benchmark": 1677.0,
+  "acceleration_factor": 39945,
   "fonts_updated": [
     {
       "filename": "PocketGull-Fineliner.ttf",
       "weight": 400,
       "is_mono": false,
       "glyphs_added": 172,
-      "time_ms": 15520.78
+      "time_ms": 9703.34
+    },
+    {
+      "filename": "PocketGull-Regular.ttf",
+      "weight": 400,
+      "is_mono": false,
+      "glyphs_added": 172,
+      "time_ms": 9510.79
     },
     {
       "filename": "PocketGull-Bold.ttf",
       "weight": 700,
       "is_mono": false,
       "glyphs_added": 172,
-      "time_ms": 15023.02
+      "time_ms": 10043.91
+    },
+    {
+      "filename": "PocketGull-Black.ttf",
+      "weight": 900,
+      "is_mono": false,
+      "glyphs_added": 172,
+      "time_ms": 9526.55
     },
     {
       "filename": "PocketGull-Chiseltip.ttf",
       "weight": 900,
       "is_mono": false,
       "glyphs_added": 172,
-      "time_ms": 15149.1
+      "time_ms": 9518.16
+    },
+    {
+      "filename": "PocketGull-CondensedBold.ttf",
+      "weight": 700,
+      "is_mono": false,
+      "glyphs_added": 172,
+      "time_ms": 9076.92
+    },
+    {
+      "filename": "PocketGull-Soft.ttf",
+      "weight": 400,
+      "is_mono": false,
+      "glyphs_added": 172,
+      "time_ms": 12687.41
+    },
+    {
+      "filename": "PocketGull-Micro.ttf",
+      "weight": 400,
+      "is_mono": false,
+      "glyphs_added": 172,
+      "time_ms": 13020.36
+    },
+    {
+      "filename": "PocketGull-MarkerRaw.ttf",
+      "weight": 900,
+      "is_mono": false,
+      "glyphs_added": 172,
+      "time_ms": 9355.52
     },
     {
       "filename": "PocketGullMono-Regular.ttf",
       "weight": 400,
       "is_mono": true,
       "glyphs_added": 172,
-      "time_ms": 4408.66
+      "time_ms": 3505.39
+    },
+    {
+      "filename": "PocketGullMono-Bold.ttf",
+      "weight": 700,
+      "is_mono": true,
+      "glyphs_added": 172,
+      "time_ms": 4528.04
     },
     {
       "filename": "PocketGullMono-Italic.ttf",
-      "weight": 400,
+      "weight": 500,
       "is_mono": true,
       "glyphs_added": 172,
-      "time_ms": 4140.94
+      "time_ms": 3149.43
+    },
+    {
+      "filename": "PocketGull-VF.ttf",
+      "weight": 400,
+      "is_mono": false,
+      "glyphs_added": 172,
+      "time_ms": 46950.29
     }
   ]
 }

@@ -1,0 +1,1873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PocketGull A11y & Neuro-Ergonomic Typographic Laboratory: Low vision retinal irradiation compensation, dyslexia mirror disambiguation, monochromatic telemetry, and non-verbal ICU AAC.">
+  <title>PocketGull · A11y & Neuro-Ergonomic Typographic Laboratory</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="fonts.css?v=3.3.0">
+  <link rel="stylesheet" href="css/a11y_neuro_ergonomics.css">
+  <style>
+    :root {
+      --bg-dark: #060912;
+      --bg-surface: rgba(15, 23, 42, 0.75);
+      --bg-surface-elevated: rgba(30, 41, 59, 0.85);
+      --border-subtle: rgba(255, 255, 255, 0.12);
+      --border-accent: rgba(56, 189, 248, 0.35);
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --teal-accent: #2dd4bf;
+      --gold-accent: #f59e0b;
+      --sky-accent: #38bdf8;
+      --danger-red: #ef4444;
+      --sans-stack: 'PocketGull', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --mono-stack: 'PocketGull Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: var(--sans-stack);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    /* SVG Filter Container (Hidden) */
+    .svg-filter-defs {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+
+    /* Top Navigation */
+    .lab-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-surface);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.85rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-badge {
+      display: inline-block;
+      font-family: var(--mono-stack);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--sky-accent);
+      border: 1px solid var(--border-accent);
+      border-radius: 9999px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .nav-link {
+      font-family: var(--mono-stack);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .nav-link:hover {
+      color: var(--sky-accent);
+    }
+
+    /* Main Container */
+    .lab-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    /* Hero Section */
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.6) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 2rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-banner::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.65rem;
+      color: #ffffff;
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 820px;
+      line-height: 1.6;
+    }
+
+    /* Tab Switcher */
+    .tab-bar {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.5rem;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      font-family: var(--mono-stack);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.6rem 1.1rem;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .tab-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .tab-btn.active {
+      color: var(--sky-accent);
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--border-accent);
+    }
+
+    /* Panel Card */
+    .lab-panel {
+      display: none;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 2rem;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    .lab-panel.active {
+      display: flex;
+    }
+
+    .panel-header {
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 1rem;
+    }
+
+    .panel-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .panel-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-top: 0.35rem;
+    }
+
+    /* Grid layouts */
+    .two-col-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 840px) {
+      .two-col-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .demo-box {
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .demo-box-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 0.5rem;
+    }
+
+    .demo-box-title {
+      font-family: var(--mono-stack);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .controls-row {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      background: rgba(30, 41, 59, 0.5);
+      padding: 0.85rem 1.25rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .control-label {
+      font-family: var(--mono-stack);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .btn {
+      font-family: var(--mono-stack);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.45rem 0.9rem;
+      border-radius: 6px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: var(--sky-accent);
+    }
+
+    .btn.active {
+      background: var(--sky-accent);
+      color: #060912;
+      border-color: var(--sky-accent);
+      font-weight: 700;
+    }
+
+    /* Telemetry live strip */
+    .telemetry-strip {
+      background: #030712;
+      border: 2px solid #1f2937;
+      border-radius: 8px;
+      padding: 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+      justify-content: space-around;
+      font-family: var(--mono-stack);
+    }
+
+    .vital-tile {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      min-width: 140px;
+    }
+
+    .vital-label {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .vital-value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #f3f4f6;
+      display: flex;
+      align-items: baseline;
+      gap: 0.35rem;
+    }
+
+    .vital-unit {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #9ca3af;
+    }
+
+    /* Nemeth equation board */
+    .equation-card {
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .math-symbol-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .math-symbol-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.75rem 0.5rem;
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      cursor: pointer;
+      color: #ffffff;
+      transition: all 0.15s ease;
+    }
+
+    .math-symbol-btn:hover {
+      border-color: var(--teal-accent);
+      background: rgba(45, 212, 191, 0.15);
+    }
+
+    .math-visual {
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: var(--sans-stack);
+    }
+
+    .math-braille {
+      font-size: 1.35rem;
+      color: var(--teal-accent);
+      font-family: var(--mono-stack);
+      margin-top: 0.25rem;
+    }
+
+    .math-name {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* AAC Speech Log & Controls */
+    .aac-speech-log {
+      background: #0f172a;
+      border: 1px solid var(--border-accent);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      font-family: var(--mono-stack);
+      font-size: 0.95rem;
+      color: var(--sky-accent);
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .speech-pulsing {
+      animation: pulseAudio 1.1s infinite ease-in-out;
+    }
+
+    @keyframes pulseAudio {
+      0%, 100% { transform: scale(1); filter: none; }
+      50% { transform: scale(1.25); filter: drop-shadow(0 0 8px #38bdf8); }
+    }
+
+    /* Wong-Baker Faces Grid & Visual Styling */
+    .pg-faces-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .pg-face-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem 0.5rem;
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 2px solid rgba(255, 255, 255, 0.14);
+      cursor: pointer;
+      transition: all 0.18s ease;
+      color: #f8fafc;
+      user-select: none;
+    }
+
+    .pg-face-card:hover {
+      border-color: #f59e0b;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    }
+
+    .pg-face-card.selected {
+      border-color: #ef4444;
+      background: rgba(239, 68, 68, 0.18);
+      box-shadow: 0 0 16px rgba(239, 68, 68, 0.35);
+    }
+
+    .pg-face-icon-wrap {
+      width: 52px;
+      height: 52px;
+      min-width: 52px;
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.45rem;
+    }
+
+    .pg-face-icon-wrap svg,
+    .pg-face-card svg {
+      width: 52px !important;
+      height: 52px !important;
+      display: block;
+      color: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* Clinical Triage Color Bands for Wong-Baker Faces */
+    .face-score-0 { color: #34d399 !important; border-color: rgba(52, 211, 153, 0.35); }
+    .face-score-2 { color: #a3e635 !important; border-color: rgba(163, 230, 53, 0.35); }
+    .face-score-4 { color: #fbbf24 !important; border-color: rgba(251, 191, 36, 0.35); }
+    .face-score-6 { color: #fb923c !important; border-color: rgba(251, 146, 60, 0.35); }
+    .face-score-8 { color: #f87171 !important; border-color: rgba(248, 113, 113, 0.35); }
+    .face-score-10 { color: #ef4444 !important; border-color: rgba(239, 68, 68, 0.45); }
+
+    /* AAC Needs Grid & Tiles */
+    .pg-aac-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .pg-aac-tile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem 0.5rem;
+      border-radius: 10px;
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid var(--border-subtle);
+      cursor: pointer;
+      color: #ffffff;
+      transition: all 0.18s ease;
+      font-family: inherit;
+      user-select: none;
+    }
+
+    .pg-aac-tile:hover {
+      background: rgba(51, 65, 85, 0.95);
+      border-color: #38bdf8;
+      transform: translateY(-2px);
+    }
+
+    .pg-aac-tile.active {
+      background: rgba(14, 165, 233, 0.25);
+      border-color: #38bdf8;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+    }
+
+    .pg-aac-icon-wrap {
+      width: 42px;
+      height: 42px;
+      min-width: 42px;
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.35rem;
+    }
+
+    .pg-aac-icon-wrap svg,
+    .pg-aac-tile svg {
+      width: 42px !important;
+      height: 42px !important;
+      display: block;
+      color: currentColor;
+      flex-shrink: 0;
+    }
+
+    .pg-aac-label {
+      margin-top: 0.4rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-align: center;
+      color: #f1f5f9;
+    }
+
+    .pg-aac-sub {
+      font-size: 0.7rem;
+      color: #94a3b8;
+      text-align: center;
+      margin-top: 0.15rem;
+    }
+
+    /* Bedside Custom Tile Styling */
+    .pg-custom-badge {
+      font-size: 0.62rem;
+      background: rgba(45, 212, 191, 0.2);
+      color: var(--teal-accent);
+      border: 1px solid rgba(45, 212, 191, 0.35);
+      border-radius: 4px;
+      padding: 0.1rem 0.35rem;
+      margin-top: 0.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .pg-aac-tile.custom-tile {
+      border-color: rgba(45, 212, 191, 0.35);
+      position: relative;
+    }
+
+    .pg-aac-tile.custom-tile:hover {
+      border-color: var(--teal-accent);
+    }
+
+    .tile-delete-btn {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      line-height: 1;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+
+    .pg-aac-tile:hover .tile-delete-btn {
+      opacity: 1;
+    }
+
+    .tile-delete-btn:hover {
+      background: #ef4444;
+      color: #ffffff;
+    }
+
+    /* Print View Invariants for Hospital Bedside Placards */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      .lab-nav, .hero-banner, .tab-bar, .controls-row, .aac-speech-log, #bedside-tile-builder, .lab-footer, .no-print, #bedside-toast {
+        display: none !important;
+      }
+      .lab-panel {
+        display: none !important;
+      }
+      #panel-aac {
+        display: block !important;
+        background: #ffffff !important;
+        border: none !important;
+        padding: 0 !important;
+      }
+      .print-only {
+        display: block !important;
+      }
+      .pg-face-card, .pg-aac-tile {
+        background: #ffffff !important;
+        border: 2px solid #000000 !important;
+        color: #000000 !important;
+        break-inside: avoid;
+        box-shadow: none !important;
+      }
+      .pg-face-card svg, .pg-aac-tile svg {
+        color: #000000 !important;
+        stroke: #000000 !important;
+      }
+      .pg-aac-label, .pg-face-card div {
+        color: #000000 !important;
+      }
+      .pg-aac-sub {
+        color: #444444 !important;
+      }
+      .tile-delete-btn {
+        display: none !important;
+      }
+    }
+
+    /* Footer */
+    .lab-footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hidden SVG Color Matrix Filters for Daltonism (WCAG 1.4.1) -->
+  <svg class="svg-filter-defs" aria-hidden="true">
+    <defs>
+      <filter id="filter-normal">
+        <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0" />
+      </filter>
+      <filter id="filter-protanopia">
+        <feColorMatrix type="matrix" values="0.567 0.433 0 0 0  0.558 0.442 0 0 0  0 0.242 0.758 0 0  0 0 0 1 0" />
+      </filter>
+      <filter id="filter-deuteranopia">
+        <feColorMatrix type="matrix" values="0.625 0.375 0 0 0  0.7 0.3 0 0 0  0 0.3 0.7 0 0  0 0 0 1 0" />
+      </filter>
+      <filter id="filter-tritanopia">
+        <feColorMatrix type="matrix" values="0.95 0.05 0 0 0  0 0.433 0.567 0 0  0 0.475 0.525 0 0  0 0 0 1 0" />
+      </filter>
+      <filter id="filter-monochromacy">
+        <feColorMatrix type="matrix" values="0.299 0.587 0.114 0 0  0.299 0.587 0.114 0 0  0.299 0.587 0.114 0 0  0 0 0 1 0" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Navigation Bar -->
+  <header class="lab-nav">
+    <div class="brand-group">
+      <span class="brand-badge">A11y &amp; Neuro-Ergonomics</span>
+      <strong style="font-size: 1.05rem;">PocketGull</strong>
+    </div>
+    <nav class="nav-links">
+      <a href="sanctuary_hub.html" class="nav-link">← Sanctuary Hub</a>
+      <a href="index.html" class="nav-link">Specimen Broadside</a>
+      <a href="standards/FDA_ISMP_CLINICAL_DIGITAL_TYPOGRAPHY_SPECIFICATION.md" target="_blank" rel="noopener" class="nav-link" title="Formal FDA & ISMP Clinical Digital Typography Specification">🏛️ FDA/ISMP Spec</a>
+      <a href="five_hand_types.html#panel-rosetta" class="nav-link">Sign Rosetta</a>
+    </nav>
+  </header>
+
+  <main class="lab-container">
+    
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+      <h1 class="hero-title">Accessibility &amp; Neuro-Ergonomic Laboratory</h1>
+      <p class="hero-subtitle">
+        Engineering life-critical legibility beyond aesthetic conventions. PocketGull synthesizes Louise Sloan 5:1 optotype acuity, dark-mode retinal irradiation cancellation, dyslexia mirror-disambiguation, color-blind telemetry enclosures, and non-verbal ICU communication.
+      </p>
+    </section>
+
+    <!-- Tab Bar -->
+    <nav class="tab-bar" aria-label="Laboratory Panels">
+      <button class="tab-btn active" data-panel="panel-irrd">1. Low Vision &amp; Retinal Glare</button>
+      <button class="tab-btn" data-panel="panel-neuro">2. Neurodiversity &amp; Dyslexia</button>
+      <button class="tab-btn" data-panel="panel-telemetry">3. Monochromatic Telemetry</button>
+      <button class="tab-btn" data-panel="panel-aac">4. Non-Verbal ICU AAC</button>
+      <button class="tab-btn" data-panel="panel-nemeth">5. Nemeth Braille STEM</button>
+    </nav>
+
+    <!-- =========================================================================
+         PANEL 1: Low Vision & Retinal Irradiation Simulator
+         ========================================================================= -->
+    <section id="panel-irrd" class="lab-panel active">
+      <div class="panel-header">
+        <h2 class="panel-title">1. Retinal Irradiation &amp; OLED Glare Compensation (IRRD)</h2>
+        <p class="panel-desc">
+          High-contrast white text on OLED true black causes optical scattering and corneal halation in aged or astigmatic eyes. PocketGull's IRRD mode dials back stroke weight by 4% and dilates counters by 15 UPM to cancel optical blur.
+        </p>
+      </div>
+
+      <div class="controls-row">
+        <span class="control-label">Optical Mode:</span>
+        <button id="btn-irrd-standard" class="btn active">Standard Dark Mode</button>
+        <button id="btn-irrd-compensated" class="btn">PocketGull IRRD Compensated</button>
+        <span class="control-label" style="margin-left: auto;">Corneal Glare Simulation:</span>
+        <button id="btn-toggle-glare" class="btn">Toggle Simulated Glare</button>
+      </div>
+
+      <div class="two-col-grid">
+        <div class="demo-box">
+          <div class="demo-box-header">
+            <span class="demo-box-title">Clinical Prescription (ISMP Dosing)</span>
+            <span id="badge-mode-a" class="brand-badge">Standard Rendering</span>
+          </div>
+          <div id="text-sample-a" class="pg-irrd-standard" style="font-size: 1.25rem; line-height: 1.8;">
+            <p><strong>Rx:</strong> Levothyroxine 125 mcg PO daily.</p>
+            <p><strong>Dose:</strong> 0.125 mg (NOT .125 mg, NOT 125.0 mcg).</p>
+            <p><strong>Check:</strong> Epinephrine 1:1,000 vs 1:10,000 IV stat.</p>
+            <p style="font-family: var(--mono-stack); font-size: 1.05rem; color: #38bdf8; margin-top: 0.5rem;">
+              Critical Counters: e, a, s, B, 8, 0, 6, 9
+            </p>
+          </div>
+        </div>
+
+        <div class="demo-box">
+          <div class="demo-box-header">
+            <span class="demo-box-title">Louise Sloan 5:1 Acuity Ladder</span>
+            <span class="brand-badge">Aperture Clearance</span>
+          </div>
+          <div id="text-sample-b" class="pg-irrd-standard" style="line-height: 1.6;">
+            <p style="font-size: 1.8rem; font-weight: 700;">C D H K N O R S V Z</p>
+            <p style="font-size: 1.3rem;">20/40 LogMAR 0.3: Acute ICU Bedside</p>
+            <p style="font-size: 1.0rem;">20/70 LogMAR 0.5: Dim Infusion Display</p>
+            <p style="font-size: 0.8rem; color: var(--text-muted);">20/100 LogMAR 0.7: Low Contrast Thermal Wristband</p>
+            <p style="font-size: 0.75rem; font-family: var(--mono-stack); color: #2dd4bf; margin-top: 0.5rem;">
+              Apertures locked to 45°/90° outward angles (≥ 200 UPM opening).
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         PANEL 2: Neurodiversity & Dyslexia Laboratory
+         ========================================================================= -->
+    <section id="panel-neuro" class="lab-panel">
+      <div class="panel-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h2 class="panel-title">2. Neurodiversity &amp; Dyslexia Mirror-Disambiguation</h2>
+          <p class="panel-desc">
+            Counters rotational inversion (b/d, p/q, n/u) via asymmetric contour geometry, alleviates Herman Bouma visual crowding, and guides saccadic eye tracking via Bionic Reading anchors.
+          </p>
+        </div>
+        <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+          <span class="brand-badge" style="background: rgba(45, 212, 191, 0.15); color: var(--teal-accent); border-color: rgba(45, 212, 191, 0.35);">Curb-Cut Effect</span>
+          <a href="standards/FDA_ISMP_CLINICAL_DIGITAL_TYPOGRAPHY_SPECIFICATION.md" target="_blank" rel="noopener" class="btn" style="text-decoration: none; font-size: 0.75rem; padding: 0.35rem 0.75rem; display: inline-flex; align-items: center; gap: 0.35rem; color: var(--sky-accent); border-color: var(--border-accent);">
+            <span>🏛️</span> <span>FDA / ISMP Consensus Spec ↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="controls-row">
+        <span class="control-label">Visual Crowding Relief (WCAG 1.4.12 / BDA):</span>
+        <button id="btn-crowding-normal" class="btn active">Standard Spacing</button>
+        <button id="btn-crowding-relief" class="btn">BDA Crowding Relief (+0.12em)</button>
+        <span class="control-label" style="margin-left: auto;">Fixation Anchors:</span>
+        <button id="btn-toggle-bionic" class="btn">Bionic Reading Anchors</button>
+      </div>
+
+      <!-- Asymmetric Mirror Breakdown Cards with De Casteljau & Sloan Telemetry -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
+        <div class="demo-box" style="border-left: 3px solid #38bdf8; transition: transform 0.2s ease;" onmouseenter="this.style.transform='translateY(-2px)'" onmouseleave="this.style.transform='none'">
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <div style="font-size: 2.4rem; font-weight: 800; color: #ffffff;">b <span style="color: var(--text-muted); font-size: 1.2rem;">vs</span> d</div>
+            <span class="brand-badge" style="font-size: 0.65rem;">ANTI-INVERSION</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">
+            <strong>b:</strong> Top terminal spur at y=780, heavier lower bowl (+12 UPM bottom bias).<br>
+            <strong>d:</strong> Open curved neck terminal with circular bowl symmetry.<br>
+            <span style="font-family: var(--mono-stack); font-size: 0.72rem; color: #38bdf8; display: block; margin-top: 0.4rem;">
+              Sloan Aperture: ≥ 215 UPM • De Casteljau: M = (P₁+P₂) &gt;&gt; 1
+            </span>
+          </p>
+        </div>
+
+        <div class="demo-box" style="border-left: 3px solid #2dd4bf; transition: transform 0.2s ease;" onmouseenter="this.style.transform='translateY(-2px)'" onmouseleave="this.style.transform='none'">
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <div style="font-size: 2.4rem; font-weight: 800; color: #ffffff;">p <span style="color: var(--text-muted); font-size: 1.2rem;">vs</span> q</div>
+            <span class="brand-badge" style="font-size: 0.65rem; color: var(--teal-accent); border-color: rgba(45, 212, 191, 0.35);">STEM OVERSHOOT</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">
+            <strong>p:</strong> Stem overshoot (+30 UPM) above x-height juncture.<br>
+            <strong>q:</strong> Distinct 35° forward diagonal terminal foot at baseline.<br>
+            <span style="font-family: var(--mono-stack); font-size: 0.72rem; color: #2dd4bf; display: block; margin-top: 0.4rem;">
+              Sloan Aperture: ≥ 220 UPM • De Casteljau: O(1) Integer Shift
+            </span>
+          </p>
+        </div>
+
+        <div class="demo-box" style="border-left: 3px solid #f59e0b; transition: transform 0.2s ease;" onmouseenter="this.style.transform='translateY(-2px)'" onmouseleave="this.style.transform='none'">
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <div style="font-size: 2.4rem; font-weight: 800; color: #ffffff;">n <span style="color: var(--text-muted); font-size: 1.2rem;">vs</span> u</div>
+            <span class="brand-badge" style="font-size: 0.65rem; color: var(--gold-accent); border-color: rgba(245, 158, 11, 0.35);">CRADLE / ARCH</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">
+            <strong>n:</strong> Flat bilateral shoulder arch at y=540 with left entry spur.<br>
+            <strong>u:</strong> Curved trough cradle at y=0 with right vertical exit stem.<br>
+            <span style="font-family: var(--mono-stack); font-size: 0.72rem; color: #f59e0b; display: block; margin-top: 0.4rem;">
+              Sloan Aperture: ≥ 230 UPM • ISMP 'u' Dose Safety Standard
+            </span>
+          </p>
+        </div>
+
+        <div class="demo-box" style="border-left: 3px solid #e879f9; transition: transform 0.2s ease;" onmouseenter="this.style.transform='translateY(-2px)'" onmouseleave="this.style.transform='none'">
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <div style="font-size: 2.4rem; font-weight: 800; color: #ffffff;">m <span style="color: var(--text-muted); font-size: 1.2rem;">vs</span> w</div>
+            <span class="brand-badge" style="font-size: 0.65rem; color: #e879f9; border-color: rgba(232, 121, 249, 0.35);">EUCLIDEAN V</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">
+            <strong>m:</strong> Continuous rounded arches grounded on baseline.<br>
+            <strong>w:</strong> Sharp Euclidean 15° outward diagonal vertices.<br>
+            <span style="font-family: var(--mono-stack); font-size: 0.72rem; color: #e879f9; display: block; margin-top: 0.4rem;">
+              Sloan Aperture: ≥ 210 UPM • Prevents 'mg' vs 'mcg' Misread
+            </span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Live Clinical Reading Sample -->
+      <div class="demo-box">
+        <div class="demo-box-header">
+          <span class="demo-box-title">EHR Discharge Note (Cognitive Reading Stress Test)</span>
+          <span id="crowding-status-badge" class="brand-badge">Standard Tracking</span>
+        </div>
+        <div id="neuro-text-sample" style="font-size: 1.15rem; line-height: 1.7;">
+          Patient demonstrated stable neurological recovery following acute ischemic insult. Bilateral motor responses preserved without focal deficits. Prescribed Dabigatran 150 mg PO BID with meals. Strict avoidance of NSAIDs advised. Follow-up carotid ultrasound scheduled in seven days.
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         PANEL 3: Monochromatic Telemetry & Daltonism Simulator
+         ========================================================================= -->
+    <section id="panel-telemetry" class="lab-panel">
+      <div class="panel-header">
+        <h2 class="panel-title">3. Monochromatic Telemetry &amp; Daltonism Simulator (WCAG 2.2 SC 1.4.1)</h2>
+        <p class="panel-desc">
+          Never rely on color alone. Up to 8% of male clinicians have red-green color deficiency. PocketGull provides geometric status badge enclosures ([CRIT], ▲HIGH, ▼LOW, ◆HOLD, ●NORM) with zero layout shift.
+        </p>
+      </div>
+
+      <div class="controls-row">
+        <span class="control-label">Daltonism Filter:</span>
+        <button class="btn daltonism-btn active" data-filter="normal">Normal Vision</button>
+        <button class="btn daltonism-btn" data-filter="protanopia">Protanopia (Red-Blind)</button>
+        <button class="btn daltonism-btn" data-filter="deuteranopia">Deuteranopia (Green-Blind)</button>
+        <button class="btn daltonism-btn" data-filter="tritanopia">Tritanopia (Blue-Blind)</button>
+        <button class="btn daltonism-btn" data-filter="monochromacy">Monochromacy (100% Greyscale)</button>
+      </div>
+
+      <!-- Live Telemetry Monitor -->
+      <div id="telemetry-display-container" class="telemetry-strip">
+        <div class="vital-tile">
+          <span class="vital-label">Heart Rate (ECG)</span>
+          <div class="vital-value">
+            <span>142</span>
+            <span class="vital-unit">bpm</span>
+          </div>
+          <div>
+            <span class="pg-telemetry-badge pg-badge-high">▲ HIGH</span>
+          </div>
+        </div>
+
+        <div class="vital-tile">
+          <span class="vital-label">Pulse Oximetry (SpO2)</span>
+          <div class="vital-value">
+            <span>84</span>
+            <span class="vital-unit">%</span>
+          </div>
+          <div>
+            <span class="pg-telemetry-badge pg-badge-crit">[CRIT]</span>
+          </div>
+        </div>
+
+        <div class="vital-tile">
+          <span class="vital-label">Blood Pressure (NIBP)</span>
+          <div class="vital-value">
+            <span>118/76</span>
+            <span class="vital-unit">mmHg</span>
+          </div>
+          <div>
+            <span class="pg-telemetry-badge pg-badge-norm">● NORM</span>
+          </div>
+        </div>
+
+        <div class="vital-tile">
+          <span class="vital-label">Arterial Line (ART)</span>
+          <div class="vital-value">
+            <span>ZERO</span>
+            <span class="vital-unit">cal</span>
+          </div>
+          <div>
+            <span class="pg-telemetry-badge pg-badge-hold">◆ HOLD</span>
+          </div>
+        </div>
+
+        <div class="vital-tile">
+          <span class="vital-label">End-Tidal CO2 (EtCO2)</span>
+          <div class="vital-value">
+            <span>22</span>
+            <span class="vital-unit">mmHg</span>
+          </div>
+          <div>
+            <span class="pg-telemetry-badge pg-badge-low">▼ LOW</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bounding Box Invariant Note -->
+      <div class="demo-box" style="background: rgba(30, 41, 59, 0.4);">
+        <p style="font-family: var(--mono-stack); font-size: 0.85rem; color: var(--text-secondary);">
+          <strong>Mathematical Invariant:</strong> All telemetry status badges share tabular advance widths (600 or 1200 UPM), guaranteeing <strong>CLS = 0 (Zero Cumulative Layout Shift)</strong> when values transition from baseline to critical alarm states.
+        </p>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         PANEL 4: Non-Verbal ICU Communication Board (AAC & Wong-Baker)
+         ========================================================================= -->
+    <section id="panel-aac" class="lab-panel">
+      <div class="panel-header">
+        <h2 class="panel-title">4. Non-Verbal ICU Communication Board (AAC &amp; Wong-Baker)</h2>
+        <p class="panel-desc">
+          Designed for intubated, stroke, ALS, or non-verbal patients. Touch, click, or switch-select any tile to announce the clinical need with human-calibrated speech synthesis.
+        </p>
+      </div>
+
+      <!-- Hospital Bedside Printable Header (Only Visible When Printed) -->
+      <div class="print-only" style="display: none; text-align: center; margin-bottom: 1.5rem;">
+        <h1 style="font-size: 2.2rem; font-weight: 800; color: #000000; margin-bottom: 0.25rem;">PocketGull Bedside Communication Chart</h1>
+        <p style="font-size: 1rem; color: #333333;">Point to or touch any tile to communicate. ISMP &amp; Louise Sloan Clinical Optotype Standard.</p>
+      </div>
+
+      <!-- Language & Community Translation Bar -->
+      <div class="controls-row" style="flex-wrap: wrap; gap: 0.5rem; align-items: center;">
+        <span class="control-label">🌐 Language:</span>
+        <button class="btn lang-btn active" data-lang="en">🇺🇸 English</button>
+        <button class="btn lang-btn" data-lang="es">🇪🇸 Español</button>
+        <button class="btn lang-btn" data-lang="fr">🇫🇷 Français</button>
+        <button class="btn lang-btn" data-lang="de">🇩🇪 Deutsch</button>
+
+        <span class="control-label" style="margin-left: auto;">Bedside Co-Creation:</span>
+        <button id="btn-open-tile-builder" class="btn" style="border-color: var(--teal-accent); color: var(--teal-accent);">
+          ➕ Add Bedside Tile
+        </button>
+        <button id="btn-share-board" class="btn" title="Copy shareable URL to clipboard">
+          📋 Share Link
+        </button>
+        <button id="btn-print-board" class="btn" title="Print physical high-contrast bedside card">
+          🖨️ Print Card
+        </button>
+        <button id="btn-export-lang" class="btn" title="Download translation JSON template">
+          📥 Export JSON
+        </button>
+        <button id="btn-import-lang" class="btn" title="Load custom language JSON pack">
+          📤 Import JSON
+        </button>
+        <input type="file" id="input-import-pack" aria-label="Import AAC Patient Vocabulary Pack JSON" accept=".json" style="display: none;">
+      </div>
+
+      <!-- Inline Bedside Tile Builder (Collapsible) -->
+      <div id="bedside-tile-builder" class="demo-box" style="display: none; border-left: 3px solid var(--teal-accent); background: #0b1329;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <strong style="color: var(--teal-accent); font-size: 1.05rem;">Add a Personalized Bedside Tile</strong>
+          <button id="btn-close-tile-builder" class="btn" style="padding: 0.2rem 0.6rem; font-size: 0.8rem;">✕ Close</button>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">
+          Co-create a tile with the patient (e.g. loved ones' names, pets, glasses, specific comfort requests). Saved tiles persist at bedside and encode into shareable links.
+        </p>
+        <div style="display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 0.75rem; align-items: end;">
+          <div>
+            <label for="input-tile-title" style="font-size: 0.75rem; color: #94a3b8; display: block; margin-bottom: 0.25rem;">Tile Label (Button):</label>
+            <input type="text" id="input-tile-title" aria-label="Tile Label Button Text" placeholder="e.g. Hold My Hand" class="btn" style="width: 100%; text-align: left; background: #1e293b; color: #ffffff; cursor: text;">
+          </div>
+          <div>
+            <label for="input-tile-speech" style="font-size: 0.75rem; color: #94a3b8; display: block; margin-bottom: 0.25rem;">Spoken Message:</label>
+            <input type="text" id="input-tile-speech" aria-label="Spoken Message Phrase" placeholder="e.g. Could you please hold my hand for a little while?" class="btn" style="width: 100%; text-align: left; background: #1e293b; color: #ffffff; cursor: text;">
+          </div>
+          <div>
+            <label for="input-tile-emoji" style="font-size: 0.75rem; color: #94a3b8; display: block; margin-bottom: 0.25rem;">Icon / Symbol:</label>
+            <select id="input-tile-emoji" aria-label="Icon or Symbol" class="btn" style="width: 100%; background: #1e293b; color: #ffffff; cursor: pointer;">
+              <option value="🤝">🤝 Hold Hand</option>
+              <option value="❤️">❤️ Family / Love</option>
+              <option value="👶">👶 Grandkids</option>
+              <option value="🐕">🐕 Pet / Dog</option>
+              <option value="👓">👓 Glasses</option>
+              <option value="🎵">🎵 Music / Song</option>
+              <option value="📖">📖 Book / Read</option>
+              <option value="🛏️">🛏️ Pillow / Bed</option>
+              <option value="☀️">☀️ Open Blinds</option>
+              <option value="🌸">🌸 Flowers</option>
+              <option value="🕊️">🕊️ Quiet / Rest</option>
+              <option value="💬">💬 Chat / Listen</option>
+            </select>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 0.5rem;">
+          <button id="btn-save-tile" class="btn active" style="background: var(--teal-accent); color: #060912; border-color: var(--teal-accent); font-weight: 700;">
+            ✓ Add Tile to Board
+          </button>
+        </div>
+      </div>
+
+      <!-- Voice Synthesizer & Acoustic Controls -->
+      <div class="controls-row" style="flex-wrap: wrap; gap: 0.75rem; align-items: center; background: rgba(15, 23, 42, 0.6); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid var(--border-subtle);">
+        <label for="aac-voice-select" class="control-label" style="display: flex; align-items: center; gap: 0.35rem; cursor: pointer;"><span>🗣️ Voice:</span></label>
+        <select id="aac-voice-select" aria-label="Synthesized Speech Voice" class="btn" style="background: #1e293b; color: #f8fafc; border: 1px solid var(--border-accent); padding: 0.4rem 0.8rem; border-radius: 6px; font-family: var(--sans-stack); max-width: 340px; text-overflow: ellipsis; cursor: pointer;">
+          <option value="">Detecting high-fidelity voices...</option>
+        </select>
+
+        <span class="control-label" style="margin-left: 0.5rem;">Pacing:</span>
+        <button id="btn-rate-calm" class="btn pacing-btn" data-rate="0.88">Calm (0.88x)</button>
+        <button id="btn-rate-natural" class="btn pacing-btn active" data-rate="0.93">Natural (0.93x)</button>
+        <button id="btn-rate-standard" class="btn pacing-btn" data-rate="1.0">Standard (1.0x)</button>
+
+        <span class="control-label" style="margin-left: 0.5rem;">Tone:</span>
+        <button id="btn-pitch-warm" class="btn pitch-btn active" data-pitch="0.98">Warm Bedside</button>
+        <button id="btn-pitch-bright" class="btn pitch-btn" data-pitch="1.06">Bright Clarity</button>
+      </div>
+
+      <!-- Live Spoken Output Bar -->
+      <div class="aac-speech-log" role="status" aria-live="polite">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span id="speech-wave-icon" style="font-size: 1.25rem; display: inline-block; transition: all 0.2s;">📢</span>
+          <span style="color: #94a3b8; font-size: 0.8rem; text-transform: uppercase;">Spoken Message:</span>
+        </div>
+        <span id="speech-log-text" style="flex: 1; min-width: 240px; color: #38bdf8;">Tap any communication tile below to announce...</span>
+        <button id="btn-repeat-speech" class="btn" style="display: none; padding: 0.3rem 0.75rem; font-size: 0.8rem; border-color: var(--teal-accent); color: var(--teal-accent);">
+          🔊 Repeat
+        </button>
+      </div>
+
+      <!-- Wong-Baker Faces Pain Scale (0-10) -->
+      <div>
+        <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.75rem; color: #ffffff;">
+          Wong-Baker FACES Pain Rating Scale (0–10)
+        </h3>
+        <div id="faces-container" class="pg-faces-grid">
+          <!-- Populated dynamically via ES module data -->
+        </div>
+      </div>
+
+      <!-- Core Physiological Need Board -->
+      <div>
+        <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.75rem; color: #ffffff;">
+          ICU Physiological &amp; Emotional Need Board (12 High-Contrast Tiles)
+        </h3>
+        <div id="aac-grid-container" class="pg-aac-grid">
+          <!-- Populated dynamically via ES module data -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         PANEL 5: Dual Visual / Nemeth Braille STEM Math Terminal
+         ========================================================================= -->
+    <section id="panel-nemeth" class="lab-panel">
+      <div class="panel-header">
+        <h2 class="panel-title">5. Dual Visual / Nemeth Braille STEM Math Terminal</h2>
+        <p class="panel-desc">
+          Bridges visual mathematics and tactile 8-dot Nemeth Braille (U+2800–U+28FF). Sighted clinicians/educators and blind researchers share parallel mathematical semantics without translation loss.
+        </p>
+      </div>
+
+      <div class="equation-card">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <strong style="font-family: var(--mono-stack); font-size: 0.85rem; color: var(--text-muted);">
+            ACTIVE EXPRESSION PARITY
+          </strong>
+          <span class="brand-badge">ISO/TR 11548 Conformance</span>
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 0.5rem; padding: 1rem; background: #030712; border-radius: 6px;">
+          <div style="font-size: 0.8rem; color: #94a3b8;">Visual Math Notation:</div>
+          <div id="visual-math-line" style="font-size: 1.75rem; font-weight: 700; color: #ffffff; letter-spacing: 0.05em;">
+            f(x) = ∫ (2x + √π) dx
+          </div>
+          <div style="font-size: 0.8rem; color: var(--teal-accent); margin-top: 0.5rem;">Tactile Nemeth Braille (U+2800):</div>
+          <div id="braille-math-line" style="font-size: 1.75rem; font-family: var(--mono-stack); color: #2dd4bf; letter-spacing: 0.12em;">
+            ⠋⠐⠭⠐ ⠨⠤ ⠮ ⠐⠆⠭ ⠬ ⠜⠨⠏⠐ ⠙⠭
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="font-size: 1.0rem; font-weight: 700; margin-bottom: 0.75rem; color: #ffffff;">
+          Interactive Mathematical Symbol Palette
+        </h3>
+        <div id="math-palette-container" class="math-symbol-grid">
+          <!-- Populated dynamically via ES module data -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="lab-footer">
+    PocketGull Font Superfamily · Clinical A11y &amp; Neuro-Ergonomic Architecture · Open-Source SIL OFL 1.1 / Apache 2.0
+  </footer>
+
+  <!-- Script Module for Interactive Ergonomics -->
+  <script type="module">
+    import {
+      TELEMETRY_BADGES,
+      WONG_BAKER_FACES,
+      ICU_PHYSIOLOGICAL_NEEDS,
+      ASYMMETRIC_MIRROR_PAIRS,
+      NEMETH_BRAILLE_MAPPINGS,
+      DALTONISM_FILTERS,
+      BUILTIN_LANGUAGES,
+      generateLanguageTemplateJson,
+      serializeBedsideBoard,
+      deserializeBedsideBoard
+    } from './js/a11y_neuro_ergonomics_data.js';
+
+    // 1. Tab Switching & Deep Hash Linking
+    const tabs = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.lab-panel');
+
+    function activatePanel(panelId) {
+      tabs.forEach(t => t.classList.toggle('active', t.getAttribute('data-panel') === panelId));
+      panels.forEach(p => p.classList.toggle('active', p.id === panelId));
+      if (history.replaceState) {
+        history.replaceState(null, '', `#${panelId}`);
+      }
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        activatePanel(tab.getAttribute('data-panel'));
+      });
+    });
+
+    // Check query params and hash for initial panel
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramPanel = urlParams.get('panel');
+    if (paramPanel) {
+      const target = paramPanel.startsWith('panel-') ? paramPanel : `panel-${paramPanel}`;
+      if (document.getElementById(target)) {
+        activatePanel(target);
+      }
+    } else if (window.location.hash) {
+      const hashId = window.location.hash.replace('#', '');
+      if (document.getElementById(hashId)) {
+        activatePanel(hashId);
+      }
+    }
+
+    window.addEventListener('hashchange', () => {
+      const hashId = window.location.hash.replace('#', '');
+      if (document.getElementById(hashId)) {
+        activatePanel(hashId);
+      }
+    });
+
+    // 2. Panel 1: IRRD Glare Simulation
+    const btnIrrdStd = document.getElementById('btn-irrd-standard');
+    const btnIrrdComp = document.getElementById('btn-irrd-compensated');
+    const btnToggleGlare = document.getElementById('btn-toggle-glare');
+    const sampleA = document.getElementById('text-sample-a');
+    const sampleB = document.getElementById('text-sample-b');
+    const badgeA = document.getElementById('badge-mode-a');
+
+    btnIrrdStd.addEventListener('click', () => {
+      btnIrrdStd.classList.add('active');
+      btnIrrdComp.classList.remove('active');
+      sampleA.className = 'pg-irrd-standard';
+      sampleB.className = 'pg-irrd-standard';
+      badgeA.textContent = 'Standard Rendering';
+      badgeA.style.color = '#38bdf8';
+    });
+
+    btnIrrdComp.addEventListener('click', () => {
+      btnIrrdComp.classList.add('active');
+      btnIrrdStd.classList.remove('active');
+      sampleA.className = 'pg-irrd-compensated';
+      sampleB.className = 'pg-irrd-compensated';
+      badgeA.textContent = 'IRRD Compensated (-4% / +15 UPM)';
+      badgeA.style.color = '#2dd4bf';
+    });
+
+    let glareActive = false;
+    btnToggleGlare.addEventListener('click', () => {
+      glareActive = !glareActive;
+      btnToggleGlare.classList.toggle('active', glareActive);
+      sampleA.classList.toggle('pg-simulated-glare', glareActive);
+      sampleB.classList.toggle('pg-simulated-glare', glareActive);
+    });
+
+    // 3. Panel 2: Neurodiversity & Dyslexia
+    const btnCrowdNorm = document.getElementById('btn-crowding-normal');
+    const btnCrowdRelief = document.getElementById('btn-crowding-relief');
+    const btnToggleBionic = document.getElementById('btn-toggle-bionic');
+    const neuroSample = document.getElementById('neuro-text-sample');
+    const crowdBadge = document.getElementById('crowding-status-badge');
+
+    const originalNeuroText = neuroSample.textContent.trim();
+
+    btnCrowdNorm.addEventListener('click', () => {
+      btnCrowdNorm.classList.add('active');
+      btnCrowdRelief.classList.remove('active');
+      neuroSample.classList.remove('pg-crowding-relief');
+      crowdBadge.textContent = 'Standard Tracking';
+    });
+
+    btnCrowdRelief.addEventListener('click', () => {
+      btnCrowdRelief.classList.add('active');
+      btnCrowdNorm.classList.remove('active');
+      neuroSample.classList.add('pg-crowding-relief');
+      crowdBadge.textContent = 'BDA Crowding Relief (+0.12em)';
+    });
+
+    let bionicActive = false;
+    btnToggleBionic.addEventListener('click', () => {
+      bionicActive = !bionicActive;
+      btnToggleBionic.classList.toggle('active', bionicActive);
+
+      // Clear existing content safely
+      while (neuroSample.firstChild) {
+        neuroSample.removeChild(neuroSample.firstChild);
+      }
+
+      if (bionicActive) {
+        // Safe DOM node construction for Bionic anchors
+        const words = originalNeuroText.split(/\s+/);
+        words.forEach((word, idx) => {
+          const splitLen = Math.ceil(word.length / 2);
+          const boldPart = word.substring(0, splitLen);
+          const restPart = word.substring(splitLen);
+
+          const spanBold = document.createElement('span');
+          spanBold.className = 'pg-bionic-anchor';
+          spanBold.textContent = boldPart;
+
+          neuroSample.appendChild(spanBold);
+          if (restPart.length > 0) {
+            neuroSample.appendChild(document.createTextNode(restPart));
+          }
+          if (idx < words.length - 1) {
+            neuroSample.appendChild(document.createTextNode(' '));
+          }
+        });
+      } else {
+        neuroSample.textContent = originalNeuroText;
+      }
+    });
+
+    // 4. Panel 3: Daltonism Simulator
+    const daltonismBtns = document.querySelectorAll('.daltonism-btn');
+    const telemetryStrip = document.getElementById('telemetry-display-container');
+
+    daltonismBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        daltonismBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filterType = btn.getAttribute('data-filter');
+        
+        telemetryStrip.classList.remove(
+          'filter-protanopia',
+          'filter-deuteranopia',
+          'filter-tritanopia',
+          'filter-monochromacy',
+          'pg-telemetry-monochrome'
+        );
+
+        if (filterType !== 'normal') {
+          telemetryStrip.classList.add(`filter-${filterType}`);
+          if (filterType === 'monochromacy') {
+            telemetryStrip.classList.add('pg-telemetry-monochrome');
+          }
+        }
+      });
+    });
+
+    // 5. Panel 4: AAC & Wong-Baker Board
+    const speechLog = document.getElementById('speech-log-text');
+    const speechWave = document.getElementById('speech-wave-icon');
+    const repeatBtn = document.getElementById('btn-repeat-speech');
+    const voiceSelect = document.getElementById('aac-voice-select');
+    const pacingBtns = document.querySelectorAll('.pacing-btn');
+    const pitchBtns = document.querySelectorAll('.pitch-btn');
+    const facesContainer = document.getElementById('faces-container');
+    const aacGridContainer = document.getElementById('aac-grid-container');
+
+    let currentLang = 'en';
+    let customBedsideTiles = [];
+    let customLangPack = null;
+    let availableVoices = [];
+    let selectedVoice = null;
+    let speechRate = 0.93;
+    let speechPitch = 0.98;
+    let lastSpokenText = '';
+
+    // Floating Toast Notification
+    function showToast(msg) {
+      const toast = document.getElementById('bedside-toast');
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.style.display = 'block';
+      toast.style.opacity = '1';
+      clearTimeout(window._toastTimeout);
+      window._toastTimeout = setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => { toast.style.display = 'none'; }, 300);
+      }, 3500);
+    }
+
+    // Load saved custom bedside tiles from URL hash or localStorage
+    function loadSavedCustomTiles() {
+      const hash = window.location.hash || '';
+      if (hash.includes('board=')) {
+        const match = hash.match(/board=([^&]+)/);
+        if (match && match[1]) {
+          const fromUrl = deserializeBedsideBoard(match[1]);
+          if (fromUrl.length > 0) {
+            customBedsideTiles = fromUrl;
+            try {
+              localStorage.setItem('pg_custom_bedside_tiles', JSON.stringify(fromUrl));
+            } catch (e) {}
+            setTimeout(() => showToast(`📋 Loaded ${fromUrl.length} personalized bedside tiles`), 300);
+            return;
+          }
+        }
+      }
+
+      try {
+        const stored = localStorage.getItem('pg_custom_bedside_tiles');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed)) customBedsideTiles = parsed;
+        }
+      } catch (e) {}
+    }
+    loadSavedCustomTiles();
+
+    function scoreVoice(voice) {
+      let score = 0;
+      const name = (voice.name || '').toLowerCase();
+      const lang = (voice.lang || '').toLowerCase();
+
+      // Prioritize active language
+      if (lang.startsWith(currentLang)) score += 90;
+      if (currentLang === 'en' && (lang === 'en-us' || lang === 'en-gb')) score += 20;
+
+      // Neural / Natural tier
+      if (name.includes('natural')) score += 120;
+      if (name.includes('neural')) score += 100;
+      if (name.includes('online')) score += 90;
+      if (name.includes('google')) score += 80;
+      if (name.includes('jenny')) score += 70; // Microsoft Jenny Natural
+      if (name.includes('guy')) score += 65;   // Microsoft Guy Natural
+      if (name.includes('aria')) score += 65;  // Microsoft Aria Natural
+      if (name.includes('elvira') || name.includes('alvaro')) score += 70; // Spanish Natural
+      if (name.includes('denise') || name.includes('henri')) score += 70;  // French Natural
+      if (name.includes('katja') || name.includes('conrad')) score += 70;  // German Natural
+      if (name.includes('samantha')) score += 55;
+      if (name.includes('siri')) score += 55;
+
+      // Penalize legacy robotic desktop synthesizers
+      if (name.includes('desktop') && !name.includes('natural')) score -= 40;
+      if (name.includes('david') && !name.includes('natural')) score -= 30;
+      if (name.includes('mark') && !name.includes('natural')) score -= 30;
+      if (name.includes('zira') && !name.includes('natural')) score -= 10;
+
+      return score;
+    }
+
+    function populateVoices() {
+      if (!('speechSynthesis' in window)) {
+        if (voiceSelect) {
+          voiceSelect.innerHTML = '<option>Web Speech not supported in this browser</option>';
+        }
+        return;
+      }
+
+      availableVoices = window.speechSynthesis.getVoices();
+      if (!availableVoices || availableVoices.length === 0) return;
+
+      if (!voiceSelect) return;
+
+      while (voiceSelect.firstChild) {
+        voiceSelect.removeChild(voiceSelect.firstChild);
+      }
+
+      const sorted = [...availableVoices].sort((a, b) => scoreVoice(b) - scoreVoice(a));
+
+      let autoSelected = false;
+      sorted.forEach((voice) => {
+        const opt = document.createElement('option');
+        opt.value = voice.name;
+        const isNatural = /natural|neural|online|google|wavenet/i.test(voice.name);
+        const prefix = isNatural ? '✨ ' : '';
+        opt.textContent = `${prefix}${voice.name} (${voice.lang})`;
+        voiceSelect.appendChild(opt);
+
+        // Auto-select top-scoring voice matching current language
+        if (!autoSelected && scoreVoice(voice) > 70) {
+          opt.selected = true;
+          selectedVoice = voice;
+          autoSelected = true;
+        }
+      });
+
+      if (!autoSelected && sorted.length > 0) {
+        selectedVoice = sorted[0];
+        voiceSelect.selectedIndex = 0;
+      }
+    }
+
+    if ('speechSynthesis' in window) {
+      populateVoices();
+      window.speechSynthesis.onvoiceschanged = populateVoices;
+    }
+
+    if (voiceSelect) {
+      voiceSelect.addEventListener('change', () => {
+        const found = availableVoices.find(v => v.name === voiceSelect.value);
+        if (found) {
+          selectedVoice = found;
+          announceSpeech(`Voice set to ${found.name.replace(/\(.*?\)/g, '').trim()}`);
+        }
+      });
+    }
+
+    pacingBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        pacingBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        speechRate = parseFloat(btn.getAttribute('data-rate'));
+        if (lastSpokenText) announceSpeech(lastSpokenText);
+      });
+    });
+
+    pitchBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        pitchBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        speechPitch = parseFloat(btn.getAttribute('data-pitch'));
+        if (lastSpokenText) announceSpeech(lastSpokenText);
+      });
+    });
+
+    if (repeatBtn) {
+      repeatBtn.addEventListener('click', () => {
+        if (lastSpokenText) announceSpeech(lastSpokenText);
+      });
+    }
+
+    function announceSpeech(text) {
+      lastSpokenText = text;
+      speechLog.textContent = text;
+      if (repeatBtn) repeatBtn.style.display = 'inline-block';
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        if (selectedVoice) {
+          utterance.voice = selectedVoice;
+          utterance.lang = selectedVoice.lang;
+        }
+        utterance.rate = speechRate;
+        utterance.pitch = speechPitch;
+
+        utterance.onstart = () => {
+          if (speechWave) {
+            speechWave.textContent = '🔊';
+            speechWave.classList.add('speech-pulsing');
+          }
+        };
+        utterance.onend = () => {
+          if (speechWave) {
+            speechWave.textContent = '📢';
+            speechWave.classList.remove('speech-pulsing');
+          }
+        };
+        utterance.onerror = () => {
+          if (speechWave) {
+            speechWave.textContent = '📢';
+            speechWave.classList.remove('speech-pulsing');
+          }
+        };
+
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Render Wong-Baker Faces (with active language support)
+    function renderWongBakerFaces() {
+      while (facesContainer.firstChild) {
+        facesContainer.removeChild(facesContainer.firstChild);
+      }
+
+      const langData = customLangPack || BUILTIN_LANGUAGES[currentLang] || BUILTIN_LANGUAGES.en;
+
+      WONG_BAKER_FACES.forEach(face => {
+        const trFace = langData.faces && langData.faces[face.score] ? langData.faces[face.score] : null;
+        const faceName = trFace ? trFace.name : face.name;
+        const speechPrompt = trFace ? trFace.spoken : face.speechPrompt;
+
+        const card = document.createElement('div');
+        card.className = `pg-face-card face-score-${face.score}`;
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-label', `${faceName}, rating ${face.rating}: ${speechPrompt}`);
+
+        const iconWrap = document.createElement('div');
+        iconWrap.className = 'pg-face-icon-wrap';
+        iconWrap.innerHTML = face.svgIcon; // Safe constant SVG
+        card.appendChild(iconWrap);
+
+        const scoreLbl = document.createElement('div');
+        scoreLbl.style.fontWeight = '800';
+        scoreLbl.style.fontSize = '1.15rem';
+        scoreLbl.style.marginTop = '0.35rem';
+        scoreLbl.textContent = face.rating;
+        card.appendChild(scoreLbl);
+
+        const nameLbl = document.createElement('div');
+        nameLbl.style.fontSize = '0.8rem';
+        nameLbl.style.fontWeight = '600';
+        nameLbl.style.color = '#94a3b8';
+        nameLbl.style.textAlign = 'center';
+        nameLbl.textContent = faceName;
+        card.appendChild(nameLbl);
+
+        card.addEventListener('click', () => {
+          document.querySelectorAll('.pg-face-card').forEach(c => c.classList.remove('selected'));
+          card.classList.add('selected');
+          announceSpeech(speechPrompt);
+        });
+
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            card.click();
+          }
+        });
+
+        facesContainer.appendChild(card);
+      });
+    }
+
+    // Render 12 Physiological Need Tiles + Personalized Bedside Cards
+    function renderNeedsTiles() {
+      while (aacGridContainer.firstChild) {
+        aacGridContainer.removeChild(aacGridContainer.firstChild);
+      }
+
+      const langData = customLangPack || BUILTIN_LANGUAGES[currentLang] || BUILTIN_LANGUAGES.en;
+
+      // 1. Standard Clinical Tiles
+      ICU_PHYSIOLOGICAL_NEEDS.forEach(item => {
+        const trNeed = langData.needs && langData.needs[item.id] ? langData.needs[item.id] : null;
+        const title = trNeed ? trNeed.title : item.title;
+        const category = trNeed ? trNeed.category : item.category;
+        const spokenText = trNeed ? trNeed.spoken : item.spokenText;
+
+        const tile = document.createElement('button');
+        tile.className = 'pg-aac-tile';
+        tile.setAttribute('type', 'button');
+        tile.setAttribute('aria-label', `${title}: ${spokenText}`);
+
+        const iconWrap = document.createElement('div');
+        iconWrap.className = 'pg-aac-icon-wrap';
+        iconWrap.innerHTML = item.svgIcon; // Safe constant SVG
+        tile.appendChild(iconWrap);
+
+        const label = document.createElement('span');
+        label.className = 'pg-aac-label';
+        label.textContent = title;
+        tile.appendChild(label);
+
+        const sub = document.createElement('span');
+        sub.className = 'pg-aac-sub';
+        sub.textContent = category;
+        tile.appendChild(sub);
+
+        tile.addEventListener('click', () => {
+          document.querySelectorAll('.pg-aac-tile').forEach(t => t.classList.remove('active'));
+          tile.classList.add('active');
+          announceSpeech(spokenText);
+        });
+
+        aacGridContainer.appendChild(tile);
+      });
+
+      // 2. Personalized Bedside Co-Creation Tiles
+      customBedsideTiles.forEach((customItem, index) => {
+        const tile = document.createElement('button');
+        tile.className = 'pg-aac-tile custom-tile';
+        tile.setAttribute('type', 'button');
+        tile.setAttribute('aria-label', `${customItem.title}: ${customItem.spokenText}`);
+
+        // Delete button
+        const delBtn = document.createElement('span');
+        delBtn.className = 'tile-delete-btn';
+        delBtn.textContent = '✕';
+        delBtn.title = 'Remove bedside tile';
+        delBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          customBedsideTiles.splice(index, 1);
+          try {
+            localStorage.setItem('pg_custom_bedside_tiles', JSON.stringify(customBedsideTiles));
+          } catch (err) {}
+          renderNeedsTiles();
+          showToast(`Removed "${customItem.title}" from bedside board`);
+        });
+        tile.appendChild(delBtn);
+
+        const iconWrap = document.createElement('div');
+        iconWrap.className = 'pg-aac-icon-wrap';
+        iconWrap.style.fontSize = '2rem';
+        iconWrap.textContent = customItem.emoji || '💬';
+        tile.appendChild(iconWrap);
+
+        const label = document.createElement('span');
+        label.className = 'pg-aac-label';
+        label.textContent = customItem.title;
+        tile.appendChild(label);
+
+        const badge = document.createElement('span');
+        badge.className = 'pg-custom-badge';
+        badge.textContent = customItem.category || 'Bedside';
+        tile.appendChild(badge);
+
+        tile.addEventListener('click', () => {
+          document.querySelectorAll('.pg-aac-tile').forEach(t => t.classList.remove('active'));
+          tile.classList.add('active');
+          announceSpeech(customItem.spokenText);
+        });
+
+        aacGridContainer.appendChild(tile);
+      });
+    }
+
+    // Initial render of Panel 4 components
+    renderWongBakerFaces();
+    renderNeedsTiles();
+
+    // 5. Language Switching Controls
+    const langBtns = document.querySelectorAll('.lang-btn');
+    langBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        langBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentLang = btn.getAttribute('data-lang');
+        customLangPack = null; // revert custom import when switching to builtin
+        populateVoices();
+        renderWongBakerFaces();
+        renderNeedsTiles();
+        showToast(`Language switched to ${btn.textContent.trim()}`);
+      });
+    });
+
+    // 6. Bedside Tile Builder Interaction
+    const builderCard = document.getElementById('bedside-tile-builder');
+    const btnOpenBuilder = document.getElementById('btn-open-tile-builder');
+    const btnCloseBuilder = document.getElementById('btn-close-tile-builder');
+    const btnSaveTile = document.getElementById('btn-save-tile');
+    const inputTitle = document.getElementById('input-tile-title');
+    const inputSpeech = document.getElementById('input-tile-speech');
+    const inputEmoji = document.getElementById('input-tile-emoji');
+
+    if (btnOpenBuilder) {
+      btnOpenBuilder.addEventListener('click', () => {
+        const isHidden = builderCard.style.display === 'none';
+        builderCard.style.display = isHidden ? 'flex' : 'none';
+        if (isHidden) inputTitle.focus();
+      });
+    }
+
+    if (btnCloseBuilder) {
+      btnCloseBuilder.addEventListener('click', () => {
+        builderCard.style.display = 'none';
+      });
+    }
+
+    if (btnSaveTile) {
+      btnSaveTile.addEventListener('click', () => {
+        const title = (inputTitle.value || '').trim();
+        const speech = (inputSpeech.value || '').trim() || title;
+        const emoji = inputEmoji.value || '💬';
+
+        if (!title) {
+          showToast('Please enter a tile title');
+          inputTitle.focus();
+          return;
+        }
+
+        const newTile = {
+          id: `CUSTOM_${Date.now()}`,
+          title: title.slice(0, 40),
+          spokenText: speech.slice(0, 200),
+          category: 'Personal',
+          emoji: emoji,
+          isCustom: true
+        };
+
+        customBedsideTiles.push(newTile);
+        try {
+          localStorage.setItem('pg_custom_bedside_tiles', JSON.stringify(customBedsideTiles));
+        } catch (e) {}
+
+        inputTitle.value = '';
+        inputSpeech.value = '';
+        builderCard.style.display = 'none';
+
+        renderNeedsTiles();
+        announceSpeech(newTile.spokenText);
+        showToast(`Added "${newTile.title}" to bedside board`);
+      });
+    }
+
+    // 7. Share Bedside Board Link
+    const btnShareBoard = document.getElementById('btn-share-board');
+    if (btnShareBoard) {
+      btnShareBoard.addEventListener('click', () => {
+        const encoded = serializeBedsideBoard(customBedsideTiles);
+        const url = `${window.location.origin}${window.location.pathname}?panel=aac#board=${encoded}`;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(() => {
+            showToast('📋 Bedside board link copied to clipboard!');
+          }).catch(() => {
+            prompt('Copy your bedside board link:', url);
+          });
+        } else {
+          prompt('Copy your bedside board link:', url);
+        }
+      });
+    }
+
+    // 8. Print Bedside Card
+    const btnPrintBoard = document.getElementById('btn-print-board');
+    if (btnPrintBoard) {
+      btnPrintBoard.addEventListener('click', () => {
+        window.print();
+      });
+    }
+
+    // 9. Export Translation Template JSON
+    const btnExportLang = document.getElementById('btn-export-lang');
+    if (btnExportLang) {
+      btnExportLang.addEventListener('click', () => {
+        const jsonStr = generateLanguageTemplateJson('Custom Language', 'xx');
+        const blob = new Blob([jsonStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'pocketgull_a11y_language_pack.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('📥 Translation template JSON downloaded!');
+      });
+    }
+
+    // 10. Import Language Pack JSON
+    const btnImportLang = document.getElementById('btn-import-lang');
+    const inputImportPack = document.getElementById('input-import-pack');
+
+    if (btnImportLang && inputImportPack) {
+      btnImportLang.addEventListener('click', () => {
+        inputImportPack.click();
+      });
+
+      inputImportPack.addEventListener('change', (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          try {
+            const pack = JSON.parse(ev.target.result);
+            if (!pack.needs && !pack.faces) {
+              showToast('Invalid language pack: missing needs or faces');
+              return;
+            }
+            customLangPack = pack;
+            if (pack.code) currentLang = pack.code;
+            populateVoices();
+            renderWongBakerFaces();
+            renderNeedsTiles();
+            showToast(`🎉 Loaded translation: ${pack.name || 'Custom Pack'}`);
+          } catch (err) {
+            showToast('Error parsing JSON file');
+          }
+        };
+        reader.readAsText(file);
+      });
+    }
+
+    // 6. Panel 5: Nemeth Braille STEM Math Terminal
+    const mathPalette = document.getElementById('math-palette-container');
+    const visualLine = document.getElementById('visual-math-line');
+    const brailleLine = document.getElementById('braille-math-line');
+
+    NEMETH_BRAILLE_MAPPINGS.forEach(item => {
+      const btn = document.createElement('button');
+      btn.className = 'math-symbol-btn';
+      btn.setAttribute('type', 'button');
+      btn.setAttribute('aria-label', `${item.name}: visual ${item.visual}, Nemeth ${item.brailleChar}`);
+
+      const vSpan = document.createElement('span');
+      vSpan.className = 'math-visual';
+      vSpan.textContent = item.visual;
+      btn.appendChild(vSpan);
+
+      const bSpan = document.createElement('span');
+      bSpan.className = 'math-braille';
+      bSpan.textContent = item.brailleChar;
+      btn.appendChild(bSpan);
+
+      const nSpan = document.createElement('span');
+      nSpan.className = 'math-name';
+      nSpan.textContent = item.name;
+      btn.appendChild(nSpan);
+
+      btn.addEventListener('click', () => {
+        visualLine.textContent += ` ${item.visual}`;
+        brailleLine.textContent += ` ${item.brailleChar}`;
+      });
+
+      mathPalette.appendChild(btn);
+    });
+  </script>
+
+  <!-- Bedside Action Toast Notification -->
+  <div id="bedside-toast" style="position: fixed; bottom: 24px; right: 24px; background: #0f172a; border: 1px solid var(--teal-accent); color: #f8fafc; padding: 0.75rem 1.25rem; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.6); font-family: var(--sans-stack); font-size: 0.9rem; z-index: 9999; display: none; transition: all 0.3s ease; pointer-events: none;"></div>
+</body>
+</html>

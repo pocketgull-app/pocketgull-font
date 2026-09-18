@@ -32,7 +32,7 @@ value = 700;
 descender = -200;
 id = "4F158253-C85A-43D9-96BC-2231CEF7208C";
 weightValue = 700;
-xHeight = 500;
+xHeight = 540;
 },
 {
 ascender = 800;
@@ -54,7 +54,7 @@ value = 400;
 descender = -200;
 id = "C07A860A-E92A-4C5F-BFF1-0168889B9654";
 weightValue = 400;
-xHeight = 500;
+xHeight = 540;
 },
 {
 ascender = 800;
@@ -76,7 +76,7 @@ value = 900;
 descender = -200;
 id = "8A9A845D-FE85-4681-A583-7E0C3068B0B3";
 weightValue = 900;
-xHeight = 500;
+xHeight = 540;
 }
 );
 glyphs = (

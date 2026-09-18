@@ -78,6 +78,8 @@ def package():
         # Root licenses & docs
         if os.path.exists("OFL.txt"):
             zf.write("OFL.txt", "OFL.txt")
+        if os.path.exists("FONTLOG.txt"):
+            zf.write("FONTLOG.txt", "FONTLOG.txt")
         if os.path.exists("README.md"):
             zf.write("README.md", "README.md")
         if os.path.exists("fonts.css"):

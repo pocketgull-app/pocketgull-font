@@ -1,106 +1,105 @@
 {
-  "timestamp": "2026-09-06T20:03:57Z",
+  "timestamp": "2026-09-18T15:15:01Z",
+  "case_study": 2,
   "script": "Chinuk Pipa (Duployan Shorthand for Chinuk Wawa)",
-  "unicode_range": "U+1BC00 - U+1BC9F",
-  "scale_method": "uniform_optical_grounded",
-  "scale_factor": 1.55,
-  "base_y": 40.0,
+  "region": "Pacific Northwest / Grand Ronde, Columbia River basin",
+  "clinical_focus": "Tribal sovereignty health centers, holistic wellness, and community clinic communications.",
   "codepoints_synthesized": 143,
+  "total_glyphs_compiled": 1859,
+  "runtime_ms": 148976.9,
+  "manual_hours_benchmark": 1394.25,
+  "acceleration_factor": 33691,
   "fonts_updated": [
     {
       "filename": "PocketGull-Fineliner.ttf",
       "weight": 400,
       "is_mono": false,
       "glyphs_added": 143,
-      "time_ms": 12868.94
+      "time_ms": 9703.66
     },
     {
       "filename": "PocketGull-Regular.ttf",
       "weight": 400,
       "is_mono": false,
       "glyphs_added": 143,
-      "time_ms": 12429.28
+      "time_ms": 9668.45
     },
     {
       "filename": "PocketGull-Bold.ttf",
       "weight": 700,
       "is_mono": false,
       "glyphs_added": 143,
-      "time_ms": 12687.71
+      "time_ms": 9201.23
     },
     {
       "filename": "PocketGull-Black.ttf",
       "weight": 900,
       "is_mono": false,
       "glyphs_added": 143,
-      "time_ms": 12801.25
+      "time_ms": 9301.9
     },
     {
       "filename": "PocketGull-Chiseltip.ttf",
       "weight": 900,
       "is_mono": false,
       "glyphs_added": 143,
-      "time_ms": 12729.24
+      "time_ms": 9270.61
     },
     {
       "filename": "PocketGull-CondensedBold.ttf",
       "weight": 700,
       "is_mono": false,
       "glyphs_added": 143,
-      "time_ms": 12651.33
+      "time_ms": 8819.38
     },
     {
       "filename": "PocketGull-Soft.ttf",
       "weight": 400,
       "is_mono": false,
       "glyphs_added": 143,
-      "time_ms": 18505.16
+      "time_ms": 12624.08
     },
     {
       "filename": "PocketGull-Micro.ttf",
       "weight": 400,
       "is_mono": false,
       "glyphs_added": 143,
-      "time_ms": 18758.69
+      "time_ms": 12441.94
     },
     {
       "filename": "PocketGull-MarkerRaw.ttf",
       "weight": 900,
       "is_mono": false,
       "glyphs_added": 143,
-      "time_ms": 9572.81
+      "time_ms": 9430.5
     },
     {
       "filename": "PocketGullMono-Regular.ttf",
       "weight": 400,
       "is_mono": true,
       "glyphs_added": 143,
-      "time_ms": 2574.25
+      "time_ms": 3583.93
     },
     {
       "filename": "PocketGullMono-Bold.ttf",
       "weight": 700,
       "is_mono": true,
       "glyphs_added": 143,
-      "time_ms": 3478.41
+      "time_ms": 4596.39
     },
     {
       "filename": "PocketGullMono-Italic.ttf",
       "weight": 500,
       "is_mono": true,
       "glyphs_added": 143,
-      "time_ms": 2534.43
+      "time_ms": 3841.18
     },
     {
       "filename": "PocketGull-VF.ttf",
       "weight": 400,
       "is_mono": false,
       "glyphs_added": 143,
-      "time_ms": 3735.27
+      "time_ms": 46484.73
     }
-  ],
-  "total_glyphs_compiled": 1859,
-  "runtime_ms": 136262.23,
-  "manual_hours_benchmark": 1394.25,
-  "acceleration_factor": 36835
+  ]
 }

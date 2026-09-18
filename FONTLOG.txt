@@ -1,0 +1,76 @@
+FONTLOG for the PocketGull fonts
+
+This file provides detailed information on the PocketGull Font Superfamily.
+This information should be distributed along with the PocketGull fonts
+and any derivative works.
+
+Basic Font Information
+======================
+
+PocketGull is an open-source clinical sans-serif, display, and telemetry
+monospace font superfamily engineered by Phil Gear. Originating from tactile
+felt marker lettering created on physical cardstock for GearArts, PocketGull
+synthesizes humanist stroke warmth with Louise Sloan 5:1 optotypic legibility
+and Institute for Safe Medication Practices (ISMP) character disambiguation
+standards for life-critical healthcare environments.
+
+The superfamily encompasses:
+- PocketGull Regular / Fineliner (weight 400): EHR clinical charts, long-form reading, patient discharge summaries.
+- PocketGull Bold (weight 700): Display titling, Bionic reading anchors, trauma alarms.
+- PocketGull Black / Chiseltip (weight 900): Calligraphic signage, high-contrast placards.
+- PocketGull Mono (weights 400, 700): Fixed 600 UPM pitch, ICU telemetry, box drawing (U+2500–U+257F), Powerline chevrons, and sub-cell ECG waveforms.
+- PocketGull Variable (weight axis 400–900).
+
+All styles conform strictly to:
+- Standard 1000 UPM em-square (ISO/IEC 14496-22).
+- TrueType 2-byte word alignment (loca[i] % 2 == 0) for 100% W3C OTS memory safety.
+- Bit-7 point flag masking (flag & 0x3F).
+- Zero duplicate contour nodes.
+- Full 256 Unicode Braille coverage (U+2800–U+28FF) with ISO/TR 11548 tactile 8-dot geometry.
+- Complete OpenType GSUB ISMP features (cv08 slashed zero, cv05 curved l, ss02 serifed I, cv11 slashed Z).
+
+ChangeLog
+=========
+
+18 Sep 2026 (Phil Gear & The PocketGull Project Authors) PocketGull Version 3.1.0
+- Clean-Room Upstream Remediation: Completely eliminated all dependencies on proprietary Microsoft Windows system fonts (Segoe UI, Nirmala, Gadugi, Ebrima, MV Boli).
+- The Grand Blend: Harmonized multi-script glyph coverage under 100% certified open-source upstream masters under the SIL Open Font License 1.1 (OFL 1.1):
+  * Google Noto Sans (Canadian Aboriginal, Duployan / Chinuk Pipa, Tifinagh, Cherokee, Ethiopic, Adlam, Vai, Arabic, Hebrew, Syriac, Thaana, Devanagari, Bengali, Gurmukhi, Gujarati, Oriya, Tamil, Telugu, Kannada, Malayalam, Sinhala).
+  * SIL International: Andika and Charis SIL for phonetic and clinical typography.
+  * IBM: IBM Plex Sans and IBM Plex Mono for technical and telemetry clarity.
+  * Rasmus Andersson: Inter for high-density micro-legibility.
+  * JetBrains: JetBrains Mono for code and telemetry proportions.
+- Procedural Vector Synthesis: Synthesized pure mathematical quadratic Bézier contours for Philocardia heart (U+2665, uni2764), Rod of Asclepius (U+2695), Warning triangle (U+26A0), Sun (U+263C), Moon (U+263D), and Do Not Crush (U+2298).
+- Fixed Inuktitut syllabics composite double-scaling defect and injected clinical Diameter symbol (⌀ U+2300) across all weights.
+- Standardized entire repository to SIL Open Font License 1.1 (OFL 1.1) with Zero Reserved Font Names (No RFN).
+
+15 Sep 2026 (Phil Gear) PocketGull Version 3.0.0
+- Introduction of PocketGull Variable Font (PocketGull-VF.ttf) with continuous weight axis (400–900).
+- Monospace fixed 600 UPM telemetry HUD with sub-cell ECG waveforms and full box-drawing coverage.
+- Louise Sloan 5:1 optotype calibration and ISMP medication safety disambiguation.
+- 256-glyph Unicode Braille cell coverage (U+2800–U+28FF).
+
+01 Aug 2026 (Phil Gear) PocketGull Version 2.0.0
+- Expanded weight spectrum: Fineliner (400), Regular (400), Bold (700), Chiseltip (900).
+- Pure Dart SFNT typefoundry compiler and Phinney forensic auditor.
+
+15 Jun 2026 (Phil Gear) PocketGull Version 1.0.0
+- Initial open-source release based on tactile felt-marker drawings created on physical cardstock for GearArts.
+
+Acknowledgements
+================
+
+If you make modifications be sure to add your name (N), email (E), web-address
+(if any) and description (D) to the list below.
+
+N: Phil Gear
+E: phil@pocketgull.app
+W: https://pocketgull.app
+D: Original Type Designer, Foundry Engineer, and Project Author
+
+Upstream Open-Source Typeface Projects:
+- Google Noto Project Authors (Google Noto Sans families, SIL Open Font License 1.1)
+- SIL International (Andika, Charis SIL, SIL Open Font License 1.1)
+- IBM Corporation (IBM Plex Sans, IBM Plex Mono, SIL Open Font License 1.1)
+- Rasmus Andersson (Inter, SIL Open Font License 1.1)
+- JetBrains s.r.o. (JetBrains Mono, SIL Open Font License 1.1)

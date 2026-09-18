@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 PocketGull Typefoundry: Universal Variable Font Compiler
 =========================================================
@@ -44,33 +44,7 @@ def compile_variable_font():
             print(f"[ERROR] Required font master missing: {path}")
             sys.exit(1)
             
-    print("1. Extracting width ('wdth') variation deltas via varLib from Condensed master...")
-    doc = DesignSpaceDocument()
-    ax_w = AxisDescriptor()
-    ax_w.name = 'Width'
-    ax_w.tag = 'wdth'
-    ax_w.minimum = 75.0
-    ax_w.default = 100.0
-    ax_w.maximum = 100.0
-    doc.addAxis(ax_w)
-
-    s1 = SourceDescriptor()
-    s1.path = src_bold
-    s1.name = 'PocketGull Bold'
-    s1.location = {'Width': 100.0}
-    doc.addSource(s1)
-
-    s2 = SourceDescriptor()
-    s2.path = src_cond
-    s2.name = 'PocketGull Condensed Bold'
-    s2.location = {'Width': 78.0}
-    doc.addSource(s2)
-
-    vf_wdth, _, _ = build(doc)
-    wdth_gvar = vf_wdth['gvar']
-    print(f"  • Extracted wdth variation deltas across {len(wdth_gvar.variations)} glyphs.")
-
-    print("2. Loading existing variable font base...")
+    print("1. Loading existing variable font base...")
     vf = TTFont(src_vf)
     fvar = vf['fvar']
     gvar = vf['gvar']
@@ -79,6 +53,32 @@ def compile_variable_font():
     # Check if 'wdth' is already in fvar axes
     has_wdth = any(a.axisTag == 'wdth' for a in fvar.axes)
     if not has_wdth:
+        print("2. Extracting width ('wdth') variation deltas via varLib from Condensed master...")
+        doc = DesignSpaceDocument()
+        ax_w = AxisDescriptor()
+        ax_w.name = 'Width'
+        ax_w.tag = 'wdth'
+        ax_w.minimum = 75.0
+        ax_w.default = 100.0
+        ax_w.maximum = 100.0
+        doc.addAxis(ax_w)
+
+        s1 = SourceDescriptor()
+        s1.path = src_bold
+        s1.name = 'PocketGull Bold'
+        s1.location = {'Width': 100.0}
+        doc.addSource(s1)
+
+        s2 = SourceDescriptor()
+        s2.path = src_cond
+        s2.name = 'PocketGull Condensed Bold'
+        s2.location = {'Width': 78.0}
+        doc.addSource(s2)
+
+        vf_wdth, _, _ = build(doc)
+        wdth_gvar = vf_wdth['gvar']
+        print(f"  • Extracted wdth variation deltas across {len(wdth_gvar.variations)} glyphs.")
+
         print("3. Appending 'wdth' continuous axis to fvar table...")
         axis_wdth = Axis()
         axis_wdth.axisTag = 'wdth'
@@ -107,31 +107,34 @@ def compile_variable_font():
             inst.coordinates = coords
             fvar.instances.append(inst)
 
-    print("4. Integrating wdth TupleVariations into gvar variation table...")
-    integrated = 0
-    skipped = 0
-    for gname in vf.getGlyphOrder():
-        if gname not in wdth_gvar.variations or gname not in gvar.variations:
-            continue
-        w_tvs = wdth_gvar.variations[gname]
-        v_tvs = gvar.variations[gname]
-        if not w_tvs:
-            continue
-        w_tv = w_tvs[0]
-        
-        # Check if already has wdth
-        if any('wdth' in tv.axes for tv in v_tvs):
-            continue
+        print("4. Integrating wdth TupleVariations into gvar variation table...")
+        integrated = 0
+        skipped = 0
+        for gname in vf.getGlyphOrder():
+            if gname not in wdth_gvar.variations or gname not in gvar.variations:
+                continue
+            w_tvs = wdth_gvar.variations[gname]
+            v_tvs = gvar.variations[gname]
+            if not w_tvs:
+                continue
+            w_tv = w_tvs[0]
             
-        if v_tvs and len(w_tv.coordinates) != len(v_tvs[0].coordinates):
-            skipped += 1
-            continue
-            
-        new_tv = TupleVariation(w_tv.axes, w_tv.coordinates)
-        v_tvs.append(new_tv)
-        integrated += 1
+            # Check if already has wdth
+            if any('wdth' in tv.axes for tv in v_tvs):
+                continue
+                
+            if v_tvs and len(w_tv.coordinates) != len(v_tvs[0].coordinates):
+                skipped += 1
+                continue
+                
+            new_tv = TupleVariation(w_tv.axes, w_tv.coordinates)
+            v_tvs.append(new_tv)
+            integrated += 1
 
-    print(f"  • Integrated wdth deltas into {integrated} glyphs (skipped {skipped}).")
+        print(f"  • Integrated wdth deltas into {integrated} glyphs (skipped {skipped}).")
+    else:
+        print("  • Variable font already contains 'wdth' axis and variation deltas.")
+
     print(f"  • Total active axes: {[a.axisTag for a in fvar.axes]}")
     print(f"  • Total named instances: {len(fvar.instances)}")
 
@@ -164,10 +167,16 @@ def compile_variable_font():
     print("5. Saving TTF and recompressing WOFF2...")
     vf.save(out_ttf)
     vf.close()
-    shutil.copyfile(out_ttf, root_ttf)
+    try:
+        shutil.copyfile(out_ttf, root_ttf)
+    except Exception as e:
+        print(f"  [WARN] Root TTF sync note: {e}")
 
     compress(out_ttf, out_woff2)
-    shutil.copyfile(out_woff2, root_woff2)
+    try:
+        shutil.copyfile(out_woff2, root_woff2)
+    except Exception as e:
+        print(f"  [WARN] Root WOFF2 sync note: {e}")
 
     ttf_sz = os.path.getsize(out_ttf)
     woff2_sz = os.path.getsize(out_woff2)

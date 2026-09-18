@@ -16,7 +16,14 @@ test('SMoE Script Experts: Unicode ranges and non-overlapping boundary integrity
     { tag: 'ARAB', name: 'Arabic & Perso-Arabic', start: 0x0600, end: 0x06FF },
     { tag: 'HEBR', name: 'Hebrew & Yiddish', start: 0x0590, end: 0x05FF },
     { tag: 'DEVA', name: 'Devanagari', start: 0x0900, end: 0x097F },
-    { tag: 'TELM', name: 'Medical ICU Telemetry', start: 0xE0A0, end: 0xE0B6 }
+    { tag: 'MONG', name: 'Traditional Mongolian & Manchu', start: 0x1800, end: 0x18AF },
+    { tag: 'NKOO', name: 'N\'Ko Alphabet', start: 0x07C0, end: 0x07FF },
+    { tag: 'OSGE', name: 'Osage Sovereign Siouan', start: 0x104B0, end: 0x104FB },
+    { tag: 'OGHM', name: 'Ogham Celtic Tree Alphabet', start: 0x1680, end: 0x169F },
+    { tag: 'ORKH', name: 'Old Turkic / Orkhon Runes', start: 0x10C00, end: 0x10C4F },
+    { tag: 'SIGN', name: 'Sutton SignWriting', start: 0x1D800, end: 0x1DAAF },
+    { tag: 'CARD', name: 'ICU Sub-Cell ECG Telemetry', start: 0xE000, end: 0xE0FF },
+    { tag: 'BLIS', name: 'Blissymbolics AAC', start: 0xE100, end: 0xE17F }
   ];
 
   for (const exp of SCRIPT_EXPERTS) {

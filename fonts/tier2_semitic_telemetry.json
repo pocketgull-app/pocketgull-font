@@ -1,39 +1,67 @@
 {
-  "timestamp": "2026-09-06T07:33:07Z",
+  "timestamp": "2026-09-18T15:31:05Z",
   "script": "Tier 2: RTL & Semitic (Arabic, Hebrew, Syriac, Thaana)",
-  "codepoints_synthesized": 957,
+  "codepoints_synthesized": 1433,
   "fonts_updated": [
     {
       "filename": "PocketGull-Fineliner.ttf",
       "weight": 400,
       "is_mono": false,
-      "glyphs_added": 957,
-      "time_ms": 6959.61
+      "glyphs_added": 1433,
+      "time_ms": 12888.5
+    },
+    {
+      "filename": "PocketGull-Regular.ttf",
+      "weight": 400,
+      "is_mono": false,
+      "glyphs_added": 1433,
+      "time_ms": 13172.34
     },
     {
       "filename": "PocketGull-Bold.ttf",
       "weight": 700,
       "is_mono": false,
-      "glyphs_added": 957,
-      "time_ms": 8258.64
+      "glyphs_added": 1433,
+      "time_ms": 12613.53
+    },
+    {
+      "filename": "PocketGull-Black.ttf",
+      "weight": 900,
+      "is_mono": false,
+      "glyphs_added": 1433,
+      "time_ms": 12861.2
     },
     {
       "filename": "PocketGull-Chiseltip.ttf",
       "weight": 900,
       "is_mono": false,
-      "glyphs_added": 957,
-      "time_ms": 8137.0
+      "glyphs_added": 1433,
+      "time_ms": 12611.99
     },
     {
       "filename": "PocketGullMono-Regular.ttf",
       "weight": 400,
       "is_mono": true,
-      "glyphs_added": 957,
-      "time_ms": 8339.5
+      "glyphs_added": 1433,
+      "time_ms": 5516.5
+    },
+    {
+      "filename": "PocketGullMono-Bold.ttf",
+      "weight": 700,
+      "is_mono": true,
+      "glyphs_added": 1433,
+      "time_ms": 6316.77
+    },
+    {
+      "filename": "PocketGullMono-Italic.ttf",
+      "weight": 500,
+      "is_mono": true,
+      "glyphs_added": 1433,
+      "time_ms": 4895.72
     }
   ],
-  "total_glyphs_compiled": 3828,
-  "runtime_ms": 31730.69,
-  "manual_hours_benchmark": 2871.0,
-  "acceleration_factor": 325728
+  "total_glyphs_compiled": 11464,
+  "runtime_ms": 83169.71,
+  "manual_hours_benchmark": 8598.0,
+  "acceleration_factor": 372164
 }

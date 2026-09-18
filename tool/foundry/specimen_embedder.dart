@@ -15,14 +15,7 @@ class SpecimenEmbedder {
     }
 
     final fontsToEmbed = [
-      ('PocketGull Bold', 'PocketGull-Bold.ttf', '700 800', 'normal'),
-      ('PocketGull', 'PocketGull-Bold.ttf', '700 800', 'normal'),
-      ('PocketGull Fineliner', 'PocketGull-Fineliner.ttf', '400', 'normal'),
-      ('PocketGull', 'PocketGull-Fineliner.ttf', '400', 'normal'),
-      ('PocketGull Chiseltip', 'PocketGull-Chiseltip.ttf', '900', 'normal'),
-      ('PocketGull', 'PocketGull-Chiseltip.ttf', '900', 'normal'),
       ('PocketGull Mono', 'PocketGullMono-Regular.ttf', '400 500', 'normal'),
-      ('PocketGull Antigravity', 'PocketGull-Antigravity.ttf', '400', 'normal'),
     ];
 
     final cssBuffer = StringBuffer();
@@ -30,7 +23,10 @@ class SpecimenEmbedder {
     cssBuffer.writeln('    /* 100% W3C OTS Sanitized In-Memory TrueType Fonts for file:/// Protocol Offline Loading */');
 
     for (final (family, filename, weight, style) in fontsToEmbed) {
-      final fontFile = File('${typefaceDir.path}${Platform.pathSeparator}$filename');
+      var fontFile = File('${typefaceDir.path}${Platform.pathSeparator}fonts${Platform.pathSeparator}ttf${Platform.pathSeparator}$filename');
+      if (!fontFile.existsSync()) {
+        fontFile = File('${typefaceDir.path}${Platform.pathSeparator}$filename');
+      }
       if (!fontFile.existsSync()) {
         stderr.writeln('  ⚠️ Font binary missing for embed: ${fontFile.path}');
         continue;

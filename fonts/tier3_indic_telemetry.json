@@ -1,6 +1,7 @@
 {
-  "timestamp": "2026-09-06T07:33:49Z",
+  "timestamp": "2026-09-18T15:33:04Z",
   "script": "Tier 3: Indic Full Subcontinent Suite (10 Scripts + Vedic)",
+  "source": "Google Noto (SIL OFL 1.1 Certified)",
   "unicode_ranges": [
     "U+0900-U+097F",
     "U+0980-U+09FF",
@@ -14,39 +15,67 @@
     "U+0D80-U+0DFF",
     "U+1CD0-U+1CFF"
   ],
-  "codepoints_synthesized": 1000,
+  "codepoints_synthesized": 999,
   "fonts_updated": [
     {
       "filename": "PocketGull-Fineliner.ttf",
       "weight": 400,
       "is_mono": false,
-      "glyphs_added": 1000,
-      "time_ms": 8279.75
+      "glyphs_added": 999,
+      "time_ms": 14439.23
+    },
+    {
+      "filename": "PocketGull-Regular.ttf",
+      "weight": 400,
+      "is_mono": false,
+      "glyphs_added": 999,
+      "time_ms": 14269.8
     },
     {
       "filename": "PocketGull-Bold.ttf",
       "weight": 700,
       "is_mono": false,
-      "glyphs_added": 1000,
-      "time_ms": 8303.77
+      "glyphs_added": 999,
+      "time_ms": 23525.28
+    },
+    {
+      "filename": "PocketGull-Black.ttf",
+      "weight": 900,
+      "is_mono": false,
+      "glyphs_added": 999,
+      "time_ms": 14381.46
     },
     {
       "filename": "PocketGull-Chiseltip.ttf",
       "weight": 900,
       "is_mono": false,
-      "glyphs_added": 1000,
-      "time_ms": 8126.55
+      "glyphs_added": 999,
+      "time_ms": 14372.21
     },
     {
       "filename": "PocketGullMono-Regular.ttf",
       "weight": 400,
       "is_mono": true,
-      "glyphs_added": 1000,
-      "time_ms": 8370.19
+      "glyphs_added": 999,
+      "time_ms": 6547.56
+    },
+    {
+      "filename": "PocketGullMono-Bold.ttf",
+      "weight": 700,
+      "is_mono": true,
+      "glyphs_added": 999,
+      "time_ms": 7120.54
+    },
+    {
+      "filename": "PocketGullMono-Italic.ttf",
+      "weight": 500,
+      "is_mono": true,
+      "glyphs_added": 999,
+      "time_ms": 6081.05
     }
   ],
-  "total_glyphs_compiled": 4000,
-  "runtime_ms": 33113.82,
-  "manual_hours_benchmark": 3000.0,
-  "acceleration_factor": 326147
+  "total_glyphs_compiled": 7992,
+  "runtime_ms": 109093.67,
+  "manual_hours_benchmark": 5994.0,
+  "acceleration_factor": 197797
 }

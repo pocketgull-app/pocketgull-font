@@ -522,6 +522,197 @@
     .plate-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.25rem; }
     .plate-desc { font-size: 0.8rem; color: var(--text-muted); }
 
+    /* Panel 6: Sign Notation Rosetta Engine */
+    .rosetta-systems-bar {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .rosetta-sys-pill {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--card-border);
+      border-radius: 999px;
+      padding: 0.35rem 0.85rem;
+      font-size: 0.82rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'PocketGull Mono', monospace;
+      color: var(--text-muted);
+    }
+    .rosetta-sys-pill strong { color: var(--text); }
+    .rosetta-controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      background: rgba(7, 11, 18, 0.6);
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+    }
+    .rosetta-shape-picker {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .rosetta-shape-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text);
+      font-family: 'PocketGull Bold', sans-serif;
+      font-size: 1.1rem;
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+    .rosetta-shape-btn:hover {
+      border-color: var(--accent);
+      background: rgba(56, 189, 248, 0.1);
+    }
+    .rosetta-shape-btn.active {
+      background: var(--accent);
+      color: #070b12;
+      border-color: var(--accent);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+    }
+    .rosetta-morph-selector {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .rosetta-morph-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: 'PocketGull', sans-serif;
+    }
+    .rosetta-morph-btn:hover {
+      border-color: var(--card-border);
+      color: var(--text);
+    }
+    .rosetta-morph-btn.active {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .rosetta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.75rem;
+    }
+    .rosetta-card {
+      background: #090d16;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .rosetta-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--card-accent, var(--accent));
+    }
+    .rosetta-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .rosetta-card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .rosetta-card-tag {
+      font-size: 0.72rem;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-muted);
+      font-family: 'PocketGull Mono', monospace;
+    }
+    .rosetta-glyph-hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 90px;
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px dashed var(--card-border);
+      border-radius: 8px;
+      font-size: 3.5rem;
+      font-family: 'PocketGull SignWriting', 'PocketGull ASL', 'PocketGull', monospace;
+      color: var(--text);
+    }
+    .rosetta-meta-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-size: 0.85rem;
+    }
+    .rosetta-meta-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .rosetta-meta-label {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+    }
+    .rosetta-meta-val {
+      font-family: 'PocketGull Mono', monospace;
+      color: var(--accent);
+      text-align: right;
+    }
+    .rosetta-desc {
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      line-height: 1.45;
+    }
+    .rosetta-calib-banner {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-top: 1rem;
+    }
+    .rosetta-calib-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      color: #34d399;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
     /* Footer */
     footer {
       text-align: center;
@@ -542,6 +733,7 @@
     </a>
     <div class="nav-links">
       <a href="asl_studio.html" class="nav-btn">🤟 Sign Studio</a>
+      <a href="a11y_studio.html" class="nav-btn">♿ A11y Lab</a>
       <a href="index.html" class="nav-btn">🏛️ Font Foundry</a>
       <a href="https://www.gutenberg.org/ebooks/30601" target="_blank" class="nav-btn">📖 Gutenberg #30601</a>
     </div>
@@ -570,6 +762,9 @@
     </button>
     <button class="view-tab" data-target="panel-sloan">
       <span>🎯 Louise Sloan 5:1 ASL Acuity Test</span>
+    </button>
+    <button class="view-tab" data-target="panel-rosetta" id="tabRosetta">
+      <span>🧬 Sign Notation Rosetta (6 Systems)</span>
     </button>
     <button class="view-tab" data-target="panel-turntable" id="tabTurntable">
       <span>🌐 3D Volumetric Turntable &amp; Kinematics</span>
@@ -848,7 +1043,83 @@
       </div>
     </section>
 
-    <!-- PANEL 4: 3D VOLUMETRIC TURNTABLE & KINEMATICS -->
+    <!-- PANEL 4: THE SIGN NOTATION ROSETTA ENGINE -->
+    <section id="panel-rosetta" class="perspective-panel">
+      <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 2rem; margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
+          <div>
+            <h2 style="font-family: 'PocketGull Bold', sans-serif; font-size: 1.8rem; margin-bottom: 0.35rem; color: #38bdf8;">
+              🧬 The Sign Notation Rosetta Engine
+            </h2>
+            <p style="color: var(--text-muted); max-width: 850px; font-size: 0.95rem;">
+              Anatomical invariant calibration connecting Elsie Lincoln Benedict's 1921 Five Hand Types to the six major sign language orthographies:
+              <strong>Sutton SignWriting</strong> (<code>U+1D800–1DAAF</code>), <strong>Stokoe Notation</strong>, <strong>HamNoSys</strong>, <strong>IMWA</strong>, <strong>ASL-phabet</strong>, and <strong>Si5s</strong>.
+            </p>
+          </div>
+          <div style="display: flex; gap: 0.75rem;">
+            <a href="asl_studio.html" style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(56, 189, 248, 0.15); border: 1px solid var(--accent); color: var(--accent); padding: 0.6rem 1.1rem; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.85rem;">
+              <span>🤟</span> ASL Studio →
+            </a>
+            <a href="documentation/SIGN_NOTATION_ROSETTA_ARCHITECTURE.md" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #34d399; padding: 0.6rem 1.1rem; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.85rem;">
+              <span>📐</span> Architecture Spec ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- System Pill Indicators -->
+        <div class="rosetta-systems-bar" id="rosettaSystemsBar">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Controls: Handshape & Morphology Selector -->
+        <div class="rosetta-controls-bar">
+          <div>
+            <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-family: 'PocketGull Mono', monospace; display: block; margin-bottom: 0.4rem;">
+              Select Canonical Handshape:
+            </span>
+            <div class="rosetta-shape-picker" id="rosettaShapePicker">
+              <!-- Populated by JS: A, B, 5, C, 1, V, O, F, S, I -->
+            </div>
+          </div>
+
+          <div>
+            <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-family: 'PocketGull Mono', monospace; display: block; margin-bottom: 0.4rem;">
+              Morphological Lens (Benedict 1921):
+            </span>
+            <div class="rosetta-morph-selector" id="rosettaMorphSelector">
+              <button type="button" class="rosetta-morph-btn active" data-morph="alimentive">1. Alimentive (Circle)</button>
+              <button type="button" class="rosetta-morph-btn" data-morph="thoracic">2. Thoracic (Wedge)</button>
+              <button type="button" class="rosetta-morph-btn" data-morph="muscular">3. Muscular (Square)</button>
+              <button type="button" class="rosetta-morph-btn" data-morph="osseous">4. Osseous (Oblong)</button>
+              <button type="button" class="rosetta-morph-btn" data-morph="cerebral">5. Cerebral (Triangle)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comparative Notation Grid (6 Systems) -->
+        <div class="rosetta-grid" id="rosettaCardsGrid">
+          <!-- Populated dynamically via safe DOM nodes -->
+        </div>
+
+        <!-- Active Calibration & Acuity Banner -->
+        <div class="rosetta-calib-banner" id="rosettaCalibBanner">
+          <div class="rosetta-calib-header">
+            <span>🔬</span>
+            <span id="rosettaCalibTitle">Active Morphological Calibration</span>
+          </div>
+          <p id="rosettaCalibDesc" style="color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; margin-bottom: 0.75rem;"></p>
+          <div style="background: rgba(0,0,0,0.3); border: 1px dashed rgba(56, 189, 248, 0.4); border-radius: 8px; padding: 0.75rem 1rem;">
+            <div style="font-size: 0.8rem; font-weight: 700; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">
+              🎯 Louise Sloan 5:1 Acuity Invariant
+            </div>
+            <p id="rosettaSloanText" style="color: #94a3b8; font-size: 0.85rem; margin: 0; font-family: 'PocketGull', sans-serif;"></p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PANEL 5: 3D VOLUMETRIC TURNTABLE & KINEMATICS -->
     <section id="panel-turntable" class="perspective-panel">
       <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
@@ -922,6 +1193,7 @@
   <script src="js/five_hand_types_data.js"></script>
   <script src="js/asl_morph_svg_data.js"></script>
   <script src="js/asl_turntable_engine.js"></script>
+  <script src="js/sign_notation_rosetta_data.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // Main perspective tabs
@@ -952,6 +1224,19 @@
           }
         });
       });
+
+      // Deep Linking via URL Hash
+      function checkHashRoute() {
+        const hash = window.location.hash ? window.location.hash.substring(1) : '';
+        if (hash) {
+          const targetTab = document.querySelector(`.view-tab[data-target="${hash}"]`);
+          if (targetTab) {
+            targetTab.click();
+          }
+        }
+      }
+      window.addEventListener('hashchange', checkHashRoute);
+      checkHashRoute();
 
       // Inject Diag and Sloan SVGs
       const diagStage = document.getElementById('diagStage');
@@ -1198,8 +1483,250 @@
         updateLayerVisibility();
       });
 
+      // Rosetta Engine Controller
+      function initRosettaEngine() {
+        const systemsBar = document.getElementById('rosettaSystemsBar');
+        const shapePicker = document.getElementById('rosettaShapePicker');
+        const morphBtns = document.querySelectorAll('.rosetta-morph-btn');
+        const cardsGrid = document.getElementById('rosettaCardsGrid');
+        const calibTitle = document.getElementById('rosettaCalibTitle');
+        const calibDesc = document.getElementById('rosettaCalibDesc');
+        const sloanText = document.getElementById('rosettaSloanText');
+
+        if (!systemsBar || !shapePicker || !cardsGrid || !window.SIGN_NOTATION_ROSETTA) return;
+
+        let activeShapeKey = 'A';
+        let activeMorphKey = 'alimentive';
+
+        // 1. Populate systems bar
+        if (window.SIGN_NOTATION_SYSTEMS) {
+          systemsBar.textContent = '';
+          const sysOrder = ['sutton', 'stokoe', 'hamnosys', 'imwa', 'aslphabet', 'si5s'];
+          sysOrder.forEach(key => {
+            const sys = window.SIGN_NOTATION_SYSTEMS[key];
+            if (!sys) return;
+            const pill = document.createElement('div');
+            pill.className = 'rosetta-sys-pill';
+            const strong = document.createElement('strong');
+            strong.textContent = sys.name;
+            const span = document.createElement('span');
+            span.textContent = `· ${sys.paradigm}`;
+            pill.appendChild(strong);
+            pill.appendChild(span);
+            systemsBar.appendChild(pill);
+          });
+        }
+
+        // 2. Populate shape picker buttons
+        shapePicker.textContent = '';
+        window.SIGN_NOTATION_ROSETTA.forEach(item => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'rosetta-shape-btn' + (item.id === activeShapeKey ? ' active' : '');
+          btn.textContent = item.id;
+          btn.title = item.name;
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('.rosetta-shape-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeShapeKey = item.id;
+            renderRosettaCards();
+          });
+          shapePicker.appendChild(btn);
+        });
+
+        // 3. Morph selector buttons
+        morphBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            morphBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeMorphKey = btn.getAttribute('data-morph');
+            renderRosettaCards();
+          });
+        });
+
+        function renderRosettaCards() {
+          const currentItem = window.SIGN_NOTATION_ROSETTA.find(i => i.id === activeShapeKey) || window.SIGN_NOTATION_ROSETTA[0];
+          if (!currentItem) return;
+
+          cardsGrid.textContent = '';
+
+          // Card 1: Sutton SignWriting
+          createCard({
+            title: '1. Sutton SignWriting',
+            tag: currentItem.sutton.hex,
+            accent: '#38bdf8',
+            heroSvg: currentItem.sutton.svgIcon,
+            heroText: currentItem.sutton.char,
+            heroFont: "'PocketGull SignWriting', 'Noto Sans SignWriting', monospace",
+            meta: [
+              ['Grapheme', currentItem.sutton.name],
+              ['Base Primitive', currentItem.sutton.primitive],
+              ['Unicode Char', `${currentItem.sutton.char} (${currentItem.sutton.hex})`]
+            ],
+            desc: window.SIGN_NOTATION_SYSTEMS.sutton.description
+          });
+
+          // Card 2: Stokoe Notation
+          createCard({
+            title: '2. Stokoe Notation (1960)',
+            tag: 'Cheremic Dez',
+            accent: '#f59e0b',
+            heroText: currentItem.stokoeChereme,
+            heroFontSize: '3rem',
+            heroFont: "'PocketGull-ASL', 'PocketGull Bold', sans-serif",
+            meta: [
+              ['Dez Chereme', currentItem.stokoeChereme],
+              ['Formational Rule', currentItem.stokoeDez],
+              ['Parameter Type', 'Manual Designator (Dez)']
+            ],
+            desc: window.SIGN_NOTATION_SYSTEMS.stokoe.description
+          });
+
+          // Card 3: Hamburg Notation System (HamNoSys)
+          createCard({
+            title: '3. HamNoSys (v4.0)',
+            tag: currentItem.hamnosys.code,
+            accent: '#06b6d4',
+            heroText: currentItem.hamnosys.label || currentItem.hamnosys.transcription,
+            heroFontSize: '1.25rem',
+            heroFont: "'PocketGull Mono', monospace",
+            meta: [
+              ['Joint Flexion', currentItem.hamnosys.flexion],
+              ['Kinematic State', currentItem.hamnosys.kinematicState],
+              ['Target Domain', 'Avatar Animation & Machine Vision']
+            ],
+            desc: window.SIGN_NOTATION_SYSTEMS.hamnosys.description
+          });
+
+          // Card 4: International Movement Writing Alphabet (IMWA)
+          createCard({
+            title: '4. IMWA Universal Kinesiology',
+            tag: currentItem.imwa.group,
+            accent: '#ec4899',
+            heroText: currentItem.imwa.id,
+            heroFontSize: '1.35rem',
+            heroFont: "'PocketGull Mono', monospace",
+            meta: [
+              ['Catalog ID', currentItem.imwa.id],
+              ['Somatic Group', currentItem.imwa.group],
+              ['Movement Plane', currentItem.imwa.plane]
+            ],
+            desc: window.SIGN_NOTATION_SYSTEMS.imwa.description
+          });
+
+          // Card 5: ASL-phabet
+          createCard({
+            title: '5. ASL-phabet (Supalla)',
+            tag: currentItem.aslphabet.graphemeId,
+            accent: '#10b981',
+            heroText: currentItem.aslphabet.graphemeId,
+            heroFontSize: '2.2rem',
+            heroFont: "'PocketGull Mono', monospace",
+            meta: [
+              ['Grapheme Code', currentItem.aslphabet.graphemeId],
+              ['Visual Silhouette', currentItem.aslphabet.glyphDesc],
+              ['Pediatric Literacy', currentItem.aslphabet.pediatricNote]
+            ],
+            desc: window.SIGN_NOTATION_SYSTEMS.aslphabet.description
+          });
+
+          // Card 6: Si5s / ASLwrite
+          createCard({
+            title: '6. Si5s / ASLwrite',
+            tag: 'Cursive Ductus',
+            accent: '#a855f7',
+            heroText: currentItem.si5s.mark,
+            heroFontSize: '1.35rem',
+            heroFont: "'PocketGull Fineliner', cursive, sans-serif",
+            meta: [
+              ['Cursive Mark', currentItem.si5s.mark],
+              ['Handwritten Ductus', currentItem.si5s.ductus],
+              ['Foundry du Jour', 'Felt-marker organic stroke dynamic']
+            ],
+            desc: window.SIGN_NOTATION_SYSTEMS.si5s.description
+          });
+
+          // Update calibration banner
+          const morphNames = {
+            alimentive: 'Alimentive (The Circle / Dimpled Knuckles)',
+            thoracic: 'Thoracic (The Wedge / Conical Taper)',
+            muscular: 'Muscular (The Square / 1:1 Planar Palm)',
+            osseous: 'Osseous (The Oblong / Knotted Articular Nodes)',
+            cerebral: 'Cerebral (The Triangle / Delicate Frail Lines)'
+          };
+
+          calibTitle.textContent = `Active Calibration: ${morphNames[activeMorphKey] || activeMorphKey} on Handshape '${currentItem.id}'`;
+          calibDesc.textContent = currentItem.morphology[activeMorphKey] || '';
+          sloanText.textContent = currentItem.sloanCalibration;
+        }
+
+        function createCard(cfg) {
+          const card = document.createElement('div');
+          card.className = 'rosetta-card';
+          card.style.setProperty('--card-accent', cfg.accent);
+
+          const header = document.createElement('div');
+          header.className = 'rosetta-card-header';
+
+          const title = document.createElement('div');
+          title.className = 'rosetta-card-title';
+          title.textContent = cfg.title;
+
+          const tag = document.createElement('span');
+          tag.className = 'rosetta-card-tag';
+          tag.textContent = cfg.tag;
+
+          header.appendChild(title);
+          header.appendChild(tag);
+          card.appendChild(header);
+
+          const hero = document.createElement('div');
+          hero.className = 'rosetta-glyph-hero';
+          if (cfg.heroFont) hero.style.fontFamily = cfg.heroFont;
+          if (cfg.heroFontSize) hero.style.fontSize = cfg.heroFontSize;
+
+          if (cfg.heroSvg) {
+            hero.innerHTML = cfg.heroSvg;
+          } else {
+            hero.textContent = cfg.heroText;
+          }
+          card.appendChild(hero);
+
+          const metaRow = document.createElement('div');
+          metaRow.className = 'rosetta-meta-row';
+
+          cfg.meta.forEach(([label, val]) => {
+            const item = document.createElement('div');
+            item.className = 'rosetta-meta-item';
+
+            const l = document.createElement('span');
+            l.className = 'rosetta-meta-label';
+            l.textContent = label;
+
+            const v = document.createElement('span');
+            v.className = 'rosetta-meta-val';
+            v.textContent = val;
+
+            item.appendChild(l);
+            item.appendChild(v);
+            metaRow.appendChild(item);
+          });
+          card.appendChild(metaRow);
+
+          const desc = document.createElement('div');
+          desc.className = 'rosetta-desc';
+          desc.textContent = cfg.desc;
+          card.appendChild(desc);
+
+          cardsGrid.appendChild(card);
+        }
+
+        renderRosettaCards();
+      }
+
       // Initial Render
       renderCanvas();
+      initRosettaEngine();
     });
   </script>
 </body>

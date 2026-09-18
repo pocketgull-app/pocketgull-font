@@ -33,13 +33,11 @@ WOFF2_DIR = ROOT_DIR / "fonts" / "woff2"
 TELEMETRY_PATH = ROOT_DIR / "fonts" / "case_study_02_telemetry.json"
 
 REF_CANDIDATES = [
-    Path(r"C:\Windows\Fonts\SansSerifCollection.ttf"),
-    Path("/mnt/c/Windows/Fonts/SansSerifCollection.ttf"),
-    Path(os.environ.get("WINDIR", "C:\\Windows")) / "Fonts" / "SansSerifCollection.ttf"
+    ROOT_DIR / "sources" / "clean_upstream" / "NotoSansDuployan-Regular.ttf"
 ]
 
-SCALE = 1.55
-Y_BASE = 40.0  # reference baseline in SansSerifCollection.ttf
+SCALE = 1.0
+Y_BASE = 0.0  # reference baseline in NotoSansDuployan-Regular.ttf
 
 TARGET_FONTS = [
     {"filename": "PocketGull-Fineliner.ttf", "weight": 400, "is_mono": False},
@@ -65,14 +63,14 @@ def find_ref_font():
 
 def compile_chinuk_pipa():
     print("=" * 70)
-    print("  POCKETGULL TYPEFOUNDRY: CHINUK PIPA (DUPLOYAN) UNIFORM COMPILER")
+    print("  POCKETGULL TYPEFOUNDRY: CHINUK PIPA (DUPLOYAN) CLEAN-ROOM COMPILER")
     print("  Script: Duployan Shorthand for Chinuk Wawa (U+1BC00 - U+1BC9F)")
-    print(f"  Uniform Optical Scale: {SCALE}x (Baseline Y: {Y_BASE})")
+    print(f"  Source: Google Noto Sans Duployan (SIL OFL 1.1)")
     print("=" * 70)
 
     ref_path = find_ref_font()
     if not ref_path:
-        print(f"[ERROR] Reference font SansSerifCollection.ttf not found in candidates: {REF_CANDIDATES}")
+        print(f"[ERROR] Clean upstream reference font NotoSansDuployan-Regular.ttf not found at: {REF_CANDIDATES[0]}")
         sys.exit(1)
 
     overall_start = time.perf_counter()
@@ -221,8 +219,12 @@ def compile_chinuk_pipa():
         print(f"    [OK] Saved WOFF2: {woff2_path.name} ({woff2_path.stat().st_size / 1024:.1f} KB)")
 
         if font_filename == "PocketGullMono-Regular.ttf":
-            shutil.copy(str(woff2_path), str(ROOT_DIR / woff2_filename))
-            print(f"    [OK] Copied root WOFF2: {ROOT_DIR / woff2_filename}")
+            dest_root_woff2 = ROOT_DIR / woff2_filename
+            try:
+                shutil.copyfile(str(woff2_path), str(dest_root_woff2))
+                print(f"    [OK] Copied root WOFF2: {dest_root_woff2}")
+            except Exception as e:
+                print(f"    [WARN] Could not copy root WOFF2: {e}")
 
         font_elapsed_ms = (time.perf_counter() - font_start) * 1000.0
         total_glyphs_compiled += new_glyphs_added

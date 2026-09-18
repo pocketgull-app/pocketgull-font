@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 scripts/build_production_vf.py
 ==============================
@@ -133,16 +133,22 @@ def compile_production_vf():
 
     print("4. Saving TrueType Variable Font...")
     vf.save(out_ttf)
-    vf.save(root_ttf)
     gf_ttf = os.path.join(ttf_dir, "PocketGull[wght].ttf")
     vf.save(gf_ttf)
+    try:
+        vf.save(root_ttf)
+    except Exception as e:
+        print(f"  [WARN] Root TTF save note: {e}")
     vf.close()
 
     print("5. Compressing Brotli WOFF2...")
     compress(out_ttf, out_woff2)
-    shutil.copyfile(out_woff2, root_woff2)
     gf_woff2 = os.path.join(woff2_dir, "PocketGull[wght].woff2")
     compress(gf_ttf, gf_woff2)
+    try:
+        shutil.copyfile(out_woff2, root_woff2)
+    except Exception as e:
+        print(f"  [WARN] Root WOFF2 sync note: {e}")
 
     ttf_sz = os.path.getsize(out_ttf)
     woff2_sz = os.path.getsize(out_woff2)

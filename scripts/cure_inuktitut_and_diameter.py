@@ -14,19 +14,44 @@ import math
 import os
 import shutil
 import sys
+import time
 from pathlib import Path
 from fontTools.ttLib import TTFont
 from fontTools.ttLib.tables._g_l_y_f import Glyph, GlyphCoordinates
 from fontTools.ttLib.tables.ttProgram import Program
+from fontTools.varLib.instancer import instantiateVariableFont
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 TTF_DIR = ROOT_DIR / "fonts" / "ttf"
+CLEAN_DIR = ROOT_DIR / "sources" / "clean_upstream"
 
-def find_font(filename):
-    for p in [Path(r"C:\Windows\Fonts") / filename, Path("/mnt/c/Windows/Fonts") / filename]:
-        if p.exists():
-            return p
-    raise FileNotFoundError(f"Reference font {filename} not found.")
+def safe_save_font(font, target_path):
+    target_path = Path(target_path)
+    tmp_path = target_path.with_name(f"{target_path.stem}.tmp{target_path.suffix}")
+    if tmp_path.exists():
+        try:
+            tmp_path.unlink()
+        except Exception:
+            pass
+    font.save(str(tmp_path))
+    font.close()
+    for attempt in range(10):
+        try:
+            if target_path.exists():
+                try:
+                    target_path.unlink()
+                except Exception:
+                    pass
+            shutil.move(str(tmp_path), str(target_path))
+            return
+        except Exception:
+            time.sleep(0.3)
+    # Fallback: copyfile
+    shutil.copyfile(str(tmp_path), str(target_path))
+    try:
+        tmp_path.unlink()
+    except Exception:
+        pass
 
 def sanitize_contour_points(coords, endPts):
     """Eliminates consecutive identical points to guarantee 0 duplicate nodes and OTS safety."""
@@ -120,11 +145,13 @@ def cure_superfamily():
     print("  POCKETGULL FOUNDRY: INUKTITUT OPTICAL SCALE & U+2300 DIAMETER MASTER CURE")
     print("=" * 80)
 
-    gadugi_reg_p = find_font("gadugi.ttf")
-    gadugi_bold_p = find_font("gadugib.ttf")
+    noto_ca_p = CLEAN_DIR / "NotoSansCanadianAboriginal[wght].ttf"
+    if not noto_ca_p.exists():
+        raise FileNotFoundError(f"Clean reference font not found at {noto_ca_p}")
 
-    f_reg = TTFont(str(gadugi_reg_p))
-    f_bold = TTFont(str(gadugi_bold_p))
+    tt_ca = TTFont(str(noto_ca_p))
+    f_reg = instantiateVariableFont(tt_ca, {"wght": 400})
+    f_bold = instantiateVariableFont(tt_ca, {"wght": 700})
 
     reg_cmap = f_reg.getBestCmap()
     bold_cmap = f_bold.getBestCmap()
@@ -135,7 +162,7 @@ def cure_superfamily():
     reg_hmtx = f_reg["hmtx"]
     bold_hmtx = f_bold["hmtx"]
 
-    scale = 1000.0 / 2048.0
+    scale = 1000.0 / f_reg["head"].unitsPerEm
 
     inuktitut_cps = [cp for cp in range(0x1400, 0x1680) if cp in reg_cmap]
     print(f"  • Reference Inuktitut codepoints: {len(inuktitut_cps)}")
@@ -265,13 +292,16 @@ def cure_superfamily():
             gorder.append("uni2300")
             font.setGlyphOrder(gorder)
 
-        font.save(str(fpath))
+        safe_save_font(font, fpath)
         print(f"  [OK] {fname:28s} | Cured {cured_inuk_count} Inuktitut glyphs | Injected uni2300 (adv={adv_2300}, stroke={stroke_w})")
 
     root_mono = ROOT_DIR / "PocketGullMono-Regular.ttf"
     if root_mono.exists() and (TTF_DIR / "PocketGullMono-Regular.ttf").exists():
-        shutil.copyfile(TTF_DIR / "PocketGullMono-Regular.ttf", root_mono)
-        print("  [OK] Synchronized root PocketGullMono-Regular.ttf")
+        try:
+            shutil.copyfile(TTF_DIR / "PocketGullMono-Regular.ttf", root_mono)
+            print("  [OK] Synchronized root PocketGullMono-Regular.ttf")
+        except Exception as e:
+            print(f"  [WARN] Root sync note: {e}")
 
     print("\n[SUCCESS] All target fonts cured and synchronized.")
 

@@ -29,6 +29,13 @@
       --font-display: 'PocketGull Bold', 'PocketGull', 'PocketGull Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       --font-chisel: 'PocketGull Chiseltip', 'PocketGull Bold', 'PocketGull', 'PocketGull Fallback', -apple-system, sans-serif;
       --font-serif: 'PocketGull Serif', 'PocketGull Serif Fallback', Georgia, Cambria, 'Times New Roman', serif;
+      --btn-bg-subtle: #152238;
+      --btn-bg-hover: #1e3354;
+      --btn-border-subtle: #2e4468;
+      --btn-border-hover: #38bdf8;
+      --btn-text-subtle: #f1f5f9;
+      --btn-text-hover: #ffffff;
+      --btn-focus-ring: #06b6d4;
       --font-vf: 'PocketGull VF', 'PocketGull', 'PocketGull Fallback', -apple-system, sans-serif;
     }
 
@@ -36,6 +43,16 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    [contenteditable="true"]:focus-visible {
+      outline: 2px solid var(--cyan) !important;
+      outline-offset: 2px !important;
     }
 
     body {
@@ -198,7 +215,7 @@
     }
 
     .font-sample-chiseltip {
-      font-family: 'PocketGull';
+      font-family: 'PocketGull Chiseltip', 'PocketGull Black', 'PocketGull', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       font-size: 46px;
       font-weight: 900;
       font-style: normal;
@@ -208,7 +225,7 @@
     }
 
     .font-sample-bold {
-      font-family: 'PocketGull';
+      font-family: 'PocketGull Bold', 'PocketGull', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       font-size: 40px;
       font-weight: 700;
       font-style: normal;
@@ -217,7 +234,7 @@
     }
 
     .font-sample-bolditalic {
-      font-family: 'PocketGull';
+      font-family: 'PocketGull Bold Italic', 'PocketGull Bold', 'PocketGull', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       font-weight: 700;
       font-style: italic;
       font-size: 38px;
@@ -226,7 +243,7 @@
     }
 
     .font-sample-fineliner {
-      font-family: 'PocketGull';
+      font-family: 'PocketGull Fineliner', 'PocketGull', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       font-size: 32px;
       font-weight: 400;
       font-style: normal;
@@ -235,7 +252,7 @@
     }
 
     .font-sample-finelineritalic {
-      font-family: 'PocketGull';
+      font-family: 'PocketGull Fineliner Italic', 'PocketGull Italic', 'PocketGull', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       font-weight: 400;
       font-style: italic;
       font-size: 32px;
@@ -356,26 +373,80 @@
       flex-wrap: wrap;
     }
 
+    
     .tittle-variety-pill {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--card-border);
-      color: var(--text-muted);
+      background: var(--btn-bg-subtle);
+      border: 1.5px solid var(--btn-border-subtle);
+      color: var(--btn-text-subtle);
       border-radius: 6px;
       padding: 3px 8px;
       font-size: 12px;
+      font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       transition: all 0.2s ease;
     }
-
-    .tittle-variety-pill:hover,
-    .tittle-variety-pill.active {
-      background: rgba(251, 113, 133, 0.2);
+    .tittle-variety-pill:hover {
+      background: var(--btn-bg-hover);
       border-color: var(--rose);
-      color: var(--rose);
+      color: #ffffff;
     }
+    .tittle-variety-pill.active {
+      background: rgba(244, 63, 94, 0.25) !important;
+      border-color: #fb7185 !important;
+      color: #ffe4e6 !important;
+      font-weight: 800;
+    }
+
+    .preset-pill {
+      background: var(--btn-bg-subtle);
+      border: 1.5px solid var(--btn-border-subtle);
+      color: var(--btn-text-subtle);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .preset-pill:hover {
+      background: var(--btn-bg-hover);
+      border-color: var(--btn-border-hover);
+      color: var(--btn-text-hover);
+    }
+    .preset-pill.active {
+      background: #10b981 !important;
+      border-color: #10b981 !important;
+      color: #041c14 !important;
+      font-weight: 800;
+    }
+
+    .hero-btn-secondary {
+      background: var(--btn-bg-subtle);
+      border: 1.5px solid var(--btn-border-subtle);
+      color: var(--btn-text-subtle);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .hero-btn-secondary:hover {
+      background: var(--btn-bg-hover);
+      border-color: var(--btn-border-hover);
+      color: var(--btn-text-hover);
+    }
+
+    .eco-scale-btn.active {
+      background: #10b981 !important;
+      border-color: #10b981 !important;
+      color: #041c14 !important;
+      font-weight: 800;
+    }
+
 
     .ismp-desc {
       font-size: 12px;
@@ -445,6 +516,7 @@
       border: 1px solid #1e293b;
       border-radius: 12px;
       padding: 20px;
+      font-family: 'PocketGull Mono', 'PocketGull', monospace;
       font-size: 24px;
       color: var(--cyan);
       letter-spacing: 0.15em;
@@ -894,10 +966,10 @@
         <div class="hierarchy-row">
           <div class="row-meta">
             <span>03. POCKETGULL FINELINER &amp; ITALIC (wght: 400 / 0° &amp; -10.5°)</span>
-            <span>EHR Clinical Documentation • Patient Recovery &amp; Homeward Care</span>
+            <span>EHR Clinical Documentation • Patient Recovery &amp; Convalescence</span>
           </div>
           <div class="font-sample-fineliner">
-            Heading Home: Patient resting peacefully in stable sinus rhythm (72 bpm). Breath sounds clear and easy bilaterally. Heading home into the warm sunlight with family.
+            Convalescent Care: Patient resting comfortably in steady sinus rhythm (68 bpm). Breath sounds clear bilaterally. Discharged into the warm sunlight with family.
           </div>
           <div class="font-sample-finelineritalic" style="margin-top: 8px;">
             Clinical Directive: Pathogen cleared completely • Strength, comfort, and vitality renewed.
@@ -905,12 +977,12 @@
           <div class="font-sample-clinical-syntax" style="font-family: 'PocketGull'; font-size: clamp(14px, 1.8vw, 18px); line-height: 1.5; margin-top: 10px; padding-top: 8px; border-top: 1px dashed var(--card-border);">
             <span style="font-weight: 700; color: #94a3b8; font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.06em; margin-right: 8px;">Clinical Italic Syntax:</span>
             <span style="color: #94a3b8;">Gene</span> <em style="color: #38bdf8; margin: 0 4px;">BRCA1</em>
-            <span style="color: #64748b; margin: 0 6px;">vs</span>
+            <span style="color: #94a3b8; margin: 0 6px; font-weight: 600;">vs</span>
             <span style="color: #94a3b8;">Protein</span> <strong style="color: #f1f5f9; margin: 0 4px;">BRCA1</strong>
-            <span style="color: #64748b; margin: 0 10px;">•</span>
-            <span style="color: #94a3b8;">Therapy:</span> <em style="color: #34d399; margin: 0 4px;">Amoxicillin 500 mg</em>
-            <span style="color: #64748b; margin: 0 10px;">•</span>
-            <span style="color: #94a3b8;">Status:</span> <em style="color: #38bdf8; margin: 0 4px;">Heading Home</em>
+            <span style="color: #94a3b8; margin: 0 10px;">•</span>
+            <span style="color: #94a3b8;">Therapy:</span> <em style="color: #34d399; margin: 0 4px;">Gentamicin 80 mg</em>
+            <span style="color: #94a3b8; margin: 0 10px;">•</span>
+            <span style="color: #94a3b8;">Status:</span> <em style="color: #38bdf8; margin: 0 4px;">Convalescent</em>
           </div>
         </div>
 
@@ -921,7 +993,7 @@
             <span>ICU Telemetry HUD • Box Drawing • Powerline Chevrons</span>
           </div>
           <div class="font-sample-mono">
-            [HR: 72 bpm] [SpO2: 99%] [BP: 120/80] [MAP: 93] | ⠁⠍⠕⠭ Amoxicillin 500 mg
+            [HR: 64 bpm] [SpO2: 99%] [BP: 118/74] [MAP: 89] | ⠝⠕⠗ Noradrenaline 0.05 mcg/kg/min
           </div>
         </div>
       </div>
@@ -937,12 +1009,12 @@
 
       <!-- Style Presets (Shifted Left) -->
       <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; justify-content: flex-start;">
-        <button type="button" class="preset-pill active" data-preset="fineliner" style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.4); color: var(--cyan); padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 700; cursor: pointer;">Fineliner 400</button>
-        <button type="button" class="preset-pill" data-preset="regular" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); color: var(--text-main); padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 700; cursor: pointer;">Regular 500</button>
-        <button type="button" class="preset-pill" data-preset="bold" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); color: var(--text-main); padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 700; cursor: pointer;">Bold 700</button>
-        <button type="button" class="preset-pill" data-preset="chiseltip" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); color: var(--text-main); padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 700; cursor: pointer;">Chiseltip 900</button>
-        <button type="button" class="preset-pill" data-preset="italic" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); color: var(--text-main); padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 700; cursor: pointer;">Italic (-10.5°)</button>
-        <button type="button" class="preset-pill" data-preset="condensed" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); color: var(--text-main); padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 700; cursor: pointer;">Condensed (75%)</button>
+        <button type="button" class="preset-pill active" data-preset="fineliner">Fineliner 400</button>
+        <button type="button" class="preset-pill" data-preset="regular">Regular 500</button>
+        <button type="button" class="preset-pill" data-preset="bold">Bold 700</button>
+        <button type="button" class="preset-pill" data-preset="chiseltip">Chiseltip 900</button>
+        <button type="button" class="preset-pill" data-preset="italic">Italic (-10.5°)</button>
+        <button type="button" class="preset-pill" data-preset="condensed">Condensed (75%)</button>
       </div>
 
       <!-- Sliders Grid (Shifted Left) -->
@@ -1110,7 +1182,7 @@
         <div class="ismp-card" id="ismpCardHeart" style="border-color: rgba(251, 113, 133, 0.35); background: linear-gradient(180deg, rgba(251, 113, 133, 0.05) 0%, var(--card-bg) 100%);">
           <div class="ismp-title" style="color: var(--rose); display: flex; justify-content: space-between; align-items: center;">
             <span>Philocardia Hearts (cv09 / ss07)</span>
-            <button type="button" id="broadsideHeartBpmBadge" title="72 BPM Sinus Rhythm" style="background: rgba(251, 113, 133, 0.18); border: 1px solid rgba(251, 113, 133, 0.4); color: var(--rose); font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; cursor: pointer;">72 BPM</button>
+            <button type="button" id="broadsideHeartBpmBadge" title="72 BPM Sinus Rhythm" style="background: rgba(244, 63, 94, 0.25); border: 1.5px solid #fb7185; color: #ffe4e6; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; cursor: pointer;">72 BPM</button>
           </div>
           <div class="ismp-comparison">
             <span class="ismp-standard">clinical</span>
@@ -1134,11 +1206,11 @@
       <div class="section-label">Medical Telemetry Monospace (Fixed 600 UPM)</div>
       <h2 class="section-title">
         <span>PocketGull Mono ICU Intensive Care Telemetry HUD</span>
-        <small>Gapless Box Drawing (U+2500–257F) • Sub-Cell Waveforms • Powerline Chevrons</small>
+        <small>Gapless Rounded Box Drawing (U+256D–2570) • Sub-Cell Waveforms • Powerline Chevrons</small>
       </h2>
 
       <div class="terminal-box">
-┌───────────────────────────────────────────────────────────────────────────────────────────────┐
+╭───────────────────────────────────────────────────────────────────────────────────────────────╮
 │ POCKETGULL CLINICAL TELEMETRY MONITOR :: BED 04 (NEURO-ICU TRAUMA POD-A)                      │
 ├───────────────────────────────────────────────────────────────────────────────────────────────┤
 │ PATIENT: Sapiens, H. (34y F)    | MRN: #9842-01-STAT           | CADENCE: 72 BPM SINUS STABLE │
@@ -1152,7 +1224,7 @@
 ├───────────────────────────────────────────────────────────────────────────────────────────────┤
 │ ACTIVE RX: R Cefazolin 2 g IV Q8H • ø 18G Cannula Right Antecubital • ALLERGY: PENICILLIN    │
 │ POWERLINE:  icu-station  main  bed-04  tty1 (PocketGull Mono 600 UPM pitch)               │
-└───────────────────────────────────────────────────────────────────────────────────────────────┘
+╰───────────────────────────────────────────────────────────────────────────────────────────────╯
       </div>
 
       <!-- Tactile Braille Strip -->
@@ -1220,16 +1292,16 @@
             </h3>
           </div>
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <button type="button" class="preset-pill eco-scale-btn" data-scale="clinic" style="cursor: pointer;">
+            <button type="button" class="preset-pill eco-scale-btn" data-scale="clinic">
               Clinic (25 Carts)
             </button>
-            <button type="button" class="preset-pill eco-scale-btn active" data-scale="hospital" style="cursor: pointer; background: var(--emerald); color: #000; font-weight: 700;">
+            <button type="button" class="preset-pill eco-scale-btn active" data-scale="hospital">
               500-Bed Hospital
             </button>
-            <button type="button" class="preset-pill eco-scale-btn" data-scale="network" style="cursor: pointer;">
+            <button type="button" class="preset-pill eco-scale-btn" data-scale="network">
               Health System (1.8k Carts)
             </button>
-            <button type="button" class="preset-pill eco-scale-btn" data-scale="enterprise" style="cursor: pointer;">
+            <button type="button" class="preset-pill eco-scale-btn" data-scale="enterprise">
               Enterprise (5k Carts / 100M Pages)
             </button>
           </div>
@@ -1243,7 +1315,7 @@
                 <span>Annual Printed Clinical Pages (EHR, Lab, Discharge)</span>
                 <span id="val-eco-pages">12,000,000 pages</span>
               </label>
-              <input type="range" id="slider-eco-pages" min="500000" max="100000000" step="500000" value="12000000" style="width: 100%; accent-color: var(--emerald); cursor: pointer;">
+              <input type="range" id="slider-eco-pages" aria-label="Annual Clinical Chart Pages" min="500000" max="100000000" step="500000" value="12000000" style="width: 100%; accent-color: var(--emerald); cursor: pointer;">
             </div>
 
             <div class="eco-slider-group">
@@ -1251,7 +1323,7 @@
                 <span>Mobile COW Carts &amp; Nursing Tablets</span>
                 <span id="val-eco-carts">320 devices</span>
               </label>
-              <input type="range" id="slider-eco-carts" min="10" max="5000" step="10" value="320" style="width: 100%; accent-color: var(--cyan); cursor: pointer;">
+              <input type="range" id="slider-eco-carts" aria-label="Active Clinical Telemetry Devices" min="10" max="5000" step="10" value="320" style="width: 100%; accent-color: var(--cyan); cursor: pointer;">
             </div>
 
             <div class="eco-slider-group" style="margin-bottom: 0;">
@@ -1259,7 +1331,7 @@
                 <span>Annual Patient Portal &amp; Telehealth Sessions</span>
                 <span id="val-eco-visits">25,000,000 visits</span>
               </label>
-              <input type="range" id="slider-eco-visits" min="1000000" max="200000000" step="1000000" value="25000000" style="width: 100%; accent-color: var(--purple); cursor: pointer;">
+              <input type="range" id="slider-eco-visits" aria-label="Annual Patient Encounters" min="1000000" max="200000000" step="1000000" value="25000000" style="width: 100%; accent-color: var(--purple); cursor: pointer;">
             </div>
           </div>
 
@@ -1364,7 +1436,7 @@
               Toggle OpenType Spore Traps (<code>ss01</code>) to observe optical weight mitigation and simulated active display wattage.
             </div>
           </div>
-          <button type="button" id="toggleSporeBtn" class="hero-btn-secondary" style="font-size: 12px; padding: 7px 16px; border-color: var(--emerald); color: var(--emerald); cursor: pointer;">
+          <button type="button" id="toggleSporeBtn" class="hero-btn-secondary" style="font-size: 12px; padding: 7px 16px; border: 1.5px solid var(--emerald); background: var(--btn-bg-subtle); color: var(--text-main); cursor: pointer;">
             <span>🌱</span> Spore Traps [ss01]: <strong id="sporeBtnState" style="margin-left: 4px;">OFF (Standard)</strong>
           </button>
         </div>
@@ -1652,10 +1724,7 @@
         if (slider) {
           slider.addEventListener('input', () => {
             document.querySelectorAll('.preset-pill').forEach(p => {
-              p.classList.remove('active');
-              p.style.background = 'rgba(255, 255, 255, 0.05)';
-              p.style.borderColor = 'var(--card-border)';
-              p.style.color = 'var(--text-main)';
+              p.classList.remove("active");
             });
             updateAll();
           });
@@ -1679,15 +1748,9 @@
           if (!p) return;
 
           document.querySelectorAll('.preset-pill').forEach(b => {
-            b.classList.remove('active');
-            b.style.background = 'rgba(255, 255, 255, 0.05)';
-            b.style.borderColor = 'var(--card-border)';
-            b.style.color = 'var(--text-main)';
+            b.classList.remove("active");
           });
-          btn.classList.add('active');
-          btn.style.background = 'rgba(56, 189, 248, 0.15)';
-          btn.style.borderColor = 'rgba(56, 189, 248, 0.4)';
-          btn.style.color = 'var(--cyan)';
+          btn.classList.add("active");
 
           axes.forEach(a => {
             const slider = document.getElementById(a.el);
@@ -1752,15 +1815,9 @@
       document.querySelectorAll('.eco-scale-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           document.querySelectorAll('.eco-scale-btn').forEach(b => {
-            b.classList.remove('active');
-            b.style.background = '';
-            b.style.color = '';
-            b.style.fontWeight = '';
+            b.classList.remove("active");
           });
-          btn.classList.add('active');
-          btn.style.background = 'var(--emerald)';
-          btn.style.color = '#000';
-          btn.style.fontWeight = '700';
+          btn.classList.add("active");
 
           const scale = btn.getAttribute('data-scale');
           const p = ecoScalePresets[scale];

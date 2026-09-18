@@ -15,7 +15,7 @@ from fontTools.ttLib import TTFont
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TTF_DIR = os.path.join(ROOT_DIR, "fonts", "ttf")
-LICENSE_PATH = os.path.join(ROOT_DIR, "LICENSE.txt")
+LICENSE_PATH = os.path.join(ROOT_DIR, "OFL.txt")
 METADATA_PATH = os.path.join(ROOT_DIR, "METADATA.pb")
 
 # ANSI color codes
@@ -42,12 +42,12 @@ def validate():
         log_fail(f"TrueType directory not found: {TTF_DIR}")
         sys.exit(1)
 
-    # 1. Read LICENSE.txt copyright line
+    # 1. Read OFL.txt copyright line
     expected_copyright = "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)"
     if not os.path.isfile(LICENSE_PATH):
-        log_fail(f"LICENSE.txt missing at {LICENSE_PATH}")
+        log_fail(f"OFL.txt missing at {LICENSE_PATH}")
         sys.exit(1)
-    log_info(f"LICENSE: Apache License 2.0 verified ({LICENSE_PATH})")
+    log_info(f"LICENSE: SIL Open Font License 1.1 verified ({LICENSE_PATH})")
 
     ttf_files = sorted([f for f in os.listdir(TTF_DIR) if f.endswith(".ttf")])
     if not ttf_files:
@@ -112,7 +112,7 @@ def validate():
         total_checks += 1
         name_records = [n.toUnicode() for n in font["name"].names if n.nameID == 0]
         if name_records and (name_records[0] == expected_copyright or "pocketgull-app" in name_records[0]):
-            log_pass("name ID 0 matches LICENSE.txt copyright exactly")
+            log_pass("name ID 0 matches OFL.txt copyright exactly")
         else:
             log_fail(f"name ID 0 mismatch: '{name_records[0] if name_records else None}' != '{expected_copyright}'")
             failed_checks += 1

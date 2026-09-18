@@ -1,49 +1,105 @@
 {
-  "timestamp": "2026-09-06T09:10:12Z",
+  "timestamp": "2026-09-18T15:17:28Z",
   "case_study": 3,
   "script": "Neo-Tifinagh (Amazigh / Berber)",
   "region": "North Africa / Maghreb",
   "clinical_focus": "Maghreb public health, Amazigh maternal care, and emergency hospital triage.",
   "codepoints_synthesized": 59,
-  "total_glyphs_compiled": 295,
-  "runtime_ms": 50256.95,
-  "manual_hours_benchmark": 221.25,
-  "acceleration_factor": 15848,
+  "total_glyphs_compiled": 767,
+  "runtime_ms": 147741.52,
+  "manual_hours_benchmark": 575.25,
+  "acceleration_factor": 14017,
   "fonts_updated": [
     {
       "filename": "PocketGull-Fineliner.ttf",
       "weight": 400,
       "is_mono": false,
       "glyphs_added": 59,
-      "time_ms": 13506.69
+      "time_ms": 9351.69
+    },
+    {
+      "filename": "PocketGull-Regular.ttf",
+      "weight": 400,
+      "is_mono": false,
+      "glyphs_added": 59,
+      "time_ms": 9295.7
     },
     {
       "filename": "PocketGull-Bold.ttf",
       "weight": 700,
       "is_mono": false,
       "glyphs_added": 59,
-      "time_ms": 13297.06
+      "time_ms": 9149.73
+    },
+    {
+      "filename": "PocketGull-Black.ttf",
+      "weight": 900,
+      "is_mono": false,
+      "glyphs_added": 59,
+      "time_ms": 9327.65
     },
     {
       "filename": "PocketGull-Chiseltip.ttf",
       "weight": 900,
       "is_mono": false,
       "glyphs_added": 59,
-      "time_ms": 15682.44
+      "time_ms": 9328.68
+    },
+    {
+      "filename": "PocketGull-CondensedBold.ttf",
+      "weight": 700,
+      "is_mono": false,
+      "glyphs_added": 59,
+      "time_ms": 9022.83
+    },
+    {
+      "filename": "PocketGull-Soft.ttf",
+      "weight": 400,
+      "is_mono": false,
+      "glyphs_added": 59,
+      "time_ms": 12753.13
+    },
+    {
+      "filename": "PocketGull-Micro.ttf",
+      "weight": 400,
+      "is_mono": false,
+      "glyphs_added": 59,
+      "time_ms": 12442.61
+    },
+    {
+      "filename": "PocketGull-MarkerRaw.ttf",
+      "weight": 900,
+      "is_mono": false,
+      "glyphs_added": 59,
+      "time_ms": 8945.02
     },
     {
       "filename": "PocketGullMono-Regular.ttf",
       "weight": 400,
       "is_mono": true,
       "glyphs_added": 59,
-      "time_ms": 3922.68
+      "time_ms": 3506.68
+    },
+    {
+      "filename": "PocketGullMono-Bold.ttf",
+      "weight": 700,
+      "is_mono": true,
+      "glyphs_added": 59,
+      "time_ms": 4587.83
     },
     {
       "filename": "PocketGullMono-Italic.ttf",
-      "weight": 400,
+      "weight": 500,
       "is_mono": true,
       "glyphs_added": 59,
-      "time_ms": 3839.98
+      "time_ms": 3344.64
+    },
+    {
+      "filename": "PocketGull-VF.ttf",
+      "weight": 400,
+      "is_mono": false,
+      "glyphs_added": 59,
+      "time_ms": 46683.47
     }
   ]
 }

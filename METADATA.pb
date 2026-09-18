@@ -1,6 +1,6 @@
-﻿name: "Pocket Gull"
+name: "Pocket Gull"
 designer: "Phil Gear"
-license: "APACHE2"
+license: "OFL"
 category: "SANS_SERIF"
 date_added: "2026-08-04"
 fonts {
@@ -47,8 +47,8 @@ source {
   repository_url: "https://github.com/pocketgull-app/pocketgull-font"
   branch: "main"
   files {
-    source_file: "LICENSE.txt"
-    dest_file: "LICENSE.txt"
+    source_file: "OFL.txt"
+    dest_file: "OFL.txt"
   }
   files {
     source_file: "fonts/ttf/PocketGull-Regular.ttf"

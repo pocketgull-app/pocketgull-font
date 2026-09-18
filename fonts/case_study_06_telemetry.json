@@ -1,49 +1,105 @@
 {
-  "timestamp": "2026-09-06T09:12:56Z",
+  "timestamp": "2026-09-18T15:25:18Z",
   "case_study": 6,
   "script": "West African Sovereign Scripts (Adlam & Vai)",
   "region": "West Africa / Guinea, Liberia, Sierra Leone",
   "clinical_focus": "Ebola/Lassa fever community health workers, vaccination tracking, and maternal health.",
   "codepoints_synthesized": 388,
-  "total_glyphs_compiled": 1940,
-  "runtime_ms": 54971.0,
-  "manual_hours_benchmark": 1455.0,
-  "acceleration_factor": 95286,
+  "total_glyphs_compiled": 5044,
+  "runtime_ms": 158242.92,
+  "manual_hours_benchmark": 3783.0,
+  "acceleration_factor": 86062,
   "fonts_updated": [
     {
       "filename": "PocketGull-Fineliner.ttf",
       "weight": 400,
       "is_mono": false,
       "glyphs_added": 388,
-      "time_ms": 16151.93
+      "time_ms": 10332.22
+    },
+    {
+      "filename": "PocketGull-Regular.ttf",
+      "weight": 400,
+      "is_mono": false,
+      "glyphs_added": 388,
+      "time_ms": 10004.82
     },
     {
       "filename": "PocketGull-Bold.ttf",
       "weight": 700,
       "is_mono": false,
       "glyphs_added": 388,
-      "time_ms": 15457.27
+      "time_ms": 10282.58
+    },
+    {
+      "filename": "PocketGull-Black.ttf",
+      "weight": 900,
+      "is_mono": false,
+      "glyphs_added": 388,
+      "time_ms": 10057.37
     },
     {
       "filename": "PocketGull-Chiseltip.ttf",
       "weight": 900,
       "is_mono": false,
       "glyphs_added": 388,
-      "time_ms": 16072.78
+      "time_ms": 10052.53
+    },
+    {
+      "filename": "PocketGull-CondensedBold.ttf",
+      "weight": 700,
+      "is_mono": false,
+      "glyphs_added": 388,
+      "time_ms": 9828.65
+    },
+    {
+      "filename": "PocketGull-Soft.ttf",
+      "weight": 400,
+      "is_mono": false,
+      "glyphs_added": 388,
+      "time_ms": 13897.11
+    },
+    {
+      "filename": "PocketGull-Micro.ttf",
+      "weight": 400,
+      "is_mono": false,
+      "glyphs_added": 388,
+      "time_ms": 14197.64
+    },
+    {
+      "filename": "PocketGull-MarkerRaw.ttf",
+      "weight": 900,
+      "is_mono": false,
+      "glyphs_added": 388,
+      "time_ms": 9984.56
     },
     {
       "filename": "PocketGullMono-Regular.ttf",
       "weight": 400,
       "is_mono": true,
       "glyphs_added": 388,
-      "time_ms": 3781.56
+      "time_ms": 3466.89
+    },
+    {
+      "filename": "PocketGullMono-Bold.ttf",
+      "weight": 700,
+      "is_mono": true,
+      "glyphs_added": 388,
+      "time_ms": 4370.27
     },
     {
       "filename": "PocketGullMono-Italic.ttf",
-      "weight": 400,
+      "weight": 500,
       "is_mono": true,
       "glyphs_added": 388,
-      "time_ms": 3506.99
+      "time_ms": 3622.64
+    },
+    {
+      "filename": "PocketGull-VF.ttf",
+      "weight": 400,
+      "is_mono": false,
+      "glyphs_added": 388,
+      "time_ms": 47998.34
     }
   ]
 }

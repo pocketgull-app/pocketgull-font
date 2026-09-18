@@ -1,0 +1,82 @@
+/* ==UserStyle==
+@name           PocketGull Typography for Wikipedia
+@namespace      https://pocketgull.app/
+@version        3.1.0
+@description    Brings Louise Sloan 5:1 optotypes, 540 UPM optical volume parity, ISMP clinical disambiguation, and multi-script vertical stabilization to Wikipedia.
+@author         The PocketGull Project Authors
+@license        OFL-1.1
+==/UserStyle== */
+
+@import url("https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@main/fonts.css");
+
+@-moz-document domain("wikipedia.org"), domain("wikimedia.org"), domain("wiktionary.org"), domain("wikibooks.org"), domain("wikidata.org") {
+  /* ==========================================================================
+     1. MEDIAWIKI VECTOR 2022 & CODEX CSS DESIGN TOKENS
+     ========================================================================== */
+  :root, html {
+    --font-family-sans: 'PocketGull', system-ui, -apple-system, sans-serif !important;
+    --font-family-serif: 'PocketGull Serif', 'PocketGull', Georgia, serif !important;
+    --font-family-monospace: 'PocketGull Mono', 'Courier New', monospace !important;
+    --font-size-browser: 16px;
+    --line-height-base: 1.7;
+  }
+
+  /* ==========================================================================
+     2. ENCYCLOPEDIC BODY COPY & OPTICAL VOLUME EQUALIZATION (540 UPM EQUIVALENT)
+     ========================================================================== */
+  body, .mw-body, .mw-parser-output, .mw-parser-output p {
+    font-family: var(--font-family-sans) !important;
+    font-size: 1.05rem !important;
+    line-height: 1.72 !important;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ==========================================================================
+     3. SECTION HEADINGS & BIONIC FIXATION ANCHORING
+     ========================================================================== */
+  h1, h2, h3, h4, h5, h6, .mw-first-heading {
+    font-family: var(--font-family-sans) !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.018em;
+  }
+
+  /* ==========================================================================
+     4. W3C WRITING MODES LEVEL 3: VERTICAL MONGOLIAN INLINE STABILIZATION
+     ========================================================================== */
+  .font-mong, span[lang="mn-Mong"], [dir="ltr"] > [style*="vertical-lr"] {
+    display: inline-block !important;
+    font-size: 1.14em !important;
+    line-height: 1.0 !important;
+    vertical-align: -0.20em !important;
+    margin: 0 0.22em !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ==========================================================================
+     5. ISMP / FDA CLINICAL LIFE-SAFETY DISAMBIGUATION
+     Slashed Zero (cv08), Curved l (cv05), Serifed I (ss02), Slashed Z (cv11)
+     ========================================================================== */
+  .infobox, .wikitable, .infobox-drug, .drugbox, .medical-table,
+  .infobox-medical-condition, .chembox {
+    font-family: var(--font-family-sans) !important;
+    font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1 !important;
+  }
+
+  /* ==========================================================================
+     6. FIXED-PITCH TELEMETRY & UNICODE TABLES
+     ========================================================================== */
+  code, pre, .mw-code, .monospaced {
+    font-family: var(--font-family-monospace) !important;
+    font-feature-settings: "zero" 1 !important;
+  }
+
+  /* ==========================================================================
+     7. PHONETICS (IPA) & SCHOLARLY TRANSLITERATION DIACRITICS
+     ========================================================================== */
+  .IPA, [title*="International Phonetic Alphabet"], [lang="und-Latn-fonipa"] {
+    font-family: 'PocketGull', 'Gentium Plus', serif !important;
+    letter-spacing: 0.035em !important;
+  }
+}

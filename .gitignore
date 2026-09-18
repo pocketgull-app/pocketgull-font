@@ -27,6 +27,7 @@ master_ufo/
 master_ttf/
 master_otf/
 master_ufo_interpolatable/
+sources/clean_upstream/
 *.intermediate.ttf
 *.intermediate.otf
 

@@ -26,6 +26,7 @@ from pathlib import Path
 from fontTools.ttLib import TTFont
 from fontTools.ttLib.tables._g_l_y_f import Glyph, GlyphCoordinates
 from fontTools.ttLib.tables.ttProgram import Program
+from fontTools.varLib.instancer import instantiateVariableFont
 
 # Ensure UTF-8 output on Windows consoles
 if hasattr(sys.stdout, 'reconfigure'):
@@ -39,28 +40,32 @@ WOFF2_DIR = ROOT_DIR / "fonts" / "woff2"
 FONTS_DIR = ROOT_DIR / "fonts"
 CASE_STUDIES_DIR = ROOT_DIR / "documentation" / "case_studies"
 
+CLEAN_DIR = ROOT_DIR / "sources" / "clean_upstream"
+
 TARGET_FONTS = [
     {"filename": "PocketGull-Fineliner.ttf", "weight": 400, "is_mono": False, "src_weight": "regular"},
+    {"filename": "PocketGull-Regular.ttf", "weight": 400, "is_mono": False, "src_weight": "regular"},
     {"filename": "PocketGull-Bold.ttf", "weight": 700, "is_mono": False, "src_weight": "bold"},
+    {"filename": "PocketGull-Black.ttf", "weight": 900, "is_mono": False, "src_weight": "bold"},
     {"filename": "PocketGull-Chiseltip.ttf", "weight": 900, "is_mono": False, "src_weight": "bold"},
+    {"filename": "PocketGull-CondensedBold.ttf", "weight": 700, "is_mono": False, "src_weight": "bold"},
+    {"filename": "PocketGull-Soft.ttf", "weight": 400, "is_mono": False, "src_weight": "regular"},
+    {"filename": "PocketGull-Micro.ttf", "weight": 400, "is_mono": False, "src_weight": "regular"},
+    {"filename": "PocketGull-MarkerRaw.ttf", "weight": 900, "is_mono": False, "src_weight": "bold"},
     {"filename": "PocketGullMono-Regular.ttf", "weight": 400, "is_mono": True, "src_weight": "regular"},
-    {"filename": "PocketGullMono-Italic.ttf", "weight": 400, "is_mono": True, "src_weight": "regular"},
+    {"filename": "PocketGullMono-Bold.ttf", "weight": 700, "is_mono": True, "src_weight": "bold"},
+    {"filename": "PocketGullMono-Italic.ttf", "weight": 500, "is_mono": True, "src_weight": "regular"},
+    {"filename": "PocketGull-VF.ttf", "weight": 400, "is_mono": False, "src_weight": "regular"},
 ]
 
-def resolve_font_path(filename):
-    for base in [Path(r"C:\Windows\Fonts"), Path("/mnt/c/Windows/Fonts")]:
-        p = base / filename
-        if p.exists():
-            return p
-    return Path(r"C:\Windows\Fonts") / filename
-
-REF_FONTS = {
-    "ebrima_regular": resolve_font_path("ebrima.ttf"),
-    "ebrima_bold": resolve_font_path("ebrimabd.ttf"),
-    "gadugi_regular": resolve_font_path("gadugi.ttf"),
-    "gadugi_bold": resolve_font_path("gadugib.ttf"),
-    "sans_serif_regular": resolve_font_path("SansSerifCollection.ttf"),
-    "sans_serif_bold": resolve_font_path("SansSerifCollection.ttf"),
+REF_SOURCES = {
+    "inuktitut": CLEAN_DIR / "NotoSansCanadianAboriginal[wght].ttf",
+    "chinuk_pipa": CLEAN_DIR / "NotoSansDuployan-Regular.ttf",
+    "tifinagh": CLEAN_DIR / "NotoSansTifinagh-Regular.ttf",
+    "cherokee": CLEAN_DIR / "NotoSansCherokee[wght].ttf",
+    "ethiopic": CLEAN_DIR / "NotoSansEthiopic[wdth,wght].ttf",
+    "adlam": CLEAN_DIR / "NotoSansAdlam[wght].ttf",
+    "vai": CLEAN_DIR / "NotoSansVai-Regular.ttf",
 }
 
 SCRIPT_SPECS = [
@@ -68,8 +73,7 @@ SCRIPT_SPECS = [
         "id": "inuktitut",
         "case_study": 1,
         "title": "Canadian Aboriginal Syllabics (Inuktitut / Cree / Ojibwe)",
-        "ranges": [(0x1400, 0x167F)],
-        "ref_family": "gadugi",
+        "sources": [("inuktitut", [(0x1400, 0x167F)])],
         "doc_name": "CASE_STUDY_01_INUKTITUT_SYLLABICS.md",
         "telemetry_file": "case_study_01_telemetry.json",
         "matrix_file": "inuktitut_matrix.json",
@@ -80,8 +84,7 @@ SCRIPT_SPECS = [
         "id": "chinuk_pipa",
         "case_study": 2,
         "title": "Chinuk Pipa (Duployan Shorthand for Chinuk Wawa)",
-        "ranges": [(0x1BC00, 0x1BC9F)],
-        "ref_family": "sans_serif",
+        "sources": [("chinuk_pipa", [(0x1BC00, 0x1BC9F)])],
         "doc_name": "CASE_STUDY_02_CHINUK_PIPA.md",
         "telemetry_file": "case_study_02_telemetry.json",
         "matrix_file": "chinuk_pipa_matrix.json",
@@ -92,8 +95,7 @@ SCRIPT_SPECS = [
         "id": "tifinagh",
         "case_study": 3,
         "title": "Neo-Tifinagh (Amazigh / Berber)",
-        "ranges": [(0x2D30, 0x2D7F)],
-        "ref_family": "ebrima",
+        "sources": [("tifinagh", [(0x2D30, 0x2D7F)])],
         "doc_name": "CASE_STUDY_03_NEO_TIFINAGH.md",
         "telemetry_file": "case_study_03_telemetry.json",
         "matrix_file": "tifinagh_matrix.json",
@@ -104,8 +106,7 @@ SCRIPT_SPECS = [
         "id": "cherokee",
         "case_study": 4,
         "title": "Cherokee Syllabary (Tsalagi Gawonihisdi)",
-        "ranges": [(0x13A0, 0x13FF), (0xAB70, 0xABBF)],
-        "ref_family": "gadugi",
+        "sources": [("cherokee", [(0x13A0, 0x13FF), (0xAB70, 0xABBF)])],
         "doc_name": "CASE_STUDY_04_CHEROKEE_SYLLABARY.md",
         "telemetry_file": "case_study_04_telemetry.json",
         "matrix_file": "cherokee_matrix.json",
@@ -116,8 +117,7 @@ SCRIPT_SPECS = [
         "id": "ethiopic",
         "case_study": 5,
         "title": "Ethiopic / Ge'ez (Amharic, Tigrinya, Oromo)",
-        "ranges": [(0x1200, 0x137F)],
-        "ref_family": "ebrima",
+        "sources": [("ethiopic", [(0x1200, 0x137F)])],
         "doc_name": "CASE_STUDY_05_ETHIOPIC_GEEZ.md",
         "telemetry_file": "case_study_05_telemetry.json",
         "matrix_file": "ethiopic_matrix.json",
@@ -128,8 +128,10 @@ SCRIPT_SPECS = [
         "id": "adlam_vai",
         "case_study": 6,
         "title": "West African Sovereign Scripts (Adlam & Vai)",
-        "ranges": [(0x1E900, 0x1E95F), (0xA500, 0xA63F)],
-        "ref_family": "ebrima",
+        "sources": [
+            ("adlam", [(0x1E900, 0x1E95F)]),
+            ("vai", [(0xA500, 0xA63F)])
+        ],
         "doc_name": "CASE_STUDY_06_WEST_AFRICAN_SCRIPTS.md",
         "telemetry_file": "case_study_06_telemetry.json",
         "matrix_file": "adlam_vai_matrix.json",
@@ -255,32 +257,38 @@ def build_script_matrices():
         json.dump(adlam_vai_data, f, indent=2, ensure_ascii=False)
     print("  [OK] Created adlam_vai_matrix.json")
 
+ref_font_cache = {}
+
+def get_ref_font(src_key, weight=400):
+    cache_key = (src_key, 700 if weight >= 700 else 400)
+    if cache_key in ref_font_cache:
+        return ref_font_cache[cache_key]
+    font_path = REF_SOURCES[src_key]
+    tt = TTFont(str(font_path))
+    if "gvar" in tt:
+        inst = instantiateVariableFont(tt, {"wght": 700 if weight >= 700 else 400})
+        ref_font_cache[cache_key] = inst
+        return inst
+    else:
+        ref_font_cache[cache_key] = tt
+        return tt
+
 def compile_all_tier6_scripts():
-    """Compiles all Tier 6 scripts into the 4 PocketGull font binaries."""
+    """Compiles all Tier 6 scripts into the PocketGull font binaries."""
     build_script_matrices()
 
     print("\n" + "=" * 80)
     print("  POCKETGULL TYPEFOUNDRY: TIER 6 INDIGENOUS & SOVEREIGN SCRIPTS MASTER COMPILER")
+    print("  Reference Sources: Google Noto (SIL OFL 1.1 Certified)")
     print("=" * 80)
 
     # Verify reference fonts exist
-    for k, p in REF_FONTS.items():
+    for k, p in REF_SOURCES.items():
         if not p.exists():
-            print(f"[FATAL] Reference font {k} not found at {p}")
+            print(f"[FATAL] Clean reference font {k} not found at {p}")
             sys.exit(1)
 
     overall_start = time.perf_counter()
-
-    # Pre-load reference fonts
-    ref_instances = {
-        "ebrima_regular": TTFont(str(REF_FONTS["ebrima_regular"])),
-        "ebrima_bold": TTFont(str(REF_FONTS["ebrima_bold"])),
-        "gadugi_regular": TTFont(str(REF_FONTS["gadugi_regular"])),
-        "gadugi_bold": TTFont(str(REF_FONTS["gadugi_bold"])),
-        "sans_serif_regular": TTFont(str(REF_FONTS["sans_serif_regular"])),
-        "sans_serif_bold": TTFont(str(REF_FONTS["sans_serif_bold"])),
-    }
-
     grand_total_glyphs = 0
     case_study_reports = []
 
@@ -288,15 +296,15 @@ def compile_all_tier6_scripts():
         spec_start = time.perf_counter()
         spec_name = spec["title"]
         spec_cs = spec["case_study"]
-        ref_prefix = spec["ref_family"]
         print(f"\n>>> Compiling Case Study {spec_cs:02d}: {spec_name}...")
 
         # Determine all target codepoints across ranges
         target_cps = []
-        reg_font = ref_instances[f"{ref_prefix}_regular"]
-        cmap = reg_font.getBestCmap()
-        for start, end in spec["ranges"]:
-            target_cps.extend([cp for cp in cmap if start <= cp <= end])
+        for src_key, ranges in spec["sources"]:
+            reg_font = get_ref_font(src_key, 400)
+            cmap = reg_font.getBestCmap()
+            for start, end in ranges:
+                target_cps.extend([cp for cp in cmap if start <= cp <= end])
         target_cps = sorted(list(set(target_cps)))
         print(f"    Target codepoints found in reference: {len(target_cps)} (from U+{min(target_cps):04X} to U+{max(target_cps):04X})")
 
@@ -307,7 +315,6 @@ def compile_all_tier6_scripts():
             font_filename = target["filename"]
             weight = target["weight"]
             is_mono = target["is_mono"]
-            src_weight = target["src_weight"]
             ttf_path = TTF_DIR / font_filename
 
             font_start = time.perf_counter()
@@ -315,97 +322,92 @@ def compile_all_tier6_scripts():
             glyf_table = font["glyf"]
             hmtx_table = font["hmtx"]
 
-            # Select appropriate reference weight
-            ref_font = ref_instances[f"{ref_prefix}_{src_weight}"]
-            ref_cmap = ref_font.getBestCmap()
-            ref_glyf = ref_font["glyf"]
-            ref_hmtx = ref_font["hmtx"]
-            ref_upm = ref_font["head"].unitsPerEm  # 2048
-            scale = 1000.0 / ref_upm  # 0.48828125
-
             added_count = 0
-            for cp in target_cps:
-                if cp not in ref_cmap:
-                    continue
-                src_gname = ref_cmap[cp]
-                src_glyph = ref_glyf[src_gname]
-                src_adv, src_lsb = ref_hmtx[src_gname]
+            for src_key, ranges in spec["sources"]:
+                ref_font = get_ref_font(src_key, weight)
+                ref_cmap = ref_font.getBestCmap()
+                ref_glyf = ref_font["glyf"]
+                ref_hmtx = ref_font["hmtx"]
+                ref_upm = ref_font["head"].unitsPerEm
+                scale = 1000.0 / ref_upm
 
-                dest_gname = f"u{cp:04X}"
+                for start, end in ranges:
+                    for cp in range(start, end + 1):
+                        if cp not in ref_cmap:
+                            continue
+                        src_gname = ref_cmap[cp]
+                        src_glyph = ref_glyf[src_gname]
+                        src_adv, src_lsb = ref_hmtx[src_gname]
 
-                # Decompose all glyphs (simple or composite) to flat coordinates
-                if src_glyph.numberOfContours != 0:
-                    raw_coords, endPts, flags = src_glyph.getCoordinates(ref_glyf)
-                    coords = GlyphCoordinates(raw_coords)
-                    # Scale to 1000 UPM
-                    coords.transform(((scale, 0), (0, scale)))
-                    coords.toInt()
+                        dest_gname = f"u{cp:04X}"
 
-                    dest_glyph = Glyph()
-                    dest_glyph.numberOfContours = len(endPts)
-                    dest_glyph.endPtsOfContours = list(endPts)
-                    dest_glyph.flags = flags
-                    dest_glyph.program = Program()
+                        # Decompose all glyphs to flat coordinates
+                        if src_glyph.numberOfContours != 0:
+                            raw_coords, endPts, flags = src_glyph.getCoordinates(ref_glyf)
+                            coords = GlyphCoordinates(raw_coords)
+                            if scale != 1.0:
+                                coords.transform(((scale, 0), (0, scale)))
+                                coords.toInt()
 
-                    if is_mono:
-                        # Monospace 600 UPM cell normalization
-                        cur_min_x = min(coords._a[0::2])
-                        cur_max_x = max(coords._a[0::2])
-                        cur_min_y = min(coords._a[1::2])
-                        cur_max_y = max(coords._a[1::2])
-                        cur_w = cur_max_x - cur_min_x
-                        cur_h = cur_max_y - cur_min_y
+                            dest_glyph = Glyph()
+                            dest_glyph.numberOfContours = len(endPts)
+                            dest_glyph.endPtsOfContours = list(endPts)
+                            dest_glyph.flags = bytearray([f & 0x3F for f in flags])
+                            dest_glyph.program = Program()
 
-                        # Cap-height and width bounding:
-                        # In PocketGullMono, Latin caps are ~715-720 UPM and lowercase are ~540 UPM.
-                        # For sovereign scripts (Adlam, Vai, Ethiopic, Cherokee, etc.),
-                        # prevent oversized symbols from exceeding cap-height (730 UPM) or cell width (530 UPM).
-                        s_h = 730.0 / cur_h if cur_h > 730 else 1.0
-                        s_w = 530.0 / cur_w if cur_w > 530 else 1.0
-                        m_scale = min(s_h, s_w)
+                            if is_mono:
+                                cur_min_x = min(coords._a[0::2])
+                                cur_max_x = max(coords._a[0::2])
+                                cur_min_y = min(coords._a[1::2])
+                                cur_max_y = max(coords._a[1::2])
+                                cur_w = cur_max_x - cur_min_x
+                                cur_h = cur_max_y - cur_min_y
 
-                        if m_scale < 1.0:
-                            coords.transform(((m_scale, 0), (0, m_scale)))
-                            coords.toInt()
-                            cur_min_x = min(coords._a[0::2])
-                            cur_max_x = max(coords._a[0::2])
-                            cur_w = cur_max_x - cur_min_x
-                        
-                        # Center horizontally in 600 cell
-                        dx = int((600 - cur_w) / 2) - cur_min_x
-                        coords.translate((dx, 0))
-                        coords.toInt()
+                                s_h = 730.0 / cur_h if cur_h > 730 else 1.0
+                                s_w = 530.0 / cur_w if cur_w > 530 else 1.0
+                                m_scale = min(s_h, s_w)
 
-                        dest_adv = 600
-                        dest_glyph.coordinates = coords
-                        sanitize_contour_points(coords, dest_glyph.endPtsOfContours)
-                        dest_glyph.recalcBounds(glyf_table)
-                        dest_lsb = dest_glyph.xMin
-                    else:
-                        # Proportional font: scale metrics directly
-                        dest_adv = int(round(src_adv * scale))
-                        dest_glyph.coordinates = coords
-                        sanitize_contour_points(coords, dest_glyph.endPtsOfContours)
-                        dest_glyph.recalcBounds(glyf_table)
-                        dest_lsb = dest_glyph.xMin
-                else:
-                    dest_glyph = Glyph()
-                    dest_glyph.numberOfContours = 0
-                    dest_glyph.program = Program()
-                    dest_adv = 600 if is_mono else int(round(src_adv * scale))
-                    dest_lsb = 0
+                                if m_scale < 1.0:
+                                    coords.transform(((m_scale, 0), (0, m_scale)))
+                                    coords.toInt()
+                                    cur_min_x = min(coords._a[0::2])
+                                    cur_max_x = max(coords._a[0::2])
+                                    cur_w = cur_max_x - cur_min_x
 
-                # Register glyph and metric
-                glyf_table[dest_gname] = dest_glyph
-                hmtx_table[dest_gname] = (dest_adv, dest_lsb)
-                added_count += 1
+                                dx = int((600 - cur_w) / 2) - cur_min_x
+                                coords.translate((dx, 0))
+                                coords.toInt()
 
-                # Dual Format 4 & 12 cmap mapping
-                for table in font["cmap"].tables:
-                    if table.format == 12:
-                        table.cmap[cp] = dest_gname
-                    elif table.format == 4 and cp <= 0xFFFF:
-                        table.cmap[cp] = dest_gname
+                                dest_adv = 600
+                                dest_glyph.coordinates = coords
+                                sanitize_contour_points(coords, dest_glyph.endPtsOfContours)
+                                dest_glyph.recalcBounds(glyf_table)
+                                dest_lsb = dest_glyph.xMin
+                            else:
+                                dest_adv = int(round(src_adv * scale))
+                                dest_glyph.coordinates = coords
+                                sanitize_contour_points(coords, dest_glyph.endPtsOfContours)
+                                dest_glyph.recalcBounds(glyf_table)
+                                dest_lsb = dest_glyph.xMin
+                        else:
+                            dest_glyph = Glyph()
+                            dest_glyph.numberOfContours = 0
+                            dest_glyph.endPtsOfContours = []
+                            dest_glyph.flags = bytearray()
+                            dest_glyph.coordinates = GlyphCoordinates([])
+                            dest_glyph.program = Program()
+                            dest_adv = 600 if is_mono else int(round(src_adv * scale))
+                            dest_lsb = 0
+
+                        glyf_table[dest_gname] = dest_glyph
+                        hmtx_table[dest_gname] = (dest_adv, dest_lsb)
+                        added_count += 1
+
+                        for table in font["cmap"].tables:
+                            if table.format == 12:
+                                table.cmap[cp] = dest_gname
+                            elif table.format == 4 and cp <= 0xFFFF:
+                                table.cmap[cp] = dest_gname
 
             font.setGlyphOrder(glyf_table.glyphOrder)
 
@@ -425,7 +427,10 @@ def compile_all_tier6_scripts():
 
             # Copy to root if PocketGullMono-Regular
             if font_filename == "PocketGullMono-Regular.ttf":
-                shutil.copy(str(ttf_path), str(ROOT_DIR / font_filename))
+                try:
+                    shutil.copy(str(ttf_path), str(ROOT_DIR / font_filename))
+                except Exception as e:
+                    print(f"    [WARN] Root sync TTF note: {e}")
 
             # Save WOFF2
             woff2_filename = font_filename.replace(".ttf", ".woff2")
@@ -434,7 +439,10 @@ def compile_all_tier6_scripts():
             font.save(str(woff2_path))
 
             if font_filename == "PocketGullMono-Regular.ttf":
-                shutil.copy(str(woff2_path), str(ROOT_DIR / woff2_filename))
+                try:
+                    shutil.copy(str(woff2_path), str(ROOT_DIR / woff2_filename))
+                except Exception as e:
+                    print(f"    [WARN] Root sync WOFF2 note: {e}")
 
             font_elapsed = (time.perf_counter() - font_start) * 1000.0
             spec_glyphs_added += added_count

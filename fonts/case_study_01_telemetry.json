@@ -1,49 +1,105 @@
 {
-  "timestamp": "2026-09-06T09:08:32Z",
+  "timestamp": "2026-09-18T15:12:32Z",
   "case_study": 1,
   "script": "Canadian Aboriginal Syllabics (Inuktitut / Cree / Ojibwe)",
   "region": "Arctic & Subarctic / Nunavut, NWT, Northern Quebec",
   "clinical_focus": "Nunavut telehealth, northern emergency medical evacuation, and Inuit health care plans.",
   "codepoints_synthesized": 640,
-  "total_glyphs_compiled": 3200,
-  "runtime_ms": 52766.11,
-  "manual_hours_benchmark": 2400.0,
-  "acceleration_factor": 163741,
+  "total_glyphs_compiled": 8320,
+  "runtime_ms": 149894.84,
+  "manual_hours_benchmark": 6240.0,
+  "acceleration_factor": 149865,
   "fonts_updated": [
     {
       "filename": "PocketGull-Fineliner.ttf",
       "weight": 400,
       "is_mono": false,
       "glyphs_added": 640,
-      "time_ms": 13732.68
+      "time_ms": 9527.97
+    },
+    {
+      "filename": "PocketGull-Regular.ttf",
+      "weight": 400,
+      "is_mono": false,
+      "glyphs_added": 640,
+      "time_ms": 9210.67
     },
     {
       "filename": "PocketGull-Bold.ttf",
       "weight": 700,
       "is_mono": false,
       "glyphs_added": 640,
-      "time_ms": 15987.19
+      "time_ms": 9244.73
+    },
+    {
+      "filename": "PocketGull-Black.ttf",
+      "weight": 900,
+      "is_mono": false,
+      "glyphs_added": 640,
+      "time_ms": 9455.35
     },
     {
       "filename": "PocketGull-Chiseltip.ttf",
       "weight": 900,
       "is_mono": false,
       "glyphs_added": 640,
-      "time_ms": 15856.14
+      "time_ms": 9181.15
+    },
+    {
+      "filename": "PocketGull-CondensedBold.ttf",
+      "weight": 700,
+      "is_mono": false,
+      "glyphs_added": 640,
+      "time_ms": 9254.43
+    },
+    {
+      "filename": "PocketGull-Soft.ttf",
+      "weight": 400,
+      "is_mono": false,
+      "glyphs_added": 640,
+      "time_ms": 12739.73
+    },
+    {
+      "filename": "PocketGull-Micro.ttf",
+      "weight": 400,
+      "is_mono": false,
+      "glyphs_added": 640,
+      "time_ms": 12518.48
+    },
+    {
+      "filename": "PocketGull-MarkerRaw.ttf",
+      "weight": 900,
+      "is_mono": false,
+      "glyphs_added": 640,
+      "time_ms": 8958.67
     },
     {
       "filename": "PocketGullMono-Regular.ttf",
       "weight": 400,
       "is_mono": true,
       "glyphs_added": 640,
-      "time_ms": 3640.62
+      "time_ms": 3582.51
+    },
+    {
+      "filename": "PocketGullMono-Bold.ttf",
+      "weight": 700,
+      "is_mono": true,
+      "glyphs_added": 640,
+      "time_ms": 4551.94
     },
     {
       "filename": "PocketGullMono-Italic.ttf",
-      "weight": 400,
+      "weight": 500,
       "is_mono": true,
       "glyphs_added": 640,
-      "time_ms": 3532.19
+      "time_ms": 3422.95
+    },
+    {
+      "filename": "PocketGull-VF.ttf",
+      "weight": 400,
+      "is_mono": false,
+      "glyphs_added": 640,
+      "time_ms": 48029.37
     }
   ]
 }

@@ -1,6 +1,7 @@
-﻿{
+{
   "name": "@pocketgull/font",
   "version": "3.1.0",
+  "type": "module",
   "description": "Optotypically calibrated clinical and ophthalmological vector font superfamily bridging tactile humanist warmth with zero-error clinical precision.",
   "main": "fonts.css",
   "style": "fonts.css",
@@ -25,7 +26,7 @@
     "The PocketGull Project Authors",
     "Emma"
   ],
-  "license": "Apache-2.0",
+  "license": "OFL-1.1",
   "bugs": {
     "url": "https://github.com/pocketgull-app/pocketgull-font/issues"
   },
@@ -44,6 +45,7 @@
     "fonts/woff2/*.woff2",
     "fonts.css",
     "pocketgull.css",
+    "OFL.txt",
     "LICENSE.txt",
     "CITATION.cff"
   ]

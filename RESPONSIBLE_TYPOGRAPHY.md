@@ -1,4 +1,4 @@
-﻿# PocketGull Charter on Responsible Typography, Multi-Script Sovereignty & Clinical Life-Safety
+# PocketGull Charter on Responsible Typography, Multi-Script Sovereignty & Clinical Life-Safety
 
 **The PocketGull Font Superfamily**  
 *An Open-Source Ethical Framework for Human Factors Precision, Vision Science Invariants, and Indigenous Script Sovereignty*
@@ -125,6 +125,14 @@ Just as ISMP specifies rules for Latin drug labels, PocketGull defines and enfor
 | **Pan-Cyrillic** | Anti-Trojan homoglyphs: Cyrillic **Р** (/r/), **С** (/s/), **Н** (/n/) typed instead of Latin **P**, **C**, **H**, causing EHR database search failures. | **Slavic Micro-Terminal Invariant**: Subtle terminal curvature differences visually distinguish Cyrillic glyphs from Latin look-alikes. |
 | **CJK Logographs** | Extreme stroke crowding in 15+ stroke medical characters (e.g. 囊, 臟) at 6pt label sizes. | **Radical Hierarchy & Counter Dilation**: Expanded internal counter-spaces ensure radical recognition (月 flesh vs 骨 bone) under low magnification. |
 | **Korean Hangul** | Final consonant (받침 / Batchim) merging with medial vowel stems. | **Lower-Quadrant Separation**: 30% lower vertical zone reservation keeps final consonants visually distinct from nucleus vowels. |
+| **Traditional Mongolian (Hudum & Manchu)** | Inline vertical cursive ribbon (`writing-mode: vertical-lr`) rupturing Latin line heights; compact phonemic teeth/loops (`nidu`/`shilbe`) collapsing at 12–14px. | **Vertical-LR 1.18x Optical Scale & Inline Box Invariant**: Enforces `size-adjust: 118%` so vertical cursive units match Latin x-height, with `vertical-align: -0.20em` and `line-height: 1.0` inline box containment. |
+| **N'Ko (`U+07C0`–`U+07FF`)** | RTL tone diacritic collision above vowel stems (`߫`, `߬`, `߭`) obscuring Manding grammatical aspect. | **Manding Tone Clearance Invariant**: Enforces $\ge 120\text{ UPM}$ vertical clearance for high/low/rising tone marks and 104% optical volume. |
+| **Osage (`U+104B0`–`U+104FB`)** | Homoglyph collision with Latin look-alikes; nasal vowel diacritic (`𐓬`) collapse in tribal EHR charts. | **Osage Sovereign Baseline Invariant**: Independent baseline locking and distinct terminal spurs distinguishing Siouan vowels from Latin letters. |
+| **Ogham (`U+1680`–`U+169F`)** | Disconnected stem line (*flesc*) turning continuous stone inscriptions into disjointed notches. | **Continuous Flesc Invariant**: Gapless bounding across space character (` `, `U+1680`) and cross-flesc consonants (`ᚐ`, `ᚑ`, `ᚒ`). |
+| **Old Turkic (`U+10C00`–`U+10C4F`)** | Steppe runic stroke clumping at acute angles on low-resolution displays. | **Orkhon Angular Clarity Invariant**: Enforces $>35^\circ$ stroke divergence for runic ascenders and fixed cap-height normalization. |
+| **Sutton SignWriting (`U+1D800`–`U+1DAAF`)** | 2D spatial arrangement glyphs overlapping and distorting sign language spatial grammar. | **Sign Spatial Bounding Invariant**: Standardized 2D bounding boxes with rotational origin centering across all 672 visual-spatial graphemes. |
+| **Sub-Cell ICU ECG (`U+E000`–`U+E0FF`)** | Vector jitter, interpolation latency, or broken continuous cardiac baselines across live telemetry sweeps. | **Continuous Isoelectric Baseline Invariant**: Standardized $y=300\text{ UPM}$ isoelectric axis with zero-gap horizontal tangent continuity between adjacent beat vectors. |
+| **Blissymbolics AAC (`U+E100`–`U+E17F`)** | Indicator shape blur (skyline vs earthline vs humanline) confusing non-verbal patient emergency communication. | **Tri-Level AAC Plane Invariant**: Strict three-tier horizontal reference locking (Skyline $y=700$, Midline $y=400$, Earthline $y=100$) for zero ambiguity. |
 
 ---
 
@@ -213,6 +221,25 @@ To ensure **everyone feels heard, equal, and protected**, PocketGull enforces th
 
 ### 5. Equal Cultural Dignity in Living Medical Documentation
 * Clinical specimens feature authentic diagnostic orders in Inuktitut, Chinuk Wawa, Cherokee, Amazigh, Amharic, Persian, Hebrew, Hindi, and Japanese—honoring the linguistic rights of every patient who places their trust in our hands.
+
+---
+
+## 🔬 Pillar IX: Optical Sizing, Eye-Scale Equivalence & The 538 UPM Reading Standard
+
+Digital legibility across life-critical healthcare, encyclopedic reference libraries, and high-throughput terminals requires that letterforms maintain **optical volume parity** with human cognitive reading expectations.
+
+### 1. The 538 UPM x-Height Standard (Dual-Master Architecture)
+* **PocketGull Display**: Originating from physical cardstock felt-marker titling, display cuts retain an x-height of $500\text{ UPM}$ ($50\%$ of the em-square) for dramatic stroke contrast and expressive humanist warmth.
+* **PocketGull Text / Reading Master**: For sustained reading across clinical EHRs, Wikipedia, and long-form medical summaries, PocketGull establishes an elevated optical volume of **$538\text{ UPM}$** (effective $53.8\%$ of em-square).
+* **Webfont Volume Equalizer (`size-adjust: 108%`)**: In digital web environments, `@font-face` applies `size-adjust: 108%` across primary text cuts, lifting the perceived character volume to match standard modern screen interfaces (Segoe UI, Roboto, Inter) at $14\text{px}$–$16\text{px}$ without manual user scaling or line-height disruption.
+
+### 2. Aperture Dilation & $45^\circ$ Retinal Inktraps
+* **Aperture Widening**: Semi-closed lowercase characters (`e`, `c`, `s`, `a`) expand terminal apertures from $120\text{ UPM}$ to $160\text{ UPM}$, preventing pixel bridging and optical clumping on low-DPI displays.
+* **Stress-Relief Junction Inktraps**: Acute diagonal intersections (`M`, `W`, `N`, `v`, Cyrillic `ж`, `щ`) incorporate internal $45^\circ$ parabolic inktraps. Under low-resolution screen rasterization, these reliefs dissolve into mathematically crisp vertices rather than dark ink blobs.
+
+### 3. Vertical Ribbon Optical Scaling (1.18× Invariant)
+* Continuous vertical cursive scripts (Traditional Mongolian, Manchu) feature compact phonemic units (teeth, loops, spines) that appear undersized when set alongside Latin text at identical UPM values.
+* PocketGull enforces a mandatory **1.18× Optical Scale Invariant** (`size-adjust: 118%`) for vertical-lr script experts, achieving visual balance and cognitive parity with horizontal Latin text.
 
 ---
 
