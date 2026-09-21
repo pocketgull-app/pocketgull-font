@@ -8,6 +8,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import vm from 'node:vm';
 
 const EXPECTED_AXES = [
   'wght', 'wdth', 'slnt', 'opsz',
@@ -184,5 +185,34 @@ test('E2E [DOM Heart Tittle Showcase]: index.html & specimen-broadside.html feat
   assert.ok(broadsideHtml.includes('id="ismpCardHeart"'), "specimen-broadside.html must have #ismpCardHeart");
   assert.ok(broadsideHtml.includes('id="broadsideTittleVarietyMini"'), "specimen-broadside.html must have #broadsideTittleVarietyMini");
   assert.ok(broadsideHtml.includes('philocardia-heart'), "specimen-broadside.html must render philocardia-heart");
+});
+
+test('E2E [JS Invariant]: index.html inline script compiles with 0 syntax errors and exports all event handlers', () => {
+  const indexHtml = fs.readFileSync('index.html', 'utf-8');
+  const scriptMatch = indexHtml.match(/<script\b[^>]*>([\s\S]*?)<\/script>/i);
+  assert.ok(scriptMatch, 'index.html must contain an inline script tag');
+
+  const scriptCode = scriptMatch[1];
+  assert.doesNotThrow(() => {
+    new vm.Script(scriptCode);
+  }, 'index.html inline script must compile cleanly without syntax errors');
+
+  // Verify all event handlers declared in HTML attributes are exposed on window
+  const onAttrRegex = /\bon\w+="([^"]+)"/g;
+  let match;
+  const calledFns = new Set();
+  while ((match = onAttrRegex.exec(indexHtml)) !== null) {
+    const fnMatch = match[1].match(/^([a-zA-Z0-9_$]+)\s*\(/);
+    if (fnMatch) {
+      calledFns.add(fnMatch[1]);
+    }
+  }
+
+  for (const fn of calledFns) {
+    assert.ok(
+      scriptCode.includes('window.' + fn),
+      `Function '${fn}' called from HTML attribute must be exposed on window`
+    );
+  }
 });
 

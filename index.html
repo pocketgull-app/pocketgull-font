@@ -4650,7 +4650,6 @@
           vfText.style.fontFeatureSettings = 'normal';
         }
       }
-      }
 
       axes.forEach(a => {
         const slider = document.getElementById(a.el);
@@ -4801,6 +4800,16 @@
         if (samples[type]) {
           vfText.textContent = samples[type];
         }
+      };
+
+      // Studio Drawer / Progressive Disclosure Controller
+      window.toggleStudioDrawer = function(id, forceOpen) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (el.tagName === 'DETAILS' && forceOpen) {
+          el.open = true;
+        }
+        el.scrollIntoView({ behavior: 'smooth' });
       };
 
       // Robust Clipboard Helper with execCommand Fallback
