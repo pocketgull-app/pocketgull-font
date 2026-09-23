@@ -15,6 +15,9 @@ import 'foundry/foundry_spector.dart';
 import 'foundry/sanctuary_tui.dart';
 import 'foundry/sanctuary_server.dart';
 import 'foundry/var_spector.dart';
+import 'foundry/subsetter_service.dart';
+import 'foundry/compliance_auditor.dart';
+import 'foundry/osv_auditor.dart';
 
 const fontStems = [
   'PocketGull-Regular',
@@ -757,12 +760,34 @@ Commands:
   benchmark         Run scientific rasterization throughput & latency benchmark suite
   serve [port]      Serve specimen proof locally with zero CORS restrictions (default: 8770)
   sanctuary         Launch interactive Pure-Dart Terminal Sanctuary (TUI, Ludology, Pacing)
+  compliance        Execute Seven Invariant Quality Pillars & Dieter Rams compliance audit
+  osv               Audit dependencies & lockfiles against Google OSV-Scanner database
+  subset-service    Launch dynamic SMoE font subsetting microservice (Cloud Run ready)
 ''');
 }
 
 Future<void> main(List<String> args) async {
   final command = args.isNotEmpty ? args[0] : 'audit';
   switch (command) {
+    case 'compliance':
+      final auditor = ComplianceAuditor(projectRoot: Directory(findProjectRoot()));
+      final ok = await auditor.run();
+      if (!ok) exitCode = 1;
+      break;
+    case 'osv':
+    case 'osv-scanner':
+      final auditor = OsvAuditor(projectRoot: Directory(findProjectRoot()));
+      final ok = await auditor.run();
+      if (!ok) exitCode = 1;
+      break;
+    case 'subset-service':
+    case 'subsetter':
+      final port = args.length > 1
+          ? int.tryParse(args[1]) ?? 8080
+          : int.tryParse(Platform.environment['PORT'] ?? '') ?? 8080;
+      final service = SubsetterService(projectRoot: Directory(findProjectRoot()), port: port);
+      await service.start();
+      break;
     case 'varspector':
     case 'var':
       final target = args.length > 1 ? File(args[1]) : File('fonts/ttf/PocketGull-VF.ttf');

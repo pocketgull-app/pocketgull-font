@@ -341,9 +341,6 @@ String generateSocialGithubPreview(
 // 2. SYNAPTIC SPECIMEN DARK (1200x1720)
 // =============================================================================
 String generateSynapticSpecimenDark(String quillingBase64) {
-  final flagBlock = nunavutFlagSvg(x: 24, y: 15, width: 75, height: 46);
-  final canFlag = canadaFlagSvg(x: 108, y: 15, width: 75, height: 46);
-
   final quillingPlate = quillingBase64.isNotEmpty
       ? '''
       <g id="synaptic-quilling-plate" transform="translate(60, 135)">

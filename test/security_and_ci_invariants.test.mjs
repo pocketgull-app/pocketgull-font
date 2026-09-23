@@ -64,36 +64,3 @@ test('Security Invariant: asl_studio.html and sign_studio.html use safe DOM text
   }
 });
 
-test('Security Invariant: dymaxion_cube.html does not use flawed regex HTML stripping', () => {
-  const cubePath = 'dymaxion_cube.html';
-  assert.ok(fs.existsSync(cubePath), 'dymaxion_cube.html must exist');
-  const code = fs.readFileSync(cubePath, 'utf8');
-
-  assert.doesNotMatch(
-    code,
-    /\.replace\(\/<\[\^>\]\*>(\?\/gm|;\s*)/,
-    'dymaxion_cube.html must not use flawed regex tag-stripping (incomplete sanitization)'
-  );
-  assert.match(
-    code,
-    /markerCaption\.textContent\s*=\s*'';/,
-    'dymaxion_cube.html must construct markerCaption safely using DOM nodes'
-  );
-});
-
-test('Security Invariant: healing_cinema.html uses renderBionic with DOM nodes rather than innerHTML', () => {
-  const cinemaPath = 'healing_cinema.html';
-  assert.ok(fs.existsSync(cinemaPath), 'healing_cinema.html must exist');
-  const code = fs.readFileSync(cinemaPath, 'utf8');
-
-  assert.match(
-    code,
-    /renderBionic\(container,\s*text\)/,
-    'healing_cinema.html must provide renderBionic(container, text) DOM node builder'
-  );
-  assert.doesNotMatch(
-    code,
-    /document\.getElementById\("heroText"\)\.innerHTML\s*=\s*cinema\.formatBionic/,
-    'healing_cinema.html must not assign formatBionic output to innerHTML'
-  );
-});

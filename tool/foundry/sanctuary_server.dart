@@ -33,11 +33,11 @@ class SanctuaryServer {
     print('  🕊️  POCKETGULL DART SANCTUARY SERVER & LIVE TELEMETRY (DART 3.11)');
     print('======================================================================');
     print('  Specimen Web App:      http://localhost:$bindPort/index.html');
-    print('  Healing Games Parlor:  http://localhost:$bindPort/parlor_sanctuary.html');
-    print('  Gameboard Studio:      http://localhost:$bindPort/gameboard.html');
+    print('  A11y & Neuro Lab:      http://localhost:$bindPort/a11y_studio.html');
+    print('  Kinetic Laboratory:    http://localhost:$bindPort/kinetic_laboratory.html');
+    print('  Adaptive Transit:      http://localhost:$bindPort/micromobility_sanctuary.html');
     print('  Live Telemetry API:    http://localhost:$bindPort/api/status');
     print('  Forensic Audit API:    http://localhost:$bindPort/api/audit');
-    print('  The World Tarot API:   http://localhost:$bindPort/api/tarot/world');
     print('  WebSocket Hot-Reload:  ws://localhost:$bindPort/ws/live');
     print('  Serving Directory:     ${projectRoot.path}');
     print('  Cache Control:         Zero-CORS, Instant Refresh');
@@ -167,33 +167,6 @@ class SanctuaryServer {
         'passed': results.where((r) => r['passed'] == true).length,
         'results': results,
       }));
-      await request.response.close();
-      return;
-    }
-
-    if (path == '/api/tarot/world') {
-      final payload = {
-        'arcana': 'Major Arcana XXI',
-        'name': 'The World (Le Monde)',
-        'symbolism': 'Cosmic Wholeness, Completion, Integration, and Infinite Renewal',
-        'mandorla': {
-          'geometry': 'Vesica Piscis Laurel Wreath',
-          'colors': ['#10b981 (Celtic Emerald)', '#f59e0b (24k Gold)'],
-          'lemniscates': 'Dual red infinity loops at zenith and nadir',
-        },
-        'guardians': [
-          {'element': 'Air', 'totem': 'Angel', 'quadrant': 'Top-Left', 'frequencyHz': 432, 'quality': 'Intellect & Breath'},
-          {'element': 'Water', 'totem': 'Eagle', 'quadrant': 'Top-Right', 'frequencyHz': 528, 'quality': 'Intuition & Flow'},
-          {'element': 'Fire', 'totem': 'Lion', 'quadrant': 'Bottom-Left', 'frequencyHz': 660, 'quality': 'Willpower & Vitality'},
-          {'element': 'Earth', 'totem': 'Bull', 'quadrant': 'Bottom-Right', 'frequencyHz': 330, 'quality': 'Somatic Grounding'},
-        ],
-        'dancingAnima': {
-          'attributes': 'Dual spiral balance wands rotating in harmonic equilibrium',
-          'center': 'Radiant Heart (♥)',
-          'wholenessOrbit': 7,
-        }
-      };
-      request.response.write(jsonEncode(payload));
       await request.response.close();
       return;
     }

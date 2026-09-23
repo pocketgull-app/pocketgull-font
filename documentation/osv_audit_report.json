@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-09-22T20:07:22.341719",
+  "scanner": "Google OSV-Scanner (api.osv.dev)",
+  "scannedPackages": 2,
+  "vulnerabilitiesFound": 0,
+  "passed": true,
+  "results": [
+    {
+      "package": "PyPI: cu2qu@1.6.7.post2",
+      "status": "PASS",
+      "vulnerabilities": []
+    },
+    {
+      "package": "PyPI: fonttools@4.65.0",
+      "status": "PASS",
+      "vulnerabilities": []
+    }
+  ]
+}

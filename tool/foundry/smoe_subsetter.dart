@@ -352,7 +352,6 @@ class SmoeSubsetter {
       return;
     }
 
-    final bytes = ttfFile.readAsBytesSync();
     print('\n======================================================================');
     print('  SMoE SCRIPT EXPERT ROUTER AUDIT: ${ttfFile.uri.pathSegments.last}');
     print('======================================================================\n');

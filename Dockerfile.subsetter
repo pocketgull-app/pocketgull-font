@@ -1,0 +1,34 @@
+# syntax=docker/dockerfile:1
+# ------------------------------------------------------------------------------
+# PocketGull Dynamic SMoE Subsetter Service
+# Cloud Run Serverless Micro-Container (Scale-to-Zero, 0 Cost Ingress/Idle)
+# ------------------------------------------------------------------------------
+
+# Stage 1: Fast Pure-Dart AOT Compilation
+FROM dart:3-sdk AS build
+
+WORKDIR /app
+COPY pubspec.* ./
+RUN dart pub get
+
+COPY . .
+RUN dart compile exe tool/pocketgull_foundry.dart -o /app/pocketgull_foundry
+
+# Stage 2: Distroless Minimal Security Image (<40MB)
+FROM gcr.io/distroless/cc-debian12:nonroot
+
+WORKDIR /app
+
+# Copy compiled AOT binary
+COPY --from=build /app/pocketgull_foundry /app/pocketgull_foundry
+
+# Copy fonts directory for serverless font loading
+COPY --from=build /app/fonts /app/fonts
+
+ENV PORT=8080
+EXPOSE 8080
+
+# Run as nonroot user (UID 65532) with read-only rootfs
+USER nonroot:nonroot
+
+ENTRYPOINT ["/app/pocketgull_foundry", "subset-service"]

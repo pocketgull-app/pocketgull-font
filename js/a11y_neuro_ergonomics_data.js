@@ -17,6 +17,8 @@ export const TELEMETRY_BADGES = [
     strokeUpm: 120,
     contrastRatio: 18.2,
     ariaRole: "alert",
+    ieee11073Code: "MDC_EVT_ALARM_CRIT",
+    otelAttribute: "med.alarm.critical",
     description: "Maximum boundary alert for life-critical vitals (e.g. Asystole, V-Fib).",
     svgIcon: `<svg viewBox="0 0 100 100" class="w-6 h-6 inline-block" aria-hidden="true"><polygon points="30,5 70,5 95,30 95,70 70,95 30,95 5,70 5,30" fill="none" stroke="currentColor" stroke-width="8"/><polygon points="34,15 66,15 85,34 85,66 66,85 34,85 15,66 15,34" fill="currentColor" opacity="0.25"/><text x="50" y="58" text-anchor="middle" font-size="28" font-weight="900" fill="currentColor" font-family="monospace">!</text></svg>`
   },
@@ -29,6 +31,8 @@ export const TELEMETRY_BADGES = [
     strokeUpm: 100,
     contrastRatio: 16.5,
     ariaRole: "status",
+    ieee11073Code: "MDC_EVT_ALARM_HI",
+    otelAttribute: "med.alarm.high",
     description: "Super-threshold physiological elevation (e.g. Tachycardia > 120 bpm, SBP > 180).",
     svgIcon: `<svg viewBox="0 0 100 100" class="w-6 h-6 inline-block" aria-hidden="true"><polygon points="50,10 90,85 10,85" fill="none" stroke="currentColor" stroke-width="10"/><polygon points="50,28 78,80 22,80" fill="currentColor"/></svg>`
   },
@@ -41,6 +45,8 @@ export const TELEMETRY_BADGES = [
     strokeUpm: 100,
     contrastRatio: 15.8,
     ariaRole: "status",
+    ieee11073Code: "MDC_EVT_ALARM_LO",
+    otelAttribute: "med.alarm.low",
     description: "Sub-threshold physiological depression (e.g. Bradycardia < 45 bpm, SpO2 < 88%).",
     svgIcon: `<svg viewBox="0 0 100 100" class="w-6 h-6 inline-block" aria-hidden="true"><polygon points="50,90 90,15 10,15" fill="none" stroke="currentColor" stroke-width="10"/><polygon points="50,72 78,20 22,20" fill="currentColor"/></svg>`
   },
@@ -53,6 +59,8 @@ export const TELEMETRY_BADGES = [
     strokeUpm: 90,
     contrastRatio: 14.1,
     ariaRole: "status",
+    ieee11073Code: "MDC_EVT_ALARM_SUSPEND",
+    otelAttribute: "med.alarm.hold",
     description: "Infusion hold, transducer zeroing, or temporary clinical alarm silence.",
     svgIcon: `<svg viewBox="0 0 100 100" class="w-6 h-6 inline-block" aria-hidden="true"><polygon points="50,10 90,50 50,90 10,50" fill="none" stroke="currentColor" stroke-width="10"/><polygon points="50,25 75,50 50,75 25,50" fill="currentColor"/></svg>`
   },
@@ -65,8 +73,73 @@ export const TELEMETRY_BADGES = [
     strokeUpm: 90,
     contrastRatio: 17.0,
     ariaRole: "status",
+    ieee11073Code: "MDC_EVT_STAT_OK",
+    otelAttribute: "med.alarm.normal",
     description: "All physiological parameters within normal baseline limits.",
     svgIcon: `<svg viewBox="0 0 100 100" class="w-6 h-6 inline-block" aria-hidden="true"><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="10"/><circle cx="50" cy="50" r="24" fill="currentColor"/></svg>`
+  }
+];
+
+export const CLINICAL_TELEMETRY_METRICS = [
+  {
+    id: "HR",
+    label: "HR",
+    name: "Heart Rate",
+    unit: "bpm",
+    ieee11073Code: "MDC_PULS_RATE_NON_INV",
+    ieeePartition: "PART_SCADA",
+    otelAttribute: "med.vital.heart_rate",
+    typicalRange: [50, 100],
+    alarmRange: [40, 140],
+    subcellGlyph: "♥"
+  },
+  {
+    id: "SPO2",
+    label: "SpO2",
+    name: "Oxygen Saturation",
+    unit: "%",
+    ieee11073Code: "MDC_PULS_OXIM_SAT_O2",
+    ieeePartition: "PART_SCADA",
+    otelAttribute: "med.vital.spo2",
+    typicalRange: [95, 100],
+    alarmRange: [88, 100],
+    subcellGlyph: "◌"
+  },
+  {
+    id: "NIBP_SYS",
+    label: "NIBP Sys",
+    name: "Non-Invasive Blood Pressure (Systolic)",
+    unit: "mmHg",
+    ieee11073Code: "MDC_PRESS_BLD_NONINV_SYS",
+    ieeePartition: "PART_SCADA",
+    otelAttribute: "med.vital.blood_pressure.systolic",
+    typicalRange: [90, 130],
+    alarmRange: [80, 180],
+    subcellGlyph: "▲"
+  },
+  {
+    id: "NIBP_DIA",
+    label: "NIBP Dia",
+    name: "Non-Invasive Blood Pressure (Diastolic)",
+    unit: "mmHg",
+    ieee11073Code: "MDC_PRESS_BLD_NONINV_DIA",
+    ieeePartition: "PART_SCADA",
+    otelAttribute: "med.vital.blood_pressure.diastolic",
+    typicalRange: [60, 85],
+    alarmRange: [50, 110],
+    subcellGlyph: "▼"
+  },
+  {
+    id: "RESP",
+    label: "Resp",
+    name: "Respiration Rate",
+    unit: "rpm",
+    ieee11073Code: "MDC_RESP_RATE",
+    ieeePartition: "PART_SCADA",
+    otelAttribute: "med.vital.respiration_rate",
+    typicalRange: [12, 20],
+    alarmRange: [8, 30],
+    subcellGlyph: "≋"
   }
 ];
 
@@ -769,6 +842,7 @@ export function deserializeBedsideBoard(base64Str) {
 if (typeof window !== 'undefined') {
   window.PocketGullA11y = {
     TELEMETRY_BADGES,
+    CLINICAL_TELEMETRY_METRICS,
     WONG_BAKER_FACES,
     ICU_PHYSIOLOGICAL_NEEDS,
     ASYMMETRIC_MIRROR_PAIRS,

@@ -1,4 +1,4 @@
-﻿import 'dart:io';
+import 'dart:io';
 import 'dart:typed_data';
 
 /// Severity level for FoundrySpector check results.
@@ -165,7 +165,6 @@ class FoundrySpector {
     final fontRevFrac = data.getUint16(headOffset + 6, Endian.big);
     final fontRevision = fontRevInt + (fontRevFrac / 65536.0);
     final unitsPerEm = data.getUint16(headOffset + 18, Endian.big);
-    final macStyle = data.getUint16(headOffset + 44, Endian.big);
     final indexToLocFormat = data.getInt16(headOffset + 50, Endian.big);
 
     // 2. Units Per Em
@@ -209,7 +208,6 @@ class FoundrySpector {
 
     // Parse 'OS/2' table
     final os2Offset = tables['OS/2']!.$1;
-    final usWeightClass = data.getUint16(os2Offset + 4, Endian.big);
     final fsType = data.getUint16(os2Offset + 8, Endian.big);
     final panoseProportion = data.getUint8(os2Offset + 35); // panose[3] is bProportion
     final fsSelection = data.getUint16(os2Offset + 62, Endian.big);
@@ -255,7 +253,6 @@ class FoundrySpector {
     final nameId0 = nameRecords[0] ?? '';
     final nameId1 = nameRecords[1] ?? '';
     final nameId2 = nameRecords[2] ?? '';
-    final nameId4 = nameRecords[4] ?? '';
     final nameId5 = nameRecords[5] ?? '';
     final nameId6 = nameRecords[6] ?? '';
 

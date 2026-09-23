@@ -248,7 +248,8 @@
       gap: 4px;
     }
     .nav-dropdown:hover .nav-dropdown-menu,
-    .nav-dropdown:focus-within .nav-dropdown-menu {
+    .nav-dropdown:focus-within .nav-dropdown-menu,
+    .nav-dropdown.open .nav-dropdown-menu {
       display: flex;
     }
     .nav-dropdown-menu a {
@@ -4556,6 +4557,23 @@
           const idx = themes.indexOf(currentTheme);
           currentTheme = themes[(idx + 1) % themes.length];
           applyTheme(currentTheme);
+        });
+      }
+
+      // Nav Dropdown Controller (Click & Touch Support)
+      const navDropdown = document.querySelector('.nav-dropdown');
+      const navDropdownBtn = document.querySelector('.nav-dropdown-btn');
+      if (navDropdown && navDropdownBtn) {
+        navDropdownBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isOpen = navDropdown.classList.toggle('open');
+          navDropdownBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        document.addEventListener('click', (e) => {
+          if (!navDropdown.contains(e.target)) {
+            navDropdown.classList.remove('open');
+            navDropdownBtn.setAttribute('aria-expanded', 'false');
+          }
         });
       }
 

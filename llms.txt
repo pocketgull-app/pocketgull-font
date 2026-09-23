@@ -1,4 +1,4 @@
-﻿# PocketGull Font Superfamily
+# PocketGull Font Superfamily
 
 > Open-source ophthalmological and clinical font superfamily engineered for Louise Sloan 5:1 optotypic legibility, ISO/TR 11548 256-glyph Unicode Braille, and ISMP life-critical medication safety.
 
@@ -9,7 +9,7 @@
 - **License**: [SIL Open Font License 1.1](https://openfontlicense.org) (100% Free & Open Source)
 - [Official Repository](https://github.com/pocketgull-app/pocketgull-font): Git repository containing UFO3 source files, Dart foundry compiler, and font binaries.
 - [Interactive Web Specimen](https://font.pocketgull.app/): Live specimen engine with variable font axes and 670nm Retinal PBM mode.
-- [Healing Cinema Engine](https://font.pocketgull.app/healing_cinema.html): 0.1 Hz resonant breathing typographic cinema and OKLCH gradient flow.
+- [A11y & Neuro-Ergonomics Lab](https://font.pocketgull.app/a11y_studio.html): Clinical a11y, Louise Sloan 5:1 acuity, and ICU physiological boards.
 - [CERN Zenodo Archival](https://doi.org/10.5281/zenodo.20647514): Long-term DOI preservation.
 - [Citation Metadata](https://font.pocketgull.app/CITATION.cff): CFF bibliographic citation format.
 

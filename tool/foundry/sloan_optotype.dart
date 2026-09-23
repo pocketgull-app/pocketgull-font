@@ -11,6 +11,11 @@ class SloanOptotypeEngine {
   static const int upm = 1000;
   static const int stroke = 200;
   static const int aperture = 200;
+  static const List<String> allOptotypes = ['C', 'D', 'H', 'K', 'N', 'O', 'R', 'S', 'V', 'Z'];
+
+  static bool isSloanOptotype(int codePoint) {
+    return allOptotypes.any((c) => c.codeUnitAt(0) == codePoint);
+  }
 
   /// Generates a Sloan 5:1 letter O (Concentric 5:1 circles with 200 UPM stroke).
   static GlyphRecord generateLetterO(int gid) {

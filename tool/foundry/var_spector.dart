@@ -102,7 +102,6 @@ class VariableFoundrySpector {
       final axisCount = data.getUint16(fvarOffset + 8);
       final axisSize = data.getUint16(fvarOffset + 10);
       final instanceCount = data.getUint16(fvarOffset + 12);
-      final instanceSize = data.getUint16(fvarOffset + 14);
 
       checks.add(VarCheck(
         id: 'fvar_presence',

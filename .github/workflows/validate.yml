@@ -46,10 +46,16 @@ jobs:
       - name: 2. Automated SWE Unit & Metric Regression Tests (Node)
         run: npm run test:unit
 
-      - name: 3. Run PocketGull Pre-Flight Validator
+      - name: 3. Seven Pillars Compliance & Dieter Rams Invariants Audit (Dart 3.11)
+        run: dart run tool/pocketgull_foundry.dart compliance
+
+      - name: 4. Google OSV-Scanner Lockfile & Dependency Security Audit (Dart 3.11)
+        run: dart run tool/pocketgull_foundry.dart osv
+
+      - name: 5. Run PocketGull Pre-Flight Validator
         run: python sources/validate_fonts.py
 
-      - name: 4. Run Fontbakery (Google Fonts Profile)
+      - name: 6. Run Fontbakery (Google Fonts Profile)
         continue-on-error: true
         run: |
           fontbakery check-googlefonts \
