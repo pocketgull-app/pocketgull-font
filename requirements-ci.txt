@@ -1046,9 +1046,9 @@ nanoemoji==0.16.0 \
     --hash=sha256:542a32cd87dd12e55c5ca29ba2e8f108b6f627170f19c3f0501903976206e1b7 \
     --hash=sha256:f340bc5006bcbb9deea1a9c5aab03f8bf0c6a7675cfb9f8925cc320f63587b8e
     # via gftools
-networkx==3.6.1 \
-    --hash=sha256:26b7c357accc0c8cde558ad486283728b65b6a95d85ee1cd66bafab4c8168509 \
-    --hash=sha256:d47fbf302e7d9cbbb9e2555a0d267983d2aa476bac30e90dfbe5669bd57f3762
+networkx==3.7 \
+    --hash=sha256:e3fd2c13a7814cee3746340d8d7f8598a67f16a58bf47fb7f8793fab6efca1b0 \
+    --hash=sha256:fd77a511bd90f39f3d016351345b52cf5319b813bdca01de3f755d3cca62e96a
     # via gftools
 ninja==1.13.2 \
     --hash=sha256:09de9ab04f7352f51570c73fd4913acb1e6c24be0a72cd8b80243d4d3ed04925 \
