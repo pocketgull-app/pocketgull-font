@@ -9,7 +9,7 @@
 [![W3C OTS Validated](https://img.shields.io/badge/W3C_OTS-100%25_Valid-emerald.svg?style=flat-square)](https://github.com/googlefonts/ots)
 [![WCAG 2.1 AAA](https://img.shields.io/badge/WCAG_2.1-AAA_100%25-emerald.svg?style=flat-square)](index.html)
 
-**[🌐 Live Specimen Broadside](https://font.pocketgull.app)** &nbsp;•&nbsp; **[💾 Download Fonts (.ZIP)](pocketgull-font-v3.1.0.zip)** &nbsp;•&nbsp; **[🤟 Sign Studio](asl_studio.html)** &nbsp;•&nbsp; **[🛠️ STEM Studio](stem_studio.html)** &nbsp;•&nbsp; **[🎼 Music Studio](music_studio.html)**
+**[🌐 Live Specimen Broadside](https://font.pocketgull.app)** &nbsp;•&nbsp; **[💾 Download Fonts (.ZIP)](https://github.com/pocketgull-app/pocketgull-font/releases/download/v3.1.0/pocketgull-typeface-v3.1.0.zip)** &nbsp;•&nbsp; **[🤟 Sign Studio](asl_studio.html)** &nbsp;•&nbsp; **[🛠️ STEM Studio](stem_studio.html)** &nbsp;•&nbsp; **[🎼 Music Studio](music_studio.html)**
 
 <br/>
 
@@ -37,10 +37,12 @@
 
 ## 🚀 Quickstart
 
-Add the webfont stylesheet to your HTML:
+### Public Edge CDN (jsDelivr)
+Add the global, high-performance webfont stylesheet directly to your `<head>`:
 ```html
-<link rel="stylesheet" href="https://font.pocketgull.app/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css">
 ```
+*(Or from the official specimen domain: `https://font.pocketgull.app/fonts.css`)*
 
 Apply safe dosage disambiguation to patient charts and medical calculators:
 ```css
@@ -56,9 +58,9 @@ Apply safe dosage disambiguation to patient charts and medical calculators:
 
 | Platform | Command | Notes |
 | :--- | :--- | :--- |
-| **macOS (Homebrew)** | `brew install --cask font-pocketgull` | Complete 29-style TrueType superfamily |
-| **Windows (Winget)** | `winget install PocketGull.Font` | Native portable Windows font installation |
-| **Web (NPM)** | `npm install @fontsource/pocketgull` | Self-hosted zero-CLS webfonts |
+| **macOS (Homebrew Tap)** | `brew install pocketgull-app/tap/font-pocketgull` | Complete 32-style TrueType superfamily |
+| **Windows (Winget)** | `winget install PocketGull.Typeface` | Native Windows font installation ([PR #441164](https://github.com/microsoft/winget-pkgs/pull/441164)) |
+| **Web (NPM)** | `npm install @fontsource/pocketgull` | Self-hosted zero-CLS webfonts ([Issue #168](https://github.com/fontsource/font-files/issues/168)) |
 | **Scientific (PyPI)** | `pip install pocketgull-math` | Matplotlib stylesheets &amp; telemetry |
 | **Typesetting (Typst)** | `#import "@preview/pocketgull-math:3.1.0": *` | Academic STEM paper typesetting |
 
