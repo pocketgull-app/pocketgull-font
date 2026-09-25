@@ -115,3 +115,20 @@ dart run tool/pocketgull_foundry.dart sync
 2. **DOM-Based XSS Prevention**: Never interpolate unescaped user input or URL query parameters into `.innerHTML`. Always construct DOM trees using `textContent`, `document.createTextNode()`, and `document.createElement()`.
 3. **Automated Enforcement**: Enforced at build and pre-flight time via `test/security_and_ci_invariants.test.mjs`.
 
+---
+
+## 📦 Distribution, Supply Chain & Repository Hygiene Invariants
+
+1. **Multi-Channel Distribution Baseline**:
+   - **Homebrew Tap**: `pocketgull-app/tap/font-pocketgull` (32 styles).
+   - **Windows Package Manager**: `PocketGull.Typeface` (manifests in `distribution/winget/`).
+   - **Global Edge CDN (jsDelivr)**: `https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css` (CORS-enabled, zero-quota edge delivery).
+2. **Dependabot & CI Python Environment Lock**:
+   - CI environment is pinned to Python 3.11. Never merge dependency bumps that require Python >= 3.12 (e.g. `networkx >= 3.7`) without migrating the CI runner first.
+   - Respect strict peer constraints (e.g. `fontbakery 1.1.0` pins `freetype-py < 2.4.0`). Keep conflicting major/minor bumps ignored in `.github/dependabot.yml`.
+3. **Repository Cleanliness (Google Fonts Project Template Standard)**:
+   - Public repository strictly contains open-source code, fonts, build sources, and specimen documentation.
+   - Internal business memos, email pitches, legal assignments, and patent disclosures MUST reside in `private/` or `local/` and are strictly ignored by `.gitignore`.
+   - Never leave dirty or experimental font binary re-exports in the working tree (`fonts/ttf/`, `fonts/woff2/`).
+
+
