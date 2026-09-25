@@ -692,6 +692,7 @@
       color: var(--cyan);
       background: linear-gradient(135deg, #38bdf8 0%, #06b6d4 100%);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
@@ -2260,7 +2261,7 @@
       <div id="vfPresetControls" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; justify-content: flex-start;">
         <button type="button" class="preset-pill active" data-preset="healing">🌿 Happy &amp; Healing Sanctuary</button>
         <button type="button" class="preset-pill" data-preset="heading_home">🌱 Heading Home (72 bpm)</button>
-        <button type="button" class="preset-pill" data-preset="philocardia">💖 Philocardia (Hearts)</button>
+        <button type="button" class="preset-pill" data-preset="philocardia">💖 The Healer Font (Heart 'i's)</button>
         <button type="button" class="preset-pill" data-preset="hairline">Hairline 100</button>
         <button type="button" class="preset-pill" data-preset="thin">Thin 200</button>
         <button type="button" class="preset-pill" data-preset="fineliner">Fineliner 400</button>
@@ -2614,15 +2615,15 @@
         <!-- 11. Philocardia Heart Tittle Card -->
         <div class="ismp-card" id="ismpCardHeart" data-inspect="philocardia_hearts" tabindex="0" role="region" aria-label="Philocardia Hearts and Healer Alternates" style="border-color: rgba(251, 113, 133, 0.35); background: linear-gradient(180deg, rgba(251, 113, 133, 0.05) 0%, var(--card-bg) 100%);">
           <div class="ismp-title" style="color: var(--rose); display: flex; justify-content: space-between; align-items: center;">
-            <span>Philocardia Hearts (cv09 / ss07)</span>
+            <span>Philocardia Hearts • The Healer Font (cv09 / ss07)</span>
             <div style="display: flex; gap: 6px; align-items: center;">
               <span class="ismp-inspect-badge ismp-badge-rose">🔬 Inspect</span>
               <button type="button" id="heartBpmBadge" title="Click to cycle cardiac pacing: 72 BPM -> 60 BPM -> Static" style="background: rgba(251, 113, 133, 0.18); border: 1px solid rgba(251, 113, 133, 0.4); color: var(--rose); font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; cursor: pointer;">72 BPM</button>
             </div>
           </div>
-          <div class="ismp-comparison">
-            <span class="ismp-standard">clinical</span>
-            <span class="ismp-safe ismp-feat-heart" id="ismpHeartComparison" style="color: var(--rose);">cl<span class="philocardia-heart philocardia-pacing-72" title="Philocardia Heart Tittle">ı</span>n<span class="philocardia-heart philocardia-pacing-72" title="Philocardia Heart Tittle">ı</span>cal</span>
+          <div class="ismp-comparison" style="font-size: 1.35rem; display: flex; justify-content: space-around; align-items: center; white-space: nowrap; gap: 8px;">
+            <span class="ismp-standard" style="white-space: nowrap; font-size: 1.35rem;">clinical</span>
+            <span class="ismp-safe ismp-feat-heart" id="ismpHeartComparison" style="color: var(--rose); white-space: nowrap; font-size: 1.35rem;">cl<span class="philocardia-heart philocardia-pacing-72" title="Philocardia Heart Tittle">ı</span>n<span class="philocardia-heart philocardia-pacing-72" title="Philocardia Heart Tittle">ı</span>cal</span>
           </div>
           <div class="tittle-variety-mini-selector" id="tittleVarietyMini">
             <button type="button" class="tittle-variety-pill active" data-v="heart" title="Heart (♥): Bedside warmth &amp; lovingkindness">♥</button>
@@ -4342,6 +4343,28 @@
             <button type="button" class="cli-copy-btn" data-copy="npm install @fontsource/pocketgull" title="Copy to clipboard">Copy</button>
           </div>
         </div>
+
+        <div class="cli-card">
+          <div class="cli-label">
+            <span>Public Global CDN</span>
+            <span style="color: #ec4899;">jsDelivr Edge</span>
+          </div>
+          <div class="cli-cmd-box">
+            <code>https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css</code>
+            <button type="button" class="cli-copy-btn" data-copy="&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css&quot;&gt;" title="Copy &lt;link&gt; tag to clipboard">Copy</button>
+          </div>
+        </div>
+
+        <div class="cli-card">
+          <div class="cli-label">
+            <span>Official Homebrew Tap (Instant)</span>
+            <span style="color: #f59e0b;">macOS &bull; Linux</span>
+          </div>
+          <div class="cli-cmd-box">
+            <code>brew install pocketgull-app/tap/font-pocketgull</code>
+            <button type="button" class="cli-copy-btn" data-copy="brew install pocketgull-app/tap/font-pocketgull" title="Copy to clipboard">Copy</button>
+          </div>
+        </div>
       </div>
 
       <!-- Individual Font Cuts Grid -->
@@ -4652,6 +4675,30 @@
         if (hlngVal >= 0.5) feats.push('"ss07" 1', '"cv09" 1');
         vfText.style.fontFeatureSettings = feats.join(', ');
 
+        // Philocardia ISMP-grade clarity rendering across all variable axes
+        const activeBtn = document.querySelector('#vfPresetControls .preset-pill.active');
+        const isPhilocardiaActive = activeBtn?.getAttribute('data-preset') === 'philocardia' || hlngVal >= 0.5;
+        const rawText = vfText.dataset.rawText || vfText.textContent || '';
+        if (isPhilocardiaActive) {
+          const clean = rawText.replace(/ı/g, 'i').replace(/ȷ/g, 'j');
+          vfText.textContent = '';
+          for (let char of clean) {
+            if (char === 'i' || char === 'j') {
+              const span = document.createElement('span');
+              span.className = char === 'i' ? 'philocardia-heart philocardia-pacing-72' : 'philocardia-j philocardia-pacing-72';
+              span.textContent = char === 'i' ? 'ı' : 'ȷ';
+              vfText.appendChild(span);
+            } else {
+              vfText.appendChild(document.createTextNode(char));
+            }
+          }
+        } else {
+          const clean = rawText.replace(/ı/g, 'i').replace(/ȷ/g, 'j');
+          if (vfText.textContent !== clean) {
+            vfText.textContent = clean;
+          }
+        }
+
         if (readout) {
           readout.innerHTML = `Active 16-Axis Engine: <strong style="color: var(--cyan);">${parts.slice(0, 4).join(', ')}</strong> | <span style="color: #34d399;">${parts.slice(4, 9).join(', ')}</span><br><code style="font-size: 10px; color: var(--text-muted);">font-variation-settings: ${fvs}</code>`;
         }
@@ -4691,7 +4738,7 @@
         },
         philocardia: {
           axes: { wght: 600, wdth: 100, slnt: 0, opsz: 36, SOFT: 0.8, HLNG: 1.0, APTR: 0.7, SMRN: 0.6, THRM: 0, BION: 0, GRAV: 0, BOUM: 0.7, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
-          text: "Clinical Care • Pediatric Healing Sanctuary (Lovingkindness & Hearts for i's)"
+          text: "Clinical Care • Pediatric Healing Sanctuary • The Healer Font (Hearts for i's) ♥"
         },
         hairline: {
           axes: { wght: 100, wdth: 100, slnt: 0, opsz: 36, SOFT: 0, HLNG: 0, APTR: 0, SMRN: 0, THRM: 0, BION: 0, GRAV: 0, BOUM: 0, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
@@ -4769,14 +4816,8 @@
             });
           }
           if (vfText && p.text) {
+            vfText.dataset.rawText = p.text;
             vfText.textContent = p.text;
-          }
-          if (vfText) {
-            if (key === 'philocardia') {
-              vfText.style.fontFeatureSettings = '"ss07" 1';
-            } else {
-              vfText.style.fontFeatureSettings = 'normal';
-            }
           }
           updateAllAxes();
         });
