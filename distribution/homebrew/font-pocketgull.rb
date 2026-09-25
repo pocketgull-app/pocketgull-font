@@ -1,8 +1,8 @@
 cask "font-pocketgull" do
   version "3.1.0"
-  sha256 "d7cb0d35d490a0ed17034fa850a7b50581ae3ed7dd69a2f423b06178e10ae3a6"
+  sha256 "34b07aaed632064210a67baaa1932de2d4b5001bd280b8666d928d7a0f79c718"
 
-  url "https://github.com/pocketgull-app/pocketgull-font/releases/download/v#{version}/pocketgull-font-v#{version}.zip",
+  url "https://github.com/pocketgull-app/pocketgull-font/releases/download/v#{version}/pocketgull-typeface-v#{version}.zip",
       verified: "github.com/pocketgull-app/pocketgull-font/"
   name "PocketGull"
   desc "Humanist sans-serif, display, slab, and telemetry monospace font superfamily"
