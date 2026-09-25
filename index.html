@@ -2904,7 +2904,7 @@
         <div class="scotopic-container" id="scotopicContainer">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--card-border);">
             <div>
-              <span class="badge" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.4); margin-bottom: 4px;">Dark-Sky Observatory Telemetry</span>
+              <span class="badge" style="color: #f87171; border-color: rgba(248, 113, 113, 0.4); margin-bottom: 4px;">Dark-Sky Observatory Telemetry</span>
               <h3 style="font-family: 'PocketGull Bold'; font-size: 20px; margin-top: 4px;">650nm Scotopic Observational Console</h3>
             </div>
             <button type="button" class="astro-mode-btn" id="scotopicToggleBtn" onclick="toggleScotopicNight()">
@@ -3769,7 +3769,7 @@
 
       <!-- Live Stage -->
       <div id="chromaticStage" style="background: #0f172a; border: 1px solid var(--card-border); border-radius: 12px; padding: 60px 40px; text-align: center; overflow-x: auto; min-height: 240px; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 2px 8px rgba(0,0,0,0.5);">
-        <div class="chromatic-container" id="chromaticDisplay" style="font-size: 84px; letter-spacing: 0.02em;">
+        <div class="chromatic-container" id="chromaticDisplay" aria-hidden="true" style="font-size: 84px; letter-spacing: 0.02em;">
           <div class="chromatic-layer font-bold" id="renderShadow" style="color: #334155; transform: translate(6px, 8px);">POCKETGULL</div>
           <div class="chromatic-layer font-bold" id="renderBase" style="color: #fef08a;">POCKETGULL</div>
           <div class="chromatic-layer font-halftone" id="renderHalftone" style="color: #06b6d4; mix-blend-mode: multiply;">POCKETGULL</div>
@@ -4561,11 +4561,16 @@
       const themes = ['dark', 'washi', 'light'];
       const themeIcons = { dark: '◐', washi: '◈', light: '☼' };
       const themeLabels = { dark: 'Dark', washi: 'Washi', light: 'Light' };
-      let currentTheme = localStorage.getItem('pg_theme') || 'dark';
+      let currentTheme = 'dark';
+      try {
+        currentTheme = localStorage.getItem('pg_theme') || 'dark';
+      } catch (e) {}
 
       function applyTheme(t) {
         document.documentElement.setAttribute('data-theme', t);
-        localStorage.setItem('pg_theme', t);
+        try {
+          localStorage.setItem('pg_theme', t);
+        } catch (e) {}
         const iconEl = document.getElementById('themeIcon');
         const labelEl = document.getElementById('themeLabel');
         if (iconEl) iconEl.textContent = themeIcons[t];
@@ -4681,15 +4686,30 @@
         const rawText = vfText.dataset.rawText || vfText.textContent || '';
         if (isPhilocardiaActive) {
           const clean = rawText.replace(/ı/g, 'i').replace(/ȷ/g, 'j');
-          vfText.textContent = '';
-          for (let char of clean) {
-            if (char === 'i' || char === 'j') {
-              const span = document.createElement('span');
-              span.className = char === 'i' ? 'philocardia-heart philocardia-pacing-72' : 'philocardia-j philocardia-pacing-72';
-              span.textContent = char === 'i' ? 'ı' : 'ȷ';
-              vfText.appendChild(span);
-            } else {
-              vfText.appendChild(document.createTextNode(char));
+          if (typeof currentVariety !== 'undefined' && currentVariety === 'dot') {
+            if (vfText.textContent !== clean) {
+              vfText.textContent = clean;
+            }
+          } else {
+            const cadence = typeof currentCadence !== 'undefined' ? currentCadence : '72';
+            let pacingClass = '';
+            if (cadence === '72') pacingClass = 'philocardia-pacing-72';
+            else if (cadence === '60') pacingClass = 'philocardia-pacing-60';
+
+            const classI = pacingClass ? `philocardia-heart ${pacingClass}` : 'philocardia-heart';
+            const classJ = pacingClass ? `philocardia-j ${pacingClass}` : 'philocardia-j';
+            const classExcl = pacingClass ? `philocardia-excl ${pacingClass}` : 'philocardia-excl';
+
+            vfText.textContent = '';
+            for (let char of clean) {
+              if (char === 'i' || char === 'j' || char === '!') {
+                const span = document.createElement('span');
+                span.className = (char === 'i') ? classI : (char === 'j') ? classJ : classExcl;
+                span.textContent = (char === 'i') ? 'ı' : (char === 'j') ? 'ȷ' : '!';
+                vfText.appendChild(span);
+              } else {
+                vfText.appendChild(document.createTextNode(char));
+              }
             }
           }
         } else {
@@ -4738,7 +4758,7 @@
         },
         philocardia: {
           axes: { wght: 600, wdth: 100, slnt: 0, opsz: 36, SOFT: 0.8, HLNG: 1.0, APTR: 0.7, SMRN: 0.6, THRM: 0, BION: 0, GRAV: 0, BOUM: 0.7, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
-          text: "Clinical Care • Pediatric Healing Sanctuary • The Healer Font (Hearts for i's) ♥"
+          text: "Clinical Care • Pediatric Healing Sanctuary (Lovingkindness & Hearts for i's)"
         },
         hairline: {
           axes: { wght: 100, wdth: 100, slnt: 0, opsz: 36, SOFT: 0, HLNG: 0, APTR: 0, SMRN: 0, THRM: 0, BION: 0, GRAV: 0, BOUM: 0, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
@@ -4823,6 +4843,17 @@
         });
       });
 
+      // Maintain live editable text binding for 16-Axis Console
+      if (vfText) {
+        vfText.addEventListener('input', () => {
+          // Record raw characters so any typed i, j, ! are kept
+          vfText.dataset.rawText = vfText.textContent || '';
+        });
+        vfText.addEventListener('blur', () => {
+          updateAllAxes();
+        });
+      }
+
       // Quick Specimen Sample Inserter Helper
       window.setVfSample = function(type) {
         if (!vfText) return;
@@ -4834,6 +4865,9 @@
           inuktitut: "ᐃᓄᒃᑎᑐᑦ • Inuktitut Syllabics Apex Acuity Standards (Nunavut & Arctic Telehealth)",
           arabic: "نقطة خط عربي • Arabic Nuqta Natural Calligraphic Pen Angle Footprint"
         };
+        if (samples[type]) {
+          vfText.dataset.rawText = samples[type];
+        }
         if (type === 'braille') {
           const bBtn = document.querySelector('button[data-preset="braille"]');
           if (bBtn) bBtn.click();
@@ -4842,7 +4876,9 @@
           if (pBtn) {
             pBtn.click();
           } else {
-            vfText.style.fontFeatureSettings = '"ss07" 1';
+            const hSlider = document.getElementById('slider-HLNG');
+            if (hSlider) hSlider.value = 1.0;
+            updateAllAxes();
           }
         } else if (type === 'ismp') {
           const aBtn = document.querySelector('button[data-preset="aperture"]');
@@ -4855,9 +4891,8 @@
           const s = document.getElementById('slider-NUQT');
           if (s) { s.value = 1.0; }
           updateAllAxes();
-        }
-        if (samples[type]) {
-          vfText.textContent = samples[type];
+        } else {
+          updateAllAxes();
         }
       };
 
@@ -5011,6 +5046,7 @@
         if (bannerDesc) bannerDesc.innerHTML = `${varietyMeanings[v] || ''} Type lowercase <code>i</code>, <code>j</code>, or <code>!</code> above.`;
 
         updateHealerSpecimen();
+        updateAllAxes();
       }
 
       document.querySelectorAll('.tittle-variety-pill').forEach(btn => {
@@ -5037,6 +5073,7 @@
         });
 
         updateHealerSpecimen();
+        updateAllAxes();
       }
 
       document.querySelectorAll('.healer-cadence-btn').forEach(btn => {

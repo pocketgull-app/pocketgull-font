@@ -38,7 +38,9 @@
     "validate": "node scripts/run-font-validator.mjs",
     "checksums": "node scripts/generate_checksums.mjs",
     "serve": "dart run tool/pocketgull_foundry.dart serve 8770",
-    "test:unit": "node --test test/*.test.mjs"
+    "test:unit": "node --test test/*.test.mjs",
+    "test:e2e": "node --test test/specimen_interactions_playwright.test.mjs",
+    "test:lighthouse": "node --test test/lighthouse_and_wcag_audit.test.mjs"
   },
   "files": [
     "fonts/ttf/*.ttf",
@@ -48,5 +50,10 @@
     "OFL.txt",
     "LICENSE.txt",
     "CITATION.cff"
-  ]
+  ],
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "axe-core": "^4.13.0",
+    "playwright": "^1.63.0"
+  }
 }
