@@ -1,7 +1,7 @@
-﻿{
-  "title": "PocketGull Font Superfamily: Optotypically Calibrated Clinical & Ophthalmological Vector Letterforms",
+{
+  "title": "PocketGull Font Superfamily: Optotypically Calibrated Clinical, Mathematical, Astronomical & Telemetry Vector Letterforms",
   "upload_type": "software",
-  "description": "PocketGull is an open-source clinical, ophthalmological, and telemetry monospace font superfamily designed for digital health applications, critical care patient monitoring, and sovereign multi-script literacy. Engineered on a 1000 UPM grid conforming to ISO/IEC 14496-22 and Google Fonts specifications with LogMAR 0.0 Louise Sloan 5:1 optotypic legibility, PocketGull features 256 Unicode Braille patterns (U+2800..U+28FF), ISMP/FDA numeral disambiguation (slashed zero cv08, curved lowercase l cv05, serifed capital I ss02), Herman Bouma lateral anti-crowding spacing, 670nm Retinal PBM night mode, and native multi-script support for Canadian Aboriginal Syllabics (Inuktitut), Chinuk Pipa, Cherokee Syllabary, Neo-Tifinagh, Ethiopic Ge'ez, Adlam, Vai, and Pan-Tribal North American Indigenous orthographies under the CARE Principles for Indigenous Data Sovereignty.",
+  "description": "PocketGull is an open-source clinical sans-serif, display, mathematical, and telemetry monospace font superfamily designed for digital health applications, critical care patient monitoring, observational astronomy, STEM publishing, and sovereign multi-script literacy. Engineered on a 1000 UPM grid conforming to ISO/IEC 14496-22 and Google Fonts specifications with LogMAR 0.0 Louise Sloan 5:1 optotypic legibility, PocketGull features 256 Unicode Braille patterns (U+2800..U+28FF), ISMP/FDA numeral disambiguation (slashed zero cv08, curved lowercase l cv05, serifed capital I ss02, slashed Z cv11), Herman Bouma lateral anti-crowding spacing, Scotopic 650nm dark-sky red mode for astronomical observatories, 80-column FITS header compliance, robust 68 UPM math stem weights with OpenType MATH tables (LaTeX CTAN / Typst universe), gapless ICU telemetry box drawing (U+2500..U+257F) with sub-cell plethysmograph/ECG waveforms, and native multi-script support for Canadian Aboriginal Syllabics (Inuktitut), Chinuk Pipa, Cherokee Syllabary, Neo-Tifinagh, Ethiopic Ge'ez, Adlam, Vai, and Pan-Tribal North American Indigenous orthographies under the CARE Principles for Indigenous Data Sovereignty.",
   "creators": [
     {
       "name": "Gear, Phil",
@@ -14,8 +14,8 @@
   ],
   "access_right": "open",
   "license": "OFL-1.1",
-  "publication_date": "2026-09-04",
-  "version": "3.0.0",
+  "publication_date": "2026-09-18",
+  "version": "3.1.0",
   "keywords": [
     "typography",
     "typeface",
@@ -23,11 +23,23 @@
     "optotypes",
     "clinical-safety",
     "ismp-medication-safety",
+    "electronic-health-records",
+    "icu-monitoring",
+    "telemetry",
+    "ecg-waveforms",
+    "box-drawing",
+    "mathematical-typesetting",
+    "latex-ctan",
+    "typst",
+    "astronomy",
+    "scotopic-vision",
+    "fits-headers",
+    "genomics",
+    "cheminformatics",
     "braille",
     "bionic-reading",
     "low-vision",
     "dyslexia",
-    "photobiomodulation",
     "variable-fonts",
     "google-fonts",
     "open-font-license",
@@ -39,6 +51,8 @@
     "cherokee-syllabary",
     "neo-tifinagh",
     "ethiopic-geez",
+    "adlam",
+    "vai",
     "w3c-ots"
   ],
   "related_identifiers": [
@@ -65,6 +79,16 @@
     {
       "relation": "isSupplementTo",
       "identifier": "https://github.com/pocketgull-app/pocketgull",
+      "resource_type": "software"
+    },
+    {
+      "relation": "isSupplementTo",
+      "identifier": "https://pypi.org/project/pocketgull-math/",
+      "resource_type": "software"
+    },
+    {
+      "relation": "isSupplementTo",
+      "identifier": "https://typst.app/universe/package/pocketgull-math",
       "resource_type": "software"
     }
   ]

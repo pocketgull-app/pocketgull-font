@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use the PocketGull Font Superfamily in clinical software, medical informatics, vision science research, or assistive reading systems, please cite it as below."
-title: "PocketGull Font Superfamily: Optotypically Calibrated Clinical & Ophthalmological Vector Letterforms"
-abstract: "PocketGull is an open-source clinical, ophthalmological, and telemetry monospace font superfamily bridging tactile humanist warmth with zero-error clinical precision. Engineered on a 1000 UPM grid with LogMAR 0.0 Snellen optotypic geometry, PocketGull incorporates 256 Unicode Braille patterns (U+2800..U+28FF), ISMP/FDA numeral disambiguation (slashed zero, curved lowercase l, serifed capital I), Louise Sloan 5:1 proportional legibility, 670nm Retinal Photobiomodulation (PBM) mode, and native multi-script support for Canadian Aboriginal Syllabics, Chinuk Pipa, Cherokee Syllabary, Neo-Tifinagh, Ethiopic Ge'ez, Adlam, Vai, and Pan-Tribal North American Indigenous orthographies under the CARE Principles for Indigenous Data Sovereignty."
+title: "PocketGull Font Superfamily: Optotypically Calibrated Clinical, Mathematical, Astronomical & Telemetry Vector Letterforms"
+abstract: "PocketGull is an open-source clinical sans-serif, display, mathematical, and telemetry monospace font superfamily bridging tactile humanist warmth with zero-error clinical precision. Engineered on a 1000 UPM grid conforming to ISO/IEC 14496-22 and Google Fonts specifications with LogMAR 0.0 Snellen optotypic geometry, PocketGull incorporates 256 Unicode Braille patterns (U+2800..U+28FF), ISMP/FDA numeral disambiguation (slashed zero, curved lowercase l, serifed capital I, slashed Z), Louise Sloan 5:1 proportional legibility, Scotopic 650nm dark-sky red mode for astronomical observatories, 80-column FITS header compliance, robust 68 UPM math stem weights with OpenType MATH tables (LaTeX CTAN / Typst universe), gapless ICU telemetry box drawing (U+2500..U+257F) with sub-cell plethysmograph/ECG waveforms, and native multi-script support for Canadian Aboriginal Syllabics, Chinuk Pipa, Cherokee Syllabary, Neo-Tifinagh, Ethiopic Ge'ez, Adlam, Vai, and Pan-Tribal North American Indigenous orthographies under the CARE Principles for Indigenous Data Sovereignty."
 version: 3.1.0
 date-released: "2026-09-18"
 license: OFL-1.1
@@ -39,6 +39,12 @@ identifiers:
   - type: url
     value: "https://zenodo.org/records/20647514"
     description: "PocketGull Clinical Intelligence Suite Official Zenodo Record"
+  - type: url
+    value: "https://pypi.org/project/pocketgull-math/"
+    description: "Official Python PyPI Scientific Typesetting Package"
+  - type: url
+    value: "https://typst.app/universe/package/pocketgull-math"
+    description: "Official Typst Universe STEM Publishing Package"
 keywords:
   - "typography"
   - "typeface"
@@ -46,11 +52,23 @@ keywords:
   - "optotypes"
   - "clinical-safety"
   - "ismp-medication-safety"
+  - "electronic-health-records"
+  - "icu-monitoring"
+  - "telemetry"
+  - "ecg-waveforms"
+  - "box-drawing"
+  - "mathematical-typesetting"
+  - "latex-ctan"
+  - "typst"
+  - "astronomy"
+  - "scotopic-vision"
+  - "fits-headers"
+  - "genomics"
+  - "cheminformatics"
   - "braille"
   - "bionic-reading"
   - "low-vision"
   - "dyslexia"
-  - "photobiomodulation"
   - "variable-fonts"
   - "google-fonts"
   - "open-font-license"
@@ -61,9 +79,13 @@ keywords:
   - "chinuk-pipa"
   - "cherokee-syllabary"
   - "neo-tifinagh"
+  - "ethiopic-geez"
+  - "adlam"
+  - "vai"
+  - "w3c-ots"
 preferred-citation:
   type: software
-  title: "PocketGull Font Superfamily: Optotypically Calibrated Clinical & Ophthalmological Vector Letterforms"
+  title: "PocketGull Font Superfamily: Optotypically Calibrated Clinical, Mathematical, Astronomical & Telemetry Vector Letterforms"
   authors:
     - family-names: "Gear"
       given-names: "Phil"
@@ -72,9 +94,9 @@ preferred-citation:
     - name: "The PocketGull Project Authors"
   year: 2026
   month: 9
-  version: "3.0.0"
+  version: "3.1.0"
   doi: "10.5281/zenodo.22309379"
   url: "https://font.pocketgull.app"
   repository-code: "https://github.com/pocketgull-app/pocketgull-font"
-  license: "Apache-2.0"
-  notes: "Released under the SIL Open Font License 1.1 for medical informatics, clinical safety, and low-vision accessibility under CARE Indigenous Data Sovereignty."
+  license: "OFL-1.1"
+  notes: "Released under the SIL Open Font License 1.1 for medical informatics, clinical safety, STEM mathematics, observational astronomy, and low-vision accessibility under CARE Indigenous Data Sovereignty."
