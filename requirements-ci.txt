@@ -691,14 +691,14 @@ fonttools==4.65.0 \
     #   ufomerge
     #   vharfbuzz
     #   vttlib
-freetype-py==2.3.0 \
-    --hash=sha256:3a552265b06c2cb3fa54f86ed6fcbf045d8dc8176f9475bedddf9a1b31f5402f \
-    --hash=sha256:89cee8f4e7cf0a37b73a43a08c88703d84e3b9f9243fc665d8dc0b72a5d206a8 \
-    --hash=sha256:b95ccd52ff7e9bef34505f8af724cee114a3c3cc9cf13e0fd406fa0cc92b988a \
-    --hash=sha256:c8f17c3ac35dc7cc9571ac37a00a6daa428a1a6d0fe6926a77d16066865ed5ef \
-    --hash=sha256:ca7155de937af6f26bfd9f9089a6e9b01fa8f9d3040a3ddc0aeb3a53cf88f428 \
-    --hash=sha256:ccdb1616794a8ad48beaa9e29d3494e6643d24d8e925cc39263de21c062ea5a7 \
-    --hash=sha256:f9b64ce3272a5c358dcee824800a32d70997fb872a0965a557adca20fce7a5d0
+freetype-py==2.5.1 \
+    --hash=sha256:0b7f8e0342779f65ca13ef8bc103938366fecade23e6bb37cb671c2b8ad7f124 \
+    --hash=sha256:289b443547e03a4f85302e3ac91376838e0d11636050166662a4f75e3087ed0b \
+    --hash=sha256:3c1aefc4f0d5b7425f014daccc5fdc7c6f914fb7d6a695cc684f1c09cd8c1660 \
+    --hash=sha256:5d2f6b3d68496797da23204b3b9c4e77e67559c80390fc0dc8b3f454ae1cd819 \
+    --hash=sha256:cd3bfdbb7e1a84818cfbc8025fca3096f4f2afcd5d4641184bf0a3a2e6f97bbf \
+    --hash=sha256:cfe2686a174d0dd3d71a9d8ee9bf6a2c23f5872385cf8ce9f24af83d076e2fbd \
+    --hash=sha256:d01ded2557694f06aa0413f3400c0c0b2b5ebcaabeef7aaf3d756be44f51e90b
     # via fontbakery
 future==1.0.0 \
     --hash=sha256:929292d34f5872e70396626ef385ec22355a1fae8ad29e1a734c3e43f9fbc216 \
