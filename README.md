@@ -35,6 +35,19 @@
 
 ---
 
+## 🛡️ ISMP Clinical Disambiguation Matrix
+
+PocketGull systematically eliminates look-alike character collisions identified in Institute for Safe Medication Practices (ISMP) adverse event reports:
+
+| Collision Risk | Standard Grotesque (Helvetica/Arial) | PocketGull Clinical Solution | OpenType Feature | Clinical Impact |
+| :--- | :---: | :---: | :---: | :--- |
+| **0 vs O** | `10 mg` vs `1O mg` (Identical oval) | **`0̸` Slashed Zero** | `"zero" 1` / `"cv08" 1` | Eliminates 10-fold dosage errors |
+| **1 vs l vs I** | `1`, `l`, `I` (3 identical vertical sticks) | **Curved foot `l`, Bilobe serif `I`** | `"cv05" 1`, `"ss02" 1` | Prevents cisplatin vs carboplatin / IL-6 misreads |
+| **2 vs Z** | `2` vs `Z` (Can blur into each other) | **Crossbar Slashed `Z`** | `"cv11" 1` | Differentiates units and vital signs |
+| **b vs d / p vs q** | Symmetrical mirror flips | **Asymmetric spur & bowl bias** | Built-in DNA | Dyslexia rotational inversion protection |
+
+---
+
 ## 🚀 Quickstart
 
 ### Public Edge CDN (jsDelivr)
@@ -44,11 +57,30 @@ Add the global, high-performance webfont stylesheet directly to your `<head>`:
 ```
 *(Or from the official specimen domain: `https://font.pocketgull.app/fonts.css`)*
 
-Apply safe dosage disambiguation to patient charts and medical calculators:
+### Copy-Ready CSS Recipes
+
+#### 1. Bedside EHR & Prescription Dosage Charts (ISMP Disambiguated)
 ```css
-.clinical-dosage-safe {
+.ehr-dosage-safe {
   font-family: 'PocketGull', sans-serif;
   font-feature-settings: "zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "tnum" 1;
+}
+```
+
+#### 2. ICU Telemetry & Diagnostic Terminals (Zero Column Shear)
+```css
+.telemetry-vitals {
+  font-family: 'PocketGull Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.0; /* Strict fixed-pitch box grid */
+}
+```
+
+#### 3. Pediatric & Healing Sanctuary (The Healer Font with Heart 'i's)
+```css
+.pediatric-sanctuary {
+  font-family: 'PocketGull VF', 'PocketGull', sans-serif;
+  font-feature-settings: "cv09" 1, "ss07" 1; /* Philocardia cardiac heart tittles */
 }
 ```
 
