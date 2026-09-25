@@ -12,6 +12,13 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "freetype-py"
+        # fontbakery 1.1.0 pins freetype-py < 2.4.0
+        update-types: ["version-update:semver-minor", "version-update:semver-major"]
+      - dependency-name: "networkx"
+        # networkx >= 3.7 requires Python >= 3.12 (CI environment is Python 3.11)
+        update-types: ["version-update:semver-minor", "version-update:semver-major"]
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
