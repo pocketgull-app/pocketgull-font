@@ -1,0 +1,24 @@
+languagesystem DFLT dflt;
+languagesystem latn dflt;
+
+# PocketGull Salishan OpenType GPOS Mark & MKMK Feature Definitions
+markClass [uni030C] <anchor 0 540> @TOP_MARKS;
+markClass [uni0313] <anchor 0 540> @TOP_MARKS;
+markClass [uni0313] <anchor 0 540> @COMMA_MARKS;
+
+feature mark {
+    lookup MarkToBase_Salishan {
+        pos base x <anchor 246 540> mark @TOP_MARKS;
+        pos base q <anchor 274 540> mark @COMMA_MARKS;
+        pos base k <anchor 320 750> mark @COMMA_MARKS;
+        pos base c <anchor 235 540> mark @COMMA_MARKS;
+        pos base uni019B <anchor 350 750> mark @COMMA_MARKS;
+    } MarkToBase_Salishan;
+} mark;
+
+feature mkmk {
+    lookup MarkToMark_Salishan {
+        pos mark uni030C <anchor 0 766> mark @TOP_MARKS;
+        pos mark uni0313 <anchor 0 714> mark @TOP_MARKS;
+    } MarkToMark_Salishan;
+} mkmk;

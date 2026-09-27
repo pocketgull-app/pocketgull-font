@@ -17,6 +17,7 @@ PocketGull is an open-source clinical sans-serif, display, and telemetry monospa
 - **Let Braille be Braille**: Preserve standard tactile cell geometries, dot pitch, and negative space (ISO/TR 11548 & ISO 17049).
 - **Let Canadian Syllabics be Syllabics**: Respect rotational symmetry, optical stroke weights, and stroke terminals.
 - **Let Stenography be Stenography**: Respect phonemic size ratios without forcing shorthand into Roman metal boxes.
+- **Let Indigenous Scripts be Sovereign (UNDRIP Accord)**: Adhere strictly to the United Nations Declaration on the Rights of Indigenous Peoples (Articles 11, 13, 14, 24, 31). Zero forced Latinization, unencumbered libre licensing (SIL OFL 1.1) for native schools and publishers, OCAP® data sovereignty, and equal clinical optotype legibility across all tribal orthographies.
 - **Keep the binary engine clean**: Pad bytes to keep OTS happy (`loca[i] % 2 == 0`), ensuring memory safety across all systems.
 
 ---
@@ -53,9 +54,10 @@ PocketGull is an open-source clinical sans-serif, display, and telemetry monospa
 ### 7. DirectWrite / ClearType Antialiasing (`gasp`)
 - Version 1 `gasp` table mapping `0xFFFF` to `GASP_DOGRAY` (0x02) and `GASP_SYMMETRIC_SMOOTHING` (0x04).
 
-### 8. Multi-Script Proportions & Grounding
+### 8. Multi-Script Proportions & Grounding (UNDRIP Invariant)
 - **Unicode Braille (`U+2800`–`U+28FF`)**: Respects ISO/TR 11548 & ISO 17049 standard 8-dot tactile dome geometry (r = 60 UPM, 2.5 mm pitch, authentic negative space), grounded on Latin baseline (y = 0) to prevent floating cell artifacts.
 - **Duployan / Chinuk Pipa (`U+1BC00`–`U+1BC9F`)**: Respects phonemic size ratios (130 UPM vowel loops vs. consonant stems), anchored along the optical waist (y = 270 UPM) to harmonize with Latin x-height.
+- **Pan-Tribal Orthographies & Syllabics**: Stacked diacritic elevation (>= 110 UPM clearance for *ą́*, *ę́*, *į́*, *ǫ́*), barred consonant contrast (crossbar >= 1.4x optical aperture for *Ł*, *ł*, *ƛ*), and first-class glottal letter status (*ʼ*, *ʻ*, *ʔ*). Conforms to UNDRIP Articles 11, 13, 14, 24, and 31.
 
 ---
 

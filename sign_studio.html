@@ -1057,6 +1057,12 @@
           </div>
         </div>
 
+        <!-- OWASP Anti-Automation Honeypot (Invisible to human users) -->
+        <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+          <label for="formHpWebsite">Leave this field blank</label>
+          <input type="text" name="hp_website" id="formHpWebsite" tabindex="-1" autocomplete="off">
+        </div>
+
         <div class="form-group">
           <label class="form-label" for="formSignerRole">Your Role / Background</label>
           <select class="form-select" id="formSignerRole">
@@ -1083,7 +1089,7 @@
 
         <div class="form-group">
           <label class="form-label" for="formTargetLetter">Specific Letter or Sign Reviewed</label>
-          <input type="text" class="form-input" id="formTargetLetter" placeholder="e.g., Letter 'R', Numeral '3', or All">
+          <input type="text" class="form-input" id="formTargetLetter" maxlength="64" autocomplete="off" placeholder="e.g., Letter 'R', Numeral '3', or All">
         </div>
 
         <div class="form-group">
@@ -1099,7 +1105,7 @@
 
         <div class="form-group full-width">
           <label class="form-label" for="formComments">Regional Variation Notes or Feedback</label>
-          <textarea class="form-textarea" id="formComments" rows="3" placeholder="Describe any thumb placement adjustments, palm orientation suggestions, or regional dialect notes..."></textarea>
+          <textarea class="form-textarea" id="formComments" rows="3" maxlength="2000" placeholder="Describe any thumb placement adjustments, palm orientation suggestions, or regional dialect notes..."></textarea>
         </div>
 
         <div class="form-actions">
@@ -1113,6 +1119,9 @@
             📜 Generate Digital Usage Receipt (.JSON)
           </button>
         </div>
+
+        <!-- Form Status / Spam Notice -->
+        <div id="formStatusMsg" style="display: none; font-size: 0.82rem; margin-top: 0.75rem; padding: 8px 12px; border-radius: 6px;"></div>
 
         <!-- Receipt Card -->
         <div id="receiptCard">
@@ -1740,13 +1749,70 @@
       });
     });
 
+    // ---------------------------------------------------------------------------
+    // OWASP ANTI-SPAM & INPUT VALIDATION CONTROLS (OAT-017, OAT-015, ASVS V5)
+    // ---------------------------------------------------------------------------
+    const formRenderTime = Date.now();
+    let lastSubmitTime = 0;
+    const SUBMIT_COOLDOWN_MS = 4000;
+    const MIN_INTERACTION_MS = 1200;
+
+    function sanitizeInput(str, maxLen = 2000) {
+      if (!str) return '';
+      return String(str)
+        .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '')
+        .trim()
+        .slice(0, maxLen);
+    }
+
+    function showFormStatus(msg, isError = false) {
+      const statusEl = document.getElementById('formStatusMsg');
+      if (!statusEl) return;
+      statusEl.style.display = 'block';
+      statusEl.style.background = isError ? 'rgba(239, 68, 68, 0.15)' : 'rgba(16, 185, 129, 0.15)';
+      statusEl.style.color = isError ? '#ef4444' : '#10b981';
+      statusEl.style.border = isError ? '1px solid rgba(239, 68, 68, 0.3)' : '1px solid rgba(16, 185, 129, 0.3)';
+      statusEl.textContent = msg;
+    }
+
+    function validateSubmission() {
+      // 1. Honeypot check (OWASP Anti-Automation)
+      const hp = document.getElementById('formHpWebsite');
+      if (hp && hp.value) {
+        console.warn('[OWASP Security] Automated bot submission discarded by honeypot.');
+        showFormStatus('Submission could not be verified (automated activity detected).', true);
+        return false;
+      }
+
+      const now = Date.now();
+      // 2. Minimum interaction time trap
+      if (now - formRenderTime < MIN_INTERACTION_MS) {
+        console.warn('[OWASP Security] Submission rejected: form completed unnaturally fast.');
+        showFormStatus('Please review your feedback before submitting.', true);
+        return false;
+      }
+
+      // 3. Rate limiting / Cooldown
+      if (now - lastSubmitTime < SUBMIT_COOLDOWN_MS) {
+        const remaining = Math.ceil((SUBMIT_COOLDOWN_MS - (now - lastSubmitTime)) / 1000);
+        showFormStatus(`Please wait ${remaining}s before submitting again.`, true);
+        return false;
+      }
+
+      lastSubmitTime = now;
+      showFormStatus('✓ Feedback processed securely.', false);
+      return true;
+    }
+
     // Email Dispatch
     document.getElementById('btnDispatchEmail').addEventListener('click', () => {
-      const role = document.getElementById('formSignerRole').value;
-      const lang = document.getElementById('formLanguageTarget').value;
-      const letter = document.getElementById('formTargetLetter').value || 'General System';
-      const rating = document.getElementById('formClarityRating').value;
-      const comments = document.getElementById('formComments').value || 'No additional comments provided.';
+      if (!validateSubmission()) return;
+
+      const role = sanitizeInput(document.getElementById('formSignerRole').value, 100);
+      const lang = sanitizeInput(document.getElementById('formLanguageTarget').value, 100);
+      const letter = sanitizeInput(document.getElementById('formTargetLetter').value, 64) || 'General System';
+      const rating = sanitizeInput(document.getElementById('formClarityRating').value, 100);
+      const comments = sanitizeInput(document.getElementById('formComments').value, 2000) || 'No additional comments provided.';
 
       const subject = encodeURIComponent(`[PocketGull Sign Consultation] Review for ${lang} (${letter})`);
       const body = encodeURIComponent(
@@ -1769,11 +1835,13 @@ System: PocketGull Sign Foundry v3.3.0
 
     // GitHub Issue Generator
     document.getElementById('btnGenerateIssue').addEventListener('click', () => {
-      const role = document.getElementById('formSignerRole').value;
-      const lang = document.getElementById('formLanguageTarget').value;
-      const letter = document.getElementById('formTargetLetter').value || 'All';
-      const rating = document.getElementById('formClarityRating').value;
-      const comments = document.getElementById('formComments').value || 'Community feedback review.';
+      if (!validateSubmission()) return;
+
+      const role = sanitizeInput(document.getElementById('formSignerRole').value, 100);
+      const lang = sanitizeInput(document.getElementById('formLanguageTarget').value, 100);
+      const letter = sanitizeInput(document.getElementById('formTargetLetter').value, 64) || 'All';
+      const rating = sanitizeInput(document.getElementById('formClarityRating').value, 100);
+      const comments = sanitizeInput(document.getElementById('formComments').value, 2000) || 'Community feedback review.';
 
       const title = encodeURIComponent(`[Sign Review] ${lang}: ${letter} (${role})`);
       const issueBody = encodeURIComponent(
@@ -1794,11 +1862,13 @@ ${comments}
 
     // Digital Usage Receipt Generator
     document.getElementById('btnDownloadReceipt').addEventListener('click', () => {
-      const role = document.getElementById('formSignerRole').value;
-      const lang = document.getElementById('formLanguageTarget').value;
-      const letter = document.getElementById('formTargetLetter').value || 'All Glyphs';
-      const rating = document.getElementById('formClarityRating').value;
-      const comments = document.getElementById('formComments').value || 'Guidelines reviewed and verified.';
+      if (!validateSubmission()) return;
+
+      const role = sanitizeInput(document.getElementById('formSignerRole').value, 100);
+      const lang = sanitizeInput(document.getElementById('formLanguageTarget').value, 100);
+      const letter = sanitizeInput(document.getElementById('formTargetLetter').value, 64) || 'All Glyphs';
+      const rating = sanitizeInput(document.getElementById('formClarityRating').value, 100);
+      const comments = sanitizeInput(document.getElementById('formComments').value, 2000) || 'Guidelines reviewed and verified.';
 
       const receiptObj = {
         receiptId: "PG-SIGN-" + Date.now().toString(36).toUpperCase(),

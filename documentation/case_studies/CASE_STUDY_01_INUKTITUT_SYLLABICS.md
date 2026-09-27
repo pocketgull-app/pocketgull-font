@@ -5,7 +5,7 @@
 **Date**: 2026-09-18T15:12:32Z  
 **Status**: Peer-Reviewed Empirical Case Study  
 **Artifacts**: `PocketGull-Bold.ttf`, `PocketGull-Fineliner.ttf`, `PocketGull-Chiseltip.ttf`, `PocketGullMono-Regular.ttf`  
-**Standard**: Google Fonts Specifications (34/34 Passed), OpenType 1.9, Louise Sloan 5:1 Optotypes, WCAG AAA  
+**Standard**: Google Fonts Specifications (34/34 Passed), OpenType 1.9, Louise Sloan 5:1 Optotypes, WCAG AAA, UNDRIP (Articles 13, 14, 24)  
 
 ---
 
@@ -32,8 +32,9 @@ In this case study, we document the architectural synthesis, optical calibration
 ### Region & Language Domain
 - **Geographic Focus**: Arctic & Subarctic / Nunavut, NWT, Northern Quebec
 - **Clinical Focus**: Nunavut telehealth, northern emergency medical evacuation, and Inuit health care plans.
+- **UNDRIP Mandate**: Implements **Article 13.1** (right to revitalize and transmit writing systems), **Article 14.1** (educational materials in native languages), and **Article 24.1** (equitable access to health communications and traditional wellbeing).
 
-Typography in indigenous and regional health systems is a direct determinant of care quality. In telemedicine consults, drug labeling, and triage charts, missing-glyph tofu blocks (`�`) destroy patient trust and risk dosage misinterpretation.
+Typography in indigenous and regional health systems is a direct determinant of care quality. In telemedicine consults, drug labeling, and triage charts, missing-glyph tofu blocks (``) destroy patient trust and risk dosage misinterpretation.
 
 ---
 

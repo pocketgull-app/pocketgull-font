@@ -5,7 +5,7 @@
 **Date**: 2026-09-18T15:15:01Z  
 **Status**: Peer-Reviewed Empirical Case Study  
 **Artifacts**: `PocketGull-Bold.ttf`, `PocketGull-Fineliner.ttf`, `PocketGull-Chiseltip.ttf`, `PocketGullMono-Regular.ttf`  
-**Standard**: Google Fonts Specifications (34/34 Passed), OpenType 1.9, Louise Sloan 5:1 Optotypes, WCAG AAA  
+**Standard**: Google Fonts Specifications (34/34 Passed), OpenType 1.9, Louise Sloan 5:1 Optotypes, WCAG AAA, UNDRIP (Articles 11, 13, 14, 31)  
 
 ---
 
@@ -30,10 +30,11 @@ In this case study, we document the architectural synthesis, optical calibration
 ## 1. Regional & Clinical Provenance
 
 ### Region & Language Domain
-- **Geographic Focus**: Pacific Northwest / Grand Ronde, Columbia River basin
+- **Geographic Focus**: Pacific Northwest / Grand Ronde, Columbia River basin, Secwépemc (Kamloops Wawa historical corpus)
 - **Clinical Focus**: Tribal sovereignty health centers, holistic wellness, and community clinic communications.
+- **UNDRIP Mandate**: Implements **Article 11.1** (protection of visual culture and literatures), **Article 13.1** (oral traditions, philosophies, and writing systems transmission), **Article 14.1** (native educational systems), and **Article 31.1** (stewardship and intellectual property over traditional cultural expressions).
 
-Typography in indigenous and regional health systems is a direct determinant of care quality. In telemedicine consults, drug labeling, and triage charts, missing-glyph tofu blocks (`�`) destroy patient trust and risk dosage misinterpretation.
+Typography in indigenous and regional health systems is a direct determinant of care quality. In telemedicine consults, drug labeling, and triage charts, missing-glyph tofu blocks (``) destroy patient trust and risk dosage misinterpretation.
 
 ---
 

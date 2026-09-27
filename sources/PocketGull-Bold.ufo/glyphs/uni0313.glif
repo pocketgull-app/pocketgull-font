@@ -4,4 +4,7 @@
   <outline>
     <component base="quoteright" xOffset="-108"/>
   </outline>
+  <anchor x="0" y="540" name="_top"/>
+  <anchor x="0" y="540" name="_commaaccent"/>
+  <anchor x="0" y="714" name="top"/>
 </glyph>

@@ -5,7 +5,7 @@
 **Date**: 2026-09-04T09:12:00Z  
 **Status**: Peer-Reviewed Empirical Case Study (Case Study 07)  
 **Artifacts**: PocketGull-Bold.ttf, PocketGull-Fineliner.ttf, PocketGull-Chiseltip.ttf, PocketGullMono-Regular.ttf  
-**Standards**: Google Fonts Specifications (34/34 Passed), OpenType 1.9, Louise Sloan 5:1 Optotypes, WCAG AAA, ISMP 2026  
+**Standards**: Google Fonts Specifications (34/34 Passed), OpenType 1.9, Louise Sloan 5:1 Optotypes, WCAG AAA, ISMP 2026, UNDRIP (Articles 11, 13, 14, 24, 31)  
 
 ---
 
@@ -190,3 +190,4 @@ All compiled fonts are released under the **SIL Open Font License 1.1** and arch
 19. **Unicode Consortium.** (2024). Latin Extended-A; Latin Extended-B; Spacing Modifier Letters; Combining Diacritical Marks. In *The Unicode Standard, Version 16.0*. Mountain View, CA: Unicode Consortium.
 20. **White, R.** (1983). *The Roots of Dependency: Subsistence, Environment, and Social Change among the Choctaws, Pawnees, and Navajos*. Lincoln: University of Nebraska Press. ISBN: 978-0803297241.
 21. **World Health Organization (WHO).** (2022). *WHO Global Report on Health Equity for Indigenous Peoples*. Geneva: World Health Organization. ISBN: 978-9240064362.
+22. **United Nations.** (2007). *United Nations Declaration on the Rights of Indigenous Peoples (UNDRIP)*. Resolution adopted by the General Assembly on 13 September 2007 (A/RES/61/295). Geneva: United Nations. https://www.un.org/development/desa/indigenouspeoples/wp-content/uploads/sites/19/2018/11/UNDRIP_E_web.pdf

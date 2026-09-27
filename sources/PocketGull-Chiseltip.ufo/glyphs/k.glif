@@ -26,4 +26,6 @@
       <point x="258" y="760" type="line"/>
     </contour>
   </outline>
+  <anchor x="360" y="750" name="commaaccent"/>
+  <anchor x="360" y="750" name="top"/>
 </glyph>

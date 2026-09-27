@@ -1,4 +1,4 @@
-﻿# Project Governance & Typographic Oversight Policy
+# Project Governance & Typographic Oversight Policy
 
 **PocketGull Font Superfamily**  
 *Open Source Governance, Clinical & Ophthalmological Typography Review Board, and Release Protocol*
@@ -12,7 +12,7 @@ PocketGull Font Superfamily is an open-source medical, ophthalmological, and Pan
 Our governance model ensures:
 1. **Ophthalmological Rigor & Evidence Grounding**: All letterform metrics, stroke contrasts, x-height ratios, and counter spaces must be grounded in peer-reviewed vision science literature (Louise Sloan 5:1 acuity, Hermann Bouma crowding coefficients, ISO/TR 11548 Braille dimensions, DIN 1450 legibility standards).
 2. **Deterministic Safety Precedence**: Stylistic flourishes never compromise clinical readability or the Institute for Safe Medication Practices (ISMP) zero-error character disambiguation rules.
-3. **Radical Transparency & Libre Licensing**: 100% open-source licensing under the **Apache License 2.0**, open vector sources (UFO3 / Glyphs), reproducible build toolchains, and public issue tracking.
+3. **Radical Transparency & Libre Licensing**: 100% open-source font distribution under the **SIL Open Font License 1.1** (with build tooling under Apache 2.0), open vector sources (UFO3 / Glyphs), reproducible build toolchains, and public issue tracking.
 4. **Binary Integrity & Memory Safety**: Zero W3C OpenType Sanitizer (OTS) violations, 2-byte word boundary alignment, and hermetic CI validation.
 5. **Multi-Script Respect & Inclusivity**: Orthographies and scripts are designed in accordance with established writing systems and community input, preserving authentic calligraphic stroke traditions without mechanical flattening.
 
@@ -30,10 +30,28 @@ To maintain mathematical vector determinism, binary safety, and upstream open-so
   * **Sloan Acuity & ISMP Disambiguation**: Louise Sloan 5:1 optotypes, mandatory `cv08` slashed zero, `cv05` curved l, `ss02` serifed I, `cv11` slashed Z.
   * **Pure Dart 3.11 Toolchain**: Deterministic SFNT compilation, 0 duplicate nodes, hermetic table layout.
 * **🌐 Google Fonts Parity & Upstream Harmony**:
-  * **Minimalist Versioning**: `head.fontRevision == 3.0`, `nameID 5 == 'Version 3.000; The PocketGull Project Authors; Apache 2.0'`.
+  * **Minimalist Versioning**: `head.fontRevision == 3.1`, `nameID 5 == 'Version 3.100; The PocketGull Project Authors; OFL 1.1'`.
   * **Zero RFN Debt**: SIL Open Font License 1.1 with no Reserved Font Name restriction (see [TRADEMARKS.md](TRADEMARKS.md) for brand coexistence policy).
   * **Full CFF & Zenodo DOI Sync**: Permanent DOI `10.5281/zenodo.22309379` mapped to CERN open science index.
   * **Pre-Flight Checks**: Complete fontbakery check-googlefonts compliance, WOFF2 Brotli 11, designer profile dossier.
+
+### 1.2 UNDRIP Typographic Accord & Indigenous Data Sovereignty
+
+PocketGull formally commits to and implements the **United Nations Declaration on the Rights of Indigenous Peoples (UNDRIP)** across all font families, character sets, and OpenType layouts:
+
+1. **Digital Infrastructure for Language Transmission (Articles 13.1 & 14.1)**:
+   - Indigenous peoples have the inherent right to revitalize, use, develop, and transmit their languages, oral traditions, philosophies, writing systems, and literatures to future generations.
+   - PocketGull provides complete, zero-`.notdef` digital infrastructure across Canadian Aboriginal Syllabics (`U+1400`–`U+167F`), Duployan / Chinuk Pipa (`U+1BC00`–`U+1BC9F`), Cherokee (`U+13A0`–`U+13FF`, `U+AB70`–`U+ABBF`), Osage (`U+104B0`–`U+104FB`), and Pan-Tribal Latin orthographies covering 574+ federally recognized tribes in the U.S. and 630+ First Nations in Canada.
+   - The SIL Open Font License 1.1 guarantees that tribal schools, immersion programs, elders, and community publishers can freely use, subset, modify, embed, and distribute the fonts without royalties, proprietary lock-in, or internet connectivity requirements.
+
+2. **Rejection of Typographic Colonialism & Cultural Integrity (Articles 11.1 & 31.1)**:
+   - Indigenous scripts possess their own authentic geometric logic, rotational semantics, and calligraphic traditions. PocketGull strictly prohibits "Latinization"—the distortion of non-Latin characters to conform to Roman cap-heights or Western typographic grids.
+   - Rotational symmetry in Canadian Aboriginal Syllabics is preserved with exact optical centering to ensure vowel distinctions remain unambiguous.
+   - In accordance with the **First Nations OCAP® Principles** (Ownership, Control, Access, and Possession) and **UNDRIP Article 31**, cultural symbols, clan insignia, and sacred motifs will never be unilaterally extracted or commodified. Any inclusion of specialized tribal emblems requires explicit Free, Prior, and Informed Consent (FPIC) through authorized community channels.
+
+3. **Equitable Healthcare Acuity & Triage Life-Safety (Articles 13.2 & 24.1)**:
+   - Article 24 affirms Indigenous rights to the highest attainable standard of physical and mental health, while Article 13.2 mandates that Indigenous peoples must be understood in administrative and health proceedings.
+   - PocketGull applies the exact same life-critical Louise Sloan 5:1 optotype clarity, ISMP error prevention, and anti-clipping vertical margins (>= 110 UPM headspace for stacked high-tone nasals like *ą́*, *ę́*, *į́*, *ǫ́*) to Indian Health Service (IHS) and First Nations electronic health records (EHR), prescription labeling, and emergency signage as it does to Latin clinical dosage charts.
 
 ---
 
@@ -55,8 +73,9 @@ To maintain mathematical vector determinism, binary safety, and upstream open-so
 ### 2.3 Core Maintainers
 * Review daily pull requests, maintain CI/CD pipelines, and enforce pre-flight test suites (`sources/validate_fonts.py`, `fontbakery check-googlefonts`).
 
-### 2.4 Multi-Script & Linguistic Advisory
-* Governs orthographic expansion, syllabic accuracy, and script integrity across non-Latin writing systems (Canadian Syllabics, Duployan Chinuk Pipa, Arabic, Cherokee, Cyrillic, Greek, Hebrew).
+### 2.4 Multi-Script, Indigenous & Linguistic Advisory
+* Governs orthographic expansion, syllabic accuracy, and script integrity across Indigenous and sovereign writing systems (Canadian Syllabics, Duployan Chinuk Pipa, Cherokee, Osage, Diné Bizaad, Lakȟótiyapi, Lushootseed, Arabic, Cyrillic, Greek, Hebrew).
+* Collaborates with Indigenous language keepers, tribal immersion educators, and verified linguistic standards to uphold UNDRIP compliance and community orthographic conventions.
 * Ensures accurate encoding and alignment with Unicode standards and verified linguistic reference materials.
 
 ---

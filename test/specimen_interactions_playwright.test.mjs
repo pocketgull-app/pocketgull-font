@@ -223,6 +223,36 @@ for (const { name: browserName, launcher } of BROWSERS) {
         assert.ok(await studioDrawer.evaluate(el => el.open === true), `[${browserName}] Drawer must open on toggleStudioDrawer`);
       }
 
+      // 11b. Test Evidence Focus / Doc Drill Interactive Drawer
+      const docDrillTrigger = page.locator('#docDrillFloatTrigger');
+      const docDrillPanel = page.locator('#docDrillPanel');
+      assert.ok(await docDrillTrigger.count() > 0, `[${browserName}] #docDrillFloatTrigger must exist`);
+      assert.ok(await docDrillPanel.count() > 0, `[${browserName}] #docDrillPanel must exist`);
+
+      await docDrillTrigger.click();
+      assert.ok(await docDrillPanel.evaluate(el => el.classList.contains('open')), `[${browserName}] Doc Drill panel must open on trigger click`);
+
+      const drillBody = page.locator('#drillBody');
+      const drillBodyText = await drillBody.textContent();
+      assert.ok(drillBodyText.includes('Louise Sloan') || drillBodyText.includes('5:1'), `[${browserName}] Drill body must render educational content`);
+
+      // Test chip interaction
+      const chip = page.locator('.doc-drill-chip').first();
+      if (await chip.count() > 0) {
+        await chip.click();
+        await page.waitForTimeout(300);
+      }
+
+      // Test input submission
+      const drillInput = page.locator('#drillInput');
+      await drillInput.fill('What is the Louise Sloan 5:1 ratio?');
+      await page.locator('#drillSend').click();
+      await page.waitForTimeout(300);
+
+      // Test close button
+      await page.locator('#drillClose').click();
+      assert.ok(await docDrillPanel.evaluate(el => !el.classList.contains('open')), `[${browserName}] Doc Drill panel must close on #drillClose click`);
+
       // 12. Verify All Internal Anchor Links have Valid Targets
       const invalidAnchors = await page.evaluate(() => {
         const anchors = Array.from(document.querySelectorAll('a[href^="#"]'));

@@ -36,4 +36,6 @@
       <point x="346" y="-10"/>
     </contour>
   </outline>
+  <anchor x="235" y="540" name="commaaccent"/>
+  <anchor x="235" y="540" name="top"/>
 </glyph>

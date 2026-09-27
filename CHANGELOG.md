@@ -5,6 +5,26 @@ All notable changes to the **PocketGull Font Superfamily** will be documented in
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) (`v3.0.0`).
 
+## [3.2.0] - 2026-09-27
+
+### Added
+- **OWASP Anti-Automation & Form Abuse Protection**:
+  - Injected invisible anti-bot honeypots (`#formHpWebsite`) on sign consultation forms in `asl_studio.html` and `sign_studio.html`.
+  - Added time-trap delays (`MIN_INTERACTION_MS = 1200ms`) and 4-second client rate-limiting cooldowns (`SUBMIT_COOLDOWN_MS = 4000ms`).
+  - Enforced strict character length bounds (`maxlength="64"` for glyph review, `maxlength="2000"` for comments, `maxlength="300"` on Doc Drill socratic input in `index.html`).
+  - Added control character sanitization (`[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]`) preventing header and URI injection in `mailto:` handlers.
+  - Automated security regression test added to `test/security_and_ci_invariants.test.mjs`.
+- **Salishan OpenType GPOS Mark & MKMK Anchor Definitions**:
+  - Created standardized `features.fea` in UFO sources (`Bold`, `Fineliner`, `Chiseltip`, `Mono`) supporting canonical Salishan combining marks (`uni030C`, `uni0313`) anchored to base glyphs `x`, `q`, `k`, `c`, and `uni019B`.
+  - Shaperglot feature proposal and audit dossier documented in `documentation/reports/`.
+- **Osage Script Telemetry & Forensic Audit**:
+  - Added Osage orthographic telemetry data (`fonts/case_study_osage_telemetry.json`) adhering to UNDRIP sovereign script standards.
+
+### Fixed
+- **Clean Glyph Geometry & TrueType 2-Byte Alignment**:
+  - Removed duplicate on-curve nodes in `q.ejective_labial` and `k.ejective_labial` in `PocketGullMono-Regular.ttf`.
+  - Re-synchronized all 146 production TrueType and WOFF2 binaries through the pure Dart foundry engine, achieving 100% W3C OTS memory safety (`loca[i] % 2 == 0`) and zero Google Fonts pre-flight errors.
+
 ## [3.100] - 2026-09-15
 
 ### Added

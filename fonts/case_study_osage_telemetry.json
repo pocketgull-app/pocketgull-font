@@ -1,0 +1,61 @@
+{
+  "timestamp": "2026-09-26T18:34:23Z",
+  "script": "Osage Sovereign Alphabet",
+  "unicode_range": "U+104B0 - U+104FB",
+  "codepoints_synthesized": 72,
+  "fonts_updated": [
+    {
+      "filename": "PocketGull-Fineliner.ttf",
+      "weight": 400,
+      "is_mono": false,
+      "glyphs_added": 72,
+      "time_ms": 19035.69
+    },
+    {
+      "filename": "PocketGull-Regular.ttf",
+      "weight": 400,
+      "is_mono": false,
+      "glyphs_added": 72,
+      "time_ms": 18888.09
+    },
+    {
+      "filename": "PocketGull-Bold.ttf",
+      "weight": 700,
+      "is_mono": false,
+      "glyphs_added": 72,
+      "time_ms": 18627.64
+    },
+    {
+      "filename": "PocketGull-Black.ttf",
+      "weight": 900,
+      "is_mono": false,
+      "glyphs_added": 72,
+      "time_ms": 19575.22
+    },
+    {
+      "filename": "PocketGull-Chiseltip.ttf",
+      "weight": 900,
+      "is_mono": false,
+      "glyphs_added": 72,
+      "time_ms": 19656.53
+    },
+    {
+      "filename": "PocketGullMono-Regular.ttf",
+      "weight": 400,
+      "is_mono": true,
+      "glyphs_added": 72,
+      "time_ms": 9311.46
+    },
+    {
+      "filename": "PocketGullMono-Bold.ttf",
+      "weight": 700,
+      "is_mono": true,
+      "glyphs_added": 72,
+      "time_ms": 10661.02
+    }
+  ],
+  "total_glyphs_compiled": 504,
+  "runtime_ms": 115785.9,
+  "manual_hours_benchmark": 378.0,
+  "acceleration_factor": 11753
+}
