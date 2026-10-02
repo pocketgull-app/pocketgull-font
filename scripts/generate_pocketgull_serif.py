@@ -143,12 +143,13 @@ def make_serif_nodes(xl, xr, y, O, H_slab, H_bracket, mode, pos, going_rtl):
         nodes.reverse()
     return nodes
 
-def serify_stem(pts, flags, gname, O=38, H_slab=26, H_bracket=38):
+def serify_stem(pts, flags, gname, O=38, H_slab=26, H_bracket=38, is_bold=False):
     n = len(pts)
     new_pts = []
     new_flgs = []
     i = 0
     H_tot = H_slab + H_bracket
+    x_height = 546 if is_bold else 536
 
     while i < n:
         p0 = pts[i]
@@ -251,8 +252,8 @@ def serify_stem(pts, flags, gname, O=38, H_slab=26, H_bracket=38):
 
         # Lowercase q:
         elif gname == 'q':
-            if dy <= 5 and abs(y_avg - 536) <= 8 and xl >= 400 and dx >= 50:
-                nodes = make_serif_nodes(xl, xr, 536, O, H_slab, H_bracket, 'right_only', 'top', going_rtl)
+            if dy <= 5 and abs(y_avg - x_height) <= 12 and xl >= 400 and dx >= 50:
+                nodes = make_serif_nodes(xl, xr, x_height, O, H_slab, H_bracket, 'right_only', 'top', going_rtl)
                 for pt, flg in nodes:
                     new_pts.append(pt)
                     new_flgs.append(flg)
@@ -268,7 +269,7 @@ def serify_stem(pts, flags, gname, O=38, H_slab=26, H_bracket=38):
 
         # Caps E, F:
         elif gname in ['E', 'F']:
-            if dy <= 4 and abs(y_avg - 0) <= 6 and xl < 200 and 60 <= dx <= 180:
+            if dy <= 4 and abs(y_avg - 0) <= 6 and xl < 200 and 60 <= dx <= 240:
                 nodes = make_serif_nodes(xl, xr, 0, O, H_slab, H_bracket, 'bilateral', 'base', going_rtl)
                 for pt, flg in nodes:
                     new_pts.append(pt)
@@ -278,7 +279,7 @@ def serify_stem(pts, flags, gname, O=38, H_slab=26, H_bracket=38):
 
         # Cap L:
         elif gname == 'L':
-            if dy <= 4 and abs(y_avg - 714) <= 6 and xl < 200 and 60 <= dx <= 180:
+            if dy <= 4 and abs(y_avg - 714) <= 6 and xl < 200 and 60 <= dx <= 240:
                 nodes = make_serif_nodes(xl, xr, 714, O, H_slab, H_bracket, 'left_only', 'top', going_rtl)
                 for pt, flg in nodes:
                     new_pts.append(pt)
@@ -288,14 +289,14 @@ def serify_stem(pts, flags, gname, O=38, H_slab=26, H_bracket=38):
 
         # Standard uppercase stems (H, M, N, K, T, U):
         elif gname in ['H', 'M', 'N', 'K', 'T', 'U']:
-            if gname != 'T' and dy <= 4 and abs(y_avg - 714) <= 6 and 60 <= dx <= 180:
+            if gname != 'T' and dy <= 4 and abs(y_avg - 714) <= 8 and 60 <= dx <= 240:
                 nodes = make_serif_nodes(xl, xr, 714, O, H_slab, H_bracket, 'bilateral', 'top', going_rtl)
                 for pt, flg in nodes:
                     new_pts.append(pt)
                     new_flgs.append(flg)
                 i += 2
                 continue
-            elif dy <= 4 and abs(y_avg - 0) <= 6 and 60 <= dx <= 180:
+            elif dy <= 4 and abs(y_avg - 0) <= 8 and 60 <= dx <= 240:
                 nodes = make_serif_nodes(xl, xr, 0, O, H_slab, H_bracket, 'bilateral', 'base', going_rtl)
                 for pt, flg in nodes:
                     new_pts.append(pt)
@@ -312,7 +313,7 @@ def serify_stem(pts, flags, gname, O=38, H_slab=26, H_bracket=38):
                     new_flgs.append(flg)
                 i += 2
                 continue
-            elif dy <= 4 and abs(y_avg - 0) <= 6 and 60 <= dx <= 180:
+            elif dy <= 4 and abs(y_avg - 0) <= 6 and 60 <= dx <= 240:
                 nodes = make_serif_nodes(xl, xr, 0, O, H_slab, H_bracket, 'bilateral', 'base', going_rtl)
                 for pt, flg in nodes:
                     new_pts.append(pt)
@@ -322,14 +323,14 @@ def serify_stem(pts, flags, gname, O=38, H_slab=26, H_bracket=38):
 
         # Lowercase x-height stems (m, n, r):
         elif gname in ['m', 'n', 'r']:
-            if dy <= 5 and abs(y_avg - 536) <= 8 and xl < 220 and 50 <= dx <= 150:
+            if dy <= 5 and abs(y_avg - x_height) <= 12 and xl < 220 and 50 <= dx <= 180:
                 nodes = make_serif_nodes(xl, xr, p0[1], O, H_slab, H_bracket, 'left_only', 'top', going_rtl)
                 for pt, flg in nodes:
                     new_pts.append(pt)
                     new_flgs.append(flg)
                 i += 2
                 continue
-            elif dy <= 4 and abs(y_avg - 0) <= 6 and 60 <= dx <= 180:
+            elif dy <= 4 and abs(y_avg - 0) <= 6 and 60 <= dx <= 240:
                 nodes = make_serif_nodes(xl, xr, 0, O, H_slab, H_bracket, 'bilateral', 'base', going_rtl)
                 for pt, flg in nodes:
                     new_pts.append(pt)
@@ -339,14 +340,14 @@ def serify_stem(pts, flags, gname, O=38, H_slab=26, H_bracket=38):
 
         # Lowercase p:
         elif gname == 'p':
-            if dy <= 5 and abs(y_avg - 536) <= 8 and xl < 220 and 50 <= dx <= 150:
+            if dy <= 5 and abs(y_avg - x_height) <= 12 and xl < 220 and 50 <= dx <= 180:
                 nodes = make_serif_nodes(xl, xr, p0[1], O, H_slab, H_bracket, 'left_only', 'top', going_rtl)
                 for pt, flg in nodes:
                     new_pts.append(pt)
                     new_flgs.append(flg)
                 i += 2
                 continue
-            elif dy <= 4 and abs(y_avg - (-240)) <= 8 and 60 <= dx <= 180:
+            elif dy <= 4 and abs(y_avg - (-240)) <= 8 and 60 <= dx <= 240:
                 nodes = make_serif_nodes(xl, xr, -240, O, H_slab, H_bracket, 'bilateral', 'descender', going_rtl)
                 for pt, flg in nodes:
                     new_pts.append(pt)
@@ -356,14 +357,14 @@ def serify_stem(pts, flags, gname, O=38, H_slab=26, H_bracket=38):
 
         # Lowercase u:
         elif gname == 'u':
-            if dy <= 5 and abs(y_avg - 536) <= 8 and xl < 220 and 50 <= dx <= 150:
+            if dy <= 5 and abs(y_avg - x_height) <= 12 and xl < 220 and 50 <= dx <= 180:
                 nodes = make_serif_nodes(xl, xr, p0[1], O, H_slab, H_bracket, 'left_only', 'top', going_rtl)
                 for pt, flg in nodes:
                     new_pts.append(pt)
                     new_flgs.append(flg)
                 i += 2
                 continue
-            elif dy <= 4 and abs(y_avg - 0) <= 6 and xl >= 380 and 50 <= dx <= 150:
+            elif dy <= 4 and abs(y_avg - 0) <= 6 and xl >= 380 and 50 <= dx <= 180:
                 nodes = make_serif_nodes(xl, xr, 0, O, H_slab, H_bracket, 'right_only', 'base', going_rtl)
                 for pt, flg in nodes:
                     new_pts.append(pt)
@@ -373,7 +374,7 @@ def serify_stem(pts, flags, gname, O=38, H_slab=26, H_bracket=38):
 
         # Lowercase a:
         elif gname == 'a':
-            if dy <= 4 and abs(y_avg - 0) <= 6 and xl >= 380 and 50 <= dx <= 150:
+            if dy <= 4 and abs(y_avg - 0) <= 6 and xl >= 380 and 50 <= dx <= 180:
                 nodes = make_serif_nodes(xl, xr, 0, O, H_slab, H_bracket, 'right_only', 'base', going_rtl)
                 for pt, flg in nodes:
                     new_pts.append(pt)
@@ -439,7 +440,7 @@ def process_serif_font(src_name, weight_class=400, is_bold=False):
         for end in endPts:
             c_pts = coords[start:end+1]
             c_flgs = flags[start:end+1]
-            s_pts, s_flgs = serify_stem(c_pts, c_flgs, gname, O=O, H_slab=H_slab, H_bracket=H_bracket)
+            s_pts, s_flgs = serify_stem(c_pts, c_flgs, gname, O=O, H_slab=H_slab, H_bracket=H_bracket, is_bold=is_bold)
             new_coords.extend(s_pts)
             new_flags.extend(s_flgs)
             new_endPts.append(len(new_coords) - 1)
@@ -470,7 +471,7 @@ def process_serif_font(src_name, weight_class=400, is_bold=False):
         g = glyf['l']
         coords = list(g.coordinates)
         flags = list(g.flags)
-        s_pts, s_flgs = serify_stem(coords, flags, 'h', O=O, H_slab=H_slab, H_bracket=H_bracket)
+        s_pts, s_flgs = serify_stem(coords, flags, 'h', O=O, H_slab=H_slab, H_bracket=H_bracket, is_bold=is_bold)
         g.coordinates = GlyphCoordinates(s_pts)
         g.flags = bytearray(s_flgs)
         g.endPtsOfContours = [len(s_pts) - 1]
@@ -491,7 +492,7 @@ def process_serif_font(src_name, weight_class=400, is_bold=False):
             dot_pts = coords[endPts[0]+1:]
             dot_flgs = flags[endPts[0]+1:]
             
-            s_pts, s_flgs = serify_stem(stem_pts, stem_flgs, 'n', O=O, H_slab=H_slab, H_bracket=H_bracket)
+            s_pts, s_flgs = serify_stem(stem_pts, stem_flgs, 'n', O=O, H_slab=H_slab, H_bracket=H_bracket, is_bold=is_bold)
             g.coordinates = GlyphCoordinates(s_pts + dot_pts)
             g.flags = bytearray(s_flgs + dot_flgs)
             g.endPtsOfContours = [len(s_pts) - 1, len(s_pts) + len(dot_pts) - 1]
