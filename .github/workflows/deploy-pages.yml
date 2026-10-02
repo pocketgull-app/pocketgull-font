@@ -33,7 +33,7 @@ jobs:
       - name: Install Playwright & Browsers
         run: |
           npm ci || npm install
-          npx playwright install chromium
+          npx playwright install --with-deps chromium
 
       - name: Run Playwright E2E & Lighthouse Accessibility Tests
         run: |

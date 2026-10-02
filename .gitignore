@@ -94,8 +94,6 @@ public/
 *.code-workspace
 
 # Local & Private
-_headers
-firebase.json
 .firebaserc
 private/
 local/

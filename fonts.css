@@ -303,11 +303,33 @@
 /* PocketGull Serif (Long-Form Clinical Reading & Informed Consent) */
 @font-face {
   font-family: 'PocketGull Serif';
+  src: url('fonts/woff2/PocketGull-Serif-VF.woff2?v=3.3.1') format('woff2'),
+       url('PocketGull-Serif-VF.woff2?v=3.3.1') format('woff2'),
+       url('fonts/ttf/PocketGull-Serif-VF.ttf?v=3.3.1') format('truetype'),
+       url('PocketGull-Serif-VF.ttf?v=3.3.1') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PocketGull Serif VF';
+  src: url('fonts/woff2/PocketGull-Serif-VF.woff2?v=3.3.1') format('woff2'),
+       url('PocketGull-Serif-VF.woff2?v=3.3.1') format('woff2'),
+       url('fonts/ttf/PocketGull-Serif-VF.ttf?v=3.3.1') format('truetype'),
+       url('PocketGull-Serif-VF.ttf?v=3.3.1') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PocketGull Serif';
   src: url('fonts/woff2/PocketGull-Serif-Regular.woff2?v=3.3.1') format('woff2'),
        url('PocketGull-Serif-Regular.woff2?v=3.3.1') format('woff2'),
        url('fonts/ttf/PocketGull-Serif-Regular.ttf?v=3.3.1') format('truetype'),
        url('PocketGull-Serif-Regular.ttf?v=3.3.1') format('truetype');
-  font-weight: 400 500;
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
@@ -318,7 +340,7 @@
        url('PocketGull-Serif-Bold.woff2?v=3.3.1') format('woff2'),
        url('fonts/ttf/PocketGull-Serif-Bold.ttf?v=3.3.1') format('truetype'),
        url('PocketGull-Serif-Bold.ttf?v=3.3.1') format('truetype');
-  font-weight: 700 800;
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -873,7 +895,7 @@
    ========================================================================= */
 @font-face {
   font-family: 'PocketGull Hebrew';
-  src: local('Noto Sans Hebrew'), local('David Libre'), local('Segoe UI'), local('Arial Hebrew'), local('sans-serif');
+  src: local('Noto Sans Hebrew'), local('David Libre'), local('Segoe UI'), local('Arial Hebrew');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -894,7 +916,7 @@
   font-family: 'PocketGull Indic';
   src: local('Noto Sans Devanagari'), local('Noto Sans Tamil'), local('Noto Sans Telugu'),
        local('Noto Sans Bengali'), local('Noto Sans Gurmukhi'), local('Noto Sans Gujarati'),
-       local('Noto Sans Kannada'), local('Noto Sans Malayalam'), local('Nirmala UI'), local('sans-serif');
+       local('Noto Sans Kannada'), local('Noto Sans Malayalam'), local('Nirmala UI');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -922,7 +944,7 @@
 @font-face {
   font-family: 'PocketGull CJK Fallback';
   src: local('Noto Sans CJK SC'), local('Noto Sans JP'), local('Yu Gothic'),
-       local('Hiragino Sans'), local('Microsoft YaHei'), local('sans-serif');
+       local('Hiragino Sans'), local('Microsoft YaHei');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -950,8 +972,7 @@
   src: local('Leelawadee UI'), local('Noto Sans Thai'), local('DokChampa'),
        local('Noto Sans Lao'), local('Khmer UI'), local('Noto Sans Khmer'),
        local('Myanmar Text'), local('Noto Sans Myanmar'),
-       local('Microsoft Himalaya'), local('Noto Sans Tibetan'),
-       local('sans-serif');
+       local('Microsoft Himalaya'), local('Noto Sans Tibetan');
   font-weight: 400 900;
   font-style: normal;
   font-display: swap;
@@ -972,7 +993,7 @@
   font-family: 'PocketGull Mongolian';
   src: local('Noto Sans Mongolian'), local('Mongolian Baiti'),
        local('Menk Qagan Tig'), local('Oyun Qagan Tig'),
-       local('Mongolian Universal White'), local('sans-serif');
+       local('Mongolian Universal White');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -987,7 +1008,7 @@
   font-family: 'PocketGull';
   src: local('Noto Sans Mongolian'), local('Mongolian Baiti'),
        local('Menk Qagan Tig'), local('Oyun Qagan Tig'),
-       local('Mongolian Universal White'), local('sans-serif');
+       local('Mongolian Universal White');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -1006,7 +1027,7 @@
    ========================================================================= */
 @font-face {
   font-family: 'PocketGull NKo';
-  src: local('Noto Sans NKo'), local('Ebrima'), local('sans-serif');
+  src: local('Noto Sans NKo'), local('Ebrima');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -1019,7 +1040,7 @@
 
 @font-face {
   font-family: 'PocketGull';
-  src: local('Noto Sans NKo'), local('Ebrima'), local('sans-serif');
+  src: local('Noto Sans NKo'), local('Ebrima');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -1037,7 +1058,7 @@
    ========================================================================= */
 @font-face {
   font-family: 'PocketGull Osage';
-  src: local('Noto Sans Osage'), local('sans-serif');
+  src: local('Noto Sans Osage'), local('Segoe UI Historic'), local('Gadugi');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -1050,7 +1071,7 @@
 
 @font-face {
   font-family: 'PocketGull';
-  src: local('Noto Sans Osage'), local('sans-serif');
+  src: local('Noto Sans Osage'), local('Segoe UI Historic'), local('Gadugi');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -1068,7 +1089,7 @@
    ========================================================================= */
 @font-face {
   font-family: 'PocketGull Ogham';
-  src: local('Noto Sans Ogham'), local('BabelStone Ogham'), local('Segoe UI Historic'), local('sans-serif');
+  src: local('Noto Sans Ogham'), local('BabelStone Ogham'), local('Segoe UI Historic');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -1081,7 +1102,7 @@
 
 @font-face {
   font-family: 'PocketGull';
-  src: local('Noto Sans Ogham'), local('BabelStone Ogham'), local('Segoe UI Historic'), local('sans-serif');
+  src: local('Noto Sans Ogham'), local('BabelStone Ogham'), local('Segoe UI Historic');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -1099,7 +1120,7 @@
    ========================================================================= */
 @font-face {
   font-family: 'PocketGull Old Turkic';
-  src: local('Noto Sans Old Turkic'), local('Segoe UI Historic'), local('sans-serif');
+  src: local('Noto Sans Old Turkic'), local('Segoe UI Historic');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -1112,7 +1133,7 @@
 
 @font-face {
   font-family: 'PocketGull';
-  src: local('Noto Sans Old Turkic'), local('Segoe UI Historic'), local('sans-serif');
+  src: local('Noto Sans Old Turkic'), local('Segoe UI Historic');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -1131,8 +1152,7 @@
 @font-face {
   font-family: 'PocketGull SignWriting';
   src: local('Noto Sans SignWriting'), local('SignWriting 2010'),
-       url('https://cdn.jsdelivr.net/fontsource/fonts/noto-sans-signwriting@latest/signwriting-400-normal.woff2') format('woff2'),
-       local('sans-serif');
+       url('https://cdn.jsdelivr.net/fontsource/fonts/noto-sans-signwriting@latest/signwriting-400-normal.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -1146,8 +1166,7 @@
 @font-face {
   font-family: 'PocketGull';
   src: local('Noto Sans SignWriting'), local('SignWriting 2010'),
-       url('https://cdn.jsdelivr.net/fontsource/fonts/noto-sans-signwriting@latest/signwriting-400-normal.woff2') format('woff2'),
-       local('sans-serif');
+       url('https://cdn.jsdelivr.net/fontsource/fonts/noto-sans-signwriting@latest/signwriting-400-normal.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -1233,7 +1252,7 @@
 /* 4.1 Universal Sans Fallback (size-adjusted to 1000 UPM PocketGull em-square) */
 @font-face {
   font-family: 'PocketGull Fallback';
-  src: local('Segoe UI'), local('Roboto'), local('Helvetica Neue'), local('Arial'), local('sans-serif');
+  src: local('Segoe UI'), local('Roboto'), local('Helvetica Neue'), local('Arial');
   ascent-override: 96%;
   descent-override: 24%;
   line-gap-override: 10%;
@@ -1243,7 +1262,7 @@
 /* 4.2 Telemetry Monospace Fallback (fixed 600 UPM pitch equivalent) */
 @font-face {
   font-family: 'PocketGull Mono Fallback';
-  src: local('Cascadia Code'), local('Segoe UI Mono'), local('Consolas'), local('SFMono-Regular'), local('Menlo'), local('Courier New'), local('monospace');
+  src: local('Cascadia Code'), local('Segoe UI Mono'), local('Consolas'), local('SFMono-Regular'), local('Menlo'), local('Courier New');
   ascent-override: 96%;
   descent-override: 24%;
   line-gap-override: 10%;
@@ -1253,7 +1272,7 @@
 /* 4.3 Clinical Serif Fallback */
 @font-face {
   font-family: 'PocketGull Serif Fallback';
-  src: local('Georgia'), local('Times New Roman'), local('Cambria'), local('serif');
+  src: local('Georgia'), local('Times New Roman'), local('Cambria');
   ascent-override: 96%;
   descent-override: 24%;
   line-gap-override: 10%;
@@ -1263,7 +1282,7 @@
 /* 4.4 Google Noto Global Script Fallback */
 @font-face {
   font-family: 'PocketGull Noto Fallback';
-  src: local('Noto Sans'), local('Noto Sans CJK SC'), local('Noto Sans Devanagari'), local('Noto Sans Arabic'), local('sans-serif');
+  src: local('Noto Sans'), local('Noto Sans CJK SC'), local('Noto Sans Devanagari'), local('Noto Sans Arabic');
   ascent-override: 96%;
   descent-override: 24%;
   line-gap-override: 10%;

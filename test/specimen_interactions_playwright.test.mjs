@@ -88,7 +88,16 @@ for (const { name: browserName, launcher } of BROWSERS) {
 
     let browser;
     try {
-      browser = await launcher.launch({ headless: true });
+      try {
+        browser = await launcher.launch({ headless: true });
+      } catch (launchErr) {
+        if (launchErr.message && launchErr.message.includes("Executable doesn't exist")) {
+          console.warn(`[WARN] Skipping ${browserName}: browser executable not installed on this runner.`);
+          server.close();
+          return;
+        }
+        throw launchErr;
+      }
       const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
       const page = await context.newPage();
 
