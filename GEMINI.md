@@ -82,7 +82,7 @@ All future glyphs, icons, indicators, and symbols synthesized into PocketGull mu
 
 PocketGull maintains independent typefoundry distribution governed by Phil Gear:
 - **Global Package Registries**:
-  - **Homebrew Cask**: `distribution/homebrew/font-pocketgull.rb` (`brew install --cask font-pocketgull`)
+  - **Homebrew Tap**: `distribution/homebrew/font-pocketgull.rb` (`brew install --cask pocketgull-app/tap/font-pocketgull`)
   - **Windows Package Manager (Winget)**: `distribution/winget/PocketGull.Typeface.yaml` (`winget install PocketGull.Typeface`)
   - **Fontsource (NPM)**: `distribution/fontsource/metadata.json` (`npm install @fontsource/pocketgull`)
   - **Adobe Fonts Partner Portfolio**: `distribution/adobe/ADOBE_FONTS_PORTFOLIO.md`

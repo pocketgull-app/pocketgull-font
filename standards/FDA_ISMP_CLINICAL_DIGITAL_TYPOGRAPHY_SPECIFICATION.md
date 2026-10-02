@@ -213,7 +213,7 @@ The **PocketGull Font Superfamily** serves as the canonical open-source referenc
 * **Repository**: `https://github.com/pocketgull-app/pocketgull-font`
 * **Foundry Distribution**: SIL Open Font License 1.1 (zero reserved font names).
 * **Package Registries**:
-  - **Homebrew Cask**: `brew install --cask font-pocketgull`
+  - **Homebrew Tap**: `brew install --cask pocketgull-app/tap/font-pocketgull`
   - **Windows Package Manager (Winget)**: `winget install PocketGull.Typeface`
   - **Fontsource (NPM)**: `npm install @fontsource/pocketgull`
 * **Interactive Specimen & Neuro-Ergonomic Lab**: `https://font.pocketgull.app/index.html` & `a11y_studio.html`
