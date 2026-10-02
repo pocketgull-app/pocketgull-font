@@ -535,16 +535,7 @@ def process_serif_font(src_name, weight_class=400, is_bold=False):
         font['OS/2'].achVendID = 'POCK'
         font['OS/2'].fsType = 0x0000
 
-    font.save(str(out_ttf))
-    font.close()
-
-    # Realign loca/glyf to 2-byte word boundaries
-    font = TTFont(str(out_ttf))
-    glyf = font['glyf']
-    for gn in font.getGlyphOrder():
-        glyph = glyf[gn]
-        if hasattr(glyph, 'data') and glyph.data and len(glyph.data) % 2 != 0:
-            glyph.data = glyph.data + b'\x00'
+    font['glyf'].padding = 2
     font.save(str(out_ttf))
     font.close()
 
