@@ -7,10 +7,10 @@
 /* 0. Variable Font Superfamily (Toyota Production System 16-Axis Continuous Design Space) */
 @font-face {
   font-family: 'PocketGull VF';
-  src: url('fonts/woff2/PocketGull-VF.woff2?v=3.3.1') format('woff2'),
-       url('PocketGull-VF.woff2?v=3.3.1') format('woff2'),
-       url('fonts/ttf/PocketGull-VF.ttf?v=3.3.1') format('truetype'),
-       url('PocketGull-VF.ttf?v=3.3.1') format('truetype');
+  src: url('fonts/woff2/PocketGull-VF.woff2?v=3.3.2') format('woff2'),
+       url('PocketGull-VF.woff2?v=3.3.2') format('woff2'),
+       url('fonts/ttf/PocketGull-VF.ttf?v=3.3.2') format('truetype'),
+       url('PocketGull-VF.ttf?v=3.3.2') format('truetype');
   font-weight: 100 900;
   font-stretch: 75% 100%;
   font-style: oblique -10.5deg 0deg;
@@ -1297,7 +1297,7 @@
   --font-mono: 'PocketGull Mono', 'PocketGull Mono Fallback', ui-monospace, 'Cascadia Code', 'Segoe UI Mono', SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
   --font-display: 'PocketGull Bold', 'PocketGull', 'PocketGull Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-black: 'PocketGull Black', 'PocketGull Chiseltip', 'PocketGull Bold', 'PocketGull', 'PocketGull Fallback', -apple-system, sans-serif;
-  --font-chisel: 'PocketGull Chiseltip', 'PocketGull Black', 'PocketGull Bold', 'PocketGull', 'PocketGull Fallback', -apple-system, sans-serif;
+  --font-chisel: 'PocketGull Marker Raw', 'PocketGull Chiseltip', cursive;
   --font-serif: 'PocketGull Serif', 'PocketGull Serif Fallback', Georgia, Cambria, 'Times New Roman', serif;
   --font-vf: 'PocketGull VF', 'PocketGull', 'PocketGull Fallback', -apple-system, sans-serif;
 }

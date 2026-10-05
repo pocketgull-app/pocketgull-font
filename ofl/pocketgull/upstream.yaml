@@ -1,0 +1,6 @@
+archive: https://github.com/pocketgull-app/pocketgull-font/archive/refs/tags/v3.000.zip
+branch: main
+files:
+  PocketGull-Regular.ttf: fonts/ttf/PocketGull-Regular.ttf
+  PocketGull-Bold.ttf: fonts/ttf/PocketGull-Bold.ttf
+  PocketGull-Black.ttf: fonts/ttf/PocketGull-Black.ttf

@@ -1,0 +1,6 @@
+archive: https://github.com/pocketgull-app/pocketgull-font/archive/refs/tags/v3.000.zip
+branch: main
+files:
+  PocketGull-Black.ttf: fonts/ttf/PocketGull-Black.ttf
+  PocketGull-Chiseltip.ttf: fonts/ttf/PocketGull-Chiseltip.ttf
+  PocketGull-MarkerRaw.ttf: fonts/ttf/PocketGull-MarkerRaw.ttf

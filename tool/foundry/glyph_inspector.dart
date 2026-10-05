@@ -114,7 +114,19 @@ class GlyphInspector {
             }
           }
         }
-        break; // Format 4 parsed
+      } else if (format == 12) {
+        final numGroups = data.getUint32(subOffset + 12);
+        int groupOffset = subOffset + 16;
+        for (int g = 0; g < numGroups; g++) {
+          final startCharCode = data.getUint32(groupOffset);
+          final endCharCode = data.getUint32(groupOffset + 4);
+          final startGlyphId = data.getUint32(groupOffset + 8);
+          for (int c = startCharCode; c <= endCharCode; c++) {
+            final gid = startGlyphId + (c - startCharCode);
+            if (gid != 0) unicodeToGid[c] = gid;
+          }
+          groupOffset += 12;
+        }
       }
     }
   }
@@ -168,6 +180,10 @@ class GlyphInspector {
         'composite': true,
         'numContours': numContours,
         'bounds': [xMin, yMin, xMax, yMax],
+        'xMin': xMin,
+        'yMin': yMin,
+        'xMax': xMax,
+        'yMax': yMax,
         'adv': adv,
         'lsb': lsb,
       };
@@ -232,6 +248,10 @@ class GlyphInspector {
       'composite': false,
       'numContours': numContours,
       'bounds': [xMin, yMin, xMax, yMax],
+      'xMin': xMin,
+      'yMin': yMin,
+      'xMax': xMax,
+      'yMax': yMax,
       'adv': adv,
       'lsb': lsb,
       'endPts': endPts,

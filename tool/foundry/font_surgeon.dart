@@ -69,6 +69,10 @@ class FontSurgeon {
           scaleFactor: 10.12 * scale,
           unicode: 0x0067,
         );
+        // Ensure the inner counter has the opposite winding order so it punches a hole
+        if (gRecord.contours.isNotEmpty) {
+          gRecord.contours[0] = GlyphContour(gRecord.contours[0].points.reversed.toList());
+        }
         builder.addGlyph(gRecord);
         print('  [REPAIRED] Lowercase "g" replaced with authentic descender wordmark (gid: $gid)');
         continue;

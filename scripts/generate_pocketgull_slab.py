@@ -34,6 +34,14 @@ from pathlib import Path
 from fontTools.ttLib import TTFont
 from fontTools.ttLib.tables._g_l_y_f import GlyphCoordinates
 from fontTools.ttLib.woff2 import compress
+from fontTools.pens.ttGlyphPen import TTGlyphPen
+from fontTools.pens.cu2quPen import Cu2QuPen
+
+try:
+    import pathops
+    HAS_PATHOPS = True
+except ImportError:
+    HAS_PATHOPS = False
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 TTF_DIR = ROOT_DIR / "fonts" / "ttf"
@@ -68,24 +76,85 @@ def clean_glyph_geometry(glyph):
     glyph.flags = bytearray(new_flags)
     glyph.endPtsOfContours = new_endPts
 
-def make_slab_nodes(xl, xr, y, O, H_slab, H_rise, mode, pos, going_rtl):
+def make_slab_nodes(xl, xr, y, O, H_slab, H_rise, mode, pos, going_rtl, O_left=None, O_right=None):
     """
-    Constructs bracketed slab serif nodes using optimal quadratic Bézier curves.
+    Constructs bracketed humanist slab serif nodes using optimal quadratic Bézier curves.
     At bracket transitions, an off-curve control point (flag=0) provides C1 tangency
-    connecting the vertical stem to the horizontal serif shelf.
+    connecting the vertical stem to the horizontal serif shelf with 25 UPM felt-marker curvature.
+    Supports asymmetric lateral overhangs (O_left, O_right) to prevent inner counter crowding.
     """
+    ol = O_left if O_left is not None else O
+    or_ = O_right if O_right is not None else O
     H_tot = H_slab + H_rise
     nodes = [] # tuples: ((x, y), flag)
     
-    if pos == 'base':
+    if H_rise == 0:
+        if pos == 'base':
+            if mode == 'bilateral':
+                nodes = [
+                    ((xl, y + H_slab), 1),
+                    ((xl - ol, y + H_slab), 1),
+                    ((xl - ol, y), 1),
+                    ((xr + or_, y), 1),
+                    ((xr + or_, y + H_slab), 1),
+                    ((xr, y + H_slab), 1)
+                ]
+            elif mode == 'left_only':
+                nodes = [
+                    ((xl, y + H_slab), 1),
+                    ((xl - ol, y + H_slab), 1),
+                    ((xl - ol, y), 1),
+                    ((xr, y), 1)
+                ]
+            elif mode == 'right_only':
+                nodes = [
+                    ((xl, y), 1),
+                    ((xr + or_, y), 1),
+                    ((xr + or_, y + H_slab), 1),
+                    ((xr, y + H_slab), 1)
+                ]
+        elif pos == 'top':
+            if mode == 'bilateral':
+                nodes = [
+                    ((xl, y - H_slab), 1),
+                    ((xl - ol, y - H_slab), 1),
+                    ((xl - ol, y), 1),
+                    ((xr + or_, y), 1),
+                    ((xr + or_, y - H_slab), 1),
+                    ((xr, y - H_slab), 1)
+                ]
+            elif mode == 'left_only':
+                nodes = [
+                    ((xl, y - H_slab), 1),
+                    ((xl - ol, y - H_slab), 1),
+                    ((xl - ol, y), 1),
+                    ((xr, y), 1)
+                ]
+            elif mode == 'right_only':
+                nodes = [
+                    ((xl, y), 1),
+                    ((xr + or_, y), 1),
+                    ((xr + or_, y - H_slab), 1),
+                    ((xr, y - H_slab), 1)
+                ]
+        elif pos == 'descender':
+            nodes = [
+                ((xl, y + H_slab), 1),
+                ((xl - ol, y + H_slab), 1),
+                ((xl - ol, y), 1),
+                ((xr + or_, y), 1),
+                ((xr + or_, y + H_slab), 1),
+                ((xr, y + H_slab), 1)
+            ]
+    elif pos == 'base':
         if mode == 'bilateral':
             nodes = [
                 ((xl, y + H_tot), 1),
                 ((xl, y + H_slab), 0), # quadratic bracket control point
-                ((xl - O, y + H_slab), 1),
-                ((xl - O, y), 1),
-                ((xr + O, y), 1),
-                ((xr + O, y + H_slab), 1),
+                ((xl - ol, y + H_slab), 1),
+                ((xl - ol, y), 1),
+                ((xr + or_, y), 1),
+                ((xr + or_, y + H_slab), 1),
                 ((xr, y + H_slab), 0), # quadratic bracket control point
                 ((xr, y + H_tot), 1)
             ]
@@ -93,15 +162,15 @@ def make_slab_nodes(xl, xr, y, O, H_slab, H_rise, mode, pos, going_rtl):
             nodes = [
                 ((xl, y + H_tot), 1),
                 ((xl, y + H_slab), 0),
-                ((xl - O, y + H_slab), 1),
-                ((xl - O, y), 1),
+                ((xl - ol, y + H_slab), 1),
+                ((xl - ol, y), 1),
                 ((xr, y), 1)
             ]
         elif mode == 'right_only':
             nodes = [
                 ((xl, y), 1),
-                ((xr + O, y), 1),
-                ((xr + O, y + H_slab), 1),
+                ((xr + or_, y), 1),
+                ((xr + or_, y + H_slab), 1),
                 ((xr, y + H_slab), 0),
                 ((xr, y + H_tot), 1)
             ]
@@ -110,10 +179,10 @@ def make_slab_nodes(xl, xr, y, O, H_slab, H_rise, mode, pos, going_rtl):
             nodes = [
                 ((xl, y - H_tot), 1),
                 ((xl, y - H_slab), 0), # quadratic bracket control point
-                ((xl - O, y - H_slab), 1),
-                ((xl - O, y), 1),
-                ((xr + O, y), 1),
-                ((xr + O, y - H_slab), 1),
+                ((xl - ol, y - H_slab), 1),
+                ((xl - ol, y), 1),
+                ((xr + or_, y), 1),
+                ((xr + or_, y - H_slab), 1),
                 ((xr, y - H_slab), 0), # quadratic bracket control point
                 ((xr, y - H_tot), 1)
             ]
@@ -121,15 +190,15 @@ def make_slab_nodes(xl, xr, y, O, H_slab, H_rise, mode, pos, going_rtl):
             nodes = [
                 ((xl, y - H_tot), 1),
                 ((xl, y - H_slab), 0),
-                ((xl - O, y - H_slab), 1),
-                ((xl - O, y), 1),
+                ((xl - ol, y - H_slab), 1),
+                ((xl - ol, y), 1),
                 ((xr, y), 1)
             ]
         elif mode == 'right_only':
             nodes = [
                 ((xl, y), 1),
-                ((xr + O, y), 1),
-                ((xr + O, y - H_slab), 1),
+                ((xr + or_, y), 1),
+                ((xr + or_, y - H_slab), 1),
                 ((xr, y - H_slab), 0),
                 ((xr, y - H_tot), 1)
             ]
@@ -137,10 +206,10 @@ def make_slab_nodes(xl, xr, y, O, H_slab, H_rise, mode, pos, going_rtl):
         nodes = [
             ((xl, y + H_tot), 1),
             ((xl, y + H_slab), 0),
-            ((xl - O, y + H_slab), 1),
-            ((xl - O, y), 1),
-            ((xr + O, y), 1),
-            ((xr + O, y + H_slab), 1),
+            ((xl - ol, y + H_slab), 1),
+            ((xl - ol, y), 1),
+            ((xr + or_, y), 1),
+            ((xr + or_, y + H_slab), 1),
             ((xr, y + H_slab), 0),
             ((xr, y + H_tot), 1)
         ]
@@ -295,19 +364,33 @@ def serify_stem(pts, flags, gname, O=52, H_slab=48, H_rise=18):
         # Standard uppercase stems (H, M, N, K, T, U):
         elif gname in ['H', 'M', 'N', 'K', 'T', 'U']:
             if gname != 'T' and dy <= 4 and abs(y_avg - 714) <= 6 and 60 <= dx <= 180:
-                nodes = make_slab_nodes(xl, xr, 714, O, H_slab, H_rise, 'bilateral', 'top', going_rtl)
-                for pt, flg in nodes:
-                    new_pts.append(pt)
-                    new_flgs.append(flg)
-                i += 2
-                continue
+                if gname == 'K' and xl > 250:
+                    pass  # Keep diagonal top arm of K clean (Roboto Slab paradigm)
+                elif gname == 'M' and 250 < xl < 650:
+                    pass  # Keep interior diagonals of M clean
+                else:
+                    ol = O if (gname not in ['M', 'U'] or xl < 300) else int(O * 0.65)
+                    or_ = O if (gname not in ['M', 'U'] or xl > 500) else int(O * 0.65)
+                    nodes = make_slab_nodes(xl, xr, 714, O, H_slab, H_rise, 'bilateral', 'top', going_rtl, O_left=ol, O_right=or_)
+                    for pt, flg in nodes:
+                        new_pts.append(pt)
+                        new_flgs.append(flg)
+                    i += 2
+                    continue
             elif dy <= 4 and abs(y_avg - 0) <= 6 and 60 <= dx <= 180:
-                nodes = make_slab_nodes(xl, xr, 0, O, H_slab, H_rise, 'bilateral', 'base', going_rtl)
-                for pt, flg in nodes:
-                    new_pts.append(pt)
-                    new_flgs.append(flg)
-                i += 2
-                continue
+                if gname == 'K' and xl > 250:
+                    pass  # CRITICAL: Don't serify diagonal leg of K! Only vertical stem (xl < 250) gets a slab foot!
+                elif gname == 'M' and 250 < xl < 650:
+                    pass  # CRITICAL: Don't serify center apex of M! Only left and right outer stems get slab feet!
+                else:
+                    ol = O if (gname not in ['M', 'U'] or xl < 300) else int(O * 0.65)
+                    or_ = O if (gname not in ['M', 'U'] or xl > 500) else int(O * 0.65)
+                    nodes = make_slab_nodes(xl, xr, 0, O, H_slab, H_rise, 'bilateral', 'base', going_rtl, O_left=ol, O_right=or_)
+                    for pt, flg in nodes:
+                        new_pts.append(pt)
+                        new_flgs.append(flg)
+                    i += 2
+                    continue
 
         # Lowercase ascenders (h, k):
         elif gname in ['h', 'k']:
@@ -319,12 +402,15 @@ def serify_stem(pts, flags, gname, O=52, H_slab=48, H_rise=18):
                 i += 2
                 continue
             elif dy <= 4 and abs(y_avg - 0) <= 6 and 60 <= dx <= 180:
-                nodes = make_slab_nodes(xl, xr, 0, O, H_slab, H_rise, 'bilateral', 'base', going_rtl)
-                for pt, flg in nodes:
-                    new_pts.append(pt)
-                    new_flgs.append(flg)
-                i += 2
-                continue
+                if gname == 'k' and xl > 250:
+                    pass  # CRITICAL: Don't serify diagonal leg of k! Only vertical stem (xl < 250) gets a slab foot!
+                else:
+                    nodes = make_slab_nodes(xl, xr, 0, O, H_slab, H_rise, 'bilateral', 'base', going_rtl)
+                    for pt, flg in nodes:
+                        new_pts.append(pt)
+                        new_flgs.append(flg)
+                    i += 2
+                    continue
 
         # Lowercase x-height stems (m, n, r):
         elif gname in ['m', 'n', 'r']:
@@ -336,7 +422,17 @@ def serify_stem(pts, flags, gname, O=52, H_slab=48, H_rise=18):
                 i += 2
                 continue
             elif dy <= 4 and abs(y_avg - 0) <= 6 and 60 <= dx <= 180:
-                nodes = make_slab_nodes(xl, xr, 0, O, H_slab, H_rise, 'bilateral', 'base', going_rtl)
+                # Moderate inner serifs on m to ensure spacious arch counters
+                if gname == 'm':
+                    if xl < 280:
+                        ol, or_ = O, int(O * 0.6)
+                    elif xl > 550:
+                        ol, or_ = int(O * 0.6), O
+                    else:
+                        ol, or_ = int(O * 0.55), int(O * 0.55)
+                else:
+                    ol, or_ = O, O
+                nodes = make_slab_nodes(xl, xr, 0, O, H_slab, H_rise, 'bilateral', 'base', going_rtl, O_left=ol, O_right=or_)
                 for pt, flg in nodes:
                     new_pts.append(pt)
                     new_flgs.append(flg)
@@ -387,6 +483,85 @@ def serify_stem(pts, flags, gname, O=52, H_slab=48, H_rise=18):
                 i += 2
                 continue
 
+        # Capital A: Left and right baseline slab feet
+        elif gname == 'A':
+            if dy <= 4 and abs(y_avg - 0) <= 6 and 40 <= dx <= 160:
+                ol = O if xl < 200 else int(O * 0.65)
+                or_ = int(O * 0.65) if xl < 200 else O
+                nodes = make_slab_nodes(xl, xr, 0, O, H_slab, H_rise, 'bilateral', 'base', going_rtl, O_left=ol, O_right=or_)
+                for pt, flg in nodes:
+                    new_pts.append(pt)
+                    new_flgs.append(flg)
+                i += 2
+                continue
+
+        # Cap Y & Lowercase y: Top arms and baseline stem foot
+        elif gname in ['Y', 'y']:
+            if dy <= 5 and (abs(y_avg - 714) <= 8 or abs(y_avg - 536) <= 8) and 40 <= dx <= 180:
+                nodes = make_slab_nodes(xl, xr, p0[1], O, H_slab, H_rise, 'bilateral', 'top', going_rtl)
+                for pt, flg in nodes:
+                    new_pts.append(pt)
+                    new_flgs.append(flg)
+                i += 2
+                continue
+            elif dy <= 5 and abs(y_avg - 0) <= 8 and 50 <= dx <= 180:
+                nodes = make_slab_nodes(xl, xr, 0, O, H_slab, H_rise, 'bilateral', 'base', going_rtl)
+                for pt, flg in nodes:
+                    new_pts.append(pt)
+                    new_flgs.append(flg)
+                i += 2
+                continue
+
+        # Lowercase f: Baseline stem slab
+        elif gname == 'f':
+            if dy <= 4 and abs(y_avg - 0) <= 6 and 60 <= dx <= 180:
+                nodes = make_slab_nodes(xl, xr, 0, O, H_slab, H_rise, 'bilateral', 'base', going_rtl)
+                for pt, flg in nodes:
+                    new_pts.append(pt)
+                    new_flgs.append(flg)
+                i += 2
+                continue
+
+        # Numeral 1: Broad baseline slab foot
+        elif gname == 'one':
+            if dy <= 5 and abs(y_avg - 0) <= 6 and dx >= 80:
+                nodes = make_slab_nodes(xl, xr, 0, int(O * 1.15), H_slab, H_rise, 'bilateral', 'base', going_rtl)
+                for pt, flg in nodes:
+                    new_pts.append(pt)
+                    new_flgs.append(flg)
+                i += 2
+                continue
+
+        # Numeral 4: Baseline vertical stem slab
+        elif gname == 'four':
+            if dy <= 5 and abs(y_avg - 0) <= 6 and xl > 300 and 50 <= dx <= 160:
+                nodes = make_slab_nodes(xl, xr, 0, O, H_slab, H_rise, 'bilateral', 'base', going_rtl)
+                for pt, flg in nodes:
+                    new_pts.append(pt)
+                    new_flgs.append(flg)
+                i += 2
+                continue
+
+        # Numeral 7: Baseline foot slab
+        elif gname == 'seven':
+            if dy <= 5 and abs(y_avg - 0) <= 6 and 50 <= dx <= 160:
+                nodes = make_slab_nodes(xl, xr, 0, O, H_slab, H_rise, 'bilateral', 'base', going_rtl)
+                for pt, flg in nodes:
+                    new_pts.append(pt)
+                    new_flgs.append(flg)
+                i += 2
+                continue
+
+        # Exclamation mark: Top wedge horizontal shelf
+        elif gname == 'exclam':
+            if dy <= 5 and abs(y_avg - 714) <= 6 and 60 <= dx <= 160:
+                nodes = make_slab_nodes(xl, xr, 714, int(O * 0.7), H_slab, H_rise, 'bilateral', 'top', going_rtl)
+                for pt, flg in nodes:
+                    new_pts.append(pt)
+                    new_flgs.append(flg)
+                i += 2
+                continue
+
         new_pts.append(p0)
         new_flgs.append(flags[i])
         i += 1
@@ -409,19 +584,23 @@ def process_slab_font(src_name, family_name="PocketGull Slab", ps_family="Pocket
     glyf = font['glyf']
     hmtx = font['hmtx']
 
-    # Slab parameters calibrated to weight
+    # Modern UI Unbracketed 90° Digital Slab Architecture (Roboto Slab / Noto Slab Paradigm)
+    # Pure unbracketed 90° right angles (H_rise = 0) with crisp rectangular slab authority
     if is_bold:
-        O = 65
-        H_slab = 68
-        H_rise = 26
+        O = 82
+        H_slab = 88
+        H_rise = 0
     else:
-        O = 52
-        H_slab = 48
-        H_rise = 18
+        O = 68
+        H_slab = 68
+        H_rise = 0
 
     target_glyphs = [
         'H', 'M', 'N', 'K', 'B', 'D', 'P', 'R', 'T', 'U', 'E', 'F', 'L',
-        'b', 'd', 'h', 'k', 'm', 'n', 'p', 'q', 'r', 'u', 'a'
+        'A', 'Y',
+        'b', 'd', 'h', 'k', 'm', 'n', 'p', 'q', 'r', 'u', 'a',
+        'f', 'y',
+        'one', 'four', 'seven', 'exclam'
     ]
     transformed = 0
 
@@ -454,11 +633,47 @@ def process_slab_font(src_name, family_name="PocketGull Slab", ps_family="Pocket
         g.flags = bytearray(new_flags)
         g.endPtsOfContours = new_endPts
         clean_glyph_geometry(g)
+
+        # Boolean union & overlap simplification
+        if HAS_PATHOPS:
+            try:
+                p = pathops.Path()
+                glyphSet = font.getGlyphSet()
+                glyphSet[gname].draw(p.getPen())
+                p.simplify()
+                tt_pen = TTGlyphPen(None)
+                cu2qu_pen = Cu2QuPen(tt_pen, max_err=1.0)
+                p.draw(cu2qu_pen)
+                new_g = tt_pen.glyph()
+                clean_glyph_geometry(new_g)
+                new_g.recalcBounds(glyf)
+                glyf[gname] = new_g
+                g = new_g
+            except Exception:
+                pass
+
         g.recalcBounds(glyf)
 
-        orig_adv, orig_lsb = hmtx[gname]
-        new_adv = max(orig_adv, int(g.xMax + 45))
-        hmtx[gname] = (new_adv, g.xMin)
+        target_lsb = 40 if is_bold else 45
+        target_rsb = 40 if is_bold else 45
+
+        # Optical sidebearing compensation (Roboto Slab paradigm):
+        # Prevent serifs from eating into left whitespace (which caused 3 UPM LSB and collisions)
+        if gname == 'T':
+            # Mathematically center T crossbar
+            t_side = 35 if is_bold else 40
+            shift_x = t_side - g.xMin
+            g.coordinates = GlyphCoordinates([(x + shift_x, y) for (x, y) in g.coordinates])
+            g.recalcBounds(glyf)
+            hmtx[gname] = (int(g.xMax + t_side), g.xMin)
+        else:
+            orig_adv, orig_lsb = hmtx[gname]
+            if g.xMin < target_lsb:
+                shift_x = target_lsb - g.xMin
+                g.coordinates = GlyphCoordinates([(x + shift_x, y) for (x, y) in g.coordinates])
+                g.recalcBounds(glyf)
+            new_adv = max(orig_adv, int(g.xMax + target_rsb))
+            hmtx[gname] = (new_adv, g.xMin)
         transformed += 1
 
     # ISMP Special Glyphs:
@@ -466,8 +681,14 @@ def process_slab_font(src_name, family_name="PocketGull Slab", ps_family="Pocket
     if 'I.serif' in glyf:
         glyf['I'] = copy.deepcopy(glyf['I.serif'])
         clean_glyph_geometry(glyf['I'])
-        glyf['I'].recalcBounds(glyf)
-        hmtx['I'] = (max(hmtx['I.serif'][0], glyf['I'].xMax + 45), glyf['I'].xMin)
+        g = glyf['I']
+        g.recalcBounds(glyf)
+        i_side = 45 if is_bold else 50
+        if g.xMin < i_side:
+            shift_x = i_side - g.xMin
+            g.coordinates = GlyphCoordinates([(x + shift_x, y) for (x, y) in g.coordinates])
+            g.recalcBounds(glyf)
+        hmtx['I'] = (int(g.xMax + i_side), g.xMin)
         print("  • Injected authenticated ISMP Capital 'I' (ss02 bilateral serifs)")
 
     # 2. Lowercase 'l': Keep curved foot (cv05) and add top entry spur
@@ -481,7 +702,12 @@ def process_slab_font(src_name, family_name="PocketGull Slab", ps_family="Pocket
         g.endPtsOfContours = [len(s_pts) - 1]
         clean_glyph_geometry(g)
         g.recalcBounds(glyf)
-        hmtx['l'] = (max(hmtx['l'][0], g.xMax + 45), g.xMin)
+        l_side = 40 if is_bold else 45
+        if g.xMin < l_side:
+            shift_x = l_side - g.xMin
+            g.coordinates = GlyphCoordinates([(x + shift_x, y) for (x, y) in g.coordinates])
+            g.recalcBounds(glyf)
+        hmtx['l'] = (max(hmtx['l'][0], int(g.xMax + l_side)), g.xMin)
         print("  • Injected ISMP Lowercase 'l' (top entry spur + outward terminal curved foot)")
 
     # 3. Lowercase 'i': Base serif + top spur, preserves heart tittle
@@ -502,7 +728,12 @@ def process_slab_font(src_name, family_name="PocketGull Slab", ps_family="Pocket
             g.endPtsOfContours = [len(s_pts) - 1, len(s_pts) + len(dot_pts) - 1]
             clean_glyph_geometry(g)
             g.recalcBounds(glyf)
-            hmtx['i'] = (max(hmtx['i'][0], g.xMax + 45), g.xMin)
+            i_side = 40 if is_bold else 45
+            if g.xMin < i_side:
+                shift_x = i_side - g.xMin
+                g.coordinates = GlyphCoordinates([(x + shift_x, y) for (x, y) in g.coordinates])
+                g.recalcBounds(glyf)
+            hmtx['i'] = (max(hmtx['i'][0], int(g.xMax + i_side)), g.xMin)
             print("  • Injected ISMP Lowercase 'i' (calibrated tittle + base slab & entry spur)")
 
     print(f"  -> Transformed {transformed} letterforms with robust slab serifs.")

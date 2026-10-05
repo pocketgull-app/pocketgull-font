@@ -3,6 +3,7 @@ import glob
 from pathlib import Path
 from fontTools.ttLib import TTFont
 from fontTools.ttLib.tables._g_l_y_f import GlyphCoordinates
+import math
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 TTF_DIR = ROOT_DIR / "fonts" / "ttf"
@@ -42,6 +43,9 @@ def calibrate_font(font_path):
         _, _, _, h_contours = get_glyph_contours(glyf, 'H')
         cap_y = max(c['y_max'] for c in h_contours)
 
+    italic_angle = font["post"].italicAngle if "post" in font else 0
+    tan_a = math.tan(math.radians(-italic_angle)) if italic_angle != 0 else 0
+
     is_bold = any(k in fname for k in ['Bold', 'Black', 'Chiseltip'])
     is_mono = 'Mono' in fname
     target_gap = 42 if is_bold else 48
@@ -79,18 +83,18 @@ def calibrate_font(font_path):
             ny = cur_dot_mid_y + (oy - cur_dot_mid_y) * scale_f
             new_coords[idx] = (round(nx), round(ny))
 
-        # Recompute scaled dot bounds to get exact vertical shift
         scaled_pts = new_coords[dot_start:dot_end]
         s_y_min = min(y for x,y in scaled_pts)
         s_y_max = max(y for x,y in scaled_pts)
         dy = target_bot - s_y_min
+        dx = dy * tan_a
 
         final_coords = []
         for idx, (x, y) in enumerate(new_coords):
             if dot_start <= idx < dot_end:
-                final_coords.append((x, y + dy))
+                final_coords.append((int(round(x + dx)), int(round(y + dy))))
             else:
-                final_coords.append((x, y))
+                final_coords.append((int(round(x)), int(round(y))))
 
         glyf['i'].coordinates = GlyphCoordinates(final_coords)
         glyf['i'].recalcBounds(glyf)
@@ -130,13 +134,14 @@ def calibrate_font(font_path):
         scaled_pts = new_coords[dot_start:dot_end]
         s_y_min = min(y for x,y in scaled_pts)
         dy = target_bot - s_y_min
+        dx = dy * tan_a
 
         final_coords = []
         for idx, (x, y) in enumerate(new_coords):
             if dot_start <= idx < dot_end:
-                final_coords.append((x, y + dy))
+                final_coords.append((int(round(x + dx)), int(round(y + dy))))
             else:
-                final_coords.append((x, y))
+                final_coords.append((int(round(x)), int(round(y))))
 
         glyf['j'].coordinates = GlyphCoordinates(final_coords)
         glyf['j'].recalcBounds(glyf)
@@ -174,9 +179,10 @@ def calibrate_font(font_path):
                 
                 scaled_pts = final_coords[d_start:d_end]
                 dy = target_bot - min(y for x,y in scaled_pts)
+                dx = dy * tan_a
                 for idx in range(d_start, d_end):
                     x, y = final_coords[idx]
-                    final_coords[idx] = (x, y + dy)
+                    final_coords[idx] = (int(round(x + dx)), int(round(y + dy)))
 
             glyf['ij'].coordinates = GlyphCoordinates(final_coords)
             glyf['ij'].recalcBounds(glyf)
@@ -211,13 +217,14 @@ def calibrate_font(font_path):
 
             scaled_pts = new_coords[h_start:h_end]
             dy = target_bot - min(y for x,y in scaled_pts)
+            dx = dy * tan_a
 
             final_coords = []
             for idx, (x, y) in enumerate(new_coords):
                 if h_start <= idx < h_end:
-                    final_coords.append((x, y + dy))
+                    final_coords.append((int(round(x + dx)), int(round(y + dy))))
                 else:
-                    final_coords.append((x, y))
+                    final_coords.append((int(round(x)), int(round(y))))
 
             glyf[hname].coordinates = GlyphCoordinates(final_coords)
             glyf[hname].recalcBounds(glyf)

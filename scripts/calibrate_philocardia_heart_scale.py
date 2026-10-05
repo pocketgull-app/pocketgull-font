@@ -9,6 +9,7 @@ giving it optical parity with standard round dot tittles.
 import os
 import glob
 import sys
+import math
 from pathlib import Path
 from fontTools.ttLib import TTFont
 from fontTools.pens.ttGlyphPen import TTGlyphPen
@@ -27,28 +28,34 @@ def sanitize_contour_points(coords, endpts):
     # Enforce even coordinate byte alignment and valid winding
     pass
 
-def generate_calibrated_heart(dot_cx, dot_cy, dot_w, dot_h):
+def generate_calibrated_heart(dot_cx, dot_cy, dot_w, dot_h, italic_angle=0):
     h_pen = TTGlyphPen(None)
-    # Generous ISMP-parity Philocardia heart geometry matching card ♥
-    # Width 260 UPM, Height 236 UPM, Cleft depth 118 UPM
-    h_w = 260
-    h_h = 236
+    # Wider, more pronounced Philocardia heart geometry exploration
+    # Width 320 UPM, Height 240 UPM, Cleft depth 130 UPM
+    h_w = 320
+    h_h = 240
     half_w = h_w / 2.0
     base_y = 520
-    top_y = base_y + h_h  # 756 UPM (overshoots cap-height for crisp optotype recognition)
-    cleft_y = base_y + int(h_h * 0.50)  # 638 UPM
+    top_y = base_y + h_h  # 760 UPM
+    cleft_y = base_y + int(h_h * 0.46)  # 630 UPM (deeper cleft for a more pronounced shape)
     mid_y = base_y + int(h_h * 0.52)  # 642 UPM
     r_apex = max(6, int(h_w * 0.07))
+    
+    tan_a = math.tan(math.radians(-italic_angle)) if italic_angle != 0 else 0
+    def pt(x, y):
+        if tan_a != 0:
+            x = x + (y - dot_cy) * tan_a
+        return (int(round(x)), int(round(y)))
 
-    h_pen.moveTo((int(dot_cx), int(base_y)))
-    h_pen.qCurveTo((int(dot_cx + r_apex), int(base_y)), (int(dot_cx + r_apex * 1.6), int(base_y + 8)))
-    h_pen.qCurveTo((int(dot_cx + half_w * 0.94), int(base_y + h_h * 0.26)), (int(dot_cx + half_w), int(mid_y)))
-    h_pen.qCurveTo((int(dot_cx + half_w), int(top_y)), (int(dot_cx + half_w * 0.48), int(top_y)))
-    h_pen.qCurveTo((int(dot_cx + half_w * 0.15), int(top_y)), (int(dot_cx), int(cleft_y)))
-    h_pen.qCurveTo((int(dot_cx - half_w * 0.15), int(top_y)), (int(dot_cx - half_w * 0.48), int(top_y)))
-    h_pen.qCurveTo((int(dot_cx - half_w), int(top_y)), (int(dot_cx - half_w), int(mid_y)))
-    h_pen.qCurveTo((int(dot_cx - half_w * 0.94), int(base_y + h_h * 0.26)), (int(dot_cx - r_apex * 1.6), int(base_y + 8)))
-    h_pen.qCurveTo((int(dot_cx - r_apex), int(base_y)), (int(dot_cx), int(base_y)))
+    h_pen.moveTo(pt(dot_cx, base_y))
+    h_pen.qCurveTo(pt(dot_cx + r_apex, base_y), pt(dot_cx + r_apex * 1.6, base_y + 8))
+    h_pen.qCurveTo(pt(dot_cx + half_w * 0.94, base_y + h_h * 0.26), pt(dot_cx + half_w, mid_y))
+    h_pen.qCurveTo(pt(dot_cx + half_w, top_y), pt(dot_cx + half_w * 0.48, top_y))
+    h_pen.qCurveTo(pt(dot_cx + half_w * 0.15, top_y), pt(dot_cx, cleft_y))
+    h_pen.qCurveTo(pt(dot_cx - half_w * 0.15, top_y), pt(dot_cx - half_w * 0.48, top_y))
+    h_pen.qCurveTo(pt(dot_cx - half_w, top_y), pt(dot_cx - half_w, mid_y))
+    h_pen.qCurveTo(pt(dot_cx - half_w * 0.94, base_y + h_h * 0.26), pt(dot_cx - r_apex * 1.6, base_y + 8))
+    h_pen.qCurveTo(pt(dot_cx - r_apex, base_y), pt(dot_cx, base_y))
     h_pen.closePath()
 
     return h_pen.glyph()
@@ -57,6 +64,8 @@ def calibrate_font(font_path):
     font = TTFont(font_path, lazy=True)
     glyf = font["glyf"]
     hmtx = font["hmtx"]
+
+    italic_angle = font["post"].italicAngle if "post" in font else 0
 
     # Discover heart glyph names from GSUB ss07 or cv09
     heart_glyphs = set()
@@ -107,7 +116,7 @@ def calibrate_font(font_path):
         dot_h = dot_max_y - dot_min_y
 
         # Generate newly scaled heart
-        h_glyph = generate_calibrated_heart(dot_cx, dot_cy, dot_w, dot_h)
+        h_glyph = generate_calibrated_heart(dot_cx, dot_cy, dot_w, dot_h, italic_angle)
         h_coords, h_endpts, h_flags = h_glyph.getCoordinates(glyf)
 
         all_coords = stem_c + list(h_coords)

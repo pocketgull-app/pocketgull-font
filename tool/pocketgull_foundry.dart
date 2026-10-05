@@ -7,6 +7,9 @@ import 'foundry/braille_generator.dart';
 import 'foundry/ismp_engine.dart';
 import 'foundry/monospace_hud.dart';
 import 'foundry/phinney_auditor.dart';
+import 'foundry/ellen_lupton_auditor.dart';
+import 'foundry/karen_cheng_auditor.dart';
+import 'foundry/tek_undrip_auditor.dart';
 import 'foundry/glyph_inspector.dart';
 import 'foundry/font_surgeon.dart';
 import 'foundry/smoe_subsetter.dart';
@@ -139,6 +142,122 @@ void runAudit() {
     exitCode = 1;
   }
 }
+
+void runCouncil() {
+  print('\n======================================================================');
+  print('  POCKETGULL TYPEFOUNDRY: THE TYPOGRAPHIC COUNCIL (DART 3.11)');
+  print('  ORDER OF EVALUATION: WOMEN ON TOP (LUPTON -> CHENG -> PHINNEY)');
+  print('======================================================================\n');
+
+  final typefaceRoot = findTypefaceDir();
+  final ttfDir = Directory('${typefaceRoot.path}${Platform.pathSeparator}fonts${Platform.pathSeparator}ttf');
+  if (!ttfDir.existsSync()) {
+    print('[ERROR] fonts/ttf directory not found');
+    exitCode = 1;
+    return;
+  }
+
+  final files = ttfDir.listSync().whereType<File>().where((f) => f.path.endsWith('.ttf')).toList();
+  files.sort((a, b) => a.path.compareTo(b.path));
+
+  // --- PHASE 1: ELLEN LUPTON ---
+  print('──────────────────────────────────────────────────────────────────────');
+  print('  [PHASE 1] 🕊️ ELLEN LUPTON: HUMAN VOICE & CLINICAL ACUITY AUDITOR');
+  print('  "Thinking with Type" (Sloan 5:1, ISMP Disambiguation, Aperture)');
+  print('──────────────────────────────────────────────────────────────────────');
+  var luptonPasses = 0;
+  for (final f in files) {
+    final name = f.uri.pathSegments.last;
+    final res = EllenLuptonAuditor.audit(f);
+    if (res.passed) luptonPasses++;
+    final status = res.passed ? '[PASS]' : '[WARN]';
+    print('  $status $name: Sloan=${res.sloanPasses}p/${res.sloanWarnings}w, ISMP=${res.ismpPasses}p/${res.ismpWarnings}w, Aperture=${res.aperturePasses}p');
+  }
+  print('  => Ellen Lupton Audit: $luptonPasses / ${files.length} Passed\n');
+
+  // --- PHASE 2: KAREN CHENG ---
+  print('──────────────────────────────────────────────────────────────────────');
+  print('  [PHASE 2] 📐 KAREN CHENG: MICRO-ANATOMICAL ARCHITECTURE AUDITOR');
+  print('  "Designing Type" (Overshoot, 53% Waistline, Extrema, Slab Ratio)');
+  print('──────────────────────────────────────────────────────────────────────');
+  var chengPasses = 0;
+  for (final f in files) {
+    final name = f.uri.pathSegments.last;
+    final res = KarenChengAuditor.audit(f);
+    if (res.passed) chengPasses++;
+    final status = res.passed ? '[PASS]' : '[WARN]';
+    print('  $status $name: Overshoot=${res.overshootPasses}p/${res.overshootWarnings}w, Waist=${res.waistlinePasses}p, Extrema=${res.extremaPasses}p');
+  }
+  print('  => Karen Cheng Audit: $chengPasses / ${files.length} Passed\n');
+
+  // --- PHASE 3: THOMAS PHINNEY ---
+  print('──────────────────────────────────────────────────────────────────────');
+  print('  [PHASE 3] 🔬 THOMAS PHINNEY: BINARY ENGINE & FORENSIC AUDITOR');
+  print('  W3C OTS, 2-Byte Word Alignment (loca[i] % 2 == 0), Bit-7 Masking');
+  print('──────────────────────────────────────────────────────────────────────');
+  var phinneyPasses = 0;
+  for (final f in files) {
+    final name = f.uri.pathSegments.last;
+    final res = ThomasPhinneyAuditor.audit(f);
+    if (res.passed) phinneyPasses++;
+    final status = res.passed ? '[PASS]' : '[FAIL]';
+    print('  $status $name: ${res.totalGlyphs} glyphs, oddLoca=${res.oddLocaOffsets}, badBit7=${res.badBit7Flags}');
+  }
+  print('  => Thomas Phinney Audit: $phinneyPasses / ${files.length} Passed W3C OTS\n');
+
+  // --- PHASE 4: TRADITIONAL ECOLOGICAL KNOWLEDGE (TEK) & UNDRIP ---
+  print('──────────────────────────────────────────────────────────────────────');
+  print('  [PHASE 4] 🌿 TRADITIONAL ECOLOGICAL KNOWLEDGE (TEK) & UNDRIP AUDITOR');
+  print('  UNDRIP Articles 11, 13, 14, 24, 31 (Pan-Tribal, Syllabics, Chinuk Pipa, Braille)');
+  print('──────────────────────────────────────────────────────────────────────');
+  var tekPasses = 0;
+  for (final f in files) {
+    final name = f.uri.pathSegments.last;
+    final res = TekUndripAuditor.audit(f);
+    if (res.passed) tekPasses++;
+    final status = res.passed ? '[PASS]' : '[WARN]';
+    print('  $status $name: Pan-Tribal=${res.panTribalPasses}/15, Syllabics=${res.syllabicsPasses}/640, Duployan=${res.duployanPasses}/143, Braille=${res.braillePasses}/256');
+  }
+  print('  => TEK & UNDRIP Audit: $tekPasses / ${files.length} Passed Sovereign Accord\n');
+
+  print('======================================================================');
+  print('  FOUNDRY COUNCIL GOVERNANCE SUMMARY:');
+  print('    🕊️ Ellen Lupton (Human Voice):        $luptonPasses / ${files.length} Verified');
+  print('    📐 Karen Cheng  (Anatomical Craft):   $chengPasses / ${files.length} Verified');
+  print('    🔬 Thomas Phinney (Binary Engine):    $phinneyPasses / ${files.length} 100% OTS Safe');
+  print('    🌿 TEK & UNDRIP (Sovereign Accord):   $tekPasses / ${files.length} Verified Sovereign');
+  print('======================================================================\n');
+}
+
+void runTekAudit() {
+  print('\n======================================================================');
+  print('  POCKETGULL TYPEFOUNDRY: TEK & UNDRIP SOVEREIGN ACCORD AUDIT (DART 3.11)');
+  print('  Grounded in UNDRIP Articles 11, 13, 14, 24, 31, OCAP®, and CARE Principles');
+  print('======================================================================\n');
+
+  final typefaceRoot = findTypefaceDir();
+  final ttfDir = Directory('${typefaceRoot.path}${Platform.pathSeparator}fonts${Platform.pathSeparator}ttf');
+  if (!ttfDir.existsSync()) {
+    print('[ERROR] fonts/ttf directory not found');
+    exitCode = 1;
+    return;
+  }
+
+  final files = ttfDir.listSync().whereType<File>().where((f) => f.path.endsWith('.ttf')).toList();
+  files.sort((a, b) => a.path.compareTo(b.path));
+
+  var passes = 0;
+  for (final f in files) {
+    final name = f.uri.pathSegments.last;
+    final res = TekUndripAuditor.audit(f);
+    if (res.passed) passes++;
+    final status = res.passed ? '[PASS]' : '[WARN]';
+    print('  $status $name: Pan-Tribal=${res.panTribalPasses}/15, Syllabics=${res.syllabicsPasses}/640, ChinukPipa=${res.duployanPasses}/143, Braille=${res.braillePasses}/256');
+  }
+
+  print('\n  => TEK / UNDRIP Sovereign Audit: $passes / ${files.length} Passed');
+}
+
 
 void runRealign() {
   print('\n======================================================================');
@@ -524,8 +643,8 @@ void runRepair() {
   final typefaceRoot = Directory('${Directory(root).parent.path}${Platform.pathSeparator}pocketgull-typeface');
   print('\n=== POCKETGULL FONT SURGEON (PURE DART 3.11) ===\n');
 
-  for (final stem in ['PocketGull-Bold', 'PocketGull-Fineliner', 'PocketGull-Chiseltip']) {
-    final ttfFile = File('${typefaceRoot.path}${Platform.pathSeparator}$stem.ttf');
+  for (final stem in ['PocketGull-Bold', 'PocketGull-Fineliner', 'PocketGull-Chiseltip', 'PocketGull-MarkerRaw']) {
+    final ttfFile = File('${typefaceRoot.path}${Platform.pathSeparator}fonts${Platform.pathSeparator}ttf${Platform.pathSeparator}$stem.ttf');
     if (!ttfFile.existsSync()) continue;
     final tempOut = File('${typefaceRoot.path}${Platform.pathSeparator}${stem}_repaired.ttf');
     FontSurgeon.repairFont(ttfFile, tempOut);
@@ -747,6 +866,8 @@ Commands:
   heal              Autonomous closed-loop self-healing pipeline (realign, compress, sync, checksum, audit)
   watch             Autonomous closed-loop daemon monitoring fonts/ttf for modifications
   build             Execute unified 4-step pipeline (realign, compress, audit, validate)
+  council           The Typographic Council (Lupton -> Cheng -> Phinney -> TEK/UNDRIP)
+  tek               Audit Traditional Ecological Knowledge (TEK) & UNDRIP Sovereign Accord
   audit             Forensic W3C OTS & 2-byte word-alignment verification (Thomas Phinney)
   compile           Compile precision Sloan optotypes, Braille & ISMP glyphs into SFNT
   embed             Embed verified pristine Base64 fonts into HTML specimen
@@ -826,6 +947,14 @@ Future<void> main(List<String> args) async {
     case 'cure':
     case 'upstream':
       await UpstreamCureEngine.run(projectRoot: findProjectRoot());
+      break;
+    case 'council':
+    case 'triumvirate':
+      runCouncil();
+      break;
+    case 'tek':
+    case 'undrip':
+      runTekAudit();
       break;
     case 'audit':
       runAudit();

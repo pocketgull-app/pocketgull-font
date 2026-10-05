@@ -61,5 +61,59 @@ PocketGull's geometry and clinical behavioral architecture are grounded in peer-
 
 ---
 
+## 7. Traditional Ecological Knowledge (TEK) & Indigenous Science
+* **Fikret Berkes, Ph.D. (2018)**: *"Sacred Ecology"* (4th ed.). Routledge. ISBN: 978-1138078550. [[DOI: 10.4324/9781315114644](https://doi.org/10.4324/9781315114644)]  
+  *Foundational academic treatise defining Traditional Ecological Knowledge (TEK) as a cumulative, adaptive body of knowledge, practice, and belief regarding living beings and their ecological interdependence.*
+* **Nancy J. Turner, Ph.D. (2014)**: *"Ancient Pathways, Ancestral Knowledge: Ethnobotany and Ecological Wisdom of Indigenous Peoples of Northwestern North America"* (2 Vols.). McGill-Queen's University Press. ISBN: 978-0773543805. [[JSTOR: j.ctt9qf2mf](https://www.jstor.org/stable/j.ctt9qf2mf)]  
+  *The definitive Pacific Northwest ethnobotanical documentation across Salishan, Chinuk Wawa, Nuu-chah-nulth, and Kwakwaka'wakw ecosystems (Western Redcedar, Fireweed, Devil's Club, Camas).*
+* **Nancy J. Turner, Ph.D. (2005)**: *"The Earth's Blanket: Traditional Teachings for Sustainable Living."* University of Washington Press. ISBN: 978-0295984742.  
+  *Ethnobotanical principles of ecological reciprocity and salutogenic landscape stewardship.*
+* **Robin Wall Kimmerer, Ph.D. (2013)**: *"Braiding Sweetgrass: Indigenous Wisdom, Scientific Knowledge and the Teachings of Plants."* Milkweed Editions. ISBN: 978-1571313560.  
+  *Synthesizes plant physiology, ecological restoration, and indigenous reciprocal relationality.*
+* **Eugene S. Hunn, Ph.D. (1990)**: *"Nch'i-Wána, 'The Big River': Mid-Columbia Indians and Their Land."* University of Washington Press. ISBN: 978-0295971193.  
+  *Landmark ethnobiological taxonomy and Sahaptin classification systems across the Columbia River plateau.*
+* **Gregory Cajete, Ph.D. (2000)**: *"Native Science: Natural Laws of Interdependence."* Clear Light Publishers. ISBN: 978-1574160413.  
+  *Indigenous scientific paradigms, ecological pedagogy, and perceptual orientation to natural systems.*
+* **Linda Tuhiwai Smith, Ph.D. (2021)**: *"Decolonizing Methodologies: Research and Indigenous Peoples"* (3rd ed.). Zed Books. ISBN: 978-1786998132. [[DOI: 10.5040/9781350225282](https://doi.org/10.5040/9781350225282)]  
+  *International standard for non-extractive research ethics, community self-determination, and protection of Indigenous cultural and intellectual property.*
+
+---
+
+## 8. Indigenous Data Sovereignty & Information Governance (CARE & OCAP®)
+* **First Nations Information Governance Centre (FNIGC) (2014)**: *"Ownership, Control, Access and Possession (OCAP®): The Path to First Nations Information Governance."* Ottawa (ON): FNIGC. [[FNIGC OCAP®](https://fnigc.ca/ocap-training/)]  
+  *Establishes the First Nations standard for collective data ownership, control, access, and physical possession in research and health informatics.*
+* **Stephanie Russo Carroll, Ibrahim Garba, et al. (2020)**: *"The CARE Principles for Indigenous Data Governance."* Data Science Journal, 19(1), 43. [[DOI: 10.5334/dsj-2020-043](https://doi.org/10.5334/dsj-2020-043)]  
+  *Codifies the CARE Principles (Collective Benefit, Authority to Control, Responsibility, Ethics) complementing open data standards for sovereign health systems.*
+* **Stephanie Russo Carroll, Desi Rodriguez-Lonebear, & Andrew Martinez (2019)**: *"Indigenous Data Governance: Strategies from United States Native Nations."* Data Science Journal, 18(1), 31. [[DOI: 10.5334/dsj-2019-031](https://doi.org/10.5334/dsj-2019-031)]  
+  *Operational protocols for tribal health privacy, edge AI deployment, and EHR data independence.*
+* **United Nations General Assembly (2007)**: *"United Nations Declaration on the Rights of Indigenous Peoples (UNDRIP)."* Resolution 61/295.  
+  *Articles 11, 13, 14, 24, and 31 guarantee linguistic, educational, traditional medicine, and intellectual property sovereignty.*
+
+---
+
+## 9. Typographic Science, Optical Crowding & Reading Ergonomics
+* **Karen Cheng, M.Des. (2020)**: *"Designing Type"* (2nd ed.). Yale University Press. ISBN: 978-0300249927.  
+  *Micro-anatomical mechanics: capital waistline proportions (53%), optical overshoot physics, stroke junction thinning, and balance in sans-serif and slab forms.*
+* **Ellen Lupton (2014)**: *"Thinking with Type: A Critical Guide for Designers, Writers, Editors, & Students"* (2nd ed.). Princeton Architectural Press. ISBN: 978-1616892418.  
+  *Foundational principles of typographic hierarchy, humanist rhythm, counter-form cadence, and aperture breathing.*
+* **Gordon E. Legge, Ph.D. (2007)**: *"Psychophysics of Reading in Normal and Low Vision."* CRC Press / Lawrence Erlbaum Associates. ISBN: 978-0805843286. [[DOI: 10.4324/9780203837771](https://doi.org/10.4324/9780203837771)]  
+  *Empirical psychophysics of reading speed, visual span, critical character size, and contrast reserve across macular degeneration and diabetic retinopathy.*
+* **Sofie Beier, Ph.D. (2012)**: *"Reading Letters: Designing for Legibility."* BIS Publishers. ISBN: 978-9063692711.  
+  *Empirical investigation into character confusion matrices, stroke aperture distinctiveness, and optical frequency filtering.*
+* **Robert Bringhurst (2004)**: *"The Solid Form of Language: An Essay on Writing and Meaning."* Gaspereau Press. ISBN: 978-1894031868.  
+  *Typographic anthropology examining the morphology of writing systems across Indigenous North American orthographies.*
+
+---
+
+## 10. Human-Computer Interaction, Semantic Compression & Noise Elimination
+* **Dieter Rams (1980)**: *"Ten Principles for Good Design (Weniger, aber besser / Less, but better)."* Frankfurt: Braun AG.  
+  *The ten design commandments enforcing functional honesty, unobtrusiveness, environmental durability, and semantic minimalism.*
+* **Edward R. Tufte, Ph.D. (1990)**: *"Envisioning Information."* Graphics Press. ISBN: 978-0961392116.  
+  *Chapter 3 ('1 + 1 = 3 or More: Active Non-Information') demonstrates how spurious lines, micro-ticks, and edge clutter create false retinal contours in telemetry.*
+* **Susan Kare, Ph.D. (2011)**: *"Susan Kare, Icons."* Pointed Leaf Press. ISBN: 978-0983888307.  
+  *Pioneering archetypal semiotics: creating monochromatic vector glyphs that function as self-explanatory, unambiguous hieroglyphs rather than distracting illustrations.*
+
+---
+
 ## Citation
 For academic and clinical literature citation, see [CITATION.cff](../CITATION.cff).

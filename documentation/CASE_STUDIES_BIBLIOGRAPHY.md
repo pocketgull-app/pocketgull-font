@@ -23,19 +23,36 @@ This master bibliography compiles the foundational peer-reviewed literature, his
 
 ## 🏛️ Foundational Trans-Disciplinary Frameworks
 
-### Indigenous Knowledge Sovereignty & Epistemology
+### Indigenous Knowledge Sovereignty, TEK & Epistemology
+- **Berkes, F.** (2018). *Sacred Ecology* (4th ed.). New York: Routledge. https://doi.org/10.4324/9781315114644
 - **Cajete, G.** (2000). *Native Science: Natural Laws of Interdependence*. Santa Fe, NM: Clear Light Publishers. ISBN: 978-1574160413.
+- **Carroll, S. R., Garba, I., Figueroa-Rodríguez, O. L., et al.** (2020). The CARE Principles for Indigenous Data Governance. *Data Science Journal*, 19(1), 43. https://doi.org/10.5334/dsj-2020-043
+- **Carroll, S. R., Rodriguez-Lonebear, D., & Martinez, A.** (2019). Indigenous data governance: Strategies from United States Native Nations. *Data Science Journal*, 18(1), 31. https://doi.org/10.5334/dsj-2019-031
 - **Deloria, V., Jr.** (1994). *God Is Red: A Native View of Religion* (2nd ed.). Golden, CO: Fulcrum Publishing. ISBN: 978-1555911768.
 - **First Nations Information Governance Centre (FNIGC).** (2014). *Ownership, Control, Access and Possession (OCAP®): The Path to First Nations Information Governance*. Ottawa, ON: FNIGC.
+- **Hunn, E. S.** (1990). *Nch'i-Wána, "The Big River": Mid-Columbia Indians and Their Land*. Seattle: University of Washington Press. ISBN: 978-0295971193.
 - **Kimmerer, R. W.** (2013). *Braiding Sweetgrass: Indigenous Wisdom, Scientific Knowledge and the Teachings of Plants*. Minneapolis, MN: Milkweed Editions. ISBN: 978-1571313560.
+- **Smith, L. T.** (2021). *Decolonizing Methodologies: Research and Indigenous Peoples* (3rd ed.). London: Zed Books. https://doi.org/10.5040/9781350225282
+- **Turner, N. J.** (2005). *The Earth's Blanket: Traditional Teachings for Sustainable Living*. Seattle: University of Washington Press. ISBN: 978-0295984742.
+- **Turner, N. J.** (2014). *Ancient Pathways, Ancestral Knowledge: Ethnobotany and Ecological Wisdom of Indigenous Peoples of Northwestern North America* (2 Vols.). Montreal: McGill-Queen's University Press.
 - **United Nations.** (2007). *United Nations Declaration on the Rights of Indigenous Peoples (UNDRIP)*. Resolution 61/295. New York: UN General Assembly.
 - **World Health Organization (WHO).** (2022). *WHO Global Report on Health Equity for Indigenous Peoples*. Geneva: World Health Organization. ISBN: 978-9240064362.
 
 ### Vision Science, Optical Acuity & Visual Crowding
+- **Beier, S.** (2012). *Reading Letters: Designing for Legibility*. Amsterdam: BIS Publishers. ISBN: 978-9063692711.
 - **Bouma, H.** (1970). Interaction effects in parafoveal letter recognition. *Nature*, 226(5241), 177–178. https://doi.org/10.1038/226177a0
+- **Legge, G. E.** (2007). *Psychophysics of Reading in Normal and Low Vision*. Boca Raton, FL: CRC Press / Lawrence Erlbaum. https://doi.org/10.4324/9780203837771
 - **Levi, D. M.** (2008). Crowding—an essential bottleneck for object recognition: A mini-review. *Vision Research*, 48(5), 635–654. https://doi.org/10.1016/j.visres.2007.12.009
 - **Pelli, D. G., & Tillman, K. A.** (2008). The uncrowded window of object recognition. *Nature Neuroscience*, 11(10), 1129–1135. https://doi.org/10.1038/nn.2187
 - **Sloan, L. L.** (1959). New test charts for the measurement of visual acuity at far and near distances. *American Journal of Ophthalmology*, 48(6), 807–813. https://doi.org/10.1016/0002-9394(59)90626-7
+
+### Typographic Anatomy, Human-Computer Interaction & Information Clarity
+- **Bringhurst, R.** (2004). *The Solid Form of Language: An Essay on Writing and Meaning*. Kentville, NS: Gaspereau Press. ISBN: 978-1894031868.
+- **Cheng, K.** (2020). *Designing Type* (2nd ed.). New Haven, CT: Yale University Press. ISBN: 978-0300249927.
+- **Kare, S.** (2011). *Susan Kare, Icons*. New York: Pointed Leaf Press. ISBN: 978-0983888307.
+- **Lupton, E.** (2014). *Thinking with Type: A Critical Guide for Designers, Writers, Editors, & Students* (2nd ed.). New York: Princeton Architectural Press. ISBN: 978-1616892418.
+- **Rams, D.** (1980). *Ten Principles for Good Design*. Frankfurt: Braun AG.
+- **Tufte, E. R.** (1990). *Envisioning Information*. Cheshire, CT: Graphics Press. ISBN: 978-0961392116.
 
 ### Medication Safety & Clinical Telemetry Standards
 - **Food and Drug Administration (FDA).** (2024). *Safety Considerations for Container Labels and Carton Labeling Design to Minimize Medication Errors: Guidance for Industry*. Silver Spring, MD: Center for Drug Evaluation and Research (CDER).
