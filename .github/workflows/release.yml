@@ -61,7 +61,7 @@ jobs:
           sha256sum fonts/ttf/*.ttf fonts/woff2/*.woff2 >> SHA256SUMS.txt
 
       - name: Attest Build Provenance (SLSA Level 2+)
-        uses: actions/attest-build-provenance@520d128f165991a6c774bcb264f323e3d70747f4 # v2.2.0
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
         with:
           subject-path: |
             pocketgull-typeface-*.zip
