@@ -42,7 +42,7 @@ jobs:
 
       - name: Install Node Dependencies
         run: |
-          npm ci || npm install
+          npm ci
           npx playwright install --with-deps chromium
 
       - name: 1. Thomas Phinney Forensic Font Invariant Audit (Dart 3.11)

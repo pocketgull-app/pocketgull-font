@@ -5,7 +5,7 @@
 # ------------------------------------------------------------------------------
 
 # Stage 1: Fast Pure-Dart AOT Compilation
-FROM dart:3-sdk AS build
+FROM dart:3-sdk@sha256:7efb22ee3003e3aaa7af34840bfacb2fc1b06e1ac1295237dfcca1552816588e AS build
 
 WORKDIR /app
 COPY pubspec.* ./
@@ -15,7 +15,7 @@ COPY . .
 RUN dart compile exe tool/pocketgull_foundry.dart -o /app/pocketgull_foundry
 
 # Stage 2: Distroless Minimal Security Image (<40MB)
-FROM gcr.io/distroless/cc-debian12:nonroot
+FROM gcr.io/distroless/cc-debian12:nonroot@sha256:9dac0a79194e45a7da0158a9c6da57b217585af0786db3845d1f0ec1a0dd182f
 
 WORKDIR /app
 
