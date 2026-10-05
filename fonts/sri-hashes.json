@@ -85,9 +85,10 @@
     "sri": "sha384-q4oUpVs7xEChORTr2xsoOoYTNxT1EL2KhsRm5qISMZsD8pjGAhBKoFRyHRz17Yi8"
   },
   "fonts/ttf/PocketGull-Math.ttf": {
-    "size": 2671500,
+    "size": 3926836,
     "sha256": "62a82c2c1b1d8b1b957e0cac2fc4e342dbea3192af39e636a03c19e559d9db82",
-    "sri": "sha384-+DQq47D8zRXNtVNmR6A7ROGjvFL8E8FO4R27JotDuE5IrBIefB7upXQ+MFe0Hi9f"
+    "sri": "sha384-+DQq47D8zRXNtVNmR6A7ROGjvFL8E8FO4R27JotDuE5IrBIefB7upXQ+MFe0Hi9f",
+    "integrity": "sha256-zjrRynUOPTr5t3/yCXidcMCLGNAB6YadpOuFVOFsdQc="
   },
   "fonts/ttf/PocketGull-Micro.ttf": {
     "size": 3025328,
@@ -290,9 +291,10 @@
     "sri": "sha384-rTGEaa43yEFIg56yIL44t3dRBwz9AH67MuwzXysEhhFTwWjgykynSl1mndlKK7tB"
   },
   "fonts/woff2/PocketGull-Math.woff2": {
-    "size": 803868,
+    "size": 1023500,
     "sha256": "aa35385bc51f0da153807f6da255890797681f19cfbca214785d05c2f5707435",
-    "sri": "sha384-1PPLcnNZago1vC6L1f1z0XyA69T064iJZGQTfLJWy/tmgb00JvXWzlY5lrkmbHHW"
+    "sri": "sha384-1PPLcnNZago1vC6L1f1z0XyA69T064iJZGQTfLJWy/tmgb00JvXWzlY5lrkmbHHW",
+    "integrity": "sha256-Pi4wsvyH8z+lP7uG1bgOU3BbFqsovqZzowyN9F3JuNg="
   },
   "fonts/woff2/PocketGull-Micro-Core.woff2": {
     "size": 18540,

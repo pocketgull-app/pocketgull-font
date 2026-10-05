@@ -133,4 +133,28 @@ dart run tool/pocketgull_foundry.dart sync
    - Internal business memos, email pitches, legal assignments, and patent disclosures MUST reside in `private/` or `local/` and are strictly ignored by `.gitignore`.
    - Never leave dirty or experimental font binary re-exports in the working tree (`fonts/ttf/`, `fonts/woff2/`).
 
+---
+
+## 🌐 Universal Adoption & Single-Source-of-Truth (SSOT) Versioning Rules
+
+1. **Single Source of Truth (SSOT) SemVer Invariant**:
+   - `package.json` (`version: "X.Y.Z"`) is the single source of truth for repository SemVer.
+   - OpenType `head.fontRevision` MUST be derived programmatically as decimal float $X + \frac{Y}{10} + \frac{Z}{100}$ (e.g. `3.1.0` $\to$ `3.1`, `nameID 5` $\to$ `"Version 3.100; ..."`).
+   - In `fonts.css` and HTML specimens, asset cache-busting query strings (`?v=...`) MUST always match the active package SemVer (`?v=3.1.0`) to eliminate version confusion between OpenType fixed-point floats and SemVer strings.
+2. **Unified Variable Font (VF) Default for Web**:
+   - Web applications, specimen pages, and CDN integrations MUST prioritize `PocketGull-VF.woff2` (weight 100..900) as the primary font face to prevent loading multi-megabyte cascades of static fonts.
+   - Always declare zero-CLS font-metric overrides (`ascent-override`, `descent-override`, `size-adjust: 108%`) to eliminate layout shifts against system fallback optotypes.
+3. **Multi-Channel Distribution Parity**:
+   - Any version release MUST synchronize simultaneously across:
+     - **Homebrew Tap**: `distribution/homebrew/font-pocketgull.rb`
+     - **Windows Package Manager**: `distribution/winget/PocketGull.Typeface/`
+     - **LaTeX CTAN Package**: `distribution/latex/` (`pocketgull-math.sty`)
+     - **Python Telemetry Package**: `distribution/python/` (`pocketgull_math/__init__.py`)
+     - **Cryptographic Hashes**: `fonts/sri-hashes.json`, `fonts/SHA256SUMS`, and `CHECKSUMS.sha256`
+   - Release archive generation (`pocketgull-font-vX.Y.Z.zip`) is automated via the Dart foundry toolchain, eliminating manual checksum drifts.
+4. **Sub-Second Acuity & Fast Loading (HCI Invariant)**:
+   - Only preload critical display fonts (`PocketGull-Fineliner.woff2`, `PocketGull-Bold.woff2`, or `PocketGull-VF.woff2`).
+   - All secondary/specialty fonts (`Math`, `Emoji`, `ASL`) MUST declare `font-display: swap` and be loaded lazily on demand.
+
+
 

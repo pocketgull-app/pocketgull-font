@@ -958,21 +958,27 @@ def build_math_font():
         "math_ital_phi": 60,
         "math_ital_psi": 65,
     }
+    raw_corr = {}
     for gname, val in special_corr.items():
         if gname in glyf:
-            corr_glyphs.append(gname)
-            rec = otTables.MathValueRecord()
-            rec.Value = val
-            corr_values.append(rec)
+            raw_corr[gname] = val
 
     for cp in range(0x1D434, 0x1D468):
         if cp in cmap:
             g = cmap[cp]
-            if g in glyf and g not in corr_glyphs:
-                corr_glyphs.append(g)
-                rec = otTables.MathValueRecord()
-                rec.Value = 35
-                corr_values.append(rec)
+            if g in glyf and g not in raw_corr:
+                raw_corr[g] = 35
+
+    # Strictly sort by glyph ID (glyph_order index) to satisfy OpenType Coverage specification
+    order_index = {name: idx for idx, name in enumerate(glyph_order)}
+    sorted_corr = sorted(raw_corr.items(), key=lambda item: order_index[item[0]])
+
+    corr_glyphs = [g for g, _ in sorted_corr]
+    corr_values = []
+    for _, val in sorted_corr:
+        rec = otTables.MathValueRecord()
+        rec.Value = val
+        corr_values.append(rec)
 
     mici_cov.glyphs = corr_glyphs
     mici.Coverage = mici_cov
@@ -1014,21 +1020,23 @@ def build_math_font():
         ("radical", ["radical.v1", "radical.v2", "radical.v3", "radical.v4"]),
     ]
 
+    delims_dict = {base: var_names for base, var_names in delims if base in glyf}
+    sorted_delims = sorted(delims_dict.items(), key=lambda item: order_index[item[0]])
+
     v_cov = otTables.Coverage()
-    v_cov.glyphs = [base for base, _ in delims if base in glyf]
+    v_cov.glyphs = [base for base, _ in sorted_delims]
     mv.VertGlyphCoverage = v_cov
     mv.VertGlyphConstruction = []
 
-    for base, var_names in delims:
-        if base in glyf:
-            vgc = otTables.VertGlyphConstruction()
-            vgc.MathGlyphVariantRecord = []
-            for vname, h in zip(var_names, height_steps):
-                rec = otTables.MathGlyphVariantRecord()
-                rec.VariantGlyph = vname
-                rec.AdvanceMeasurement = h
-                vgc.MathGlyphVariantRecord.append(rec)
-            mv.VertGlyphConstruction.append(vgc)
+    for base, var_names in sorted_delims:
+        vgc = otTables.VertGlyphConstruction()
+        vgc.MathGlyphVariantRecord = []
+        for vname, h in zip(var_names, height_steps):
+            rec = otTables.MathGlyphVariantRecord()
+            rec.VariantGlyph = vname
+            rec.AdvanceMeasurement = h
+            vgc.MathGlyphVariantRecord.append(rec)
+        mv.VertGlyphConstruction.append(vgc)
 
     math_table.MathVariants = mv
 

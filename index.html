@@ -2444,7 +2444,7 @@
     </div>
   </header>
 
-  <main class="container" id="mainContent" role="main">
+  <main class="container" id="mainContent">
 
     <!-- 1. Broadside Master Header -->
     <header class="header-broadside">
@@ -3222,22 +3222,22 @@
           <!-- Interactive Equatorial Sliders -->
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 20px; background: rgba(0,0,0,0.25); padding: 16px; border-radius: 8px; border: 1px solid var(--card-border);">
             <div>
-              <label style="display: flex; justify-content: space-between; font-size: 11px; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">
-                <label for="sliderAstroRA"><span>Right Ascension (&alpha;)</span></label>
+              <label for="sliderAstroRA" style="display: flex; justify-content: space-between; font-size: 11px; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">
+                <span>Right Ascension (&alpha;)</span>
                 <span id="valAstroRA" style="font-family: 'PocketGull Mono'; font-weight: 700;">12h 30m 49.4s</span>
               </label>
               <input type="range" id="sliderAstroRA" aria-label="Right Ascension (alpha)" min="0" max="360" step="0.5" value="187.7" style="width: 100%; accent-color: #ef4444; cursor: pointer;" oninput="updateAstroTelemetry()">
             </div>
             <div>
-              <label style="display: flex; justify-content: space-between; font-size: 11px; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">
-                <label for="sliderAstroDec"><span>Declination (&delta;)</span></label>
+              <label for="sliderAstroDec" style="display: flex; justify-content: space-between; font-size: 11px; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">
+                <span>Declination (&delta;)</span>
                 <span id="valAstroDec" style="font-family: 'PocketGull Mono'; font-weight: 700;">+12&deg; 23' 28"</span>
               </label>
               <input type="range" id="sliderAstroDec" aria-label="Declination (delta)" min="-90" max="90" step="0.5" value="12.39" style="width: 100%; accent-color: #ef4444; cursor: pointer;" oninput="updateAstroTelemetry()">
             </div>
             <div>
-              <label style="display: flex; justify-content: space-between; font-size: 11px; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">
-                <label for="sliderAstroAirmass"><span>Air Mass (X)</span></label>
+              <label for="sliderAstroAirmass" style="display: flex; justify-content: space-between; font-size: 11px; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">
+                <span>Air Mass (X)</span>
                 <span id="valAstroAirmass" style="font-family: 'PocketGull Mono'; font-weight: 700;">1.04</span>
               </label>
               <input type="range" id="sliderAstroAirmass" aria-label="Air Mass (X)" min="1.00" max="3.00" step="0.01" value="1.04" style="width: 100%; accent-color: #ef4444; cursor: pointer;" oninput="updateAstroTelemetry()">
@@ -3967,23 +3967,23 @@
       <!-- Text and Geometry Controls -->
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 20px; background: rgba(0,0,0,0.15); padding: 16px; border-radius: 8px; border: 1px solid var(--card-border);">
         <div style="grid-column: 1 / -1;">
-          <label style="font-size: 12px; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px;">Live Text Sample:</label>
+          <label for="chromaticTextInput" style="font-size: 12px; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px;">Live Text Sample:</label>
           <input type="text" id="chromaticTextInput" aria-label="Chromatic Live Text Sample" value="POCKETGULL" style="width: 100%; background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-main); font-family: 'PocketGull Bold', sans-serif; font-size: 18px; padding: 8px 12px; border-radius: 6px;">
         </div>
         <div>
-          <label style="font-size: 12px; font-weight: 600; color: var(--text-muted); display: flex; justify-content: space-between;">
+          <label for="chromaticSizeSlider" style="font-size: 12px; font-weight: 600; color: var(--text-muted); display: flex; justify-content: space-between;">
             <span>Font Size:</span> <span id="chromaticSizeVal">84px</span>
           </label>
           <input type="range" id="chromaticSizeSlider" aria-label="Chromatic Font Size" min="36" max="140" value="84" style="width: 100%;">
         </div>
         <div>
-          <label style="font-size: 12px; font-weight: 600; color: var(--text-muted); display: flex; justify-content: space-between;">
+          <label for="chromaticTrackingSlider" style="font-size: 12px; font-weight: 600; color: var(--text-muted); display: flex; justify-content: space-between;">
             <span>Letter Spacing:</span> <span id="chromaticTrackingVal">0.02em</span>
           </label>
           <input type="range" id="chromaticTrackingSlider" aria-label="Chromatic Letter Spacing" min="-0.05" max="0.30" step="0.01" value="0.02" style="width: 100%;">
         </div>
         <div>
-          <label style="font-size: 12px; font-weight: 600; color: var(--text-muted); display: flex; justify-content: space-between;">
+          <label for="chromaticShadowSlider" style="font-size: 12px; font-weight: 600; color: var(--text-muted); display: flex; justify-content: space-between;">
             <span>Shadow Offset X/Y:</span> <span id="chromaticShadowVal">6px / 8px</span>
           </label>
           <input type="range" id="chromaticShadowSlider" aria-label="Chromatic Shadow Offset" min="0" max="24" step="1" value="6" style="width: 100%;">

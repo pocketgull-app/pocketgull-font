@@ -107,6 +107,15 @@ class SanctuaryServer {
       return;
     }
 
+    // DevTools descriptor probe
+    if (path == '/com.chrome.devtools.json' || path.endsWith('/com.chrome.devtools.json')) {
+      request.response.headers.contentType = ContentType.json;
+      request.response.statusCode = HttpStatus.ok;
+      request.response.write('{}');
+      await request.response.close();
+      return;
+    }
+
     // 2. REST APIs
     if (path.startsWith('/api/')) {
       await _handleApiRequest(request, path);
