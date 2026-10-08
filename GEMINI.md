@@ -115,7 +115,9 @@ dart run tool/pocketgull_foundry.dart sync
 ## 🛡️ CI & SAST Security Invariants
 1. **GitHub CodeQL Native Default Setup**: Do **NOT** commit or restore a `.github/workflows/codeql.yml` workflow file. The repository relies on GitHub's native Default Setup (`state: configured`). Adding an advanced workflow causes SARIF upload rejection conflicts.
 2. **DOM-Based XSS Prevention**: Never interpolate unescaped user input or URL query parameters into `.innerHTML`. Always construct DOM trees using `textContent`, `document.createTextNode()`, and `document.createElement()`.
-3. **Automated Enforcement**: Enforced at build and pre-flight time via `test/security_and_ci_invariants.test.mjs`.
+3. **Safe HTML & Tag Parsing Invariant (CodeQL Alert 80)**: Never parse or extract `<script>` or other HTML tags using naive regular expressions (e.g. `/<script\b[^>]*>...<\/script>/`). CodeQL flags these under `js/bad-tag-filter`. Use deterministic string boundaries (`indexOf` / `lastIndexOf`) or proper AST / DOM parsers.
+4. **Windows Smart App Control & Playwright Sandbox Resilience**: End-to-end browser tests running on Windows host environments must gracefully handle unsigned browser engine launches (such as Playwright WebKit) blocked by Windows Smart App Control or local sandbox policies, falling back cleanly with non-fatal warnings while strictly asserting on available production engines (Chromium / Firefox).
+5. **Automated Enforcement**: Enforced at build and pre-flight time via `test/security_and_ci_invariants.test.mjs`.
 
 ---
 
