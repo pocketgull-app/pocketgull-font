@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-09-22T20:07:22.341719",
+  "timestamp": "2026-10-07T20:47:29.502621",
   "scanner": "Google OSV-Scanner (api.osv.dev)",
-  "scannedPackages": 2,
+  "scannedPackages": 5,
   "vulnerabilitiesFound": 0,
   "passed": true,
   "results": [
@@ -12,6 +12,21 @@
     },
     {
       "package": "PyPI: fonttools@4.65.0",
+      "status": "PASS",
+      "vulnerabilities": []
+    },
+    {
+      "package": "npm: axe-core@4.14.0",
+      "status": "PASS",
+      "vulnerabilities": []
+    },
+    {
+      "package": "npm: playwright@1.64.0",
+      "status": "PASS",
+      "vulnerabilities": []
+    },
+    {
+      "package": "npm: playwright-core@1.64.0",
       "status": "PASS",
       "vulnerabilities": []
     }
