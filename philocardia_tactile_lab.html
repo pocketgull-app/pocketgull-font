@@ -1324,6 +1324,28 @@
 
       <!-- Spindle Interactive Stage -->
       <div class="spindle-stage-wrap">
+        <!-- Chassis & Form Factor Selector -->
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-bottom: 0.75rem;">
+          <span style="font-family: var(--mono-stack); font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">Hardware Chassis:</span>
+          <button type="button" class="pacing-chip active" id="btnModeLathe" onclick="setChassisMode('lathe')">
+            ⚙️ Mandrel Lathe (Decks)
+          </button>
+          <button type="button" class="pacing-chip" id="btnModeBasin" onclick="setChassisMode('basin')">
+            🍵 Philocardia Basin (Raku Dish)
+          </button>
+          <button type="button" class="pacing-chip" id="btnModePixel" onclick="setChassisMode('pixel')">
+            📱 Google Pixel Candybar
+          </button>
+          <div id="pixelTierToggles" style="display: none; align-items: center; gap: 0.4rem; margin-left: auto;">
+            <button type="button" class="pacing-chip active" id="btnPixelTier1" onclick="setPixelTier(1)">
+              ⚡ Bare Glass (240Hz Shear Haptics)
+            </button>
+            <button type="button" class="pacing-chip" id="btnPixelTier2" onclick="setPixelTier(2)">
+              🌊 Aquaglyde MagSafe Case (Microfluidics)
+            </button>
+          </div>
+        </div>
+
         <div class="spindle-canvas-container">
           <canvas id="spindleCanvas" width="600" height="260" aria-label="3D Rotating Tactile Lathe Drum Canvas" title="Click and drag or scroll vertically to roll the soft-robotic cylinder manually under your resting finger"></canvas>
           <div class="spindle-instructions" id="spindleNotice">
@@ -2870,13 +2892,75 @@
       friction: 0.965,
       isDragging: false,
       lastY: 0,
+      lastX: 0,
       lastTime: performance.now(),
       direction: 1,
       radius: 72,
       mandrelLength: 360,
       lastClickAngle: 0,
-      cellsPerRev: 8
+      cellsPerRev: 8,
+      chassisMode: 'lathe', // 'lathe' | 'basin' | 'pixel'
+      pixelTier: 1,        // 1: Bare Glass | 2: Aquaglyde Case
+      touchPt: null,       // { x, y, active }
+      basinAngle: 0,
+      shearTriggered: 0,
+      lastGlidingRow: -1
     };
+
+    function setChassisMode(mode) {
+      latheState.chassisMode = mode;
+      document.querySelectorAll('#btnModeLathe, #btnModeBasin, #btnModePixel').forEach(b => b.classList.remove('active'));
+      const btn = document.getElementById(`btnMode${mode.charAt(0).toUpperCase() + mode.slice(1)}`);
+      if (btn) btn.classList.add('active');
+
+      const tierWrap = document.getElementById('pixelTierToggles');
+      const notice = document.getElementById('spindleNotice');
+      const hudAxle = document.getElementById('hudSpindleAxle');
+      const hudEMG = document.getElementById('hudNibEMG');
+
+      if (tierWrap) {
+        tierWrap.style.display = (mode === 'pixel') ? 'inline-flex' : 'none';
+      }
+
+      if (mode === 'pixel') {
+        if (notice) notice.innerHTML = `📱 <strong>Google Pixel 9 Pro Candybar</strong>: Aluminum rails serve as stationary banks. Glide finger down screen flume for 240Hz sub-millisecond shear haptics, or snap on Qi2 Aquaglyde case.`;
+        if (hudEMG) hudEMG.innerHTML = `Stationary <span style="font-size: 0.7rem; font-weight: normal; color: var(--cyan);">Aluminum Rails</span>`;
+        if (hudAxle) hudAxle.textContent = `Tensor NPU · Gemini Nano Local OCR · Qi2 Ready`;
+      } else if (mode === 'basin') {
+        if (notice) notice.innerHTML = `🍵 <strong>The Philocardia Basin (Raku Dish)</strong>: Rest palm on 360° stationary ceramic rim (33.5°C thermal mass). Soft hydro-droplets orbit silently in a concentric closed-loop flume.`;
+        if (hudEMG) hudEMG.innerHTML = `Stationary <span style="font-size: 0.7rem; font-weight: normal; color: var(--amber);">360° Ceramic Rim</span>`;
+        if (hudAxle) hudAxle.textContent = `33.5°C Stoneware Mass · MagLev Stator Drive`;
+      } else {
+        if (notice) notice.innerHTML = `🕊️ <strong>Philocardia Mandrel Lathe</strong>: Stationary left/right side decks provide rock-solid palm support while soft silicone nibs roll smoothly underneath with zero pain.`;
+        if (hudEMG) hudEMG.innerHTML = `Stationary <span style="font-size: 0.7rem; font-weight: normal; color: var(--emerald);">Grounded Decks</span>`;
+        if (hudAxle) hudAxle.textContent = `33.5°C · Soothing Thermal Warmth (Zero Vibration)`;
+      }
+    }
+
+    function setPixelTier(tier) {
+      latheState.pixelTier = tier;
+      document.querySelectorAll('#btnPixelTier1, #btnPixelTier2').forEach(b => b.classList.remove('active'));
+      const btn = document.getElementById(`btnPixelTier${tier}`);
+      if (btn) btn.classList.add('active');
+
+      const notice = document.getElementById('spindleNotice');
+      const hudPressure = document.getElementById('hudNibPressure');
+      if (tier === 1) {
+        if (notice) notice.innerHTML = `⚡ <strong>Tier 1: Bare Pixel Glass</strong>: CS40L25 closed-loop LRA fires 3ms micro-shear clicks on dot contact. Dead silent (0 dB) when finger is resting.`;
+        if (hudPressure) hudPressure.innerHTML = `0.00 kPa <span style="font-size: 0.7rem; font-weight: normal; color: var(--cyan);">Solid Victus Glass</span>`;
+      } else {
+        if (notice) notice.innerHTML = `🌊 <strong>Tier 2: Aquaglyde MagSafe Case</strong>: Powered by Pixel Battery Share (58mW). 6–8 soft silicone nibs inflate on right rail with 0.00 mL/hr water loss.`;
+        if (hudPressure) hudPressure.innerHTML = `+18.4 kPa <span style="font-size: 0.7rem; font-weight: normal; color: var(--rose);">Microfluidic Nibs</span>`;
+      }
+    }
+
+    function triggerPixelShear(x, y) {
+      playSpindleClick(0.35);
+      if (typeof navigator !== 'undefined' && navigator.vibrate) {
+        try { navigator.vibrate(3); } catch (_) {}
+      }
+      latheState.shearTriggered = performance.now();
+    }
 
     function initLatheCanvas() {
       if (!latheCanvas || !latheCtx) return;
@@ -3037,6 +3121,365 @@
       } catch (_) {}
     }
 
+    function renderPixelChassis(w, h, now, dt) {
+      const pw = Math.min(360, w - 40);
+      const ph = h - 24;
+      const px = (w - pw) / 2;
+      const py = 12;
+      const pr = 26;
+
+      latheCtx.fillStyle = '#050811';
+      latheCtx.fillRect(0, 0, w, h);
+
+      // 1. PHONE CHASSIS: Matte Anodized Aluminum Perimeter Frame (Stationary Banks)
+      const railGrad = latheCtx.createLinearGradient(px, py, px + pw, py);
+      railGrad.addColorStop(0.00, '#64748b');
+      railGrad.addColorStop(0.06, '#334155');
+      railGrad.addColorStop(0.12, '#1e293b');
+      railGrad.addColorStop(0.50, '#0f172a');
+      railGrad.addColorStop(0.88, '#1e293b');
+      railGrad.addColorStop(0.94, '#334155');
+      railGrad.addColorStop(1.00, '#64748b');
+
+      latheCtx.fillStyle = railGrad;
+      latheCtx.beginPath();
+      latheCtx.roundRect(px, py, pw, ph, pr);
+      latheCtx.fill();
+
+      if (latheState.pixelTier === 2) {
+        latheCtx.strokeStyle = '#0284c7';
+        latheCtx.lineWidth = 3.5;
+        latheCtx.stroke();
+      } else {
+        latheCtx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
+        latheCtx.lineWidth = 1.5;
+        latheCtx.stroke();
+      }
+
+      // Engraved stationary bank labels
+      latheCtx.save();
+      latheCtx.font = '600 7px "PocketGull Mono", monospace';
+      latheCtx.fillStyle = 'rgba(148, 163, 184, 0.65)';
+      latheCtx.textAlign = 'center';
+      latheCtx.translate(px + 7, py + ph / 2);
+      latheCtx.rotate(-Math.PI / 2);
+      latheCtx.fillText('STATIONARY ALUMINUM RAIL · HAND REST', 0, 0);
+      latheCtx.restore();
+
+      if (latheState.pixelTier === 1) {
+        latheCtx.save();
+        latheCtx.font = '600 7px "PocketGull Mono", monospace';
+        latheCtx.fillStyle = 'rgba(148, 163, 184, 0.65)';
+        latheCtx.textAlign = 'center';
+        latheCtx.translate(px + pw - 7, py + ph / 2);
+        latheCtx.rotate(Math.PI / 2);
+        latheCtx.fillText('STATIONARY ALUMINUM RAIL · HAND REST', 0, 0);
+        latheCtx.restore();
+      }
+
+      // 2. CENTRAL OLED SCREEN (Dark Scotopic Water Flume)
+      const sx = px + (latheState.pixelTier === 2 ? 18 : 16);
+      const sy = py + 12;
+      const sw = pw - (latheState.pixelTier === 2 ? 46 : 32);
+      const sh = ph - 24;
+      const sr = 18;
+
+      latheCtx.fillStyle = '#010408';
+      latheCtx.beginPath();
+      latheCtx.roundRect(sx, sy, sw, sh, sr);
+      latheCtx.fill();
+
+      latheCtx.strokeStyle = 'rgba(56, 189, 248, 0.2)';
+      latheCtx.lineWidth = 1;
+      latheCtx.stroke();
+
+      // Top speaker slit
+      latheCtx.fillStyle = '#0f172a';
+      latheCtx.beginPath();
+      latheCtx.roundRect(px + pw / 2 - 24, py + 4, 48, 2.5, 1.2);
+      latheCtx.fill();
+
+      // Selfie camera punch-hole
+      latheCtx.fillStyle = '#000000';
+      latheCtx.beginPath();
+      latheCtx.arc(px + pw / 2, sy + 10, 4.5, 0, Math.PI * 2);
+      latheCtx.fill();
+
+      // Status Bar
+      latheCtx.font = '600 8.5px -apple-system, sans-serif';
+      latheCtx.fillStyle = '#94a3b8';
+      latheCtx.textAlign = 'left';
+      latheCtx.fillText('14:26', sx + 12, sy + 13);
+
+      latheCtx.textAlign = 'right';
+      if (latheState.pixelTier === 2) {
+        latheCtx.fillStyle = '#38bdf8';
+        latheCtx.fillText('⚡ Battery Share 58mW · 5G', sx + sw - 12, sy + 13);
+      } else {
+        latheCtx.fillStyle = '#10b981';
+        latheCtx.fillText('CS40L25 LRA · 240Hz · 5G', sx + sw - 12, sy + 13);
+      }
+
+      // 3. TACTILE WATERSLIDE FLUME ON OLED
+      const flumeX = sx + 18;
+      const flumeW = sw - 36;
+      const flumeY = sy + 22;
+      const flumeH = sh - 30;
+
+      const flumeBg = latheCtx.createLinearGradient(flumeX, flumeY, flumeX + flumeW, flumeY);
+      flumeBg.addColorStop(0.0, 'rgba(6, 30, 44, 0.4)');
+      flumeBg.addColorStop(0.5, 'rgba(14, 58, 82, 0.55)');
+      flumeBg.addColorStop(1.0, 'rgba(6, 30, 44, 0.4)');
+      latheCtx.fillStyle = flumeBg;
+      latheCtx.beginPath();
+      latheCtx.roundRect(flumeX, flumeY, flumeW, flumeH, 10);
+      latheCtx.fill();
+
+      // Laminar streamlines
+      latheCtx.strokeStyle = 'rgba(56, 189, 248, 0.12)';
+      latheCtx.lineWidth = 1;
+      const scrollOffset = (now * 0.05 * (latheState.isMotorRunning ? (latheState.wpm / 120) : 0.5)) % 32;
+      for (let y = flumeY + scrollOffset; y < flumeY + flumeH; y += 32) {
+        latheCtx.beginPath();
+        latheCtx.moveTo(flumeX + 12, y);
+        latheCtx.bezierCurveTo(flumeX + flumeW * 0.3, y - 2, flumeX + flumeW * 0.7, y + 2, flumeX + flumeW - 12, y);
+        latheCtx.stroke();
+      }
+
+      // Braille dots streaming
+      const numRows = 7;
+      const rowH = 26;
+      for (let r = 0; r < numRows; r++) {
+        const dotY = flumeY + 18 + ((r * rowH + (now * 0.04 * (latheState.isMotorRunning ? latheState.wpm / 150 : 0.6))) % flumeH);
+        if (dotY > flumeY + 8 && dotY < flumeY + flumeH - 8) {
+          for (let c = 0; c < 4; c++) {
+            const dotX = flumeX + 24 + c * ((flumeW - 48) / 3);
+            const isBright = ((r + c) % 3 === 0);
+
+            latheCtx.fillStyle = isBright ? 'rgba(56, 189, 248, 0.95)' : 'rgba(16, 185, 129, 0.8)';
+            latheCtx.beginPath();
+            latheCtx.arc(dotX, dotY, 4.2, 0, Math.PI * 2);
+            latheCtx.fill();
+
+            latheCtx.fillStyle = 'rgba(255, 255, 255, 0.75)';
+            latheCtx.beginPath();
+            latheCtx.arc(dotX - 1.2, dotY - 1.2, 1.2, 0, Math.PI * 2);
+            latheCtx.fill();
+          }
+        }
+      }
+
+      // If Tier 2: Aquaglyde Right Rail Microfluidic Flume Trough
+      if (latheState.pixelTier === 2) {
+        const railX = px + pw - 24;
+        const railY = py + 28;
+        const railW = 16;
+        const railH = ph - 56;
+
+        latheCtx.fillStyle = '#071624';
+        latheCtx.beginPath();
+        latheCtx.roundRect(railX, railY, railW, railH, 8);
+        latheCtx.fill();
+        latheCtx.strokeStyle = 'rgba(56, 189, 248, 0.4)';
+        latheCtx.lineWidth = 1;
+        latheCtx.stroke();
+
+        const numNibs = 6;
+        const nibSpacing = railH / (numNibs + 1);
+        for (let i = 0; i < numNibs; i++) {
+          const ny = railY + (i + 1) * nibSpacing;
+          const nx = railX + railW / 2;
+          const isInflated = ((Math.floor(now / 400) + i) % 2 === 0);
+
+          const dropGrad = latheCtx.createRadialGradient(nx - 1, ny - 1, 1, nx, ny, isInflated ? 5.5 : 3.5);
+          if (isInflated) {
+            dropGrad.addColorStop(0, '#ffffff');
+            dropGrad.addColorStop(0.3, '#38bdf8');
+            dropGrad.addColorStop(0.8, '#f43f5e');
+            dropGrad.addColorStop(1.0, '#be123c');
+          } else {
+            dropGrad.addColorStop(0, '#94a3b8');
+            dropGrad.addColorStop(1.0, '#334155');
+          }
+          latheCtx.fillStyle = dropGrad;
+          latheCtx.beginPath();
+          latheCtx.arc(nx, ny, isInflated ? 5.5 : 3.5, 0, Math.PI * 2);
+          latheCtx.fill();
+        }
+
+        latheCtx.save();
+        latheCtx.font = '600 6.5px "PocketGull Mono", monospace';
+        latheCtx.fillStyle = '#38bdf8';
+        latheCtx.textAlign = 'center';
+        latheCtx.translate(px + pw - 3, py + ph / 2);
+        latheCtx.rotate(Math.PI / 2);
+        latheCtx.fillText('AQUAGLYDE MICROFLUIDIC FLUME · PIXEL REVERSE QI', 0, 0);
+        latheCtx.restore();
+      }
+
+      // Touch & Shear Haptic Rendering
+      if (latheState.touchPt && latheState.touchPt.active) {
+        const tx = latheState.touchPt.x;
+        const ty = latheState.touchPt.y;
+
+        latheCtx.fillStyle = 'rgba(244, 63, 94, 0.25)';
+        latheCtx.strokeStyle = 'rgba(244, 63, 94, 0.85)';
+        latheCtx.lineWidth = 1.5;
+        latheCtx.beginPath();
+        latheCtx.ellipse(tx, ty, 18, 24, 0, 0, Math.PI * 2);
+        latheCtx.fill();
+        latheCtx.stroke();
+
+        latheCtx.fillStyle = '#ffffff';
+        latheCtx.beginPath();
+        latheCtx.arc(tx, ty, 3, 0, Math.PI * 2);
+        latheCtx.fill();
+
+        const elapsed = now - (latheState.shearTriggered || 0);
+        if (elapsed < 280) {
+          const progress = elapsed / 280;
+          const radius = 18 + progress * 32;
+          const alpha = 1.0 - progress;
+
+          latheCtx.strokeStyle = `rgba(16, 185, 129, ${alpha})`;
+          latheCtx.lineWidth = 2.5;
+          latheCtx.beginPath();
+          latheCtx.arc(tx, ty, radius, 0, Math.PI * 2);
+          latheCtx.stroke();
+
+          latheCtx.font = '700 8.5px "PocketGull Mono", monospace';
+          latheCtx.fillStyle = `rgba(56, 189, 248, ${alpha})`;
+          latheCtx.textAlign = 'center';
+          latheCtx.fillText('⚡ 3ms Shear Impulse · CS40L25 LRA', tx, ty - 30);
+        }
+      }
+
+      latheCtx.font = '600 8.5px "PocketGull Mono", monospace';
+      latheCtx.fillStyle = 'rgba(148, 163, 184, 0.7)';
+      latheCtx.textAlign = 'center';
+      if (latheState.pixelTier === 1) {
+        latheCtx.fillText('GLIDE FINGER DOWN SCREEN · 240HZ TRANSIENT SHEAR HAPTICS · 0 dB NOISE', sx + sw / 2, sy + sh - 8);
+      } else {
+        latheCtx.fillText('REST FINGER ON RIGHT RAIL FLUME · CLOSED-LOOP MICROFLUIDIC DROPLETS · 0 LOSS', sx + sw / 2, sy + sh - 8);
+      }
+    }
+
+    function renderBasinChassis(w, h, now, dt) {
+      const cx = w / 2;
+      const cy = h / 2;
+      const outerR = Math.min(124, h / 2 - 8);
+      const basinR = outerR - 26;
+      const flumeR = basinR - 22;
+
+      latheCtx.fillStyle = '#060a12';
+      latheCtx.fillRect(0, 0, w, h);
+
+      if (latheState.isMotorRunning) {
+        const charsPerSec = (latheState.wpm * 6.5) / 60;
+        latheState.basinAngle += (charsPerSec * 0.08) * dt;
+      }
+
+      // 360° STATIONARY STONEWARE RIM (Raku Ceramic Thermal Mass)
+      const rimGrad = latheCtx.createRadialGradient(cx, cy, basinR, cx, cy, outerR);
+      rimGrad.addColorStop(0.0, '#1c1510');
+      rimGrad.addColorStop(0.5, '#2e231b');
+      rimGrad.addColorStop(0.85, '#3b2f25');
+      rimGrad.addColorStop(1.0, '#18120e');
+
+      latheCtx.fillStyle = rimGrad;
+      latheCtx.beginPath();
+      latheCtx.arc(cx, cy, outerR, 0, Math.PI * 2);
+      latheCtx.fill();
+
+      latheCtx.strokeStyle = 'rgba(251, 146, 60, 0.4)';
+      latheCtx.lineWidth = 2;
+      latheCtx.stroke();
+
+      // INNER WATER BASIN
+      latheCtx.fillStyle = '#02050b';
+      latheCtx.beginPath();
+      latheCtx.arc(cx, cy, basinR, 0, Math.PI * 2);
+      latheCtx.fill();
+      latheCtx.strokeStyle = 'rgba(56, 189, 248, 0.35)';
+      latheCtx.lineWidth = 1.5;
+      latheCtx.stroke();
+
+      // CONCENTRIC ANNULAR WATER FLUME
+      const flumeTrackW = 26;
+      latheCtx.strokeStyle = 'rgba(14, 58, 82, 0.7)';
+      latheCtx.lineWidth = flumeTrackW;
+      latheCtx.beginPath();
+      latheCtx.arc(cx, cy, flumeR, 0, Math.PI * 2);
+      latheCtx.stroke();
+
+      // Translucent Sealed Silicone Meniscus
+      latheCtx.strokeStyle = 'rgba(56, 189, 248, 0.25)';
+      latheCtx.lineWidth = flumeTrackW - 4;
+      latheCtx.beginPath();
+      latheCtx.arc(cx, cy, flumeR, 0, Math.PI * 2);
+      latheCtx.stroke();
+
+      // SOFT HYDRO-DROPLET BRAILLE NIBS ORBITING
+      const numOrbitNibs = 12;
+      for (let i = 0; i < numOrbitNibs; i++) {
+        const nibAngle = latheState.basinAngle + (i * (Math.PI * 2 / numOrbitNibs));
+        const nx = cx + Math.cos(nibAngle) * flumeR;
+        const ny = cy + Math.sin(nibAngle) * flumeR;
+
+        const dropGrad = latheCtx.createRadialGradient(nx - 1, ny - 1, 1, nx, ny, 5.5);
+        dropGrad.addColorStop(0, '#ffffff');
+        dropGrad.addColorStop(0.35, '#38bdf8');
+        dropGrad.addColorStop(0.8, '#f43f5e');
+        dropGrad.addColorStop(1.0, '#be123c');
+
+        latheCtx.fillStyle = dropGrad;
+        latheCtx.beginPath();
+        latheCtx.arc(nx, ny, 5.5, 0, Math.PI * 2);
+        latheCtx.fill();
+        latheCtx.strokeStyle = 'rgba(244, 63, 94, 0.8)';
+        latheCtx.lineWidth = 1;
+        latheCtx.stroke();
+      }
+
+      // CENTER PORCELAIN ISLAND WITH EMBLEM
+      const islandR = flumeR - 18;
+      const islandGrad = latheCtx.createRadialGradient(cx, cy, 2, cx, cy, islandR);
+      islandGrad.addColorStop(0.0, '#1e293b');
+      islandGrad.addColorStop(0.7, '#0f172a');
+      islandGrad.addColorStop(1.0, '#020617');
+
+      latheCtx.fillStyle = islandGrad;
+      latheCtx.beginPath();
+      latheCtx.arc(cx, cy, islandR, 0, Math.PI * 2);
+      latheCtx.fill();
+      latheCtx.strokeStyle = 'rgba(56, 189, 248, 0.3)';
+      latheCtx.lineWidth = 1.2;
+      latheCtx.stroke();
+
+      latheCtx.font = '22px sans-serif';
+      latheCtx.textAlign = 'center';
+      latheCtx.textBaseline = 'middle';
+      latheCtx.fillText('🕊️', cx, cy - 2);
+
+      latheCtx.font = '600 7.5px "PocketGull Mono", monospace';
+      latheCtx.fillStyle = 'rgba(148, 163, 184, 0.8)';
+      latheCtx.fillText('PHILOCARDIA BASIN', cx, cy + 16);
+
+      latheCtx.save();
+      latheCtx.font = '700 8.5px "PocketGull Mono", monospace';
+      latheCtx.fillStyle = '#fb923c';
+      latheCtx.textAlign = 'left';
+      latheCtx.fillText('🍵 360° STATIONARY RIM · 33.5°C THERMAL MASS · MAGLEV CLOSED-LOOP FLUME', 20, 20);
+      latheCtx.restore();
+
+      latheCtx.save();
+      latheCtx.font = '600 8px "PocketGull Mono", monospace';
+      latheCtx.fillStyle = '#38bdf8';
+      latheCtx.textAlign = 'right';
+      latheCtx.fillText('0.00 mL/hr Net Water Loss · Dry-Water Meniscus', w - 20, 20);
+      latheCtx.restore();
+    }
+
     function renderLathe(now) {
       if (!latheCanvas || !latheCtx) return;
       const rect = latheCanvas.getBoundingClientRect();
@@ -3047,6 +3490,16 @@
 
       const dt = Math.min(0.05, (now - latheState.lastTime) / 1000);
       latheState.lastTime = now;
+
+      if (latheState.chassisMode === 'pixel') {
+        renderPixelChassis(w, h, now, dt);
+        requestAnimationFrame(renderLathe);
+        return;
+      } else if (latheState.chassisMode === 'basin') {
+        renderBasinChassis(w, h, now, dt);
+        requestAnimationFrame(renderLathe);
+        return;
+      }
 
       if (latheState.isMotorRunning) {
         const charsPerSec = (latheState.wpm * 6.5) / 60;
@@ -3385,36 +3838,78 @@
     }
 
     if (latheCanvas) {
+      function getCanvasRelativePos(e) {
+        const rect = latheCanvas.getBoundingClientRect();
+        return {
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top
+        };
+      }
+
       latheCanvas.addEventListener('pointerdown', (e) => {
         latheState.isDragging = true;
         latheState.lastY = e.clientY;
+        latheState.lastX = e.clientX;
         latheState.angularVelocity = 0;
         latheCanvas.setPointerCapture(e.pointerId);
+
+        const pos = getCanvasRelativePos(e);
+        latheState.touchPt = { x: pos.x, y: pos.y, active: true };
+
+        if (latheState.chassisMode === 'pixel') {
+          triggerPixelShear(pos.x, pos.y);
+        }
       });
 
       latheCanvas.addEventListener('pointermove', (e) => {
+        const pos = getCanvasRelativePos(e);
+        if (latheState.touchPt && latheState.touchPt.active) {
+          latheState.touchPt.x = pos.x;
+          latheState.touchPt.y = pos.y;
+        }
+
         if (!latheState.isDragging) return;
         const dy = e.clientY - latheState.lastY;
+        const dx = e.clientX - latheState.lastX;
         latheState.lastY = e.clientY;
+        latheState.lastX = e.clientX;
 
-        const angleDelta = (dy / latheState.radius) * 1.5;
-        latheState.angle += angleDelta;
-        latheState.angularVelocity = angleDelta * 30;
+        if (latheState.chassisMode === 'pixel') {
+          const row = Math.floor(pos.y / 24);
+          if (row !== latheState.lastGlidingRow) {
+            latheState.lastGlidingRow = row;
+            triggerPixelShear(pos.x, pos.y);
+          }
+        } else if (latheState.chassisMode === 'basin') {
+          latheState.basinAngle += (dy / 80) * 1.5;
+        } else {
+          const angleDelta = (dy / latheState.radius) * 1.5;
+          latheState.angle += angleDelta;
+          latheState.angularVelocity = angleDelta * 30;
+        }
       });
 
       latheCanvas.addEventListener('pointerup', (e) => {
         latheState.isDragging = false;
+        if (latheState.touchPt) latheState.touchPt.active = false;
         try { latheCanvas.releasePointerCapture(e.pointerId); } catch (_) {}
       });
 
       latheCanvas.addEventListener('pointercancel', () => {
         latheState.isDragging = false;
+        if (latheState.touchPt) latheState.touchPt.active = false;
       });
 
       latheCanvas.addEventListener('wheel', (e) => {
         e.preventDefault();
         const delta = Math.sign(e.deltaY) * 2.5;
-        latheState.angularVelocity += delta;
+        if (latheState.chassisMode === 'pixel') {
+          triggerPixelShear(100, 100);
+        } else if (latheState.chassisMode === 'basin') {
+          latheState.basinAngle += delta * 0.04;
+        } else {
+          latheState.angularVelocity += delta;
+        }
       }, { passive: false });
     }
 
