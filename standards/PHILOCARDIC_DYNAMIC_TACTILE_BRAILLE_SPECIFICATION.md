@@ -4,9 +4,10 @@
 *A Mathematical, Biomechanical & Psychophysical Specification for Paper-Conserving, High-Velocity, Affective Tactile Reading for the Blind*
 
 **Lead Architect**: Phil Gear & The PocketGull Project Authors  
+**Assignee & IP Holding Entity**: PocketGull LLC (Portland, Oregon, USA)  
 **Consensus Standards**: ISO/TR 11548 (Tactile reading), ISO 17049 (Braille equipment & tactile dots), Unified English Braille (UEB), WCAG 2.2 AAA, IEEE 11073 Telemetry, UNDRIP Sovereign Accord (Articles 13, 14, 24, 31)  
 **Document Identifier**: `SPEC-POCKETGULL-BRAILLE-RSTP-2026-V1`  
-**License**: Open Access under Creative Commons Attribution 4.0 International (CC-BY 4.0) & SIL Open Font License 1.1  
+**License & Governance**: Open Digital Typography (SIL OFL 1.1 / CC-BY 4.0); Hardware Inventions, Mechanical Mandrel Apparatus & Soft-Robotic Patents Assigned Exclusively to PocketGull LLC (All Rights Reserved)  
 
 ---
 
@@ -425,5 +426,38 @@ The Philocardia Soft-Robotic Lathe is engineered specifically to be **easy on th
 
 ---
 
-*This specification is maintained by Phil Gear and the PocketGull Typefoundry as part of the radical clinical inclusion charter for open-source digital typography.*
+## 🏛️ 10. Intellectual Property, Patent Assignment & Proprietary Hardware Governance (PocketGull LLC)
+
+### 10.1 Worldwide Ownership & Assignment Declaration
+1. **Exclusive Title & Assignment**:
+   All right, title, and interest throughout the world in and to the technical inventions, biomechanical architectures, apparatus designs, mechanical kinematics, pneumatic/fluidic distribution manifolds, mathematical formulations, and engineering disclosures set forth in this specification—including without limitation:
+   - The **Tactile Lathe & Rotary Mandrel Architecture** (Sections 8.1–8.5);
+   - The **Soft-Robotic Micro-Pneumatic Inflating and Deflating Elastomeric Nibs** (Section 8.6);
+   - The **Sub-Nociceptive "Doesn't Hurt" Biomechanical Ergonomics & Contact Thresholds** (Section 8.7);
+   - The **Rapid Serial Tactile Presentation (RSTP) Dwell Time Timing Engine & Bionic Tactile Fixation Matrix** (Sections 3 & 4);
+   - The **Semantic Morphological Compression (Grade 3+ Sub-Word Tokenizer)** (Section 5); and
+   - The **PocketGull Story Capsule, Spindle-Gull & PocketRoller Hardware Enclosures** (Sections 7 & 8.3);
+   are the sole, exclusive, and unencumbered intellectual property of **PocketGull LLC** (a limited liability company organized and existing under the laws of the State of Oregon, USA), as assignee of sole inventor **Phil Gear**.
+
+2. **Patent Disclosures & International Priority**:
+   - The inventions described herein constitute priority disclosures for international patent filings (including USPTO Non-Provisional Patent Applications, Patent Cooperation Treaty [PCT] International Applications, European Patent Office [EPO] validations, and corresponding worldwide national stage entries).
+   - PocketGull LLC reserves all statutory patent rights, continuations, continuations-in-part, divisional applications, design patents, and utility models claiming priority to this document and its constituent laboratory implementations.
+
+3. **Dual Open-Standard & Hardware Governance Accord**:
+   - **Open-Source Software & Digital Typographic Binaries**: The digital font software, TrueType outline data (`glyf`/`fvar`), and open web stylesheets are licensed openly under the **SIL Open Font License 1.1 (SIL OFL 1.1)** and Creative Commons Attribution 4.0 International (**CC-BY 4.0**), guaranteeing that blind individuals, educators, non-profit institutions, hospitals, and Indigenous language publishers may freely read, render, and typeset PocketGull Braille optotypes without royalty or encumbrance.
+   - **Commercial Hardware & Proprietary Manufacturing Protection**: Nothing in this specification, nor in the SIL OFL 1.1 or CC-BY 4.0 licenses of the accompanying font binaries, conveys or implies any patent license, commercial manufacturing right, or commercial hardware distribution right in the physical apparatus, rotary lathe mechanisms, micro-pneumatic distribution manifolds, or elastomeric inflatable nib assemblies described herein. Commercial manufacturing, sale, lease, or clinical commercialization of hardware devices embodying these proprietary claims requires an explicit, written Commercial Hardware Licensing Agreement executed by an authorized officer of **PocketGull LLC**.
+   - **Trademarks & Trade Dress**: "PocketGull", "Philocardia", "Spindle-Gull", "PocketRoller", "CloudTouch", and the PocketGull avian emblem are proprietary trademarks and trade dress of PocketGull LLC and Phil Gear. All rights reserved.
+
+### 10.2 Legal Inquiries & Licensing Administration
+For academic partnership, clinical trial qualification, or commercial hardware manufacturing inquiries:
+* **Entity**: PocketGull LLC
+* **Attention**: Office of the General Counsel & Intellectual Property Administration
+* **Correspondence**: `legal@pocketgull.app` / `dpo@pocketgull.app`
+* **Address**: PocketGull LLC, 101 SW Madison St #1664, Portland, Oregon 97207 USA
+* **Website**: `https://pocketgull.app`
+
+---
+
+*This specification is maintained by Phil Gear and PocketGull LLC as part of the radical clinical inclusion charter for open-source digital typography.*
+
 
