@@ -60,10 +60,19 @@ function createLocalServer() {
 
       const ext = path.extname(fullPath).toLowerCase();
       const contentType = MIME_TYPES[ext] || 'application/octet-stream';
+      const isFont = ext === '.woff2' || ext === '.ttf';
+      const isImage = ext === '.png' || ext === '.svg' || ext === '.ico';
+      const cacheControl = isFont
+        ? 'public, max-age=31536000, immutable'
+        : isImage
+        ? 'public, max-age=2592000, immutable'
+        : 'public, max-age=86400, stale-while-revalidate=604800';
+
       res.writeHead(200, {
         'Content-Type': contentType,
         'Content-Length': stats.size,
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
+        'Cache-Control': cacheControl
       });
       fs.createReadStream(fullPath).pipe(res);
     });

@@ -86,3 +86,23 @@ test('Observatory 125+ Invariant: firebase.json enforces all mandatory security 
     'firebase.json CSP must NOT contain unsafe-inline in script-src'
   );
 });
+
+test('Performance Invariant: _headers and firebase.json enforce efficient cache lifetimes (1-year immutable fonts)', () => {
+  const headersContent = fs.readFileSync(path.join('_headers'), 'utf8');
+  assert.match(
+    headersContent,
+    /Cache-Control:\s*public,\s*max-age=31536000,\s*immutable/,
+    '_headers must declare 1-year immutable caching for font binaries'
+  );
+
+  const firebaseConfig = JSON.parse(fs.readFileSync(path.join('firebase.json'), 'utf8'));
+  const fontRule = firebaseConfig.hosting.headers.find(h => h.source === 'fonts/**' || h.source.includes('woff2'));
+  assert.ok(fontRule, 'firebase.json must contain explicit cache rule for font assets');
+  const fontHeaders = new Map(fontRule.headers.map(h => [h.key, h.value]));
+  assert.equal(
+    fontHeaders.get('Cache-Control'),
+    'public, max-age=31536000, immutable',
+    'firebase.json must declare 1-year immutable caching for font assets'
+  );
+});
+

@@ -8,6 +8,8 @@ class SanctuaryServer {
   final Directory projectRoot;
   final int port;
   final List<WebSocket> _clients = [];
+  final Map<String, List<int>> _compressedCache = {};
+  final Map<String, int> _cacheMtimes = {};
 
   SanctuaryServer({required this.projectRoot, this.port = 8770});
 
@@ -65,6 +67,8 @@ class SanctuaryServer {
   }
 
   void _broadcastReload(String changedFile) {
+    _compressedCache.clear();
+    _cacheMtimes.clear();
     final msg = jsonEncode({
       'event': 'reload',
       'file': changedFile,
@@ -194,12 +198,23 @@ class SanctuaryServer {
     final ext = path.contains('.') ? path.split('.').last.toLowerCase() : '';
     final isHtml = ext == 'html';
     final isFont = ext == 'woff2' || ext == 'ttf' || ext == 'otf';
-    final isStaticAsset = ext == 'css' || ext == 'js' || ext == 'svg' || ext == 'png' || ext == 'webp' || ext == 'ico' || ext == 'json';
+    final isImage = ext == 'png' || ext == 'webp' || ext == 'svg' || ext == 'ico' || ext == 'jpg' || ext == 'jpeg';
+    final isStaticAsset = ext == 'css' || ext == 'js' || ext == 'json';
 
-    if (isFont || isStaticAsset) {
-      request.response.headers.set(HttpHeaders.cacheControlHeader, 'no-cache, must-revalidate');
+    request.response.headers.set('X-Content-Type-Options', 'nosniff');
+
+    if (isFont) {
+      request.response.headers.set(HttpHeaders.cacheControlHeader, 'public, max-age=31536000, immutable');
+      request.response.headers.set('Access-Control-Allow-Origin', '*');
+    } else if (isImage) {
+      request.response.headers.set(HttpHeaders.cacheControlHeader, 'public, max-age=2592000, immutable');
+    } else if (isStaticAsset) {
+      request.response.headers.set(HttpHeaders.cacheControlHeader, 'public, max-age=86400, stale-while-revalidate=604800');
+      if (ext == 'css') {
+        request.response.headers.set('Access-Control-Allow-Origin', '*');
+      }
     } else {
-      request.response.headers.set(HttpHeaders.cacheControlHeader, 'no-cache, no-store, must-revalidate');
+      request.response.headers.set(HttpHeaders.cacheControlHeader, 'no-cache, must-revalidate');
     }
 
     if (await targetFile.exists()) {
@@ -212,6 +227,7 @@ class SanctuaryServer {
       if (path.endsWith('.svg')) request.response.headers.contentType = ContentType('image', 'svg+xml');
       if (path.endsWith('.png')) request.response.headers.contentType = ContentType('image', 'png');
       if (path.endsWith('.webp')) request.response.headers.contentType = ContentType('image', 'webp');
+      if (path.endsWith('.jpg') || path.endsWith('.jpeg')) request.response.headers.contentType = ContentType('image', 'jpeg');
 
       if (request.method == 'HEAD') {
         request.response.statusCode = HttpStatus.ok;
@@ -224,7 +240,15 @@ class SanctuaryServer {
       if (isCompressible && acceptEncoding.contains('gzip')) {
         request.response.headers.set(HttpHeaders.contentEncodingHeader, 'gzip');
         request.response.headers.set(HttpHeaders.varyHeader, 'Accept-Encoding');
-        await targetFile.openRead().transform(gzip.encoder).pipe(request.response);
+        final mtime = targetFile.lastModifiedSync().millisecondsSinceEpoch;
+        List<int>? bytes = _compressedCache[path];
+        if (bytes == null || _cacheMtimes[path] != mtime) {
+          bytes = gzip.encode(await targetFile.readAsBytes());
+          _compressedCache[path] = bytes;
+          _cacheMtimes[path] = mtime;
+        }
+        request.response.add(bytes);
+        await request.response.close();
       } else {
         await targetFile.openRead().pipe(request.response);
       }

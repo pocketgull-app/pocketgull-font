@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="License the PocketGull Commercial Superfamily (38 Cuts + Variable Font). Clinical optotype acuity, ISMP character disambiguation, and 600 UPM fixed telemetry.">
+  <title>PocketGull™ · Commercial License & Storefront</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="fonts.css?v=3.1.0">
+  <link rel="stylesheet" href="pocketgull.css?v=3.1.0">
+  <style>
+    :root {
+      --bg-dark: #060912;
+      --bg-surface: rgba(15, 23, 42, 0.85);
+      --bg-card: #0f172a;
+      --bg-card-hover: #1e293b;
+      --border-subtle: rgba(255, 255, 255, 0.12);
+      --border-active: #38bdf8;
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --teal-accent: #2dd4bf;
+      --gold-accent: #f59e0b;
+      --sky-accent: #38bdf8;
+      --sans-stack: 'PocketGull', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --mono-stack: 'PocketGull Mono', ui-monospace, Menlo, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: var(--sans-stack);
+      line-height: 1.5;
+      padding: 0 1rem 4rem;
+      min-height: 100vh;
+    }
+
+    header.store-header {
+      max-width: 1100px;
+      margin: 2rem auto 2.5rem;
+      text-align: center;
+    }
+
+    .brand-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 2.5rem;
+    }
+
+    .brand-link {
+      color: var(--sky-accent);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-tag {
+      font-family: var(--mono-stack);
+      font-size: 0.8rem;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--sky-accent);
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    h1.store-title {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ffffff 40%, var(--sky-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p.store-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .spec-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .badge {
+      font-family: var(--mono-stack);
+      font-size: 0.75rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+    }
+
+    main.checkout-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    @media (min-width: 860px) {
+      main.checkout-container {
+        grid-template-columns: 1.4fr 1fr;
+      }
+    }
+
+    /* Tier Selector Cards */
+    .tier-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .tier-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .tier-card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(56, 189, 248, 0.5);
+    }
+
+    .tier-card.active {
+      border-color: var(--sky-accent);
+      background: rgba(15, 23, 42, 0.95);
+      box-shadow: 0 0 24px rgba(56, 189, 248, 0.15);
+    }
+
+    .tier-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .tier-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .tier-price {
+      font-family: var(--mono-stack);
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--teal-accent);
+    }
+
+    .tier-tag {
+      font-family: var(--mono-stack);
+      font-size: 0.7rem;
+      background: #0284c7;
+      color: #fff;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-left: 0.5rem;
+    }
+
+    .tier-meta {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .tier-list {
+      list-style: none;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .tier-list li::before {
+      content: '✓ ';
+      color: var(--teal-accent);
+      font-weight: bold;
+    }
+
+    /* Checkout Portal Panel */
+    .checkout-panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      position: sticky;
+      top: 2rem;
+      height: fit-content;
+    }
+
+    .panel-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.75rem;
+    }
+
+    .summary-box {
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 8px;
+      padding: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .summary-row.total {
+      font-size: 1.2rem;
+      font-weight: 800;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 0.5rem;
+      margin-top: 0.5rem;
+      color: var(--teal-accent);
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .input-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .input-field {
+      background: #020617;
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      color: #fff;
+      font-family: var(--sans-stack);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .input-field:focus {
+      border-color: var(--sky-accent);
+    }
+
+    .paypal-wrapper {
+      margin-top: 0.5rem;
+      min-height: 120px;
+    }
+
+    .status-box {
+      display: none;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-family: var(--mono-stack);
+      margin-top: 0.5rem;
+    }
+
+    .status-box.error {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+    }
+
+    .fallback-box {
+      display: none;
+      text-align: center;
+      padding: 1rem;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 8px;
+      font-size: 0.85rem;
+    }
+
+    .fallback-btn {
+      display: inline-block;
+      margin-top: 0.75rem;
+      background: #0070ba;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+    }
+
+    .legal-note {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .legal-note a {
+      color: var(--sky-accent);
+      text-decoration: underline;
+    }
+  </style>
+
+  <!-- Load official PayPal JavaScript SDK (Client ID configured for production / sandbox) -->
+  <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD&components=buttons&enable-funding=venmo,card"></script>
+</head>
+<body>
+
+  <header class="store-header">
+    <nav class="brand-nav">
+      <a href="index.html" class="brand-link">
+        <span>🕊️</span> PocketGull™ Master Specimen
+      </a>
+      <div style="display:flex; gap:0.5rem; align-items:center;">
+        <span class="nav-tag">Foundry Release v3.1.0</span>
+        <span class="nav-tag" style="border-color:var(--teal-accent); color:var(--teal-accent);">Direct Foundry Checkout</span>
+      </div>
+    </nav>
+
+    <h1 class="store-title">PocketGull™ Commercial Suite</h1>
+    <p class="store-subtitle">
+      Optotypically calibrated clinical and telemetry superfamily engineered for life-critical healthcare, diagnostic consoles, and human-centered digital products.
+    </p>
+
+    <div class="spec-badges">
+      <span class="badge">38 Production Cuts</span>
+      <span class="badge">2-Axis Continuous Variable VF</span>
+      <span class="badge">ISMP Disambiguation Matrix</span>
+      <span class="badge">Louise Sloan 5:1 Optotype Ratio</span>
+      <span class="badge">Strict 600 UPM Telemetry</span>
+      <span class="badge">W3C OTS Memory-Safe</span>
+    </div>
+  </header>
+
+  <main class="checkout-container">
+    <!-- Left Column: Tier Selection Cards -->
+    <section class="tier-grid" aria-label="Select Commercial License Tier">
+      <!-- Solo Card -->
+      <article class="tier-card" data-tier="solo" aria-selected="false" tabindex="0">
+        <div class="tier-header">
+          <div class="tier-title">Solo Designer / Indie</div>
+          <div class="tier-price">$49</div>
+        </div>
+        <div class="tier-meta">For freelancers, solo developers, and independent creators.</div>
+        <ul class="tier-list">
+          <li>1 Named User across up to 3 personal workstations</li>
+          <li>Unlimited website pageviews (Zero impression caps)</li>
+          <li>Embedding in up to 2 commercial applications (Web, iOS, Android)</li>
+          <li>Full TrueType (.ttf), OpenType (.otf), and Web (.woff2) cuts</li>
+          <li>Perpetual Commercial EULA with standard foundry support</li>
+        </ul>
+      </article>
+
+      <!-- Studio Card (Default Active) -->
+      <article class="tier-card active" data-tier="studio" aria-selected="true" tabindex="0">
+        <div class="tier-header">
+          <div class="tier-title">
+            Studio / Agency <span class="tier-tag">Most Popular</span>
+          </div>
+          <div class="tier-price">$149</div>
+        </div>
+        <div class="tier-meta">For design agencies, software studios, publishers, and startups.</div>
+        <ul class="tier-list">
+          <li>Up to 10 Users / Workstations across client campaigns</li>
+          <li>Unlimited commercial client projects, corporate identities, & packaging</li>
+          <li>Embedding in up to 10 commercial apps, SaaS portals, or game titles</li>
+          <li>Full 2-Axis Continuous Variable Font (Weight 100–900 & Slant)</li>
+          <li>Priority Foundry Engineering & Typographic bugfix support</li>
+        </ul>
+      </article>
+
+      <!-- Enterprise Card -->
+      <article class="tier-card" data-tier="enterprise" aria-selected="false" tabindex="0">
+        <div class="tier-header">
+          <div class="tier-title">
+            Enterprise / Health System <span class="tier-tag" style="background:#059669;">Clinical Grade</span>
+          </div>
+          <div class="tier-price">$499</div>
+        </div>
+        <div class="tier-meta">For hospital systems, medical device manufacturers, and EHR software.</div>
+        <ul class="tier-list">
+          <li>Unlimited Users & Enterprise-wide installation</li>
+          <li>Full Electronic Health Record (EHR) & Bedside Telemetry distribution</li>
+          <li>Medical device firmware and diagnostic hardware display embedding</li>
+          <li>Full Legal IP Warranty & Louise Sloan 5:1 Acuity Indemnification</li>
+          <li>Custom font subsetting and direct access to designer Phil Gear</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- Right Column: Interactive PayPal Checkout Panel -->
+    <aside class="checkout-panel" aria-label="Order Summary & Checkout">
+      <h2 class="panel-title">Order Summary</h2>
+
+      <div class="summary-box">
+        <div class="summary-row">
+          <span style="color:var(--text-muted);">Selected License:</span>
+          <strong id="selected-tier-name">Studio / Agency</strong>
+        </div>
+        <div class="summary-row">
+          <span style="color:var(--text-muted);">Entitlement:</span>
+          <span id="selected-license-summary">Up to 10 Workstations • 10 Applications</span>
+        </div>
+        <div class="summary-row">
+          <span style="color:var(--text-muted);">Package Delivery:</span>
+          <span>Instant ZIP (145 MB)</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total (USD):</span>
+          <span id="selected-price-display">$149.00</span>
+        </div>
+      </div>
+
+      <!-- Licensee / Company Name Input -->
+      <div class="input-group">
+        <label for="licensee-name-input" class="input-label">
+          Company or Licensee Legal Name <span style="color:var(--teal-accent);">*</span>
+        </label>
+        <input 
+          type="text" 
+          id="licensee-name-input" 
+          class="input-field" 
+          placeholder="e.g. Acme Health LLC or Jane Doe"
+          maxlength="120"
+          required
+        >
+        <span style="font-size:0.75rem; color:var(--text-muted);">
+          Printed on your counter-signed Commercial EULA certificate.
+        </span>
+      </div>
+
+      <!-- PayPal Smart Button Mount Point -->
+      <div class="paypal-wrapper">
+        <div id="paypal-button-container"></div>
+        <div id="checkout-status-msg" class="status-box"></div>
+      </div>
+
+      <!-- Fallback container for blocked scripts -->
+      <div id="paypal-fallback-container" class="fallback-box">
+        <p>Direct PayPal checkout link:</p>
+        <a href="https://paypal.me/philgear" class="fallback-btn" target="_blank" rel="noopener noreferrer">
+          Pay via PayPal.Me & Request License
+        </a>
+      </div>
+
+      <p class="legal-note">
+        Protected by 256-bit TLS encryption. By completing checkout you agree to the 
+        <a href="COMMERCIAL_LICENSE_EULA.md" target="_blank">PocketGull Commercial EULA</a>. 
+        Questions? Contact <a href="mailto:licensing@pocketgull.app">licensing@pocketgull.app</a>.
+      </p>
+    </aside>
+  </main>
+
+  <!-- Client-side tier selector and checkout controller -->
+  <script src="js/commercial_checkout.js"></script>
+</body>
+</html>

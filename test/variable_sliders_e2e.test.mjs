@@ -189,10 +189,13 @@ test('E2E [DOM Heart Tittle Showcase]: index.html & specimen-broadside.html feat
 
 test('E2E [JS Invariant]: index.html inline script compiles with 0 syntax errors and exports all event handlers', () => {
   const indexHtml = fs.readFileSync('index.html', 'utf-8');
-  const scriptMatch = indexHtml.match(/<script\b[^>]*>([\s\S]*?)<\/script\s*>/i);
-  assert.ok(scriptMatch, 'index.html must contain an inline script tag');
+  const scriptStartTag = '<script>';
+  const scriptEndTag = '</script>';
+  const startIndex = indexHtml.indexOf(scriptStartTag);
+  const endIndex = indexHtml.lastIndexOf(scriptEndTag);
+  assert.ok(startIndex !== -1 && endIndex !== -1 && endIndex > startIndex, 'index.html must contain an inline script tag');
 
-  const scriptCode = scriptMatch[1];
+  const scriptCode = indexHtml.slice(startIndex + scriptStartTag.length, endIndex);
   assert.doesNotThrow(() => {
     new vm.Script(scriptCode);
   }, 'index.html inline script must compile cleanly without syntax errors');

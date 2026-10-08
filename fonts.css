@@ -1598,14 +1598,14 @@ body.red-dash .iphillyg-heart::after {
 .iphillyg-heart:hover::after,
 .philocardia-j:hover::after {
   transform: translate(-50%, -50%) scale(1.22);
-  color: #f43f5e;
-  filter: drop-shadow(0 0 5px rgba(244, 63, 94, 0.8));
+  color: #10b981;
+  filter: drop-shadow(0 0 5px rgba(16, 185, 129, 0.8));
 }
 
 .philocardia-arabic-heart:hover::after {
   transform: translateX(50%) scale(1.22);
-  color: #f43f5e;
-  filter: drop-shadow(0 0 5px rgba(244, 63, 94, 0.8));
+  color: #10b981;
+  filter: drop-shadow(0 0 5px rgba(16, 185, 129, 0.8));
 }
 
 /* Physiological S1/S2 Cardiac Pulse Animation (72 BPM = 0.833s period) */

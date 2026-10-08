@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>License Activated · PocketGull™ Commercial Suite</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="fonts.css?v=3.1.0">
+  <style>
+    :root {
+      --bg-dark: #060912;
+      --bg-card: #0f172a;
+      --border-subtle: rgba(255, 255, 255, 0.12);
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --teal-accent: #2dd4bf;
+      --sky-accent: #38bdf8;
+      --sans-stack: 'PocketGull', -apple-system, sans-serif;
+      --mono-stack: 'PocketGull Mono', ui-monospace, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: var(--sans-stack);
+      line-height: 1.6;
+      padding: 3rem 1.5rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .success-container {
+      max-width: 760px;
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono-stack);
+      font-size: 0.85rem;
+      color: var(--teal-accent);
+      background: rgba(45, 212, 191, 0.12);
+      border: 1px solid rgba(45, 212, 191, 0.3);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 1.5rem;
+    }
+
+    h1.success-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      color: #fff;
+    }
+
+    p.lead-text {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+
+    .details-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .details-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .details-table td:first-child {
+      color: var(--text-muted);
+      width: 35%;
+      font-weight: 500;
+    }
+
+    .details-table td:last-child {
+      font-family: var(--mono-stack);
+      color: #fff;
+    }
+
+    .download-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-download-primary {
+      flex: 1;
+      min-width: 240px;
+      background: linear-gradient(135deg, #0284c7, #0ea5e9);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 1rem 1.75rem;
+      border-radius: 8px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 16px rgba(2, 132, 199, 0.4);
+      transition: transform 0.15s ease;
+    }
+
+    .btn-download-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-download-secondary {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-download-secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      border-color: var(--sky-accent);
+    }
+
+    .quickstart-box {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .quickstart-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--sky-accent);
+      margin-bottom: 0.75rem;
+    }
+
+    pre.code-block {
+      background: #020617;
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-family: var(--mono-stack);
+      font-size: 0.85rem;
+      color: #38bdf8;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 0.5rem;
+    }
+
+    .footer-support {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .footer-support a {
+      color: var(--sky-accent);
+    }
+  </style>
+</head>
+<body>
+
+  <main class="success-container">
+    <div class="status-badge">
+      <span>●</span> Commercial License Issued & Perpetual Rights Conferred
+    </div>
+
+    <h1 class="success-title">Thank You for Your Order!</h1>
+    <p class="lead-text">
+      Your payment was processed successfully via PayPal. Your perpetual commercial rights to the PocketGull Typeface Superfamily are now active.
+    </p>
+
+    <table class="details-table" aria-label="Purchase Receipt Details">
+      <tbody>
+        <tr>
+          <td>Transaction ID</td>
+          <td id="out-order-id">PG-PAYPAL-REF</td>
+        </tr>
+        <tr>
+          <td>Authorized Licensee</td>
+          <td id="out-licensee">Commercial Licensee</td>
+        </tr>
+        <tr>
+          <td>Licensed Tier</td>
+          <td id="out-tier">Studio / Agency (10 Workstations)</td>
+        </tr>
+        <tr>
+          <td>Superfamily Version</td>
+          <td>v3.1.0 (38 Cuts + 2-Axis Variable)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="download-actions">
+      <a href="PocketGull-v3.1.0-Superfamily.zip" download="PocketGull-v3.1.0-Superfamily.zip" id="btn-main-download" class="btn-download-primary">
+        <span>⬇</span> Download Complete Superfamily ZIP (99.5 MB)
+      </a>
+      <button type="button" id="btn-cert-download" class="btn-download-secondary">
+        Download EULA Certificate (.txt)
+      </button>
+    </div>
+
+    <section class="quickstart-box">
+      <div class="quickstart-title">⚡ Instant Webfont Integration</div>
+      <p style="font-size:0.85rem; color:var(--text-secondary);">
+        Unpack the ZIP and copy <code>pocketgull.css</code> into your project assets:
+      </p>
+      <pre class="code-block">&lt;link rel="stylesheet" href="/assets/fonts/pocketgull.css"&gt;
+
+/* Enable ISMP Slashed Zero & Clinical Disambiguation */
+.clinical-readout {
+  font-family: 'PocketGull', sans-serif;
+  font-feature-settings: "zero" 1, "cv08" 1, "cv05" 1, "ss02" 1;
+}</pre>
+    </section>
+
+    <div class="footer-support">
+      A copy of this receipt has been emailed to your PayPal address.<br>
+      Questions or custom engineering requests? Reach designer Phil Gear at 
+      <a href="mailto:licensing@pocketgull.app">licensing@pocketgull.app</a>.
+    </div>
+  </main>
+
+  <script src="js/commercial_success.js"></script>
+</body>
+</html>

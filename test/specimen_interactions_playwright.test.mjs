@@ -87,19 +87,28 @@ for (const { name: browserName, launcher } of BROWSERS) {
     const baseUrl = `http://127.0.0.1:${port}/index.html`;
 
     let browser;
+    let context;
+    let page;
     try {
       try {
         browser = await launcher.launch({ headless: true });
+        context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+        page = await context.newPage();
       } catch (launchErr) {
-        if (launchErr.message && launchErr.message.includes("Executable doesn't exist")) {
-          console.warn(`[WARN] Skipping ${browserName}: browser executable not installed on this runner.`);
+        const msg = launchErr?.message || '';
+        if (
+          msg.includes("Executable doesn't exist") ||
+          msg.includes('Target page, context or browser has been closed') ||
+          msg.includes('Process failed to launch') ||
+          msg.includes('spawn')
+        ) {
+          console.warn(`[WARN] Skipping ${browserName}: browser executable or process blocked by OS security policy (e.g. Smart App Control) or missing.`);
+          if (browser) await browser.close().catch(() => {});
           server.close();
           return;
         }
         throw launchErr;
       }
-      const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
-      const page = await context.newPage();
 
       const consoleErrors = [];
       page.on('console', (msg) => {

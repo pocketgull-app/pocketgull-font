@@ -943,7 +943,7 @@
     }
 
     .ismp-feat-heart {
-      color: var(--rose);
+      color: var(--emerald);
       font-feature-settings: "ss07" 1;
     }
 
@@ -2748,7 +2748,7 @@
         <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; align-items: center;">
           <span style="font-size: 11px; color: var(--text-muted); font-family: 'PocketGull Mono'; margin-right: 4px;">Quick Insert:</span>
           <button type="button" class="vf-chip vf-chip-purple" onclick="setVfSample('braille')">⠁⠃⠉ Tactile Braille</button>
-          <button type="button" class="vf-chip vf-chip-rose" onclick="setVfSample('hearts')">💖 Philocardia Hearts</button>
+          <button type="button" class="vf-chip vf-chip-emerald" onclick="setVfSample('hearts')">💚 Philocardia Hearts</button>
           <button type="button" class="vf-chip vf-chip-cyan" onclick="setVfSample('ismp')">0̸ Slashed Zero &amp; Dosage</button>
           <button type="button" class="vf-chip vf-chip-emerald" onclick="setVfSample('sloan')">👁️ Sloan 5:1 Acuity</button>
           <button type="button" class="vf-chip vf-chip-blue" onclick="setVfSample('inuktitut')">ᐃ Inuktitut Syllabics</button>
@@ -2916,17 +2916,17 @@
         </div>
 
         <!-- 11. Philocardia Heart Tittle Card -->
-        <div class="ismp-card" id="ismpCardHeart" data-inspect="philocardia_hearts" tabindex="0" role="region" aria-label="Philocardia Hearts and Healer Alternates" style="border-color: rgba(251, 113, 133, 0.35); background: linear-gradient(180deg, rgba(251, 113, 133, 0.05) 0%, var(--card-bg) 100%);">
-          <div class="ismp-title" style="color: var(--rose); display: flex; justify-content: space-between; align-items: center;">
+        <div class="ismp-card" id="ismpCardHeart" data-inspect="philocardia_hearts" tabindex="0" role="region" aria-label="Philocardia Hearts and Healer Alternates" style="border-color: rgba(16, 185, 129, 0.35); background: linear-gradient(180deg, rgba(16, 185, 129, 0.05) 0%, var(--card-bg) 100%);">
+          <div class="ismp-title" style="color: var(--emerald); display: flex; justify-content: space-between; align-items: center;">
             <span>Philocardia Hearts • The Healer Font (cv09 / ss07)</span>
             <div style="display: flex; gap: 6px; align-items: center;">
-              <span class="ismp-inspect-badge ismp-badge-rose">🔬 Inspect</span>
-              <button type="button" id="heartBpmBadge" title="Click to cycle cardiac pacing: 72 BPM -> 60 BPM -> Static" style="background: rgba(251, 113, 133, 0.18); border: 1px solid rgba(251, 113, 133, 0.4); color: var(--rose); font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; cursor: pointer;">72 BPM</button>
+              <span class="ismp-inspect-badge" style="background: rgba(16, 185, 129, 0.18); color: var(--emerald); border: 1px solid rgba(16, 185, 129, 0.3);">🔬 Inspect</span>
+              <button type="button" id="heartBpmBadge" title="Click to cycle cardiac pacing: 72 BPM -> 60 BPM -> Static" style="background: rgba(16, 185, 129, 0.18); border: 1px solid rgba(16, 185, 129, 0.4); color: var(--emerald); font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; cursor: pointer;">72 BPM</button>
             </div>
           </div>
           <div class="ismp-comparison" style="font-size: 1.35rem; display: flex; justify-content: space-around; align-items: center; white-space: nowrap; gap: 8px;">
             <span class="ismp-standard" style="white-space: nowrap; font-size: 1.35rem;">clinical</span>
-            <span class="ismp-safe ismp-feat-heart" id="ismpHeartComparison" style="color: var(--rose); white-space: nowrap; font-size: 1.35rem;">cl<span class="philocardia-heart philocardia-pacing-72" title="Philocardia Heart Tittle">ı</span>n<span class="philocardia-heart philocardia-pacing-72" title="Philocardia Heart Tittle">ı</span>cal</span>
+            <span class="ismp-safe ismp-feat-heart" id="ismpHeartComparison" style="color: var(--emerald); white-space: nowrap; font-size: 1.35rem;">cl<span class="philocardia-heart philocardia-pacing-72" title="Philocardia Heart Tittle">ı</span>n<span class="philocardia-heart philocardia-pacing-72" title="Philocardia Heart Tittle">ı</span>cal</span>
           </div>
           <div class="tittle-variety-mini-selector" id="tittleVarietyMini">
             <button type="button" class="tittle-variety-pill active" data-v="heart" title="Heart (♥): Bedside warmth &amp; lovingkindness">♥</button>
@@ -3027,30 +3027,30 @@
       </div>
 
       <!-- Interactive Philocardia Healer Banner -->
-      <div class="philocardia-healer-banner" style="margin-top: 24px; padding: 20px 24px; background: rgba(251, 113, 133, 0.04); border: 1px solid rgba(251, 113, 133, 0.25); border-radius: 12px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
+      <div class="philocardia-healer-banner" style="margin-top: 24px; padding: 20px 24px; background: rgba(16, 185, 129, 0.04); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 12px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
         <div style="flex: 1 1 340px;">
-          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--rose); font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
-            <span data-inspect="philocardia_hearts" style="cursor: pointer;">❤️ The Healer Alternate • Live Heart Tittle Studio</span>
+          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--emerald); font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+            <span data-inspect="philocardia_hearts" style="cursor: pointer;">💚 The Healer Alternate • Live Heart Tittle Studio</span>
             <span data-inspect="asclepius" style="cursor: pointer; padding: 1px 6px; border-radius: 4px; border: 1px solid rgba(45, 212, 191, 0.4); color: var(--teal-accent); font-size: 10px;" title="Inspect Rod of Asclepius procedural vector heraldry">⚕ Staff of Epidauros</span>
           </div>
           <div id="philocardiaInteractiveText" class="font-sample-bold" contenteditable="true" spellcheck="false" style="font-size: clamp(22px, 2.6vw, 32px); color: var(--sample-text); outline: none; line-height: 1.3;" title="Click to edit and test heart tittles in real time">
             Ped<span class="philocardia-heart philocardia-pacing-72">ı</span>atr<span class="philocardia-heart philocardia-pacing-72">ı</span>c Care • Fl<span class="philocardia-heart philocardia-pacing-72">ı</span>ght Sanctuary!
           </div>
           <div style="font-size: 12px; color: var(--text-muted); margin-top: 8px;" id="healerBannerMeaning">
-            💖 <strong>Philocardia:</strong> Bedside warmth, pediatric comfort, and lovingkindness. Type lowercase <code>i</code>, <code>j</code>, or <code>!</code> above.
+            💚 <strong>Philocardia:</strong> Bedside warmth, pediatric comfort, and lovingkindness. Type lowercase <code>i</code>, <code>j</code>, or <code>!</code> above.
           </div>
         </div>
         <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-end;">
           <div style="display: flex; gap: 6px; align-items: center;">
             <span style="font-size: 12px; color: var(--text-muted); font-weight: 600;">Cadence:</span>
-            <button type="button" class="healer-cadence-btn active" data-cadence="72" style="background: rgba(251, 113, 133, 0.2); border: 1px solid var(--rose); color: var(--rose); padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer;">72 BPM</button>
+            <button type="button" class="healer-cadence-btn active" data-cadence="72" style="background: rgba(16, 185, 129, 0.2); border: 1px solid var(--emerald); color: var(--emerald); padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer;">72 BPM</button>
             <button type="button" class="healer-cadence-btn" data-cadence="60" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); color: var(--text-muted); padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer;">60 BPM</button>
             <button type="button" class="healer-cadence-btn" data-cadence="static" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); color: var(--text-muted); padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer;">Static</button>
           </div>
           <div style="display: flex; gap: 6px; align-items: center;">
             <span style="font-size: 12px; color: var(--text-muted); font-weight: 600;">Variety:</span>
             <div id="healerVarietyToolbar" style="display: flex; gap: 4px;">
-              <button type="button" class="variety-btn active" data-variety="heart" style="padding: 4px 9px; border-radius: 5px; border: 1px solid var(--rose); background: rgba(251,113,133,0.2); color: var(--rose); font-size: 13px; cursor: pointer;" title="Heart (♥)">♥</button>
+              <button type="button" class="variety-btn active" data-variety="heart" style="padding: 4px 9px; border-radius: 5px; border: 1px solid var(--emerald); background: rgba(16,185,129,0.2); color: var(--emerald); font-size: 13px; cursor: pointer;" title="Heart (♥)">♥</button>
               <button type="button" class="variety-btn" data-variety="blossom" style="padding: 4px 9px; border-radius: 5px; border: 1px solid var(--card-border); background: rgba(255,255,255,0.05); color: var(--text-muted); font-size: 13px; cursor: pointer;" title="Blossom (✤)">✤</button>
               <button type="button" class="variety-btn" data-variety="nuqta" style="padding: 4px 9px; border-radius: 5px; border: 1px solid var(--card-border); background: rgba(255,255,255,0.05); color: var(--text-muted); font-size: 13px; cursor: pointer;" title="Nuqta (◆)">◆</button>
               <button type="button" class="variety-btn" data-variety="star" style="padding: 4px 9px; border-radius: 5px; border: 1px solid var(--card-border); background: rgba(255,255,255,0.05); color: var(--text-muted); font-size: 13px; cursor: pointer;" title="Star (✦)">✦</button>
@@ -6373,7 +6373,7 @@
           },
           "philocardia_hearts": {
             badge: "TRAUMA-INFORMED",
-            badgeColor: "#fb7185",
+            badgeColor: "#10b981",
             title: "Philocardia Hearts (cv09 / ss07 / U+2665)",
             failureMode: "Eliminates acute visual threat stimuli; restores bedside empathy and pediatric calming.",
             neuro: "Cushioned 28 UPM rounded apex fillet replaces sharp 1-pixel needle vertices, mitigating amygdala threat response.",
@@ -6381,7 +6381,7 @@
             gravOffset: "28 UPM Cushioned Apex",
             clause: "PocketGull Invariant 6; Dieter Rams Law 3 & 4",
             vectors: [
-              { type: 'path', d: 'M 270 420 C 270 340 210 260 140 260 C 70 260 50 340 50 400 C 50 520 180 660 270 760 C 360 660 490 520 490 400 C 490 340 470 260 400 260 C 330 260 270 340 270 420 Z', stroke: '#fb7185', width: 14 },
+              { type: 'path', d: 'M 270 420 C 270 340 210 260 140 260 C 70 260 50 340 50 400 C 50 520 180 660 270 760 C 360 660 490 520 490 400 C 490 340 470 260 400 260 C 330 260 270 340 270 420 Z', stroke: '#10b981', width: 14 },
               { type: 'p0', x: 250, y: 740, label: 'Apex L' },
               { type: 'p1', x: 270, y: 765, label: '28 UPM Fillet' },
               { type: 'p2', x: 290, y: 740, label: 'Apex R' },
