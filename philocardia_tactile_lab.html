@@ -1,0 +1,2043 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="PocketGull Philocardia Tactile &amp; Somatosensory Braille Laboratory: Affective touch, cardiac sinus rhythm pacing, tactile prosody, and emotional entrainment for the blind.">
+  <title>PocketGull · Philocardia Tactile &amp; Somatosensory Braille Laboratory</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="fonts.css?v=3.1.0">
+  <style>
+    :root {
+      --bg: #060913;
+      --card-bg: #0c1220;
+      --card-border: #1e293b;
+      --surface-inner: #090e18;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --cyan: #38bdf8;
+      --cyan-glow: rgba(56, 189, 248, 0.25);
+      --emerald: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.35);
+      --rose: #fb7185;
+      --rose-glow: rgba(251, 113, 133, 0.3);
+      --amber: #f59e0b;
+      --amber-glow: rgba(245, 158, 11, 0.25);
+      --purple: #c084fc;
+      --purple-glow: rgba(192, 132, 252, 0.25);
+      --sans-stack: 'PocketGull VF', 'PocketGull', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --mono-stack: 'PocketGull Mono', ui-monospace, Menlo, Consolas, monospace;
+      --braille-dot-fill: #10b981;
+      --braille-dot-glow: rgba(16, 185, 129, 0.6);
+      --thermal-temp: 33.5deg;
+      --thermal-color: #fb923c;
+    }
+
+    [data-theme="scotopic"] {
+      --bg: #0a0303;
+      --card-bg: #140505;
+      --card-border: #3b0d0d;
+      --surface-inner: #0d0404;
+      --text-main: #fca5a5;
+      --text-muted: #b91c1c;
+      --cyan: #ef4444;
+      --cyan-glow: rgba(239, 68, 68, 0.25);
+      --emerald: #f87171;
+      --emerald-glow: rgba(248, 113, 113, 0.35);
+      --rose: #f43f5e;
+      --rose-glow: rgba(244, 63, 94, 0.3);
+      --amber: #dc2626;
+      --purple: #e11d48;
+      --braille-dot-fill: #f87171;
+      --braille-dot-glow: rgba(248, 113, 113, 0.6);
+    }
+
+    [data-theme="washi"] {
+      --bg: #f6f1e7;
+      --card-bg: #ebe3d3;
+      --card-border: #d4c8b2;
+      --surface-inner: #fdfcf9;
+      --text-main: #1e1b18;
+      --text-muted: #6b6357;
+      --cyan: #0284c7;
+      --cyan-glow: rgba(2, 132, 199, 0.2);
+      --emerald: #059669;
+      --emerald-glow: rgba(5, 150, 105, 0.25);
+      --rose: #e11d48;
+      --rose-glow: rgba(225, 29, 72, 0.2);
+      --amber: #b45309;
+      --purple: #7e22ce;
+      --braille-dot-fill: #059669;
+      --braille-dot-glow: rgba(5, 150, 105, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--sans-stack);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      line-height: 1.55;
+    }
+
+    /* Top Lab Navbar */
+    .lab-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(12, 18, 32, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    [data-theme="washi"] .lab-nav {
+      background: rgba(246, 241, 231, 0.85);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-main);
+      text-decoration: none;
+    }
+
+    .brand-badge {
+      font-family: var(--mono-stack);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--emerald);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: 6px;
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      font-family: var(--mono-stack);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid var(--card-border);
+      background: var(--surface-inner);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .nav-btn:hover, .nav-btn.active {
+      border-color: var(--emerald);
+      color: var(--emerald);
+      background: rgba(16, 185, 129, 0.1);
+    }
+
+    /* Main Container */
+    .lab-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* Hero Banner */
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(56, 189, 248, 0.05) 50%, rgba(192, 132, 252, 0.05) 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2.25rem 2rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-banner::after {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, var(--emerald-glow) 0%, transparent 70%);
+      pointer-events: none;
+      border-radius: 50%;
+    }
+
+    .hero-pretitle {
+      font-family: var(--mono-stack);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--emerald);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hero-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.85rem;
+      max-width: 900px;
+    }
+
+    .hero-title span {
+      color: var(--emerald);
+      text-shadow: 0 0 20px var(--emerald-glow);
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 820px;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-pacing-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      align-items: center;
+    }
+
+    .pacing-chip {
+      font-family: var(--mono-stack);
+      font-size: 0.75rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      border: 1px solid var(--card-border);
+      background: var(--surface-inner);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.25s ease;
+    }
+
+    .pacing-chip:hover, .pacing-chip.active {
+      border-color: var(--emerald);
+      color: var(--emerald);
+      background: rgba(16, 185, 129, 0.15);
+      box-shadow: 0 0 12px var(--emerald-glow);
+    }
+
+    /* Grid Layout */
+    .lab-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (min-width: 1024px) {
+      .lab-grid-2col {
+        grid-template-columns: 1.15fr 0.85fr;
+      }
+      .lab-grid-3col {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* Lab Card */
+    .lab-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.25rem;
+      gap: 1rem;
+    }
+
+    .card-title-group h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .card-title-group p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .card-badge {
+      font-family: var(--mono-stack);
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--cyan);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      white-space: nowrap;
+    }
+
+    /* Canvas Virtual Fingertip & Mechanoreceptor Scanner */
+    .touchpad-stage {
+      background: var(--surface-inner);
+      border: 1px dashed var(--card-border);
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      min-height: 280px;
+      cursor: crosshair;
+      touch-action: none;
+    }
+
+    #fingerpadCanvas {
+      width: 100%;
+      height: 280px;
+      display: block;
+    }
+
+    .touchpad-instructions {
+      position: absolute;
+      bottom: 12px;
+      left: 14px;
+      font-family: var(--mono-stack);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      pointer-events: none;
+      background: rgba(9, 14, 24, 0.85);
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--card-border);
+    }
+
+    /* Telemetry HUD Cards */
+    .telemetry-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .telemetry-tile {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    .telemetry-label {
+      font-family: var(--mono-stack);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .telemetry-val {
+      font-family: var(--mono-stack);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--emerald);
+    }
+
+    /* 5 Living Dimensions Showcase */
+    .dimensions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .dim-item {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .dim-item:hover, .dim-item.active {
+      border-color: var(--emerald);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.15);
+    }
+
+    .dim-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.35rem;
+    }
+
+    .dim-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .dim-num {
+      font-family: var(--mono-stack);
+      font-size: 0.7rem;
+      color: var(--cyan);
+      background: rgba(56, 189, 248, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .dim-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Interactive Braille Translator & Emotional Engine */
+    .translator-box {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .trans-input {
+      width: 100%;
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      color: var(--text-main);
+      font-family: var(--sans-stack);
+      font-size: 1rem;
+      padding: 0.85rem 1rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .trans-input:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 2px var(--cyan-glow);
+    }
+
+    .stage-output-area {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .braille-display-strip {
+      font-family: 'PocketGull VF', sans-serif;
+      font-size: 2.25rem;
+      line-height: 1.3;
+      letter-spacing: 0.08em;
+      color: var(--braille-dot-fill);
+      text-shadow: 0 0 8px var(--braille-dot-glow);
+      user-select: text;
+      word-break: break-word;
+      transition: all 0.3s ease;
+    }
+
+    .braille-display-strip.pacing-72 {
+      animation: philocardia-braille-beat-72 0.8333s infinite ease-in-out;
+    }
+
+    .braille-display-strip.pacing-60 {
+      animation: philocardia-braille-beat-60 1.0000s infinite ease-in-out;
+    }
+
+    .latin-mirror-strip {
+      font-family: var(--sans-stack);
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .latin-mirror-strip .philocardia-heart {
+      color: var(--emerald);
+      filter: drop-shadow(0 0 4px var(--emerald-glow));
+    }
+
+    /* Phil Gear Photography ANSCII Chamber */
+    .anscii-chamber-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    @media (min-width: 1024px) {
+      .anscii-chamber-grid {
+        grid-template-columns: 360px 1fr;
+      }
+    }
+
+    .anscii-photo-preview-wrap {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .anscii-canvas-preview {
+      width: 100%;
+      height: 240px;
+      display: block;
+      background: #000;
+    }
+
+    .exif-telemetry-badge {
+      padding: 0.75rem 1rem;
+      border-top: 1px solid var(--card-border);
+      font-family: var(--mono-stack);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .exif-telemetry-badge strong {
+      color: var(--cyan);
+    }
+
+    .anscii-stage-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .anscii-braille-view {
+      font-family: 'PocketGull Mono', ui-monospace, Menlo, Consolas, monospace;
+      font-size: 9.5px;
+      line-height: 9.5px;
+      letter-spacing: 0;
+      white-space: pre;
+      overflow-x: auto;
+      background: var(--surface-inner);
+      padding: 1.25rem;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+      color: var(--braille-dot-fill);
+      text-shadow: 0 0 4px var(--braille-dot-glow);
+      user-select: text;
+      min-height: 280px;
+      cursor: crosshair;
+      transition: all 0.3s ease;
+    }
+
+    .anscii-braille-view.pacing-72 {
+      animation: philocardia-braille-beat-72 0.8333s infinite ease-in-out;
+    }
+
+    .anscii-braille-view.pacing-60 {
+      animation: philocardia-braille-beat-60 1.0000s infinite ease-in-out;
+    }
+
+    .anscii-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+    }
+
+    /* Affective Rosetta Cards */
+    .rosetta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .rosetta-card {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .rosetta-card:hover {
+      border-color: var(--purple);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(192, 132, 252, 0.15);
+    }
+
+    .rosetta-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .rosetta-glyph {
+      font-family: 'PocketGull VF', sans-serif;
+      font-size: 2.2rem;
+      color: var(--emerald);
+      text-shadow: 0 0 8px var(--emerald-glow);
+    }
+
+    .rosetta-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .rosetta-unicode {
+      font-family: var(--mono-stack);
+      font-size: 0.7rem;
+      color: var(--cyan);
+    }
+
+    .rosetta-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Audio & Haptic Telemetry Bar */
+    .sensory-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--card-border);
+    }
+
+    .slider-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono-stack);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .slider-group input[type="range"] {
+      accent-color: var(--emerald);
+      cursor: pointer;
+      width: 110px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 2rem 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: center;
+      background: var(--card-bg);
+      margin-top: auto;
+    }
+
+    footer a {
+      color: var(--cyan);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="lab-nav" aria-label="Philocardia Lab Navigation">
+    <div class="brand-group">
+      <a href="index.html" class="brand-title" title="Return to PocketGull Specimen">
+        🕊️ <strong>PocketGull</strong>
+      </a>
+      <span class="brand-badge">Philocardia Tactile Lab</span>
+    </div>
+
+    <div class="nav-controls">
+      <button type="button" class="nav-btn" id="btnAudioToggle" onclick="toggleAudioEngine()" aria-label="Toggle Cardiac &amp; Tactile Acoustic Synthesis">
+        <span id="audioIcon">🔊</span> <span id="audioLabel">Heart Sound: ON</span>
+      </button>
+      <button type="button" class="nav-btn" id="btnThemeToggle" onclick="cycleTheme()" aria-label="Cycle UI theme">
+        🎨 <span id="themeLabel">Theme: Obsidian</span>
+      </button>
+      <a href="index.html" class="nav-btn" title="Back to Master Specimen">Master Specimen ↗</a>
+      <a href="a11y_studio.html" class="nav-btn" title="Visit A11y &amp; Neuro-Ergonomic Studio">A11y Studio ↗</a>
+      <a href="asl_studio.html" class="nav-btn" title="Visit ASL &amp; Sign Studio">ASL Studio ↗</a>
+    </div>
+  </nav>
+
+  <!-- Main Laboratory Workspace -->
+  <main class="lab-container">
+
+    <!-- Hero Banner -->
+    <header class="hero-banner">
+      <div class="hero-pretitle">
+        <span>💖 TACTILE INTEROCEPTION &amp; SOMATOSENSORY CARE</span>
+        <span>•</span>
+        <span>ISO/TR 11548 &amp; ISO 17049 COMPLIANT</span>
+      </div>
+      <h1 class="hero-title">
+        Touching Emotion: <span>Philocardia Tactile Braille</span>
+      </h1>
+      <p class="hero-desc">
+        Historically, Braille has been a cold binary telegraph for the fingers ($0$ or $1$ static metal pins). Philocardia transforms Braille into an instrument of living empathy: cushioned quadratic heart-dot contours, 72 BPM cardiac sinus rhythm pacing, tactile prosody elevation, and affective thermal warmth for blind readers.
+      </p>
+
+      <!-- Active Cardiac Pacing Selection -->
+      <div class="hero-pacing-pill-row" role="group" aria-label="Cardiac Cadence Selection">
+        <span style="font-family: var(--mono-stack); font-size: 0.75rem; color: var(--text-muted); margin-right: 4px;">Pacing Rhythm:</span>
+        <button type="button" class="pacing-chip active" id="chip72" onclick="setCadence('72')" aria-pressed="true">
+          💓 72 BPM Sinus Rhythm (Resting Calm)
+        </button>
+        <button type="button" class="pacing-chip" id="chip60" onclick="setCadence('60')" aria-pressed="false">
+          🌿 60 BPM Vagal Sanctuary (Slow Deep Wave)
+        </button>
+        <button type="button" class="pacing-chip" id="chipStatic" onclick="setCadence('0')" aria-pressed="false">
+          ⠠ Standard Static Emboss
+        </button>
+      </div>
+    </header>
+
+    <!-- Lab Section 1: Fingerpad Simulator & Mechanoreceptor Scanner -->
+    <section class="lab-grid lab-grid-2col" aria-label="Virtual Tactile Fingerpad and Mechanoreceptors">
+      
+      <!-- Interactive Touchpad Stage -->
+      <div class="lab-card">
+        <div class="card-header">
+          <div class="card-title-group">
+            <h3>👆 Epidermal Ridge &amp; Fingerpad Scanner</h3>
+            <p>Sweep your cursor or finger across the tactile cell to excite cutaneous mechanoreceptors.</p>
+          </div>
+          <span class="card-badge">LIVE 60 FPS SIMULATION</span>
+        </div>
+
+        <div class="touchpad-stage" id="touchpadContainer" aria-label="Interactive Braille Touchpad">
+          <canvas id="fingerpadCanvas" width="600" height="280"></canvas>
+          <div class="touchpad-instructions" id="touchpadNotice">
+            👉 Drag or sweep across Braille dots to feel shear stress &amp; cardiac pulse
+          </div>
+        </div>
+
+        <!-- Real-Time Telemetry HUD -->
+        <div class="telemetry-row">
+          <div class="telemetry-tile">
+            <div class="telemetry-label">Merkel SA-I (Acuity)</div>
+            <div class="telemetry-val" id="hudMerkel">0.94 <span style="font-size: 0.7rem; font-weight: normal;">kPa</span></div>
+          </div>
+          <div class="telemetry-tile">
+            <div class="telemetry-label">Meissner RA-I (Slip)</div>
+            <div class="telemetry-val" id="hudMeissner">28.4 <span style="font-size: 0.7rem; font-weight: normal;">Hz</span></div>
+          </div>
+          <div class="telemetry-tile">
+            <div class="telemetry-label">Pacinian RA-II (Pulse)</div>
+            <div class="telemetry-val" id="hudPacinian">72.0 <span style="font-size: 0.7rem; font-weight: normal;">BPM</span></div>
+          </div>
+          <div class="telemetry-tile">
+            <div class="telemetry-label">C-Tactile (Emotion)</div>
+            <div class="telemetry-val" id="hudCT" style="color: var(--rose);">96.2%</div>
+          </div>
+        </div>
+
+        <!-- Sensory Toolbar -->
+        <div class="sensory-toolbar">
+          <div class="slider-group">
+            <label for="sliderPinHeight">Elevation:</label>
+            <input type="range" id="sliderPinHeight" min="15" max="65" value="48" oninput="updatePinHeight(this.value)">
+            <span id="lblPinHeight">0.48 mm</span>
+          </div>
+          <div class="slider-group">
+            <label for="sliderThermal">Thermal:</label>
+            <input type="range" id="sliderThermal" min="20" max="38" step="0.5" value="33.5" oninput="updateThermal(this.value)">
+            <span id="lblThermal" style="color: var(--amber);">33.5°C</span>
+          </div>
+          <div class="slider-group">
+            <label for="sliderBouma">Bouma Gap:</label>
+            <input type="range" id="sliderBouma" min="0" max="100" value="40" oninput="updateBoumaGap(this.value)">
+            <span id="lblBouma">+0.04em</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 Living Dimensions Information & Control -->
+      <div class="lab-card">
+        <div class="card-header">
+          <div class="card-title-group">
+            <h3>📐 The 5 Philocardic Dimensions</h3>
+            <p>How physical touch translates into emotional solace for the blind reader.</p>
+          </div>
+          <span class="card-badge">THE ARCHITECTURE</span>
+        </div>
+
+        <div class="dimensions-list" role="list">
+          <!-- Dim 1 -->
+          <div class="dim-item active" onclick="selectDimension(1)" role="listitem" tabindex="0">
+            <div class="dim-head">
+              <span class="dim-title">💖 I. Cushioned Quadratic Heart-Dots</span>
+              <span class="dim-num">25 UPM FILLET</span>
+            </div>
+            <p class="dim-desc">
+              Replaces harsh rigid conical punches with quadratic Bézier dome fillets. The soft heart cleft relieves peak fingertip shear stress, eliminating sensory callousing and fatigue.
+            </p>
+          </div>
+
+          <!-- Dim 2 -->
+          <div class="dim-item" onclick="selectDimension(2)" role="listitem" tabindex="0">
+            <div class="dim-head">
+              <span class="dim-title">💓 II. Cardiac Sinus Rhythm Pacing</span>
+              <span class="dim-num">72 BPM / S1+S2</span>
+            </div>
+            <p class="dim-desc">
+              On refreshable tactile displays, pins pulse subtly at resting sinus rhythm ($0.8333\,\text{s}$). Interoceptive entrainment synchronizes human HRV and vagus tone into parasympathetic calm.
+            </p>
+          </div>
+
+          <!-- Dim 3 -->
+          <div class="dim-item" onclick="selectDimension(3)" role="listitem" tabindex="0">
+            <div class="dim-head">
+              <span class="dim-title">📈 III. Tactile Prosody &amp; Multi-Elevation</span>
+              <span class="dim-num">WHISPER ↔ FORTE</span>
+            </div>
+            <p class="dim-desc">
+              Moves beyond binary (0 or 1) pins. Low compliant pins ($0.2\,\text{mm}$) convey vulnerability, tenderness, or a whisper; firm elevated pins ($0.55\,\text{mm}$) express laughter or triumph.
+            </p>
+          </div>
+
+          <!-- Dim 4 -->
+          <div class="dim-item" onclick="selectDimension(4)" role="listitem" tabindex="0">
+            <div class="dim-head">
+              <span class="dim-title">🌡️ IV. Affective Thermal Warmth</span>
+              <span class="dim-num">33.5°C SKIN CONTACT</span>
+            </div>
+            <p class="dim-desc">
+              Micro-Peltier thermal junctions bring reading pins to living skin temperature ($33.5^\circ\text{C}$). Directly activates C-tactile (CT) unmyelinated fibers to trigger oxytocin release.
+            </p>
+          </div>
+
+          <!-- Dim 5 -->
+          <div class="dim-item" onclick="selectDimension(5)" role="listitem" tabindex="0">
+            <div class="dim-head">
+              <span class="dim-title">🌬️ V. Herman Bouma Somatic Breath Waves</span>
+              <span class="dim-num">4-7-8 INTERVAL</span>
+            </div>
+            <p class="dim-desc">
+              Dynamic inter-cell white space allows sentences to breathe. During pauses, commas, and poetic breaks, spacing expands gently to harmonize with natural respiration cycles.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lab Section 2: Interactive UEB & Philocardia Translator -->
+    <section class="lab-card" style="margin-bottom: 2rem;" aria-label="Interactive Braille Translator and Emotional Stager">
+      <div class="card-header">
+        <div class="card-title-group">
+          <h3>✨ Unified English Braille (UEB) &amp; Philocardia Stager</h3>
+          <p>Type any phrase to generate authentic Unicode Braille (U+2800–U+28FF) with cardiac sinus rhythm and heart-dot modulation.</p>
+        </div>
+        <span class="card-badge">FULL 256 UNICODE COVERAGE</span>
+      </div>
+
+      <div class="translator-box">
+        <input type="text" id="txtTransInput" class="trans-input" value="Amoxicillin 500 mg • You are safe and loved • 72 bpm" placeholder="Type text here..." oninput="handleTranslationInput(this.value)">
+
+        <div class="stage-output-area">
+          <div class="braille-display-strip pacing-72" id="brailleStage" aria-label="Braille output stage">
+            ⠠⠁⠍⠕⠭⠊⠉⠊⠇⠇⠊⠝⠀⠼⠑⠚⠚⠀⠍⠛⠀•⠀⠠⠽⠕⠥⠀⠁⠗⠑⠀⠎⠁⠋⠑⠀⠁⠝⠙⠀⠇⠕⠧⠑⠙⠀•⠀⠼⠛⠃⠀⠃⠏⠍
+          </div>
+          <div class="latin-mirror-strip" id="latinMirror">
+            Amox<span class="philocardia-heart">ı</span>c<span class="philocardia-heart">ı</span>ll<span class="philocardia-heart">ı</span>n 500 mg • You are safe and loved • 72 bpm
+          </div>
+        </div>
+
+        <!-- Quick Insert Samples -->
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;">
+          <span style="font-family: var(--mono-stack); font-size: 0.72rem; color: var(--text-muted);">Quick Presets:</span>
+          <button type="button" class="pacing-chip" onclick="loadSample('rx')">💊 Pediatric Amoxicillin 500 mg</button>
+          <button type="button" class="pacing-chip" onclick="loadSample('sanctuary')">🌿 Bedside Healing Sanctuary</button>
+          <button type="button" class="pacing-chip" onclick="loadSample('poetry')">📖 Rilke: Let Everything Happen</button>
+          <button type="button" class="pacing-chip" onclick="loadSample('vitals')">💓 Cardiac Vitals Normal 72 bpm</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lab Section: Phil Gear Photography ANSCII Tactile Halftone Chamber -->
+    <section class="lab-card" style="margin-bottom: 2rem;" aria-label="Phil Gear Photography ANSCII Halftone Chamber">
+      <div class="card-header">
+        <div class="card-title-group">
+          <h3>📷 Phil Gear Photography · The ANSCII Tactile Landscape Chamber</h3>
+          <p>Translating 42.4 MP Masterworks into Living Tactile Braille Halftones (U+2800–U+28FF) for Blind Observers.</p>
+        </div>
+        <span class="card-badge">SONY α7R III TELEMETRY</span>
+      </div>
+
+      <!-- Landscape Selection Chips -->
+      <div style="display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; margin-bottom: 1rem;">
+        <span style="font-family: var(--mono-stack); font-size: 0.72rem; color: var(--text-muted);">Master Plates:</span>
+        <button type="button" class="pacing-chip active" id="chipHoh" onclick="loadAnsciiPlate('hoh')">
+          🌲 Hoh Rainforest Cathedral (Light Shafts)
+        </button>
+        <button type="button" class="pacing-chip" id="chipSea" onclick="loadAnsciiPlate('sea')">
+          🌊 Pacific Breakers &amp; Sea Stack
+        </button>
+        <button type="button" class="pacing-chip" id="chipAlvord" onclick="loadAnsciiPlate('alvord')">
+          🌌 Alvord Dark Sky &amp; Milky Way
+        </button>
+        <button type="button" class="pacing-chip" id="chipOwl" onclick="loadAnsciiPlate('owl')">
+          🦉 Northern Saw-Whet Owl (Living Pulse)
+        </button>
+        <label class="pacing-chip" style="cursor: pointer;" title="Upload custom photo for Braille ANSCII rasterization">
+          📁 Custom Photo Ingest
+          <input type="file" id="filePhotoUpload" accept="image/*" style="display: none;" onchange="handleCustomPhotoUpload(event)">
+        </label>
+      </div>
+
+      <div class="anscii-chamber-grid">
+        <!-- Left: Optical Master Plate Preview -->
+        <div class="anscii-photo-preview-wrap">
+          <canvas id="photoPreviewCanvas" class="anscii-canvas-preview" width="360" height="240"></canvas>
+          <div class="exif-telemetry-badge" id="exifTelemetry">
+            <div><strong>Camera:</strong> Sony Alpha 7R III (ILCE-7RM3)</div>
+            <div><strong>Lens:</strong> FE 24-70mm F2.8 GM @ 24mm</div>
+            <div><strong>Exposure:</strong> 1/250s · f/8.0 · ISO 100 · Native 42.4 MP</div>
+            <div id="exifSubject" style="color: var(--emerald); margin-top: 0.2rem;">Hoh River Valley, Olympic National Park</div>
+          </div>
+        </div>
+
+        <!-- Right: Living ANSCII Braille Halftone Matrix -->
+        <div class="anscii-stage-wrap">
+          <div class="anscii-braille-view pacing-72" id="ansciiBrailleStage" aria-label="ANSCII Braille Halftone Display" title="Sweep cursor across Braille landscape to feel tactile contours and trigger sound">
+            <!-- Dynamically generated 8-dot Braille halftone -->
+          </div>
+
+          <div class="anscii-toolbar">
+            <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+              <button type="button" class="nav-btn" onclick="copyAnsciiBraille()">📋 Copy ANSCII Text</button>
+              <button type="button" class="nav-btn" onclick="toggleAnsciiInvert()">🌗 Invert Dither</button>
+              <div class="slider-group">
+                <label for="sliderAnsciiCols">Density:</label>
+                <input type="range" id="sliderAnsciiCols" min="40" max="80" value="54" oninput="updateAnsciiResolution(this.value)">
+                <span id="lblAnsciiCols">54 cols</span>
+              </div>
+            </div>
+
+            <!-- Sweep Telemetry Readout -->
+            <div style="font-family: var(--mono-stack); font-size: 0.72rem; color: var(--text-muted); display: flex; gap: 0.75rem;">
+              <span>Luminance: <strong id="hudPhotoLum" style="color: var(--cyan);">184</strong></span>
+              <span>Elevation: <strong id="hudPhotoElev" style="color: var(--emerald);">0.48 mm</strong></span>
+              <span>Thermal: <strong id="hudPhotoTemp" style="color: var(--amber);">33.5°C</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lab Section 3: Affective Tactile Emoticons (Susan Kare Tactile Semiosis) -->
+    <section class="lab-card" aria-label="Affective Braille Emoticons">
+      <div class="card-header">
+        <div class="card-title-group">
+          <h3>🕊️ Affective Tactile Emoticons (Tactile Semiosis)</h3>
+          <p>Novel tactile glyph combinations designed to convey emotion directly to fingertips without verbose Latin spelling.</p>
+        </div>
+        <span class="card-badge">8 NOVEL GLYPHS</span>
+      </div>
+
+      <div class="rosetta-grid" role="list">
+        
+        <!-- Emoticon 1 -->
+        <div class="rosetta-card" onclick="auditionGlyph('heart')" role="listitem" tabindex="0">
+          <div class="rosetta-top">
+            <span class="rosetta-glyph">⠠⠓⠠⠓</span>
+            <span class="rosetta-unicode">U+2820 U+2813</span>
+          </div>
+          <div class="rosetta-title">💖 Loving Embrace / Heart</div>
+          <p class="rosetta-desc">Bilateral arching dots resembling a heart's upper lobes. Pulses at 72 BPM to convey affection, intimacy, and parental presence.</p>
+        </div>
+
+        <!-- Emoticon 2 -->
+        <div class="rosetta-card" onclick="auditionGlyph('relief')" role="listitem" tabindex="0">
+          <div class="rosetta-top">
+            <span class="rosetta-glyph">⠐⠒⠤</span>
+            <span class="rosetta-unicode">U+2810 U+2812 U+2824</span>
+          </div>
+          <div class="rosetta-title">🕊️ Somatic Sigh / Relief</div>
+          <p class="rosetta-desc">Descending baseline progression signaling a release of breath, de-escalation of tension, and safe discharge.</p>
+        </div>
+
+        <!-- Emoticon 3 -->
+        <div class="rosetta-card" onclick="auditionGlyph('safe')" role="listitem" tabindex="0">
+          <div class="rosetta-top">
+            <span class="rosetta-glyph">⠸⠿⠇</span>
+            <span class="rosetta-unicode">U+2838 U+283F U+2807</span>
+          </div>
+          <div class="rosetta-title">🛡️ Sanctuary / Safe Haven</div>
+          <p class="rosetta-desc">Enclosing bracket dots surrounding a solid 6-dot tactile anchor. Indicates physical safety and clinical sanctuary.</p>
+        </div>
+
+        <!-- Emoticon 4 -->
+        <div class="rosetta-card" onclick="auditionGlyph('wonder')" role="listitem" tabindex="0">
+          <div class="rosetta-top">
+            <span class="rosetta-glyph">⠠⠴⠠⠴</span>
+            <span class="rosetta-unicode">U+2820 U+2834</span>
+          </div>
+          <div class="rosetta-title">✨ Sparkle / Wonder</div>
+          <p class="rosetta-desc">Alternating upper-right and lower-left diagonals evoking a shimmering star or intellectual delight.</p>
+        </div>
+
+        <!-- Emoticon 5 -->
+        <div class="rosetta-card" onclick="auditionGlyph('sun')" role="listitem" tabindex="0">
+          <div class="rosetta-top">
+            <span class="rosetta-glyph">⠐⠕⠂</span>
+            <span class="rosetta-unicode">U+2810 U+2815 U+2802</span>
+          </div>
+          <div class="rosetta-title">☀️ Circadian Dawn / Morning</div>
+          <p class="rosetta-desc">Radiant core cell for morning medication administration and circadian awakeness priming without language barriers.</p>
+        </div>
+
+        <!-- Emoticon 6 -->
+        <div class="rosetta-card" onclick="auditionGlyph('moon')" role="listitem" tabindex="0">
+          <div class="rosetta-top">
+            <span class="rosetta-glyph">⠠⠉⠄</span>
+            <span class="rosetta-unicode">U+2820 U+2809 U+2804</span>
+          </div>
+          <div class="rosetta-title">🌙 Bedtime / Sleep Sanctuary</div>
+          <p class="rosetta-desc">Gentle crescent arc indicating nighttime dosage, melatonin cycles, and quiet restorative sleep.</p>
+        </div>
+
+        <!-- Emoticon 7 -->
+        <div class="rosetta-card" onclick="auditionGlyph('comfort')" role="listitem" tabindex="0">
+          <div class="rosetta-top">
+            <span class="rosetta-glyph">⠂⠆⠒</span>
+            <span class="rosetta-unicode">U+2802 U+2806 U+2812</span>
+          </div>
+          <div class="rosetta-title">🌿 Gentle Comfort / Solace</div>
+          <p class="rosetta-desc">Rising harmonic stairs with low mechanical compliance, soothing the fingertips during palliative care.</p>
+        </div>
+
+        <!-- Emoticon 8 -->
+        <div class="rosetta-card" onclick="auditionGlyph('solidarity')" role="listitem" tabindex="0">
+          <div class="rosetta-top">
+            <span class="rosetta-glyph">⠪⠕</span>
+            <span class="rosetta-unicode">U+282A U+2815</span>
+          </div>
+          <div class="rosetta-title">🤝 Solidarity / Clasping Hands</div>
+          <p class="rosetta-desc">Mirrored interlocking cells symbolizing peer support, community solidarity, and shared resilience.</p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Laboratory Footer -->
+  <footer>
+    <p>
+      PocketGull Philocardia Tactile Laboratory · Engineered by <strong>Phil Gear</strong> · Governed under <strong>SIL OFL 1.1</strong> · In compliance with <strong>ISO/TR 11548</strong>, <strong>ISO 17049</strong> &amp; <strong>UNDRIP Accord</strong>.
+    </p>
+    <p style="margin-top: 0.5rem; font-size: 0.75rem;">
+      <a href="index.html">Master Specimen</a> • <a href="a11y_studio.html">A11y Studio</a> • <a href="asl_studio.html">ASL Studio</a> • <a href="music_studio.html">Music Studio</a> • <a href="kinetic_laboratory.html">Kinetic Lab</a>
+    </p>
+  </footer>
+
+  <!-- Laboratory Interactive Engine Script -->
+  <script>
+    // State management
+    const state = {
+      cadence: '72',
+      pinHeightMm: 0.48,
+      thermalCelsius: 33.5,
+      boumaGapEm: 0.04,
+      audioEnabled: true,
+      currentTheme: 'dark',
+      touchX: 300,
+      touchY: 140,
+      isSweeping: false,
+      velocity: 0,
+      lastTouchTime: performance.now(),
+      lastTouchX: 300,
+      lastTouchY: 140
+    };
+
+    // Grade 1 UEB Character Map (Unicode Braille Patterns U+2800..U+28FF)
+    const UEB_MAP = {
+      'a': '⠁', 'b': '⠃', 'c': '⠉', 'd': '⠙', 'e': '⠑', 'f': '⠋', 'g': '⠛', 'h': '⠓', 'i': '⠊', 'j': '⠚',
+      'k': '⠇', 'l': '⠇', 'm': '⠍', 'n': '⠝', 'o': '⠕', 'p': '⠏', 'q': '⠟', 'r': '⠗', 's': '⠎', 't': '⠞',
+      'u': '⠥', 'v': '⠧', 'w': '⠺', 'x': '⠭', 'y': '⠽', 'z': '⠵',
+      '1': '⠁', '2': '⠃', '3': '⠉', '4': '⠙', '5': '⠑', '6': '⠋', '7': '⠛', '8': '⠓', '9': '⠊', '0': '⠚',
+      ' ': '⠀', ',': '⠂', ';': '⠆', ':': '⠒', '.': '⠲', '!': '⠖', '?': '⠦', '-': '⠤', '•': '•'
+    };
+
+    // Canvas Fingerpad Simulator
+    const canvas = document.getElementById('fingerpadCanvas');
+    const ctx = canvas.getContext('2d');
+    let animationFrameId = null;
+
+    function initCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+    }
+
+    function renderFingerpad(timestamp) {
+      const rect = canvas.getBoundingClientRect();
+      const w = rect.width;
+      const h = rect.height;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // 1. Draw Grid & Cell Ground Guides
+      ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--card-border').trim() || '#1e293b';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(20, h - 40);
+      ctx.lineTo(w - 20, h - 40);
+      ctx.stroke();
+
+      // 2. Draw Sample Braille Dots (8-Dot Matrix)
+      const dotRadius = Math.max(8, state.pinHeightMm * 18);
+      const cols = 7;
+      const spacingX = (w - 100) / cols;
+      const baseY = h - 60;
+
+      for (let c = 0; c < cols; c++) {
+        const cx = 50 + c * spacingX;
+        for (let row = 0; row < 4; row++) {
+          const cy = baseY - row * 36;
+          const isPopulated = (c + row) % 2 === 0 || row === 0;
+
+          if (isPopulated) {
+            // Heart-Dot Apex Curve
+            const pulseScale = (state.cadence === '72') ? (1 + 0.12 * Math.sin(timestamp * 0.0075)) :
+                               (state.cadence === '60') ? (1 + 0.10 * Math.sin(timestamp * 0.0062)) : 1.0;
+
+            const r = dotRadius * pulseScale;
+
+            // Thermal Halo
+            const thermalAlpha = Math.min(0.8, (state.thermalCelsius - 20) / 25);
+            ctx.fillStyle = `rgba(251, 146, 60, ${thermalAlpha * 0.25})`;
+            ctx.beginPath();
+            ctx.arc(cx, cy, r * 1.8, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Heart Dot Path
+            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--braille-dot-fill').trim() || '#10b981';
+            ctx.shadowColor = getComputedStyle(document.documentElement).getPropertyValue('--braille-dot-glow').trim() || 'rgba(16, 185, 129, 0.6)';
+            ctx.shadowBlur = 10;
+
+            ctx.beginPath();
+            // Draw Organic Cushioned Heart-Dot Shape
+            ctx.arc(cx - r * 0.25, cy - r * 0.2, r * 0.45, Math.PI, 0);
+            ctx.arc(cx + r * 0.25, cy - r * 0.2, r * 0.45, Math.PI, 0);
+            ctx.lineTo(cx, cy + r * 0.55);
+            ctx.closePath();
+            ctx.fill();
+            ctx.shadowBlur = 0;
+          } else {
+            // Un-popped base indent
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+            ctx.beginPath();
+            ctx.arc(cx, cy, 3, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+      }
+
+      // 3. Draw Virtual Fingerpad Contact Ellipse
+      if (state.isSweeping || state.touchX > 0) {
+        ctx.save();
+        ctx.translate(state.touchX, state.touchY);
+
+        // Epidermal Papillary Ridge Gradient
+        const grad = ctx.createRadialGradient(0, 0, 10, 0, 0, 55);
+        grad.addColorStop(0, 'rgba(56, 189, 248, 0.45)');
+        grad.addColorStop(0.6, 'rgba(56, 189, 248, 0.15)');
+        grad.addColorStop(1, 'transparent');
+
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, 48, 32, -0.15, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Mechanical Pressure Contour Rings
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.6)';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, 24, 16, -0.15, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.strokeStyle = 'rgba(16, 185, 129, 0.7)';
+        ctx.beginPath();
+        ctx.ellipse(0, 0, 12, 8, -0.15, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.restore();
+      }
+
+      animationFrameId = requestAnimationFrame(renderFingerpad);
+    }
+
+    // Touchpad Interaction Listeners
+    const touchpad = document.getElementById('touchpadContainer');
+    touchpad.addEventListener('pointerdown', (e) => {
+      state.isSweeping = true;
+      updatePointerPos(e);
+      playTactileImpulse();
+    });
+
+    touchpad.addEventListener('pointermove', (e) => {
+      if (state.isSweeping) {
+        updatePointerPos(e);
+      }
+    });
+
+    window.addEventListener('pointerup', () => {
+      state.isSweeping = false;
+    });
+
+    function updatePointerPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const now = performance.now();
+      const dt = Math.max(1, now - state.lastTouchTime);
+
+      const curX = Math.max(20, Math.min(rect.width - 20, e.clientX - rect.left));
+      const curY = Math.max(20, Math.min(rect.height - 20, e.clientY - rect.top));
+
+      const dx = curX - state.lastTouchX;
+      const dy = curY - state.lastTouchY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      state.velocity = (dist / dt) * 100; // cm/s scale approx
+      state.touchX = curX;
+      state.touchY = curY;
+      state.lastTouchX = curX;
+      state.lastTouchY = curY;
+      state.lastTouchTime = now;
+
+      // Update Telemetry
+      const merkelAcuity = (0.75 + (state.pinHeightMm * 0.4)).toFixed(2);
+      const meissnerSlip = (state.velocity * 0.8 + 12).toFixed(1);
+      const ctExcitation = Math.min(99.4, Math.max(40, (100 - Math.abs(state.velocity - 3.5) * 6))).toFixed(1);
+
+      document.getElementById('hudMerkel').innerHTML = `${merkelAcuity} <span style="font-size:0.7rem;font-weight:normal;">kPa</span>`;
+      document.getElementById('hudMeissner').innerHTML = `${meissnerSlip} <span style="font-size:0.7rem;font-weight:normal;">Hz</span>`;
+      document.getElementById('hudCT').textContent = `${ctExcitation}%`;
+
+      // Trigger Web Audio micro-tick if sweep crossed column
+      if (dist > 18) {
+        playTactileSweepAudio();
+      }
+    }
+
+    // Web Audio Synthesizer Engine (Self-contained, zero dependencies)
+    let audioCtx = null;
+    let cardiacTimer = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioClass) {
+          audioCtx = new AudioClass();
+        }
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playTactileImpulse() {
+      if (!state.audioEnabled) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(140, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(45, ctx.currentTime + 0.04);
+
+      gain.gain.setValueAtTime(0.08, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.045);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start();
+      osc.stop(ctx.currentTime + 0.05);
+
+      // Web Haptics vibration pattern
+      if (navigator.vibrate) {
+        navigator.vibrate(15);
+      }
+    }
+
+    function playTactileSweepAudio() {
+      if (!state.audioEnabled) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(180, ctx.currentTime);
+      gain.gain.setValueAtTime(0.02, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.02);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start();
+      osc.stop(ctx.currentTime + 0.025);
+    }
+
+    function startCardiacLoop() {
+      if (cardiacTimer) clearInterval(cardiacTimer);
+      if (state.cadence === '0') return;
+
+      const bpm = (state.cadence === '72') ? 72 : 60;
+      const intervalMs = (60 / bpm) * 1000;
+
+      cardiacTimer = setInterval(() => {
+        if (!state.audioEnabled) return;
+        const ctx = getAudioContext();
+        if (!ctx) return;
+
+        const now = ctx.currentTime;
+
+        // S1 Systole ("lub") - 38 Hz damped impulse
+        const osc1 = ctx.createOscillator();
+        const gain1 = ctx.createGain();
+        osc1.frequency.setValueAtTime(42, now);
+        osc1.frequency.exponentialRampToValueAtTime(32, now + 0.08);
+        gain1.gain.setValueAtTime(0.12, now);
+        gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+        osc1.connect(gain1);
+        gain1.connect(ctx.destination);
+        osc1.start(now);
+        osc1.stop(now + 0.095);
+
+        // S2 Diastole ("dub") - 54 Hz damped impulse +0.24s later
+        const osc2 = ctx.createOscillator();
+        const gain2 = ctx.createGain();
+        osc2.frequency.setValueAtTime(54, now + 0.22);
+        osc2.frequency.exponentialRampToValueAtTime(40, now + 0.29);
+        gain2.gain.setValueAtTime(0.08, now + 0.22);
+        gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.30);
+        osc2.connect(gain2);
+        gain2.connect(ctx.destination);
+        osc2.start(now + 0.22);
+        osc2.stop(now + 0.31);
+
+        // Somatosensory haptic heartbeat pulse
+        if (navigator.vibrate) {
+          navigator.vibrate([25, 40, 20]);
+        }
+      }, intervalMs);
+    }
+
+    // UI Control Event Handlers
+    function setCadence(cadenceStr) {
+      state.cadence = cadenceStr;
+      document.querySelectorAll('.pacing-chip').forEach(c => c.classList.remove('active'));
+
+      const stage = document.getElementById('brailleStage');
+      stage.classList.remove('pacing-72', 'pacing-60');
+
+      if (cadenceStr === '72') {
+        document.getElementById('chip72')?.classList.add('active');
+        stage.classList.add('pacing-72');
+        document.getElementById('hudPacinian').innerHTML = '72.0 <span style="font-size:0.7rem;font-weight:normal;">BPM</span>';
+      } else if (cadenceStr === '60') {
+        document.getElementById('chip60')?.classList.add('active');
+        stage.classList.add('pacing-60');
+        document.getElementById('hudPacinian').innerHTML = '60.0 <span style="font-size:0.7rem;font-weight:normal;">BPM</span>';
+      } else {
+        document.getElementById('chipStatic')?.classList.add('active');
+        document.getElementById('hudPacinian').innerHTML = '0.0 <span style="font-size:0.7rem;font-weight:normal;">STATIC</span>';
+      }
+
+      startCardiacLoop();
+    }
+
+    function updatePinHeight(val) {
+      const mm = (val / 100).toFixed(2);
+      state.pinHeightMm = parseFloat(mm);
+      document.getElementById('lblPinHeight').textContent = `${mm} mm`;
+      const stage = document.getElementById('brailleStage');
+      stage.style.fontSize = `${2.0 + (state.pinHeightMm - 0.35) * 1.5}rem`;
+    }
+
+    function updateThermal(val) {
+      state.thermalCelsius = parseFloat(val);
+      const lbl = document.getElementById('lblThermal');
+      lbl.textContent = `${val}°C`;
+      if (val > 35) {
+        lbl.style.color = 'var(--rose)';
+      } else if (val >= 31) {
+        lbl.style.color = 'var(--amber)';
+      } else {
+        lbl.style.color = 'var(--cyan)';
+      }
+    }
+
+    function updateBoumaGap(val) {
+      const em = (val / 1000).toFixed(3);
+      state.boumaGapEm = parseFloat(em);
+      document.getElementById('lblBouma').textContent = `+${em}em`;
+      document.getElementById('brailleStage').style.letterSpacing = `${0.08 + state.boumaGapEm * 2}em`;
+    }
+
+    function toggleAudioEngine() {
+      state.audioEnabled = !state.audioEnabled;
+      const icon = document.getElementById('audioIcon');
+      const lbl = document.getElementById('audioLabel');
+      if (state.audioEnabled) {
+        icon.textContent = '🔊';
+        lbl.textContent = 'Heart Sound: ON';
+        startCardiacLoop();
+      } else {
+        icon.textContent = '🔇';
+        lbl.textContent = 'Heart Sound: OFF';
+        if (cardiacTimer) clearInterval(cardiacTimer);
+      }
+    }
+
+    function cycleTheme() {
+      const themes = ['dark', 'scotopic', 'washi'];
+      const curIdx = themes.indexOf(state.currentTheme);
+      const nextTheme = themes[(curIdx + 1) % themes.length];
+      state.currentTheme = nextTheme;
+      document.documentElement.setAttribute('data-theme', nextTheme);
+      document.getElementById('themeLabel').textContent = `Theme: ${nextTheme.charAt(0).toUpperCase() + nextTheme.slice(1)}`;
+    }
+
+    function selectDimension(dimNum) {
+      document.querySelectorAll('.dim-item').forEach((item, idx) => {
+        item.classList.toggle('active', (idx + 1) === dimNum);
+      });
+      if (dimNum === 1) updatePinHeight(55);
+      if (dimNum === 2) setCadence('72');
+      if (dimNum === 3) updatePinHeight(62);
+      if (dimNum === 4) updateThermal(34.5);
+      if (dimNum === 5) updateBoumaGap(80);
+    }
+
+    // Translation Engine
+    function translateToUEB(text) {
+      let out = '';
+      let isNumberMode = false;
+
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const lower = char.toLowerCase();
+
+        // Capital indicator
+        if (char >= 'A' && char <= 'Z') {
+          out += '⠠';
+        }
+
+        // Numeric indicator
+        if (char >= '0' && char <= '9') {
+          if (!isNumberMode) {
+            out += '⠼';
+            isNumberMode = true;
+          }
+          out += UEB_MAP[char] || char;
+        } else {
+          isNumberMode = false;
+          out += UEB_MAP[lower] || char;
+        }
+      }
+      return out;
+    }
+
+    function handleTranslationInput(val) {
+      const braille = translateToUEB(val);
+      document.getElementById('brailleStage').textContent = braille;
+
+      // Update Latin Mirror with Philocardia Heart Tittles for 'i'
+      const mirror = document.getElementById('latinMirror');
+      mirror.textContent = '';
+      for (const char of val) {
+        if (char === 'i' || char === 'j' || char === '!') {
+          const span = document.createElement('span');
+          span.className = 'philocardia-heart';
+          span.textContent = (char === 'i') ? 'ı' : (char === 'j') ? 'ȷ' : '!';
+          mirror.appendChild(span);
+        } else {
+          mirror.appendChild(document.createTextNode(char));
+        }
+      }
+    }
+
+    function loadSample(key) {
+      const samples = {
+        rx: "Amoxicillin 500 mg • STAT 10 mcg • 72 bpm",
+        sanctuary: "You are safe and held • Peaceful breath • 60 bpm",
+        poetry: "Let everything happen: beauty and terror • Just keep going",
+        vitals: "Vitals Normal: Pulse 72 bpm • SpO2 99% • BP 120/80"
+      };
+      if (samples[key]) {
+        const input = document.getElementById('txtTransInput');
+        input.value = samples[key];
+        handleTranslationInput(samples[key]);
+      }
+    }
+
+    function auditionGlyph(type) {
+      playTactileImpulse();
+    }
+
+    // =========================================================================
+    // PHIL GEAR PHOTOGRAPHY: ANSCII TACTILE BRAILLE HALFTONE ENGINE
+    // =========================================================================
+    const ansciiState = {
+      plate: 'hoh',
+      cols: 54,
+      invert: false,
+      currentText: ''
+    };
+
+    const photoCanvas = document.getElementById('photoPreviewCanvas');
+    const photoCtx = photoCanvas ? photoCanvas.getContext('2d') : null;
+
+    // 4x4 Bayer Dithering Matrix for smooth grayscale Braille halftone
+    const BAYER_4X4 = [
+      [ 0,  8,  2, 10],
+      [12,  4, 14,  6],
+      [ 3, 11,  1,  9],
+      [15,  7, 13,  5]
+    ];
+
+    function drawHohRainforest(ctx, w, h) {
+      // Sky & Canopy background
+      const skyGrad = ctx.createLinearGradient(0, 0, 0, h);
+      skyGrad.addColorStop(0, '#020508');
+      skyGrad.addColorStop(0.5, '#0b1d16');
+      skyGrad.addColorStop(1, '#020604');
+      ctx.fillStyle = skyGrad;
+      ctx.fillRect(0, 0, w, h);
+
+      // Sacred Cathedral Sunbeams (Diagonal Light Shafts)
+      ctx.save();
+      const beamGrad = ctx.createLinearGradient(w * 0.3, 0, w * 0.7, h);
+      beamGrad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
+      beamGrad.addColorStop(0.3, 'rgba(167, 243, 208, 0.75)');
+      beamGrad.addColorStop(0.8, 'rgba(52, 211, 153, 0.25)');
+      beamGrad.addColorStop(1, 'transparent');
+
+      ctx.fillStyle = beamGrad;
+      ctx.beginPath();
+      ctx.moveTo(w * 0.35, 0);
+      ctx.lineTo(w * 0.55, 0);
+      ctx.lineTo(w * 0.85, h);
+      ctx.lineTo(w * 0.50, h);
+      ctx.closePath();
+      ctx.fill();
+
+      // Secondary beam
+      ctx.beginPath();
+      ctx.moveTo(w * 0.2, 0);
+      ctx.lineTo(w * 0.32, 0);
+      ctx.lineTo(w * 0.58, h);
+      ctx.lineTo(w * 0.35, h);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+
+      // Towering Douglas Fir Trunks (Deep Silhouette)
+      ctx.fillStyle = '#010302';
+      // Left Trunk
+      ctx.fillRect(w * 0.05, 0, w * 0.16, h);
+      // Right Trunk
+      ctx.fillRect(w * 0.78, 0, w * 0.18, h);
+      // Mid background trunk
+      ctx.fillStyle = '#06130b';
+      ctx.fillRect(w * 0.38, 0, w * 0.08, h);
+
+      // Hanging Club Moss Drapery
+      ctx.fillStyle = 'rgba(110, 231, 183, 0.4)';
+      for (let i = 0; i < 8; i++) {
+        const mx = w * 0.18 + i * (w * 0.08);
+        const my = 20 + (i % 3) * 15;
+        ctx.beginPath();
+        ctx.ellipse(mx, my, 8, 30 + (i % 4) * 15, 0.1, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Nurse Log & Ferns across bottom
+      ctx.fillStyle = '#030805';
+      ctx.fillRect(0, h - 35, w, 35);
+      ctx.fillStyle = 'rgba(52, 211, 153, 0.6)';
+      ctx.fillRect(w * 0.2, h - 25, w * 0.4, 8);
+    }
+
+    function drawPacificBreakers(ctx, w, h) {
+      // Overcast marine horizon
+      const skyGrad = ctx.createLinearGradient(0, 0, 0, h);
+      skyGrad.addColorStop(0, '#09131d');
+      skyGrad.addColorStop(0.45, '#1e293b');
+      skyGrad.addColorStop(0.5, '#38bdf8');
+      skyGrad.addColorStop(1, '#040d16');
+      ctx.fillStyle = skyGrad;
+      ctx.fillRect(0, 0, w, h);
+
+      // Sea Stack Monolith (Silhouette)
+      ctx.fillStyle = '#02060b';
+      ctx.beginPath();
+      ctx.moveTo(w * 0.62, h * 0.5);
+      ctx.lineTo(w * 0.68, h * 0.18);
+      ctx.lineTo(w * 0.74, h * 0.14);
+      ctx.lineTo(w * 0.82, h * 0.22);
+      ctx.lineTo(w * 0.88, h * 0.5);
+      ctx.closePath();
+      ctx.fill();
+
+      // Smaller offshore stack
+      ctx.beginPath();
+      ctx.moveTo(w * 0.45, h * 0.5);
+      ctx.lineTo(w * 0.48, h * 0.35);
+      ctx.lineTo(w * 0.52, h * 0.5);
+      ctx.closePath();
+      ctx.fill();
+
+      // Surging Breaker Wave (White Foam Crest)
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.moveTo(0, h * 0.65);
+      ctx.bezierCurveTo(w * 0.3, h * 0.55, w * 0.6, h * 0.68, w, h * 0.60);
+      ctx.lineTo(w, h * 0.75);
+      ctx.bezierCurveTo(w * 0.6, h * 0.82, w * 0.3, h * 0.70, 0, h * 0.80);
+      ctx.closePath();
+      ctx.fill();
+
+      // Foaming sea spray
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+      for (let i = 0; i < 20; i++) {
+        ctx.beginPath();
+        ctx.arc((i * 19) % w, h * 0.62 + (i % 5) * 4, 3 + (i % 3) * 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Driftwood monolith on shoreline
+      ctx.fillStyle = '#010305';
+      ctx.beginPath();
+      ctx.ellipse(w * 0.25, h - 20, 70, 14, -0.1, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function drawAlvordDarkSky(ctx, w, h) {
+      // Obsidian Night Sky
+      ctx.fillStyle = '#020205';
+      ctx.fillRect(0, 0, w, h);
+
+      // Glowing Milky Way Arch (Galactic Dust)
+      ctx.save();
+      const mwGrad = ctx.createLinearGradient(0, h * 0.8, w, 0);
+      mwGrad.addColorStop(0, 'transparent');
+      mwGrad.addColorStop(0.35, 'rgba(192, 132, 252, 0.25)');
+      mwGrad.addColorStop(0.5, 'rgba(255, 255, 255, 0.85)');
+      mwGrad.addColorStop(0.65, 'rgba(56, 189, 248, 0.35)');
+      mwGrad.addColorStop(1, 'transparent');
+
+      ctx.fillStyle = mwGrad;
+      ctx.beginPath();
+      ctx.moveTo(w * 0.1, h * 0.85);
+      ctx.bezierCurveTo(w * 0.35, h * 0.45, w * 0.65, h * 0.25, w * 0.95, 0);
+      ctx.lineTo(w * 0.85, 0);
+      ctx.bezierCurveTo(w * 0.55, h * 0.20, w * 0.25, h * 0.40, 0, h * 0.85);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+
+      // Star Particles
+      ctx.fillStyle = '#ffffff';
+      for (let i = 0; i < 90; i++) {
+        const sx = ((i * 73) + (i * i * 17)) % w;
+        const sy = ((i * 41) + 11) % (h * 0.75);
+        const sr = (i % 5 === 0) ? 2.2 : (i % 3 === 0) ? 1.4 : 0.8;
+        ctx.beginPath();
+        ctx.arc(sx, sy, sr, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Steens Mountain Ridge Silhouette
+      ctx.fillStyle = '#000000';
+      ctx.beginPath();
+      ctx.moveTo(0, h);
+      ctx.lineTo(0, h * 0.78);
+      ctx.lineTo(w * 0.2, h * 0.72);
+      ctx.lineTo(w * 0.45, h * 0.79);
+      ctx.lineTo(w * 0.7, h * 0.68);
+      ctx.lineTo(w * 0.88, h * 0.74);
+      ctx.lineTo(w, h * 0.71);
+      ctx.lineTo(w, h);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    function drawNocturnalOwl(ctx, w, h) {
+      // Dark Woodland Vignette
+      ctx.fillStyle = '#04070a';
+      ctx.fillRect(0, 0, w, h);
+
+      // Feather Mantle
+      ctx.fillStyle = '#0c1520';
+      ctx.beginPath();
+      ctx.ellipse(w * 0.5, h * 0.55, 120, 95, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Facial Disc (Bilateral Concentric Circles)
+      ctx.fillStyle = '#1e293b';
+      ctx.beginPath();
+      ctx.arc(w * 0.41, h * 0.46, 44, 0, Math.PI * 2);
+      ctx.arc(w * 0.59, h * 0.46, 44, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Glowing Amber Eyes (The Living Focus)
+      ctx.fillStyle = '#f59e0b';
+      ctx.shadowColor = '#f59e0b';
+      ctx.shadowBlur = 15;
+      ctx.beginPath();
+      ctx.arc(w * 0.41, h * 0.46, 18, 0, Math.PI * 2);
+      ctx.arc(w * 0.59, h * 0.46, 18, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      // Dark Pupils with Pinpoint Highlight
+      ctx.fillStyle = '#05070a';
+      ctx.beginPath();
+      ctx.arc(w * 0.41, h * 0.46, 11, 0, Math.PI * 2);
+      ctx.arc(w * 0.59, h * 0.46, 11, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(w * 0.39, h * 0.43, 3, 0, Math.PI * 2);
+      ctx.arc(w * 0.57, h * 0.43, 3, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Small hooked bill
+      ctx.fillStyle = '#d97706';
+      ctx.beginPath();
+      ctx.moveTo(w * 0.48, h * 0.50);
+      ctx.lineTo(w * 0.52, h * 0.50);
+      ctx.lineTo(w * 0.50, h * 0.62);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // Convert any canvas to 8-dot Unicode Braille ANSCII Halftone
+    function rasterizeCanvasToBraille(srcCanvas, cols, invert) {
+      if (!srcCanvas) return '';
+      const rows = Math.floor(cols * (srcCanvas.height / srcCanvas.width) * 0.5);
+
+      const offCanvas = document.createElement('canvas');
+      offCanvas.width = cols * 2;
+      offCanvas.height = rows * 4;
+      const offCtx = offCanvas.getContext('2d');
+      offCtx.drawImage(srcCanvas, 0, 0, offCanvas.width, offCanvas.height);
+
+      const imgData = offCtx.getImageData(0, 0, offCanvas.width, offCanvas.height);
+      const data = imgData.data;
+      const w = offCanvas.width;
+
+      let result = '';
+
+      for (let y = 0; y < offCanvas.height; y += 4) {
+        let line = '';
+        for (let x = 0; x < offCanvas.width; x += 2) {
+          let brailleByte = 0;
+
+          // Helper to get dithered dot status
+          const checkDot = (dx, dy, bit) => {
+            const px = x + dx;
+            const py = y + dy;
+            if (px >= offCanvas.width || py >= offCanvas.height) return;
+            const idx = (py * w + px) * 4;
+            // Perceptual grayscale luminance (Rec. 709)
+            let lum = (0.2126 * data[idx] + 0.7152 * data[idx + 1] + 0.0722 * data[idx + 2]);
+            if (invert) lum = 255 - lum;
+
+            const bayerVal = (BAYER_4X4[py % 4][px % 4] / 16) * 255;
+            if (lum > bayerVal) {
+              brailleByte |= (1 << bit);
+            }
+          };
+
+          // 8-Dot Braille sub-pixel mapping
+          checkDot(0, 0, 0); // Dot 1 (top-left)
+          checkDot(0, 1, 1); // Dot 2
+          checkDot(0, 2, 2); // Dot 3
+          checkDot(1, 0, 3); // Dot 4 (top-right)
+          checkDot(1, 1, 4); // Dot 5
+          checkDot(1, 2, 5); // Dot 6
+          checkDot(0, 3, 6); // Dot 7 (bottom-left)
+          checkDot(1, 3, 7); // Dot 8 (bottom-right)
+
+          line += String.fromCharCode(0x2800 + brailleByte);
+        }
+        result += line + '\n';
+      }
+
+      return result;
+    }
+
+    function renderActiveAnsciiPlate() {
+      if (!photoCanvas || !photoCtx) return;
+
+      const w = photoCanvas.width;
+      const h = photoCanvas.height;
+
+      if (ansciiState.plate === 'hoh') {
+        drawHohRainforest(photoCtx, w, h);
+      } else if (ansciiState.plate === 'sea') {
+        drawPacificBreakers(photoCtx, w, h);
+      } else if (ansciiState.plate === 'alvord') {
+        drawAlvordDarkSky(photoCtx, w, h);
+      } else if (ansciiState.plate === 'owl') {
+        drawNocturnalOwl(photoCtx, w, h);
+      }
+
+      const brailleText = rasterizeCanvasToBraille(photoCanvas, ansciiState.cols, ansciiState.invert);
+      ansciiState.currentText = brailleText;
+      const stage = document.getElementById('ansciiBrailleStage');
+      if (stage) {
+        stage.textContent = brailleText;
+      }
+    }
+
+    function loadAnsciiPlate(plateKey) {
+      ansciiState.plate = plateKey;
+      document.querySelectorAll('#chipHoh, #chipSea, #chipAlvord, #chipOwl').forEach(c => c.classList.remove('active'));
+
+      const meta = {
+        hoh: {
+          chip: 'chipHoh',
+          cam: 'Sony Alpha 7R III (ILCE-7RM3)',
+          lens: 'FE 24-70mm F2.8 GM @ 24mm (Ultrawide)',
+          exp: '1/250s · f/8.0 · ISO 100 · Native 42.4 MP',
+          sub: 'Hoh River Valley Cathedral, Olympic National Park'
+        },
+        sea: {
+          chip: 'chipSea',
+          cam: 'Sony Alpha 7R III (ILCE-7RM3)',
+          lens: 'FE 35mm F1.4 GM @ 35mm (Prime)',
+          exp: '1/1000s · f/5.6 · ISO 200 · Native 42.4 MP',
+          sub: 'Rialto Beach Sea Stack & Breakers, Pacific Coast'
+        },
+        alvord: {
+          chip: 'chipAlvord',
+          cam: 'Sony Alpha 7R III (ILCE-7RM3)',
+          lens: 'FE 14mm F1.8 GM @ 14mm (Ultrawide)',
+          exp: '25.0s · f/1.8 · ISO 3200 · Dark-Sky Reserve',
+          sub: 'Alvord Desert Caldera & Galactic Core Starfield'
+        },
+        owl: {
+          chip: 'chipOwl',
+          cam: 'Sony Alpha 7R III (ILCE-7RM3)',
+          lens: 'FE 100-400mm F4.5-5.6 GM @ 400mm (Supertelephoto)',
+          exp: '1/500s · f/5.6 · ISO 800 · Megafauna Tracking',
+          sub: 'Northern Saw-Whet Owl, Olympic National Forest'
+        }
+      };
+
+      if (meta[plateKey]) {
+        document.getElementById(meta[plateKey].chip)?.classList.add('active');
+        const badge = document.getElementById('exifTelemetry');
+        if (badge) {
+          badge.innerHTML = `
+            <div><strong>Camera:</strong> ${meta[plateKey].cam}</div>
+            <div><strong>Lens:</strong> ${meta[plateKey].lens}</div>
+            <div><strong>Exposure:</strong> ${meta[plateKey].exp}</div>
+            <div style="color: var(--emerald); margin-top: 0.2rem;">${meta[plateKey].sub}</div>
+          `;
+        }
+      }
+
+      renderActiveAnsciiPlate();
+    }
+
+    function updateAnsciiResolution(val) {
+      ansciiState.cols = parseInt(val, 10);
+      document.getElementById('lblAnsciiCols').textContent = `${val} cols`;
+      renderActiveAnsciiPlate();
+    }
+
+    function toggleAnsciiInvert() {
+      ansciiState.invert = !ansciiState.invert;
+      renderActiveAnsciiPlate();
+    }
+
+    function copyAnsciiBraille() {
+      if (!ansciiState.currentText) return;
+      navigator.clipboard.writeText(ansciiState.currentText).then(() => {
+        const btn = event?.target;
+        if (btn) {
+          const original = btn.textContent;
+          btn.textContent = '✅ Copied ANSCII!';
+          setTimeout(() => { btn.textContent = original; }, 1800);
+        }
+      });
+    }
+
+    function handleCustomPhotoUpload(e) {
+      const file = e.target.files?.[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = new Image();
+        img.onload = () => {
+          ansciiState.plate = 'custom';
+          document.querySelectorAll('#chipHoh, #chipSea, #chipAlvord, #chipOwl').forEach(c => c.classList.remove('active'));
+
+          if (photoCanvas && photoCtx) {
+            photoCtx.drawImage(img, 0, 0, photoCanvas.width, photoCanvas.height);
+            const brailleText = rasterizeCanvasToBraille(photoCanvas, ansciiState.cols, ansciiState.invert);
+            ansciiState.currentText = brailleText;
+            const stage = document.getElementById('ansciiBrailleStage');
+            if (stage) stage.textContent = brailleText;
+
+            const badge = document.getElementById('exifTelemetry');
+            if (badge) {
+              badge.innerHTML = `
+                <div><strong>Source:</strong> Ingested Client Masterwork (${file.name})</div>
+                <div><strong>Resolution:</strong> ${img.width} × ${img.height} px</div>
+                <div style="color: var(--emerald); margin-top: 0.2rem;">Client-Side Dithered Braille Halftone Matrix</div>
+              `;
+            }
+          }
+        };
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Attach Tactile Sweep & Web Audio Sonification to the ANSCII Braille Stage
+    const ansciiStage = document.getElementById('ansciiBrailleStage');
+    if (ansciiStage) {
+      ansciiStage.addEventListener('pointermove', (e) => {
+        const rect = ansciiStage.getBoundingClientRect();
+        const normX = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        const normY = Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height));
+
+        if (photoCanvas && photoCtx) {
+          const px = Math.floor(normX * photoCanvas.width);
+          const py = Math.floor(normY * photoCanvas.height);
+          const pixel = photoCtx.getImageData(px, py, 1, 1).data;
+          const lum = Math.round(0.2126 * pixel[0] + 0.7152 * pixel[1] + 0.0722 * pixel[2]);
+
+          const elev = (0.20 + (lum / 255) * 0.38).toFixed(2);
+          const temp = (24.0 + (lum / 255) * 9.5).toFixed(1);
+
+          document.getElementById('hudPhotoLum').textContent = lum;
+          document.getElementById('hudPhotoElev').textContent = `${elev} mm`;
+          document.getElementById('hudPhotoTemp').textContent = `${temp}°C`;
+
+          // Sonify the photographic brightness
+          if (state.audioEnabled && Math.random() < 0.25) {
+            playPhotoTone(lum);
+          }
+        }
+      });
+    }
+
+    function playPhotoTone(lum) {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      // Pentatonic pitch scale from 110 Hz (A2) to 554 Hz (C#5)
+      const freq = 110 + (lum / 255) * 440;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, ctx.currentTime);
+
+      gain.gain.setValueAtTime(0.015, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.04);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start();
+      osc.stop(ctx.currentTime + 0.045);
+    }
+
+    // Lifecycle Mount
+    window.addEventListener('DOMContentLoaded', () => {
+      initCanvas();
+      animationFrameId = requestAnimationFrame(renderFingerpad);
+      startCardiacLoop();
+      loadAnsciiPlate('hoh');
+    });
+
+    window.addEventListener('resize', () => {
+      initCanvas();
+    });
+  </script>
+</body>
+</html>
