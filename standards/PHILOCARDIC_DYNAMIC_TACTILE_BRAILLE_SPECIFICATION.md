@@ -423,6 +423,11 @@ The Philocardia Soft-Robotic Lathe is engineered specifically to be **easy on th
 6. **Institute for Safe Medication Practices (ISMP)** (2023). *List of Confused Drug Names and Typographic Disambiguation Standards*.
 7. **United Nations** (2007). *Declaration on the Rights of Indigenous Peoples (UNDRIP)*. Articles 11, 13, 14, 24, 31.
 8. **International Organization for Standardization (ISO)** (2002). *ISO/TR 11548-1: Communication aids for blind persons — Identifiers, names and assignation to coded character sets of 8-dot Braille characters*.
+9. **Roberts, J. W., Slattery, O. T., & Kardos, D. W. (NIST)** (2004). *Refreshable braille reader*. U.S. Patent No. 6,776,619 B1 (Expired). Washington, DC: U.S. Patent and Trademark Office.
+10. **Schmidt, R.** (2002). *Refreshable braille display system*. U.S. Patent No. 6,354,839 B1 (Expired). Washington, DC: U.S. Patent and Trademark Office.
+11. **Yairi, M., Saal, N., & Ciesla, C. (Tactus Technology)** (2013). *Dynamic tactile interface*. U.S. Patent No. 8,547,339 B2. Washington, DC: U.S. Patent and Trademark Office.
+12. **Johnson, K. O., & Phillips, J. R.** (1988). *A rotating drum stimulator for scanning embossed patterns and textures across the skin*. Journal of Neuroscience Methods, 22(3), 221–231.
+13. **PocketGull LLC** (2026). *USPTO Patent Prior Art Search & Patentability Assessment Report (Docket POCK-PAT-2026-001)*. See [USPTO_PRIOR_ART_AND_PATENTABILITY_REPORT.md](file:///c:/Users/philg/Pocketgull/pocketgull-typeface/standards/USPTO_PRIOR_ART_AND_PATENTABILITY_REPORT.md).
 
 ---
 
