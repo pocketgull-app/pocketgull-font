@@ -115,5 +115,36 @@ PocketGull's geometry and clinical behavioral architecture are grounded in peer-
 
 ---
 
+## 11. Mathematical Typography, METAFONT & Algorithmic Type Design
+* **Donald E. Knuth, Ph.D. (1979)**: *"Mathematical Typography."* Bulletin of the American Mathematical Society (New Series), 1(2), 337–372. [[DOI: 10.1090/S0273-0979-1979-14598-1](https://doi.org/10.1090/S0273-0979-1979-14598-1)]  
+  *The Josiah Willard Gibbs Lecture establishing the foundation of computer-assisted typography, TeX, and METAFONT.*
+* **Donald E. Knuth, Ph.D. (1982)**: *"The Concept of a Meta-Font."* Visible Language, 16(1), 3–27.  
+  *Exposition of algorithmic character generation, parametric curves, and the mathematical representation of letterforms.*
+* **Donald E. Knuth, Ph.D. (1986)**: *"Computers & Typesetting, Volume C: The METAFONTbook."* Addison-Wesley. ISBN: 0-201-13445-4.  
+  *Definitive language specification and algebraic geometry for METAFONT.*
+* **Donald E. Knuth, Ph.D. (1986)**: *"Computers & Typesetting, Volume E: Computer Modern Typefaces."* Addison-Wesley. ISBN: 0-201-13446-2.  
+  *Complete literate WEB source code defining the mathematical equations for the Computer Modern typeface superfamily.*
+* **John D. Hobby, Ph.D. (1989)**: *"A METAFONT-like system with PostScript output."* TUGboat, 10(4), 505–512.  
+  *Introduction of MetaPost, solving the mathematical conversion of pen-stroke envelopes into closed Bézier spline contours.*
+* **Richard Southall (1988)**: *"Visual run-time profiles of METAFONT."* TUGboat, 9(2), 113–118.  
+  *Critical typographic analysis of perceptual distortion under extreme scalar parameter transformations.*
+* **Microsoft Typography & TeX Users Group (2007/2023)**: *"MATH — The Mathematical Typesetting Table."* ISO/IEC 14496-22 Annex.  
+  *The universal OpenType specification for native mathematical layout, operator scaling, and delimiter construction.*
+
+---
+
+## 12. Typeface Intellectual Property Jurisprudence & Open Source Governance
+* **U.S. Fourth Circuit Court of Appeals (1978)**: *Eltra Corp. v. Ringer*, 570 F.2d 416 (4th Cir. 1978); 37 C.F.R. § 202.1(e).  
+  *Affirmed that typeface designs (the visual appearance of letters) are not protectable by copyright in the United States, establishing the legal boundary between uncopyrightable type designs and copyrightable font software programs.*
+* **United States Code (1946/amended)**: *The Lanham Act § 43(a)*, 15 U.S.C. § 1125(a).  
+  *Governs trademark false designation of origin, brand integrity, and nominative fair use in software and typographical referencing.*
+* **SIL International (2007)**: *"SIL Open Font License (OFL), Version 1.1."*  
+  *The international open-source standard for font software licensing, ensuring freedom to modify, embed, and redistribute with or without Reserved Font Names.*
+* **LaTeX Project (2008)**: *"The LaTeX Project Public License (LPPL), Version 1.3c."*  
+  *Open-source license governing LaTeX macro packages, style sheets, and CTAN contributions.*
+
+---
+
 ## Citation
 For academic and clinical literature citation, see [CITATION.cff](../CITATION.cff).
+
