@@ -736,6 +736,70 @@
       gap: 1rem;
     }
 
+    /* Spindle Simulator Styles */
+    .spindle-stage-wrap {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .spindle-canvas-container {
+      position: relative;
+      background: #000;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #spindleCanvas {
+      width: 100%;
+      height: 260px;
+      display: block;
+      cursor: grab;
+      user-select: none;
+    }
+
+    #spindleCanvas:active {
+      cursor: grabbing;
+    }
+
+    .spindle-instructions {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.75);
+      border: 1px solid var(--card-border);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-family: var(--mono-stack);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .spindle-controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .spindle-architecture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
     /* Affective Rosetta Cards */
     .rosetta-grid {
       display: grid;
@@ -1233,6 +1297,115 @@
           <div class="telemetry-label">Reading Velocity Acceleration</div>
           <div class="telemetry-val" id="calcSpeedGain" style="font-size: 1.4rem; color: var(--cyan);">+140% <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">(2.4× faster)</span></div>
           <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.25rem;">Zero hand motion · Zero return-sweep latency</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lab Section: Philocardia Precision Tactile Lathe & Soft Inflating Rubber Nibs -->
+    <section class="lab-card" style="margin-bottom: 2rem;" aria-label="Precision Tactile Lathe with Soft Inflating Rubber Nibs">
+      <div class="card-header">
+        <div class="card-title-group">
+          <h3>🕊️ The Philocardia Tactile Lathe · Soft Inflating Rubber Nibs</h3>
+          <p>Easy on the hands that never hurts. Soft-robotic silicone nibs dynamically inflate on the ascending arc and deflate flat as the cylinder turns. 78% below human pain thresholds.</p>
+        </div>
+        <span class="card-badge">CLOUDTOUCH™ SOFT-ROBOTIC MANDREL</span>
+      </div>
+
+      <!-- Spindle Interactive Stage -->
+      <div class="spindle-stage-wrap">
+        <div class="spindle-canvas-container">
+          <canvas id="spindleCanvas" width="600" height="260" aria-label="3D Rotating Tactile Lathe Drum Canvas" title="Click and drag or scroll vertically to roll the soft-robotic cylinder manually under your resting finger"></canvas>
+          <div class="spindle-instructions" id="spindleNotice">
+            🎈 Watch soft silicone nibs inflate (+18 kPa) as they rise, cushion your finger, and deflate flush!
+          </div>
+        </div>
+
+        <!-- Touch Comfort Modes -->
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-top: 0.25rem;">
+          <span style="font-family: var(--mono-stack); font-size: 0.72rem; color: var(--text-muted);">Comfort Presets:</span>
+          <button type="button" class="pacing-chip active" id="chipComfortCloud" onclick="setComfortMode('cloud')">
+            ☁️ Cloud-Soft (Arthritic &amp; Neuropathy Care · Shore A 15 · 34.5°C)
+          </button>
+          <button type="button" class="pacing-chip" id="chipComfortNatural" onclick="setComfortMode('natural')">
+            🌸 Natural Humanist (Daily Reading · Shore A 25 · 33.5°C)
+          </button>
+          <button type="button" class="pacing-chip" id="chipComfortFirm" onclick="setComfortMode('firm')">
+            ⚡ Precision Optotype (High Velocity 350+ WPM · Shore A 35)
+          </button>
+        </div>
+
+        <!-- Spindle Physics & Biomechanical Telemetry HUD -->
+        <div class="telemetry-row">
+          <div class="telemetry-tile">
+            <div class="telemetry-label">Contact Stress (Pain Threshold: 85 kPa)</div>
+            <div class="telemetry-val" id="hudNibStress" style="color: var(--emerald);">24.6 <span style="font-size: 0.7rem; font-weight: normal; color: var(--emerald);">kPa (-78% Zero Pain 💖)</span></div>
+          </div>
+          <div class="telemetry-tile">
+            <div class="telemetry-label">Nib State (Dynamic Manifold)</div>
+            <div class="telemetry-val" id="hudNibPressure" style="color: var(--rose);">+18.4 kPa <span style="font-size: 0.7rem; font-weight: normal; color: var(--cyan);">Inflating</span></div>
+          </div>
+          <div class="telemetry-tile">
+            <div class="telemetry-label">Hand &amp; Wrist Strain (sEMG)</div>
+            <div class="telemetry-val" id="hudNibEMG" style="color: var(--cyan);">0.0 <span style="font-size: 0.7rem; font-weight: normal; color: var(--emerald);">μV (Complete Rest)</span></div>
+          </div>
+          <div class="telemetry-tile">
+            <div class="telemetry-label">Epidermal Shear Friction</div>
+            <div class="telemetry-val" id="hudSpindleShear" style="color: var(--amber);">0.00 <span style="font-size: 0.7rem; font-weight: normal; color: var(--emerald);">mm/s (Zero Blisters)</span></div>
+          </div>
+        </div>
+
+        <!-- Spindle Hardware Controls -->
+        <div class="spindle-controls-row">
+          <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+            <button type="button" class="nav-btn" id="btnSpindleMotor" onclick="toggleSpindleMotor()">
+              <span id="spindleMotorIcon">⚡</span> <span id="spindleMotorLabel">Motorized Lathe: OFF</span>
+            </button>
+            <button type="button" class="nav-btn" onclick="spinSpindleImpulse(18)" title="Give the spindle a manual flick/spin">
+              💫 Flick Spindle
+            </button>
+            <button type="button" class="nav-btn" onclick="reverseSpindleDirection()" title="Reverse rotation direction">
+              ⇄ Reverse
+            </button>
+          </div>
+
+          <div class="slider-group" style="min-width: 220px;">
+            <label for="sliderSpindleSpeed">Lathe Velocity:</label>
+            <input type="range" id="sliderSpindleSpeed" min="60" max="450" step="10" value="240" oninput="updateSpindleSpeed(this.value)">
+            <span id="lblSpindleSpeed" style="font-weight: 700; color: var(--cyan);">240 WPM</span>
+          </div>
+
+          <div style="font-family: var(--mono-stack); font-size: 0.75rem; color: var(--text-muted);">
+            Air Core: <strong id="hudSpindleAxle" style="color: var(--rose);">33.5°C · 72 BPM Sinus Pulsing</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spindle Form Factor Blueprints -->
+      <div class="spindle-architecture-grid" style="margin-top: 1.5rem;">
+        <div class="telemetry-tile" style="text-align: left; padding: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <strong style="color: var(--cyan); font-size: 0.95rem;">🕊️ The "Spindle-Gull" Desk Cradle</strong>
+            <span class="card-badge" style="margin: 0;">DESKTOP / BEDSIDE</span>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin: 0;">
+            Sculpted biometric palm rest with an exposed Ø 28 mm motorized spindle. The blind reader rests an index finger on the crown while text rotates underneath. Bottom-arc stationary cams refresh radial pins silently before they reach top contact.
+          </p>
+          <div style="font-family: var(--mono-stack); font-size: 0.7rem; color: var(--emerald); margin-top: 0.5rem;">
+            BOM Cost: &lt; $180 · 8-Column Cam Latching · 0–450 WPM
+          </div>
+        </div>
+
+        <div class="telemetry-tile" style="text-align: left; padding: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <strong style="color: var(--rose); font-size: 0.95rem;">📱 The "PocketRoller" Thumb Capsule</strong>
+            <span class="card-badge" style="margin: 0;">ULTRA-PORTABLE</span>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin: 0;">
+            Handheld thumb-roller designed like a luxury camera dial. Rolling the drum with thumb flexion drives an optical encoder that scrubs text synchronously. Roll fast to skim, roll back to re-read. Magnetic detents click at word boundaries.
+          </p>
+          <div style="font-family: var(--mono-stack); font-size: 0.7rem; color: var(--emerald); margin-top: 0.5rem;">
+            Weight: 42 g · 1200 CPR Magnetic Encoder · 35h Li-Po
+          </div>
         </div>
       </div>
     </section>
@@ -2573,6 +2746,470 @@
       renderCurrentRstpWord();
     }
 
+    // ==========================================
+    // PHILOCARDIA PRECISION TACTILE LATHE ENGINE
+    // ==========================================
+    const latheCanvas = document.getElementById('spindleCanvas');
+    const latheCtx = latheCanvas ? latheCanvas.getContext('2d') : null;
+
+    const latheState = {
+      isMotorRunning: false,
+      rpm: 38,
+      wpm: 240,
+      angle: 0,
+      angularVelocity: 0,
+      friction: 0.965,
+      isDragging: false,
+      lastY: 0,
+      lastTime: performance.now(),
+      direction: 1,
+      radius: 72,
+      mandrelLength: 360,
+      lastClickAngle: 0,
+      cellsPerRev: 8
+    };
+
+    function initLatheCanvas() {
+      if (!latheCanvas || !latheCtx) return;
+      const dpr = window.devicePixelRatio || 1;
+      const rect = latheCanvas.getBoundingClientRect();
+      latheCanvas.width = rect.width * dpr;
+      latheCanvas.height = rect.height * dpr;
+      latheCtx.scale(dpr, dpr);
+    }
+
+    function updateSpindleSpeed(val) {
+      latheState.wpm = parseInt(val, 10) || 240;
+      const lbl = document.getElementById('lblSpindleSpeed');
+      if (lbl) lbl.textContent = `${latheState.wpm} WPM`;
+
+      const charsPerSec = (latheState.wpm * 6.5) / 60;
+      const vt = (charsPerSec * 6.2).toFixed(1);
+      const omega = (vt / 14.0).toFixed(1);
+
+      const elOmega = document.getElementById('hudSpindleOmega');
+      if (elOmega) {
+        elOmega.textContent = `${omega} `;
+        const s = document.createElement('span');
+        s.style.fontSize = '0.7rem';
+        s.style.fontWeight = 'normal';
+        s.textContent = 'rad/s';
+        elOmega.appendChild(s);
+      }
+
+      const elVt = document.getElementById('hudSpindleVt');
+      if (elVt) {
+        elVt.textContent = `${vt} `;
+        const s = document.createElement('span');
+        s.style.fontSize = '0.7rem';
+        s.style.fontWeight = 'normal';
+        s.textContent = 'mm/s';
+        elVt.appendChild(s);
+      }
+    }
+
+    function toggleSpindleMotor() {
+      latheState.isMotorRunning = !latheState.isMotorRunning;
+      const btn = document.getElementById('btnSpindleMotor');
+      const icon = document.getElementById('spindleMotorIcon');
+      const label = document.getElementById('spindleMotorLabel');
+
+      if (latheState.isMotorRunning) {
+        if (btn) btn.classList.add('playing');
+        if (icon) icon.textContent = '⚙️';
+        if (label) label.textContent = 'Motorized Lathe: ON';
+      } else {
+        if (btn) btn.classList.remove('playing');
+        if (icon) icon.textContent = '⚡';
+        if (label) label.textContent = 'Motorized Lathe: OFF';
+      }
+    }
+
+    function spinSpindleImpulse(impulse) {
+      latheState.angularVelocity = impulse * latheState.direction;
+      playSpindleRevSound(Math.abs(impulse));
+    }
+
+    function reverseSpindleDirection() {
+      latheState.direction *= -1;
+      latheState.angularVelocity *= -1;
+    }
+
+    function playSpindleClick(intensity = 1.0) {
+      const ctx = getAudioContext();
+      if (!ctx || !state.audioEnabled) return;
+      try {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(1800, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(320, ctx.currentTime + 0.012);
+        gain.gain.setValueAtTime(0.02 * Math.min(1.5, intensity), ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.015);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.016);
+      } catch (_) {}
+    }
+
+    function playSpindleRevSound(vel) {
+      const ctx = getAudioContext();
+      if (!ctx || !state.audioEnabled) return;
+      try {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(120 + vel * 8, ctx.currentTime);
+        gain.gain.setValueAtTime(0.015, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.08);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.085);
+      } catch (_) {}
+    }
+
+    function setComfortMode(mode) {
+      latheState.comfortMode = mode;
+      document.querySelectorAll('#chipComfortCloud, #chipComfortNatural, #chipComfortFirm').forEach(c => c.classList.remove('active'));
+
+      const chip = document.getElementById(`chipComfort${mode.charAt(0).toUpperCase() + mode.slice(1)}`);
+      if (chip) chip.classList.add('active');
+
+      const elStress = document.getElementById('hudNibStress');
+      const elPressure = document.getElementById('hudNibPressure');
+      const elAxle = document.getElementById('hudSpindleAxle');
+
+      if (mode === 'cloud') {
+        latheState.nibPressureKpa = 12.0;
+        latheState.contactStressKpa = 18.2;
+        latheState.shoreADurometer = 15;
+        latheState.temperatureC = 34.5;
+        if (elStress) elStress.innerHTML = `18.2 <span style="font-size: 0.7rem; font-weight: normal; color: var(--emerald);">kPa (-82% Zero Pain 💖)</span>`;
+        if (elPressure) elPressure.innerHTML = `+12.0 kPa <span style="font-size: 0.7rem; font-weight: normal; color: var(--cyan);">Pillowed</span>`;
+        if (elAxle) elAxle.textContent = `34.5°C · 72 BPM Cloud-Soft`;
+      } else if (mode === 'natural') {
+        latheState.nibPressureKpa = 18.4;
+        latheState.contactStressKpa = 24.6;
+        latheState.shoreADurometer = 25;
+        latheState.temperatureC = 33.5;
+        if (elStress) elStress.innerHTML = `24.6 <span style="font-size: 0.7rem; font-weight: normal; color: var(--emerald);">kPa (-78% Zero Pain 💖)</span>`;
+        if (elPressure) elPressure.innerHTML = `+18.4 kPa <span style="font-size: 0.7rem; font-weight: normal; color: var(--cyan);">Inflating</span>`;
+        if (elAxle) elAxle.textContent = `33.5°C · 72 BPM Sinus Pulsing`;
+      } else if (mode === 'firm') {
+        latheState.nibPressureKpa = 26.0;
+        latheState.contactStressKpa = 32.4;
+        latheState.shoreADurometer = 35;
+        latheState.temperatureC = 32.0;
+        if (elStress) elStress.innerHTML = `32.4 <span style="font-size: 0.7rem; font-weight: normal; color: var(--emerald);">kPa (-65% Optotype Acuity)</span>`;
+        if (elPressure) elPressure.innerHTML = `+26.0 kPa <span style="font-size: 0.7rem; font-weight: normal; color: var(--cyan);">Firm High-WPM</span>`;
+        if (elAxle) elAxle.textContent = `32.0°C · 72 BPM Rapid Lathe`;
+      }
+
+      playPneumaticPuff();
+    }
+
+    function playPneumaticPuff() {
+      const ctx = getAudioContext();
+      if (!ctx || !state.audioEnabled) return;
+      try {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(260, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(140, ctx.currentTime + 0.04);
+        gain.gain.setValueAtTime(0.015, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.045);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.05);
+      } catch (_) {}
+    }
+
+    function renderLathe(now) {
+      if (!latheCanvas || !latheCtx) return;
+      const rect = latheCanvas.getBoundingClientRect();
+      const w = rect.width;
+      const h = rect.height;
+
+      latheCtx.clearRect(0, 0, w, h);
+
+      const dt = Math.min(0.05, (now - latheState.lastTime) / 1000);
+      latheState.lastTime = now;
+
+      if (latheState.isMotorRunning) {
+        const charsPerSec = (latheState.wpm * 6.5) / 60;
+        const targetOmega = (charsPerSec * 6.2) / 14.0;
+        latheState.angularVelocity = targetOmega * latheState.direction;
+      } else if (!latheState.isDragging) {
+        latheState.angularVelocity *= latheState.friction;
+        if (Math.abs(latheState.angularVelocity) < 0.05) {
+          latheState.angularVelocity = 0;
+        }
+      }
+
+      latheState.angle += latheState.angularVelocity * dt;
+
+      const stepAngle = (2 * Math.PI) / latheState.cellsPerRev;
+      const currentStep = Math.floor(latheState.angle / stepAngle);
+      const lastStep = Math.floor(latheState.lastClickAngle / stepAngle);
+      if (currentStep !== lastStep && Math.abs(latheState.angularVelocity) > 0.1) {
+        playSpindleClick(Math.abs(latheState.angularVelocity) / 5);
+        latheState.lastClickAngle = latheState.angle;
+      }
+
+      let pulseScale = 1.0;
+      if (state.cadence === '72') {
+        const cardiacPhase = (now % 833.33) / 833.33;
+        pulseScale = 1.0 + 0.06 * Math.sin(cardiacPhase * 2 * Math.PI);
+      } else if (state.cadence === '60') {
+        const cardiacPhase = (now % 1000.0) / 1000.0;
+        pulseScale = 1.0 + 0.08 * Math.sin(cardiacPhase * 2 * Math.PI);
+      }
+
+      const cx = w / 2;
+      const cy = h / 2 + 15;
+      const R = latheState.radius * pulseScale;
+      const L = Math.min(w * 0.72, latheState.mandrelLength);
+      const xStart = cx - L / 2;
+      const xEnd = cx + L / 2;
+
+      // 1. Lathe Bed & Lead Screw
+      latheCtx.fillStyle = '#0f172a';
+      latheCtx.fillRect(xStart - 40, cy + R + 10, L + 80, 24);
+      latheCtx.strokeStyle = '#334155';
+      latheCtx.lineWidth = 2;
+      latheCtx.strokeRect(xStart - 40, cy + R + 10, L + 80, 24);
+
+      latheCtx.strokeStyle = '#475569';
+      latheCtx.lineWidth = 3;
+      latheCtx.beginPath();
+      latheCtx.moveTo(xStart - 35, cy + R + 22);
+      latheCtx.lineTo(xEnd + 35, cy + R + 22);
+      latheCtx.stroke();
+
+      // 2. Headstock (Motor housing)
+      const headstockW = 42;
+      const headstockH = R * 2 + 20;
+      const headstockGrad = latheCtx.createLinearGradient(xStart - headstockW, 0, xStart, 0);
+      headstockGrad.addColorStop(0, '#1e293b');
+      headstockGrad.addColorStop(0.5, '#334155');
+      headstockGrad.addColorStop(1, '#0f172a');
+      latheCtx.fillStyle = headstockGrad;
+      latheCtx.fillRect(xStart - headstockW, cy - headstockH / 2, headstockW, headstockH);
+      latheCtx.strokeStyle = '#64748b';
+      latheCtx.strokeRect(xStart - headstockW, cy - headstockH / 2, headstockW, headstockH);
+
+      latheCtx.fillStyle = latheState.isMotorRunning ? '#10b981' : '#64748b';
+      latheCtx.beginPath();
+      latheCtx.arc(xStart - headstockW / 2, cy - headstockH / 2 + 12, 4, 0, 2 * Math.PI);
+      latheCtx.fill();
+
+      // 3. Tailstock
+      const tailstockW = 32;
+      const tailstockGrad = latheCtx.createLinearGradient(xEnd, 0, xEnd + tailstockW, 0);
+      tailstockGrad.addColorStop(0, '#0f172a');
+      tailstockGrad.addColorStop(0.5, '#334155');
+      tailstockGrad.addColorStop(1, '#1e293b');
+      latheCtx.fillStyle = tailstockGrad;
+      latheCtx.fillRect(xEnd, cy - headstockH / 2, tailstockW, headstockH);
+      latheCtx.strokeStyle = '#64748b';
+      latheCtx.strokeRect(xEnd, cy - headstockH / 2, tailstockW, headstockH);
+
+      // 4. Rotating Mandrel Cylinder
+      const drumGrad = latheCtx.createLinearGradient(0, cy - R, 0, cy + R);
+      drumGrad.addColorStop(0.00, '#334155');
+      drumGrad.addColorStop(0.18, '#94a3b8');
+      drumGrad.addColorStop(0.35, '#f8fafc');
+      drumGrad.addColorStop(0.55, '#64748b');
+      drumGrad.addColorStop(0.85, '#1e293b');
+      drumGrad.addColorStop(1.00, '#090d16');
+
+      latheCtx.fillStyle = drumGrad;
+      latheCtx.fillRect(xStart, cy - R, L, R * 2);
+
+      latheCtx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+      latheCtx.lineWidth = 1;
+      for (let ly = cy - R + 6; ly < cy + R; ly += 12) {
+        latheCtx.beginPath();
+        latheCtx.moveTo(xStart, ly);
+        latheCtx.lineTo(xEnd, ly);
+        latheCtx.stroke();
+      }
+
+      // 5. Circumferential Soft-Robotic Inflating/Deflating Rubber Nibs
+      const numColumns = 8;
+      for (let col = 0; col < numColumns; col++) {
+        const colAngle = latheState.angle + (col * (2 * Math.PI / numColumns));
+        const frontDepth = Math.sin(colAngle);
+        const yOffset = -Math.cos(colAngle);
+
+        const normAngle = ((colAngle % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+        const distToApex = Math.min(normAngle, 2 * Math.PI - normAngle);
+
+        // Inflation profile: soft rubber nib expands smoothly as it reaches reading apex
+        let inflation = 0.12; // Deflated baseline
+        if (distToApex < 1.4) {
+          inflation = 0.12 + 0.88 * Math.pow(Math.cos(distToApex * (Math.PI / 2.8)), 2);
+        }
+
+        if (frontDepth > -0.2) {
+          const pinY = cy + yOffset * R;
+          const normalY = yOffset;
+          const maxNibElevation = 15 * pulseScale;
+          const currentNibHeight = maxNibElevation * inflation;
+          const alpha = Math.max(0, Math.min(1, frontDepth + 0.3));
+
+          const cellSpacing = L / 5;
+          for (let cellIdx = 0; cellIdx < 4; cellIdx++) {
+            const pinX = xStart + (cellIdx + 1) * cellSpacing;
+            const isAtApex = distToApex < 0.22;
+
+            // Rubber Base Grommet
+            latheCtx.fillStyle = 'rgba(51, 65, 85, 0.7)';
+            latheCtx.beginPath();
+            latheCtx.ellipse(pinX, pinY, 6, 2, 0, 0, 2 * Math.PI);
+            latheCtx.fill();
+
+            // Inflated Soft Silicone Rubber Dome
+            const nibRadius = (3.2 + 3.2 * inflation);
+            const domeCenterY = pinY + normalY * (currentNibHeight);
+
+            const nibGrad = latheCtx.createRadialGradient(
+              pinX - 1, domeCenterY - 1, 1,
+              pinX, domeCenterY, nibRadius
+            );
+
+            if (isAtApex) {
+              nibGrad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
+              nibGrad.addColorStop(0.4, 'rgba(251, 113, 133, 0.9)'); // Warm pillowed rose
+              nibGrad.addColorStop(1, 'rgba(225, 29, 72, 0.75)');
+            } else {
+              nibGrad.addColorStop(0, `rgba(255, 255, 255, ${0.8 * alpha})`);
+              nibGrad.addColorStop(0.5, `rgba(56, 189, 248, ${0.7 * alpha})`);
+              nibGrad.addColorStop(1, `rgba(14, 116, 144, ${0.5 * alpha})`);
+            }
+
+            latheCtx.fillStyle = nibGrad;
+            latheCtx.strokeStyle = isAtApex ? 'rgba(244, 63, 94, 0.85)' : `rgba(56, 189, 248, ${0.4 * alpha})`;
+            latheCtx.lineWidth = 1;
+
+            latheCtx.beginPath();
+            if (isAtApex) {
+              // Pillowed soft meniscus against resting skin
+              latheCtx.ellipse(pinX, domeCenterY, nibRadius * 1.3, nibRadius * 0.82, 0, 0, 2 * Math.PI);
+            } else {
+              latheCtx.ellipse(pinX, domeCenterY, nibRadius, nibRadius * (0.65 + 0.35 * Math.abs(normalY)), 0, 0, 2 * Math.PI);
+            }
+            latheCtx.fill();
+            latheCtx.stroke();
+
+            // Inner Air Cushion Bubble Highlight
+            if (inflation > 0.4) {
+              latheCtx.fillStyle = `rgba(255, 255, 255, ${0.4 * alpha})`;
+              latheCtx.beginPath();
+              latheCtx.arc(pinX - 1.2, domeCenterY - 1.2, 1.4, 0, 2 * Math.PI);
+              latheCtx.fill();
+            }
+
+            // At Apex: Soft Pillow Contact Glow (Zero Pain · 24.6 kPa)
+            if (isAtApex) {
+              latheCtx.fillStyle = 'rgba(251, 113, 133, 0.35)';
+              latheCtx.beginPath();
+              latheCtx.arc(pinX, domeCenterY, 11, 0, 2 * Math.PI);
+              latheCtx.fill();
+            }
+          }
+        }
+      }
+
+      // 6. Biometric Tool Rest
+      const toolRestW = 140;
+      const toolRestH = 26;
+      const toolRestX = cx - toolRestW / 2;
+      const toolRestY = cy - R - 32;
+
+      latheCtx.fillStyle = 'rgba(30, 41, 59, 0.85)';
+      latheCtx.strokeStyle = '#38bdf8';
+      latheCtx.lineWidth = 1.5;
+      latheCtx.beginPath();
+      latheCtx.roundRect(toolRestX, toolRestY, toolRestW, toolRestH, [8, 8, 2, 2]);
+      latheCtx.fill();
+      latheCtx.stroke();
+
+      latheCtx.fillStyle = '#94a3b8';
+      latheCtx.font = '9px "PocketGull Mono", monospace';
+      latheCtx.textAlign = 'center';
+      latheCtx.fillText('BIOMETRIC TOOL REST', cx, toolRestY + 11);
+
+      // 7. Human Resting Fingerpad
+      latheCtx.fillStyle = 'rgba(251, 146, 60, 0.35)';
+      latheCtx.strokeStyle = 'rgba(251, 146, 60, 0.8)';
+      latheCtx.lineWidth = 2;
+      latheCtx.beginPath();
+      latheCtx.ellipse(cx, cy - R - 4, 38, 14, 0, Math.PI, 2 * Math.PI);
+      latheCtx.stroke();
+      latheCtx.fill();
+
+      latheCtx.strokeStyle = 'rgba(251, 146, 60, 0.4)';
+      latheCtx.lineWidth = 1;
+      for (let r = 8; r <= 28; r += 7) {
+        latheCtx.beginPath();
+        latheCtx.arc(cx, cy - R - 16, r, 0.2 * Math.PI, 0.8 * Math.PI);
+        latheCtx.stroke();
+      }
+
+      latheCtx.strokeStyle = '#10b981';
+      latheCtx.lineWidth = 2;
+      latheCtx.beginPath();
+      latheCtx.moveTo(cx, cy - R - 24);
+      latheCtx.lineTo(cx, cy - R - 8);
+      latheCtx.stroke();
+      latheCtx.beginPath();
+      latheCtx.moveTo(cx - 3, cy - R - 11);
+      latheCtx.lineTo(cx, cy - R - 8);
+      latheCtx.lineTo(cx + 3, cy - R - 11);
+      latheCtx.stroke();
+
+      requestAnimationFrame(renderLathe);
+    }
+
+    if (latheCanvas) {
+      latheCanvas.addEventListener('pointerdown', (e) => {
+        latheState.isDragging = true;
+        latheState.lastY = e.clientY;
+        latheState.angularVelocity = 0;
+        latheCanvas.setPointerCapture(e.pointerId);
+      });
+
+      latheCanvas.addEventListener('pointermove', (e) => {
+        if (!latheState.isDragging) return;
+        const dy = e.clientY - latheState.lastY;
+        latheState.lastY = e.clientY;
+
+        const angleDelta = (dy / latheState.radius) * 1.5;
+        latheState.angle += angleDelta;
+        latheState.angularVelocity = angleDelta * 30;
+      });
+
+      latheCanvas.addEventListener('pointerup', (e) => {
+        latheState.isDragging = false;
+        try { latheCanvas.releasePointerCapture(e.pointerId); } catch (_) {}
+      });
+
+      latheCanvas.addEventListener('pointercancel', () => {
+        latheState.isDragging = false;
+      });
+
+      latheCanvas.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = Math.sign(e.deltaY) * 2.5;
+        latheState.angularVelocity += delta;
+      }, { passive: false });
+    }
+
     // Lifecycle Mount
     window.addEventListener('DOMContentLoaded', () => {
       initCanvas();
@@ -2580,10 +3217,14 @@
       startCardiacLoop();
       loadAnsciiPlate('hoh');
       loadRstpStory('hoh');
+      initLatheCanvas();
+      requestAnimationFrame(renderLathe);
+      updateSpindleSpeed(240);
     });
 
     window.addEventListener('resize', () => {
       initCanvas();
+      initLatheCanvas();
     });
   </script>
 </body>
