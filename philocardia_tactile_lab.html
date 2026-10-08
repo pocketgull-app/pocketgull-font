@@ -597,6 +597,145 @@
       margin-top: 0.5rem;
     }
 
+    /* Rapid Serial Tactile Presentation (RSTP) Styling */
+    .rstp-stage-wrap {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .rstp-telemetry-banner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      font-family: var(--mono-stack);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .rstp-display-viewport {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 180px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px dashed rgba(56, 189, 248, 0.25);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .rstp-braille-word {
+      font-family: 'PocketGull Mono', 'PocketGull', monospace;
+      font-size: 3.5rem;
+      line-height: 1.2;
+      color: var(--braille-dot-fill);
+      text-shadow: 0 0 10px var(--braille-dot-glow);
+      letter-spacing: 0.15em;
+      min-height: 4.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.1s ease;
+    }
+
+    .rstp-braille-word.pacing-72 {
+      animation: philocardia-braille-beat-72 0.8333s infinite ease-in-out;
+    }
+
+    .rstp-braille-word.pacing-60 {
+      animation: philocardia-braille-beat-60 1.0000s infinite ease-in-out;
+    }
+
+    .rstp-braille-cell-anchor {
+      color: var(--emerald);
+      text-shadow: 0 0 12px var(--emerald-glow);
+      border-bottom: 2px solid var(--emerald);
+      padding-bottom: 2px;
+    }
+
+    .rstp-braille-cell-body {
+      color: var(--braille-dot-fill);
+    }
+
+    .rstp-braille-cell-affix {
+      opacity: 0.65;
+    }
+
+    .rstp-latin-word {
+      font-family: var(--sans-stack);
+      font-size: 1.5rem;
+      color: var(--text-primary);
+      margin-top: 0.5rem;
+      letter-spacing: 0.04em;
+    }
+
+    .rstp-latin-word .bionic-anchor {
+      font-weight: 800;
+      color: var(--cyan);
+    }
+
+    .rstp-latin-word .bionic-rest {
+      font-weight: 400;
+      opacity: 0.75;
+    }
+
+    .rstp-controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .rstp-btn-group {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .rstp-play-btn {
+      background: rgba(16, 185, 129, 0.15) !important;
+      border-color: rgba(16, 185, 129, 0.4) !important;
+      color: var(--emerald) !important;
+      font-weight: 700;
+    }
+
+    .rstp-play-btn.playing {
+      background: rgba(244, 63, 94, 0.15) !important;
+      border-color: rgba(244, 63, 94, 0.4) !important;
+      color: var(--rose) !important;
+    }
+
+    .rstp-progress-track {
+      width: 120px;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .rstp-progress-fill {
+      height: 100%;
+      background: var(--cyan);
+      transition: width 0.15s ease;
+    }
+
+    .conservation-calculator-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
     /* Affective Rosetta Cards */
     .rosetta-grid {
       display: grid;
@@ -719,6 +858,7 @@
       <button type="button" class="nav-btn" id="btnThemeToggle" onclick="cycleTheme()" aria-label="Cycle UI theme">
         🎨 <span id="themeLabel">Theme: Obsidian</span>
       </button>
+      <a href="standards/PHILOCARDIC_DYNAMIC_TACTILE_BRAILLE_SPECIFICATION.md" target="_blank" class="nav-btn" style="color: var(--cyan); border-color: rgba(56,189,248,0.3);">📄 Research Spec ↗</a>
       <a href="index.html" class="nav-btn" title="Back to Master Specimen">Master Specimen ↗</a>
       <a href="a11y_studio.html" class="nav-btn" title="Visit A11y &amp; Neuro-Ergonomic Studio">A11y Studio ↗</a>
       <a href="asl_studio.html" class="nav-btn" title="Visit ASL &amp; Sign Studio">ASL Studio ↗</a>
@@ -986,6 +1126,113 @@
               <span>Thermal: <strong id="hudPhotoTemp" style="color: var(--amber);">33.5°C</strong></span>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lab Section: Rapid Serial Tactile Presentation (RSTP) & Paper Conservation Engine -->
+    <section class="lab-card" style="margin-bottom: 2rem;" aria-label="Dynamic RSTP Speed-Reader and Paper Conservation Engine">
+      <div class="card-header">
+        <div class="card-title-group">
+          <h3>⚡ Rapid Serial Tactile Presentation (RSTP) &amp; Paper Conservation Engine</h3>
+          <p>Stationary fingerpad streaming with Bionic micro-elevation. Eliminates 100% of return-sweep fatigue, accelerates tactile reading to 240+ WPM, and eliminates paper waste.</p>
+        </div>
+        <span class="card-badge">SPEC-POCKETGULL-BRAILLE-RSTP</span>
+      </div>
+
+      <!-- Live Streamer Display Stage -->
+      <div class="rstp-stage-wrap">
+        <!-- Telemetry Banner -->
+        <div class="rstp-telemetry-banner">
+          <div>Mode: <strong style="color: var(--cyan);">Stationary 4-Cell RSTP</strong></div>
+          <div>Dwell: <strong id="rstpDwellReadout" style="color: var(--emerald);">250 ms / word</strong></div>
+          <div>Bionic Anchor: <strong id="rstpAnchorReadout" style="color: var(--rose);">Active (+0.20 mm)</strong></div>
+          <div>Return Latency: <strong style="color: var(--amber);">0 ms (Zero Regressions)</strong></div>
+        </div>
+
+        <!-- The 4-Cell Dynamic Tactile Braille Window -->
+        <div class="rstp-display-viewport">
+          <div class="rstp-braille-word pacing-72" id="rstpBrailleWord" aria-label="Streaming Braille Word">
+            <!-- Dynamic Braille Cells rendered here -->
+          </div>
+          <div class="rstp-latin-word" id="rstpLatinWord">
+            <!-- Dynamic Latin Word with Bionic bolding rendered here -->
+          </div>
+        </div>
+
+        <!-- Interactive Transport & Speed Controls -->
+        <div class="rstp-controls-row">
+          <div class="rstp-btn-group">
+            <button type="button" class="nav-btn rstp-play-btn" id="btnRstpPlay" onclick="toggleRstpPlay()">
+              <span id="rstpPlayIcon">▶</span> <span id="rstpPlayLabel">Start Stream</span>
+            </button>
+            <button type="button" class="nav-btn" onclick="stepRstp(-1)" title="Previous Word">⏮ Step</button>
+            <button type="button" class="nav-btn" onclick="stepRstp(1)" title="Next Word">⏭ Step</button>
+            <button type="button" class="nav-btn" onclick="resetRstp()" title="Reset Stream">🔄 Reset</button>
+          </div>
+
+          <!-- Speed Slider -->
+          <div class="slider-group" style="min-width: 240px;">
+            <label for="sliderWpm">Reading Velocity:</label>
+            <input type="range" id="sliderWpm" min="60" max="360" step="10" value="240" oninput="updateRstpWpm(this.value)">
+            <span id="lblRstpWpm" style="font-weight: 700; color: var(--emerald);">240 WPM</span>
+          </div>
+
+          <!-- Progress Bar & Word Counter -->
+          <div style="font-family: var(--mono-stack); font-size: 0.75rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.5rem;">
+            <span>Word <strong id="rstpWordIdx" style="color: var(--cyan);">1</strong> of <strong id="rstpWordTotal">18</strong></span>
+            <div class="rstp-progress-track">
+              <div class="rstp-progress-fill" id="rstpProgressBar" style="width: 5.5%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Story Ingest & Presets -->
+      <div style="margin-top: 1.5rem;">
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-bottom: 0.75rem;">
+          <span style="font-family: var(--mono-stack); font-size: 0.72rem; color: var(--text-muted);">Story Presets:</span>
+          <button type="button" class="pacing-chip active" id="chipRstpPresetHoh" onclick="loadRstpStory('hoh')">
+            🌲 Hoh Rainforest Cathedral (Phil Gear)
+          </button>
+          <button type="button" class="pacing-chip" id="chipRstpPresetRx" onclick="loadRstpStory('rx')">
+            💊 Pediatric Clinical Discharge
+          </button>
+          <button type="button" class="pacing-chip" id="chipRstpPresetRilke" onclick="loadRstpStory('rilke')">
+            📖 Rilke: Letters to a Young Poet
+          </button>
+          <button type="button" class="pacing-chip" id="chipRstpPresetHeart" onclick="loadRstpStory('heart')">
+            💖 Philocardia Sanctuary &amp; Hope
+          </button>
+        </div>
+
+        <textarea id="txtRstpCustomStory" class="trans-input" rows="3" style="width: 100%; resize: vertical; font-family: var(--sans-stack); font-size: 0.9rem;" placeholder="Paste any book chapter, clinical chart, or personal story to stream via RSTP..." oninput="handleCustomRstpInput(this.value)">Under the moss-draped spruce, shafts of morning light pierce the emerald cathedral. Time stands still in peaceful sanctuary.</textarea>
+      </div>
+
+      <!-- Real-Time Paper Conservation & Velocity Impact Calculator -->
+      <div class="conservation-calculator-grid" style="margin-top: 1.5rem;">
+        <div class="telemetry-tile" style="text-align: left; padding: 1rem;">
+          <div class="telemetry-label">Standard Embossed Paper (Grade 1)</div>
+          <div class="telemetry-val" id="calcGrade1Pages" style="font-size: 1.4rem; color: var(--rose);">1.0 <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">pages (140# cardstock)</span></div>
+          <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.25rem;">Standard 40×25 cell single/double sided sheets</div>
+        </div>
+
+        <div class="telemetry-tile" style="text-align: left; padding: 1rem;">
+          <div class="telemetry-label">Philocardic Compressed (Grade 3+)</div>
+          <div class="telemetry-val" id="calcGrade3Pages" style="font-size: 1.4rem; color: var(--amber);">0.52 <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">pages (-48% paper savings)</span></div>
+          <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.25rem;">Sub-word tokenization halves cardstock weight</div>
+        </div>
+
+        <div class="telemetry-tile" style="text-align: left; padding: 1rem;">
+          <div class="telemetry-label">PocketGull RSTP Capsule</div>
+          <div class="telemetry-val" id="calcRstpSavings" style="font-size: 1.4rem; color: var(--emerald);">0 pages <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">(100% Paper Eliminated)</span></div>
+          <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.25rem;">38 g pocket slate · Infinite personal library</div>
+        </div>
+
+        <div class="telemetry-tile" style="text-align: left; padding: 1rem;">
+          <div class="telemetry-label">Reading Velocity Acceleration</div>
+          <div class="telemetry-val" id="calcSpeedGain" style="font-size: 1.4rem; color: var(--cyan);">+140% <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">(2.4× faster)</span></div>
+          <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.25rem;">Zero hand motion · Zero return-sweep latency</div>
         </div>
       </div>
     </section>
@@ -1963,11 +2210,27 @@
 
             const badge = document.getElementById('exifTelemetry');
             if (badge) {
-              badge.innerHTML = `
-                <div><strong>Source:</strong> Ingested Client Masterwork (${file.name})</div>
-                <div><strong>Resolution:</strong> ${img.width} × ${img.height} px</div>
-                <div style="color: var(--emerald); margin-top: 0.2rem;">Client-Side Dithered Braille Halftone Matrix</div>
-              `;
+              badge.textContent = '';
+              const d1 = document.createElement('div');
+              const s1 = document.createElement('strong');
+              s1.textContent = 'Source: ';
+              d1.appendChild(s1);
+              d1.appendChild(document.createTextNode(`Ingested Client Masterwork (${file.name})`));
+
+              const d2 = document.createElement('div');
+              const s2 = document.createElement('strong');
+              s2.textContent = 'Resolution: ';
+              d2.appendChild(s2);
+              d2.appendChild(document.createTextNode(`${img.width} × ${img.height} px`));
+
+              const d3 = document.createElement('div');
+              d3.style.color = 'var(--emerald)';
+              d3.style.marginTop = '0.2rem';
+              d3.textContent = 'Client-Side Dithered Braille Halftone Matrix';
+
+              badge.appendChild(d1);
+              badge.appendChild(d2);
+              badge.appendChild(d3);
             }
           }
         };
@@ -2027,12 +2290,296 @@
       osc.stop(ctx.currentTime + 0.045);
     }
 
+    // ==========================================
+    // RAPID SERIAL TACTILE PRESENTATION (RSTP) ENGINE
+    // ==========================================
+    const rstpStories = {
+      hoh: 'Under the moss-draped spruce, shafts of morning light pierce the emerald cathedral. Time stands still in peaceful sanctuary.',
+      rx: 'Amoxicillin 500 mg completed. Vital signs resting at 72 bpm. Patient discharged in peaceful sanctuary.',
+      rilke: 'Let everything happen to you: beauty and terror. Just keep going. No feeling is final.',
+      heart: 'In the stillness of touch, your heart and fingers beat together as one. You are safe, remembered, and deeply loved.'
+    };
+
+    const rstpState = {
+      isPlaying: false,
+      words: [],
+      currentIndex: 0,
+      wpm: 240,
+      timerId: null
+    };
+
+    function parseStoryIntoWords(text) {
+      if (!text || typeof text !== 'string') return [];
+      return text.trim().split(/\s+/).filter(w => w.length > 0);
+    }
+
+    function wordToBraille(word) {
+      let res = '';
+      const clean = word.toLowerCase();
+      for (let i = 0; i < clean.length; i++) {
+        const ch = clean[i];
+        res += UEB_MAP[ch] || ch;
+      }
+      return res;
+    }
+
+    function updateRstpConservationTelemetry(text) {
+      const words = parseStoryIntoWords(text);
+      const wordCount = words.length;
+      
+      const totalCellsG1 = Math.max(1, Math.round(wordCount * 6.5));
+      const g1Pages = (totalCellsG1 / 1000).toFixed(2);
+      
+      const totalCellsG3 = Math.max(1, Math.round(totalCellsG1 * 0.52));
+      const g3Pages = (totalCellsG3 / 1000).toFixed(2);
+
+      const elG1 = document.getElementById('calcGrade1Pages');
+      if (elG1) {
+        elG1.textContent = `${g1Pages} `;
+        const span = document.createElement('span');
+        span.style.fontSize = '0.8rem';
+        span.style.fontWeight = 'normal';
+        span.style.color = 'var(--text-muted)';
+        span.textContent = 'pages (140# cardstock)';
+        elG1.appendChild(span);
+      }
+
+      const elG3 = document.getElementById('calcGrade3Pages');
+      if (elG3) {
+        elG3.textContent = `${g3Pages} `;
+        const span = document.createElement('span');
+        span.style.fontSize = '0.8rem';
+        span.style.fontWeight = 'normal';
+        span.style.color = 'var(--text-muted)';
+        span.textContent = 'pages (-48% paper savings)';
+        elG3.appendChild(span);
+      }
+
+      const elSpeed = document.getElementById('calcSpeedGain');
+      if (elSpeed) {
+        const gainPercent = Math.round(((rstpState.wpm - 100) / 100) * 100);
+        const factor = (rstpState.wpm / 100).toFixed(1);
+        elSpeed.textContent = `+${gainPercent}% `;
+        const span = document.createElement('span');
+        span.style.fontSize = '0.8rem';
+        span.style.fontWeight = 'normal';
+        span.style.color = 'var(--text-muted)';
+        span.textContent = `(${factor}× faster)`;
+        elSpeed.appendChild(span);
+      }
+    }
+
+    function playTactileTick() {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+      try {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(1400, ctx.currentTime);
+        gain.gain.setValueAtTime(0.012, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.018);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.02);
+      } catch (_) {}
+    }
+
+    function renderCurrentRstpWord() {
+      const brailleContainer = document.getElementById('rstpBrailleWord');
+      const latinContainer = document.getElementById('rstpLatinWord');
+      const idxEl = document.getElementById('rstpWordIdx');
+      const totalEl = document.getElementById('rstpWordTotal');
+      const progressEl = document.getElementById('rstpProgressBar');
+      const dwellEl = document.getElementById('rstpDwellReadout');
+
+      if (!brailleContainer || !latinContainer) return;
+
+      const words = rstpState.words;
+      const total = words.length;
+      if (total === 0) {
+        brailleContainer.textContent = '⠀';
+        latinContainer.textContent = 'No text loaded';
+        return;
+      }
+
+      const currentWord = words[rstpState.currentIndex] || '';
+      
+      if (idxEl) idxEl.textContent = (rstpState.currentIndex + 1);
+      if (totalEl) totalEl.textContent = total;
+      if (progressEl) {
+        const pct = (((rstpState.currentIndex + 1) / total) * 100).toFixed(1);
+        progressEl.style.width = `${pct}%`;
+      }
+
+      const baseMs = 60000 / rstpState.wpm;
+      const lenFactor = 1 + 0.12 * Math.max(0, currentWord.length - 4);
+      const punctFactor = /[,.;:!?]/.test(currentWord) ? 1.5 : 1.0;
+      const dwellMs = Math.round(baseMs * lenFactor * punctFactor);
+      if (dwellEl) dwellEl.textContent = `${dwellMs} ms / word`;
+
+      latinContainer.textContent = '';
+      const bionicSplit = Math.min(Math.max(1, Math.ceil(currentWord.length * 0.45)), 3);
+      const anchorPart = currentWord.slice(0, bionicSplit);
+      const restPart = currentWord.slice(bionicSplit);
+
+      const anchorSpan = document.createElement('span');
+      anchorSpan.className = 'bionic-anchor';
+      anchorSpan.textContent = anchorPart;
+      latinContainer.appendChild(anchorSpan);
+
+      if (restPart.length > 0) {
+        const restSpan = document.createElement('span');
+        restSpan.className = 'bionic-rest';
+        restSpan.textContent = restPart;
+        latinContainer.appendChild(restSpan);
+      }
+
+      brailleContainer.textContent = '';
+      const brailleChars = wordToBraille(currentWord);
+      for (let i = 0; i < brailleChars.length; i++) {
+        const cellSpan = document.createElement('span');
+        cellSpan.textContent = brailleChars[i];
+        if (i < bionicSplit) {
+          cellSpan.className = 'rstp-braille-cell-anchor';
+          cellSpan.title = 'Bionic Anchor: 0.55 mm elevation';
+        } else if (i >= brailleChars.length - 2 && brailleChars.length >= 6) {
+          cellSpan.className = 'rstp-braille-cell-affix';
+          cellSpan.title = 'Compliant Affix: 0.28 mm elevation';
+        } else {
+          cellSpan.className = 'rstp-braille-cell-body';
+          cellSpan.title = 'Standard Body: 0.38 mm elevation';
+        }
+        brailleContainer.appendChild(cellSpan);
+      }
+
+      if (state.audioEnabled) {
+        playTactileTick();
+      }
+      if (typeof navigator !== 'undefined' && navigator.vibrate) {
+        try { navigator.vibrate(10); } catch (_) {}
+      }
+    }
+
+    function scheduleNextRstpWord() {
+      if (!rstpState.isPlaying) return;
+      const words = rstpState.words;
+      if (rstpState.currentIndex >= words.length - 1) {
+        pauseRstp();
+        rstpState.currentIndex = words.length - 1;
+        renderCurrentRstpWord();
+        return;
+      }
+
+      const currentWord = words[rstpState.currentIndex] || '';
+      const baseMs = 60000 / rstpState.wpm;
+      const lenFactor = 1 + 0.12 * Math.max(0, currentWord.length - 4);
+      const punctFactor = /[,.;:!?]/.test(currentWord) ? 1.5 : 1.0;
+      const dwellMs = Math.round(baseMs * lenFactor * punctFactor);
+
+      rstpState.timerId = setTimeout(() => {
+        if (!rstpState.isPlaying) return;
+        rstpState.currentIndex++;
+        renderCurrentRstpWord();
+        scheduleNextRstpWord();
+      }, dwellMs);
+    }
+
+    function playRstp() {
+      if (rstpState.words.length === 0) return;
+      if (rstpState.currentIndex >= rstpState.words.length - 1) {
+        rstpState.currentIndex = 0;
+      }
+      rstpState.isPlaying = true;
+      const btn = document.getElementById('btnRstpPlay');
+      const icon = document.getElementById('rstpPlayIcon');
+      const label = document.getElementById('rstpPlayLabel');
+      if (btn) btn.classList.add('playing');
+      if (icon) icon.textContent = '⏸';
+      if (label) label.textContent = 'Pause Stream';
+      renderCurrentRstpWord();
+      scheduleNextRstpWord();
+    }
+
+    function pauseRstp() {
+      rstpState.isPlaying = false;
+      if (rstpState.timerId) {
+        clearTimeout(rstpState.timerId);
+        rstpState.timerId = null;
+      }
+      const btn = document.getElementById('btnRstpPlay');
+      const icon = document.getElementById('rstpPlayIcon');
+      const label = document.getElementById('rstpPlayLabel');
+      if (btn) btn.classList.remove('playing');
+      if (icon) icon.textContent = '▶';
+      if (label) label.textContent = 'Resume Stream';
+    }
+
+    function toggleRstpPlay() {
+      if (rstpState.isPlaying) {
+        pauseRstp();
+      } else {
+        playRstp();
+      }
+    }
+
+    function stepRstp(direction) {
+      pauseRstp();
+      const next = rstpState.currentIndex + direction;
+      if (next >= 0 && next < rstpState.words.length) {
+        rstpState.currentIndex = next;
+        renderCurrentRstpWord();
+      }
+    }
+
+    function resetRstp() {
+      pauseRstp();
+      rstpState.currentIndex = 0;
+      renderCurrentRstpWord();
+    }
+
+    function updateRstpWpm(val) {
+      rstpState.wpm = parseInt(val, 10) || 240;
+      const lbl = document.getElementById('lblRstpWpm');
+      if (lbl) lbl.textContent = `${rstpState.wpm} WPM`;
+      const currentText = document.getElementById('txtRstpCustomStory')?.value || '';
+      updateRstpConservationTelemetry(currentText);
+      renderCurrentRstpWord();
+    }
+
+    function loadRstpStory(presetKey) {
+      const text = rstpStories[presetKey] || rstpStories.hoh;
+      const txtArea = document.getElementById('txtRstpCustomStory');
+      if (txtArea) txtArea.value = text;
+      
+      document.querySelectorAll('#chipRstpPresetHoh, #chipRstpPresetRx, #chipRstpPresetRilke, #chipRstpPresetHeart').forEach(c => c.classList.remove('active'));
+      const activeChip = document.getElementById(`chipRstpPreset${presetKey.charAt(0).toUpperCase() + presetKey.slice(1)}`);
+      if (activeChip) activeChip.classList.add('active');
+
+      rstpState.words = parseStoryIntoWords(text);
+      rstpState.currentIndex = 0;
+      pauseRstp();
+      updateRstpConservationTelemetry(text);
+      renderCurrentRstpWord();
+    }
+
+    function handleCustomRstpInput(val) {
+      document.querySelectorAll('#chipRstpPresetHoh, #chipRstpPresetRx, #chipRstpPresetRilke, #chipRstpPresetHeart').forEach(c => c.classList.remove('active'));
+      rstpState.words = parseStoryIntoWords(val);
+      rstpState.currentIndex = 0;
+      pauseRstp();
+      updateRstpConservationTelemetry(val);
+      renderCurrentRstpWord();
+    }
+
     // Lifecycle Mount
     window.addEventListener('DOMContentLoaded', () => {
       initCanvas();
       animationFrameId = requestAnimationFrame(renderFingerpad);
       startCardiacLoop();
       loadAnsciiPlate('hoh');
+      loadRstpStory('hoh');
     });
 
     window.addEventListener('resize', () => {
