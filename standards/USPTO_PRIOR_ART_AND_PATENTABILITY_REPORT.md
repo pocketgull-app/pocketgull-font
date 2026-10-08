@@ -147,8 +147,11 @@ PocketGull LLC has engineered the **Philocardic Dynamic Tactile Flume** ("Spindl
 ### Dependent Claim 7 (Modular Magnetic Story Capsule)
 > **7. The apparatus of claim 1**, wherein said cylindrical mandrel is configured as a detachable, interchangeable cartridge coupled to said drive mechanism via a self-aligning magnetic spindle dock and axial pneumatic seal.
 
-### Independent Claim 8 (Method of Tactile Reading with Stationary Hand Support)
-> **8. A method for presenting dynamic tactile literature to a reader without cutaneous shear stress, comprising:**
+### Dependent Claim 8 (Concentric Basin & Dish Housing)
+> **8. The apparatus of claim 1**, wherein said housing comprises a shallow dish having a continuous outer stationary rim configured for 360° palm support, a central recessed basin, and wherein said rotatable member comprises a concentric annular flume rotatably disposed within said basin beneath a hermetic flexible membrane, magnetically driven through a bottom wall of said dish with zero through-wall penetrations.
+
+### Independent Claim 9 (Method of Tactile Reading with Stationary Hand Support)
+> **9. A method for presenting dynamic tactile literature to a reader without cutaneous shear stress, comprising:**
 > - supporting a reader's palm and hand in a stationary resting posture upon stationary ergonomic flume decks of a housing;
 > - rotating a cylindrical mandrel beneath a central flume aperture adjacent said stationary flume decks at an angular velocity synchronized to a target words-per-minute cadence;
 > - inflating a pattern of soft elastomeric nibs on an ascending arc of said mandrel using a closed-loop fluid distribution system to form Braille characters;

@@ -451,6 +451,45 @@ The tactile flume synthesizes the physical sensation of an **eco-friendly waters
    - The fluidic micro-droplets beneath the thin silicone skin create an ultra-low-friction hydrodynamic cushion.
    - Epidermal shear friction drops to $\mu \approx 0.002$ (pure laminar glide), eliminating blister formation, skin dragging, and abrasion. Reading feels like floating on water.
 
+### 8.9 The "Philocardia Basin" (Dish Form Factor & Zen Water-Garden Architecture)
+
+A clinical reading machine need not resemble industrial shop equipment. By configuring the closed-loop flume inside a **therapeutic shallow ceramic dish (or raku ware tea basin)**, the device transforms into an object of bedside sanctuary:
+
+```
++───────────────────────────────────────────────────────────────────────────────────────────────+
+|                  THE "PHILOCARDIA BASIN" (CONCENTRIC DISH ARCHITECTURE)                       |
++───────────────────────────────────────────────────────────────────────────────────────────────+
+|                                  [STATIONARY CERAMIC RIM]                                     |
+|                       ╭──────────────────────────────────────────────╮                        |
+|                       │  360° Grounded Palm Rest (Stoneware/Ceramic) │                        |
+|                       │  Thermal Mass: Holds 33.5°C Soothing Heat     │                        |
+|                       │  ╭────────────────────────────────────────╮  │                        |
+|                       │  │   CONCENTRIC ORBITAL WATER FLUME       │  │                        |
+|                       │  │   ╭────────────────────────────────╮   │  │                        |
+|                       │  │   │  SEALED SILICONE MENISCUS      │   │  │                        |
+|                       │  │   │  💧💧 Braille Orbit 💧💧        │   │  │                        |
+|                       │  │   │  (Zero Leaks · 100% Conserved) │   │  │                        |
+|                       │  │   ╰────────────────────────────────╯   │  │                        |
+|                       │  │   Floating Magnetic Carousel Beneath   │  │                        |
+|                       │  ╰────────────────────────────────────────╯  │                        |
+|                       ╰──────────────────────────────────────────────╯                        |
++───────────────────────────────────────────────────────────────────────────────────────────────+
+```
+
+1. **Continuous 360° Stationary Ceramic Rim**:
+   - The outer lip of the dish serves as a continuous, omnidirectional stationary palm and wrist rest.
+   - The reader can approach the dish from any angle—lying in a hospital bed, sitting in an armchair, or resting at a desk.
+   - The natural thermal mass of ceramic or dense stoneware holds pre-warmed $33.5^\circ\text{C}$ soothing heat for hours, relaxing arthritic hand musculature without electrical noise near the fingertips.
+2. **Concentric Annular Flume (Perpetual Lazy River Orbit)**:
+   - Instead of a linear drum with left/right ends, the flume is an **annular concentric ring** revolving smoothly in the floor of the dish.
+   - Characters orbit continuously in a circle. There are **zero mechanical end-stops**, zero carriage returns, and zero directional reversals. Reading is an unbroken, tranquil stream.
+3. **The Hermetic "Dry Water" Meniscus**:
+   - The shallow basin is hermetically sealed by an optical-grade hyperelastic silicone diaphragm stretched across the concentric flume like natural water surface tension.
+   - The user rests their fingertip on the warm, compliant membrane. It creates the sensory illusion of dipping your finger into a calm, warm spring, yet the finger remains **100% dry**, and the internal $15\,\text{mL}$ fluid reservoir is **100% conserved with zero evaporation**.
+4. **Hermetic Magnetic Levitation Coupling (Hospital Sterilizable)**:
+   - The rotating annular flume is magnetically driven from beneath the non-magnetic ceramic basin floor via permanent neodymium magnets coupled to a brushless pancake stator.
+   - **Zero Through-Wall Axles or Penetrations**: The dish has no seams, holes, or mechanical seals. It is 100% waterproof, impervious to fluids, and can be sanitized with hospital-grade wipes or submerged in autoclave wash.
+
 ---
 
 ## 📚 9. References & Foundations
