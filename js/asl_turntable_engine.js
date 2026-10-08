@@ -179,7 +179,7 @@ class ASLTurntable {
             <div>
               <div style="font-size: 1.05rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px;">
                 <span>3D Volumetric Spinning Hand</span>
-                <span style="font-size: 0.65rem; background: rgba(6, 182, 212, 0.15); border: 1px solid var(--cyan); color: var(--cyan); padding: 2px 6px; border-radius: 9999px; font-weight: 800;">
+                <span style="font-size: 0.65rem; background: rgba(6, 182, 212, 0.15); border: 1px solid var(--cyan); color: var(--cyan); padding: 2px 6px; border-radius: 6px; font-weight: 800;">
                   60 FPS ORBIT
                 </span>
               </div>

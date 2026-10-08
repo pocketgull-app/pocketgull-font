@@ -110,7 +110,7 @@
       align-items: center;
       gap: 6px;
       padding: 4px 12px;
-      border-radius: 9999px;
+      border-radius: 8px;
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.05em;
@@ -346,6 +346,10 @@
       font-feature-settings: "zero" 1, "cv08" 1;
     }
 
+    .ismp-feat-cv12 {
+      font-feature-settings: "cv12" 1;
+    }
+
     .ismp-feat-cv05 {
       font-feature-settings: "cv05" 1;
     }
@@ -407,7 +411,7 @@
       border: 1.5px solid var(--btn-border-subtle);
       color: var(--btn-text-subtle);
       padding: 6px 14px;
-      border-radius: 9999px;
+      border-radius: 8px;
       font-size: 12px;
       font-weight: 700;
       cursor: pointer;
@@ -617,7 +621,7 @@
       align-items: center;
       gap: 6px;
       padding: 4px 10px;
-      border-radius: 9999px;
+      border-radius: 6px;
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
@@ -1159,6 +1163,15 @@
         </div>
 
         <div class="ismp-card">
+          <div class="ismp-title">Optical Dotted Zero (cv12)</div>
+          <div class="ismp-comparison">
+            <span class="ismp-standard">0 vs O</span>
+            <span class="ismp-safe ismp-feat-cv12">0 vs O</span>
+          </div>
+          <p class="ismp-desc">Empathetic pediatric & bedside disambiguation via central core optical dot.</p>
+        </div>
+
+        <div class="ismp-card">
           <div class="ismp-title">Curved Lowercase l (cv05)</div>
           <div class="ismp-comparison">
             <span class="ismp-standard">l 1 I</span>
@@ -1213,6 +1226,17 @@
             <button type="button" class="tittle-variety-pill" data-v="dot" title="Dot (●): Traditional clinical dot">●</button>
           </div>
           <p class="ismp-desc" id="broadsideTittleDesc">Bedside empathy & pediatric care: transforms circular dot tittles into calibrated sinus-rhythm heart forms.</p>
+        </div>
+
+        <!-- Circadian Care & Bedside Administration Pictograms -->
+        <div class="ismp-card" style="border-color: rgba(56, 189, 248, 0.35); background: linear-gradient(180deg, rgba(56, 189, 248, 0.05) 0%, var(--card-bg) 100%);">
+          <div class="ismp-title" style="color: #38bdf8;">Circadian Care &amp; Administration (U+263C / U+263D / U+2298)</div>
+          <div class="ismp-comparison" style="font-size: 1.35rem; display: flex; justify-content: space-around; align-items: center; white-space: nowrap; gap: 8px;">
+            <span title="Morning Dose: ☼ (U+263C)" style="color: #f59e0b; font-family: 'PocketGull', sans-serif;">☼ 08:00</span>
+            <span title="Night Dose: ☽ (U+263D)" style="color: #818cf8; font-family: 'PocketGull', sans-serif;">☽ 20:00</span>
+            <span title="Do Not Crush: ⊘ (U+2298)" style="color: #f43f5e; font-family: 'PocketGull', sans-serif;">⊘ NO CRUSH</span>
+          </div>
+          <p class="ismp-desc">Procedural vector optotypes for circadian chronotherapy, nocturnal dosing, and tablet integrity.</p>
         </div>
       </div>
     </section>

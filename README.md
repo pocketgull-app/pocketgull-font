@@ -14,9 +14,9 @@
 <br/>
 
 <p align="center">
-  <img src="documentation/images/pocketgull_healer_hero.jpg" alt="PocketGull The Healer — Humanist Felt-Marker Lettering on Cardstock" width="100%" style="border-radius: 8px;" />
+  <img src="documentation/images/social_github_preview.png" alt="PocketGull — Letters Made for Healthy Eyes" width="100%" style="border-radius: 8px;" />
   <br/>
-  <sub><strong>Humanist Cardstock DNA: Hand-drawn felt-marker lettering engineered for clinical clarity.</strong></sub>
+  <sub><strong>Letters Made for Healthy Eyes: Good design is simple and kind. Clean, friendly typography engineered for clinical clarity.</strong></sub>
 </p>
 
 </div>
@@ -194,6 +194,24 @@ PocketGull eliminates missing-glyph tofu across healthcare communication in dive
 ```
 
 </details>
+
+---
+
+## 🙏 Acknowledgements
+
+* **[Emma Marichal](https://github.com/emmamarichal)**: For foundational linguistic research, sovereign orthographic case studies (Chinuk Pipa, Neo-Tifinagh, Cherokee, Ethiopic Geʻez, Adlam & Vai), character curation, and guidance on open-source typography.
+* **[Thomas Phinney](https://www.thomasphinney.com)** ([The Font Detective](https://thefontdetective.com)): For OpenType binary table forensics, 2-byte word alignment (`loca[i] % 2 == 0`), and serving as our foundry mentor.
+* **Donald E. Knuth & John D. Hobby**: For establishing typography as a mathematical discipline (TeX, METAFONT, MetaPost) and algorithmic pen-stroke envelope translation.
+* **Dieter Rams & Susan Kare**: For humanist HCI design invariants (*"Weniger, aber besser"*) and archetypal clinical icon semiosis.
+* **The Google Fonts Team & Fontbakery**: For championing the libre typography commons and automated OpenType quality assurance.
+* **Robin Williams, Ellen Lupton & Karen Cheng**: For seminal books in typographic education (*The Non-Designer's Type Book*, *The Mac is not a typewriter*), spatial hierarchy (*Thinking with Type*), and anatomical precision (*Designing Type*).
+* **Behdad Esfahbod, Khaled Hosny & Werner Lemberg**: For low-level text shaping (HarfBuzz), font rasterization (FreeType), and memory-safe sanitization (W3C OTS).
+* **The FontLab Engineering Team**: For pioneering multi-master variable font interpolation and `.vfj` vector interchange.
+* **The Dart Programming Language Team** ([dart.dev](https://dart.dev)): For the soundly-typed, high-performance tooling engine powering our procedural vector synthesis and pre-flight validation.
+* **Randal L. Schwartz**: For decades of advocacy in reproducible software engineering and open-source pedagogy.
+* **Vision Science Pioneers**: Louise L. Sloan (5:1 optotypes), Herman Bouma (anti-crowding), and the Institute for Safe Medication Practices (ISMP).
+
+See **[THANKS.md](THANKS.md)** for our full community and sovereign language keeper dedications.
 
 ---
 

@@ -53,11 +53,35 @@ class BrailleGenerator {
       ..add(cx - r, cy + r, onCurve: false);
   }
 
+  /// Generates a cushioned Philocardia heart dot contour (clockwise for TrueType).
+  static GlyphContour _buildHeartDotContour(int cx, int cy, int r) {
+    final double hr = r * 1.15;
+    final int top = cy + r;
+    final int bot = cy - r;
+    final int cleft = cy + (r * 0.25).round();
+    final int apexR = (r * 0.15).round();
+
+    return GlyphContour()
+      ..add(cx, bot)
+      ..add(cx + apexR, bot, onCurve: false)
+      ..add(cx + hr.round(), cy)
+      ..add(cx + hr.round(), top, onCurve: false)
+      ..add(cx + (hr * 0.5).round(), top)
+      ..add(cx + (hr * 0.15).round(), top, onCurve: false)
+      ..add(cx, cleft)
+      ..add(cx - (hr * 0.15).round(), top, onCurve: false)
+      ..add(cx - (hr * 0.5).round(), top)
+      ..add(cx - hr.round(), top, onCurve: false)
+      ..add(cx - hr.round(), cy)
+      ..add(cx - apexR, bot, onCurve: false);
+  }
+
   /// Synthesizes a Braille glyph from its 8-bit pattern (0 to 255).
   static GlyphRecord generateBrailleGlyph(
     int gid,
     int bytePattern, {
     bool opticalReadability = true,
+    bool philocardiaHearts = false,
   }) {
     final codePoint = 0x2800 + bytePattern;
     final contours = <GlyphContour>[];
@@ -67,7 +91,11 @@ class BrailleGenerator {
     for (var dot = 0; dot < 8; dot++) {
       if ((bytePattern & (1 << dot)) != 0) {
         final pos = coords[dot];
-        contours.add(_buildDotContour(pos.$1, pos.$2, radius));
+        if (philocardiaHearts) {
+          contours.add(_buildHeartDotContour(pos.$1, pos.$2, radius));
+        } else {
+          contours.add(_buildDotContour(pos.$1, pos.$2, radius));
+        }
       }
     }
 
@@ -82,13 +110,18 @@ class BrailleGenerator {
   }
 
   /// Synthesizes the full 256-glyph block into a list of GlyphRecords.
-  static List<GlyphRecord> generateAll(int startingGid, {bool opticalReadability = true}) {
+  static List<GlyphRecord> generateAll(
+    int startingGid, {
+    bool opticalReadability = true,
+    bool philocardiaHearts = false,
+  }) {
     final list = <GlyphRecord>[];
     for (var b = 0; b < 256; b++) {
       list.add(generateBrailleGlyph(
         startingGid + b,
         b,
         opticalReadability: opticalReadability,
+        philocardiaHearts: philocardiaHearts,
       ));
     }
     return list;

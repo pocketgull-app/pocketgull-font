@@ -48,6 +48,15 @@ void main() {
     }
   });
 
+  test('256-Glyph Philocardia Heart Braille Conformance', () {
+    final heartBraille = BrailleGenerator.generateAll(0, philocardiaHearts: true);
+    assert(heartBraille.length == 256, 'Must generate exactly 256 Philocardia Heart Braille glyphs');
+    assert(heartBraille.last.contours.length == 8, 'U+28FF must contain exactly 8 heart dot contours');
+    for (final g in heartBraille) {
+      assert(g.advanceWidth == BrailleGenerator.cellWidth, 'All Philocardia Braille cells must share uniform cell width');
+    }
+  });
+
   // 3. ISMP Disambiguation
   test('ISMP & FDA Clinical Disambiguation (0 vs O, l vs 1 vs I, Z vs 2)', () {
     final zero = IsmpDisambiguationEngine.generateSlashedZero(0);

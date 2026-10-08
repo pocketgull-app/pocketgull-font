@@ -13,6 +13,9 @@ authors:
     given-names: "Phil"
     orcid: "https://orcid.org/0009-0008-1372-5381"
     affiliation: "PocketGull LLC"
+  - family-names: "Marichal"
+    given-names: "Emma"
+    website: "https://github.com/emmamarichal"
   - name: "The PocketGull Project Authors"
 identifiers:
   - type: url
@@ -91,6 +94,9 @@ preferred-citation:
       given-names: "Phil"
       orcid: "https://orcid.org/0009-0008-1372-5381"
       affiliation: "PocketGull LLC"
+    - family-names: "Marichal"
+      given-names: "Emma"
+      website: "https://github.com/emmamarichal"
     - name: "The PocketGull Project Authors"
   year: 2026
   month: 9

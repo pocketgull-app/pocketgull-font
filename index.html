@@ -925,6 +925,10 @@
       font-feature-settings: "zero" 1, "cv08" 1;
     }
 
+    .ismp-feat-cv12 {
+      font-feature-settings: "cv12" 1;
+    }
+
     .ismp-feat-cv05 {
       font-feature-settings: "cv05" 1;
     }
@@ -954,7 +958,8 @@
       flex-wrap: wrap;
     }
 
-        .tittle-variety-pill,
+    .tittle-variety-chip,
+    .tittle-variety-pill,
     .healer-cadence-btn,
     .variety-btn {
       background: var(--btn-bg-subtle);
@@ -971,6 +976,8 @@
       transition: all 0.2s ease;
     }
 
+    .tittle-variety-chip:hover,
+    .tittle-variety-chip.active,
     .tittle-variety-pill:hover,
     .tittle-variety-pill.active,
     .healer-cadence-btn:hover,
@@ -1131,6 +1138,17 @@
     @keyframes hudSlideUp {
       from { opacity: 0; transform: translateY(16px) scale(0.98); }
       to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @media (max-width: 640px) {
+      .neuro-inspector-hud {
+        bottom: 8px;
+        right: 8px;
+        left: 8px;
+        width: auto;
+        padding: 12px 14px;
+        max-height: 85vh;
+        overflow-y: auto;
+      }
     }
     .hud-header {
       display: flex;
@@ -1564,7 +1582,8 @@
     }
 
     
-    /* Accessible Button Architecture */
+    /* Accessible Button Architecture (DirectCurves Action Chips) */
+    .preset-chip,
     .preset-pill {
       background: var(--btn-bg-subtle);
       border: 1.5px solid var(--btn-border-subtle);
@@ -1581,12 +1600,14 @@
       line-height: 1.2;
       box-shadow: 0 1px 2px rgba(0,0,0,0.15);
     }
+    .preset-chip:hover,
     .preset-pill:hover {
       background: var(--btn-bg-hover);
       border-color: var(--btn-border-hover);
       color: var(--btn-text-hover);
       transform: translateY(-1px);
     }
+    .preset-chip.active,
     .preset-pill.active {
       background: var(--emerald) !important;
       border-color: var(--emerald) !important;
@@ -2076,7 +2097,7 @@
       background: rgba(13, 148, 136, 0.92);
       color: #fff;
       border: 1px solid rgba(45, 212, 191, 0.5);
-      border-radius: 9999px;
+      border-radius: 12px;
       padding: 0.6rem 1.15rem;
       font-family: 'PocketGull', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       font-size: 0.82rem;
@@ -2579,6 +2600,7 @@
         <button type="button" class="preset-pill" data-preset="bionic">Bionic Fixation</button>
         <button type="button" class="preset-pill" data-preset="thermal">203 DPI Thermal</button>
         <button type="button" class="preset-pill" data-preset="braille">Tactile Braille</button>
+        <button type="button" class="preset-pill" data-preset="braille_philocardia">💖 Philocardia Braille</button>
       </div>
 
       <!-- 16-Axis Console: 4 Structured Domains -->
@@ -2748,6 +2770,7 @@
         <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; align-items: center;">
           <span style="font-size: 11px; color: var(--text-muted); font-family: 'PocketGull Mono'; margin-right: 4px;">Quick Insert:</span>
           <button type="button" class="vf-chip vf-chip-purple" onclick="setVfSample('braille')">⠁⠃⠉ Tactile Braille</button>
+          <button type="button" class="vf-chip vf-chip-purple" onclick="setVfSample('braille_philocardia')">💖 Philocardia Braille</button>
           <button type="button" class="vf-chip vf-chip-emerald" onclick="setVfSample('hearts')">💚 Philocardia Hearts</button>
           <button type="button" class="vf-chip vf-chip-cyan" onclick="setVfSample('ismp')">0̸ Slashed Zero &amp; Dosage</button>
           <button type="button" class="vf-chip vf-chip-emerald" onclick="setVfSample('sloan')">👁️ Sloan 5:1 Acuity</button>
@@ -2851,6 +2874,19 @@
           <p class="ismp-desc">Prevents confusing numeral zero with letter O in 10 mg vs 1O mg.</p>
         </div>
 
+        <!-- 5b. Optical Core Dotted Zero -->
+        <div class="ismp-card" data-inspect="dotted_zero" tabindex="0" role="region" aria-label="Dotted Zero Disambiguation">
+          <div class="ismp-title" style="display: flex; justify-content: space-between; align-items: center;">
+            <span>Optical Dotted Zero (cv12)</span>
+            <span class="ismp-inspect-badge">🔬 Inspect</span>
+          </div>
+          <div class="ismp-comparison">
+            <span class="ismp-standard">0 vs O</span>
+            <span class="ismp-safe ismp-feat-cv12">0 vs O</span>
+          </div>
+          <p class="ismp-desc">Empathetic pediatric & bedside disambiguation via central core optical dot.</p>
+        </div>
+
         <!-- 6. Curved Lowercase l -->
         <div class="ismp-card" data-inspect="curved_l" tabindex="0" role="region" aria-label="Curved Lowercase l Disambiguation">
           <div class="ismp-title" style="display: flex; justify-content: space-between; align-items: center;">
@@ -2937,6 +2973,20 @@
             <button type="button" class="tittle-variety-pill" data-v="dot" title="Dot (●): Traditional clinical dot">●</button>
           </div>
           <p class="ismp-desc" id="tittleVarietyDesc">Cushioned 28 UPM rounded apex fillet: Bedside empathy &amp; pediatric care.</p>
+        </div>
+
+        <!-- 12. Circadian Care & Bedside Administration Pictograms -->
+        <div class="ismp-card" data-inspect="circadian_care" tabindex="0" role="region" aria-label="Circadian Care and Administration Symbols" style="border-color: rgba(56, 189, 248, 0.35); background: linear-gradient(180deg, rgba(56, 189, 248, 0.05) 0%, var(--card-bg) 100%);">
+          <div class="ismp-title" style="color: var(--sky-accent, #38bdf8); display: flex; justify-content: space-between; align-items: center;">
+            <span>Circadian &amp; Bedside Care (U+263C / U+263D / U+2298)</span>
+            <span class="ismp-inspect-badge" style="background: rgba(56, 189, 248, 0.18); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);">🔬 Inspect</span>
+          </div>
+          <div class="ismp-comparison" style="font-size: 1.35rem; display: flex; justify-content: space-around; align-items: center; white-space: nowrap; gap: 8px;">
+            <span title="Morning Dose: ☼ (U+263C)" style="color: #f59e0b; font-family: 'PocketGull', sans-serif;">☼ 08:00</span>
+            <span title="Night Dose: ☽ (U+263D)" style="color: #818cf8; font-family: 'PocketGull', sans-serif;">☽ 20:00</span>
+            <span title="Do Not Crush: ⊘ (U+2298)" style="color: #f43f5e; font-family: 'PocketGull', sans-serif;">⊘ NO CRUSH</span>
+          </div>
+          <p class="ismp-desc">Procedural vector optotypes for circadian chronotherapy, nocturnal dosing, and tablet integrity.</p>
         </div>
       </div>
 
@@ -5023,7 +5073,8 @@
 
         // Philocardia ISMP-grade clarity rendering across all variable axes
         const activeBtn = document.querySelector('#vfPresetControls .preset-pill.active');
-        const isPhilocardiaActive = activeBtn?.getAttribute('data-preset') === 'philocardia' || hlngVal >= 0.5;
+        const activePreset = activeBtn?.getAttribute('data-preset');
+        const isPhilocardiaActive = activePreset === 'philocardia' || activePreset === 'braille_philocardia' || hlngVal >= 0.5;
         const rawText = vfText.dataset.rawText || vfText.textContent || '';
         if (isPhilocardiaActive) {
           const clean = rawText.replace(/ı/g, 'i').replace(/ȷ/g, 'j');
@@ -5040,6 +5091,7 @@
             const classI = pacingClass ? `philocardia-heart ${pacingClass}` : 'philocardia-heart';
             const classJ = pacingClass ? `philocardia-j ${pacingClass}` : 'philocardia-j';
             const classExcl = pacingClass ? `philocardia-excl ${pacingClass}` : 'philocardia-excl';
+            const classBraille = pacingClass ? `philocardia-braille ${pacingClass}` : 'philocardia-braille';
 
             vfText.textContent = '';
             for (let char of clean) {
@@ -5047,6 +5099,11 @@
                 const span = document.createElement('span');
                 span.className = (char === 'i') ? classI : (char === 'j') ? classJ : classExcl;
                 span.textContent = (char === 'i') ? 'ı' : (char === 'j') ? 'ȷ' : '!';
+                vfText.appendChild(span);
+              } else if (char >= '\u2801' && char <= '\u28FF') {
+                const span = document.createElement('span');
+                span.className = classBraille;
+                span.textContent = char;
                 vfText.appendChild(span);
               } else {
                 vfText.appendChild(document.createTextNode(char));
@@ -5155,7 +5212,11 @@
         },
         braille: {
           axes: { wght: 700, wdth: 100, slnt: 0, opsz: 36, SOFT: 0, HLNG: 0, APTR: 1.0, SMRN: 0, THRM: 0, BION: 0, GRAV: 0, BOUM: 0, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 96 },
-          text: "⠁⠍oxig... (Amoxicillin 500 mg • 72 bpm)"
+          text: "⠠⠁⠍⠕⠭⠊⠉⠊⠇⠇⠊⠝⠀⠼⠑⠚⠚⠀⠍⠛⠀•⠀(Amoxicillin 500 mg • 72 bpm)"
+        },
+        braille_philocardia: {
+          axes: { wght: 600, wdth: 100, slnt: 0, opsz: 36, SOFT: 0.6, HLNG: 1.0, APTR: 0.8, SMRN: 0.5, THRM: 0, BION: 0, GRAV: 0, BOUM: 0.5, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 96 },
+          text: "⠠⠁⠍⠕⠭⠊⠉⠊⠇⠇⠊⠝⠀⠼⠑⠚⠚⠀⠍⠛⠀•⠀(Amoxicillin 500 mg • 72 bpm)"
         }
       };
 
@@ -5199,7 +5260,8 @@
       window.setVfSample = function(type) {
         if (!vfText) return;
         const samples = {
-          braille: "⠁⠍⠕⠭⠊⠉⠊⠇⠇⠊⠝⠀⠼⠑⠚⠚⠀⠍⠛⠀•⠀(Amoxicillin 500 mg • 72 bpm)",
+          braille: "⠠⠁⠍⠕⠭⠊⠉⠊⠇⠇⠊⠝⠀⠼⠑⠚⠚⠀⠍⠛⠀•⠀(Amoxicillin 500 mg • 72 bpm)",
+          braille_philocardia: "⠠⠁⠍⠕⠭⠊⠉⠊⠇⠇⠊⠝⠀⠼⠑⠚⠚⠀⠍⠛⠀•⠀(Amoxicillin 500 mg • 72 bpm)",
           hearts: "Clinical Care • Pediatric Healing Sanctuary (Lovingkindness & Hearts for i's)",
           ismp: "Amoxicillin 500 mg • STAT 10 mcg • Morphine 0.5 mg • 0̸ vs O • l vs 1 • 2 vs Z",
           sloan: "C D E F L O P T Z • 5:1 Louise Sloan Visual Acuity Ratio Standards",
@@ -5212,6 +5274,9 @@
         if (type === 'braille') {
           const bBtn = document.querySelector('button[data-preset="braille"]');
           if (bBtn) bBtn.click();
+        } else if (type === 'braille_philocardia') {
+          const bpBtn = document.querySelector('button[data-preset="braille_philocardia"]');
+          if (bpBtn) bpBtn.click();
         } else if (type === 'hearts') {
           const pBtn = document.querySelector('button[data-preset="philocardia"]');
           if (pBtn) {
@@ -6280,6 +6345,21 @@
               { type: 'mid', x: 220, y: 635, label: 'M = (P₁+P₂)>>1' }
             ]
           },
+          "dotted_zero": {
+            badge: "GENTLE CLINICAL",
+            badgeColor: "#38bdf8",
+            title: "Optical Core Dotted Zero (0̇ / cv12)",
+            failureMode: "Eliminates numeral '0' vs letter 'O' confusion in pediatric, neonatal, and bedside palliative care where harsh diagonal slashes create visual stress or ink clots.",
+            neuro: "Centroid-centered optical core dot (radius r ≈ 36 UPM) positioned in the geometric center of the counter hole with zero stroke-junction collisions.",
+            aperture: "Louise Sloan 5:1 oval with interior optical core dot (O(1) rasterizer acuity).",
+            gravOffset: "Dot Center at (285.5, 357.5)",
+            clause: "ISMP Guidelines (2024) / Humanized Pediatric Oncology Standard",
+            vectors: [
+              { type: 'path', d: 'M 270 260 C 160 260 140 400 140 530 C 140 660 160 800 270 800 C 380 800 400 660 400 530 C 400 400 380 260 270 260 Z', stroke: '#38bdf8', width: 14 },
+              { type: 'circle', cx: 270, cy: 530, r: 24, fill: '#38bdf8' },
+              { type: 'p0', x: 270, y: 530, label: 'Optical Centroid' }
+            ]
+          },
           "curved_l": {
             badge: "TRIPLET BREAKER",
             badgeColor: "#2dd4bf",
@@ -6404,6 +6484,22 @@
               { type: 'p1', x: 270, y: 420, label: 'Center Axis' },
               { type: 'p2', x: 270, y: 760, label: 'Staff Apex' },
               { type: 'mid', x: 270, y: 540, label: 'Serpent Loop' }
+            ]
+          },
+          "circadian_care": {
+            badge: "CIRCADIAN CARE",
+            badgeColor: "#38bdf8",
+            title: "Circadian Administration Optotypes (☼ / ☽ / ⊘)",
+            failureMode: "Eliminates timing confusion in complex multi-drug regimens and prevents lethal crushing of extended-release (ER/XR) oral solid dosages.",
+            neuro: "Instant circadian visual priming (Sun = Morning, Moon = Bedtime, Slash-Circle = Do Not Crush) accessible across language and cognitive barriers.",
+            aperture: "Pure closed quadratic TrueType contours (1000 UPM) with 2-byte word boundary alignment.",
+            gravOffset: "Harmonized optical center at (270, 380)",
+            clause: "ISMP Guidelines for Timely Medication Administration / USP <1066>",
+            vectors: [
+              { type: 'path', d: 'M 270 260 C 160 260 140 400 140 530 C 140 660 160 800 270 800 C 380 800 400 660 400 530 C 400 400 380 260 270 260 Z', stroke: '#38bdf8', width: 14 },
+              { type: 'line', x1: 270, y1: 220, x2: 270, y2: 120, stroke: '#f59e0b', width: 8 },
+              { type: 'line', x1: 270, y1: 580, x2: 270, y2: 680, stroke: '#f59e0b', width: 8 },
+              { type: 'p0', x: 270, y: 380, label: 'Sun Core' }
             ]
           }
         };
@@ -6706,8 +6802,8 @@
           title: 'ISMP / FDA Clinical Disambiguation',
           category: 'PATIENT SAFETY',
           citation: 'ISMP Guidelines (2023) &amp; FDA CDER Guidance (2016)',
-          chips: ['Why is 5.0 mg prohibited?', 'What is cv08 slashed zero?', 'Explain curved l (cv05)'],
-          content: '<h3>I. The Zero-Error Prescription Standard</h3><p>The Institute for Safe Medication Practices (ISMP) and the FDA have documented thousands of fatal medication errors caused by typographic ambiguities. PocketGull embeds native OpenType sets to eliminate these hazards:</p><ul><li><strong>Slashed Zero (<code>zero</code> / <code>cv08</code>):</strong> Unequivocally separates numeral <code>0</code> from uppercase letter <code>O</code>.</li><li><strong>Curved Lowercase l (<code>cv05</code>):</strong> Prominent terminal outward sweep distinguishes lowercase <code>l</code> from numeral <code>1</code> and uppercase <code>I</code>.</li><li><strong>Serifed Capital I (<code>ss02</code>):</strong> Symmetrical horizontal serifs distinguish uppercase <code>I</code> from lowercase <code>l</code>.</li><li><strong>Prohibition of Trailing Zeros:</strong> "5.0 mg" is prohibited because a stray speck on a dirty screen transforms it into "50 mg" (10-fold overdose).</li><li><strong>Tabular Numerals (<code>tnum</code>):</strong> Fixed-width numbers ensure decimal points align rigidly in vertical columns.</li></ul>'
+          chips: ['Why is 5.0 mg prohibited?', 'What is cv08 slashed zero?', 'What is cv12 dotted zero?', 'Explain curved l (cv05)'],
+          content: '<h3>I. The Zero-Error Prescription Standard</h3><p>The Institute for Safe Medication Practices (ISMP) and the FDA have documented thousands of fatal medication errors caused by typographic ambiguities. PocketGull embeds native OpenType sets to eliminate these hazards:</p><ul><li><strong>Slashed Zero (<code>zero</code> / <code>cv08</code>):</strong> Unequivocally separates numeral <code>0</code> from uppercase letter <code>O</code> for ICU and trauma telemetry.</li><li><strong>Optical Core Dotted Zero (<code>cv12</code>):</strong> Empathetic centroid dot disambiguation for pediatric care, hospice, and bedside comfort without harsh diagonal cuts.</li><li><strong>Curved Lowercase l (<code>cv05</code>):</strong> Prominent terminal outward sweep distinguishes lowercase <code>l</code> from numeral <code>1</code> and uppercase <code>I</code>.</li><li><strong>Serifed Capital I (<code>ss02</code>):</strong> Symmetrical horizontal serifs distinguish uppercase <code>I</code> from lowercase <code>l</code>.</li><li><strong>Prohibition of Trailing Zeros:</strong> "5.0 mg" is prohibited because a stray speck on a dirty screen transforms it into "50 mg" (10-fold overdose).</li><li><strong>Tabular Numerals (<code>tnum</code>):</strong> Fixed-width numbers ensure decimal points align rigidly in vertical columns.</li></ul>'
         },
         braille: {
           title: '256 Unicode Braille Patterns (U+2800–U+28FF)',
@@ -7117,6 +7213,12 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
             answer = `<h4 style="color: var(--cyan); margin-bottom: 6px; font-size: 0.9rem;">0̸ OpenType cv08 Slashed Zero Disambiguation</h4>
             <p>In electronic health records, numeral <code>0</code> and capital letter <code>O</code> share identical oval bounding boxes. In drug names like <code>Oxycodone 10mg</code>, transposition errors cause order delivery failures.</p>
             <p>PocketGull's <code>cv08</code> feature cuts a crisp 45° interior slash through the zero, making it instantly recognizable as a numeric quantity across surgical monitors and bedside wristbands.</p>`;
+          }
+          // 9b. CV12 DOTTED ZERO
+          else if (qLower.includes('cv12') || qLower.includes('dotted zero') || qLower.includes('dotted 0')) {
+            answer = `<h4 style="color: var(--cyan); margin-bottom: 6px; font-size: 0.9rem;">0̇ OpenType cv12 Optical Core Dotted Zero</h4>
+            <p>In pediatric, neonatal, and bedside palliative care, the traditional <code>cv08</code> military slashed zero can feel visually aggressive or risk ink bleeding on low-resolution thermal label printers.</p>
+            <p>PocketGull's <code>cv12</code> feature introduces an optical core dot positioned at the exact geometric centroid of the inner counter hole, ensuring 100% numeral vs letter disambiguation with a calm, gentle bedside aesthetic.</p>`;
           }
           // 10. CURVED L (CV05) & SERIFED I (SS02)
           else if (qLower.includes('cv05') || qLower.includes('curved l') || qLower.includes('ss02') || qLower.includes('serifed i') || qLower.includes('disambiguation')) {

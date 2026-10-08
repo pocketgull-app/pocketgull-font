@@ -96,6 +96,8 @@ PocketGull's geometry and clinical behavioral architecture are grounded in peer-
   *Micro-anatomical mechanics: capital waistline proportions (53%), optical overshoot physics, stroke junction thinning, and balance in sans-serif and slab forms.*
 * **Ellen Lupton (2014)**: *"Thinking with Type: A Critical Guide for Designers, Writers, Editors, & Students"* (2nd ed.). Princeton Architectural Press. ISBN: 978-1616892418.  
   *Foundational principles of typographic hierarchy, humanist rhythm, counter-form cadence, and aperture breathing.*
+* **Robin Williams (1998/2007)**: *"The Non-Designer's Type Book: Insights into Typography for the Non-Designer"* & *"The Mac is not a typewriter"* (1990). Peachpit Press. ISBN: 978-0321500113.  
+  *Landmark desktop publishing manuals establishing digital typographic discipline: smart quotes, optical kerning, en/em dash metrics, and contrast-repetition-alignment-proximity (CRAP) principles.*
 * **Gordon E. Legge, Ph.D. (2007)**: *"Psychophysics of Reading in Normal and Low Vision."* CRC Press / Lawrence Erlbaum Associates. ISBN: 978-0805843286. [[DOI: 10.4324/9780203837771](https://doi.org/10.4324/9780203837771)]  
   *Empirical psychophysics of reading speed, visual span, critical character size, and contrast reserve across macular degeneration and diabetic retinopathy.*
 * **Sofie Beier, Ph.D. (2012)**: *"Reading Letters: Designing for Legibility."* BIS Publishers. ISBN: 978-9063692711.  

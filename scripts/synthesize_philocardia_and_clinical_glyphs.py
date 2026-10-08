@@ -20,6 +20,7 @@ PocketGull Typefoundry - Philocardia Hearts & Clinical Pictograms Synthesizer (C
 5. Realigns all tables to 2-byte word boundaries (loca[i] % 2 == 0).
 """
 
+import copy
 import math
 import os
 import shutil
@@ -307,6 +308,54 @@ def build_procedural_do_not_crush(advance, is_mono):
     g.program = Program()
     return g
 
+def build_procedural_dotted_zero(base_zero, glyf_table):
+    """
+    Synthesizes the empathetic Optical Core Dotted Zero (zero.dotted / cv12).
+    Preserves exact parent Sloan 5:1 outer contour and inner counter hole,
+    adding a central optical core dot with 0 duplicate nodes and CCW winding.
+    """
+    if base_zero.numberOfContours < 2:
+        return None
+    raw_coords, endpts, fl = base_zero.getCoordinates(glyf_table)
+    c0_end = endpts[0]
+    c1_end = endpts[1]
+    hole_coords = raw_coords[c0_end + 1 : c1_end + 1]
+
+    hx_min = min(pt[0] for pt in hole_coords)
+    hx_max = max(pt[0] for pt in hole_coords)
+    hy_min = min(pt[1] for pt in hole_coords)
+    hy_max = max(pt[1] for pt in hole_coords)
+
+    cx = round((hx_min + hx_max) / 2.0)
+    cy = round((hy_min + hy_max) / 2.0)
+    hole_w = hx_max - hx_min
+    r = round(min(42.0, max(30.0, hole_w * 0.15)))
+
+    # 8-point quadratic Bézier circle (CCW positive fill)
+    dot_pts = [
+        (cx - r, cy),
+        (cx - r, cy + r),
+        (cx, cy + r),
+        (cx + r, cy + r),
+        (cx + r, cy),
+        (cx + r, cy - r),
+        (cx, cy - r),
+        (cx - r, cy - r)
+    ]
+    dot_flags = [1, 0, 1, 0, 1, 0, 1, 0]
+
+    new_coords = list(raw_coords[:c1_end + 1]) + dot_pts
+    new_flags = list(fl[:c1_end + 1]) + dot_flags
+    new_endpts = list(endpts[:2]) + [len(new_coords) - 1]
+
+    z_dot = copy.deepcopy(base_zero)
+    z_dot.coordinates = GlyphCoordinates(new_coords)
+    z_dot.flags = bytearray(new_flags)
+    z_dot.endPtsOfContours = new_endpts
+    z_dot.numberOfContours = 3
+    z_dot.program = Program()
+    return z_dot
+
 def ensure_feature_record(gsub, tag, lookup_index):
     """Ensures a FeatureRecord with tag and lookup_index exists in GSUB and is registered in all scripts."""
     if gsub.FeatureList is None:
@@ -466,7 +515,18 @@ def inject_philocardia():
                 if heart_char not in gorder:
                     gorder.append(heart_char)
 
-        # 3. Setup OpenType GSUB ss07 "Philocardia Heart Tittles"
+        # 3. Synthesize zero.dotted for cv12 (Optical Core Dotted Zero)
+        if "zero" in glyf:
+            z_dot = build_procedural_dotted_zero(glyf["zero"], glyf)
+            if z_dot is not None:
+                glyf["zero.dotted"] = z_dot
+                z_dot.recalcBounds(glyf)
+                base_adv, _ = hmtx["zero"]
+                hmtx["zero.dotted"] = (base_adv, z_dot.xMin)
+                if "zero.dotted" not in gorder:
+                    gorder.append("zero.dotted")
+
+        # 4. Setup OpenType GSUB ss07 "Philocardia Heart Tittles" & cv12 "Dotted Zero"
         if "GSUB" in font:
             gsub = font["GSUB"].table
             if gsub.LookupList is None:
@@ -499,6 +559,33 @@ def inject_philocardia():
                 gsub.LookupList.LookupCount = len(gsub.LookupList.Lookup)
 
             ensure_feature_record(gsub, "ss07", ss07_lookup_idx)
+
+            # cv12: Optical Core Dotted Zero
+            if "zero.dotted" in glyf:
+                cv12_lookup_idx = None
+                for i_idx, lk in enumerate(gsub.LookupList.Lookup):
+                    if lk.LookupType == 1:
+                        for st in lk.SubTable:
+                            if hasattr(st, "mapping") and st.mapping.get("zero") == "zero.dotted":
+                                cv12_lookup_idx = i_idx
+                                break
+                    if cv12_lookup_idx is not None:
+                        break
+
+                if cv12_lookup_idx is None:
+                    st = ot.SingleSubst()
+                    st.Format = 1
+                    st.mapping = {"zero": "zero.dotted"}
+                    lk = ot.Lookup()
+                    lk.LookupType = 1
+                    lk.LookupFlag = 0
+                    lk.SubTable = [st]
+                    lk.SubTableCount = 1
+                    cv12_lookup_idx = len(gsub.LookupList.Lookup)
+                    gsub.LookupList.Lookup.append(lk)
+                    gsub.LookupList.LookupCount = len(gsub.LookupList.Lookup)
+
+                ensure_feature_record(gsub, "cv12", cv12_lookup_idx)
 
         # Update glyph order & save
         font.setGlyphOrder(gorder)

@@ -1,4 +1,4 @@
-﻿/* PocketGull Specimen Interactive Engine */
+/* PocketGull Specimen Interactive Engine */
 
 
     // 1. Tri-Modal Theme System: Washi Papercraft (和紙), Clinical Obsidian, and 670nm PBM
@@ -1930,7 +1930,7 @@ Sincerely,
                     <span style="font-family: 'PocketGull Bold', sans-serif; font-size: 1.15rem; font-weight: 900; color: #38bdf8; letter-spacing: -0.02em;">
                       POCKETGULL 2D-TO-3D TURNTABLE STUDIO
                     </span>
-                    <span style="font-size: 0.7rem; background: rgba(56, 189, 248, 0.15); border: 1px solid #38bdf8; padding: 0.15rem 0.5rem; border-radius: 9999px; color: #38bdf8; font-weight: 800;">
+                    <span style="font-size: 0.7rem; background: rgba(56, 189, 248, 0.15); border: 1px solid #38bdf8; padding: 0.15rem 0.5rem; border-radius: 6px; color: #38bdf8; font-weight: 800;">
                       ADOBE-INSPIRED EXTRUSION RIG
                     </span>
                   </div>
@@ -3490,7 +3490,7 @@ Sincerely,
                     <span style="font-family: 'PocketGull Bold', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--accent-teal); letter-spacing: -0.02em;">
                       POCKETGULL 3D SPATIAL HOLOCALLIGRAMME
                     </span>
-                    <span style="font-size: 0.7rem; background: rgba(20, 184, 166, 0.2); border: 1px solid var(--accent-teal); padding: 0.15rem 0.6rem; border-radius: 9999px; color: var(--accent-teal); font-weight: 800;">
+                    <span style="font-size: 0.7rem; background: rgba(20, 184, 166, 0.2); border: 1px solid var(--accent-teal); padding: 0.15rem 0.6rem; border-radius: 6px; color: var(--accent-teal); font-weight: 800;">
                       100% PURE POCKETGULL VF
                     </span>
                   </div>
