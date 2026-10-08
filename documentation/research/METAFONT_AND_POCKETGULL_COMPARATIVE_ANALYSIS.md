@@ -1,8 +1,8 @@
-# The Algorithmic Pen and the Living Contour: From Donald Knuth’s METAFONT to the PocketGull Superfamily
+# The Algorithmic Pen and the Living Contour: From Donald Knuth’s METAFONT to the Pocket Gull Superfamily
 
 ### *Fifty Years of Code-Driven Typography: From Cartesian Mathematical Rationalism to Life-Critical Clinical Acuity*
 
-**By Phil Gear & The PocketGull Typefoundry Project**  
+**By Phil Gear & The Pocket Gull Typefoundry Project**  
 *Published Autumn 2026*
 
 ---
@@ -16,9 +16,9 @@ Knuth’s central realization was audacious:
 
 Fast forward nearly half a century. In healthcare intensive care units, emergency departments, and telemetry flight bridges, a parallel crisis of digital typography emerged. Commercial operating systems and clinical electronic health records (EHRs) were saturated with sterile, geometric neo-grotesques and photochemically flat sans-serifs. In high-stress, low-light triage environments, nurses and clinicians misread dosages: `10 mg` collided with `1.0 mg`; lower-case `l` was indistinguishable from numeral `1` and capital `I`; zeros and capital `O`s bled together; hairlines vanished under night-shift red illumination.
 
-The answer to that modern crisis was the **PocketGull Superfamily**, engineered by Phil Gear. Originating from tactile felt-marker lettering on physical cardstock for GearArts, PocketGull synthesized humanist warmth with Louise Sloan 5:1 optotypes, Institute for Safe Medication Practices (ISMP) character disambiguation, and a pure-code typefoundry compiler pipeline.
+The answer to that modern crisis was the **Pocket Gull Superfamily**, engineered by Phil Gear. Originating from tactile felt-marker lettering on physical cardstock for GearArts, Pocket Gull synthesized humanist warmth with Louise Sloan 5:1 optotypes, Institute for Safe Medication Practices (ISMP) character disambiguation, and a pure-code typefoundry compiler pipeline.
 
-Both METAFONT and PocketGull represent landmark experiments in **code-driven type design**. Yet they arrived at radically divergent destinations. To examine their kinship and their deep technical schisms is to understand how computer science, mathematical geometry, and human perception have co-evolved over fifty years.
+Both METAFONT and Pocket Gull represent landmark experiments in **code-driven type design**. Yet they arrived at radically divergent destinations. To examine their kinship and their deep technical schisms is to understand how computer science, mathematical geometry, and human perception have co-evolved over fifty years.
 
 ---
 
