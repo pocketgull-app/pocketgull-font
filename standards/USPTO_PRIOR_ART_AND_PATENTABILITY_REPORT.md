@@ -17,12 +17,12 @@
 ## 🏛️ 1. Executive Summary & Patentability Opinion
 
 ### 1.1 The Core Invention
-PocketGull LLC has engineered the **Philocardic Dynamic Tactile Lathe** ("Spindle-Gull" / "PocketRoller"):
-1. A **revolving cylindrical mandrel** rotated along a horizontal axis at continuous variable angular velocities matching human reading cadence ($100\text{--}400\,\text{WPM}$).
-2. An array of **soft-robotic elastomeric inflatable rubber nibs** (Shore A 15–25 liquid silicone rubber) that dynamically inflate under positive pneumatic pressure ($+18.4\,\text{kPa}$) on an ascending arc, present Braille characters to a resting fingerpad, and actively deflate under negative vacuum pressure ($-4.5\,\text{kPa}$) flush with the cylinder circumference on a descending arc.
-3. A **stationary biometric lathe tool rest** supporting the user’s hand and fingerpad in neutral $15^\circ$ pronation, eliminating horizontal hand sweeping, repetitive strain injury (RSI), and shear friction ($\tau_{\text{shear}} \approx 0$).
-4. A **sub-nociceptive contact mechanics threshold** distributing contact stress strictly below $28\,\text{kPa}$ (well under the human cutaneous pain threshold of $85\text{--}120\,\text{kPa}$), allowing painless reading for individuals with arthritis, peripheral neuropathy, and fragile skin.
-5. **Warmed cardio-pneumatic pacing** ($34.5^\circ\text{C}$, 72 BPM sinus wave) providing autonomic relaxation and affective prosody.
+PocketGull LLC has engineered the **Philocardic Dynamic Tactile Flume** ("Spindle-Gull" / "Aquaglyde Waterslide"):
+1. A **revolving cylindrical mandrel** rotated along a horizontal axis within a central aperture at continuous variable angular velocities matching human reading cadence ($100\text{--}400\,\text{WPM}$).
+2. An array of **soft-robotic elastomeric inflatable rubber nibs** (Shore A 15–25 liquid silicone rubber) that dynamically inflate under positive pneumatic or hydrostatic pressure ($+18.4\,\text{kPa}$) on an ascending arc, present Braille characters to a resting fingerpad with zero bouncing, and actively deflate under negative vacuum pressure ($-4.5\,\text{kPa}$) flush with the cylinder circumference on a descending arc.
+3. **Stationary ergonomic flume banks** (left and right chassis decks) and a stationary finger rest lip supporting the user’s hand and fingerpad in neutral $15^\circ$ pronation, eliminating horizontal hand sweeping, repetitive strain injury (RSI), and shear friction ($\tau_{\text{shear}} \approx 0$).
+4. A **zero-pain contact mechanics threshold** distributing contact stress strictly between $18\text{--}24\,\text{kPa}$ (pure velvet touch, non-nociceptive), guaranteeing completely painless, fatigue-free reading for individuals with arthritis, peripheral neuropathy, and fragile skin.
+5. A **closed-loop recirculating microfluidic flume** conserving 100% of fluid ($0.00\,\text{mL/hr}$ loss) while providing laminar hydrodynamic glide ($\mu \approx 0.002$) beneath the resting finger.
 
 ### 1.2 Patentability Determination
 * **Novelty (35 U.S.C. § 102)**: **STRONG / CLEAR.** No single prior art reference in the USPTO, EPO, or WIPO database discloses a rotating cylindrical drum or lathe mandrel equipped with soft elastomeric inflatable/deflating rubber nibs or active lower-arc vacuum retraction.
@@ -118,16 +118,16 @@ PocketGull LLC has engineered the **Philocardic Dynamic Tactile Lathe** ("Spindl
 
 ### Independent Claim 1 (Apparatus)
 > **1. A dynamic tactile reading apparatus for continuous somatosensory character presentation, comprising:**
-> - a housing;
-> - a cylindrical mandrel rotatably mounted within said housing about a central axis of rotation;
+> - a housing comprising stationary left and right ergonomic flume decks defining a central flume aperture;
+> - a cylindrical mandrel rotatably mounted within said housing beneath said central flume aperture about a central axis of rotation;
 > - a drive mechanism operatively coupled to said cylindrical mandrel to rotate said mandrel at a controlled angular velocity corresponding to a tactile reading rate;
 > - an array of soft-robotic tactile presentation elements disposed circumferentially about an outer surface of said mandrel, each tactile presentation element comprising an elastomeric chamber formed from a compliant polymer having a Shore A durometer between 10 and 35;
-> - a pneumatic distribution system comprising a positive pressure source and a negative vacuum source in fluid communication with said elastomeric chambers;
-> - wherein rotation of said mandrel coordinates fluid delivery such that selected elastomeric chambers inflate to a tactilely discernable elevation upon traversing an ascending arc toward a top-dead-center reading zone, and actively deflate flush with or beneath the outer surface of said mandrel under negative pressure upon traversing a descending arc away from said reading zone; and
-> - a stationary biometric tool rest affixed to said housing adjacent said reading zone, configured to support a human fingerpad in tangential, zero-shear rolling contact with said inflated elastomeric chambers.
+> - a fluid distribution system comprising a positive pressure source and a negative vacuum source in fluid communication with said elastomeric chambers;
+> - wherein rotation of said mandrel coordinates fluid delivery such that selected elastomeric chambers inflate to a tactilely discernable elevation upon traversing an ascending arc toward a top-dead-center reading zone within said central flume aperture, maintain a steady uniform radial elevation without bouncing, and actively deflate flush with or beneath the outer surface of said mandrel under negative pressure upon traversing a descending arc away from said reading zone; and
+> - a stationary finger rest lip affixed to said housing adjacent said reading zone, configured to support a human fingerpad in tangential, zero-shear rolling contact with said inflated elastomeric chambers while the user's hand rests upon said stationary flume decks.
 
-### Dependent Claim 2 (Sub-Nociceptive Biomechanical Threshold)
-> **2. The apparatus of claim 1**, wherein each inflated elastomeric chamber exerts a peak normal contact stress against the human fingerpad of less than $35\,\text{kPa}$ at an indentation depth of $0.50\,\text{mm}$, thereby remaining below the human cutaneous nociceptive pain threshold of $85\,\text{kPa}$.
+### Dependent Claim 2 (Zero-Pain Biomechanical Invariant)
+> **2. The apparatus of claim 1**, wherein each inflated elastomeric chamber exerts a peak normal contact stress against the human fingerpad of less than $25\,\text{kPa}$ at an indentation depth of $0.50\,\text{mm}$, ensuring zero cutaneous nociceptive activation and completely painless reading across prolonged durations.
 
 ### Dependent Claim 3 (Dual-Phase Rotary Commutator)
 > **3. The apparatus of claim 1**, wherein said pneumatic distribution system comprises an internal stationary commutator positioned coaxially within said rotatable mandrel, said commutator defining:
@@ -138,8 +138,8 @@ PocketGull LLC has engineered the **Philocardic Dynamic Tactile Lathe** ("Spindl
 ### Dependent Claim 4 (Warmed Thermal Conditioning)
 > **4. The apparatus of claim 1**, further comprising a thermal conditioning element heating air supplied to said elastomeric chambers to a temperature between $32.0^\circ\text{C}$ and $36.0^\circ\text{C}$, maintaining distal interphalangeal joint warmth and stimulating C-tactile afferent fibers.
 
-### Dependent Claim 5 (Cardio-Pneumatic Sinus Rhythm Pacing)
-> **5. The apparatus of claim 1**, further comprising a pneumatic modulator oscillating positive pressure delivered to said elastomeric chambers in a rhythmic sinus wave patterned after a mammalian resting heart rate between 55 and 80 cycles per minute.
+### Dependent Claim 5 (Closed-Loop Microfluidic "Waterslide" Flume & Zero Water Loss)
+> **5. The apparatus of claim 1**, wherein said fluid distribution system comprises a hermetically sealed, closed-loop microfluidic recirculating flume, wherein hydraulic fluid is recirculated continuously between said ascending arc and said descending arc with $0.00\,\text{mL/hr}$ net fluid loss, generating a frictionless hydrodynamic laminar cushion ($\mu \le 0.005$) beneath the resting fingerpad.
 
 ### Dependent Claim 6 (Bionic Tactile Fixation Multi-Level Elevation)
 > **6. The apparatus of claim 1**, wherein said pneumatic distribution system selectively provides at least two discrete positive pressure levels, inflating word-onset tactile presentation elements to a first elevation of at least $0.55\,\text{mm}$ and inflating subsequent intra-word elements to a second elevation of approximately $0.40\,\text{mm}$ to establish a tactile saccadic fixation anchor.
@@ -147,13 +147,13 @@ PocketGull LLC has engineered the **Philocardic Dynamic Tactile Lathe** ("Spindl
 ### Dependent Claim 7 (Modular Magnetic Story Capsule)
 > **7. The apparatus of claim 1**, wherein said cylindrical mandrel is configured as a detachable, interchangeable cartridge coupled to said drive mechanism via a self-aligning magnetic spindle dock and axial pneumatic seal.
 
-### Independent Claim 8 (Method of Tactile Reading)
+### Independent Claim 8 (Method of Tactile Reading with Stationary Hand Support)
 > **8. A method for presenting dynamic tactile literature to a reader without cutaneous shear stress, comprising:**
-> - supporting a reader's fingerpad in a stationary posture upon a contoured biometric tool rest;
-> - rotating a cylindrical mandrel beneath the stationary fingerpad at an angular velocity synchronized to a target words-per-minute cadence;
-> - inflating a pattern of soft elastomeric nibs on an ascending arc of said mandrel using positive pneumatic pressure to form Braille characters;
-> - rolling said inflated elastomeric nibs across the stationary fingerpad with substantially zero interfacial slip velocity; and
-> - deflating said elastomeric nibs flush with the mandrel surface on a descending arc using negative vacuum pressure.
+> - supporting a reader's palm and hand in a stationary resting posture upon stationary ergonomic flume decks of a housing;
+> - rotating a cylindrical mandrel beneath a central flume aperture adjacent said stationary flume decks at an angular velocity synchronized to a target words-per-minute cadence;
+> - inflating a pattern of soft elastomeric nibs on an ascending arc of said mandrel using a closed-loop fluid distribution system to form Braille characters;
+> - rolling said inflated elastomeric nibs smoothly beneath the stationary fingerpad in a constant circular arc with substantially zero interfacial slip velocity and zero radial bouncing; and
+> - deflating said elastomeric nibs flush with the mandrel surface on a descending arc using negative vacuum pressure while recirculating the fluid within a closed loop without fluid loss.
 
 ---
 

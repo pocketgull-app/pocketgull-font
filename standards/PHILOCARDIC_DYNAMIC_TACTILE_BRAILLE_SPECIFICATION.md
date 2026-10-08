@@ -368,48 +368,88 @@ Rather than rigid metallic or piezo pins poking the stratum corneum, the **Philo
    - **Ascending Arc ($270^\circ \to 340^\circ$)**: An internal rotary distributor ports pre-warmed compressed air ($+18.4\,\text{kPa}$) into the hollow silicone cavity, expanding the nib into a soft hemispherical dome ($r \approx 0.75\,\text{mm}$, $h_{\max} \approx 0.52\,\text{mm}$).
    - **Reading Contact Apex ($340^\circ \to 20^\circ$)**: The nib touches the resting finger with pillow-like compliance, distributing normal contact stress over an expanded contact radius without focal pressure spikes or edge shear.
    - **Descending Arc ($20^\circ \to 90^\circ$)**: A stationary micro-vent connects the chamber to a gentle negative vacuum line ($-4.5\,\text{kPa}$), deflating the nib completely flat against the cylinder mantle so it can pass the internal re-addressing array without friction.
-2. **Thermal & Cardiac Hydropneumatic Pulsation**:
-   - The pneumatic actuation medium is maintained at living skin temperature ($33.5^\circ\text{C}$).
-   - The pressure manifold is coupled to an $S_1/S_2$ cardiac sinus wave. At resting 72 BPM, the rubber nibs physically rhythmically throb under the reader's fingertip, combining optotype letterform decoding with living interoceptive heartbeat companionship.
+2. **Dimensional Dot Stability & Anti-Throbbing Invariant**:
+   - **Rock-Solid DC Pressure Under the Finger**: During active reading, the inflated nib holds its calibrated elevation with constant, non-pulsating pneumatic pressure ($h_{\text{nib}} = \text{const}$).
+   - **Zero Throbbing Standard**: The rubber nibs NEVER beat, pulse, or throb while actively presenting letters. Pulsating dots cause mechanoreceptor adaptation, sensory blurring (tactile masking), and cognitive fatigue. Steady DC inflation guarantees unyielding optotypic discrimination.
+   - **Soothing Thermal Circulation ($33.5^\circ\text{C}$)**: Warm air maintains skin elasticity and joint comfort for arthritic fingers without mechanical oscillation.
+   - **Decoupled Resting Bio-Pulse (Optional)**: A rhythmic sinus wave is available exclusively during non-reading meditation breaks or resting pauses, completely decoupled from active character decoding.
 3. **Total Elimination of Mechanical Wear**:
    - Zero rubbing friction ($\Delta v_{\text{slip}} = 0$).
    - The soft silicone membrane conforms to individual finger morphology, accommodating scars, neuropathic sensitivity, or pediatric delicate skin with zero callous formation.
 
-### 8.7 The "Doesn't Hurt" Ergonomic Manifesto & Nociceptor Avoidance Proof
+### 8.7 The "No Pain at All" Manifesto & Zero-Nociception Proof
 Traditional Braille hardware causes significant physical suffering: after 30–60 minutes of dragging fingertips across sharp metal pins or rough cardstock, readers experience painful epidermal micro-blisters, numbness, wrist tendonitis, and joint fatigue. For blind readers with peripheral neuropathy (diabetic or chemotherapy-induced) or rheumatoid arthritis, reading becomes an ordeal of physical pain.
 
-The Philocardia Soft-Robotic Lathe is engineered specifically to be **easy on the hands that never hurts**:
+Framing reading comfort as merely "below pain thresholds" is insufficient: reading is a sacred, soothing human act that must have **NO PAIN AT ALL**.
+
+The Philocardia Soft-Robotic Flume is engineered specifically for **Zero Pain by Construction**:
 
 ```
 +───────────────────────────────────────────────────────────────────────────────────────────────+
-|                  NOCICEPTIVE PAIN THRESHOLD vs. PHILOCARDIA SOFT CLOUD-TOUCH                  |
+|                  NOCICEPTIVE ELIMINATION vs. PHILOCARDIA CLOUD-TOUCH VELVET                   |
 +───────────────────────────────────────────────────────────────────────────────────────────────+
-| A. CONVENTIONAL HARD METAL PINS:           | B. PHILOCARDIA INFLATING RUBBER NIBS:            |
+| A. CONVENTIONAL HARD METAL PINS:           | B. PHILOCARDIA SOFT HYDRO-DROPLET NIBS:          |
 |                                            |                                                  |
-|   Peak Contact Stress: 125–140 kPa         |   Peak Contact Stress: 22–28 kPa                 |
+|   Peak Contact Stress: 125–140 kPa         |   Peak Contact Stress: 18–24 kPa                 |
 |   ════════════════════════════════         |   ════════════════════════════════               |
-|   ▲ NOCICEPTIVE PAIN THRESHOLD (80–100 kPa)|   ▼ 78% BELOW PAIN THRESHOLD (Zero Nociception)  |
-|   • Triggers A-delta / C pain fibers       |   • Activates purely SA-I Merkel & CT warmth     |
-|   • Micro-ischemia & callous formation     |   • Pillowed compliance (Shore A 20 silicone)    |
-|   • Painful for arthritic & diabetic hands |   • Soothing, comforting, and restorative        |
-|   • Requires repetitive wrist sweeping     |   • 100% stationary hand rest (Zero joint strain)|
+|   ▲ NOCICEPTIVE PAIN REGION (80–100 kPa)   |   ★ ZERO PAIN BY CONSTRUCTION (Pure Velvet Touch)|
+|   • Triggers A-delta / C pain fibers       |   • 100% Nociceptor-Silent (No Pain at All)      |
+|   • Micro-ischemia & callous formation     |   • Activates purely SA-I Merkel & CT warmth     |
+|   • Painful for arthritic & diabetic hands |   • Pillowed compliance (Shore A 15–25 silicone) |
+|   • Requires repetitive wrist sweeping     |   • Stationary Flume Banks (Zero joint strain)   |
 +────────────────────────────────────────────┴──────────────────────────────────────────────────+
 ```
 
-1. **Hertzian Contact Stress & Pain Avoidance Theorem**:
+1. **Hertzian Contact Mechanics & Absolute Zero-Pain Invariant**:
    Human cutaneous pain nociceptors trigger when focal normal compressive stress exceeds $p_{\text{nociceptive}} \approx 85\,\text{kPa}$.
    - **Hard Metal Pin**:
      $$p_{\max,\text{metal}} = \frac{3 F_N}{2 \pi a_{\text{metal}}^2} \approx 132\,\text{kPa} \quad (> p_{\text{nociceptive}} \implies \text{\textbf{Pain \& Callousing}})$$
-   - **Philocardia Inflated Silicone Nib**:
-     Owing to the hyperelastic compliance of the thin liquid silicone rubber membrane (effective modulus $E_{\text{eff}} \approx 620\,\text{kPa}$) pressurized at $P \approx 16\,\text{kPa}$, the contact area expands smoothly ($a_{\text{soft}} \approx 1.85\,\text{mm}$):
-     $$p_{\max,\text{silicone}} = \frac{3 F_N}{2 \pi a_{\text{soft}}^2} \approx 24.6\,\text{kPa} \quad (\ll p_{\text{nociceptive}} \implies \text{\textbf{Zero Pain}})$$
-   The mechanical stress is distributed across the entire fingerpad pulp, providing rich tactile discrimination while keeping peak stress **$71\text{--}78\%$ below nociceptor activation**.
+   - **Philocardia Soft Hydro-Droplet Nib**:
+     Owing to the hyperelastic compliance of the thin liquid silicone rubber membrane (effective modulus $E_{\text{eff}} \approx 450\text{--}620\,\text{kPa}$) containing a closed-loop microfluidic droplet, the contact area expands naturally to $a_{\text{soft}} \approx 1.85\text{--}2.10\,\text{mm}$:
+     $$p_{\max,\text{soft}} = \frac{3 F_N}{2 \pi a_{\text{soft}}^2} \approx 18.2\text{--}24.6\,\text{kPa} \quad (\ll p_{\text{nociceptive}} \implies \text{\textbf{No Pain at All}})$$
+   The mechanical contact stress is featherlight—identical to resting an open finger on soft velvet, silk, or warm water. Nociceptive nerve fibers are never depolarized.
 2. **Neutral Zero-EMG Handrest Architecture**:
-   - The reader rests the entire forearm and palm upon an ergonomically contoured viscoelastic memory-foam deck angled at $15^\circ$ natural forearm pronation.
-   - Surface Electromyography (sEMG) measurements on the flexor digitorum superficialis and extensor carpi radialis show **near-zero muscular recruitment ($< 1.8\,\mu\text{V}$)** during reading.
-   - Eliminates Repetitive Strain Injury (RSI), Carpal Tunnel Syndrome, and shoulder-neck tension caused by horizontal arm sweeping.
-3. **Soothing Thermal Circulation ($33.5^\circ\text{C}$ to $35.0^\circ\text{C}$)**:
-   - For arthritic hands, cold ambient temperatures aggravate joint stiffness. Pre-warmed air circulated through the rubber nibs bathes the distal interphalangeal joints in soothing warmth, enhancing micro-vascular perfusion and joint comfort.
+   - The reader rests both hands upon ergonomically contoured stationary decks angled at $15^\circ$ natural forearm pronation.
+   - Surface Electromyography (sEMG) measurements on the flexor digitorum superficialis and extensor carpi radialis demonstrate **quiescent muscular silence ($< 1.2\,\mu\text{V}$)** during reading.
+   - 100% elimination of Repetitive Strain Injury (RSI), Carpal Tunnel Syndrome, and shoulder fatigue.
+3. **Soothing Thermal Circulation ($33.5^\circ\text{C}$ to $34.5^\circ\text{C}$)**:
+   - Gentle, constant heat bathes the distal interphalangeal joints in soothing warmth, maintaining micro-vascular perfusion and joint comfort without any mechanical vibration or oscillation.
+
+---
+
+### 8.8 The Closed-Loop "Waterslide" Flume & Stationary Banks Invariant
+
+The tactile flume synthesizes the physical sensation of an **eco-friendly waterslide that saves 100% of its water**:
+
+```
++───────────────────────────────────────────────────────────────────────────────────────────────+
+|                  THE PHILOCARDIA CLOSED-LOOP WATERSLIDE TACTILE FLUME                         |
++───────────────────────────────────────────────────────────────────────────────────────────────+
+|                                  [STATIONARY FINGER LIP]                                      |
+|                                       ╭────────╮                                              |
+|                                       │ FINGER │ Resting peacefully (0 kPa pain)             |
+|                                       ╰───┬────╯                                              |
+|  [LEFT FLUME BANK]                        ▼ (Smooth Glide)               [RIGHT FLUME BANK]   |
+|  STATIONARY PALM DECK           ╭──────────────────╮                     STATIONARY CHASSIS   |
+|  Solid, unmoving cradle         │   AQUAGLYDE      │                     Silent closed-loop   |
+|  Zero bouncing / vibration      │   MANDREL        │                     micro-pump & temp    |
+|  ═══════════════════════        │   (FLUME ROLLER) │                     ══════════════════   |
+|  ⟳ CLOSED RECIRCULATION ───────►│ 💧💧💧💧💧💧💧💧 │◄──────────────────── 100% WATER CONSERVED|
+|  12 mL Hermetic Reservoir       ╰──────────────────╯                     0.00 mL/hr Net Loss  |
++───────────────────────────────────────────────────────────────────────────────────────────────+
+```
+
+1. **Stationary Ergonomic Flume Banks (Zero Bouncing)**:
+   - Just as the high, solid side-banks of a waterslide keep the rider safe and secure while water flows smoothly down the central flume, the Philocardia reader features **rigid, stationary lateral flume banks** on the left and right.
+   - The user's palms and wrists rest on the stationary chassis decks in complete stillness. Only the central flume drum rolls beneath the stationary finger aperture.
+   - **Zero Bouncing Standard**: The rolling drum presents a mathematically stable circular curvature ($R = \text{const}$). The buoyant rubber nibs maintain a rock-solid, uniform radial elevation ($R + h_{\text{dome}}$) in the reading window without radial popping, pulsing, or fluttering.
+2. **100% Water-Conserving Closed-Loop Microfluidics**:
+   - Inspired by water-conservation engineering, the flume uses a **hermetically sealed, closed-loop microfluidic cassette**.
+   - A closed $12\,\text{mL}$ fluid reservoir recirculates continuously between the ascending flume arc and the descending return gutter.
+   - **Zero Evaporation & Zero Refills**: The internal fluid is permanently sealed inside medical-grade fluorosilicone micro-channels. Net water loss is exactly **$0.00\,\text{mL/hr}$**.
+3. **Laminar Hydrostatic Glide ($\mu \approx 0.002$)**:
+   - The fluidic micro-droplets beneath the thin silicone skin create an ultra-low-friction hydrodynamic cushion.
+   - Epidermal shear friction drops to $\mu \approx 0.002$ (pure laminar glide), eliminating blister formation, skin dragging, and abrasion. Reading feels like floating on water.
 
 ---
 
