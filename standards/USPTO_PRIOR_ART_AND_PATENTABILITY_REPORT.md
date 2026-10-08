@@ -158,6 +158,12 @@ PocketGull LLC has engineered the **Philocardic Dynamic Tactile Flume** ("Spindl
 > - rolling said inflated elastomeric nibs smoothly beneath the stationary fingerpad in a constant circular arc with substantially zero interfacial slip velocity and zero radial bouncing; and
 > - deflating said elastomeric nibs flush with the mandrel surface on a descending arc using negative vacuum pressure while recirculating the fluid within a closed loop without fluid loss.
 
+### Dependent Claim 10 (Parasitically Powered Smartphone Accessory Bumper Case)
+> **10. The apparatus of claim 1**, wherein said housing is configured as a mobile smartphone bumper case adapted to detachably couple to a host smartphone via magnetic attraction, wherein said closed-loop fluid distribution system is disposed within said bumper case and receives operating electrical power wirelessly from said host smartphone via reverse inductive wireless power transfer, and wherein said tactile presentation elements are positioned along an ergonomic perimeter rail of said bumper case for resting fingertip access during handheld smartphone operation.
+
+### Dependent Claim 11 (Transient Shear Electro-Tactile Haptic Emulation Method)
+> **11. The method of claim 9**, further comprising presenting simulated tactile relief upon a monolithic glass touch surface of a host mobile device by tracking a sliding velocity of a fingerpad across said surface at a sampling rate of at least 200 Hz, and firing a discrete, sub-millisecond linear shear transient from a closed-loop linear resonant actuator upon said fingerpad crossing virtual character coordinates while suppressing actuation between character coordinates, thereby eliciting Meissner corpuscle afferent excitation without continuous motor vibration.
+
 ---
 
 ## 🛡️ 5. Freedom-to-Operate (FTO) & Prosecution Strategy

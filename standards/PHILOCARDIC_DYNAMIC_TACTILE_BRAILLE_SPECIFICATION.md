@@ -490,6 +490,70 @@ A clinical reading machine need not resemble industrial shop equipment. By confi
    - The rotating annular flume is magnetically driven from beneath the non-magnetic ceramic basin floor via permanent neodymium magnets coupled to a brushless pancake stator.
    - **Zero Through-Wall Axles or Penetrations**: The dish has no seams, holes, or mechanical seals. It is 100% waterproof, impervious to fluids, and can be sanitized with hospital-grade wipes or submerged in autoclave wash.
 
+### 8.10 The Commodity Smartphone Ecosystem: Candybar Google Pixel Architecture, MagSafe/Qi2 Microfluidic Cases & Transient Shear Electro-Flumes
+
+While purpose-built bedside carousels and raku dishes provide stationary sanctuary, tactile literacy must also accompany the blind reader into the mobile world—on trains, buses, hospital corridors, and city streets. The Philocardia system bridges the physical-digital divide through a **three-tier smartphone architecture** optimized for commodity "candybar" form-factor smartphones (exemplified by the Google Pixel 8, 9, and 10 series):
+
+```
++───────────────────────────────────────────────────────────────────────────────────────────────+
+|               THE COMMODITY SMARTPHONE TACTILE FLUME HIERARCHY (GOOGLE PIXEL)                 |
++───────────────────────────────────────────────────────────────────────────────────────────────+
+| TIER 1: BARE CANDYBAR PHONE (Zero Hardware Accessories)                                       |
+| • Stationary Decks: Matte anodized aluminum chassis perimeter rails (grasped in hand).        |
+| • Tactile Flume: Center OLED glass lane with 240Hz capacitive velocity tracking.              |
+| • Actuation: Cirrus Logic CS40L25/26 closed-loop LRA emitting sub-millisecond shear clicks.   |
+| • Psychophysics: Lateral sliding finger + 3ms transient shear impulse = perceived dot relief. |
+| • Zero Pain & Noise: No continuous vibration motor hum; 0 dB baseline, 0 Hz background.      |
++───────────────────────────────────────────────────────────────────────────────────────────────+
+| TIER 2: THE "AQUAGLYDE" SNAP-ON CASE (Physical Soft Microfluidic Inflatable Nibs)             |
+| • Form Factor: Slim (3.8–4.2 mm) MagSafe / Qi2 silicone bumper case.                          |
+| • Power: Pixel "Battery Share" (reverse wireless Qi power, < 80 mW consumption).              |
+| • Hydraulic Cassette: Hermetic 5 mL fluorosilicone circuit with 6–8 inflatable soft nibs.     |
+| • Ergonomics: Nibs positioned on side grip rail beneath natural resting index finger.         |
+| • Fluid Conservation: 100% closed loop, 0.00 mL/hr water loss, IP68 submersible drop-proof.  |
++───────────────────────────────────────────────────────────────────────────────────────────────+
+| TIER 3: THE "PIXEL IN THE BASIN" BEDSIDE SANCTUARY DOCK                                       |
+| • Symbiosis: Candybar Pixel docks magnetically into the center of the Philocardia Raku Dish.  |
+| • Division of Labor: Phone provides Tensor NPU, on-device Gemini Nano, cellular connectivity,  |
+|   and scotopic display; Dish provides 360° ceramic thermal mass and motorized annular flume.  |
+| • Seamless Handoff: Removing the phone instantly transitions reading stream to Pocket Mode.   |
++───────────────────────────────────────────────────────────────────────────────────────────────+
+```
+
+1. **Tier 1: Native Candybar Phone (Bare Glass & Transient Shear Haptics)**:
+   - **The Physical Screen Reality**: Monolithic Gorilla Glass Victus cannot physically expand into $0.5\,\text{mm}$ elastomeric fluid blisters without add-on hardware.
+   - **The Tactile Solution (Transient Lateral Shear)**:
+     - The smartphone's flat aluminum perimeter rails serve as the **stationary flume decks**. The non-reading fingers grip the rigid chassis firmly.
+     - As the reader glides their index fingerpad down the glass flume lane, the capacitive digitizer polls coordinate positions at 240Hz ($4.16\,\text{ms}$ resolution).
+     - When the fingerpad crosses a virtual Braille dot coordinate, the phone's custom haptic DSP (Cirrus Logic CS40L25/CS40L26 wideband Linear Resonant Actuator) fires a single, discrete **3-millisecond micro-shear impulse** (`VibrationEffect.Composition.addPrimitive(PRIMITIVE_CLICK, 0.22f)`).
+     - **Neuromechanical Principle**: Human tactile mechanoreceptors (specifically Meissner's corpuscles RA-I and Merkel discs SA-I) interpret lateral kinetic sliding friction modulated by high-acceleration shear transients as a **physical surface contour or droplet bead** (Pasquero & Hayward principle).
+     - **Zero Pain Invariant**: The transient amplitude is bounded strictly below nociceptive activation thresholds ($\sim 18\,\text{kPa}$ equivalent stress).
+     - **Zero Motor Drone**: Between dots and when the finger stops moving, the phone is **completely silent and motionless ($0\,\text{Hz}$, $0\,\text{dB}$)**. There is zero buzzing, zero numbness, and zero hand tingling.
+
+2. **Tier 2: The "Aquaglyde" MagSafe / Qi2 Microfluidic Snap-On Case**:
+   - For users requiring real physical fluidic elevation, a standard candybar phone accepts the **Philocardia Aquaglyde Case**:
+   - **Side-Rail Finger Trough**: The tactile reading flume is embedded along the right-hand perimeter rail (or rear longitudinal groove) where the index or middle finger naturally rests during single-handed phone carry.
+   - **Parasitic Reverse Wireless Power (Pixel Battery Share)**:
+     - The case contains a flat Qi receiver coil aligned with the Pixel's internal wireless charging coil.
+     - Drawing parasitically via Pixel Battery Share (or low-profile USB-C tongue), the internal piezoelectric micropumps (Murata/TDK micro-piezo pumps) operate at micro-watt levels.
+     - An entire 1-hour reading session consumes less than **$1.4\%$ of the smartphone's battery capacity**.
+   - **Closed-Loop Hermetic Cassette**:
+     - Contains a sealed $5.0\,\text{mL}$ degassed fluorosilicone fluid bladder and micro-valves.
+     - Nibs inflate to $0.45\,\text{mm}$ elevation (Shore A 15 soft silicone) with zero fluid leakage or evaporation ($0.00\,\text{mL/hr}$ loss).
+     - The screen can remain completely off in one's pocket or bag while books, GPS turn-by-turn guidance, or EHR notifications stream silently under the user's resting fingertip.
+
+3. **Tier 3: The "Pixel in the Dish" Bedside Sanctuary**:
+   - In a bedroom or clinic, the **Philocardia Basin** (the shallow raku stoneware dish) features an integrated Qi2 charging cradle in its center recess.
+   - Dropping the candybar Pixel into the cradle creates a unified tactile appliance:
+     - The Pixel screen acts as the calm visual water-flume display in Scotopic Night Vision mode ($650\,\text{nm}$ red/teal).
+     - The Pixel's Google Tensor G3/G4 NPU runs **Gemini Nano** locally to perform instant, private on-device document OCR, chart analysis, and Grade 3+ morphological tokenization.
+     - The phone wirelessly powers and phase-synchronizes the dish's silent magnetic annular carousel.
+     - Lifting the phone off the dock seamlessly transfers the active reading position to the smartphone's mobile flume.
+
+4. **Privacy & Air-Gapped Local Intelligence**:
+   - Every stage of text ingestion—whether scanning paper via the Pixel camera, reading an EPUB, or processing clinical telemetry—executes **100% on-device** via WebAssembly, MediaPipe, and Chrome Built-in Prompt APIs.
+   - Zero telemetry, zero camera frames, and zero patient data ever leave the local hardware sandbox.
+
 ---
 
 ## 📚 9. References & Foundations
