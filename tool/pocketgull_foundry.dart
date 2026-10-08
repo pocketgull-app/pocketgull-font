@@ -143,6 +143,41 @@ void runAudit() {
   }
 }
 
+void runPhinneyMentor(String targetPath) {
+  print('\n======================================================================');
+  print('  🔬 THOMAS PHINNEY: FORENSIC TYPE MENTOR & FONTLAB MASTERCLASS');
+  print('  "Font Forensics, OpenType Invariants & Diagnostic Pedagogy"');
+  print('======================================================================\n');
+
+  final file = File(targetPath);
+  print('Inspecting binary: ${file.path}');
+  final lessons = ThomasPhinneyMentor.inspectAndMentor(file);
+
+  var passedCount = 0;
+  for (var i = 0; i < lessons.length; i++) {
+    final lesson = lessons[i];
+    if (lesson.passed) passedCount++;
+
+    print('──────────────────────────────────────────────────────────────────────');
+    print('  [LESSON ${i + 1}] ${lesson.statusSymbol} ${lesson.title}');
+    print('──────────────────────────────────────────────────────────────────────');
+    print('  • Status:     ${lesson.diagnosis}');
+    print('  • Detective:  ${lesson.forensicInsight}');
+    print('  • FontLab:    ${lesson.fontLabAdvice}');
+    print('  • Remedy:     ${lesson.prescriptiveFix}\n');
+  }
+
+  print('======================================================================');
+  print('  MENTOR SUMMARY: $passedCount / ${lessons.length} INVARIANTS CERTIFIED');
+  print('  Forensic Detective: Thomas Phinney (The Font Detective / former CEO FontLab)');
+  print('  Reference Guide: documentation/FONTLAB_AND_PHINNEY_FORENSIC_WORKFLOW.md');
+  print('======================================================================\n');
+
+  if (passedCount < lessons.length) {
+    exitCode = 1;
+  }
+}
+
 void runCouncil() {
   print('\n======================================================================');
   print('  POCKETGULL TYPEFOUNDRY: THE TYPOGRAPHIC COUNCIL (DART 3.11)');
@@ -884,6 +919,7 @@ Commands:
   compliance        Execute Seven Invariant Quality Pillars & Dieter Rams compliance audit
   osv               Audit dependencies & lockfiles against Google OSV-Scanner database
   subset-service    Launch dynamic SMoE font subsetting microservice (Cloud Run ready)
+  mentor [font]     Thomas Phinney Forensic Type Mentor & FontLab masterclass inspection
 ''');
 }
 
@@ -958,6 +994,12 @@ Future<void> main(List<String> args) async {
       break;
     case 'audit':
       runAudit();
+      break;
+    case 'mentor':
+    case 'detective':
+    case 'phinney':
+      final targetFont = args.length > 1 ? args[1] : 'fonts/ttf/PocketGull-Bold.ttf';
+      runPhinneyMentor(targetFont);
       break;
     case 'realign':
       runRealign();

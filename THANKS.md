@@ -1,4 +1,4 @@
-﻿# 🙏 Acknowledgements & Thanks
+# 🙏 Acknowledgements & Thanks
 
 The PocketGull Font Superfamily is an open-source clinical, optotypic, and sovereign multi-script typography initiative dedicated to patient safety, health equity, and world language preservation.
 
@@ -69,10 +69,12 @@ We extend our heartfelt gratitude and respect to the indigenous language teacher
 
 ## 🔍 Forensic Typography & Type Engineering Masters
 
-### 🕵️ Thomas Phinney — The Font Detective
-We extend our profound gratitude to **[Thomas Phinney](https://www.thomasphinney.com)** ([The Font Detective](https://thefontdetective.com)), former Adobe type program manager, former CEO of FontLab, and world-renowned forensic font detective.
+### 🕵️ Thomas Phinney — The Font Detective & FontLab Champion
+We extend our profound gratitude to **[Thomas Phinney](https://www.thomasphinney.com)** ([The Font Detective](https://thefontdetective.com)), former Adobe type program manager, former CEO of **[FontLab](https://www.fontlab.com)** (2014–2019), and world-renowned forensic font detective.
 
-His pioneering advocacy for OpenType mathematical integrity, rigorous 2-byte TrueType word boundary alignment (`loca[i] % 2 == 0`), subpixel `gasp` rendering standards, and meticulous font forensics has directly shaped PocketGull's memory-safe foundry architecture (`tool/foundry/phinney_auditor.dart`). PocketGull's zero-drop reliability across Windows DirectWrite, Apple CoreText, and Chromium OTS stands as a direct tribute to his engineering principles.
+His leadership in developing FontLab VI and FontLab 7 redefined modern multi-master and variable font design, while his pioneering advocacy for OpenType mathematical integrity, rigorous 2-byte TrueType word boundary alignment (`loca[i] % 2 == 0`), subpixel `gasp` rendering standards, and meticulous font forensics has directly shaped PocketGull's memory-safe foundry architecture (`tool/foundry/phinney_auditor.dart`).
+
+In PocketGull, Thomas Phinney serves not merely as a passive validator, but as our **foundry mentor**—teaching us that font engineering is a forensic science where every single byte and table offset matters to the human eye and the operating system kernel. See our [FontLab & Phinney Forensic Workflow Guide](documentation/FONTLAB_AND_PHINNEY_FORENSIC_WORKFLOW.md).
 
 
 ---
