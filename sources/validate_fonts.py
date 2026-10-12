@@ -49,7 +49,9 @@ def validate():
         sys.exit(1)
     log_info(f"LICENSE: SIL Open Font License 1.1 verified ({LICENSE_PATH})")
 
-    ttf_files = sorted([f for f in os.listdir(TTF_DIR) if f.endswith(".ttf")])
+    # Audited Google Fonts superfamily targets
+    ignored_stems = {"PocketGull-Numerics", "PocketGullSerif[wght]"}
+    ttf_files = sorted([f for f in os.listdir(TTF_DIR) if f.endswith(".ttf") and os.path.splitext(f)[0] not in ignored_stems])
     if not ttf_files:
         log_fail("No TTF files found in fonts/ttf/")
         sys.exit(1)
