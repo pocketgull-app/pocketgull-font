@@ -40,7 +40,8 @@
     "serve": "dart run tool/pocketgull_foundry.dart serve 8770",
     "test:unit": "node --test test/*.test.mjs",
     "test:e2e": "node --test test/specimen_interactions_playwright.test.mjs",
-    "test:lighthouse": "node --test test/lighthouse_and_wcag_audit.test.mjs"
+    "test:lighthouse": "node --test test/lighthouse_and_wcag_audit.test.mjs",
+    "benchmark": "node --test test/system_provisions_benchmark.test.mjs"
   },
   "files": [
     "fonts/ttf/*.ttf",
