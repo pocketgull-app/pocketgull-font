@@ -15,3 +15,14 @@ contributes:
         - text: |
             \usepackage{unicode-math}
             \setmathfont{PocketGull-Math.ttf}[Scale=MatchLowercase]
+    pocketgull-math-html:
+      theme: [cosmo, pocketgull-math.scss]
+      mainfont: "PocketGull"
+      monofont: "PocketGull Mono"
+    pocketgull-math-pdf:
+      documentclass: article
+      pdf-engine: xelatex
+      include-in-header:
+        - text: |
+            \usepackage{unicode-math}
+            \setmathfont{PocketGull-Math.ttf}[Scale=MatchLowercase]
