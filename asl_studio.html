@@ -881,7 +881,7 @@
         </div>
 
         <!-- Input Box -->
-        <input type="text" class="transcribe-input-box" id="transcribeInput"
+        <input type="text" class="transcribe-input-box" id="transcribeInput" maxlength="200"
                value="AMOXICILLIN 500 MG" placeholder="Type letters, numbers, or clinical terms..." autocomplete="off" spellcheck="false">
 
         <!-- Quick Presets -->
@@ -1060,7 +1060,7 @@
         <!-- OWASP Anti-Automation Honeypot (Invisible to human users) -->
         <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
           <label for="formHpWebsite">Leave this field blank</label>
-          <input type="text" name="hp_website" id="formHpWebsite" tabindex="-1" autocomplete="off">
+          <input type="text" name="hp_website" id="formHpWebsite" maxlength="100" tabindex="-1" autocomplete="off">
         </div>
 
         <div class="form-group">
