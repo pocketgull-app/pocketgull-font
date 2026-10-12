@@ -204,6 +204,41 @@ test('Classic Systems Canon & CRT Phosphor Terminal Invariant', () => {
   assert.ok(html.includes('define (filter-signal'), 'must include Lisp expression in CRT console');
 });
 
+test('Full 118-Element Periodic Table Invariant (Card 5.2)', () => {
+  const htmlPath = path.join(ROOT_DIR, 'index.html');
+  const html = fs.readFileSync(htmlPath, 'utf8');
+
+  // Verify dedicated Card 5.2 section
+  assert.ok(html.includes('id="periodic-table"'), 'index.html must include dedicated periodic-table card');
+  assert.ok(html.includes('The Standard 118-Element Periodic Table of Elements'), 'must declare 118-element title');
+  assert.ok(html.includes('id="fullPeriodicTableGrid"'), 'must include 18-column table grid');
+  assert.ok(html.includes('id="fullPtableHeroTile"'), 'must include active element hero inspector tile');
+  assert.ok(html.includes('initFullPeriodicTableGrid'), 'must declare initFullPeriodicTableGrid controller');
+  assert.ok(html.includes('inspectFullPtableElement'), 'must declare inspectFullPtableElement inspector');
+  assert.ok(html.includes('sym: "Ts"'), 'must include element 117 Tennessine');
+  assert.ok(html.includes('sym: "U"'), 'must include element 92 Uranium');
+});
+
+test('Musicology 10-Hole Diatonic Harmonica Invariant (Key of C Richter Tuning)', () => {
+  const htmlPath = path.join(ROOT_DIR, 'index.html');
+  const html = fs.readFileSync(htmlPath, 'utf8');
+
+  // Verify Harmonica DOM elements and controllers
+  assert.ok(html.includes('id="btnViewHarmonica"'), 'index.html must include Harmonica instrument view button');
+  assert.ok(html.includes('id="harmonicaKeyOfCView"'), 'index.html must include harmonicaKeyOfCView container');
+  assert.ok(html.includes('id="harmonicaHolesGrid"'), 'must include 10-hole chamber grid');
+  assert.ok(html.includes('switchInstrumentView(\'harmonica\')'), 'must support switching to harmonica view');
+  assert.ok(html.includes('playHarmonicaReed'), 'must declare playHarmonicaReed audio handler');
+  assert.ok(html.includes('playHarmonicaRiff'), 'must declare playHarmonicaRiff scale chip');
+
+  // Verify Richter tuning notes (Blow: C4, E4, G4, C5, E5, G5, C6, E6, G6, C7; Draw: D4, G4, B4, D5, F5, A5, B5, D6, F6, A6)
+  assert.ok(html.includes('playHarmonicaReed(1, \'blow\', \'C4\', 261.63, \'Red\', \'Do\')'), 'Hole 1 Blow must be C4');
+  assert.ok(html.includes('playHarmonicaReed(1, \'draw\', \'D4\', 293.66, \'Orange\', \'Re\')'), 'Hole 1 Draw must be D4');
+  assert.ok(html.includes('playHarmonicaReed(4, \'blow\', \'C5\', 523.25, \'Red\', \'Do\')'), 'Hole 4 Blow must be C5 (Middle Octave)');
+  assert.ok(html.includes('playHarmonicaReed(10, \'blow\', \'C7\', 2093.00, \'Red\', \'Do\')'), 'Hole 10 Blow must be C7');
+  assert.ok(html.includes('playHarmonicaReed(10, \'draw\', \'A6\', 1760.00, \'Indigo\', \'La\')'), 'Hole 10 Draw must be A6');
+});
+
 
 
 

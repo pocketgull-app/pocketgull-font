@@ -2530,6 +2530,90 @@
       text-align: center;
     }
 
+    /* 10-Hole Diatonic Harmonica (Key of C Richter Tuning) */
+    .harmonica-chassis-frame {
+      background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+      border: 2px solid #475569;
+      border-radius: 12px;
+      padding: 16px;
+      margin: 12px 0;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.8), 0 4px 16px rgba(0,0,0,0.5);
+    }
+    .harmonica-holes-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 6px;
+    }
+    .harmonica-hole-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 8px 4px;
+      transition: border-color 0.2s ease, transform 0.15s ease;
+    }
+    .harmonica-hole-column:hover {
+      border-color: #38bdf8;
+      transform: translateY(-2px);
+    }
+    .harmonica-hole-number {
+      font-family: 'PocketGull Bold', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: #94a3b8;
+      margin: 6px 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #1e293b;
+      border: 1px solid #475569;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .harmonica-reed-btn {
+      width: 100%;
+      min-height: 52px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 4px 2px;
+      transition: all 0.12s ease;
+    }
+    .harmonica-reed-btn:hover {
+      filter: brightness(1.25);
+      border-color: #38bdf8;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+    }
+    .harmonica-reed-btn.active {
+      transform: scale(0.96);
+      filter: brightness(1.4);
+      box-shadow: 0 0 14px currentColor;
+    }
+    .harmonica-reed-note {
+      font-family: 'PocketGull Bold', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .harmonica-reed-hz {
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 9.5px;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+    .harmonica-reed-sol {
+      font-family: 'PocketGull', sans-serif;
+      font-size: 9px;
+      color: #cbd5e1;
+    }
+
     /* Clinical Direct Glare, Veiling Reflection & Sunlight washout filters */
     .lab-glare-active {
       position: relative;
@@ -2653,6 +2737,85 @@
       border-color: #075985;
       font-weight: 800;
     }
+
+    /* Full 118-Element Periodic Table Standard Grid (18 Columns) */
+    .ptable-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      padding: 16px 0;
+      scrollbar-width: thin;
+    }
+    .ptable-grid {
+      display: grid;
+      grid-template-columns: repeat(18, minmax(46px, 1fr));
+      gap: 4px;
+      min-width: 860px;
+    }
+    .ptable-cell {
+      border: 1px solid var(--card-border);
+      border-radius: 4px;
+      padding: 3px 4px;
+      background: rgba(255, 255, 255, 0.02);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      aspect-ratio: 1 / 1.15;
+      transition: transform 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+      position: relative;
+    }
+    .ptable-cell:hover, .ptable-cell.active {
+      transform: scale(1.12);
+      z-index: 5;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+      border-color: #ffffff !important;
+    }
+    .ptable-cell-z {
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 8px;
+      color: var(--text-muted);
+      line-height: 1;
+    }
+    .ptable-cell-sym {
+      font-family: 'PocketGull Bold', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1;
+      text-align: center;
+      margin: 1px 0;
+    }
+    .ptable-cell-name {
+      font-size: 7px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: center;
+      line-height: 1;
+    }
+    .ptable-legend-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+      font-size: 11px;
+    }
+    .ptable-legend-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+    }
+    .ptable-legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
 
 
     @media (max-width: 900px) {
@@ -3723,7 +3886,7 @@
 │ [ECG-LEAD II]   _/\_   _/\_   _/\_   _/\_   _/\_   _/\_   _/\_   _/\_   _/\_   _/\_           │
 │ [PLETH WAVE]    ▅▇█▇▅  ▅▇█▇▅  ▅▇█▇▅  ▅▇█▇▅  ▅▇█▇▅  ▅▇█▇▅  ▅▇█▇▅  ▅▇█▇▅  ▅▇█▇▅  ▅▇█▇▅          │
 ├───────────────────────────────────────────────────────────────────────────────────────────────┤
-│ ACTIVE RX: R Cefazolin 2 g IV Q8H • ø 18G Cannula Right Antecubital • ALLERGY: PENICILLIN    │
+│ ACTIVE RX: R Cefazolin 2 g IV Q8H • ø 18G Cannula Right Antecubital • ALLERGY: PENICILLIN     │
 │ POWERLINE:  icu-station  main  bed-04  tty1 (PocketGull Mono 600 UPM pitch)               │
 ╰───────────────────────────────────────────────────────────────────────────────────────────────╯
       </div>
@@ -4104,6 +4267,7 @@
               <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-right: 4px;">Instrument View:</span>
               <button type="button" class="sci-tab-btn active" id="btnViewPiano" onclick="switchInstrumentView('piano')">🎹 Full 88-Key Concert Grand (A0–C8)</button>
               <button type="button" class="sci-tab-btn" id="btnViewGuitar" onclick="switchInstrumentView('guitar')">🎸 6-String Guitar (EADGBE)</button>
+              <button type="button" class="sci-tab-btn" id="btnViewHarmonica" onclick="switchInstrumentView('harmonica')">💨 10-Hole Diatonic Harmonica (Key of C)</button>
             </div>
             <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
               <button type="button" class="hero-btn-secondary" id="btnConnectMidi" onclick="connectWebMidi()" style="font-size: 11px; padding: 6px 12px; border-color: var(--cyan); color: var(--cyan);">
@@ -4276,6 +4440,172 @@
             </div>
           </div>
 
+          <!-- View 3: Interactive 10-Hole Diatonic Harmonica (Key of C Richter Tuning) -->
+          <div class="harmonica-chassis-frame" id="harmonicaKeyOfCView" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+              <div>
+                <span class="badge" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.4);">Richter Diatonic Tuning</span>
+                <span style="font-family: 'PocketGull Bold'; font-size: 14px; margin-left: 8px; color: var(--sample-text);">💨 Marine Band Key of C (10-Hole Chamber)</span>
+              </div>
+              <div style="font-size: 11px; font-family: 'PocketGull Mono'; color: var(--text-muted);">
+                <span style="color: #38bdf8;">▲ Blow (Exhale)</span> &bull; <span style="color: #f59e0b;">▼ Draw (Inhale)</span> &bull; ROYGBIV Optotypes
+              </div>
+            </div>
+
+            <!-- Harmonica Holes Grid: Blow Row, Hole Numbers, Draw Row -->
+            <div class="harmonica-holes-grid" id="harmonicaHolesGrid">
+              <!-- Hole 1: Blow C4 (Red), Draw D4 (Orange) -->
+              <div class="harmonica-hole-column">
+                <button type="button" class="harmonica-reed-btn" onclick="playHarmonicaReed(1, 'blow', 'C4', 261.63, 'Red', 'Do')" aria-label="Hole 1 Blow C4">
+                  <span class="harmonica-reed-note" style="color: #ef4444;">C₄</span>
+                  <span class="harmonica-reed-hz">261.6</span>
+                  <span class="harmonica-reed-sol">Do</span>
+                </button>
+                <div class="harmonica-hole-number">1</div>
+                <button type="button" class="harmonica-reed-btn" onclick="playHarmonicaReed(1, 'draw', 'D4', 293.66, 'Orange', 'Re')" aria-label="Hole 1 Draw D4">
+                  <span class="harmonica-reed-note" style="color: #f97316;">D₄</span>
+                  <span class="harmonica-reed-hz">293.7</span>
+                  <span class="harmonica-reed-sol">Re</span>
+                </button>
+              </div>
+
+              <!-- Hole 2: Blow E4 (Yellow), Draw G4 (Blue) -->
+              <div class="harmonica-hole-column">
+                <button type="button" class="harmonica-reed-btn" onclick="playHarmonicaReed(2, 'blow', 'E4', 329.63, 'Yellow', 'Mi')" aria-label="Hole 2 Blow E4">
+                  <span class="harmonica-reed-note" style="color: #eab308;">E₄</span>
+                  <span class="harmonica-reed-hz">329.6</span>
+                  <span class="harmonica-reed-sol">Mi</span>
+                </button>
+                <div class="harmonica-hole-number">2</div>
+                <button type="button" class="harmonica-reed-btn" onclick="playHarmonicaReed(2, 'draw', 'G4', 392.00, 'Blue', 'Sol')" aria-label="Hole 2 Draw G4">
+                  <span class="harmonica-reed-note" style="color: #3b82f6;">G₄</span>
+                  <span class="harmonica-reed-hz">392.0</span>
+                  <span class="harmonica-reed-sol">Sol</span>
+                </button>
+              </div>
+
+              <!-- Hole 3: Blow G4 (Blue), Draw B4 (Violet) -->
+              <div class="harmonica-hole-column">
+                <button type="button" class="harmonica-reed-btn" onclick="playHarmonicaReed(3, 'blow', 'G4', 392.00, 'Blue', 'Sol')" aria-label="Hole 3 Blow G4">
+                  <span class="harmonica-reed-note" style="color: #3b82f6;">G₄</span>
+                  <span class="harmonica-reed-hz">392.0</span>
+                  <span class="harmonica-reed-sol">Sol</span>
+                </button>
+                <div class="harmonica-hole-number">3</div>
+                <button type="button" class="harmonica-reed-btn" onclick="playHarmonicaReed(3, 'draw', 'B4', 493.88, 'Violet', 'Ti')" aria-label="Hole 3 Draw B4">
+                  <span class="harmonica-reed-note" style="color: #a855f7;">B₄</span>
+                  <span class="harmonica-reed-hz">493.9</span>
+                  <span class="harmonica-reed-sol">Ti</span>
+                </button>
+              </div>
+
+              <!-- Hole 4: Blow C5 (Red), Draw D5 (Orange) -->
+              <div class="harmonica-hole-column">
+                <button type="button" class="harmonica-reed-btn" onclick="playHarmonicaReed(4, 'blow', 'C5', 523.25, 'Red', 'Do')" aria-label="Hole 4 Blow C5">
+                  <span class="harmonica-reed-note" style="color: #ef4444;">C₅</span>
+                  <span class="harmonica-reed-hz">523.3</span>
+                  <span class="harmonica-reed-sol">Do</span>
+                </button>
+                <div class="harmonica-hole-number">4</div>
+                <button type="button" class="harmonica-reed-btn" onclick="playHarmonicaReed(4, 'draw', 'D5', 587.33, 'Orange', 'Re')" aria-label="Hole 4 Draw D5">
+                  <span class="harmonica-reed-note" style="color: #f97316;">D₅</span>
+                  <span class="harmonica-reed-hz">587.3</span>
+                  <span class="harmonica-reed-sol">Re</span>
+                </button>
+              </div>
+
+              <!-- Hole 5: Blow E5 (Yellow), Draw F5 (Green) -->
+              <div class="harmonica-hole-column">
+                <button type="button" class="harmonica-reed-btn" onclick="playHarmonicaReed(5, 'blow', 'E5', 659.25, 'Yellow', 'Mi')" aria-label="Hole 5 Blow E5">
+                  <span class="harmonica-reed-note" style="color: #eab308;">E₅</span>
+                  <span class="harmonica-reed-hz">659.3</span>
+                  <span class="harmonica-reed-sol">Mi</span>
+                </button>
+                <div class="harmonica-hole-number">5</div>
+                <button type="button" class="harmonica-reed-btn" onclick="playHarmonicaReed(5, 'draw', 'F5', 698.46, 'Green', 'Fa')" aria-label="Hole 5 Draw F5">
+                  <span class="harmonica-reed-note" style="color: #10b981;">F₅</span>
+                  <span class="harmonica-reed-hz">698.5</span>
+                  <span class="harmonica-reed-sol">Fa</span>
+                </button>
+              </div>
+
+              <!-- Hole 6: Blow G5 (Blue), Draw A5 (Indigo) -->
+              <div class="harmonica-hole-column">
+                <button type="button" class="harmonica-reed-btn" onclick="playHarmonicaReed(6, 'blow', 'G5', 783.99, 'Blue', 'Sol')" aria-label="Hole 6 Blow G5">
+                  <span class="harmonica-reed-note" style="color: #3b82f6;">G₅</span>
+                  <span class="harmonica-reed-hz">784.0</span>
+                  <span class="harmonica-reed-sol">Sol</span>
+                </button>
+                <div class="harmonica-hole-number">6</div>
+                <button type="button" class="harmonica-reed-btn" onclick="playHarmonicaReed(6, 'draw', 'A5', 880.00, 'Indigo', 'La')" aria-label="Hole 6 Draw A5">
+                  <span class="harmonica-reed-note" style="color: #6366f1;">A₅</span>
+                  <span class="harmonica-reed-hz">880.0</span>
+                  <span class="harmonica-reed-sol">La</span>
+                </button>
+              </div>
+
+              <!-- Hole 7: Blow C6 (Red), Draw B5 (Violet) -->
+              <div class="harmonica-hole-column">
+                <button type="button" class="harmonica-reed-btn" onclick="playHarmonicaReed(7, 'blow', 'C6', 1046.50, 'Red', 'Do')" aria-label="Hole 7 Blow C6">
+                  <span class="harmonica-reed-note" style="color: #ef4444;">C₆</span>
+                  <span class="harmonica-reed-hz">1046.5</span>
+                  <span class="harmonica-reed-sol">Do</span>
+                </button>
+                <div class="harmonica-hole-number">7</div>
+                <button type="button" class="harmonica-reed-btn" onclick="playHarmonicaReed(7, 'draw', 'B5', 987.77, 'Violet', 'Ti')" aria-label="Hole 7 Draw B5">
+                  <span class="harmonica-reed-note" style="color: #a855f7;">B₅</span>
+                  <span class="harmonica-reed-hz">987.8</span>
+                  <span class="harmonica-reed-sol">Ti</span>
+                </button>
+              </div>
+
+              <!-- Hole 8: Blow E6 (Yellow), Draw D6 (Orange) -->
+              <div class="harmonica-hole-column">
+                <button type="button" class="harmonica-reed-btn" onclick="playHarmonicaReed(8, 'blow', 'E6', 1318.51, 'Yellow', 'Mi')" aria-label="Hole 8 Blow E6">
+                  <span class="harmonica-reed-note" style="color: #eab308;">E₆</span>
+                  <span class="harmonica-reed-hz">1318.5</span>
+                  <span class="harmonica-reed-sol">Mi</span>
+                </button>
+                <div class="harmonica-hole-number">8</div>
+                <button type="button" class="harmonica-reed-btn" onclick="playHarmonicaReed(8, 'draw', 'D6', 1174.66, 'Orange', 'Re')" aria-label="Hole 8 Draw D6">
+                  <span class="harmonica-reed-note" style="color: #f97316;">D₆</span>
+                  <span class="harmonica-reed-hz">1174.7</span>
+                  <span class="harmonica-reed-sol">Re</span>
+                </button>
+              </div>
+
+              <!-- Hole 9: Blow G6 (Blue), Draw F6 (Green) -->
+              <div class="harmonica-hole-column">
+                <button type="button" class="harmonica-reed-btn" onclick="playHarmonicaReed(9, 'blow', 'G6', 1567.98, 'Blue', 'Sol')" aria-label="Hole 9 Blow G6">
+                  <span class="harmonica-reed-note" style="color: #3b82f6;">G₆</span>
+                  <span class="harmonica-reed-hz">1568.0</span>
+                  <span class="harmonica-reed-sol">Sol</span>
+                </button>
+                <div class="harmonica-hole-number">9</div>
+                <button type="button" class="harmonica-reed-btn" onclick="playHarmonicaReed(9, 'draw', 'F6', 1396.91, 'Green', 'Fa')" aria-label="Hole 9 Draw F6">
+                  <span class="harmonica-reed-note" style="color: #10b981;">F₆</span>
+                  <span class="harmonica-reed-hz">1396.9</span>
+                  <span class="harmonica-reed-sol">Fa</span>
+                </button>
+              </div>
+
+              <!-- Hole 10: Blow C7 (Red), Draw A6 (Indigo) -->
+              <div class="harmonica-hole-column">
+                <button type="button" class="harmonica-reed-btn" onclick="playHarmonicaReed(10, 'blow', 'C7', 2093.00, 'Red', 'Do')" aria-label="Hole 10 Blow C7">
+                  <span class="harmonica-reed-note" style="color: #ef4444;">C₇</span>
+                  <span class="harmonica-reed-hz">2093.0</span>
+                  <span class="harmonica-reed-sol">Do</span>
+                </button>
+                <div class="harmonica-hole-number">10</div>
+                <button type="button" class="harmonica-reed-btn" onclick="playHarmonicaReed(10, 'draw', 'A6', 1760.00, 'Indigo', 'La')" aria-label="Hole 10 Draw A6">
+                  <span class="harmonica-reed-note" style="color: #6366f1;">A₆</span>
+                  <span class="harmonica-reed-hz">1760.0</span>
+                  <span class="harmonica-reed-sol">La</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
           <!-- Quick Scale Player Chips -->
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 16px;">
             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
@@ -4283,6 +4613,7 @@
               <button type="button" class="eco-scale-btn" onclick="playPianoArpeggio()">🌈 Play C4–B4 Octave</button>
               <button type="button" class="eco-scale-btn" onclick="playFullRainbowGlissando()" style="border-color: #ec4899; color: #ec4899; font-weight: 700;">✨ 88-Key Stretched Rainbow Glissando (A0–C8)</button>
               <button type="button" class="eco-scale-btn" onclick="playGuitarChord('open_c')" style="border-color: #f97316; color: #f97316;">🎸 Strum Open C Guitar Chord</button>
+              <button type="button" class="eco-scale-btn" onclick="playHarmonicaRiff()" style="border-color: #38bdf8; color: #38bdf8; font-weight: 700;">💨 Blow Harmonica Riff (C4-E4-G4-C5)</button>
             </div>
             <div style="font-size: 11px; font-family: 'PocketGull Mono'; color: var(--emerald);">
               Audio Engine: Pure WebAudio Synthesizer &bull; Zero External Plugins
@@ -4345,6 +4676,71 @@
             <!-- Populated dynamically via JS -->
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- 5.2 Dedicated Card: The Complete 118-Element IUPAC Periodic Table -->
+    <section class="specimen-card" id="periodic-table" style="border-color: rgba(16, 185, 129, 0.4); background: radial-gradient(circle at top left, rgba(16, 185, 129, 0.05) 0%, var(--card-bg) 100%);">
+      <div class="section-label" style="color: var(--emerald);">Stoichiometry • Crystallography • OpenType CPAL / COLR</div>
+      <h2 class="section-title">
+        <span>The Standard 118-Element Periodic Table of Elements</span>
+        <small>Full Standard 18-Column Grid • Lanthanide &amp; Actinide Series • IUPAC / CPK Molecular Color Calibration</small>
+      </h2>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; max-width: 960px;">
+        Every chemical element rendered with PocketGull’s Louise Sloan 5:1 optotypes and ISMP character disambiguation. 
+        Each tile features atomic number $Z$, chemical symbol, atomic weight, and IUPAC/CPK chromatic classification. 
+        Click any of the 118 elements to inspect its crystallographic role, electron shell configuration, and stoichiometry in the real-time laboratory stage.
+      </p>
+
+      <!-- Active Element Inspector HUD for Card 5.2 -->
+      <div style="background: var(--surface-inner); border: 1.5px solid var(--card-border); border-radius: 12px; padding: 18px 24px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);" id="fullPtableInspectorBox">
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div id="fullPtableHeroTile" style="width: 80px; height: 90px; border-radius: 8px; border: 2px solid #ef4444; background: rgba(239, 68, 68, 0.12); display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 16px rgba(0,0,0,0.5);">
+            <span id="fullPtableHeroZ" style="font-family: 'PocketGull Mono'; font-size: 11px; color: var(--text-muted); align-self: flex-start; padding-left: 8px;">8</span>
+            <span id="fullPtableHeroSym" style="font-family: 'PocketGull Bold'; font-size: 36px; color: #ef4444; line-height: 1;">O</span>
+            <span id="fullPtableHeroMass" style="font-family: 'PocketGull Mono'; font-size: 10px; color: var(--text-muted);">15.999</span>
+          </div>
+          <div>
+            <div style="display: flex; align-items: baseline; gap: 10px;">
+              <span id="fullPtableHeroName" style="font-family: 'PocketGull Bold'; font-size: 24px; color: var(--text-main);">Oxygen (O)</span>
+              <span id="fullPtableHeroZBadge" style="font-family: 'PocketGull Mono'; font-size: 12px; color: var(--emerald); font-weight: 700;">Atomic Number: 8</span>
+            </div>
+            <div id="fullPtableHeroCategory" style="font-size: 12px; font-weight: 700; color: #ef4444; text-transform: uppercase; margin-top: 4px;">
+              Reactive Nonmetal • Group 16 • Period 2
+            </div>
+            <div id="fullPtableHeroRole" style="font-size: 13px; color: var(--text-muted); margin-top: 6px; line-height: 1.4; max-width: 650px;">
+              Electronegative carbonyl/hydroxyl red in molecular modeling and respiratory cellular metabolism.
+            </div>
+          </div>
+        </div>
+
+        <div style="font-family: 'PocketGull Mono'; font-size: 12px; color: var(--text-muted); text-align: right;">
+          <div>Standard State: <strong id="fullPtableHeroState" style="color: #fff;">Gas</strong></div>
+          <div style="margin-top: 4px;">Electronegativity: <strong id="fullPtableHeroEN" style="color: var(--cyan);">3.44 (Pauling)</strong></div>
+          <div style="margin-top: 4px;">CPK Palette Token: <strong id="fullPtableHeroHex" style="color: #ef4444;">#ef4444</strong></div>
+        </div>
+      </div>
+
+      <!-- The 18-Column Interactive Periodic Table Grid -->
+      <div class="ptable-wrapper">
+        <div class="ptable-grid" id="fullPeriodicTableGrid">
+          <!-- Populated dynamically via JS across all 118 elements -->
+        </div>
+      </div>
+
+      <!-- Color Category Legend Bar -->
+      <div class="ptable-legend-bar">
+        <div class="ptable-legend-pill"><span class="ptable-legend-dot" style="background: #a855f7;"></span>Alkali Metals</div>
+        <div class="ptable-legend-pill"><span class="ptable-legend-dot" style="background: #14b8a6;"></span>Alkaline Earth</div>
+        <div class="ptable-legend-pill"><span class="ptable-legend-dot" style="background: #f43f5e;"></span>Transition Metals</div>
+        <div class="ptable-legend-pill"><span class="ptable-legend-dot" style="background: #ec4899;"></span>Lanthanides</div>
+        <div class="ptable-legend-pill"><span class="ptable-legend-dot" style="background: #e11d48;"></span>Actinides</div>
+        <div class="ptable-legend-pill"><span class="ptable-legend-dot" style="background: #38bdf8;"></span>Post-Transition</div>
+        <div class="ptable-legend-pill"><span class="ptable-legend-dot" style="background: #eab308;"></span>Metalloids</div>
+        <div class="ptable-legend-pill"><span class="ptable-legend-dot" style="background: #f59e0b;"></span>Reactive Nonmetals</div>
+        <div class="ptable-legend-pill"><span class="ptable-legend-dot" style="background: #22c55e;"></span>Halogens</div>
+        <div class="ptable-legend-pill"><span class="ptable-legend-dot" style="background: #c084fc;"></span>Noble Gases</div>
       </div>
     </section>
 
@@ -4760,9 +5156,9 @@
 
         <!-- Terminal Body -->
         <pre id="crtTerminalScreen" style="margin: 0; padding: 20px; font-family: 'PocketGull Mono', monospace; font-size: 14px; line-height: 1.45; color: #fbbf24; background: #05080c; overflow-x: auto; text-shadow: 0 0 4px rgba(251, 191, 36, 0.4); transition: color 0.2s ease, text-shadow 0.2s ease;"><code>┌──────────────────────────────────────────────────────────────────────────────┐
-│ AT&amp;T BELL LABS &amp; MS-DOS HERITAGE WORKSTATION [PocketGull Mono 600 UPM Pitch]  │
+│ AT&amp;T BELL LABS &amp; MS-DOS HERITAGE WORKSTATION [PocketGull Mono 600 UPM Pitch] │
 ├──────────────────────────────────────────────────────────────────────────────┤
-│ /* 1. C/C++ Pointer Dereferencing &amp; Disambiguation Invariant */             │
+│ /* 1. C/C++ Pointer Dereferencing &amp; Disambiguation Invariant */              │
 │ static inline void* telemetry_alloc(size_t sz, const char *device_id) {      │
 │     struct node_t *n = (struct node_t*)calloc(1, sizeof(*n));                │
 │     if (!n || sz == 0) return NULL;  /* Slashed zero '0' vs capital 'O' */   │
@@ -4776,9 +5172,9 @@
 │ $ curl -sSL -O "https://font.pocketgull.app/PocketGullMono-Regular.ttf"      │
 ├──────────────────────────────────────────────────────────────────────────────┤
 │ ; 3. Lisp / Scheme Symbolic Expression Balance &amp; Symmetrical Closure         │
-│ (define (filter-signal pred stream)                                          │
-│   (cond ((null? stream) '())                                                 │
-│         ((pred (car stream)) (cons (car stream) (filter-signal pred (cdr stream))))))
+│ (define (filter-signal p s)                                                  │
+│   (cond ((null? s) '())                                                      │
+│         ((p (car s)) (cons (car s) (filter-signal p (cdr s))))))             │
 └──────────────────────────────────────────────────────────────────────────────┘</code></pre>
       </div>
 
@@ -7684,20 +8080,50 @@
       window.switchInstrumentView = function(viewType) {
         const pianoView = document.getElementById('pianoKeyboardView');
         const guitarView = document.getElementById('guitarFretboardView');
+        const harmonicaView = document.getElementById('harmonicaKeyOfCView');
         const btnPiano = document.getElementById('btnViewPiano');
         const btnGuitar = document.getElementById('btnViewGuitar');
+        const btnHarmonica = document.getElementById('btnViewHarmonica');
+
+        [btnPiano, btnGuitar, btnHarmonica].forEach(b => b?.classList.remove('active'));
+        if (pianoView) pianoView.style.display = 'none';
+        if (guitarView) guitarView.style.display = 'none';
+        if (harmonicaView) harmonicaView.style.display = 'none';
 
         if (viewType === 'piano') {
           if (pianoView) pianoView.style.display = 'block';
-          if (guitarView) guitarView.style.display = 'none';
           btnPiano?.classList.add('active');
-          btnGuitar?.classList.remove('active');
         } else if (viewType === 'guitar') {
-          if (pianoView) pianoView.style.display = 'none';
           if (guitarView) guitarView.style.display = 'block';
           btnGuitar?.classList.add('active');
-          btnPiano?.classList.remove('active');
+        } else if (viewType === 'harmonica') {
+          if (harmonicaView) harmonicaView.style.display = 'block';
+          btnHarmonica?.classList.add('active');
         }
+      };
+
+      window.playHarmonicaReed = function(holeNum, type, noteName, freq, colorName, solfege) {
+        const role = `Hole ${holeNum} ${type.toUpperCase()} (${type === 'blow' ? 'Exhale' : 'Inhale'}) • Richter Key of C`;
+        playPianoKey(noteName, freq, colorName, solfege, role);
+      };
+
+      window.playHarmonicaRiff = function() {
+        switchInstrumentView('harmonica');
+        const riffNotes = [
+          { hole: 4, type: 'blow', note: 'C5', freq: 523.25, color: 'Red',    sol: 'Do' },
+          { hole: 5, type: 'blow', note: 'E5', freq: 659.25, color: 'Yellow', sol: 'Mi' },
+          { hole: 6, type: 'blow', note: 'G5', freq: 783.99, color: 'Blue',   sol: 'Sol' },
+          { hole: 7, type: 'blow', note: 'C6', freq: 1046.50, color: 'Red',   sol: 'Do' },
+          { hole: 6, type: 'draw', note: 'A5', freq: 880.00, color: 'Indigo', sol: 'La' },
+          { hole: 6, type: 'blow', note: 'G5', freq: 783.99, color: 'Blue',   sol: 'Sol' },
+          { hole: 5, type: 'blow', note: 'E5', freq: 659.25, color: 'Yellow', sol: 'Mi' },
+          { hole: 4, type: 'blow', note: 'C5', freq: 523.25, color: 'Red',    sol: 'Do' }
+        ];
+        riffNotes.forEach((r, idx) => {
+          setTimeout(() => {
+            playHarmonicaReed(r.hole, r.type, r.note, r.freq, r.color, r.sol);
+          }, idx * 180);
+        });
       };
 
       window.playGuitarFret = function(stringNum, fretNum, noteName, freq, colorName, solfege) {
@@ -8077,6 +8503,201 @@
         if (roleEl) roleEl.textContent = elem.role;
       };
 
+      const full118Elements = [
+  { z: 1, sym: "H", name: "Hydrogen", mass: "1.008", cat: "reactive-nonmetal", hex: "#f4f4f5", p: 1, g: 1 },
+  { z: 2, sym: "He", name: "Helium", mass: "4.0026", cat: "noble-gas", hex: "#c084fc", p: 1, g: 18 },
+  { z: 3, sym: "Li", name: "Lithium", mass: "6.94", cat: "alkali-metal", hex: "#a855f7", p: 2, g: 1 },
+  { z: 4, sym: "Be", name: "Beryllium", mass: "9.0122", cat: "alkaline-earth", hex: "#14b8a6", p: 2, g: 2 },
+  { z: 5, sym: "B", name: "Boron", mass: "10.81", cat: "metalloid", hex: "#eab308", p: 2, g: 13 },
+  { z: 6, sym: "C", name: "Carbon", mass: "12.011", cat: "reactive-nonmetal", hex: "#71717a", p: 2, g: 14 },
+  { z: 7, sym: "N", name: "Nitrogen", mass: "14.007", cat: "reactive-nonmetal", hex: "#3b82f6", p: 2, g: 15 },
+  { z: 8, sym: "O", name: "Oxygen", mass: "15.999", cat: "reactive-nonmetal", hex: "#ef4444", p: 2, g: 16 },
+  { z: 9, sym: "F", name: "Fluorine", mass: "18.998", cat: "halogen", hex: "#22c55e", p: 2, g: 17 },
+  { z: 10, sym: "Ne", name: "Neon", mass: "20.180", cat: "noble-gas", hex: "#c084fc", p: 2, g: 18 },
+  { z: 11, sym: "Na", name: "Sodium", mass: "22.990", cat: "alkali-metal", hex: "#a855f7", p: 3, g: 1 },
+  { z: 12, sym: "Mg", name: "Magnesium", mass: "24.305", cat: "alkaline-earth", hex: "#14b8a6", p: 3, g: 2 },
+  { z: 13, sym: "Al", name: "Aluminium", mass: "26.982", cat: "post-transition", hex: "#38bdf8", p: 3, g: 13 },
+  { z: 14, sym: "Si", name: "Silicon", mass: "28.085", cat: "metalloid", hex: "#eab308", p: 3, g: 14 },
+  { z: 15, sym: "P", name: "Phosphorus", mass: "30.974", cat: "reactive-nonmetal", hex: "#f97316", p: 3, g: 15 },
+  { z: 16, sym: "S", name: "Sulfur", mass: "32.06", cat: "reactive-nonmetal", hex: "#f59e0b", p: 3, g: 16 },
+  { z: 17, sym: "Cl", name: "Chlorine", mass: "35.45", cat: "halogen", hex: "#10b981", p: 3, g: 17 },
+  { z: 18, sym: "Ar", name: "Argon", mass: "39.95", cat: "noble-gas", hex: "#c084fc", p: 3, g: 18 },
+  { z: 19, sym: "K", name: "Potassium", mass: "39.098", cat: "alkali-metal", hex: "#a855f7", p: 4, g: 1 },
+  { z: 20, sym: "Ca", name: "Calcium", mass: "40.078", cat: "alkaline-earth", hex: "#14b8a6", p: 4, g: 2 },
+  { z: 21, sym: "Sc", name: "Scandium", mass: "44.956", cat: "transition-metal", hex: "#f43f5e", p: 4, g: 3 },
+  { z: 22, sym: "Ti", name: "Titanium", mass: "47.867", cat: "transition-metal", hex: "#f43f5e", p: 4, g: 4 },
+  { z: 23, sym: "V", name: "Vanadium", mass: "50.942", cat: "transition-metal", hex: "#f43f5e", p: 4, g: 5 },
+  { z: 24, sym: "Cr", name: "Chromium", mass: "51.996", cat: "transition-metal", hex: "#f43f5e", p: 4, g: 6 },
+  { z: 25, sym: "Mn", name: "Manganese", mass: "54.938", cat: "transition-metal", hex: "#f43f5e", p: 4, g: 7 },
+  { z: 26, sym: "Fe", name: "Iron", mass: "55.845", cat: "transition-metal", hex: "#ea580c", p: 4, g: 8 },
+  { z: 27, sym: "Co", name: "Cobalt", mass: "58.933", cat: "transition-metal", hex: "#f43f5e", p: 4, g: 9 },
+  { z: 28, sym: "Ni", name: "Nickel", mass: "58.693", cat: "transition-metal", hex: "#f43f5e", p: 4, g: 10 },
+  { z: 29, sym: "Cu", name: "Copper", mass: "63.546", cat: "transition-metal", hex: "#d97706", p: 4, g: 11 },
+  { z: 30, sym: "Zn", name: "Zinc", mass: "65.38", cat: "transition-metal", hex: "#7dd3fc", p: 4, g: 12 },
+  { z: 31, sym: "Ga", name: "Gallium", mass: "69.723", cat: "post-transition", hex: "#38bdf8", p: 4, g: 13 },
+  { z: 32, sym: "Ge", name: "Germanium", mass: "72.630", cat: "metalloid", hex: "#eab308", p: 4, g: 14 },
+  { z: 33, sym: "As", name: "Arsenic", mass: "74.922", cat: "metalloid", hex: "#eab308", p: 4, g: 15 },
+  { z: 34, sym: "Se", name: "Selenium", mass: "78.971", cat: "reactive-nonmetal", hex: "#f59e0b", p: 4, g: 16 },
+  { z: 35, sym: "Br", name: "Bromine", mass: "79.904", cat: "halogen", hex: "#f87171", p: 4, g: 17 },
+  { z: 36, sym: "Kr", name: "Krypton", mass: "83.798", cat: "noble-gas", hex: "#c084fc", p: 4, g: 18 },
+  { z: 37, sym: "Rb", name: "Rubidium", mass: "85.468", cat: "alkali-metal", hex: "#a855f7", p: 5, g: 1 },
+  { z: 38, sym: "Sr", name: "Strontium", mass: "87.62", cat: "alkaline-earth", hex: "#14b8a6", p: 5, g: 2 },
+  { z: 39, sym: "Y", name: "Yttrium", mass: "88.906", cat: "transition-metal", hex: "#f43f5e", p: 5, g: 3 },
+  { z: 40, sym: "Zr", name: "Zirconium", mass: "91.224", cat: "transition-metal", hex: "#f43f5e", p: 5, g: 4 },
+  { z: 41, sym: "Nb", name: "Niobium", mass: "92.906", cat: "transition-metal", hex: "#f43f5e", p: 5, g: 5 },
+  { z: 42, sym: "Mo", name: "Molybdenum", mass: "95.95", cat: "transition-metal", hex: "#f43f5e", p: 5, g: 6 },
+  { z: 43, sym: "Tc", name: "Technetium", mass: "97", cat: "transition-metal", hex: "#f43f5e", p: 5, g: 7 },
+  { z: 44, sym: "Ru", name: "Ruthenium", mass: "101.07", cat: "transition-metal", hex: "#f43f5e", p: 5, g: 8 },
+  { z: 45, sym: "Rh", name: "Rhodium", mass: "102.91", cat: "transition-metal", hex: "#f43f5e", p: 5, g: 9 },
+  { z: 46, sym: "Pd", name: "Palladium", mass: "106.42", cat: "transition-metal", hex: "#f43f5e", p: 5, g: 10 },
+  { z: 47, sym: "Ag", name: "Silver", mass: "107.87", cat: "transition-metal", hex: "#e2e8f0", p: 5, g: 11 },
+  { z: 48, sym: "Cd", name: "Cadmium", mass: "112.41", cat: "transition-metal", hex: "#f43f5e", p: 5, g: 12 },
+  { z: 49, sym: "In", name: "Indium", mass: "114.82", cat: "post-transition", hex: "#38bdf8", p: 5, g: 13 },
+  { z: 50, sym: "Sn", name: "Tin", mass: "118.71", cat: "post-transition", hex: "#38bdf8", p: 5, g: 14 },
+  { z: 51, sym: "Sb", name: "Antimony", mass: "121.76", cat: "metalloid", hex: "#eab308", p: 5, g: 15 },
+  { z: 52, sym: "Te", name: "Tellurium", mass: "127.60", cat: "metalloid", hex: "#eab308", p: 5, g: 16 },
+  { z: 53, sym: "I", name: "Iodine", mass: "126.90", cat: "halogen", hex: "#8b5cf6", p: 5, g: 17 },
+  { z: 54, sym: "Xe", name: "Xenon", mass: "131.29", cat: "noble-gas", hex: "#c084fc", p: 5, g: 18 },
+  { z: 55, sym: "Cs", name: "Caesium", mass: "132.91", cat: "alkali-metal", hex: "#a855f7", p: 6, g: 1 },
+  { z: 56, sym: "Ba", name: "Barium", mass: "137.33", cat: "alkaline-earth", hex: "#14b8a6", p: 6, g: 2 },
+  { z: 57, sym: "La", name: "Lanthanum", mass: "138.91", cat: "lanthanide", hex: "#ec4899", p: 8, g: 3 },
+  { z: 58, sym: "Ce", name: "Cerium", mass: "140.12", cat: "lanthanide", hex: "#ec4899", p: 8, g: 4 },
+  { z: 59, sym: "Pr", name: "Praseodymium", mass: "140.91", cat: "lanthanide", hex: "#ec4899", p: 8, g: 5 },
+  { z: 60, sym: "Nd", name: "Neodymium", mass: "144.24", cat: "lanthanide", hex: "#ec4899", p: 8, g: 6 },
+  { z: 61, sym: "Pm", name: "Promethium", mass: "145", cat: "lanthanide", hex: "#ec4899", p: 8, g: 7 },
+  { z: 62, sym: "Sm", name: "Samarium", mass: "150.36", cat: "lanthanide", hex: "#ec4899", p: 8, g: 8 },
+  { z: 63, sym: "Eu", name: "Europium", mass: "151.96", cat: "lanthanide", hex: "#ec4899", p: 8, g: 9 },
+  { z: 64, sym: "Gd", name: "Gadolinium", mass: "157.25", cat: "lanthanide", hex: "#ec4899", p: 8, g: 10 },
+  { z: 65, sym: "Tb", name: "Terbium", mass: "158.93", cat: "lanthanide", hex: "#ec4899", p: 8, g: 11 },
+  { z: 66, sym: "Dy", name: "Dysprosium", mass: "162.50", cat: "lanthanide", hex: "#ec4899", p: 8, g: 12 },
+  { z: 67, sym: "Ho", name: "Holmium", mass: "164.93", cat: "lanthanide", hex: "#ec4899", p: 8, g: 13 },
+  { z: 68, sym: "Er", name: "Erbium", mass: "167.26", cat: "lanthanide", hex: "#ec4899", p: 8, g: 14 },
+  { z: 69, sym: "Tm", name: "Thulium", mass: "168.93", cat: "lanthanide", hex: "#ec4899", p: 8, g: 15 },
+  { z: 70, sym: "Yb", name: "Ytterbium", mass: "173.05", cat: "lanthanide", hex: "#ec4899", p: 8, g: 16 },
+  { z: 71, sym: "Lu", name: "Lutetium", mass: "174.97", cat: "lanthanide", hex: "#ec4899", p: 8, g: 17 },
+  { z: 72, sym: "Hf", name: "Hafnium", mass: "178.49", cat: "transition-metal", hex: "#f43f5e", p: 6, g: 4 },
+  { z: 73, sym: "Ta", name: "Tantalum", mass: "180.95", cat: "transition-metal", hex: "#f43f5e", p: 6, g: 5 },
+  { z: 74, sym: "W", name: "Tungsten", mass: "183.84", cat: "transition-metal", hex: "#f43f5e", p: 6, g: 6 },
+  { z: 75, sym: "Re", name: "Rhenium", mass: "186.21", cat: "transition-metal", hex: "#f43f5e", p: 6, g: 7 },
+  { z: 76, sym: "Os", name: "Osmium", mass: "190.23", cat: "transition-metal", hex: "#f43f5e", p: 6, g: 8 },
+  { z: 77, sym: "Ir", name: "Iridium", mass: "192.22", cat: "transition-metal", hex: "#f43f5e", p: 6, g: 9 },
+  { z: 78, sym: "Pt", name: "Platinum", mass: "195.08", cat: "transition-metal", hex: "#e2e8f0", p: 6, g: 10 },
+  { z: 79, sym: "Au", name: "Gold", mass: "196.97", cat: "transition-metal", hex: "#fbbf24", p: 6, g: 11 },
+  { z: 80, sym: "Hg", name: "Mercury", mass: "200.59", cat: "transition-metal", hex: "#94a3b8", p: 6, g: 12 },
+  { z: 81, sym: "Tl", name: "Thallium", mass: "204.38", cat: "post-transition", hex: "#38bdf8", p: 6, g: 13 },
+  { z: 82, sym: "Pb", name: "Lead", mass: "207.2", cat: "post-transition", hex: "#64748b", p: 6, g: 14 },
+  { z: 83, sym: "Bi", name: "Bismuth", mass: "208.98", cat: "post-transition", hex: "#38bdf8", p: 6, g: 15 },
+  { z: 84, sym: "Po", name: "Polonium", mass: "209", cat: "post-transition", hex: "#38bdf8", p: 6, g: 16 },
+  { z: 85, sym: "At", name: "Astatine", mass: "210", cat: "halogen", hex: "#10b981", p: 6, g: 17 },
+  { z: 86, sym: "Rn", name: "Radon", mass: "222", cat: "noble-gas", hex: "#c084fc", p: 6, g: 18 },
+  { z: 87, sym: "Fr", name: "Francium", mass: "223", cat: "alkali-metal", hex: "#a855f7", p: 7, g: 1 },
+  { z: 88, sym: "Ra", name: "Radium", mass: "226", cat: "alkaline-earth", hex: "#14b8a6", p: 7, g: 2 },
+  { z: 89, sym: "Ac", name: "Actinium", mass: "227", cat: "actinide", hex: "#f43f5e", p: 9, g: 3 },
+  { z: 90, sym: "Th", name: "Thorium", mass: "232.04", cat: "actinide", hex: "#f43f5e", p: 9, g: 4 },
+  { z: 91, sym: "Pa", name: "Protactinium", mass: "231.04", cat: "actinide", hex: "#f43f5e", p: 9, g: 5 },
+  { z: 92, sym: "U", name: "Uranium", mass: "238.03", cat: "actinide", hex: "#10b981", p: 9, g: 6 },
+  { z: 93, sym: "Np", name: "Neptunium", mass: "237", cat: "actinide", hex: "#f43f5e", p: 9, g: 7 },
+  { z: 94, sym: "Pu", name: "Plutonium", mass: "244", cat: "actinide", hex: "#f43f5e", p: 9, g: 8 },
+  { z: 95, sym: "Am", name: "Americium", mass: "243", cat: "actinide", hex: "#f43f5e", p: 9, g: 9 },
+  { z: 96, sym: "Cm", name: "Curium", mass: "247", cat: "actinide", hex: "#f43f5e", p: 9, g: 10 },
+  { z: 97, sym: "Bk", name: "Berkelium", mass: "247", cat: "actinide", hex: "#f43f5e", p: 9, g: 11 },
+  { z: 98, sym: "Cf", name: "Californium", mass: "251", cat: "actinide", hex: "#f43f5e", p: 9, g: 12 },
+  { z: 99, sym: "Es", name: "Einsteinium", mass: "252", cat: "actinide", hex: "#f43f5e", p: 9, g: 13 },
+  { z: 100, sym: "Fm", name: "Fermium", mass: "257", cat: "actinide", hex: "#f43f5e", p: 9, g: 14 },
+  { z: 101, sym: "Md", name: "Mendelevium", mass: "258", cat: "actinide", hex: "#f43f5e", p: 9, g: 15 },
+  { z: 102, sym: "No", name: "Nobelium", mass: "259", cat: "actinide", hex: "#f43f5e", p: 9, g: 16 },
+  { z: 103, sym: "Lr", name: "Lawrencium", mass: "266", cat: "actinide", hex: "#f43f5e", p: 9, g: 17 },
+  { z: 104, sym: "Rf", name: "Rutherfordium", mass: "267", cat: "transition-metal", hex: "#f43f5e", p: 7, g: 4 },
+  { z: 105, sym: "Db", name: "Dubnium", mass: "268", cat: "transition-metal", hex: "#f43f5e", p: 7, g: 5 },
+  { z: 106, sym: "Sg", name: "Seaborgium", mass: "269", cat: "transition-metal", hex: "#f43f5e", p: 7, g: 6 },
+  { z: 107, sym: "Bh", name: "Bohrium", mass: "270", cat: "transition-metal", hex: "#f43f5e", p: 7, g: 7 },
+  { z: 108, sym: "Hs", name: "Hassium", mass: "277", cat: "transition-metal", hex: "#f43f5e", p: 7, g: 8 },
+  { z: 109, sym: "Mt", name: "Meitnerium", mass: "278", cat: "unknown", hex: "#71717a", p: 7, g: 9 },
+  { z: 110, sym: "Ds", name: "Darmstadtium", mass: "281", cat: "unknown", hex: "#71717a", p: 7, g: 10 },
+  { z: 111, sym: "Rg", name: "Roentgenium", mass: "282", cat: "unknown", hex: "#71717a", p: 7, g: 11 },
+  { z: 112, sym: "Cn", name: "Copernicium", mass: "285", cat: "transition-metal", hex: "#71717a", p: 7, g: 12 },
+  { z: 113, sym: "Nh", name: "Nihonium", mass: "286", cat: "unknown", hex: "#71717a", p: 7, g: 13 },
+  { z: 114, sym: "Fl", name: "Flerovium", mass: "289", cat: "post-transition", hex: "#71717a", p: 7, g: 14 },
+  { z: 115, sym: "Mc", name: "Moscovium", mass: "290", cat: "unknown", hex: "#71717a", p: 7, g: 15 },
+  { z: 116, sym: "Lv", name: "Livermorium", mass: "293", cat: "unknown", hex: "#71717a", p: 7, g: 16 },
+  { z: 117, sym: "Ts", name: "Tennessine", mass: "294", cat: "halogen", hex: "#71717a", p: 7, g: 17 },
+  { z: 118, sym: "Og", name: "Oganesson", mass: "294", cat: "noble-gas", hex: "#c084fc", p: 7, g: 18 }
+];
+
+      window.inspectFullPtableElement = function(zVal) {
+        const el = full118Elements.find(e => e.z === zVal) || full118Elements[7];
+        const tile = document.getElementById('fullPtableHeroTile');
+        const tileZ = document.getElementById('fullPtableHeroZ');
+        const tileSym = document.getElementById('fullPtableHeroSym');
+        const tileMass = document.getElementById('fullPtableHeroMass');
+        const nameEl = document.getElementById('fullPtableHeroName');
+        const zBadge = document.getElementById('fullPtableHeroZBadge');
+        const catEl = document.getElementById('fullPtableHeroCategory');
+        const roleEl = document.getElementById('fullPtableHeroRole');
+        const stateEl = document.getElementById('fullPtableHeroState');
+        const enEl = document.getElementById('fullPtableHeroEN');
+        const hexEl = document.getElementById('fullPtableHeroHex');
+
+        if (tile) {
+          tile.style.borderColor = el.hex;
+          tile.style.background = `${el.hex}1f`;
+        }
+        if (tileZ) tileZ.textContent = el.z;
+        if (tileSym) {
+          tileSym.textContent = el.sym;
+          tileSym.style.color = el.hex;
+        }
+        if (tileMass) tileMass.textContent = el.mass;
+        if (nameEl) nameEl.textContent = `${el.name} (${el.sym})`;
+        if (zBadge) zBadge.textContent = `Atomic Number: ${el.z}`;
+        if (catEl) {
+          catEl.textContent = `${el.cat.replace('-', ' ')} • Group ${el.g} • Period ${el.p}`;
+          catEl.style.color = el.hex;
+        }
+        if (hexEl) {
+          hexEl.textContent = el.hex;
+          hexEl.style.color = el.hex;
+        }
+
+        // Highlight selected cell in grid
+        document.querySelectorAll('#fullPeriodicTableGrid .ptable-cell').forEach(c => {
+          c.classList.remove('active');
+          if (parseInt(c.dataset.z, 10) === el.z) c.classList.add('active');
+        });
+      };
+
+      window.initFullPeriodicTableGrid = function() {
+        const grid = document.getElementById('fullPeriodicTableGrid');
+        if (!grid) return;
+
+        // Build 18-column grid layout
+        grid.innerHTML = '';
+        for (let row = 1; row <= 9; row++) {
+          for (let col = 1; col <= 18; col++) {
+            const el = full118Elements.find(e => e.p === row && e.g === col);
+            if (el) {
+              const cell = document.createElement('div');
+              cell.className = 'ptable-cell' + (el.z === 8 ? ' active' : '');
+              cell.dataset.z = el.z;
+              cell.style.borderColor = el.hex;
+              cell.style.borderTop = `3px solid ${el.hex}`;
+              cell.innerHTML = `
+                <div class="ptable-cell-z">${el.z}</div>
+                <div class="ptable-cell-sym" style="color: ${el.hex};">${el.sym}</div>
+                <div class="ptable-cell-name">${el.name}</div>
+              `;
+              cell.addEventListener('click', () => inspectFullPtableElement(el.z));
+              grid.appendChild(cell);
+            } else {
+              // Empty placeholder grid cell
+              const empty = document.createElement('div');
+              empty.style.visibility = 'hidden';
+              grid.appendChild(empty);
+            }
+          }
+        }
+      };
+
       window.initPeriodicTableGrid = function() {
         const grid = document.getElementById('chemElementGrid');
         if (!grid) return;
@@ -8097,6 +8718,7 @@
         if (window.initPeriodicTableGrid) window.initPeriodicTableGrid();
         if (window.initSolarSystemGrid) window.initSolarSystemGrid();
         if (window.initFullPianoKeyboard) window.initFullPianoKeyboard();
+        if (window.initFullPeriodicTableGrid) window.initFullPeriodicTableGrid();
       }, 50);
 
 
