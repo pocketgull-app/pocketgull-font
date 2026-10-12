@@ -105,5 +105,8 @@ test('Piano ROYGBIV Color Tokens: Chromatic Music Pedagogy Invariant', () => {
   assert.ok(code.includes('#ef4444'), 'Middle C must map to Red');
   assert.ok(code.includes('#3b82f6'), 'Sol G must map to Blue');
   assert.ok(code.includes('#a855f7'), 'Leading Ti B must map to Violet');
+  assert.ok(code.includes('TRAFFIC_LIGHT_TEMPO_PALETTE'), 'Must declare TRAFFIC_LIGHT_TEMPO_PALETTE');
+  assert.ok(code.includes('get_traffic_light_phase_color'), 'Must declare get_traffic_light_phase_color');
 });
+
 

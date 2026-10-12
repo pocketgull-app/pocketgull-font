@@ -2343,11 +2343,83 @@
       margin-bottom: 16px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       gap: 20px;
       font-family: 'PocketGull Music', 'PocketGull', sans-serif;
       min-height: 80px;
+      flex-wrap: wrap;
     }
+
+    /* Traffic Light Duration & Hold Pacer */
+    .traffic-pacer-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 6px 14px;
+    }
+    .traffic-light-disc {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #27272a;
+      transition: all 0.25s ease;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.6);
+    }
+    .traffic-light-disc.green-active {
+      background: #10b981;
+      box-shadow: 0 0 12px #10b981, inset 0 -1px 2px rgba(255,255,255,0.4);
+    }
+    .traffic-light-disc.amber-active {
+      background: #f59e0b;
+      box-shadow: 0 0 12px #f59e0b, inset 0 -1px 2px rgba(255,255,255,0.4);
+    }
+    .traffic-light-disc.red-active {
+      background: #ef4444;
+      box-shadow: 0 0 12px #ef4444, inset 0 -1px 2px rgba(255,255,255,0.4);
+    }
+
+    /* Musical Waterfall Highway Canvas */
+    .piano-waterfall-highway {
+      position: relative;
+      width: 100%;
+      height: 140px;
+      background: linear-gradient(180deg, #050811 0%, #0c1222 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: flex-end;
+      box-shadow: inset 0 4px 12px rgba(0,0,0,0.7);
+    }
+    .waterfall-track {
+      flex: 1;
+      height: 100%;
+      border-right: 1px dashed rgba(255, 255, 255, 0.05);
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+    .waterfall-track:last-child {
+      border-right: none;
+    }
+    .waterfall-ribbon {
+      position: absolute;
+      width: 32px;
+      border-radius: 8px;
+      transition: transform 0.05s linear;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    .ribbon-gradient-c { background: linear-gradient(180deg, #ef4444 0%, #f59e0b 50%, #10b981 100%); }
+    .ribbon-gradient-d { background: linear-gradient(180deg, #f97316 0%, #f59e0b 50%, #10b981 100%); }
+    .ribbon-gradient-e { background: linear-gradient(180deg, #eab308 0%, #f59e0b 50%, #10b981 100%); }
+    .ribbon-gradient-f { background: linear-gradient(180deg, #10b981 0%, #f59e0b 50%, #10b981 100%); }
+    .ribbon-gradient-g { background: linear-gradient(180deg, #3b82f6 0%, #f59e0b 50%, #10b981 100%); }
+    .ribbon-gradient-a { background: linear-gradient(180deg, #6366f1 0%, #f59e0b 50%, #10b981 100%); }
+    .ribbon-gradient-b { background: linear-gradient(180deg, #a855f7 0%, #f59e0b 50%, #10b981 100%); }
 
     @media (max-width: 900px) {
       .nav-links {
@@ -3710,10 +3782,46 @@
             By mapping Middle C ($C_4$) through $B_4$ to the 7 spectral wavelengths of Newton's rainbow (ROYGBIV / Chroma-Notes standard), beginners and students with dyslexia or motor tremors bypass cognitive ledger-line crowding. Each key synthesizes procedural 100% offline WebAudio sound and displays its exact Sloan letter and solfège degree.
           </p>
 
-          <!-- Interactive Piano Note Readout Banner -->
+          <!-- Interactive Piano Note Readout Banner with Traffic Light Pacer -->
           <div class="piano-staff-stage" id="pianoStaffDisplay">
-            <span style="font-size: 26px; color: #ef4444;" id="pianoStaffNote">♩ C₄ (Middle C)</span>
-            <span style="font-size: 15px; color: var(--text-muted); font-family: 'PocketGull Mono';" id="pianoStaffDetail">Solfège: Do &bull; 261.63 Hz &bull; 650nm Red Tonic Anchor</span>
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <span style="font-size: 26px; color: #ef4444;" id="pianoStaffNote">♩ C₄ (Middle C)</span>
+              <span style="font-size: 13px; color: var(--text-muted); font-family: 'PocketGull Mono';" id="pianoStaffDetail">Solfège: Do &bull; 261.63 Hz &bull; 650nm Red Tonic Anchor</span>
+            </div>
+
+            <!-- Traffic Light Duration & Hold Metronome -->
+            <div class="traffic-pacer-box">
+              <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Hold Phase:</span>
+              <div class="traffic-light-disc green-active" id="trafficDiscGreen" title="Green: Attack & Initial Flow (0% - 50%)"></div>
+              <div class="traffic-light-disc" id="trafficDiscAmber" title="Amber: Hold & Prepare Release (50% - 85%)"></div>
+              <div class="traffic-light-disc" id="trafficDiscRed" title="Red: Full Release & Silent Breath (85% - 100%)"></div>
+              <span id="trafficPhaseText" style="font-size: 11px; font-family: 'PocketGull Mono'; color: #10b981; font-weight: 700;">FLOW (🟢)</span>
+            </div>
+          </div>
+
+          <!-- Automated Player Piano Roll (Punched Paper Ribbon Highway) -->
+          <div class="piano-waterfall-highway" id="playerPianoRollHighway">
+            <div class="waterfall-track" id="track-C">
+              <div class="waterfall-ribbon ribbon-gradient-c" id="ribbon-C" style="height: 60px; bottom: 0; opacity: 0.85;"></div>
+            </div>
+            <div class="waterfall-track" id="track-D">
+              <div class="waterfall-ribbon ribbon-gradient-d" id="ribbon-D" style="height: 45px; bottom: 35px; opacity: 0.65;"></div>
+            </div>
+            <div class="waterfall-track" id="track-E">
+              <div class="waterfall-ribbon ribbon-gradient-e" id="ribbon-E" style="height: 80px; bottom: 20px; opacity: 0.75;"></div>
+            </div>
+            <div class="waterfall-track" id="track-F">
+              <div class="waterfall-ribbon ribbon-gradient-f" id="ribbon-F" style="height: 50px; bottom: 50px; opacity: 0.5;"></div>
+            </div>
+            <div class="waterfall-track" id="track-G">
+              <div class="waterfall-ribbon ribbon-gradient-g" id="ribbon-G" style="height: 90px; bottom: 10px; opacity: 0.8;"></div>
+            </div>
+            <div class="waterfall-track" id="track-A">
+              <div class="waterfall-ribbon ribbon-gradient-a" id="ribbon-A" style="height: 55px; bottom: 40px; opacity: 0.6;"></div>
+            </div>
+            <div class="waterfall-track" id="track-B">
+              <div class="waterfall-ribbon ribbon-gradient-b" id="ribbon-B" style="height: 70px; bottom: 15px; opacity: 0.7;"></div>
+            </div>
           </div>
 
           <!-- Interactive Keyboard Frame -->
@@ -6791,6 +6899,60 @@
           osc2.stop(now + 1.25);
         } catch (e) {
           // Non-blocking fallback on silent contexts
+        }
+
+        // Trigger Traffic Light Hold Metronome Phase
+        const green = document.getElementById('trafficDiscGreen');
+        const amber = document.getElementById('trafficDiscAmber');
+        const red = document.getElementById('trafficDiscRed');
+        const phaseText = document.getElementById('trafficPhaseText');
+
+        if (green && amber && red && phaseText) {
+          // Phase 1: Attack & Flow (0 - 400ms)
+          green.className = 'traffic-light-disc green-active';
+          amber.className = 'traffic-light-disc';
+          red.className = 'traffic-light-disc';
+          phaseText.textContent = 'FLOW (🟢)';
+          phaseText.style.color = '#10b981';
+
+          // Phase 2: Sustain & Prepare Release (400ms - 850ms)
+          setTimeout(() => {
+            green.className = 'traffic-light-disc';
+            amber.className = 'traffic-light-disc amber-active';
+            red.className = 'traffic-light-disc';
+            phaseText.textContent = 'HOLD (🟡)';
+            phaseText.style.color = '#f59e0b';
+          }, 400);
+
+          // Phase 3: Release & Rest (850ms - 1300ms)
+          setTimeout(() => {
+            green.className = 'traffic-light-disc';
+            amber.className = 'traffic-light-disc';
+            red.className = 'traffic-light-disc red-active';
+            phaseText.textContent = 'REST (🔴)';
+            phaseText.style.color = '#ef4444';
+          }, 850);
+
+          // Reset to ready
+          setTimeout(() => {
+            green.className = 'traffic-light-disc green-active';
+            amber.className = 'traffic-light-disc';
+            red.className = 'traffic-light-disc';
+            phaseText.textContent = 'READY (🟢)';
+            phaseText.style.color = '#10b981';
+          }, 1400);
+        }
+
+        // Pulse the Player Piano Ribbon Highway
+        const keyLetter = noteName.charAt(0);
+        const ribbon = document.getElementById(`ribbon-${keyLetter}`);
+        if (ribbon) {
+          ribbon.style.transform = 'translateY(12px) scale(1.08)';
+          ribbon.style.filter = 'brightness(1.5)';
+          setTimeout(() => {
+            ribbon.style.transform = 'translateY(0) scale(1.0)';
+            ribbon.style.filter = 'brightness(1.0)';
+          }, 350);
         }
       };
 

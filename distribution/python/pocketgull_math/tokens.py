@@ -60,3 +60,16 @@ def get_piano_note_color(note_name: str) -> str:
     clean_note = note_name.upper().strip()[0] if note_name else ""
     token = PIANO_ROYGBIV_PALETTE.get(clean_note)
     return token["hex"] if token else "#71717a"
+
+# Traffic Light Temporal / Duration Flow Palette
+TRAFFIC_LIGHT_TEMPO_PALETTE = {
+    "green":  {"phase": "Attack & Flow", "hex": "#10b981", "duty_cycle": "0-50%",   "role": "Active stroke, onset, acoustic resonance"},
+    "amber":  {"phase": "Sustain Hold",  "hex": "#f59e0b", "duty_cycle": "50-85%",  "role": "Weight transfer, physical relaxation, prepare release"},
+    "red":    {"phase": "Rest / Release","hex": "#ef4444", "duty_cycle": "85-100%", "role": "Damper drop, complete silence, boundary reset"}
+}
+
+def get_traffic_light_phase_color(phase_name: str) -> str:
+    """Returns the chromatic signal color for a musical duration phase."""
+    token = TRAFFIC_LIGHT_TEMPO_PALETTE.get(phase_name.lower().strip())
+    return token["hex"] if token else "#71717a"
+
