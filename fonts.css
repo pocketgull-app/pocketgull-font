@@ -2405,3 +2405,37 @@ body.eco-dark-canopy {
 .palette-sunshine {
   font-palette: --pocketgull-sunshine;
 }
+
+/* IUPAC / CPK Molecular Chemistry Color Palette */
+@font-palette-values --iupac-cpk {
+  font-family: 'PocketGull Chem';
+  base-palette: 0;
+  override-colors:
+    0 #27272a, /* Carbon (Graphite) */
+    1 #ef4444, /* Oxygen (Carbonyl Red) */
+    2 #3b82f6, /* Nitrogen (Amine Blue) */
+    3 #f59e0b, /* Sulfur (Thiol Amber) */
+    4 #10b981, /* Chlorine (Halogen Green) */
+    5 #8b5cf6, /* Iodine (Violet) */
+    6 #f97316; /* Phosphorus (Phosphate Orange) */
+}
+
+/* AMS / ISO 80000-2 Mathematical Semantics Palette */
+@font-palette-values --ams-math {
+  font-family: 'PocketGull Math';
+  base-palette: 1;
+  override-colors:
+    0 #0ea5e9, /* Real Variables (Cyan) */
+    1 #10b981, /* Discrete Sets (Emerald) */
+    2 #f59e0b, /* Operators & Transforms (Amber) */
+    3 #a855f7, /* Invariants & Constants (Purple) */
+    4 #ec4899; /* Imaginary / Complex Domain (Rose) */
+}
+
+.palette-iupac-chem {
+  font-palette: --iupac-cpk;
+}
+
+.palette-ams-math {
+  font-palette: --ams-math;
+}
