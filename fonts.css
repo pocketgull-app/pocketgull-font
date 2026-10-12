@@ -2472,3 +2472,30 @@ body.eco-dark-canopy {
 .element-noble-gas       { color: #f472b6; border-color: #ec4899; }
 .element-lanthanoid      { color: #a78bfa; border-color: #8b5cf6; }
 .element-actinoid        { color: #f87171; border-color: #ef4444; }
+
+/* Musical Solfège & Piano ROYGBIV Spectral Palette (Chroma-Notes / Scriabin) */
+@font-palette-values --piano-roygbiv {
+  font-family: 'PocketGull Music', 'PocketGull VF';
+  base-palette: 0;
+  override-colors:
+    0 #ef4444, /* C / Do - Red */
+    1 #f97316, /* D / Re - Orange */
+    2 #eab308, /* E / Mi - Yellow */
+    3 #10b981, /* F / Fa - Green */
+    4 #3b82f6, /* G / Sol - Blue */
+    5 #6366f1, /* A / La - Indigo */
+    6 #a855f7; /* B / Ti - Violet */
+}
+
+.palette-piano-roygbiv {
+  font-palette: --piano-roygbiv;
+}
+
+/* Piano Key & Sheet Music Note Semantics */
+.note-c { color: #f87171; border-color: #ef4444; background: rgba(239, 68, 68, 0.12); }
+.note-d { color: #fb923c; border-color: #f97316; background: rgba(249, 115, 22, 0.12); }
+.note-e { color: #facc15; border-color: #eab308; background: rgba(234, 179, 8, 0.12); }
+.note-f { color: #34d399; border-color: #10b981; background: rgba(16, 185, 129, 0.12); }
+.note-g { color: #60a5fa; border-color: #3b82f6; background: rgba(59, 130, 246, 0.12); }
+.note-a { color: #818cf8; border-color: #6366f1; background: rgba(99, 102, 241, 0.12); }
+.note-b { color: #c084fc; border-color: #a855f7; background: rgba(168, 85, 247, 0.12); }

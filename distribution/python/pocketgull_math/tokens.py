@@ -34,6 +34,17 @@ AMS_ISO_MATH_PALETTE = {
     "relations":   {"name": "Order/Equivalence", "hex": "#64748b", "symbols": ["=", "\\le", "\\ge", "\\in", "\\subset"]}
 }
 
+# Piano ROYGBIV Spectral Solfège Palette (Chroma-Notes / Scriabin Standard)
+PIANO_ROYGBIV_PALETTE = {
+    "C": {"note": "C", "solfege": "Do", "color_name": "Red",    "hex": "#ef4444", "midi_offset": 0, "role": "Tonic root anchor (Middle C)"},
+    "D": {"note": "D", "solfege": "Re", "color_name": "Orange", "hex": "#f97316", "midi_offset": 2, "role": "Supertonic step upward"},
+    "E": {"note": "E", "solfege": "Mi", "color_name": "Yellow", "hex": "#eab308", "midi_offset": 4, "role": "Mediant bright harmonic lift"},
+    "F": {"note": "F", "solfege": "Fa", "color_name": "Green",  "hex": "#10b981", "midi_offset": 5, "role": "Subdominant organic resolution"},
+    "G": {"note": "G", "solfege": "Sol", "color_name": "Blue",   "hex": "#3b82f6", "midi_offset": 7, "role": "Dominant expansive clarity"},
+    "A": {"note": "A", "solfege": "La", "color_name": "Indigo", "hex": "#6366f1", "midi_offset": 9, "role": "Submediant Concert A440 resonance"},
+    "B": {"note": "B", "solfege": "Ti", "color_name": "Violet", "hex": "#a855f7", "midi_offset": 11, "role": "Leading tone energetic return"}
+}
+
 def get_iupac_color(symbol: str) -> str:
     """Returns the authoritative IUPAC/CPK hex color for an element symbol."""
     elem = IUPAC_CPK_PALETTE.get(symbol)
@@ -43,3 +54,9 @@ def get_math_token_color(category: str) -> str:
     """Returns the AMS/ISO 80000-2 hex color for a mathematical semantic class."""
     cat = AMS_ISO_MATH_PALETTE.get(category)
     return cat["hex"] if cat else "#71717a"
+
+def get_piano_note_color(note_name: str) -> str:
+    """Returns the ROYGBIV hex color for a natural piano note (C..B)."""
+    clean_note = note_name.upper().strip()[0] if note_name else ""
+    token = PIANO_ROYGBIV_PALETTE.get(clean_note)
+    return token["hex"] if token else "#71717a"

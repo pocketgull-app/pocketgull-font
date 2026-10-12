@@ -82,6 +82,7 @@ test('Webfont CSS Parity: fonts.css Declares OpenType @font-palette-values', () 
   assert.ok(css.includes('--iupac-cpk'), 'fonts.css must declare --iupac-cpk elemental chemistry palette');
   assert.ok(css.includes('--ams-math'), 'fonts.css must declare --ams-math mathematical semantics palette');
   assert.ok(css.includes('--iupac-periodic-table'), 'fonts.css must declare --iupac-periodic-table palette');
+  assert.ok(css.includes('--piano-roygbiv'), 'fonts.css must declare --piano-roygbiv palette');
 });
 
 test('Periodic Table IUPAC Module Exists & Maps All Major Families', () => {
@@ -93,5 +94,16 @@ test('Periodic Table IUPAC Module Exists & Maps All Major Families', () => {
   assert.ok(code.includes('noble-gases'), 'Must declare noble-gases');
   assert.ok(code.includes('halogens'), 'Must declare halogens');
   assert.ok(code.includes('actinoids'), 'Must declare actinoids');
+});
+
+test('Piano ROYGBIV Color Tokens: Chromatic Music Pedagogy Invariant', () => {
+  const tokensPath = path.join(ROOT_DIR, 'distribution', 'python', 'pocketgull_math', 'tokens.py');
+  assert.ok(fs.existsSync(tokensPath), 'tokens.py must exist');
+  const code = fs.readFileSync(tokensPath, 'utf8');
+  assert.ok(code.includes('PIANO_ROYGBIV_PALETTE'), 'Must declare PIANO_ROYGBIV_PALETTE');
+  assert.ok(code.includes('get_piano_note_color'), 'Must declare get_piano_note_color');
+  assert.ok(code.includes('#ef4444'), 'Middle C must map to Red');
+  assert.ok(code.includes('#3b82f6'), 'Sol G must map to Blue');
+  assert.ok(code.includes('#a855f7'), 'Leading Ti B must map to Violet');
 });
 

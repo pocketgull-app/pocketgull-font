@@ -2252,6 +2252,103 @@
       justify-content: center;
     }
 
+    /* Piano ROYGBIV Keyboard Synthesizer */
+    .piano-keyboard-frame {
+      background: #09090b;
+      border: 2px solid var(--card-border);
+      border-radius: 12px;
+      padding: 20px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      margin: 16px 0;
+    }
+    .piano-keys-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      height: 180px;
+      user-select: none;
+      overflow-x: auto;
+      padding: 4px;
+    }
+    .piano-white-key {
+      width: 52px;
+      height: 170px;
+      background: #ffffff;
+      border: 1.5px solid #27272a;
+      border-radius: 0 0 6px 6px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: 12px;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+      transition: background 0.1s ease, transform 0.08s ease;
+      box-shadow: inset 0 -4px 6px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .piano-white-key:hover {
+      background: #f4f4f5;
+    }
+    .piano-white-key:active, .piano-white-key.active {
+      transform: translateY(2px);
+      box-shadow: inset 0 -2px 3px rgba(0,0,0,0.2);
+    }
+    .piano-black-key {
+      width: 32px;
+      height: 105px;
+      background: #18181b;
+      border: 1px solid #09090b;
+      border-radius: 0 0 4px 4px;
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: 8px;
+      transition: background 0.1s ease, transform 0.08s ease;
+      box-shadow: inset 0 -3px 4px rgba(255,255,255,0.1), 0 4px 8px rgba(0,0,0,0.5);
+    }
+    .piano-black-key:hover {
+      background: #27272a;
+    }
+    .piano-black-key:active, .piano-black-key.active {
+      transform: translateY(2px);
+      background: #3f3f46;
+    }
+    .piano-key-badge {
+      font-family: 'PocketGull Bold', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      border-radius: 4px;
+      padding: 2px 6px;
+      line-height: 1;
+    }
+    .piano-solfege-sub {
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 10px;
+      margin-top: 3px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .piano-staff-stage {
+      background: #0d1117;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      font-family: 'PocketGull Music', 'PocketGull', sans-serif;
+      min-height: 80px;
+    }
+
     @media (max-width: 900px) {
       .nav-links {
         display: none;
@@ -3446,6 +3543,9 @@
         <button type="button" class="sci-tab-btn" id="tabMathBtn" onclick="switchSciTab('math')">
           📐 Academic Mathematics &amp; Pharmacokinetics
         </button>
+        <button type="button" class="sci-tab-btn" id="tabPianoBtn" onclick="switchSciTab('piano')">
+          🎹 ROYGBIV Rainbow Piano &amp; Solfège
+        </button>
       </div>
 
       <!-- Tab 1: Scotopic Night Astronomy HUD -->
@@ -3589,6 +3689,104 @@
               LaTeX / Typst Source Snippet:
             </div>
             <pre style="font-family: 'PocketGull Mono', monospace; background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 12px; font-size: 12px; color: var(--sky-accent); overflow-x: auto;" id="mathLatexSnippet">\usepackage[slashedzero,curvedl,serifedI,tabular]{pocketgull-math}</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: ROYGBIV Rainbow Piano Keyboard & Synesthetic Solfège -->
+      <div class="sci-panel" id="sciPanelPiano">
+        <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 12px; padding: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--card-border);">
+            <div>
+              <span class="badge" style="color: #ec4899; border-color: rgba(236, 72, 153, 0.4); margin-bottom: 4px;">Musicology &amp; Neuro-Pedagogy</span>
+              <h3 style="font-family: 'PocketGull Bold'; font-size: 20px; margin-top: 4px;">ROYGBIV Rainbow Piano &amp; W3C SMuFL Solfège</h3>
+            </div>
+            <div style="font-family: 'PocketGull Mono'; font-size: 12px; color: var(--cyan);">
+              OpenType CPAL / COLR: <code>@font-palette-values --piano-roygbiv</code>
+            </div>
+          </div>
+
+          <p style="font-size: 13px; line-height: 1.6; color: var(--text-muted); margin-bottom: 18px;">
+            By mapping Middle C ($C_4$) through $B_4$ to the 7 spectral wavelengths of Newton's rainbow (ROYGBIV / Chroma-Notes standard), beginners and students with dyslexia or motor tremors bypass cognitive ledger-line crowding. Each key synthesizes procedural 100% offline WebAudio sound and displays its exact Sloan letter and solfège degree.
+          </p>
+
+          <!-- Interactive Piano Note Readout Banner -->
+          <div class="piano-staff-stage" id="pianoStaffDisplay">
+            <span style="font-size: 26px; color: #ef4444;" id="pianoStaffNote">♩ C₄ (Middle C)</span>
+            <span style="font-size: 15px; color: var(--text-muted); font-family: 'PocketGull Mono';" id="pianoStaffDetail">Solfège: Do &bull; 261.63 Hz &bull; 650nm Red Tonic Anchor</span>
+          </div>
+
+          <!-- Interactive Keyboard Frame -->
+          <div class="piano-keyboard-frame">
+            <div class="piano-keys-wrapper" id="pianoKeyboardWrapper">
+              <!-- White Keys with Inset Black Keys -->
+              <!-- C -->
+              <div class="piano-white-key note-c" onclick="playPianoKey('C4', 261.63, 'Red', 'Do', 'Tonic root anchor')">
+                <span class="piano-key-badge note-c">C</span>
+                <span class="piano-solfege-sub">Do</span>
+              </div>
+              <!-- C# -->
+              <div class="piano-black-key" style="left: calc(50% - 156px);" onclick="playPianoKey('C#4', 277.18, 'Obsidian', 'Di', 'Accidental chromatic')">
+                <span style="font-size: 11px; color: #a1a1aa; font-family: 'PocketGull Mono';">C♯</span>
+              </div>
+              <!-- D -->
+              <div class="piano-white-key note-d" onclick="playPianoKey('D4', 293.66, 'Orange', 'Re', 'Supertonic step upward')">
+                <span class="piano-key-badge note-d">D</span>
+                <span class="piano-solfege-sub">Re</span>
+              </div>
+              <!-- D# -->
+              <div class="piano-black-key" style="left: calc(50% - 104px);" onclick="playPianoKey('D#4', 311.13, 'Obsidian', 'Ri', 'Accidental chromatic')">
+                <span style="font-size: 11px; color: #a1a1aa; font-family: 'PocketGull Mono';">D♯</span>
+              </div>
+              <!-- E -->
+              <div class="piano-white-key note-e" onclick="playPianoKey('E4', 329.63, 'Yellow', 'Mi', 'Mediant harmonic lift')">
+                <span class="piano-key-badge note-e">E</span>
+                <span class="piano-solfege-sub">Mi</span>
+              </div>
+              <!-- F -->
+              <div class="piano-white-key note-f" onclick="playPianoKey('F4', 349.23, 'Green', 'Fa', 'Subdominant resolution')">
+                <span class="piano-key-badge note-f">F</span>
+                <span class="piano-solfege-sub">Fa</span>
+              </div>
+              <!-- F# -->
+              <div class="piano-black-key" style="left: calc(50% + 0px);" onclick="playPianoKey('F#4', 369.99, 'Obsidian', 'Fi', 'Accidental chromatic')">
+                <span style="font-size: 11px; color: #a1a1aa; font-family: 'PocketGull Mono';">F♯</span>
+              </div>
+              <!-- G -->
+              <div class="piano-white-key note-g" onclick="playPianoKey('G4', 392.00, 'Blue', 'Sol', 'Dominant expansive clarity')">
+                <span class="piano-key-badge note-g">G</span>
+                <span class="piano-solfege-sub">Sol</span>
+              </div>
+              <!-- G# -->
+              <div class="piano-black-key" style="left: calc(50% + 52px);" onclick="playPianoKey('G#4', 415.30, 'Obsidian', 'Si', 'Accidental chromatic')">
+                <span style="font-size: 11px; color: #a1a1aa; font-family: 'PocketGull Mono';">G♯</span>
+              </div>
+              <!-- A -->
+              <div class="piano-white-key note-a" onclick="playPianoKey('A4', 440.00, 'Indigo', 'La', 'Submediant Concert A440')">
+                <span class="piano-key-badge note-a">A</span>
+                <span class="piano-solfege-sub">La</span>
+              </div>
+              <!-- A# -->
+              <div class="piano-black-key" style="left: calc(50% + 104px);" onclick="playPianoKey('A#4', 466.16, 'Obsidian', 'Li', 'Accidental chromatic')">
+                <span style="font-size: 11px; color: #a1a1aa; font-family: 'PocketGull Mono';">A♯</span>
+              </div>
+              <!-- B -->
+              <div class="piano-white-key note-b" onclick="playPianoKey('B4', 493.88, 'Violet', 'Ti', 'Leading tone energetic return')">
+                <span class="piano-key-badge note-b">B</span>
+                <span class="piano-solfege-sub">Ti</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Scale Player Chips -->
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 16px;">
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button type="button" class="eco-scale-btn" onclick="playPianoChord('c_major')">▶ Play C Major Triad (C - E - G)</button>
+              <button type="button" class="eco-scale-btn" onclick="playPianoArpeggio()">🌈 Play Full ROYGBIV Octave</button>
+            </div>
+            <div style="font-size: 11px; font-family: 'PocketGull Mono'; color: var(--emerald);">
+              Audio Engine: Pure WebAudio Polyphonic Synthesizer
+            </div>
           </div>
         </div>
       </div>
@@ -6507,20 +6705,118 @@
       window.switchSciTab = function(tabName) {
         const astroBtn = document.getElementById('tabAstroBtn');
         const mathBtn = document.getElementById('tabMathBtn');
+        const pianoBtn = document.getElementById('tabPianoBtn');
         const astroPanel = document.getElementById('sciPanelAstro');
         const mathPanel = document.getElementById('sciPanelMath');
+        const pianoPanel = document.getElementById('sciPanelPiano');
+
+        [astroBtn, mathBtn, pianoBtn].forEach(b => b?.classList.remove('active'));
+        [astroPanel, mathPanel, pianoPanel].forEach(p => p?.classList.remove('active'));
 
         if (tabName === 'astro') {
           astroBtn?.classList.add('active');
-          mathBtn?.classList.remove('active');
           astroPanel?.classList.add('active');
-          mathPanel?.classList.remove('active');
         } else if (tabName === 'math') {
           mathBtn?.classList.add('active');
-          astroBtn?.classList.remove('active');
           mathPanel?.classList.add('active');
-          astroPanel?.classList.remove('active');
+        } else if (tabName === 'piano') {
+          pianoBtn?.classList.add('active');
+          pianoPanel?.classList.add('active');
         }
+      };
+
+      // --- Pure WebAudio Polyphonic Synthesizer for ROYGBIV Piano ---
+      let pianoAudioCtx = null;
+      function getPianoAudioCtx() {
+        if (!pianoAudioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) {
+            pianoAudioCtx = new AudioContext();
+          }
+        }
+        if (pianoAudioCtx && pianoAudioCtx.state === 'suspended') {
+          pianoAudioCtx.resume();
+        }
+        return pianoAudioCtx;
+      }
+
+      window.playPianoKey = function(noteName, freq, colorName, solfege, role) {
+        const staffNote = document.getElementById('pianoStaffNote');
+        const staffDetail = document.getElementById('pianoStaffDetail');
+        if (staffNote) {
+          staffNote.textContent = `♩ ${noteName} (${colorName})`;
+          const colorMap = {
+            'Red': '#ef4444',
+            'Orange': '#f97316',
+            'Yellow': '#eab308',
+            'Green': '#10b981',
+            'Blue': '#3b82f6',
+            'Indigo': '#6366f1',
+            'Violet': '#a855f7',
+            'Obsidian': '#a1a1aa'
+          };
+          staffNote.style.color = colorMap[colorName] || 'var(--cyan)';
+        }
+        if (staffDetail) {
+          staffDetail.textContent = `Solfège: ${solfege} • ${freq.toFixed(2)} Hz • ${colorName} • ${role}`;
+        }
+
+        const ctx = getPianoAudioCtx();
+        if (!ctx) return;
+
+        try {
+          const now = ctx.currentTime;
+          // Dual-oscillator acoustic piano synthesis (fundamental + harmonic chime)
+          const osc1 = ctx.createOscillator();
+          const osc2 = ctx.createOscillator();
+          const gain = ctx.createGain();
+
+          osc1.type = 'triangle';
+          osc1.frequency.setValueAtTime(freq, now);
+
+          osc2.type = 'sine';
+          osc2.frequency.setValueAtTime(freq * 2, now); // 2nd harmonic sparkle
+
+          gain.gain.setValueAtTime(0.001, now);
+          gain.gain.exponentialRampToValueAtTime(0.35, now + 0.015);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+
+          osc1.connect(gain);
+          osc2.connect(gain);
+          gain.connect(ctx.destination);
+
+          osc1.start(now);
+          osc2.start(now);
+          osc1.stop(now + 1.25);
+          osc2.stop(now + 1.25);
+        } catch (e) {
+          // Non-blocking fallback on silent contexts
+        }
+      };
+
+      window.playPianoChord = function(chordType) {
+        if (chordType === 'c_major') {
+          playPianoKey('C4', 261.63, 'Red', 'Do', 'Tonic root');
+          setTimeout(() => playPianoKey('E4', 329.63, 'Yellow', 'Mi', 'Major 3rd'), 120);
+          setTimeout(() => playPianoKey('G4', 392.00, 'Blue', 'Sol', 'Dominant 5th'), 240);
+        }
+      };
+
+      window.playPianoArpeggio = function() {
+        const notes = [
+          { name: 'C4', freq: 261.63, color: 'Red', solfege: 'Do', role: 'Tonic root anchor' },
+          { name: 'D4', freq: 293.66, color: 'Orange', solfege: 'Re', role: 'Supertonic step' },
+          { name: 'E4', freq: 329.63, color: 'Yellow', solfege: 'Mi', role: 'Mediant harmonic lift' },
+          { name: 'F4', freq: 349.23, color: 'Green', solfege: 'Fa', role: 'Subdominant resolution' },
+          { name: 'G4', freq: 392.00, color: 'Blue', solfege: 'Sol', role: 'Dominant clarity' },
+          { name: 'A4', freq: 440.00, color: 'Indigo', solfege: 'La', role: 'Concert A440' },
+          { name: 'B4', freq: 493.88, color: 'Violet', solfege: 'Ti', role: 'Leading return' }
+        ];
+        notes.forEach((n, idx) => {
+          setTimeout(() => {
+            playPianoKey(n.name, n.freq, n.color, n.solfege, n.role);
+          }, idx * 260);
+        });
       };
 
       let isScotopicActive = false;
