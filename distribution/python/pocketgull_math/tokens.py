@@ -189,6 +189,154 @@ def get_audio_lufs_color(lufs_value: float, cvd_mode: str = "normal") -> dict:
         "role": token["role"]
     }
 
+# ==============================================================================
+# Astrometric Solar System & Ephemeris Palette (IAU Physical Standards)
+# ==============================================================================
+SOLAR_SYSTEM_PALETTE = {
+    "sol": {
+        "name": "Sol (Sun)",
+        "symbol": "☉",
+        "unicode": "U+2299",
+        "hex": "#fbbf24",
+        "mass_earth": 333000.0,
+        "radius_km": "695,700",
+        "semi_major_au": 0.0,
+        "period_yr": "—",
+        "spectral_class": "G2V Yellow Dwarf",
+        "role": "Barycentric origin (0,0,0) and heliospheric radiation source."
+    },
+    "mercury": {
+        "name": "Mercury",
+        "symbol": "☿",
+        "unicode": "U+263F",
+        "hex": "#94a3b8",
+        "mass_earth": 0.055,
+        "radius_km": "2,440",
+        "semi_major_au": 0.387,
+        "period_yr": "0.24",
+        "spectral_class": "Basaltic Terrestrial",
+        "role": "Innermost high-velocity perihelion anchor."
+    },
+    "venus": {
+        "name": "Venus",
+        "symbol": "♀",
+        "unicode": "U+2640",
+        "hex": "#fef08a",
+        "mass_earth": 0.815,
+        "radius_km": "6,052",
+        "semi_major_au": 0.723,
+        "period_yr": "0.62",
+        "spectral_class": "Dense Supercritical Atmosphere",
+        "role": "High-albedo greenhouse optical reference."
+    },
+    "earth": {
+        "name": "Earth",
+        "symbol": "⊕",
+        "unicode": "U+2295",
+        "hex": "#38bdf8",
+        "mass_earth": 1.000,
+        "radius_km": "6,371",
+        "semi_major_au": 1.000,
+        "period_yr": "1.00",
+        "spectral_class": "Hydrosphere Silicate",
+        "role": "Standard ephemeris baseline (1.000 AU = 149.6M km)."
+    },
+    "luna": {
+        "name": "Luna (Moon)",
+        "symbol": "☽",
+        "unicode": "U+263D",
+        "hex": "#e2e8f0",
+        "mass_earth": 0.0123,
+        "radius_km": "1,737",
+        "semi_major_au": 0.00257,
+        "period_yr": "0.075",
+        "spectral_class": "Silicate Anorthosite",
+        "role": "Tidal cadence and lunar laser ranging fiducial."
+    },
+    "mars": {
+        "name": "Mars",
+        "symbol": "♂",
+        "unicode": "U+2642",
+        "hex": "#ef4444",
+        "mass_earth": 0.107,
+        "radius_km": "3,390",
+        "semi_major_au": 1.524,
+        "period_yr": "1.88",
+        "spectral_class": "Ferric Oxide Regolith",
+        "role": "Outer terrestrial orbit and atmospheric threshold."
+    },
+    "jupiter": {
+        "name": "Jupiter",
+        "symbol": "♃",
+        "unicode": "U+2643",
+        "hex": "#f97316",
+        "mass_earth": 317.8,
+        "radius_km": "69,911",
+        "semi_major_au": 5.204,
+        "period_yr": "11.86",
+        "spectral_class": "Gas Giant (H/He)",
+        "role": "Solar system barycenter driver and Jovian shield."
+    },
+    "saturn": {
+        "name": "Saturn",
+        "symbol": "♄",
+        "unicode": "U+2644",
+        "hex": "#eab308",
+        "mass_earth": 95.16,
+        "radius_km": "58,232",
+        "semi_major_au": 9.582,
+        "period_yr": "29.46",
+        "spectral_class": "Ringed Gas Giant",
+        "role": "Low-density oblateness and ring telemetry standard."
+    },
+    "uranus": {
+        "name": "Uranus",
+        "symbol": "♅",
+        "unicode": "U+2645",
+        "hex": "#2dd4bf",
+        "mass_earth": 14.54,
+        "radius_km": "25,362",
+        "semi_major_au": 19.20,
+        "period_yr": "84.01",
+        "spectral_class": "Methane Ice Giant",
+        "role": "Extreme axial tilt (97.8°) retrograde baseline."
+    },
+    "neptune": {
+        "name": "Neptune",
+        "symbol": "♆",
+        "unicode": "U+2646",
+        "hex": "#3b82f6",
+        "mass_earth": 17.15,
+        "radius_km": "24,622",
+        "semi_major_au": 30.05,
+        "period_yr": "164.8",
+        "spectral_class": "Dynamic Deep Azure Atmosphere",
+        "role": "Trans-Neptunian orbital resonance boundary."
+    },
+    "pluto": {
+        "name": "Pluto",
+        "symbol": "♇",
+        "unicode": "U+2647",
+        "hex": "#c084fc",
+        "mass_earth": 0.0022,
+        "radius_km": "1,188",
+        "semi_major_au": 39.48,
+        "period_yr": "247.9",
+        "spectral_class": "Nitrogen Ice Dwarf",
+        "role": "Kuiper belt resonant archetype (3:2 Neptune lock)."
+    }
+}
+
+def get_solar_body_data(key: str, cvd_mode: str = "normal") -> dict:
+    """Returns astrometric specifications and CVD-simulated color for a solar system body."""
+    body = SOLAR_SYSTEM_PALETTE.get(key.lower(), SOLAR_SYSTEM_PALETTE["earth"])
+    sim_hex = simulate_cvd_color(body["hex"], cvd_mode)
+    return {
+        **body,
+        "simulated_hex": sim_hex
+    }
+
+
 
 
 

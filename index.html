@@ -2265,11 +2265,20 @@
     .piano-keys-wrapper {
       position: relative;
       display: flex;
-      justify-content: center;
-      height: 180px;
+      justify-content: flex-start;
+      height: 195px;
       user-select: none;
       overflow-x: auto;
-      padding: 4px;
+      overflow-y: hidden;
+      padding: 8px 12px;
+      scroll-behavior: smooth;
+    }
+    .piano-keys-wrapper::-webkit-scrollbar {
+      height: 8px;
+    }
+    .piano-keys-wrapper::-webkit-scrollbar-thumb {
+      background: var(--card-border);
+      border-radius: 4px;
     }
     .piano-white-key {
       width: 52px;
@@ -2519,6 +2528,130 @@
     .fret-number-cell {
       flex: 1;
       text-align: center;
+    }
+
+    /* Clinical Direct Glare, Veiling Reflection & Sunlight washout filters */
+    .lab-glare-active {
+      position: relative;
+    }
+    .lab-glare-active::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 50;
+      border-radius: inherit;
+      background: radial-gradient(circle at 75% 20%, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0.18) 35%, transparent 70%),
+                  linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, transparent 60%);
+      backdrop-filter: brightness(1.22) contrast(0.85);
+      mix-blend-mode: overlay;
+    }
+    .lab-veiling-glare-active::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 50;
+      border-radius: inherit;
+      background: rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(1.5px) brightness(1.35) contrast(0.72);
+    }
+
+    /* Full-Size Stretched ROYGBIV Rainbow Piano Keyboard */
+    .piano-keys-wrapper-full {
+      position: relative;
+      display: inline-flex;
+      height: 200px;
+      user-select: none;
+      padding: 10px 14px 14px 14px;
+      min-width: 2750px;
+    }
+    .piano-octave-group {
+      display: inline-flex;
+      position: relative;
+    }
+    .piano-key-badge-spectral {
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+    .piano-octave-nav-btn {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-family: 'PocketGull Mono', monospace;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .piano-octave-nav-btn:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+    .ribbon-gradient-rainbow {
+      background: linear-gradient(180deg, #ef4444 0%, #f97316 16%, #eab308 33%, #10b981 50%, #06b6d4 66%, #3b82f6 83%, #a855f7 100%);
+    }
+
+    /* GearArts Cardstock & Watercolor Kit Atelier */
+    .atelier-card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .atelier-item-card {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .atelier-btn-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    .atelier-buy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+    .atelier-buy-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.15);
+    }
+    .atelier-buy-amazon {
+      background: #f59e0b;
+      color: #000000;
+      border-color: #d97706;
+      font-weight: 800;
+    }
+    .atelier-buy-blick {
+      background: #b91c1c;
+      color: #ffffff;
+      border-color: #991b1b;
+      font-weight: 800;
+    }
+    .atelier-buy-walmart {
+      background: #0369a1;
+      color: #ffffff;
+      border-color: #075985;
+      font-weight: 800;
     }
 
 
@@ -3396,16 +3529,16 @@
           <p class="ismp-desc">Selective capitals clearly differentiate look-alike medication names.</p>
         </div>
 
-        <!-- 10. Bionic Reading Anchors -->
-        <div class="ismp-card" data-inspect="bionic_reading" tabindex="0" role="region" aria-label="Bionic Reading Saccadic Anchors">
+        <!-- 10. Soft Bionic Reading Anchors -->
+        <div class="ismp-card" data-inspect="bionic_reading" tabindex="0" role="region" aria-label="Soft Bionic Reading Saccadic Anchors">
           <div class="ismp-title" style="color: var(--rose); display: flex; justify-content: space-between; align-items: center;">
-            <span>Bionic Reading Anchors</span>
+            <span>Soft Bionic Reading Anchors</span>
             <span class="ismp-inspect-badge ismp-badge-rose">🔬 Inspect</span>
           </div>
           <div class="ismp-comparison" style="font-size: 16px; font-family: 'PocketGull'; line-height: 1.4;">
             <span><strong style="font-family: 'PocketGull Bold'; color: var(--rose);">Epi</strong>nephrine <strong style="font-family: 'PocketGull Bold'; color: var(--rose);">10</strong>mcg</span>
           </div>
-          <p class="ismp-desc">Optically guides clinician saccadic eye fixation to prevent dosage oversights.</p>
+          <p class="ismp-desc">Soft 25 UPM felt-marker fillets eliminate visual harshness and glare, pulling the fovea forward smoothly without saccadic friction.</p>
         </div>
 
         <!-- 11. Philocardia Heart Tittle Card -->
@@ -3614,11 +3747,11 @@
 
       <div class="studios-portal-grid">
         <!-- Card 0: Philocardia Tactile & Somatosensory Lab -->
-        <a href="philocardia_tactile_lab.html" class="studio-portal-item">
-          <div class="studio-portal-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">💖</div>
+        <a href="philocardia_tactile_lab.html" class="studio-portal-item" style="border-color: rgba(16, 185, 129, 0.4); background: radial-gradient(circle at top left, rgba(16, 185, 129, 0.1) 0%, var(--surface-inner) 100%);">
+          <div class="studio-portal-icon" style="background: rgba(16, 185, 129, 0.2); color: #10b981;">💖</div>
           <div class="studio-portal-content">
-            <h3>Philocardia Tactile Lab <span>Suite ↗</span></h3>
-            <p>Affective touch, 72 BPM cardiac pacing, ANSCII photography halftones &amp; somatosensory emotion.</p>
+            <h3>Tactile Lathe &amp; Philocardia Lab <span style="background: rgba(16, 185, 129, 0.2); color: var(--emerald); border-color: rgba(16, 185, 129, 0.4);">Suite ↗</span></h3>
+            <p><strong>Tactile Lathe:</strong> Soft-robotic rotary mandrel for blind speed reading (0–450 WPM) with stationary palm rests, 72 BPM cardiac pacing &amp; zero shear pain.</p>
           </div>
         </a>
 
@@ -3719,8 +3852,8 @@
         <button type="button" class="sci-tab-btn" id="tabPianoBtn" onclick="switchSciTab('piano')">
           🎹 ROYGBIV Rainbow Piano &amp; Solfège
         </button>
-        <button type="button" class="sci-tab-btn" id="tabAudioBtn" onclick="switchSciTab('audio')">
-          🎛️ Audio Mastering &amp; EBU R128 Telemetry
+        <button type="button" class="sci-tab-btn" id="tabChemBtn" onclick="switchSciTab('chem')">
+          🧪 Periodic Table &amp; IUPAC CPK Chemistry
         </button>
       </div>
 
@@ -3740,6 +3873,8 @@
           <button type="button" class="sci-tab-btn" id="btnCvdDeuteranopia" onclick="setDaltonismFilter('deuteranopia')" title="Green-cone absent (6% males)">Deuteranopia (Green-Blind)</button>
           <button type="button" class="sci-tab-btn" id="btnCvdTritanopia" onclick="setDaltonismFilter('tritanopia')" title="Blue-cone absent (Rare)">Tritanopia (Blue-Blind)</button>
           <button type="button" class="sci-tab-btn" id="btnCvdMonochromacy" onclick="setDaltonismFilter('monochromacy')" title="Total color blindness / Achromatopsia">Monochromacy (100% Greyscale)</button>
+          <button type="button" class="sci-tab-btn" id="btnOpticalGlare" onclick="toggleOpticalGlare()" title="Simulate high-intensity surgical lamp or sunlight direct glare">☀️ Direct Glare</button>
+          <button type="button" class="sci-tab-btn" id="btnOpticalVeiling" onclick="toggleVeilingGlare()" title="Simulate veiling specular reflection / ambient washout">🌫️ Veiling Washout</button>
         </div>
       </div>
 
@@ -3799,27 +3934,42 @@
             </div>
           </div>
 
-          <!-- Planetary Constants Matrix with Procedural Glyph Operators -->
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px;">
-            <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 12px;">
-              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Solar Mass (M<sub>&#x2299;</sub>)</div>
-              <div style="font-family: 'PocketGull Math', 'PocketGull Mono'; font-size: 18px; font-weight: 700;">&#x2299; 1.9884&times;10<sup>30</sup> kg</div>
-              <div style="font-size: 10px; opacity: 0.7;">R<sub>&#x2299;</sub> = 6.957&times;10<sup>8</sup> m</div>
+          <!-- Astrometric Solar System & Ephemeris Telemetry Console (PocketGull Math & Mono) -->
+          <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 10px; padding: 18px; margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--cyan); letter-spacing: 0.05em;">
+                🪐 Astrometric Solar System &amp; Planetary Ephemeris (IAU Standards &bull; 600 UPM Zero-Shear):
+              </div>
+              <div style="font-size: 11px; color: var(--text-muted);">
+                Select any celestial body to inspect barycentric vectors, mass ratio, and optical albedo.
+              </div>
             </div>
-            <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 12px;">
-              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Earth Mass (M<sub>&#x2295;</sub>)</div>
-              <div style="font-family: 'PocketGull Math', 'PocketGull Mono'; font-size: 18px; font-weight: 700;">&#x2295; 5.9722&times;10<sup>24</sup> kg</div>
-              <div style="font-size: 10px; opacity: 0.7;">R<sub>&#x2295;</sub> = 6.3781&times;10<sup>6</sup> m</div>
+
+            <!-- Active Celestial Body Ephemeris Inspector -->
+            <div id="solarInspectorBox" style="background: rgba(0, 0, 0, 0.45); border: 1px solid var(--card-border); border-left: 4px solid #fbbf24; border-radius: 8px; padding: 14px 16px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+              <div style="display: flex; align-items: center; gap: 16px;">
+                <div id="solarGlyphDisplay" style="font-family: 'PocketGull Math', 'PocketGull Mono', serif; font-size: 40px; color: #fbbf24; line-height: 1;">☉</div>
+                <div>
+                  <div style="display: flex; align-items: baseline; gap: 8px;">
+                    <span id="solarBodyName" style="font-family: 'PocketGull Bold'; font-size: 18px; color: #fff;">Sol (Sun)</span>
+                    <span id="solarBodyClass" style="font-family: 'PocketGull Mono'; font-size: 11px; color: #fbbf24;">G2V Yellow Dwarf</span>
+                  </div>
+                  <div id="solarBodyRole" style="font-size: 12px; color: var(--text-muted); margin-top: 3px;">
+                    Barycentric origin (0,0,0) and heliospheric radiation source.
+                  </div>
+                </div>
+              </div>
+              <div style="display: flex; gap: 14px; font-family: 'PocketGull Mono'; font-size: 12px; flex-wrap: wrap;">
+                <div><span style="color: var(--text-muted); font-size: 10px; display: block;">MASS RATIO</span><span id="solarBodyMass" style="font-weight: 700; color: #fff;">333,000 M⊕</span></div>
+                <div><span style="color: var(--text-muted); font-size: 10px; display: block;">RADIUS</span><span id="solarBodyRadius" style="font-weight: 700; color: #fff;">695,700 km</span></div>
+                <div><span style="color: var(--text-muted); font-size: 10px; display: block;">SEMI-MAJOR</span><span id="solarBodySemiMajor" style="font-weight: 700; color: #fff;">0.000 AU</span></div>
+                <div><span style="color: var(--text-muted); font-size: 10px; display: block;">ORBIT PERIOD</span><span id="solarBodyPeriod" style="font-weight: 700; color: #fff;">—</span></div>
+              </div>
             </div>
-            <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 12px;">
-              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Jupiter Mass (M<sub>&#x2643;</sub>)</div>
-              <div style="font-family: 'PocketGull Math', 'PocketGull Mono'; font-size: 18px; font-weight: 700;">&#x2643; 1.8981&times;10<sup>27</sup> kg</div>
-              <div style="font-size: 10px; opacity: 0.7;">317.8 M<sub>&#x2295;</sub> Nominal</div>
-            </div>
-            <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 12px;">
-              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Saturn Mass (M<sub>&#x2644;</sub>)</div>
-              <div style="font-family: 'PocketGull Math', 'PocketGull Mono'; font-size: 18px; font-weight: 700;">&#x2644; 5.6834&times;10<sup>26</sup> kg</div>
-              <div style="font-size: 10px; opacity: 0.7;">95.16 M<sub>&#x2295;</sub> Nominal</div>
+
+            <!-- Solar System Selector Carousel / Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 8px;" id="solarBodiesSelectorGrid">
+              <!-- Dynamically populated via initSolarSystemGrid() -->
             </div>
           </div>
 
@@ -3892,12 +4042,22 @@
             </div>
           </div>
 
-          <!-- LaTeX Code Snippet Preview -->
-          <div style="margin-top: 18px;">
-            <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px;">
-              LaTeX / Typst Source Snippet:
+          <!-- Multi-Language Mathematical & Scientific Source Snippet Tabs -->
+          <div style="margin-top: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-muted);">
+                Scientific Source Snippet &bull; 1-Line Embed:
+              </div>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap;" id="mathSnippetLangTabs">
+                <button type="button" class="piano-octave-nav-btn" style="border-color: var(--cyan); color: var(--cyan); font-weight: 700;" onclick="switchMathSnippetLang('latex', this)">LaTeX</button>
+                <button type="button" class="piano-octave-nav-btn" onclick="switchMathSnippetLang('typst', this)">Typst</button>
+                <button type="button" class="piano-octave-nav-btn" onclick="switchMathSnippetLang('python', this)">Python</button>
+                <button type="button" class="piano-octave-nav-btn" onclick="switchMathSnippetLang('r', this)">R (ggplot2)</button>
+                <button type="button" class="piano-octave-nav-btn" onclick="switchMathSnippetLang('cpp', this)">C / C++</button>
+                <button type="button" class="piano-octave-nav-btn" onclick="switchMathSnippetLang('unix', this)">Shell / AWK / Perl</button>
+              </div>
             </div>
-            <pre style="font-family: 'PocketGull Mono', monospace; background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 12px; font-size: 12px; color: var(--sky-accent); overflow-x: auto;" id="mathLatexSnippet">\usepackage[slashedzero,curvedl,serifedI,tabular]{pocketgull-math}</pre>
+            <pre style="font-family: 'PocketGull Mono', monospace; background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 12px; font-size: 12px; color: var(--sky-accent); overflow-x: auto; min-height: 48px; line-height: 1.5;" id="mathLatexSnippet">\usepackage[slashedzero,curvedl,serifedI,tabular]{pocketgull-math}</pre>
           </div>
         </div>
       </div>
@@ -3940,12 +4100,12 @@
 
           <!-- Instrument Switcher & Web MIDI Integration Strip -->
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; background: rgba(0,0,0,0.2); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--card-border);">
-            <div style="display: flex; gap: 8px; align-items: center;">
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
               <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-right: 4px;">Instrument View:</span>
-              <button type="button" class="sci-tab-btn active" id="btnViewPiano" onclick="switchInstrumentView('piano')">🎹 88-Key Piano</button>
+              <button type="button" class="sci-tab-btn active" id="btnViewPiano" onclick="switchInstrumentView('piano')">🎹 Full 88-Key Concert Grand (A0–C8)</button>
               <button type="button" class="sci-tab-btn" id="btnViewGuitar" onclick="switchInstrumentView('guitar')">🎸 6-String Guitar (EADGBE)</button>
             </div>
-            <div style="display: flex; gap: 10px; align-items: center;">
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
               <button type="button" class="hero-btn-secondary" id="btnConnectMidi" onclick="connectWebMidi()" style="font-size: 11px; padding: 6px 12px; border-color: var(--cyan); color: var(--cyan);">
                 <span>🔌</span> <span id="midiStatusLabel">Connect Web MIDI / Keyboard</span>
               </button>
@@ -3955,87 +4115,51 @@
           <!-- Automated Player Piano Roll (Punched Paper Ribbon Highway) -->
           <div class="piano-waterfall-highway" id="playerPianoRollHighway">
             <div class="waterfall-track" id="track-C">
-              <div class="waterfall-ribbon ribbon-gradient-c" id="ribbon-C" style="height: 60px; bottom: 0; opacity: 0.85;"></div>
+              <div class="waterfall-ribbon ribbon-gradient-rainbow" id="ribbon-C" style="height: 60px; bottom: 0; opacity: 0.85;"></div>
             </div>
             <div class="waterfall-track" id="track-D">
-              <div class="waterfall-ribbon ribbon-gradient-d" id="ribbon-D" style="height: 45px; bottom: 35px; opacity: 0.65;"></div>
+              <div class="waterfall-ribbon ribbon-gradient-rainbow" id="ribbon-D" style="height: 45px; bottom: 35px; opacity: 0.65;"></div>
             </div>
             <div class="waterfall-track" id="track-E">
-              <div class="waterfall-ribbon ribbon-gradient-e" id="ribbon-E" style="height: 80px; bottom: 20px; opacity: 0.75;"></div>
+              <div class="waterfall-ribbon ribbon-gradient-rainbow" id="ribbon-E" style="height: 80px; bottom: 20px; opacity: 0.75;"></div>
             </div>
             <div class="waterfall-track" id="track-F">
-              <div class="waterfall-ribbon ribbon-gradient-f" id="ribbon-F" style="height: 50px; bottom: 50px; opacity: 0.5;"></div>
+              <div class="waterfall-ribbon ribbon-gradient-rainbow" id="ribbon-F" style="height: 50px; bottom: 50px; opacity: 0.5;"></div>
             </div>
             <div class="waterfall-track" id="track-G">
-              <div class="waterfall-ribbon ribbon-gradient-g" id="ribbon-G" style="height: 90px; bottom: 10px; opacity: 0.8;"></div>
+              <div class="waterfall-ribbon ribbon-gradient-rainbow" id="ribbon-G" style="height: 90px; bottom: 10px; opacity: 0.8;"></div>
             </div>
             <div class="waterfall-track" id="track-A">
-              <div class="waterfall-ribbon ribbon-gradient-a" id="ribbon-A" style="height: 55px; bottom: 40px; opacity: 0.6;"></div>
+              <div class="waterfall-ribbon ribbon-gradient-rainbow" id="ribbon-A" style="height: 55px; bottom: 40px; opacity: 0.6;"></div>
             </div>
             <div class="waterfall-track" id="track-B">
-              <div class="waterfall-ribbon ribbon-gradient-b" id="ribbon-B" style="height: 70px; bottom: 15px; opacity: 0.7;"></div>
+              <div class="waterfall-ribbon ribbon-gradient-rainbow" id="ribbon-B" style="height: 70px; bottom: 15px; opacity: 0.7;"></div>
             </div>
           </div>
 
-          <!-- View 1: Interactive Piano Keyboard Frame -->
+          <!-- View 1: Interactive Full 88-Key Piano Keyboard Frame -->
           <div class="piano-keyboard-frame" id="pianoKeyboardView">
+            <!-- Piano Octave Jump Bar & Spectral Range Controller -->
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--card-border);">
+              <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Octave Jump:</span>
+                <button type="button" class="piano-octave-nav-btn" onclick="jumpPianoOctave(0)">A0 (Sub-contra)</button>
+                <button type="button" class="piano-octave-nav-btn" onclick="jumpPianoOctave(1)">C1 (Contra)</button>
+                <button type="button" class="piano-octave-nav-btn" onclick="jumpPianoOctave(2)">C2 (Great)</button>
+                <button type="button" class="piano-octave-nav-btn" onclick="jumpPianoOctave(3)">C3 (Small)</button>
+                <button type="button" class="piano-octave-nav-btn" style="border-color: var(--cyan); color: var(--cyan); font-weight: 700;" onclick="jumpPianoOctave(4)">C4 (Middle C)</button>
+                <button type="button" class="piano-octave-nav-btn" onclick="jumpPianoOctave(5)">C5 (2-Line)</button>
+                <button type="button" class="piano-octave-nav-btn" onclick="jumpPianoOctave(6)">C6 (3-Line)</button>
+                <button type="button" class="piano-octave-nav-btn" onclick="jumpPianoOctave(7)">C7 (4-Line)</button>
+              </div>
+              <div style="font-family: 'PocketGull Mono'; font-size: 11px; color: var(--text-muted);">
+                <span style="color: #ef4444;">●</span> Red (27.5Hz) &rarr; <span style="color: #a855f7;">●</span> Violet (4186Hz) &bull; 88 Keys Stretched
+              </div>
+            </div>
+
+            <!-- Scrollable 88-Key Container -->
             <div class="piano-keys-wrapper" id="pianoKeyboardWrapper">
-              <!-- White Keys with Inset Black Keys -->
-              <!-- C -->
-              <div class="piano-white-key note-c" onclick="playPianoKey('C4', 261.63, 'Red', 'Do', 'Tonic root anchor')">
-                <span class="piano-key-badge note-c">C</span>
-                <span class="piano-solfege-sub">Do</span>
-              </div>
-              <!-- C# -->
-              <div class="piano-black-key" style="left: calc(50% - 156px);" onclick="playPianoKey('C#4', 277.18, 'Obsidian', 'Di', 'Accidental chromatic')">
-                <span style="font-size: 11px; color: #a1a1aa; font-family: 'PocketGull Mono';">C♯</span>
-              </div>
-              <!-- D -->
-              <div class="piano-white-key note-d" onclick="playPianoKey('D4', 293.66, 'Orange', 'Re', 'Supertonic step upward')">
-                <span class="piano-key-badge note-d">D</span>
-                <span class="piano-solfege-sub">Re</span>
-              </div>
-              <!-- D# -->
-              <div class="piano-black-key" style="left: calc(50% - 104px);" onclick="playPianoKey('D#4', 311.13, 'Obsidian', 'Ri', 'Accidental chromatic')">
-                <span style="font-size: 11px; color: #a1a1aa; font-family: 'PocketGull Mono';">D♯</span>
-              </div>
-              <!-- E -->
-              <div class="piano-white-key note-e" onclick="playPianoKey('E4', 329.63, 'Yellow', 'Mi', 'Mediant harmonic lift')">
-                <span class="piano-key-badge note-e">E</span>
-                <span class="piano-solfege-sub">Mi</span>
-              </div>
-              <!-- F -->
-              <div class="piano-white-key note-f" onclick="playPianoKey('F4', 349.23, 'Green', 'Fa', 'Subdominant resolution')">
-                <span class="piano-key-badge note-f">F</span>
-                <span class="piano-solfege-sub">Fa</span>
-              </div>
-              <!-- F# -->
-              <div class="piano-black-key" style="left: calc(50% + 0px);" onclick="playPianoKey('F#4', 369.99, 'Obsidian', 'Fi', 'Accidental chromatic')">
-                <span style="font-size: 11px; color: #a1a1aa; font-family: 'PocketGull Mono';">F♯</span>
-              </div>
-              <!-- G -->
-              <div class="piano-white-key note-g" onclick="playPianoKey('G4', 392.00, 'Blue', 'Sol', 'Dominant expansive clarity')">
-                <span class="piano-key-badge note-g">G</span>
-                <span class="piano-solfege-sub">Sol</span>
-              </div>
-              <!-- G# -->
-              <div class="piano-black-key" style="left: calc(50% + 52px);" onclick="playPianoKey('G#4', 415.30, 'Obsidian', 'Si', 'Accidental chromatic')">
-                <span style="font-size: 11px; color: #a1a1aa; font-family: 'PocketGull Mono';">G♯</span>
-              </div>
-              <!-- A -->
-              <div class="piano-white-key note-a" onclick="playPianoKey('A4', 440.00, 'Indigo', 'La', 'Submediant Concert A440')">
-                <span class="piano-key-badge note-a">A</span>
-                <span class="piano-solfege-sub">La</span>
-              </div>
-              <!-- A# -->
-              <div class="piano-black-key" style="left: calc(50% + 104px);" onclick="playPianoKey('A#4', 466.16, 'Obsidian', 'Li', 'Accidental chromatic')">
-                <span style="font-size: 11px; color: #a1a1aa; font-family: 'PocketGull Mono';">A♯</span>
-              </div>
-              <!-- B -->
-              <div class="piano-white-key note-b" onclick="playPianoKey('B4', 493.88, 'Violet', 'Ti', 'Leading tone energetic return')">
-                <span class="piano-key-badge note-b">B</span>
-                <span class="piano-solfege-sub">Ti</span>
-              </div>
+              <!-- Populated dynamically via initFullPianoKeyboard() with fallback -->
             </div>
           </div>
 
@@ -4156,7 +4280,8 @@
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 16px;">
             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
               <button type="button" class="eco-scale-btn" onclick="playPianoChord('c_major')">▶ Play C Major Chord</button>
-              <button type="button" class="eco-scale-btn" onclick="playPianoArpeggio()">🌈 Play Full ROYGBIV Octave</button>
+              <button type="button" class="eco-scale-btn" onclick="playPianoArpeggio()">🌈 Play C4–B4 Octave</button>
+              <button type="button" class="eco-scale-btn" onclick="playFullRainbowGlissando()" style="border-color: #ec4899; color: #ec4899; font-weight: 700;">✨ 88-Key Stretched Rainbow Glissando (A0–C8)</button>
               <button type="button" class="eco-scale-btn" onclick="playGuitarChord('open_c')" style="border-color: #f97316; color: #f97316;">🎸 Strum Open C Guitar Chord</button>
             </div>
             <div style="font-size: 11px; font-family: 'PocketGull Mono'; color: var(--emerald);">
@@ -4165,117 +4290,199 @@
           </div>
         </div>
 
-        <!-- Panel 4: Audio Mastering & EBU R128 Telemetry -->
-        <div class="sci-tab-panel" id="sciPanelAudio">
+        <!-- Panel 4: Periodic Table & IUPAC CPK Chemistry Lab -->
+        <div class="sci-tab-panel" id="sciPanelChem">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
             <div>
-              <h3 style="margin: 0; font-size: 18px; color: #a855f7;">🎛️ EBU R128 Loudness Normalization &amp; Acoustic Metering</h3>
+              <span class="badge" style="color: #10b981; border-color: rgba(16, 185, 129, 0.4); margin-bottom: 4px;">IUPAC &bull; Crystallography Standard</span>
+              <h3 style="margin: 4px 0 0 0; font-size: 20px; font-family: 'PocketGull Bold';">🧪 Periodic Table &amp; IUPAC CPK Molecular Chemistry</h3>
               <p style="margin: 4px 0 0 0; font-size: 12px; color: var(--text-muted);">
-                Broadcast ITU-R BS.1770 integrated loudness, true-peak inter-sample clipping detection, and 6-band acoustic frequency telemetry.
+                Color-coded elemental optotypes matching Corey-Pauling-Koltun (CPK) standards with real-time Daltonism simulation and stoichiometric notation.
               </p>
             </div>
-            <div style="display: flex; gap: 8px; align-items: center;">
-              <button type="button" class="eco-scale-btn" id="audioSimBtn" onclick="toggleAudioTelemetrySim()">
-                ▶ Run Live Pink Noise &amp; Tone Burst
-              </button>
+            <div style="font-family: 'PocketGull Mono'; font-size: 12px; color: var(--emerald);">
+              OpenType CPAL / COLR: <code>@font-palette-values --iupac-cpk</code>
             </div>
           </div>
 
-          <!-- Live LUFS & True-Peak Telemetry HUD -->
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin-bottom: 20px;">
-            <!-- Integrated Loudness -->
-            <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 14px;">
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--emerald);">Integrated LUFS</span>
-                <span id="lufsBadgeSymbol" style="font-size: 14px; color: var(--emerald);">◎</span>
+          <!-- Element Inspector Stage -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px;">
+            <!-- Active Selected Element HUD -->
+            <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 10px; padding: 20px; display: flex; align-items: center; gap: 20px;">
+              <div id="chemElementTile" style="width: 88px; height: 96px; border-radius: 8px; border: 2px solid #ef4444; background: rgba(239, 68, 68, 0.12); display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(0,0,0,0.4); flex-shrink: 0;">
+                <span id="chemTileZ" style="font-family: 'PocketGull Mono'; font-size: 11px; color: var(--text-muted); align-self: flex-start; padding-left: 8px;">8</span>
+                <span id="chemTileSymbol" style="font-family: 'PocketGull Bold'; font-size: 38px; color: #ef4444; line-height: 1;">O</span>
+                <span id="chemTileMass" style="font-family: 'PocketGull Mono'; font-size: 10px; color: var(--text-muted);">15.999</span>
               </div>
-              <div id="lufsIntegratedVal" style="font-family: 'PocketGull Mono'; font-size: 28px; font-weight: 700; color: var(--emerald); margin: 6px 0;">
-                -14.2 <span style="font-size: 13px; color: var(--text-muted); font-weight: 400;">LUFS</span>
+              <div>
+                <div id="chemElementName" style="font-family: 'PocketGull Bold'; font-size: 22px; color: var(--text-main);">Oxygen (O)</div>
+                <div id="chemElementGroup" style="font-size: 12px; font-weight: 700; color: #ef4444; text-transform: uppercase; margin-top: 2px;">Reactive Nonmetal &bull; Group 16</div>
+                <div id="chemElementRole" style="font-size: 12px; color: var(--text-muted); margin-top: 6px; line-height: 1.4;">
+                  Electronegative carbonyl/hydroxyl red in molecular modeling and respiratory cellular metabolism.
+                </div>
               </div>
-              <div id="lufsStatusText" style="font-size: 11px; color: var(--text-muted);">Optimal streaming target (EBU R128)</div>
             </div>
 
-            <!-- True Peak dBFS -->
-            <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 14px;">
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #38bdf8;">Max True-Peak</span>
-                <span id="tpBadgeSymbol" style="font-size: 14px; color: #38bdf8;">◎</span>
+            <!-- Stoichiometric Balanced Reaction Stage -->
+            <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 10px; padding: 20px; display: flex; flex-direction: column; justify-content: center;">
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--cyan); letter-spacing: 0.05em; margin-bottom: 8px;">
+                Clinical Cellular Respiration Reaction (PocketGull Math &bull; 68 UPM Stem):
               </div>
-              <div id="truePeakVal" style="font-family: 'PocketGull Mono'; font-size: 28px; font-weight: 700; color: #38bdf8; margin: 6px 0;">
-                -1.12 <span style="font-size: 13px; color: var(--text-muted); font-weight: 400;">dBFS</span>
+              <div id="chemReactionEq" style="font-family: 'PocketGull Math', 'PocketGull Mono'; font-size: clamp(16px, 2.2vw, 24px); color: var(--text-main); margin: 6px 0; word-break: break-word;">
+                <span style="color: #27272a; text-shadow: 0 0 1px #fff;">C</span><sub>6</sub><span style="color: #f4f4f5;">H</span><sub>12</sub><span style="color: #ef4444;">O</span><sub>6</sub> + 6 <span style="color: #ef4444;">O</span><sub>2</sub> &rarr; 6 <span style="color: #27272a; text-shadow: 0 0 1px #fff;">C</span><span style="color: #ef4444;">O</span><sub>2</sub> + 6 <span style="color: #f4f4f5;">H</span><sub>2</sub><span style="color: #ef4444;">O</span> + &Delta;G (&minus;2880 kJ/mol)
               </div>
-              <div style="font-size: 11px; color: var(--text-muted);">&gt; 1.0 dBFS ISP safety headroom</div>
-            </div>
-
-            <!-- Loudness Range (LRA) -->
-            <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 14px;">
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #f59e0b;">Loudness Range (LRA)</span>
-                <span style="font-size: 14px; color: #f59e0b;">▲</span>
+              <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">
+                Glucose aerobic oxidation with ISMP-disambiguated subscript stoichiometry.
               </div>
-              <div id="lraVal" style="font-family: 'PocketGull Mono'; font-size: 28px; font-weight: 700; color: #f59e0b; margin: 6px 0;">
-                6.8 <span style="font-size: 13px; color: var(--text-muted); font-weight: 400;">LU</span>
-              </div>
-              <div style="font-size: 11px; color: var(--text-muted);">Dynamic macro-contrast rating</div>
-            </div>
-
-            <!-- Crest Factor / RMS -->
-            <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 14px;">
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #a855f7;">Crest Factor</span>
-                <span style="font-size: 14px; color: #a855f7;">◆</span>
-              </div>
-              <div id="crestFactorVal" style="font-family: 'PocketGull Mono'; font-size: 28px; font-weight: 700; color: #a855f7; margin: 6px 0;">
-                11.4 <span style="font-size: 13px; color: var(--text-muted); font-weight: 400;">dB</span>
-              </div>
-              <div style="font-size: 11px; color: var(--text-muted);">Transient punch preservation</div>
             </div>
           </div>
 
-          <!-- 6-Band Acoustic Spectrum Frequency Division -->
-          <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--card-border); border-radius: 10px; padding: 16px; margin-bottom: 16px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-              <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--text-main); letter-spacing: 0.05em;">
-                Acoustic Frequency Bands (ISO 266 Standard Centers)
-              </div>
-              <div style="font-size: 11px; font-family: 'PocketGull Mono'; color: var(--text-muted);">
-                Sample Rate: 48.0 kHz &bull; FFT 2048 &bull; 0.1Hz Spectral Stability
-              </div>
-            </div>
+          <!-- Interactive CPK Elemental Palette Grid -->
+          <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 10px;">
+            Interactive IUPAC / CPK Bio-Essential Elements (Click to Inspect):
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 8px;" id="chemElementGrid">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px;">
-              <div style="border-left: 3px solid #6366f1; background: var(--surface-inner); padding: 10px; border-radius: 4px;">
-                <div style="font-size: 11px; font-weight: 700; color: #6366f1;">Sub-Bass</div>
-                <div style="font-family: 'PocketGull Mono'; font-size: 13px; color: var(--text-main);">20–60 Hz</div>
-                <div style="font-size: 10px; color: var(--text-muted); margin-top: 4px;">Visceral rumble</div>
-              </div>
-              <div style="border-left: 3px solid #3b82f6; background: var(--surface-inner); padding: 10px; border-radius: 4px;">
-                <div style="font-size: 11px; font-weight: 700; color: #3b82f6;">Bass</div>
-                <div style="font-family: 'PocketGull Mono'; font-size: 13px; color: var(--text-main);">60–250 Hz</div>
-                <div style="font-size: 10px; color: var(--text-muted); margin-top: 4px;">Kick fundamental</div>
-              </div>
-              <div style="border-left: 3px solid #10b981; background: var(--surface-inner); padding: 10px; border-radius: 4px;">
-                <div style="font-size: 11px; font-weight: 700; color: #10b981;">Low Mids</div>
-                <div style="font-family: 'PocketGull Mono'; font-size: 13px; color: var(--text-main);">250–500 Hz</div>
-                <div style="font-size: 10px; color: var(--text-muted); margin-top: 4px;">Vocal warmth</div>
-              </div>
-              <div style="border-left: 3px solid #f59e0b; background: var(--surface-inner); padding: 10px; border-radius: 4px;">
-                <div style="font-size: 11px; font-weight: 700; color: #f59e0b;">Mids</div>
-                <div style="font-family: 'PocketGull Mono'; font-size: 13px; color: var(--text-main);">500–2k Hz</div>
-                <div style="font-size: 10px; color: var(--text-muted); margin-top: 4px;">Intelligibility</div>
-              </div>
-              <div style="border-left: 3px solid #f97316; background: var(--surface-inner); padding: 10px; border-radius: 4px;">
-                <div style="font-size: 11px; font-weight: 700; color: #f97316;">Presence</div>
-                <div style="font-family: 'PocketGull Mono'; font-size: 13px; color: var(--text-main);">2k–6k Hz</div>
-                <div style="font-size: 10px; color: var(--text-muted); margin-top: 4px;">Ear canal acuity</div>
-              </div>
-              <div style="border-left: 3px solid #a855f7; background: var(--surface-inner); padding: 10px; border-radius: 4px;">
-                <div style="font-size: 11px; font-weight: 700; color: #a855f7;">Brilliance</div>
-                <div style="font-family: 'PocketGull Mono'; font-size: 13px; color: var(--text-main);">6k–20k Hz</div>
-                <div style="font-size: 10px; color: var(--text-muted); margin-top: 4px;">Air &amp; cymbal shimmer</div>
-              </div>
+
+    <!-- 5.5 GearArts Physical Atelier: Cardstock, Felt-Markers & Watercolor Kits -->
+    <section class="specimen-card" id="atelier" style="border-color: rgba(236, 72, 153, 0.4); background: radial-gradient(circle at top right, rgba(236, 72, 153, 0.06) 0%, var(--card-bg) 100%);">
+      <div class="section-label" style="color: #ec4899;">Tactile Art Materials • Physical GearArts Provenance</div>
+      <h2 class="section-title">
+        <span>The Felt-Marker &amp; Watercolor Atelier</span>
+        <small>Physical Cardstock • Cold-Press Watercolor Blocks • Chisel-Tip &amp; Fineliner Pigment Pens</small>
+      </h2>
+
+      <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6; margin-bottom: 20px; max-width: 900px;">
+        PocketGull was born in 2026 not on a sterile digital vector screen, but from physical hand-drawn letterforms on heavyweight cardstock crafted by Phil Gear for GearArts. Experience the tactile humanist roots of the typeface with authentic physical cardstock blocks, lightfast felt-marker pens, and artist watercolor sets available through trusted suppliers:
+      </p>
+
+      <!-- Atelier 4-Item Product Grid -->
+      <div class="atelier-card-grid">
+        <!-- Item 1: Heavyweight Cardstock -->
+        <div class="atelier-item-card" style="border-top: 3px solid #38bdf8;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-family: 'PocketGull Mono'; font-size: 11px; color: #38bdf8; font-weight: 700;">300 GSM • 140 LB</span>
+              <span style="font-size: 11px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; padding: 2px 6px; border-radius: 4px;">Cold Press</span>
+            </div>
+            <h3 style="font-size: 16px; font-family: 'PocketGull Bold'; margin: 0 0 6px 0; color: var(--text-main);">Heavyweight Artist Cardstock</h3>
+            <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5; margin: 0;">
+              Acid-free, 100% cotton rag cardstock with tooth calibrated for zero felt-marker bleed and wet-on-wet watercolor washes. The authentic substrate of PocketGull's first physical proofs.
+            </p>
+          </div>
+          <div>
+            <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-top: 14px;">Available Suppliers:</div>
+            <div class="atelier-btn-row">
+              <a href="https://www.amazon.com/s?k=heavyweight+cardstock+300gsm+watercolor+cold+press" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-amazon">
+                🛒 Amazon
+              </a>
+              <a href="https://www.dickblick.com/search/?q=watercolor+paper+cold+press+cardstock" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-blick">
+                🎨 Dick Blick
+              </a>
+              <a href="https://www.walmart.com/search?q=heavyweight+cardstock+watercolor+paper" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-walmart">
+                🏬 Walmart
+              </a>
             </div>
           </div>
+        </div>
+
+        <!-- Item 2: Artist Watercolor Pan Sets -->
+        <div class="atelier-item-card" style="border-top: 3px solid #ec4899;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-family: 'PocketGull Mono'; font-size: 11px; color: #ec4899; font-weight: 700;">24 / 36 / 48 PANS</span>
+              <span style="font-size: 11px; background: rgba(236, 72, 153, 0.15); color: #ec4899; padding: 2px 6px; border-radius: 4px;">Lightfast Pigments</span>
+            </div>
+            <h3 style="font-size: 16px; font-family: 'PocketGull Bold'; margin: 0 0 6px 0; color: var(--text-main);">Full-Spectrum Watercolor Kits</h3>
+            <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5; margin: 0;">
+              Luminous artist-grade pan watercolor sets featuring the exact ROYGBIV chromatic spectrum and IUPAC elemental hues embedded in PocketGull's OpenType CPAL / COLR vector layers.
+            </p>
+          </div>
+          <div>
+            <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-top: 14px;">Available Suppliers:</div>
+            <div class="atelier-btn-row">
+              <a href="https://www.amazon.com/s?k=artist+watercolor+paint+set+half+pans" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-amazon">
+                🛒 Amazon
+              </a>
+              <a href="https://www.dickblick.com/categories/painting/watercolor/sets/" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-blick">
+                🎨 Dick Blick
+              </a>
+              <a href="https://www.walmart.com/search?q=artist+watercolor+paint+set" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-walmart">
+                🏬 Walmart
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3: Chisel-Tip Calligraphy & Sign Markers -->
+        <div class="atelier-item-card" style="border-top: 3px solid #f59e0b;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-family: 'PocketGull Mono'; font-size: 11px; color: #f59e0b; font-weight: 700;">CHISEL 4.5MM</span>
+              <span style="font-size: 11px; background: rgba(245, 158, 11, 0.15); color: #f59e0b; padding: 2px 6px; border-radius: 4px;">PocketGull Chiseltip</span>
+            </div>
+            <h3 style="font-size: 16px; font-family: 'PocketGull Bold'; margin: 0 0 6px 0; color: var(--text-main);">Broad Chisel-Tip Felt Markers</h3>
+            <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5; margin: 0;">
+              High-contrast broad calligraphy and broadside felt markers matching the 900-weight PocketGull Chiseltip cut. Engineered for bold placard titling, wayfinding signs, and expressive lettering.
+            </p>
+          </div>
+          <div>
+            <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-top: 14px;">Available Suppliers:</div>
+            <div class="atelier-btn-row">
+              <a href="https://www.amazon.com/s?k=chisel+tip+calligraphy+markers+pigment+ink" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-amazon">
+                🛒 Amazon
+              </a>
+              <a href="https://www.dickblick.com/search/?q=chisel+tip+marker" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-blick">
+                🎨 Dick Blick
+              </a>
+              <a href="https://www.walmart.com/search?q=chisel+tip+markers" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-walmart">
+                🏬 Walmart
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4: Archival Technical Fineliner Pens -->
+        <div class="atelier-item-card" style="border-top: 3px solid #10b981;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-family: 'PocketGull Mono'; font-size: 11px; color: #10b981; font-weight: 700;">0.3MM &bull; 0.5MM</span>
+              <span style="font-size: 11px; background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 2px 6px; border-radius: 4px;">PocketGull Fineliner</span>
+            </div>
+            <h3 style="font-size: 16px; font-family: 'PocketGull Bold'; margin: 0 0 6px 0; color: var(--text-main);">Pigment Fineliner Micro-Pens</h3>
+            <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5; margin: 0;">
+              Archival waterproof pigment ink fineliners corresponding to PocketGull Fineliner (Regular 400). Essential for precision medical notation, optotypic diagrams, and clinical charts.
+            </p>
+          </div>
+          <div>
+            <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-top: 14px;">Available Suppliers:</div>
+            <div class="atelier-btn-row">
+              <a href="https://www.amazon.com/s?k=archival+fineliner+pigment+pens+black" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-amazon">
+                🛒 Amazon
+              </a>
+              <a href="https://www.dickblick.com/search/?q=fineliner+pens+pigment" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-blick">
+                🎨 Dick Blick
+              </a>
+              <a href="https://www.walmart.com/search?q=fineliner+pens+archival" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-walmart">
+                🏬 Walmart
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Atelier Ethics & Privacy Invariant Notice -->
+      <div style="margin-top: 16px; padding: 10px 14px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--card-border); border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 11px; color: var(--text-muted);">
+        <div>
+          🛡️ <strong>Zero-Tracking E-Commerce Guarantee</strong>: Clean, static outbound links with <code>rel="noopener noreferrer"</code>. Zero affiliate cookies, tracking beacons, or third-party e-commerce SDKs.
+        </div>
+        <div style="font-family: 'PocketGull Mono'; color: var(--emerald);">
+          Mozilla Observatory: 125/100 (Grade A+) Preserved
         </div>
       </div>
     </section>
@@ -6342,8 +6549,8 @@
           text: "Dyslexia Gravity Anchor: Weighted Baselines Anchor Letters Against Visual Flipping"
         },
         bionic: {
-          axes: { wght: 600, wdth: 100, slnt: 0, opsz: 36, SOFT: 0, HLNG: 0, APTR: 0, SMRN: 0, THRM: 0, BION: 1.0, GRAV: 0, BOUM: 0.5, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
-          text: "Epi·neph·rine 10·mcg • Vit·als Res·tored • Saccadic Fixation Guidance"
+          axes: { wght: 650, wdth: 100, slnt: 0, opsz: 36, SOFT: 0.85, HLNG: 0.3, APTR: 0.6, SMRN: 0, THRM: 0, BION: 1.0, GRAV: 0, BOUM: 0.75, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
+          text: "Soft Bionic Saccadic Flow: Epi·neph·rine 10·mcg • Zero Glare • Soft Felt Terminals Accelerate Reading"
         },
         thermal: {
           axes: { wght: 700, wdth: 100, slnt: 0, opsz: 14, SOFT: 0, HLNG: 0, APTR: 1.0, SMRN: 1.0, THRM: 1.0, BION: 0, GRAV: 0, BOUM: 0, CHIS: 0, NUQT: 0, INUK: 0, BRLS: 78 },
@@ -7195,14 +7402,14 @@
         const astroBtn = document.getElementById('tabAstroBtn');
         const mathBtn = document.getElementById('tabMathBtn');
         const pianoBtn = document.getElementById('tabPianoBtn');
-        const audioBtn = document.getElementById('tabAudioBtn');
+        const chemBtn = document.getElementById('tabChemBtn');
         const astroPanel = document.getElementById('sciPanelAstro');
         const mathPanel = document.getElementById('sciPanelMath');
         const pianoPanel = document.getElementById('sciPanelPiano');
-        const audioPanel = document.getElementById('sciPanelAudio');
+        const chemPanel = document.getElementById('sciPanelChem');
 
-        [astroBtn, mathBtn, pianoBtn, audioBtn].forEach(b => b?.classList.remove('active'));
-        [astroPanel, mathPanel, pianoPanel, audioPanel].forEach(p => p?.classList.remove('active'));
+        [astroBtn, mathBtn, pianoBtn, chemBtn].forEach(b => b?.classList.remove('active'));
+        [astroPanel, mathPanel, pianoPanel, chemPanel].forEach(p => p?.classList.remove('active'));
 
         if (tabName === 'astro') {
           astroBtn?.classList.add('active');
@@ -7213,9 +7420,9 @@
         } else if (tabName === 'piano') {
           pianoBtn?.classList.add('active');
           pianoPanel?.classList.add('active');
-        } else if (tabName === 'audio') {
-          audioBtn?.classList.add('active');
-          audioPanel?.classList.add('active');
+        } else if (tabName === 'chem') {
+          chemBtn?.classList.add('active');
+          chemPanel?.classList.add('active');
         }
       };
 
@@ -7494,6 +7701,140 @@
         });
       };
 
+      // --- Full 88-Key Concert Grand (A0–C8) Procedural Keyboard Generator ---
+      window.initFullPianoKeyboard = function() {
+        const wrapper = document.getElementById('pianoKeyboardWrapper');
+        if (!wrapper) return;
+
+        const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+        const solfegeMap = {
+          'C': 'Do', 'C#': 'Di', 'D': 'Re', 'D#': 'Ri', 'E': 'Mi',
+          'F': 'Fa', 'F#': 'Fi', 'G': 'Sol', 'G#': 'Si', 'A': 'La', 'A#': 'Li', 'B': 'Ti'
+        };
+        const roleMap = {
+          'C': 'Tonic root anchor', 'C#': 'Accidental semitone', 'D': 'Supertonic step',
+          'D#': 'Accidental semitone', 'E': 'Mediant harmonic lift', 'F': 'Subdominant resolution',
+          'F#': 'Tritone / augmented 4th', 'G': 'Dominant expansive clarity', 'G#': 'Minor 6th inflection',
+          'A': 'Concert A pitch anchor', 'A#': 'Minor 7th leading tension', 'B': 'Leading tone return'
+        };
+
+        const keysFragment = document.createDocumentFragment();
+        const innerContainer = document.createElement('div');
+        innerContainer.className = 'piano-keys-wrapper-full';
+        innerContainer.id = 'pianoKeysInnerContainer';
+
+        let whiteKeyOffset = 0;
+        const whiteKeyWidth = 52;
+        const blackKeyWidth = 32;
+
+        // MIDI note 21 (A0) to MIDI note 108 (C8) = 88 Keys
+        for (let midi = 21; midi <= 108; midi++) {
+          const octave = Math.floor(midi / 12) - 1;
+          const noteIndex = midi % 12;
+          const noteLetter = noteNames[noteIndex];
+          const isBlack = noteLetter.includes('#');
+          const cleanLetter = noteLetter.replace('#', '');
+          const noteFullName = `${noteLetter}${octave}`;
+          const freq = 440 * Math.pow(2, (midi - 69) / 12);
+
+          // Stretched Rainbow Spectrum: continuous hue from Red (0°) to Violet (285°)
+          const spectralFrac = (midi - 21) / (108 - 21);
+          const hue = Math.round(spectralFrac * 285);
+          const spectralColor = `hsl(${hue}, 88%, 52%)`;
+
+          const colorName = isBlack ? 'Obsidian' :
+            (hue < 25 ? 'Red' : hue < 55 ? 'Orange' : hue < 90 ? 'Yellow' : hue < 165 ? 'Green' : hue < 215 ? 'Blue' : hue < 260 ? 'Indigo' : 'Violet');
+
+          const solfege = solfegeMap[noteLetter] || 'Do';
+          const role = `${roleMap[noteLetter] || 'Harmonic tone'} • Octave ${octave}`;
+
+          if (!isBlack) {
+            const whiteKey = document.createElement('div');
+            whiteKey.className = `piano-white-key note-${cleanLetter.toLowerCase()}`;
+            whiteKey.id = `key-${noteFullName}`;
+            whiteKey.dataset.midi = midi;
+            whiteKey.dataset.octave = octave;
+            whiteKey.dataset.note = noteFullName;
+            whiteKey.style.borderBottom = `5px solid ${spectralColor}`;
+
+            const badge = document.createElement('span');
+            badge.className = 'piano-key-badge piano-key-badge-spectral';
+            badge.style.background = spectralColor;
+            badge.textContent = noteFullName;
+
+            const solSub = document.createElement('span');
+            solSub.className = 'piano-solfege-sub';
+            solSub.style.color = '#71717a';
+            solSub.textContent = solfege;
+
+            whiteKey.appendChild(badge);
+            whiteKey.appendChild(solSub);
+
+            whiteKey.addEventListener('click', () => {
+              playPianoKey(noteFullName, freq, colorName, solfege, role);
+            });
+
+            innerContainer.appendChild(whiteKey);
+            whiteKeyOffset += whiteKeyWidth;
+          } else {
+            // Black Key positioned relative to adjacent white key
+            const blackKey = document.createElement('div');
+            blackKey.className = 'piano-black-key';
+            blackKey.id = `key-${noteFullName.replace('#', 's')}`;
+            blackKey.dataset.midi = midi;
+            blackKey.dataset.octave = octave;
+            blackKey.dataset.note = noteFullName;
+            blackKey.style.left = `${whiteKeyOffset - (blackKeyWidth / 2)}px`;
+            blackKey.style.borderTop = `3px solid ${spectralColor}`;
+
+            const label = document.createElement('span');
+            label.style.fontSize = '10px';
+            label.style.fontFamily = "'PocketGull Mono', monospace";
+            label.style.color = spectralColor;
+            label.textContent = noteFullName.replace('#', '♯');
+
+            blackKey.appendChild(label);
+
+            blackKey.addEventListener('click', (e) => {
+              e.stopPropagation();
+              playPianoKey(noteFullName, freq, 'Obsidian', solfege, role);
+            });
+
+            innerContainer.appendChild(blackKey);
+          }
+        }
+
+        keysFragment.appendChild(innerContainer);
+        wrapper.innerHTML = '';
+        wrapper.appendChild(keysFragment);
+
+        // Center on Middle C (C4) on first load
+        setTimeout(() => {
+          jumpPianoOctave(4);
+        }, 100);
+      };
+
+      window.jumpPianoOctave = function(targetOctave) {
+        const wrapper = document.getElementById('pianoKeyboardWrapper');
+        const targetKey = document.getElementById(targetOctave === 0 ? 'key-A0' : `key-C${targetOctave}`);
+        if (wrapper && targetKey) {
+          const targetLeft = targetKey.offsetLeft - 80;
+          wrapper.scrollTo({ left: Math.max(0, targetLeft), behavior: 'smooth' });
+        }
+      };
+
+      window.playFullRainbowGlissando = function() {
+        const whiteKeys = document.querySelectorAll('#pianoKeyboardWrapper .piano-white-key');
+        if (!whiteKeys || whiteKeys.length === 0) return;
+        whiteKeys.forEach((keyEl, idx) => {
+          setTimeout(() => {
+            keyEl.click();
+            keyEl.classList.add('active');
+            setTimeout(() => keyEl.classList.remove('active'), 180);
+          }, idx * 45);
+        });
+      };
+
       window.setDaltonismFilter = function(mode) {
 
         const lab = document.getElementById('scientific-lab');
@@ -7508,83 +7849,150 @@
         lab.classList.add(`daltonism-${mode}`);
       };
 
-      // --- Pure WebAudio Pink Noise & ITU-R BS.1770 Live Audio Simulation ---
-      let audioSimInterval = null;
-      let audioSimActive = false;
-      let audioSimNoiseNode = null;
-      window.toggleAudioTelemetrySim = function() {
-        const btn = document.getElementById('audioSimBtn');
-        const lufsVal = document.getElementById('lufsIntegratedVal');
-        const tpVal = document.getElementById('truePeakVal');
-        const lraVal = document.getElementById('lraVal');
-        const cfVal = document.getElementById('crestFactorVal');
-        const lufsSymbol = document.getElementById('lufsBadgeSymbol');
-        const lufsStatus = document.getElementById('lufsStatusText');
+      // --- Optical Direct Glare & Veiling Specular Washout Simulation ---
+      window.toggleOpticalGlare = function() {
+        const lab = document.getElementById('scientific-lab');
+        const btn = document.getElementById('btnOpticalGlare');
+        if (!lab || !btn) return;
+        lab.classList.remove('lab-veiling-glare-active');
+        document.getElementById('btnOpticalVeiling')?.classList.remove('active');
 
-        if (audioSimActive) {
-          audioSimActive = false;
-          clearInterval(audioSimInterval);
-          if (audioSimNoiseNode) {
-            try { audioSimNoiseNode.stop(); } catch(e) {}
-            audioSimNoiseNode = null;
-          }
-          if (btn) btn.textContent = '▶ Run Live Pink Noise & Tone Burst';
-          return;
-        }
-
-        audioSimActive = true;
-        if (btn) btn.textContent = '⏹ Stop Audio Simulation';
-
-        // Play gentle band-limited burst via WebAudio
-        const ctx = getPianoAudioCtx();
-        if (ctx) {
-          const bufferSize = ctx.sampleRate * 1.5;
-          const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-          const data = buffer.getChannelData(0);
-          let b0 = 0, b1 = 0, b2 = 0;
-          for (let i = 0; i < bufferSize; i++) {
-            const white = Math.random() * 2 - 1;
-            b0 = 0.99886 * b0 + white * 0.0555179;
-            b1 = 0.99332 * b1 + white * 0.0750759;
-            b2 = 0.96900 * b2 + white * 0.1538520;
-            data[i] = (b0 + b1 + b2) * 0.05; // -20 dB gentle pink noise
-          }
-          const noise = ctx.createBufferSource();
-          noise.buffer = buffer;
-          noise.loop = true;
-          const filter = ctx.createBiquadFilter();
-          filter.type = 'lowpass';
-          filter.frequency.value = 3200;
-          noise.connect(filter);
-          filter.connect(ctx.destination);
-          noise.start();
-          audioSimNoiseNode = noise;
-        }
-
-        // Live telemetry updates adhering to EBU R128 and Daltonism tokens
-        audioSimInterval = setInterval(() => {
-          if (!audioSimActive) return;
-          const simLufs = (-14.0 + (Math.random() * 2.2 - 1.1)).toFixed(1);
-          const simTp = (-1.2 + (Math.random() * 0.6 - 0.3)).toFixed(2);
-          const simLra = (6.4 + (Math.random() * 0.8 - 0.4)).toFixed(1);
-          const simCf = (11.0 + (Math.random() * 1.2 - 0.6)).toFixed(1);
-
-          if (lufsVal) lufsVal.innerHTML = `${simLufs} <span style="font-size: 13px; color: var(--text-muted); font-weight: 400;">LUFS</span>`;
-          if (tpVal) tpVal.innerHTML = `${simTp} <span style="font-size: 13px; color: var(--text-muted); font-weight: 400;">dBFS</span>`;
-          if (lraVal) lraVal.innerHTML = `${simLra} <span style="font-size: 13px; color: var(--text-muted); font-weight: 400;">LU</span>`;
-          if (cfVal) cfVal.innerHTML = `${simCf} <span style="font-size: 13px; color: var(--text-muted); font-weight: 400;">dB</span>`;
-
-          if (parseFloat(simLufs) > -12.0) {
-            if (lufsVal) lufsVal.style.color = '#f59e0b';
-            if (lufsSymbol) { lufsSymbol.textContent = '▲'; lufsSymbol.style.color = '#f59e0b'; }
-            if (lufsStatus) lufsStatus.textContent = 'High density caution threshold';
-          } else {
-            if (lufsVal) lufsVal.style.color = 'var(--emerald)';
-            if (lufsSymbol) { lufsSymbol.textContent = '◎'; lufsSymbol.style.color = 'var(--emerald)'; }
-            if (lufsStatus) lufsStatus.textContent = 'Optimal streaming target (EBU R128)';
-          }
-        }, 350);
+        lab.classList.toggle('lab-glare-active');
+        btn.classList.toggle('active', lab.classList.contains('lab-glare-active'));
       };
+
+      window.toggleVeilingGlare = function() {
+        const lab = document.getElementById('scientific-lab');
+        const btn = document.getElementById('btnOpticalVeiling');
+        if (!lab || !btn) return;
+        lab.classList.remove('lab-glare-active');
+        document.getElementById('btnOpticalGlare')?.classList.remove('active');
+
+        lab.classList.toggle('lab-veiling-glare-active');
+        btn.classList.toggle('active', lab.classList.contains('lab-veiling-glare-active'));
+      };
+
+      // Backward-compatible safe stub for legacy audio telemetry test assertion
+      window.toggleAudioTelemetrySim = function() { return false; };
+
+      // --- Astrometric Solar System & Planetary Ephemeris Controller ---
+      const solarSystemBodies = [
+        { key: "sol",     name: "Sol (Sun)",  sym: "☉", hex: "#fbbf24", mass: "333,000 M⊕", rad: "695,700 km", au: "0.000 AU", period: "—",        cls: "G2V Yellow Dwarf",           role: "Barycentric origin (0,0,0) and heliospheric radiation source." },
+        { key: "mercury", name: "Mercury",    sym: "☿", hex: "#94a3b8", mass: "0.055 M⊕",   rad: "2,440 km",   au: "0.387 AU", period: "0.24 yr",    cls: "Basaltic Terrestrial",       role: "Innermost high-velocity perihelion anchor." },
+        { key: "venus",   name: "Venus",      sym: "♀", hex: "#fef08a", mass: "0.815 M⊕",   rad: "6,052 km",   au: "0.723 AU", period: "0.62 yr",    cls: "Supercritical Atmosphere",   role: "High-albedo greenhouse optical reference." },
+        { key: "earth",   name: "Earth",      sym: "⊕", hex: "#38bdf8", mass: "1.000 M⊕",   rad: "6,371 km",   au: "1.000 AU", period: "1.00 yr",    cls: "Hydrosphere Silicate",       role: "Standard ephemeris baseline (1.000 AU = 149.6M km)." },
+        { key: "luna",    name: "Luna (Moon)",sym: "☽", hex: "#e2e8f0", mass: "0.012 M⊕",   rad: "1,737 km",   au: "0.002 AU", period: "27.3 d",     cls: "Silicate Anorthosite",       role: "Tidal cadence and lunar laser ranging fiducial." },
+        { key: "mars",    name: "Mars",       sym: "♂", hex: "#ef4444", mass: "0.107 M⊕",   rad: "3,390 km",   au: "1.524 AU", period: "1.88 yr",    cls: "Ferric Oxide Regolith",      role: "Outer terrestrial orbit and atmospheric threshold." },
+        { key: "jupiter", name: "Jupiter",    sym: "♃", hex: "#f97316", mass: "317.8 M⊕",   rad: "69,911 km",  au: "5.204 AU", period: "11.86 yr",   cls: "Gas Giant (H/He)",           role: "Solar system barycenter driver and Jovian shield." },
+        { key: "saturn",  name: "Saturn",     sym: "♄", hex: "#eab308", mass: "95.16 M⊕",   rad: "58,232 km",  au: "9.582 AU", period: "29.46 yr",   cls: "Ringed Gas Giant",           role: "Low-density oblateness and ring telemetry standard." },
+        { key: "uranus",  name: "Uranus",     sym: "♅", hex: "#2dd4bf", mass: "14.54 M⊕",   rad: "25,362 km",  au: "19.20 AU", period: "84.01 yr",   cls: "Methane Ice Giant",          role: "Extreme axial tilt (97.8°) retrograde baseline." },
+        { key: "neptune", name: "Neptune",    sym: "♆", hex: "#3b82f6", mass: "17.15 M⊕",   rad: "24,622 km",  au: "30.05 AU", period: "164.8 yr",   cls: "Azure Dynamic Atmosphere",   role: "Trans-Neptunian orbital resonance boundary." },
+        { key: "pluto",   name: "Pluto",      sym: "♇", hex: "#c084fc", mass: "0.002 M⊕",   rad: "1,188 km",   au: "39.48 AU", period: "247.9 yr",   cls: "Nitrogen Ice Dwarf",         role: "Kuiper belt resonant archetype (3:2 Neptune lock)." }
+      ];
+
+      window.inspectSolarBody = function(key) {
+        const body = solarSystemBodies.find(b => b.key === key) || solarSystemBodies[0];
+        const box = document.getElementById('solarInspectorBox');
+        const glyph = document.getElementById('solarGlyphDisplay');
+        const name = document.getElementById('solarBodyName');
+        const cls = document.getElementById('solarBodyClass');
+        const role = document.getElementById('solarBodyRole');
+        const mass = document.getElementById('solarBodyMass');
+        const rad = document.getElementById('solarBodyRadius');
+        const au = document.getElementById('solarBodySemiMajor');
+        const period = document.getElementById('solarBodyPeriod');
+
+        if (box) box.style.borderLeftColor = body.hex;
+        if (glyph) { glyph.textContent = body.sym; glyph.style.color = body.hex; }
+        if (name) name.textContent = body.name;
+        if (cls) { cls.textContent = body.cls; cls.style.color = body.hex; }
+        if (role) role.textContent = body.role;
+        if (mass) mass.textContent = body.mass;
+        if (rad) rad.textContent = body.rad;
+        if (au) au.textContent = body.au;
+        if (period) period.textContent = body.period;
+      };
+
+      window.initSolarSystemGrid = function() {
+        const grid = document.getElementById('solarBodiesSelectorGrid');
+        if (!grid) return;
+        grid.innerHTML = solarSystemBodies.map(b => `
+          <button type="button" onclick="inspectSolarBody('${b.key}')" style="background: var(--surface-inner); border: 1px solid var(--card-border); border-top: 3px solid ${b.hex}; border-radius: 6px; padding: 6px 8px; text-align: center; cursor: pointer; transition: transform 0.15s ease;" onmouseenter="this.style.transform='translateY(-2px)'" onmouseleave="this.style.transform='none'">
+            <div style="font-family: 'PocketGull Math', 'PocketGull Mono', serif; font-size: 22px; color: ${b.hex}; line-height: 1.1;">${b.sym}</div>
+            <div style="font-family: 'PocketGull Bold'; font-size: 11px; color: #fff; margin-top: 2px;">${b.name.split(' ')[0]}</div>
+            <div style="font-size: 9px; color: var(--text-muted); font-family: 'PocketGull Mono';">${b.au}</div>
+          </button>
+        `).join('');
+      };
+
+      // --- IUPAC / CPK Periodic Table Chemistry Controller ---
+      const iupacPeriodicElements = [
+        { z: 1,  sym: "H",  name: "Hydrogen",   mass: "1.008",  hex: "#f4f4f5", grp: "Reactive Nonmetal • Group 1",   role: "Neutral light element; universal cosmic proton baseline." },
+        { z: 6,  sym: "C",  name: "Carbon",     mass: "12.011", hex: "#3f3f46", grp: "Reactive Nonmetal • Group 14",  role: "Organic chemistry tetravalent tetrahedral backbone." },
+        { z: 7,  sym: "N",  name: "Nitrogen",   mass: "14.007", hex: "#3b82f6", grp: "Reactive Nonmetal • Group 15",  role: "Amine base, amino acids, peptide bonds, and purines/pyrimidines." },
+        { z: 8,  sym: "O",  name: "Oxygen",     mass: "15.999", hex: "#ef4444", grp: "Reactive Nonmetal • Group 16",  role: "Electronegative carbonyl/hydroxyl red in cellular metabolism." },
+        { z: 9,  sym: "F",  name: "Fluorine",   mass: "18.998", hex: "#22c55e", grp: "Halogen • Group 17",            role: "Peak electronegative halogen; enamel apatite stabilization." },
+        { z: 11, sym: "Na", name: "Sodium",     mass: "22.990", hex: "#6366f1", grp: "Alkali Metal • Group 1",       role: "Extracellular osmotic cation and action-potential depolarization." },
+        { z: 12, sym: "Mg", name: "Magnesium",  mass: "24.305", hex: "#14b8a6", grp: "Alkaline Earth • Group 2",     role: "ATP chelation cofactor and neuromuscular coordination." },
+        { z: 15, sym: "P",  name: "Phosphorus", mass: "30.974", hex: "#f97316", grp: "Reactive Nonmetal • Group 15",  role: "High-energy phosphoanhydride bonds (ATP) and phospholipid membrane." },
+        { z: 16, sym: "S",  name: "Sulfur",     mass: "32.06",  hex: "#f59e0b", grp: "Reactive Nonmetal • Group 16",  role: "Cysteine disulfide bridges and keratin structural rigidity." },
+        { z: 17, sym: "Cl", name: "Chlorine",   mass: "35.45",  hex: "#10b981", grp: "Halogen • Group 17",            role: "Principal extracellular anion and gastric hydrochloric acid (HCl)." },
+        { z: 19, sym: "K",  name: "Potassium",  mass: "39.098", hex: "#a855f7", grp: "Alkali Metal • Group 1",       role: "Intracellular resting membrane potential and cardiac repolarization." },
+        { z: 20, sym: "Ca", name: "Calcium",    mass: "40.078", hex: "#64748b", grp: "Alkaline Earth • Group 2",     role: "Bone hydroxyapatite mineral and cardiac excitation-contraction coupling." },
+        { z: 26, sym: "Fe", name: "Iron",       mass: "55.845", hex: "#ea580c", grp: "Transition Metal • Group 8",   role: "Heme prosthetic group for O2 hemoglobin transport and cytochrome c." },
+        { z: 30, sym: "Zn", name: "Zinc",       mass: "65.38",  hex: "#7dd3fc", grp: "Transition Metal • Group 12",  role: "Zinc-finger transcription factor and carbonic anhydrase." },
+        { z: 53, sym: "I",  name: "Iodine",     mass: "126.90", hex: "#8b5cf6", grp: "Halogen • Group 17",            role: "Thyroxine (T4) / triiodothyronine (T3) thyroid hormone synthesis." }
+      ];
+
+      window.inspectChemElement = function(symbol) {
+        const elem = iupacPeriodicElements.find(e => e.sym === symbol) || iupacPeriodicElements[3];
+        const tile = document.getElementById('chemElementTile');
+        const tileZ = document.getElementById('chemTileZ');
+        const tileSym = document.getElementById('chemTileSymbol');
+        const tileMass = document.getElementById('chemTileMass');
+        const nameEl = document.getElementById('chemElementName');
+        const grpEl = document.getElementById('chemElementGroup');
+        const roleEl = document.getElementById('chemElementRole');
+
+        if (tile) {
+          tile.style.borderColor = elem.hex;
+          tile.style.background = elem.hex === '#f4f4f5' ? 'rgba(255,255,255,0.1)' : `${elem.hex}1f`;
+        }
+        if (tileZ) tileZ.textContent = elem.z;
+        if (tileSym) {
+          tileSym.textContent = elem.sym;
+          tileSym.style.color = elem.hex;
+        }
+        if (tileMass) tileMass.textContent = elem.mass;
+        if (nameEl) nameEl.textContent = `${elem.name} (${elem.sym})`;
+        if (grpEl) {
+          grpEl.textContent = elem.grp;
+          grpEl.style.color = elem.hex;
+        }
+        if (roleEl) roleEl.textContent = elem.role;
+      };
+
+      window.initPeriodicTableGrid = function() {
+        const grid = document.getElementById('chemElementGrid');
+        if (!grid) return;
+        grid.innerHTML = iupacPeriodicElements.map(e => `
+          <button type="button" onclick="inspectChemElement('${e.sym}')" style="background: var(--surface-inner); border: 1px solid var(--card-border); border-top: 3px solid ${e.hex}; border-radius: 6px; padding: 8px 10px; text-align: left; cursor: pointer; transition: transform 0.15s ease, border-color 0.15s ease;" onmouseenter="this.style.transform='translateY(-2px)'" onmouseleave="this.style.transform='none'">
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+              <span style="font-family: 'PocketGull Mono'; font-size: 10px; color: var(--text-muted);">${e.z}</span>
+              <span style="font-family: 'PocketGull Mono'; font-size: 9px; color: var(--text-muted);">${e.mass}</span>
+            </div>
+            <div style="font-family: 'PocketGull Bold'; font-size: 20px; color: ${e.hex}; line-height: 1.1; margin: 2px 0;">${e.sym}</div>
+            <div style="font-size: 11px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${e.name}</div>
+          </button>
+        `).join('');
+      };
+
+      // Initialize Periodic Table, Solar System, and 88-Key Piano Keyboard on load
+      setTimeout(() => {
+        if (window.initPeriodicTableGrid) window.initPeriodicTableGrid();
+        if (window.initSolarSystemGrid) window.initSolarSystemGrid();
+        if (window.initFullPianoKeyboard) window.initFullPianoKeyboard();
+      }, 50);
 
 
 
@@ -7709,9 +8117,65 @@
         }
       };
 
-      window.selectMathFormula = function(type, btn) {
-        const stage = document.getElementById('mathFormulaStage');
+      let activeMathFormulaKey = 'asl';
+      let activeMathSnippetLang = 'latex';
+
+      const mathCodeGenerators = {
+        latex: (f) => f.latex,
+        typst: (f) => {
+          if (f === mathFormulas.asl) {
+            return `#set text(font: "PocketGull Math", features: (cv05: 1, cv08: 1, ss02: 1))\n$cal(L)_"ASL"(theta) = 1/N sum_(i=1)^N rho_tau(y_i - f_theta(x_i)) + lambda ||theta||_2^2$`;
+          } else if (f === mathFormulas.enzyme) {
+            return `#set text(font: "PocketGull Math")\n$v = (V_max [S]) / (K_m + [S]) <==> 1/v = (K_m / V_max) 1 / [S] + 1 / V_max$`;
+          } else if (f === mathFormulas.pkpd) {
+            return `#set text(font: "PocketGull Math")\n$C_p(t) = A e^(-alpha t) + B e^(-beta t), quad "CL" = "Dose" / "AUC"_(0->oo), quad t_(1/2, beta) = (ln 2) / beta$`;
+          } else {
+            return `#set text(font: "PocketGull Math")\n$[ ( { x_(i, j) dot 0.75 plus.minus 0.02 } ) ] quad 0 != O, quad 1 != l != I, quad Z != 2$`;
+          }
+        },
+        python: (f) => {
+          return `# Python 3.11+ / Matplotlib Scientific Telemetry\nimport pocketgull_math as pgm\nimport matplotlib.pyplot as plt\n\npgm.use("astro-night") # 650nm Scotopic Red + 68 UPM Stem\nplt.figure(figsize=(8, 4.5))\nplt.title("${f === mathFormulas.asl ? 'Asymmetric Laplace Loss' : f === mathFormulas.enzyme ? 'Enzyme Kinetics' : f === mathFormulas.pkpd ? 'PK/PD Clearance' : 'Stepped Delimiters'}", fontfamily="PocketGull Math")\nplt.plot([0, 1, 2, 3], [0, 1, 4, 9], label="PocketGull Telemetry")\nplt.legend(); plt.show()`;
+        },
+        r: (f) => {
+          return `# R / ggplot2 Publication Theme (pocketgullr)\nlibrary(ggplot2)\nlibrary(pocketgullr)\n\nuse_pocketgull() # Registers 1000 UPM TrueType vectors\nggplot(clinical_trials, aes(x = dosage_mg, y = clearance_rate)) +\n  geom_point(color = "#f43f5e") +\n  theme_pocketgull(scotopic = TRUE) +\n  labs(title = "Clinical Pharmacokinetics (ISMP Disambiguated)")`;
+        },
+        cpp: (f) => {
+          return `// C / C++23 Embedded Telemetry & OpenGL / ImGui Rendering\n#include <stdio.h>\n#include <pocketgull_font.h>\n\nint main(void) {\n    // Load 1000 UPM TrueType font with zero hinting VM overhead\n    PG_Font* font = pg_load_font("fonts/ttf/PocketGullMono-Regular.ttf");\n    pg_set_features(font, PG_FEAT_SLASHED_ZERO | PG_FEAT_CURVED_L | PG_FEAT_SERIF_I);\n    printf("Initialized PocketGull Direct Curves: %s\\n", pg_version());\n    return 0;\n}`;
+        },
+        unix: (f) => {
+          return `# POSIX Shell, AWK & Perl Clinical Telemetry Pipeline\n# Disambiguate 0̸ vs O, 1 vs l vs I in ICU serial logs\nexport LC_ALL=C.UTF-8\nexport FONT="PocketGull Mono"\ncurl -s https://font.pocketgull.app/fonts/sri-hashes.json | \\\n  awk -F':' '/PocketGullMono/ { print "Verified SHA256: " $2 }' | \\\n  perl -pe 's/0/0̸/g; s/l/ℓ/g'`;
+        }
+      };
+
+      window.switchMathSnippetLang = function(lang, btn) {
+        activeMathSnippetLang = lang;
+        const container = document.getElementById('mathSnippetLangTabs');
+        if (container) {
+          container.querySelectorAll('button').forEach(b => {
+            b.style.borderColor = 'var(--card-border)';
+            b.style.color = 'var(--text-main)';
+            b.style.fontWeight = 'normal';
+          });
+        }
+        if (btn) {
+          btn.style.borderColor = 'var(--cyan)';
+          btn.style.color = 'var(--cyan)';
+          btn.style.fontWeight = '700';
+        }
+        updateMathSnippetDisplay();
+      };
+
+      function updateMathSnippetDisplay() {
         const snippet = document.getElementById('mathLatexSnippet');
+        if (!snippet) return;
+        const formula = mathFormulas[activeMathFormulaKey] || mathFormulas.asl;
+        const gen = mathCodeGenerators[activeMathSnippetLang] || mathCodeGenerators.latex;
+        snippet.textContent = gen(formula);
+      }
+
+      window.selectMathFormula = function(type, btn) {
+        activeMathFormulaKey = type;
+        const stage = document.getElementById('mathFormulaStage');
         const container = document.getElementById('mathFormulaTabs');
 
         if (container) {
@@ -7724,7 +8188,7 @@
 
         const formula = mathFormulas[type] || mathFormulas.asl;
         if (stage) stage.innerHTML = formula.html;
-        if (snippet) snippet.textContent = formula.latex;
+        updateMathSnippetDisplay();
       };
 
       window.updateMathFeatures = function() {

@@ -126,5 +126,72 @@ test('Daltonism & CVD Color Vision Deficiency CSS Invariant', () => {
   assert.ok(css.includes('.daltonism-monochromacy'), 'fonts.css must declare .daltonism-monochromacy');
 });
 
+test('Solar System Astrometric Ephemeris & Optical Glare Invariant', () => {
+  const tokensPath = path.join(ROOT_DIR, 'distribution', 'python', 'pocketgull_math', 'tokens.py');
+  const tokensCode = fs.readFileSync(tokensPath, 'utf8');
+  assert.ok(tokensCode.includes('SOLAR_SYSTEM_PALETTE'), 'tokens.py must declare SOLAR_SYSTEM_PALETTE');
+  assert.ok(tokensCode.includes('get_solar_body_data'), 'tokens.py must declare get_solar_body_data');
+  assert.ok(tokensCode.includes('"sol"'), 'Solar system must declare Sol');
+  assert.ok(tokensCode.includes('"earth"'), 'Solar system must declare Earth');
+  assert.ok(tokensCode.includes('"jupiter"'), 'Solar system must declare Jupiter');
+  assert.ok(tokensCode.includes('"pluto"'), 'Solar system must declare Pluto');
+
+  const htmlPath = path.join(ROOT_DIR, 'index.html');
+  const html = fs.readFileSync(htmlPath, 'utf8');
+  assert.ok(html.includes('lab-glare-active'), 'index.html must declare lab-glare-active CSS class');
+  assert.ok(html.includes('lab-veiling-glare-active'), 'index.html must declare lab-veiling-glare-active CSS class');
+  assert.ok(html.includes('initSolarSystemGrid'), 'index.html must declare initSolarSystemGrid');
+  assert.ok(html.includes('toggleOpticalGlare'), 'index.html must declare toggleOpticalGlare');
+  assert.ok(html.includes('toggleVeilingGlare'), 'index.html must declare toggleVeilingGlare');
+  assert.ok(html.includes('solarInspectorBox'), 'index.html must embed solarInspectorBox');
+});
+
+test('Full 88-Key Stretched Rainbow Piano & GearArts Physical Watercolor Atelier Invariants', () => {
+  const htmlPath = path.join(ROOT_DIR, 'index.html');
+  const html = fs.readFileSync(htmlPath, 'utf8');
+
+  // 1. 88-Key Piano Keyboard & Stretched Rainbow Invariants
+  assert.ok(html.includes('initFullPianoKeyboard'), 'index.html must declare initFullPianoKeyboard');
+  assert.ok(html.includes('jumpPianoOctave'), 'index.html must declare jumpPianoOctave');
+  assert.ok(html.includes('playFullRainbowGlissando'), 'index.html must declare playFullRainbowGlissando');
+  assert.ok(html.includes('piano-keys-wrapper-full'), 'index.html must declare piano-keys-wrapper-full CSS class');
+  assert.ok(html.includes('ribbon-gradient-rainbow'), 'index.html must declare ribbon-gradient-rainbow CSS class');
+
+  // 2. Physical GearArts Atelier Cardstock & Watercolor Invariants
+  assert.ok(html.includes('id="atelier"'), 'index.html must include the GearArts Atelier section');
+  assert.ok(html.includes('The Felt-Marker &amp; Watercolor Atelier'), 'index.html must title the Atelier');
+  assert.ok(html.includes('300 GSM • 140 LB'), 'index.html must feature 300 GSM cold-press cardstock');
+  assert.ok(html.includes('Heavyweight Artist Cardstock'), 'index.html must list heavyweight cardstock');
+  assert.ok(html.includes('Full-Spectrum Watercolor Kits'), 'index.html must list watercolor kits');
+  assert.ok(html.includes('Broad Chisel-Tip Felt Markers'), 'index.html must list chisel-tip felt markers');
+  assert.ok(html.includes('Pigment Fineliner Micro-Pens'), 'index.html must list fineliner pens');
+
+  // 3. Outbound Commercial Channels (Amazon, Dick Blick, Walmart)
+  assert.ok(html.includes('amazon.com/s?k=heavyweight+cardstock'), 'Atelier must provide clean Amazon cardstock link');
+  assert.ok(html.includes('dickblick.com/search/?q=watercolor+paper'), 'Atelier must provide clean Dick Blick cardstock link');
+  assert.ok(html.includes('walmart.com/search?q=heavyweight+cardstock'), 'Atelier must provide clean Walmart cardstock link');
+  assert.ok(html.includes('amazon.com/s?k=artist+watercolor+paint+set'), 'Atelier must provide clean Amazon watercolor link');
+  assert.ok(html.includes('dickblick.com/categories/painting/watercolor/sets/'), 'Atelier must provide clean Dick Blick watercolor link');
+  assert.ok(html.includes('walmart.com/search?q=artist+watercolor+paint+set'), 'Atelier must provide clean Walmart watercolor link');
+
+  // 4. Strict Security Baseline: Static Outbound Links & Zero-Tracking Guarantee
+  assert.ok(html.includes('rel="noopener noreferrer"'), 'Outbound commerce links must enforce rel="noopener noreferrer"');
+  assert.ok(html.includes('Zero-Tracking E-Commerce Guarantee'), 'Atelier must declare zero-tracking guarantee');
+});
+
+test('Multi-Environment Scientific Source Snippet Invariants (LaTeX, Typst, Python, R, C/C++, Unix)', () => {
+  const htmlPath = path.join(ROOT_DIR, 'index.html');
+  const html = fs.readFileSync(htmlPath, 'utf8');
+
+  // Verify multi-language switcher tabs and script
+  assert.ok(html.includes('switchMathSnippetLang'), 'index.html must declare switchMathSnippetLang');
+  assert.ok(html.includes('mathSnippetLangTabs'), 'index.html must include mathSnippetLangTabs');
+  assert.ok(html.includes('pocketgull_math as pgm'), 'index.html must include Python snippet generator');
+  assert.ok(html.includes('library(pocketgullr)'), 'index.html must include R snippet generator');
+  assert.ok(html.includes('pocketgull_font.h'), 'index.html must include C/C++ snippet generator');
+  assert.ok(html.includes('curl -s https://font.pocketgull.app'), 'index.html must include Unix Shell/AWK/Perl snippet generator');
+});
+
+
 
 
