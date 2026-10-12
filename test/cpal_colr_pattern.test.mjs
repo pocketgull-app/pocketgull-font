@@ -81,5 +81,17 @@ test('Webfont CSS Parity: fonts.css Declares OpenType @font-palette-values', () 
   assert.ok(css.includes('--pocketgull-obsidian'), 'fonts.css must declare --pocketgull-obsidian');
   assert.ok(css.includes('--iupac-cpk'), 'fonts.css must declare --iupac-cpk elemental chemistry palette');
   assert.ok(css.includes('--ams-math'), 'fonts.css must declare --ams-math mathematical semantics palette');
+  assert.ok(css.includes('--iupac-periodic-table'), 'fonts.css must declare --iupac-periodic-table palette');
+});
+
+test('Periodic Table IUPAC Module Exists & Maps All Major Families', () => {
+  const ptPath = path.join(ROOT_DIR, 'distribution', 'python', 'pocketgull_math', 'periodic_table.py');
+  assert.ok(fs.existsSync(ptPath), 'periodic_table.py must exist');
+  const code = fs.readFileSync(ptPath, 'utf8');
+  assert.ok(code.includes('IUPAC_PERIODIC_CATEGORIES'), 'Must declare IUPAC_PERIODIC_CATEGORIES');
+  assert.ok(code.includes('alkali-metals'), 'Must declare alkali-metals');
+  assert.ok(code.includes('noble-gases'), 'Must declare noble-gases');
+  assert.ok(code.includes('halogens'), 'Must declare halogens');
+  assert.ok(code.includes('actinoids'), 'Must declare actinoids');
 });
 

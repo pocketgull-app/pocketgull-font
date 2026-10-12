@@ -2432,6 +2432,23 @@ body.eco-dark-canopy {
     4 #ec4899; /* Imaginary / Complex Domain (Rose) */
 }
 
+/* IUPAC Periodic Table Major Families Palette */
+@font-palette-values --iupac-periodic-table {
+  font-family: 'PocketGull Chem';
+  base-palette: 0;
+  override-colors:
+    0 #a855f7, /* Alkali Metals (Violet) */
+    1 #6366f1, /* Alkaline Earth (Indigo) */
+    2 #3b82f6, /* Transition Metals (Blue) */
+    3 #0ea5e9, /* Post-Transition Metals (Sky Blue) */
+    4 #14b8a6, /* Metalloids (Teal) */
+    5 #10b981, /* Reactive Nonmetals / CHNOPS (Emerald) */
+    6 #f59e0b, /* Halogens (Amber) */
+    7 #ec4899, /* Noble Gases (Rose) */
+    8 #8b5cf6, /* Lanthanoids (Purple) */
+    9 #ef4444; /* Actinoids (Red) */
+}
+
 .palette-iupac-chem {
   font-palette: --iupac-cpk;
 }
@@ -2439,3 +2456,19 @@ body.eco-dark-canopy {
 .palette-ams-math {
   font-palette: --ams-math;
 }
+
+.palette-iupac-periodic {
+  font-palette: --iupac-periodic-table;
+}
+
+/* Periodic Table Category Semantic Classes */
+.element-alkali          { color: #c084fc; border-color: #a855f7; }
+.element-alkaline-earth  { color: #818cf8; border-color: #6366f1; }
+.element-transition      { color: #60a5fa; border-color: #3b82f6; }
+.element-post-transition { color: #38bdf8; border-color: #0ea5e9; }
+.element-metalloid       { color: #2dd4bf; border-color: #14b8a6; }
+.element-nonmetal        { color: #34d399; border-color: #10b981; }
+.element-halogen         { color: #fbbf24; border-color: #f59e0b; }
+.element-noble-gas       { color: #f472b6; border-color: #ec4899; }
+.element-lanthanoid      { color: #a78bfa; border-color: #8b5cf6; }
+.element-actinoid        { color: #f87171; border-color: #ef4444; }
