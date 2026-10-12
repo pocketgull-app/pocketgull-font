@@ -107,6 +107,18 @@ test('Piano ROYGBIV Color Tokens: Chromatic Music Pedagogy Invariant', () => {
   assert.ok(code.includes('#a855f7'), 'Leading Ti B must map to Violet');
   assert.ok(code.includes('TRAFFIC_LIGHT_TEMPO_PALETTE'), 'Must declare TRAFFIC_LIGHT_TEMPO_PALETTE');
   assert.ok(code.includes('get_traffic_light_phase_color'), 'Must declare get_traffic_light_phase_color');
+  assert.ok(code.includes('DALTONISM_SIMULATION_MATRICES'), 'Must declare DALTONISM_SIMULATION_MATRICES');
+  assert.ok(code.includes('simulate_cvd_color'), 'Must declare simulate_cvd_color');
 });
+
+test('Daltonism & CVD Color Vision Deficiency CSS Invariant', () => {
+  const cssPath = path.join(ROOT_DIR, 'fonts.css');
+  const css = fs.readFileSync(cssPath, 'utf8');
+  assert.ok(css.includes('.daltonism-protanopia'), 'fonts.css must declare .daltonism-protanopia');
+  assert.ok(css.includes('.daltonism-deuteranopia'), 'fonts.css must declare .daltonism-deuteranopia');
+  assert.ok(css.includes('.daltonism-tritanopia'), 'fonts.css must declare .daltonism-tritanopia');
+  assert.ok(css.includes('.daltonism-monochromacy'), 'fonts.css must declare .daltonism-monochromacy');
+});
+
 
 

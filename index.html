@@ -2421,6 +2421,107 @@
     .ribbon-gradient-a { background: linear-gradient(180deg, #6366f1 0%, #f59e0b 50%, #10b981 100%); }
     .ribbon-gradient-b { background: linear-gradient(180deg, #a855f7 0%, #f59e0b 50%, #10b981 100%); }
 
+    /* Guitar Fretboard & String Matrix */
+    .guitar-fretboard-frame {
+      width: 100%;
+      background: linear-gradient(180deg, #1c1511 0%, #2e2118 50%, #150f0b 100%);
+      border: 2px solid #583c27;
+      border-radius: 10px;
+      padding: 16px 12px;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.8), 0 8px 24px rgba(0,0,0,0.4);
+      margin-top: 14px;
+      position: relative;
+      overflow-x: auto;
+    }
+    .guitar-neck-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-width: 620px;
+      position: relative;
+    }
+    .guitar-string-row {
+      display: flex;
+      align-items: center;
+      position: relative;
+      height: 24px;
+    }
+    .guitar-string-wire {
+      position: absolute;
+      left: 60px;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background: linear-gradient(180deg, #e2e8f0 0%, #94a3b8 50%, #475569 100%);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.9);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .guitar-nut-label {
+      width: 52px;
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-right: 8px;
+      border-right: 3px solid #cbd5e1;
+      z-index: 2;
+    }
+    .guitar-frets-container {
+      display: flex;
+      flex: 1;
+      height: 100%;
+      position: relative;
+      z-index: 2;
+    }
+    .guitar-fret-cell {
+      flex: 1;
+      height: 100%;
+      border-right: 2px solid #a1a1aa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.15s ease;
+    }
+    .guitar-fret-cell:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .guitar-fret-marker {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'PocketGull Bold', sans-serif;
+      font-size: 11px;
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 0 8px rgba(0,0,0,0.8);
+      transition: transform 0.1s ease, filter 0.1s ease;
+    }
+    .guitar-fret-marker:hover {
+      transform: scale(1.25);
+    }
+    .fret-number-row {
+      display: flex;
+      padding-left: 60px;
+      margin-top: 8px;
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 10px;
+      color: #a1a1aa;
+    }
+    .fret-number-cell {
+      flex: 1;
+      text-align: center;
+    }
+
+
     @media (max-width: 900px) {
       .nav-links {
         display: none;
@@ -3620,6 +3721,38 @@
         </button>
       </div>
 
+      <!-- Universal Daltonism / Color Vision Deficiency (CVD) Simulation Bar -->
+      <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); border-radius: 10px; padding: 12px 16px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 16px;">👁️</span>
+          <div>
+            <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--cyan); letter-spacing: 0.05em;">Daltonism &amp; CVD Neuro-Filter (Math &bull; Chemistry &bull; Music):</div>
+            <div style="font-size: 11px; color: var(--text-muted);">Simulate and verify Louise Sloan 5:1 legibility under distinct color-vision conditions.</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 6px; flex-wrap: wrap;" id="daltonismSelectorGroup">
+          <button type="button" class="sci-tab-btn active" id="btnCvdNormal" onclick="setDaltonismFilter('normal')">Normal Vision</button>
+          <button type="button" class="sci-tab-btn" id="btnCvdProtanopia" onclick="setDaltonismFilter('protanopia')" title="Red-cone absent (1% males)">Protanopia (Red-Blind)</button>
+          <button type="button" class="sci-tab-btn" id="btnCvdDeuteranopia" onclick="setDaltonismFilter('deuteranopia')" title="Green-cone absent (6% males)">Deuteranopia (Green-Blind)</button>
+          <button type="button" class="sci-tab-btn" id="btnCvdTritanopia" onclick="setDaltonismFilter('tritanopia')" title="Blue-cone absent (Rare)">Tritanopia (Blue-Blind)</button>
+          <button type="button" class="sci-tab-btn" id="btnCvdMonochromacy" onclick="setDaltonismFilter('monochromacy')" title="Total color blindness / Achromatopsia">Monochromacy (100% Greyscale)</button>
+        </div>
+      </div>
+
+      <!-- Embedded W3C SVG Color Matrix Filters for Daltonism -->
+      <svg style="position: absolute; height: 0; width: 0; pointer-events: none;" aria-hidden="true">
+        <filter id="filter-protanopia">
+          <feColorMatrix type="matrix" values="0.56667 0.43333 0 0 0  0.55833 0.44167 0 0 0  0 0.24167 0.75833 0 0  0 0 0 1 0" />
+        </filter>
+        <filter id="filter-deuteranopia">
+          <feColorMatrix type="matrix" values="0.625 0.375 0 0 0  0.70 0.30 0 0 0  0 0.30 0.70 0 0  0 0 0 1 0" />
+        </filter>
+        <filter id="filter-tritanopia">
+          <feColorMatrix type="matrix" values="0.95 0.05 0 0 0  0 0.433 0.567 0 0  0 0.475 0.525 0 0  0 0 0 1 0" />
+        </filter>
+      </svg>
+
+
       <!-- Tab 1: Scotopic Night Astronomy HUD -->
       <div class="sci-panel active" id="sciPanelAstro">
         <div class="scotopic-container" id="scotopicContainer">
@@ -3799,6 +3932,20 @@
             </div>
           </div>
 
+          <!-- Instrument Switcher & Web MIDI Integration Strip -->
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; background: rgba(0,0,0,0.2); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--card-border);">
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-right: 4px;">Instrument View:</span>
+              <button type="button" class="sci-tab-btn active" id="btnViewPiano" onclick="switchInstrumentView('piano')">🎹 88-Key Piano</button>
+              <button type="button" class="sci-tab-btn" id="btnViewGuitar" onclick="switchInstrumentView('guitar')">🎸 6-String Guitar (EADGBE)</button>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <button type="button" class="hero-btn-secondary" id="btnConnectMidi" onclick="connectWebMidi()" style="font-size: 11px; padding: 6px 12px; border-color: var(--cyan); color: var(--cyan);">
+                <span>🔌</span> <span id="midiStatusLabel">Connect Web MIDI / Keyboard</span>
+              </button>
+            </div>
+          </div>
+
           <!-- Automated Player Piano Roll (Punched Paper Ribbon Highway) -->
           <div class="piano-waterfall-highway" id="playerPianoRollHighway">
             <div class="waterfall-track" id="track-C">
@@ -3824,8 +3971,8 @@
             </div>
           </div>
 
-          <!-- Interactive Keyboard Frame -->
-          <div class="piano-keyboard-frame">
+          <!-- View 1: Interactive Piano Keyboard Frame -->
+          <div class="piano-keyboard-frame" id="pianoKeyboardView">
             <div class="piano-keys-wrapper" id="pianoKeyboardWrapper">
               <!-- White Keys with Inset Black Keys -->
               <!-- C -->
@@ -3886,19 +4033,134 @@
             </div>
           </div>
 
+          <!-- View 2: Interactive 6-String Guitar Fretboard -->
+          <div class="guitar-fretboard-frame" id="guitarFretboardView" style="display: none;">
+            <div class="guitar-neck-grid" id="guitarNeckGrid">
+              <!-- String 1: High E (E4, 329.63 Hz, Yellow) -->
+              <div class="guitar-string-row">
+                <div class="guitar-nut-label" onclick="playGuitarFret(1, 0, 'E4', 329.63, 'Yellow', 'Mi')"><span>E₄</span> <small style="color: #eab308;">0</small></div>
+                <div class="guitar-string-wire" style="height: 1.5px;"></div>
+                <div class="guitar-frets-container">
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(1, 1, 'F4', 349.23, 'Green', 'Fa')"><span class="guitar-fret-marker" style="background: #10b981;">F</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(1, 2, 'F#4', 369.99, 'Obsidian', 'Fi')"></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(1, 3, 'G4', 392.00, 'Blue', 'Sol')"><span class="guitar-fret-marker" style="background: #3b82f6;">G</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(1, 4, 'G#4', 415.30, 'Obsidian', 'Si')"></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(1, 5, 'A4', 440.00, 'Indigo', 'La')"><span class="guitar-fret-marker" style="background: #6366f1;">A</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(1, 6, 'A#4', 466.16, 'Obsidian', 'Li')"></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(1, 7, 'B4', 493.88, 'Violet', 'Ti')"><span class="guitar-fret-marker" style="background: #a855f7;">B</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(1, 8, 'C5', 523.25, 'Red', 'Do')"><span class="guitar-fret-marker" style="background: #ef4444;">C</span></div>
+                </div>
+              </div>
+
+              <!-- String 2: B (B3, 246.94 Hz, Violet) -->
+              <div class="guitar-string-row">
+                <div class="guitar-nut-label" onclick="playGuitarFret(2, 0, 'B3', 246.94, 'Violet', 'Ti')"><span>B₃</span> <small style="color: #a855f7;">0</small></div>
+                <div class="guitar-string-wire" style="height: 1.8px;"></div>
+                <div class="guitar-frets-container">
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(2, 1, 'C4', 261.63, 'Red', 'Do')"><span class="guitar-fret-marker" style="background: #ef4444;">C</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(2, 2, 'C#4', 277.18, 'Obsidian', 'Di')"></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(2, 3, 'D4', 293.66, 'Orange', 'Re')"><span class="guitar-fret-marker" style="background: #f97316;">D</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(2, 4, 'D#4', 311.13, 'Obsidian', 'Ri')"></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(2, 5, 'E4', 329.63, 'Yellow', 'Mi')"><span class="guitar-fret-marker" style="background: #eab308;">E</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(2, 6, 'F4', 349.23, 'Green', 'Fa')"><span class="guitar-fret-marker" style="background: #10b981;">F</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(2, 7, 'F#4', 369.99, 'Obsidian', 'Fi')"></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(2, 8, 'G4', 392.00, 'Blue', 'Sol')"><span class="guitar-fret-marker" style="background: #3b82f6;">G</span></div>
+                </div>
+              </div>
+
+              <!-- String 3: G (G3, 196.00 Hz, Blue) -->
+              <div class="guitar-string-row">
+                <div class="guitar-nut-label" onclick="playGuitarFret(3, 0, 'G3', 196.00, 'Blue', 'Sol')"><span>G₃</span> <small style="color: #3b82f6;">0</small></div>
+                <div class="guitar-string-wire" style="height: 2.2px;"></div>
+                <div class="guitar-frets-container">
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(3, 1, 'G#3', 207.65, 'Obsidian', 'Si')"></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(3, 2, 'A3', 220.00, 'Indigo', 'La')"><span class="guitar-fret-marker" style="background: #6366f1;">A</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(3, 3, 'A#3', 233.08, 'Obsidian', 'Li')"></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(3, 4, 'B3', 246.94, 'Violet', 'Ti')"><span class="guitar-fret-marker" style="background: #a855f7;">B</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(3, 5, 'C4', 261.63, 'Red', 'Do')"><span class="guitar-fret-marker" style="background: #ef4444;">C</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(3, 6, 'C#4', 277.18, 'Obsidian', 'Di')"></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(3, 7, 'D4', 293.66, 'Orange', 'Re')"><span class="guitar-fret-marker" style="background: #f97316;">D</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(3, 8, 'D#4', 311.13, 'Obsidian', 'Ri')"></div>
+                </div>
+              </div>
+
+              <!-- String 4: D (D3, 146.83 Hz, Orange) -->
+              <div class="guitar-string-row">
+                <div class="guitar-nut-label" onclick="playGuitarFret(4, 0, 'D3', 146.83, 'Orange', 'Re')"><span>D₃</span> <small style="color: #f97316;">0</small></div>
+                <div class="guitar-string-wire" style="height: 2.8px;"></div>
+                <div class="guitar-frets-container">
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(4, 1, 'D#3', 155.56, 'Obsidian', 'Ri')"></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(4, 2, 'E3', 164.81, 'Yellow', 'Mi')"><span class="guitar-fret-marker" style="background: #eab308;">E</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(4, 3, 'F3', 174.61, 'Green', 'Fa')"><span class="guitar-fret-marker" style="background: #10b981;">F</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(4, 4, 'F#3', 185.00, 'Obsidian', 'Fi')"></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(4, 5, 'G3', 196.00, 'Blue', 'Sol')"><span class="guitar-fret-marker" style="background: #3b82f6;">G</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(4, 6, 'G#3', 207.65, 'Obsidian', 'Si')"></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(4, 7, 'A3', 220.00, 'Indigo', 'La')"><span class="guitar-fret-marker" style="background: #6366f1;">A</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(4, 8, 'A#3', 233.08, 'Obsidian', 'Li')"></div>
+                </div>
+              </div>
+
+              <!-- String 5: A (A2, 110.00 Hz, Indigo) -->
+              <div class="guitar-string-row">
+                <div class="guitar-nut-label" onclick="playGuitarFret(5, 0, 'A2', 110.00, 'Indigo', 'La')"><span>A₂</span> <small style="color: #6366f1;">0</small></div>
+                <div class="guitar-string-wire" style="height: 3.4px;"></div>
+                <div class="guitar-frets-container">
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(5, 1, 'A#2', 116.54, 'Obsidian', 'Li')"></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(5, 2, 'B2', 123.47, 'Violet', 'Ti')"><span class="guitar-fret-marker" style="background: #a855f7;">B</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(5, 3, 'C3', 130.81, 'Red', 'Do')"><span class="guitar-fret-marker" style="background: #ef4444;">C</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(5, 4, 'C#3', 138.59, 'Obsidian', 'Di')"></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(5, 5, 'D3', 146.83, 'Orange', 'Re')"><span class="guitar-fret-marker" style="background: #f97316;">D</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(5, 6, 'D#3', 155.56, 'Obsidian', 'Ri')"></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(5, 7, 'E3', 164.81, 'Yellow', 'Mi')"><span class="guitar-fret-marker" style="background: #eab308;">E</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(5, 8, 'F3', 174.61, 'Green', 'Fa')"><span class="guitar-fret-marker" style="background: #10b981;">F</span></div>
+                </div>
+              </div>
+
+              <!-- String 6: Low E (E2, 82.41 Hz, Yellow) -->
+              <div class="guitar-string-row">
+                <div class="guitar-nut-label" onclick="playGuitarFret(6, 0, 'E2', 82.41, 'Yellow', 'Mi')"><span>E₂</span> <small style="color: #eab308;">0</small></div>
+                <div class="guitar-string-wire" style="height: 4.2px;"></div>
+                <div class="guitar-frets-container">
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(6, 1, 'F2', 87.31, 'Green', 'Fa')"><span class="guitar-fret-marker" style="background: #10b981;">F</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(6, 2, 'F#2', 92.50, 'Obsidian', 'Fi')"></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(6, 3, 'G2', 98.00, 'Blue', 'Sol')"><span class="guitar-fret-marker" style="background: #3b82f6;">G</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(6, 4, 'G#2', 103.83, 'Obsidian', 'Si')"></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(6, 5, 'A2', 110.00, 'Indigo', 'La')"><span class="guitar-fret-marker" style="background: #6366f1;">A</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(6, 6, 'A#2', 116.54, 'Obsidian', 'Li')"></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(6, 7, 'B2', 123.47, 'Violet', 'Ti')"><span class="guitar-fret-marker" style="background: #a855f7;">B</span></div>
+                  <div class="guitar-fret-cell" onclick="playGuitarFret(6, 8, 'C3', 130.81, 'Red', 'Do')"><span class="guitar-fret-marker" style="background: #ef4444;">C</span></div>
+                </div>
+              </div>
+
+              <!-- Fret Number Legend -->
+              <div class="fret-number-row">
+                <div class="fret-number-cell">Fret 1</div>
+                <div class="fret-number-cell">Fret 2</div>
+                <div class="fret-number-cell">Fret 3 •</div>
+                <div class="fret-number-cell">Fret 4</div>
+                <div class="fret-number-cell">Fret 5 •</div>
+                <div class="fret-number-cell">Fret 6</div>
+                <div class="fret-number-cell">Fret 7 •</div>
+                <div class="fret-number-cell">Fret 8</div>
+              </div>
+            </div>
+          </div>
+
           <!-- Quick Scale Player Chips -->
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 16px;">
             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-              <button type="button" class="eco-scale-btn" onclick="playPianoChord('c_major')">▶ Play C Major Triad (C - E - G)</button>
+              <button type="button" class="eco-scale-btn" onclick="playPianoChord('c_major')">▶ Play C Major Chord</button>
               <button type="button" class="eco-scale-btn" onclick="playPianoArpeggio()">🌈 Play Full ROYGBIV Octave</button>
+              <button type="button" class="eco-scale-btn" onclick="playGuitarChord('open_c')" style="border-color: #f97316; color: #f97316;">🎸 Strum Open C Guitar Chord</button>
             </div>
             <div style="font-size: 11px; font-family: 'PocketGull Mono'; color: var(--emerald);">
-              Audio Engine: Pure WebAudio Polyphonic Synthesizer
+              Audio Engine: Pure WebAudio Synthesizer &bull; Zero External Plugins
             </div>
           </div>
         </div>
       </div>
     </section>
+
 
     <!-- 6. Clinical Ecological Sustainability, Ink & Battery Runtime -->
     <section class="specimen-card" id="ecological">
@@ -6956,6 +7218,99 @@
         }
       };
 
+      window.switchInstrumentView = function(viewType) {
+        const pianoView = document.getElementById('pianoKeyboardView');
+        const guitarView = document.getElementById('guitarFretboardView');
+        const btnPiano = document.getElementById('btnViewPiano');
+        const btnGuitar = document.getElementById('btnViewGuitar');
+
+        if (viewType === 'piano') {
+          if (pianoView) pianoView.style.display = 'block';
+          if (guitarView) guitarView.style.display = 'none';
+          btnPiano?.classList.add('active');
+          btnGuitar?.classList.remove('active');
+        } else if (viewType === 'guitar') {
+          if (pianoView) pianoView.style.display = 'none';
+          if (guitarView) guitarView.style.display = 'block';
+          btnGuitar?.classList.add('active');
+          btnPiano?.classList.remove('active');
+        }
+      };
+
+      window.playGuitarFret = function(stringNum, fretNum, noteName, freq, colorName, solfege) {
+        const role = `String ${stringNum}, Fret ${fretNum} • Standard Tuning`;
+        playPianoKey(noteName, freq, colorName, solfege, role);
+      };
+
+      window.playGuitarChord = function(chordType) {
+        if (chordType === 'open_c') {
+          // Open C Major: E2(x), A2->C3 (fret 3), D3->E3 (fret 2), G3 (open), B3->C4 (fret 1), E4 (open)
+          const cFretEvents = [
+            { s: 5, f: 3, n: 'C3', freq: 130.81, c: 'Red',    sol: 'Do' },
+            { s: 4, f: 2, n: 'E3', freq: 164.81, c: 'Yellow', sol: 'Mi' },
+            { s: 3, f: 0, n: 'G3', freq: 196.00, c: 'Blue',   sol: 'Sol' },
+            { s: 2, f: 1, n: 'C4', freq: 261.63, c: 'Red',    sol: 'Do' },
+            { s: 1, f: 0, n: 'E4', freq: 329.63, c: 'Yellow', sol: 'Mi' }
+          ];
+          cFretEvents.forEach((fret, i) => {
+            setTimeout(() => {
+              playGuitarFret(fret.s, fret.f, fret.n, fret.freq, fret.c, fret.sol);
+            }, i * 75);
+          });
+        }
+      };
+
+      // Native Web MIDI Access Integration
+      let webMidiActive = false;
+      window.connectWebMidi = function() {
+        const label = document.getElementById('midiStatusLabel');
+        const btn = document.getElementById('btnConnectMidi');
+
+        if (!navigator.requestMIDIAccess) {
+          if (label) label.textContent = 'Web MIDI Not Supported in this Browser';
+          return;
+        }
+
+        navigator.requestMIDIAccess({ sysex: false }).then(midiAccess => {
+          webMidiActive = true;
+          if (label) label.textContent = '✓ MIDI Connected: Play Keys!';
+          if (btn) {
+            btn.style.borderColor = 'var(--emerald)';
+            btn.style.color = 'var(--emerald)';
+          }
+
+          const noteMap = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+          const roygbivColors = {
+            'C': 'Red', 'D': 'Orange', 'E': 'Yellow', 'F': 'Green',
+            'G': 'Blue', 'A': 'Indigo', 'B': 'Violet'
+          };
+          const solfegeMap = {
+            'C': 'Do', 'D': 'Re', 'E': 'Mi', 'F': 'Fa',
+            'G': 'Sol', 'A': 'La', 'B': 'Ti'
+          };
+
+          for (let input of midiAccess.inputs.values()) {
+            input.onmidimessage = (msg) => {
+              const [status, noteNumber, velocity] = msg.data;
+              const cmd = status >> 4;
+              if (cmd === 9 && velocity > 0) { // Note-On
+                const octave = Math.floor(noteNumber / 12) - 1;
+                const noteIndex = noteNumber % 12;
+                const letter = noteMap[noteIndex];
+                const cleanLetter = letter.charAt(0);
+                const fullName = `${letter}${octave}`;
+                const freq = 440 * Math.pow(2, (noteNumber - 69) / 12);
+                const color = roygbivColors[cleanLetter] || 'Obsidian';
+                const solfege = solfegeMap[cleanLetter] || 'Chroma';
+                playPianoKey(fullName, freq, color, solfege, `MIDI Vel: ${velocity}`);
+              }
+            };
+          }
+        }).catch(err => {
+          if (label) label.textContent = 'MIDI Access Refused / No Device';
+        });
+      };
+
       window.playPianoChord = function(chordType) {
         if (chordType === 'c_major') {
           playPianoKey('C4', 261.63, 'Red', 'Do', 'Tonic root');
@@ -6980,6 +7335,22 @@
           }, idx * 260);
         });
       };
+
+      window.setDaltonismFilter = function(mode) {
+
+        const lab = document.getElementById('scientific-lab');
+        const btns = document.querySelectorAll('#daltonismSelectorGroup .sci-tab-btn');
+        btns.forEach(b => b.classList.remove('active'));
+
+        const targetBtn = document.getElementById(`btnCvd${mode.charAt(0).toUpperCase() + mode.slice(1)}`);
+        targetBtn?.classList.add('active');
+
+        if (!lab) return;
+        lab.classList.remove('daltonism-normal', 'daltonism-protanopia', 'daltonism-deuteranopia', 'daltonism-tritanopia', 'daltonism-monochromacy');
+        lab.classList.add(`daltonism-${mode}`);
+      };
+
+
 
       let isScotopicActive = false;
       window.toggleScotopicNight = function() {

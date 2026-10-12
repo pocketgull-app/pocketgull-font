@@ -73,3 +73,49 @@ def get_traffic_light_phase_color(phase_name: str) -> str:
     token = TRAFFIC_LIGHT_TEMPO_PALETTE.get(phase_name.lower().strip())
     return token["hex"] if token else "#71717a"
 
+# Daltonism & Color Vision Deficiency (CVD) Brettel/Vienot Matrix Transformations
+DALTONISM_SIMULATION_MATRICES = {
+    "protanopia": [
+        [0.56667, 0.43333, 0.0],
+        [0.55833, 0.44167, 0.0],
+        [0.0,     0.24167, 0.75833]
+    ],
+    "deuteranopia": [
+        [0.625, 0.375, 0.0],
+        [0.70,  0.30,  0.0],
+        [0.0,   0.30,  0.70]
+    ],
+    "tritanopia": [
+        [0.95, 0.05,  0.0],
+        [0.0,  0.433, 0.567],
+        [0.0,  0.475, 0.525]
+    ],
+    "monochromacy": [
+        [0.2126, 0.7152, 0.0722],
+        [0.2126, 0.7152, 0.0722],
+        [0.2126, 0.7152, 0.0722]
+    ]
+}
+
+def simulate_cvd_color(hex_color: str, deficiency: str) -> str:
+    """Simulates perceived RGB color under Protanopia, Deuteranopia, Tritanopia, or Monochromacy."""
+    mode = deficiency.lower().strip()
+    if mode == "normal" or mode not in DALTONISM_SIMULATION_MATRICES:
+        return hex_color
+    
+    clean_hex = hex_color.lstrip("#")
+    if len(clean_hex) != 6:
+        return hex_color
+        
+    r = int(clean_hex[0:2], 16) / 255.0
+    g = int(clean_hex[2:4], 16) / 255.0
+    b = int(clean_hex[4:6], 16) / 255.0
+    
+    matrix = DALTONISM_SIMULATION_MATRICES[mode]
+    sim_r = min(1.0, max(0.0, r * matrix[0][0] + g * matrix[0][1] + b * matrix[0][2]))
+    sim_g = min(1.0, max(0.0, r * matrix[1][0] + g * matrix[1][1] + b * matrix[1][2]))
+    sim_b = min(1.0, max(0.0, r * matrix[2][0] + g * matrix[2][1] + b * matrix[2][2]))
+    
+    return f"#{int(round(sim_r * 255)):02x}{int(round(sim_g * 255)):02x}{int(round(sim_b * 255)):02x}"
+
+

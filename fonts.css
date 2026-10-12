@@ -2499,3 +2499,25 @@ body.eco-dark-canopy {
 .note-g { color: #60a5fa; border-color: #3b82f6; background: rgba(59, 130, 246, 0.12); }
 .note-a { color: #818cf8; border-color: #6366f1; background: rgba(99, 102, 241, 0.12); }
 .note-b { color: #c084fc; border-color: #a855f7; background: rgba(168, 85, 247, 0.12); }
+
+/* Daltonism & Color Vision Deficiency (CVD) Simulation Filters */
+.daltonism-normal {
+  filter: none;
+}
+.daltonism-protanopia {
+  /* Protanopia (L-cone absent): Red appears dark bronze / khaki */
+  filter: url('#filter-protanopia') drop-shadow(0 0 0 rgba(0,0,0,0));
+}
+.daltonism-deuteranopia {
+  /* Deuteranopia (M-cone absent): Green shifts toward yellow/tan */
+  filter: url('#filter-deuteranopia') drop-shadow(0 0 0 rgba(0,0,0,0));
+}
+.daltonism-tritanopia {
+  /* Tritanopia (S-cone absent): Blue and Yellow collapse */
+  filter: url('#filter-tritanopia') drop-shadow(0 0 0 rgba(0,0,0,0));
+}
+.daltonism-monochromacy {
+  /* Achromatopsia: 100% Greyscale Luminance matching Sloan 5:1 contrast */
+  filter: grayscale(100%) contrast(1.15);
+}
+
