@@ -8,7 +8,11 @@
   X-Content-Type-Options: nosniff
   Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-nvkOBKQvLMXAjNqVOB1tzcLe6zaW/dbBeLCGViWuZow=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.paypal.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https:; frame-src 'self' https://www.paypal.com https://*.paypal.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self';
 
-# 1-year immutable cache for all font binaries (eliminates 17,461 KiB transfer on repeat visits)
+# 1-year immutable cache for all font binaries (eliminates transfer on repeat visits)
+/fonts/**
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
@@ -17,7 +21,15 @@
   Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
 
+/**/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
 /*.ttf
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+/**/*.ttf
   Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
 

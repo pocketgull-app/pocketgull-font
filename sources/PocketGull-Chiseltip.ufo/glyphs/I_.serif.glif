@@ -1,20 +1,21 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="I.serif" format="2">
-  <advance width="480"/>
+  <advance width="440"/>
+  <unicode hex="0049"/>
   <outline>
     <contour>
-      <point x="50" y="0" type="line"/>
-      <point x="50" y="62" type="line"/>
-      <point x="194" y="75" type="line"/>
-      <point x="194" y="639" type="line"/>
-      <point x="50" y="652" type="line"/>
-      <point x="50" y="714" type="line"/>
-      <point x="430" y="714" type="line"/>
-      <point x="430" y="652" type="line"/>
-      <point x="284" y="639" type="line"/>
-      <point x="284" y="75" type="line"/>
-      <point x="430" y="62" type="line"/>
-      <point x="430" y="0" type="line"/>
+      <point x="406" y="0" type="line"/>
+      <point x="34" y="0" type="line"/>
+      <point x="34" y="110" type="line"/>
+      <point x="123" y="144" type="line"/>
+      <point x="123" y="571" type="line"/>
+      <point x="34" y="604" type="line"/>
+      <point x="34" y="714" type="line"/>
+      <point x="406" y="714" type="line"/>
+      <point x="406" y="604" type="line"/>
+      <point x="317" y="571" type="line"/>
+      <point x="317" y="144" type="line"/>
+      <point x="406" y="110" type="line"/>
     </contour>
   </outline>
 </glyph>

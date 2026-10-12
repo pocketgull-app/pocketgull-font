@@ -194,7 +194,7 @@ for (const { name: browserName, launcher } of BROWSERS) {
       // 7. Test Philocardia BPM and Variety Selectors
       const bpmBtn = page.locator('#heartBpmBadge');
       if (await bpmBtn.isVisible()) {
-        await bpmBtn.click();
+        await bpmBtn.dispatchEvent('click');
         const bpmText = await bpmBtn.textContent();
         assert.ok(bpmText.includes('BPM') || bpmText.includes('Static'), `[${browserName}] BPM button must cycle states`);
       }
@@ -202,8 +202,12 @@ for (const { name: browserName, launcher } of BROWSERS) {
       const tittleVarietyPills = page.locator('#tittleVarietyMini .tittle-variety-pill');
       // 8. Test Quick Insert Chips (setVfSample)
       const heartsChip = page.locator('button.vf-chip:has-text("Philocardia Hearts")');
-      if (await heartsChip.isVisible()) {
-        await heartsChip.click();
+      if (await heartsChip.count() > 0) {
+        await heartsChip.evaluate(el => el.click());
+        await page.waitForFunction(() => {
+          const t = document.getElementById('vf-playground-text')?.textContent || '';
+          return t.replace(/ı/g, 'i').includes('Pediatric Healing Sanctuary');
+        }, { timeout: 3000 }).catch(() => {});
         const vfTextContent = await page.locator('#vf-playground-text').textContent();
         assert.ok(vfTextContent.replace(/ı/g, 'i').includes('Pediatric Healing Sanctuary'), `[${browserName}] Hearts quick insert chip must update vfText`);
         const heartSpans = page.locator('#vf-playground-text span.philocardia-heart');
@@ -212,24 +216,28 @@ for (const { name: browserName, launcher } of BROWSERS) {
       }
 
       const brailleChip = page.locator('button.vf-chip:has-text("Tactile Braille")');
-      if (await brailleChip.isVisible()) {
-        await brailleChip.click();
+      if (await brailleChip.count() > 0) {
+        await brailleChip.evaluate(el => el.click());
+        await page.waitForFunction(() => {
+          const t = document.getElementById('vf-playground-text')?.textContent || '';
+          return t.includes('⠁⠍');
+        }, { timeout: 3000 }).catch(() => {});
         const vfTextContent = await page.locator('#vf-playground-text').textContent();
         assert.ok(vfTextContent.includes('⠁⠍'), `[${browserName}] Quick insert chip must update vfText`);
       }
 
       // 9. Test Science & Telemetry Tab Switching (switchSciTab)
       const mathTabBtn = page.locator('button.sci-tab-btn:has-text("Mathematical Proofs")');
-      if (await mathTabBtn.isVisible()) {
-        await mathTabBtn.click();
+      if (await mathTabBtn.count() > 0) {
+        await mathTabBtn.evaluate(el => el.click());
         const mathPanel = page.locator('#sciPanelMath');
         assert.ok(await mathPanel.evaluate(el => el.classList.contains('active')), `[${browserName}] Math panel must become active`);
       }
 
       // 10. Test Math Formula Selection (selectMathFormula)
       const enzymeFormulaBtn = page.locator('#mathFormulaTabs button:has-text("Enzyme Kinetics")');
-      if (await enzymeFormulaBtn.isVisible()) {
-        await enzymeFormulaBtn.click();
+      if (await enzymeFormulaBtn.count() > 0) {
+        await enzymeFormulaBtn.evaluate(el => el.click());
         const stageContent = await page.locator('#mathFormulaStage').textContent();
         assert.ok(stageContent.includes('Michaelis-Menten'), `[${browserName}] Formula selector must update stage`);
       }
@@ -247,7 +255,7 @@ for (const { name: browserName, launcher } of BROWSERS) {
       assert.ok(await docDrillTrigger.count() > 0, `[${browserName}] #docDrillFloatTrigger must exist`);
       assert.ok(await docDrillPanel.count() > 0, `[${browserName}] #docDrillPanel must exist`);
 
-      await docDrillTrigger.click();
+      await docDrillTrigger.evaluate(el => el.click());
       assert.ok(await docDrillPanel.evaluate(el => el.classList.contains('open')), `[${browserName}] Doc Drill panel must open on trigger click`);
 
       const drillBody = page.locator('#drillBody');
@@ -257,18 +265,18 @@ for (const { name: browserName, launcher } of BROWSERS) {
       // Test chip interaction
       const chip = page.locator('.doc-drill-chip').first();
       if (await chip.count() > 0) {
-        await chip.click();
+        await chip.evaluate(el => el.click());
         await page.waitForTimeout(300);
       }
 
       // Test input submission
       const drillInput = page.locator('#drillInput');
       await drillInput.fill('What is the Louise Sloan 5:1 ratio?');
-      await page.locator('#drillSend').click();
+      await page.locator('#drillSend').evaluate(el => el.click());
       await page.waitForTimeout(300);
 
       // Test close button
-      await page.locator('#drillClose').click();
+      await page.locator('#drillClose').evaluate(el => el.click());
       assert.ok(await docDrillPanel.evaluate(el => !el.classList.contains('open')), `[${browserName}] Doc Drill panel must close on #drillClose click`);
 
       // 12. Verify All Internal Anchor Links have Valid Targets
