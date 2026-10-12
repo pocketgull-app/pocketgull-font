@@ -28,10 +28,18 @@
 \DeclareBoolOption[false]{curvedl}
 \DeclareBoolOption[false]{serifedI}
 \DeclareBoolOption[false]{tabular}
+\DeclareBoolOption[false]{soft}
+\DeclareBoolOption[false]{chem}
 \DeclareStringOption[]{fontpath}
 \ProcessKeyvalOptions*
 
 \RequirePackage{unicode-math}
+
+% Determine active math font binary
+\def\PGM@fontname{PocketGull-Math.ttf}
+\ifPGM@chem
+  \def\PGM@fontname{PocketGull-Chem.ttf}
+\fi
 
 % Assemble OpenType RawFeatures based on package options
 \def\PGM@features{}
@@ -50,12 +58,12 @@
 
 % Primary OpenType Math Font Declaration
 \ifx\PGM@fontpath\@empty
-  \setmathfont{PocketGull-Math.ttf}[
+  \setmathfont{\PGM@fontname}[
     Scale=MatchLowercase,
     RawFeature={\PGM@features}
   ]
 \else
-  \setmathfont{PocketGull-Math.ttf}[
+  \setmathfont{\PGM@fontname}[
     Scale=MatchLowercase,
     Path=\PGM@fontpath,
     RawFeature={\PGM@features}

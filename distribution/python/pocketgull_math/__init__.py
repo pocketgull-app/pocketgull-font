@@ -43,18 +43,23 @@ def use(theme="dark", vector_paths=True):
     Parameters:
     - theme: 'dark' (clinical obsidian HUD), 'light' (medical paper/journal),
              'astro' or 'astro-night' (observatory scotopic red night vision),
-             'bio' or 'genomics' (bioinformatics & single-cell RNA-seq).
+             'bio' or 'genomics' (bioinformatics & single-cell RNA-seq),
+             'soft' or 'math-soft' (felt-marker softened humanist mathematics),
+             'chem-soft' or 'chem' (soft organic chemistry & pharmacology).
     - vector_paths: If True, sets svg.fonttype='path' to guarantee 100% visual
                     parity on viewers without the font installed.
     """
     register_font("PocketGull-Math.ttf")
     register_font("PocketGullMono-Regular.ttf")
+    register_font("PocketGull-Chem.ttf")
     
     # Map theme aliases
     alias_map = {
         "astro": "astro-night",
         "night": "astro-night",
         "genomics": "bio",
+        "soft": "math-soft",
+        "chem": "chem-soft",
     }
     canonical_theme = alias_map.get(theme, theme)
     style_name = f"pocketgull-{canonical_theme}.mplstyle"

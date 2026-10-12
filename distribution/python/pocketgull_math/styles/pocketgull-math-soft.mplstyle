@@ -1,0 +1,55 @@
+# PocketGull Math Soft — Humanist Academic Style
+# Warm cream background with softened felt-marker stroke aesthetics
+
+# Figure & Canvas
+figure.facecolor: "#fafaf9"
+figure.edgecolor: "#fafaf9"
+axes.facecolor: "#fafaf9"
+axes.edgecolor: "#78716c"
+axes.linewidth: 1.0
+
+# Text & Font
+font.family: "PocketGull"
+text.color: "#1c1917"
+axes.labelcolor: "#1c1917"
+axes.titlesize: 13
+axes.titleweight: "bold"
+axes.titlelocation: "left"
+axes.labelsize: 11
+axes.labelweight: "medium"
+
+# Math & Operators
+mathtext.fontset: "custom"
+mathtext.rm: "PocketGull Math"
+mathtext.it: "PocketGull Math:italic"
+mathtext.bf: "PocketGull Math:bold"
+
+# Ticks
+xtick.color: "#78716c"
+ytick.color: "#78716c"
+xtick.direction: "out"
+ytick.direction: "out"
+xtick.labelsize: 10
+ytick.labelsize: 10
+
+# Grid
+axes.grid: True
+grid.color: "#e7e5e4"
+grid.linestyle: "-"
+grid.linewidth: 0.8
+grid.alpha: 0.8
+
+# Lines & Curves
+lines.linewidth: 2.2
+lines.solid_capstyle: "round"
+lines.solid_joinstyle: "round"
+
+# Legend
+legend.frameon: True
+legend.facecolor: "#f5f5f4"
+legend.edgecolor: "#d6d3d1"
+legend.fontsize: 10
+legend.framealpha: 0.9
+
+# SVG Vector Export
+svg.fonttype: "path"
