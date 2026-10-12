@@ -192,6 +192,18 @@ test('Multi-Environment Scientific Source Snippet Invariants (LaTeX, Typst, Pyth
   assert.ok(html.includes('curl -s https://font.pocketgull.app'), 'index.html must include Unix Shell/AWK/Perl snippet generator');
 });
 
+test('Classic Systems Canon & CRT Phosphor Terminal Invariant', () => {
+  const htmlPath = path.join(ROOT_DIR, 'index.html');
+  const html = fs.readFileSync(htmlPath, 'utf8');
+  assert.ok(html.includes('id="classic-systems"'), 'index.html must include classic-systems section');
+  assert.ok(html.includes('The Bell Labs, Unix &amp; MS-DOS Heritage'), 'must declare Bell Labs, Unix & MS-DOS section');
+  assert.ok(html.includes('id="crtTerminalScreen"'), 'must contain CRT terminal screen');
+  assert.ok(html.includes('switchCrtPhosphor'), 'must include switchCrtPhosphor controller');
+  assert.ok(html.includes('telemetry_alloc'), 'must include C pointer code snippet in CRT console');
+  assert.ok(html.includes('awk \'BEGIN {FS=","}'), 'must include AWK column extraction in CRT console');
+  assert.ok(html.includes('define (filter-signal'), 'must include Lisp expression in CRT console');
+});
+
 
 
 

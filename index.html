@@ -4717,6 +4717,111 @@
       </div>
     </section>
 
+    <!-- 6.5 The Classic Systems Canon: Bell Labs, MS-DOS & CRT Telemetry -->
+    <section class="specimen-card" id="classic-systems">
+      <div class="section-label">Classic Systems &amp; Low-Level Computing Canon</div>
+      <h2 class="section-title">
+        <span>The Bell Labs, Unix &amp; MS-DOS Heritage</span>
+        <small>Fixed 600 UPM Monospace • Sub-Cell Box Drawing • ISMP Pointer &amp; Sigil Clarity</small>
+      </h2>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
+        Designed for the veterans of <strong>C, C++, AWK, BASIC, Lisp, sed, Unix shell, ed, curl, perl, AT&amp;T Bell Labs, IBM Watson, and MS-DOS</strong>. 
+        PocketGull Mono enforces strict 600 UPM geometry (<code>isFixedPitch = 1</code>) to eliminate horizontal jitter on 80&times;24 CRT terminals, 
+        provides seamless sub-cell box drawing (<code>U+2500</code>&ndash;<code>U+257F</code>) for TUI workflows, and incorporates ISMP disambiguation so low-level pointers (<code>*ptr</code>, <code>-&gt;</code>) and regex sigils never blur.
+      </p>
+
+      <!-- Interactive CRT Terminal Widget -->
+      <div class="crt-terminal-container" style="background: #080c10; border: 1.5px solid var(--card-border); border-radius: 10px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <!-- Terminal Header -->
+        <div style="background: #0d131a; border-bottom: 1px solid var(--card-border); padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #ef4444;"></span>
+            <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #eab308;"></span>
+            <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #22c55e;"></span>
+            <span style="font-family: 'PocketGull Mono'; font-size: 12px; color: var(--text-muted); margin-left: 8px; font-weight: 600;">
+              VT220 / MS-DOS Mode 3 Terminal Emulation (80&times;24 Columns)
+            </span>
+          </div>
+
+          <!-- Phosphor Mode Switcher -->
+          <div style="display: flex; gap: 6px;">
+            <button type="button" class="crt-phosphor-btn active" onclick="switchCrtPhosphor('amber')" id="crtBtnAmber" style="font-size: 11px; padding: 4px 10px; border-radius: 4px; border: 1px solid #d97706; background: #78350f; color: #fbbf24; cursor: pointer; font-weight: 700;">
+              Amber (P3)
+            </button>
+            <button type="button" class="crt-phosphor-btn" onclick="switchCrtPhosphor('green')" id="crtBtnGreen" style="font-size: 11px; padding: 4px 10px; border-radius: 4px; border: 1px solid #15803d; background: #052e16; color: #4ade80; cursor: pointer; font-weight: 700;">
+              Green (P1)
+            </button>
+            <button type="button" class="crt-phosphor-btn" onclick="switchCrtPhosphor('scotopic')" id="crtBtnScotopic" style="font-size: 11px; padding: 4px 10px; border-radius: 4px; border: 1px solid #991b1b; background: #450a0a; color: #f87171; cursor: pointer; font-weight: 700;">
+              Scotopic 650nm
+            </button>
+          </div>
+        </div>
+
+        <!-- Terminal Body -->
+        <pre id="crtTerminalScreen" style="margin: 0; padding: 20px; font-family: 'PocketGull Mono', monospace; font-size: 14px; line-height: 1.45; color: #fbbf24; background: #05080c; overflow-x: auto; text-shadow: 0 0 4px rgba(251, 191, 36, 0.4); transition: color 0.2s ease, text-shadow 0.2s ease;"><code>┌──────────────────────────────────────────────────────────────────────────────┐
+│ AT&amp;T BELL LABS &amp; MS-DOS HERITAGE WORKSTATION [PocketGull Mono 600 UPM Pitch]  │
+├──────────────────────────────────────────────────────────────────────────────┤
+│ /* 1. C/C++ Pointer Dereferencing &amp; Disambiguation Invariant */             │
+│ static inline void* telemetry_alloc(size_t sz, const char *device_id) {      │
+│     struct node_t *n = (struct node_t*)calloc(1, sizeof(*n));                │
+│     if (!n || sz == 0) return NULL;  /* Slashed zero '0' vs capital 'O' */   │
+│     n-&gt;flags = 0x00FF | 0x8000;      /* Distinct 'l' vs '1' vs 'I' */        │
+│     return (void*)(n-&gt;buf + (ptrdiff_t)(sz &amp; 0x7F));                         │
+│ }                                                                            │
+├──────────────────────────────────────────────────────────────────────────────┤
+│ # 2. POSIX AWK &amp; sed Column Extraction (Zero Drift on 80-Col Columns)        │
+│ $ awk 'BEGIN {FS=","} {printf "%-12s %8.2f  %s\n", $1, $2, $3}' telemetry.csv│
+│ $ sed -E 's/([0-9]+)\/([0-9]+) mmHg/BP: \1 over \2/g' chart.log              │
+│ $ curl -sSL -O "https://font.pocketgull.app/PocketGullMono-Regular.ttf"      │
+├──────────────────────────────────────────────────────────────────────────────┤
+│ ; 3. Lisp / Scheme Symbolic Expression Balance &amp; Symmetrical Closure         │
+│ (define (filter-signal pred stream)                                          │
+│   (cond ((null? stream) '())                                                 │
+│         ((pred (car stream)) (cons (car stream) (filter-signal pred (cdr stream))))))
+└──────────────────────────────────────────────────────────────────────────────┘</code></pre>
+      </div>
+
+      <!-- 4 Pillars of Systems Typography -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 20px;">
+        <div style="background: var(--card-bg-subtle); padding: 14px; border-radius: 8px; border: 1px solid var(--card-border);">
+          <div style="font-size: 12px; font-weight: 700; color: #fbbf24; margin-bottom: 4px; text-transform: uppercase;">
+            1. Zero Column Drift
+          </div>
+          <div style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">
+            Locked to exactly 600 UPM em-square width. Zero horizontal jitter across 80&times;24 CRT screens, MS-DOS BIOS mode 3, and VT100/VT220 terminals.
+          </div>
+        </div>
+
+        <div style="background: var(--card-bg-subtle); padding: 14px; border-radius: 8px; border: 1px solid var(--card-border);">
+          <div style="font-size: 12px; font-weight: 700; color: #4ade80; margin-bottom: 4px; text-transform: uppercase;">
+            2. Contiguous Box Drawing
+          </div>
+          <div style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">
+            100% gapless sub-cell geometry across Unicode box drawing (<code>U+2500</code>&ndash;<code>U+257F</code>) for <code>ncurses</code>, Norton Commander, and Borland Turbo C TUIs.
+          </div>
+        </div>
+
+        <div style="background: var(--card-bg-subtle); padding: 14px; border-radius: 8px; border: 1px solid var(--card-border);">
+          <div style="font-size: 12px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; text-transform: uppercase;">
+            3. ISMP Pointer Acuity
+          </div>
+          <div style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">
+            Distinct apertures prevent <code>*ptr</code>, <code>&amp;ref</code>, and <code>-&gt;</code> from clumping at 9&ndash;12px. Slashed zero (<code>0̸</code>) and curved foot <code>l</code> eliminate hex collisions.
+          </div>
+        </div>
+
+        <div style="background: var(--card-bg-subtle); padding: 14px; border-radius: 8px; border: 1px solid var(--card-border);">
+          <div style="font-size: 12px; font-weight: 700; color: #f87171; margin-bottom: 4px; text-transform: uppercase;">
+            4. Regex &amp; Sigil Air Gap
+          </div>
+          <div style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">
+            Perl sigils (<code>$</code>, <code>@</code>, <code>%</code>), regex delimiters (<code>/</code>), backslashes, and Lisp parentheses maintain dedicated optical clearance.
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- 7. Universal World Scripts SMoE Specimen Suite -->
     <section class="specimen-card" id="scripts">
       <div class="section-label">Mixture-of-Experts Sub-Foundry Architecture</div>
@@ -8013,6 +8118,31 @@
             if (icon) icon.textContent = '🔴';
             if (label) label.textContent = 'Activate 650nm Scotopic Red Mode';
           }
+        }
+      };
+
+      // --- Classic Systems CRT Phosphor Controller ---
+      window.switchCrtPhosphor = function(mode) {
+        const screen = document.getElementById('crtTerminalScreen');
+        const btnAmber = document.getElementById('crtBtnAmber');
+        const btnGreen = document.getElementById('crtBtnGreen');
+        const btnScotopic = document.getElementById('crtBtnScotopic');
+
+        [btnAmber, btnGreen, btnScotopic].forEach(b => b?.classList.remove('active'));
+
+        if (!screen) return;
+        if (mode === 'amber') {
+          btnAmber?.classList.add('active');
+          screen.style.color = '#fbbf24';
+          screen.style.textShadow = '0 0 4px rgba(251, 191, 36, 0.4)';
+        } else if (mode === 'green') {
+          btnGreen?.classList.add('active');
+          screen.style.color = '#4ade80';
+          screen.style.textShadow = '0 0 4px rgba(74, 222, 128, 0.4)';
+        } else if (mode === 'scotopic') {
+          btnScotopic?.classList.add('active');
+          screen.style.color = '#f87171';
+          screen.style.textShadow = '0 0 4px rgba(248, 113, 113, 0.4)';
         }
       };
 
