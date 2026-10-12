@@ -1,0 +1,23 @@
+# Maintainer: Phil Gear <phil@geararts.com>
+# Contributor: The PocketGull Project Authors
+pkgname=ttf-pocketgull
+pkgver=3.1.0
+pkgrel=1
+pkgdesc="Clinical sans-serif and fixed 600 UPM telemetry monospace font superfamily (ISMP disambiguation, Louise Sloan 5:1 optotypes)"
+arch=('any')
+url="https://font.pocketgull.app"
+license=('OFL')
+depends=('fontconfig')
+source=("https://github.com/pocketgull-app/pocketgull-font/releases/download/v${pkgver}/pocketgull-typeface-v${pkgver}.zip")
+sha256sums=('D5082DA5217C81557BC616D8D616F9FC0C6A5AC9D0C61E2F0E50DBF994B23CFB')
+
+package() {
+  install -d "${pkgdir}/usr/share/fonts/TTF"
+  install -d "${pkgdir}/usr/share/licenses/${pkgname}"
+
+  # Install all production TTF binaries
+  install -m644 fonts/ttf/*.ttf "${pkgdir}/usr/share/fonts/TTF/"
+
+  # Install Open Font License
+  install -m644 OFL.txt "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}

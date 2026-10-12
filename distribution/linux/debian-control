@@ -1,0 +1,20 @@
+Source: fonts-pocketgull
+Section: fonts
+Priority: optional
+Maintainer: Phil Gear <phil@geararts.com>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.2
+Homepage: https://font.pocketgull.app
+Rules-Requires-Root: no
+
+Package: fonts-pocketgull
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends}
+Description: Clinical sans-serif and telemetry monospace font superfamily
+ PocketGull is an open-source clinical sans-serif, display, and telemetry
+ monospace font superfamily engineered for high-acuity environments.
+ .
+ Conforms to Louise Sloan 5:1 optotypic legibility, Institute for Safe
+ Medication Practices (ISMP) character disambiguation, and fixed 600 UPM
+ monospace pitch for CRT/VT terminals, box drawing, and low-level C systems.

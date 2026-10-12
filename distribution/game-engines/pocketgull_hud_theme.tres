@@ -1,0 +1,20 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://b8pocketgullhud"]
+
+[ext_resource type="FontFile" uid="uid://fontpocketgullbold" path="res://fonts/PocketGull-Bold.ttf" id="1_pgbold"]
+[ext_resource type="FontFile" uid="uid://fontpocketgullmono" path="res://fonts/PocketGullMono-Regular.ttf" id="2_pgmono"]
+
+[resource]
+default_font = ExtResource("1_pgbold")
+default_font_size = 18
+
+Label/fonts/font = ExtResource("1_pgbold")
+Label/font_sizes/font_size = 18
+
+CodeEdit/fonts/font = ExtResource("2_pgmono")
+CodeEdit/font_sizes/font_size = 14
+
+RichTextLabel/fonts/normal_font = ExtResource("1_pgbold")
+RichTextLabel/fonts/mono_font = ExtResource("2_pgmono")
+
+ProgressBar/fonts/font = ExtResource("2_pgmono")
+ProgressBar/font_sizes/font_size = 12

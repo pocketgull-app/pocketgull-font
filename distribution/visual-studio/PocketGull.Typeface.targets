@@ -1,0 +1,9 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <!-- Include fonts as WPF / MAUI resources automatically when referenced -->
+    <Resource Include="$(MSBuildThisFileDirectory)..\contentFiles\any\any\fonts\*.ttf">
+      <Link>fonts\%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+</Project>
