@@ -5,13 +5,13 @@ import xml.etree.ElementTree as ET
 def build_nupkg():
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     vs_dir = os.path.join(base_dir, "distribution", "visual-studio")
-    nuspec_file = os.path.join(vs_dir, "PocketGull.Typeface.nuspec")
-    targets_file = os.path.join(vs_dir, "PocketGull.Typeface.targets")
-    props_file = os.path.join(vs_dir, "PocketGull.Typeface.props")
+    nuspec_file = os.path.join(vs_dir, "PocketGull.Font.nuspec")
+    targets_file = os.path.join(vs_dir, "PocketGull.Font.targets")
+    props_file = os.path.join(vs_dir, "PocketGull.Font.props")
     readme_file = os.path.join(vs_dir, "README.md")
     fonts_dir = os.path.join(base_dir, "fonts", "ttf")
     
-    output_nupkg = os.path.join(vs_dir, "PocketGull.Typeface.3.1.0.nupkg")
+    output_nupkg = os.path.join(vs_dir, "PocketGull.Font.3.1.0.nupkg")
     
     font_files = [
         "PocketGullMono-Regular.ttf",

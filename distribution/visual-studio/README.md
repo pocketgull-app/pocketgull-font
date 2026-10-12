@@ -1,4 +1,4 @@
-# PocketGull Typeface for Visual Studio & .NET
+# PocketGull Font for Visual Studio & .NET
 
 Open-source clinical sans-serif, display, and telemetry monospace font superfamily for Visual Studio IDE, WPF, WinUI 3, .NET MAUI, and C++ desktop applications.
 
@@ -6,20 +6,20 @@ Open-source clinical sans-serif, display, and telemetry monospace font superfami
 
 ### Option 1: NuGet Package Manager Console
 ```powershell
-Install-Package PocketGull.Typeface
+Install-Package PocketGull.Font
 ```
 
 ### Option 2: .NET CLI
 ```bash
-dotnet add package PocketGull.Typeface
+dotnet add package PocketGull.Font
 ```
 
 ## Usage in WPF (XAML)
 ```xml
 <Window ...
-        FontFamily="pack://application:,,,/PocketGull.Typeface;component/fonts/#PocketGull">
+        FontFamily="pack://application:,,,/PocketGull.Font;component/fonts/#PocketGull">
     <TextBlock Text="Amoxicillin 500 mg • Sinus Rhythm 72 bpm" 
-               FontFamily="pack://application:,,,/PocketGull.Typeface;component/fonts/#PocketGull Mono"
+               FontFamily="pack://application:,,,/PocketGull.Font;component/fonts/#PocketGull Mono"
                FontSize="16" />
 </Window>
 ```

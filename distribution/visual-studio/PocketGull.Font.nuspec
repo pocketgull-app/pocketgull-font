@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>PocketGull.Font</id>
+    <version>3.1.0</version>
+    <title>PocketGull Font Superfamily</title>
+    <authors>Phil Gear, The PocketGull Project Authors</authors>
+    <owners>PocketGull</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">OFL-1.1</license>
+    <projectUrl>https://font.pocketgull.app</projectUrl>
+    <repository type="git" url="https://github.com/pocketgull-app/pocketgull-font" />
+    <description>Open-source clinical sans-serif, display, and telemetry monospace font superfamily. Conforms to Louise Sloan 5:1 optotypes, ISMP medication safety disambiguation, and 600 UPM fixed-pitch monospace for C, C++, C#, WPF, WinUI 3, and Visual Studio IDE environments.</description>
+    <summary>Clinical sans-serif and telemetry monospace font superfamily for Visual Studio, .NET, WPF, and WinUI 3.</summary>
+    <releaseNotes>Version 3.1.0: Full 88-key piano chromatic range, physical cardstock watercolor atelier, polyglot scientific source snippets, and classic systems CRT telemetry console.</releaseNotes>
+    <copyright>Copyright (c) 2026 The PocketGull Project Authors</copyright>
+    <tags>fonts font typography monospace visual-studio wpf winui xaml opentype truetype telemetry ismp-disambiguation csharp cpp</tags>
+    <contentFiles>
+      <files include="any/any/fonts/**" buildAction="Resource" copyToOutput="true" />
+    </contentFiles>
+  </metadata>
+  <files>
+    <!-- TrueType fonts for WPF / WinUI / MAUI / Blazor apps -->
+    <file src="..\..\fonts\ttf\PocketGullMono-Regular.ttf" target="content\fonts\PocketGullMono-Regular.ttf" />
+    <file src="..\..\fonts\ttf\PocketGullMono-Bold.ttf" target="content\fonts\PocketGullMono-Bold.ttf" />
+    <file src="..\..\fonts\ttf\PocketGull-Regular.ttf" target="content\fonts\PocketGull-Regular.ttf" />
+    <file src="..\..\fonts\ttf\PocketGull-Bold.ttf" target="content\fonts\PocketGull-Bold.ttf" />
+    <file src="..\..\fonts\ttf\PocketGull-Fineliner.ttf" target="content\fonts\PocketGull-Fineliner.ttf" />
+    <file src="..\..\fonts\ttf\PocketGull-VF.ttf" target="content\fonts\PocketGull-VF.ttf" />
+
+    <!-- ContentFiles for modern SDK-style csproj / vcxproj -->
+    <file src="..\..\fonts\ttf\PocketGullMono-Regular.ttf" target="contentFiles\any\any\fonts\PocketGullMono-Regular.ttf" />
+    <file src="..\..\fonts\ttf\PocketGullMono-Bold.ttf" target="contentFiles\any\any\fonts\PocketGullMono-Bold.ttf" />
+    <file src="..\..\fonts\ttf\PocketGull-Regular.ttf" target="contentFiles\any\any\fonts\PocketGull-Regular.ttf" />
+    <file src="..\..\fonts\ttf\PocketGull-Bold.ttf" target="contentFiles\any\any\fonts\PocketGull-Bold.ttf" />
+    <file src="..\..\fonts\ttf\PocketGull-Fineliner.ttf" target="contentFiles\any\any\fonts\PocketGull-Fineliner.ttf" />
+    <file src="..\..\fonts\ttf\PocketGull-VF.ttf" target="contentFiles\any\any\fonts\PocketGull-VF.ttf" />
+
+    <!-- MSBuild Targets for automatic Resource inclusion in Visual Studio projects -->
+    <file src="PocketGull.Font.targets" target="build\PocketGull.Font.targets" />
+    <file src="PocketGull.Font.props" target="build\PocketGull.Font.props" />
+    <file src="README.md" target="README.md" />
+  </files>
+</package>
