@@ -1,0 +1,24 @@
+Package: pocketgullr
+Type: Package
+Title: Clinical Typography & Sloan Optotype Themes for R Visualizations
+Version: 3.1.0
+Authors@R: c(
+    person("Phil", "Gear", email = "phil@geararts.com", role = c("aut", "cre")),
+    person("The PocketGull Project Authors", role = "aut")
+  )
+Description: Provides Louise Sloan 5:1 optotypic acuity and ISMP clinical
+    character disambiguation standards for R and 'ggplot2' graphics, enabling
+    zero-blur telemetry charts, pharmacokinetic models, and clinical trial plots.
+License: OFL-1.1
+Encoding: UTF-8
+RoxygenNote: 7.3.1
+Imports:
+    ggplot2 (>= 3.4.0)
+Suggests:
+    showtext,
+    sysfonts,
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+URL: https://font.pocketgull.app, https://github.com/pocketgull-app/pocketgull-font
+BugReports: https://github.com/pocketgull-app/pocketgull-font/issues
