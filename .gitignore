@@ -26,6 +26,7 @@ desktop.ini
 build/
 dist/
 distribution/release/
+distribution/android/magisk*/system/
 instance_ufo/
 master_ufo/
 master_ttf/
@@ -81,6 +82,26 @@ scratch/
 scratch_*
 scratch*
 *.tmp
+test-results/
+*.zip
+
+# Python lockfile
+uv.lock
+
+# One-off data extraction & scratch scripts
+scripts/audit_terminal_lengths.cjs
+scripts/detailed_terminal_audit.cjs
+scripts/format_js_ptable.py
+scripts/full_118_elements.js
+scripts/generate_periodic_table_data.py
+scripts/inject_full_ptable.py
+scripts/synthesize_kaktovik_and_earth_biophysics_glyphs.py
+sources/extract_exact_beziers.py
+sources/extract_tight_glyphs.py
+sources/fit_atypi_beziers.py
+sources/recompile_proper_beziers.py
+sources/slice_individual_glyphs.py
+sources/slice_typographic_matrix.py
 
 # Root-level binary exports (production fonts reside in fonts/ttf/ and fonts/woff2/)
 /*.ttf

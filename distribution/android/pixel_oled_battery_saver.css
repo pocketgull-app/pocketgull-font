@@ -1,0 +1,59 @@
+/* ==========================================================================
+   PocketGull OLED Battery Saver & Scotopic Stylesheet
+   Optimized for Google Pixel (AMOLED / LTPO 120Hz Displays)
+   ========================================================================== */
+
+:root {
+  /* True Emissive Black: Completely powers down OLED diodes (0 mA) */
+  --pixel-oled-bg: #000000;
+  --pixel-oled-surface: #0a0a0a;
+  --pixel-oled-border: #1e1e1e;
+
+  /* Humanist Clinical Contrast (Warm, high acuity, low glare) */
+  --pixel-oled-text-primary: #e6ebed;
+  --pixel-oled-text-secondary: #9aa8ad;
+  --pixel-oled-accent: #38bdf8;
+
+  /* Scotopic 650nm Circadian Mode (Zero rhodopsin bleaching + maximum battery) */
+  --pixel-scotopic-bg: #000000;
+  --pixel-scotopic-text: #ff3b30;
+  --pixel-scotopic-dim: #8b1e19;
+
+  /* Font Family SSOT */
+  --font-pocketgull: 'PocketGull', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+  --font-pocketgull-mono: 'PocketGull Mono', monospace;
+}
+
+/* Base Body Application */
+body.oled-battery-saver {
+  background-color: var(--pixel-oled-bg) !important;
+  color: var(--pixel-oled-text-primary) !important;
+  font-family: var(--font-pocketgull);
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+
+  /* ISMP Clinical Disambiguation & OpenType Features */
+  font-feature-settings: 
+    "cv05" 1, /* Curved lowercase l (eliminates 1 / l / I collisions) */
+    "cv08" 1, /* Slashed zero (prevents 0 / O / D confusion) */
+    "cv11" 1, /* Slashed Z (differentiates Z from 2) */
+    "ss02" 1; /* Bilobe serifed capital I */
+}
+
+/* Scotopic 650nm Night Vision / Maximum Power Conservation */
+body.scotopic-650nm {
+  background-color: var(--pixel-scotopic-bg) !important;
+  color: var(--pixel-scotopic-text) !important;
+  filter: contrast(110%);
+}
+
+body.scotopic-650nm a,
+body.scotopic-650nm strong {
+  color: #ff5247 !important;
+}
+
+body.scotopic-650nm .muted {
+  color: var(--pixel-scotopic-dim) !important;
+}

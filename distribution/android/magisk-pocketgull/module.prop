@@ -1,0 +1,6 @@
+id=pocketgull_pixel_font
+name=PocketGull Font for Google Pixel
+version=v3.1.0
+versionCode=31000
+author=Phil Gear
+description=System-wide clinical optotype typeface with ISMP disambiguation, O(1) FreeType rasterization, and true black OLED battery conservation for Pixel devices.
