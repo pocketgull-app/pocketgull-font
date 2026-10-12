@@ -167,6 +167,23 @@ dart run tool/pocketgull_foundry.dart sync
 
 ---
 
+## 🕊️ Clean Signal & Anti-Spam Commit Protocol (Foundry Git Hygiene)
+
+To respect followers, prevent activity feed spam, and protect notification signal-to-noise ratio:
+1. **Zero Micro-Commit Spam on Public Default Branch**:
+   - The agent MUST NEVER push cascades of trivial micro-commits (single-line CSS tweaks, incremental contrast adjustments, typos) to `main`.
+   - All intermediate or exploratory edits must be coalesced and squashed into **Atomic Milestone Commits** before pushing to `origin/main`.
+2. **The 1-Milestone Squashed Push Invariant**:
+   - Each push to `main` must represent a single, cohesive, fully-tested architectural milestone with a conventional commit message (e.g. `feat(...)`, `fix(...)`, `refactor(...)`).
+3. **Silent Maintenance & Feature Branching**:
+   - Work spanning multiple iterative steps must occur on local feature/task branches or be staged locally (`git reset --soft`). Pushes on non-default branches do not broadcast to followers' dashboard feeds.
+4. **CI & Notification Suppression for Documentation / Minor Fixes**:
+   - For pure internal docs, comments, or non-functional edits, include `[skip ci]` or `[ci skip]` in the commit body to prevent redundant GitHub Actions workflow runs and runner alerts.
+5. **Reserved Broadcasts for SemVer Releases**:
+   - Public release notifications and Git tags (`vX.Y.Z`) are strictly reserved for official foundry releases that trigger downstream package registry syncs (Winget, Homebrew, NuGet, AWS Layer, CTAN).
+
+---
+
 ## 🛡️ The Porter-Gull Autonomous Triage Protocol & Decision Gate
 To preserve developer cognitive flow, prevent compute/token waste, and ensure unyielding security:
 1. **Tier 1 (Deterministic / Invariants)**: CI build failures, untracked files, W3C OTS memory alignment (`loca[i] % 2 == 0`), CodeQL SAST integer/DOM vulnerabilities $\to$ **Auto-remediate locally, verify 100% via unit tests, commit & push directly**.
