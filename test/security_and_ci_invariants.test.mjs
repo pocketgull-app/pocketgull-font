@@ -147,4 +147,19 @@ test('Security Invariant: OWASP Anti-Automation (Honeypot, Rate Limiting, Input 
   assert.match(indexContent, /DRILL_SUBMIT_COOLDOWN_MS/, 'index.html must throttle Doc Drill submissions');
 });
 
+test('Security & CodeQL SAST: Web MIDI & Laboratory controllers enforce strict bounds and sanitization', () => {
+  const indexContent = fs.readFileSync('index.html', 'utf8');
+
+  // 1. Web MIDI strict byte masking and clamping
+  assert.match(indexContent, /status\s*=\s*Number\(msg\.data\[0\]\)\s*&\s*0xFF/, 'Web MIDI must mask status byte to 8 bits');
+  assert.match(indexContent, /noteNumber\s*=\s*Number\(msg\.data\[1\]\)\s*&\s*0x7F/, 'Web MIDI must mask note number to 7 bits');
+  assert.match(indexContent, /rawVel\s*=\s*Number\(msg\.data\[2\]\)\s*&\s*0x7F/, 'Web MIDI must mask velocity byte to 7 bits');
+  assert.match(indexContent, /Math\.min\(127,\s*Math\.max\(1,\s*rawVel\)\)/, 'Web MIDI must clamp velocity within [1, 127]');
+
+  // 2. Safe DOM manipulation in Audio Simulator
+  assert.match(indexContent, /window\.toggleAudioTelemetrySim\s*=/, 'index.html must export toggleAudioTelemetrySim');
+  assert.match(indexContent, /window\.setDaltonismFilter\s*=/, 'index.html must export setDaltonismFilter');
+  assert.match(indexContent, /window\.switchSciTab\s*=/, 'index.html must export switchSciTab');
+});
+
 

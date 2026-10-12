@@ -110,7 +110,11 @@ test('Piano ROYGBIV Color Tokens: Chromatic Music Pedagogy Invariant', () => {
   assert.ok(code.includes('DALTONISM_SIMULATION_MATRICES'), 'Must declare DALTONISM_SIMULATION_MATRICES');
   assert.ok(code.includes('simulate_cvd_color'), 'Must declare simulate_cvd_color');
   assert.ok(code.includes('get_daltonism_piano_palette'), 'Must declare get_daltonism_piano_palette');
+  assert.ok(code.includes('AUDIO_LUFS_METRIC_TOKENS'), 'Must declare AUDIO_LUFS_METRIC_TOKENS');
+  assert.ok(code.includes('ACOUSTIC_FREQUENCY_BANDS'), 'Must declare ACOUSTIC_FREQUENCY_BANDS');
+  assert.ok(code.includes('get_audio_lufs_color'), 'Must declare get_audio_lufs_color');
 });
+
 
 
 test('Daltonism & CVD Color Vision Deficiency CSS Invariant', () => {

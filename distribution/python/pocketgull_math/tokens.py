@@ -130,5 +130,65 @@ def get_daltonism_piano_palette(deficiency: str) -> dict:
         }
     return palette
 
+# Audio Engineering & Acoustic Space Standards (EBU R128 / ITU-R BS.1770)
+AUDIO_LUFS_METRIC_TOKENS = {
+    "safe_target": {
+        "lufs": -14.0,
+        "name": "Integrated Streaming Target",
+        "hex": "#10b981",  # Emerald
+        "daltonic_symbol": "◎",
+        "protanopia_safe_hex": "#38bdf8",
+        "role": "Optimal streaming normalization (Spotify, Apple Music, YouTube)"
+    },
+    "nominal_caution": {
+        "lufs": -9.0,
+        "name": "Club / Broadcast High Density",
+        "hex": "#f59e0b",  # Amber
+        "daltonic_symbol": "▲",
+        "protanopia_safe_hex": "#facc15",
+        "role": "Loud mastering threshold with limited dynamic range"
+    },
+    "true_peak_clip": {
+        "lufs": 0.0,
+        "name": "Inter-Sample True Peak Clip Risk",
+        "hex": "#ef4444",  # Red
+        "daltonic_symbol": "⨂",
+        "protanopia_safe_hex": "#ec4899",
+        "role": "DAC reconstruction distortion and ISP boundary violation"
+    }
+}
+
+ACOUSTIC_FREQUENCY_BANDS = {
+    "sub_bass":  {"range_hz": "20 - 60 Hz",   "hex": "#6366f1", "role": "Sub-woofer visceral rumble"},
+    "bass":      {"range_hz": "60 - 250 Hz",  "hex": "#3b82f6", "role": "Rhythmic warmth & kick fundamental"},
+    "low_mids":  {"range_hz": "250 - 500 Hz", "hex": "#10b981", "role": "Vocal body & acoustic guitar resonance"},
+    "mids":      {"range_hz": "500 - 2 kHz",  "hex": "#f59e0b", "role": "Speech intelligibility & snare snap"},
+    "presence":  {"range_hz": "2k - 6 kHz",   "hex": "#f97316", "role": "Ear canal sensitivity & vocal clarity"},
+    "brilliance":{"range_hz": "6k - 20 kHz",  "hex": "#a855f7", "role": "Air, cymbals, acoustic shimmer"}
+}
+
+def get_audio_lufs_color(lufs_value: float, cvd_mode: str = "normal") -> dict:
+    """Returns accessible color and symbol for a given LUFS measurement."""
+    if lufs_value > -1.0:
+        token = AUDIO_LUFS_METRIC_TOKENS["true_peak_clip"]
+    elif lufs_value > -12.0:
+        token = AUDIO_LUFS_METRIC_TOKENS["nominal_caution"]
+    else:
+        token = AUDIO_LUFS_METRIC_TOKENS["safe_target"]
+    
+    color = token["hex"]
+    if cvd_mode.lower() in ["protanopia", "deuteranopia"]:
+        color = token["protanopia_safe_hex"]
+    elif cvd_mode.lower() == "monochromacy":
+        color = "#ffffff" if lufs_value > -1.0 else "#94a3b8"
+        
+    return {
+        "hex": color,
+        "symbol": token["daltonic_symbol"],
+        "name": token["name"],
+        "role": token["role"]
+    }
+
+
 
 
