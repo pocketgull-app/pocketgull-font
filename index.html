@@ -689,7 +689,7 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 80px;
+      scroll-padding-top: 112px;
     }
 
     
@@ -706,7 +706,7 @@
       background-color: var(--bg);
       color: var(--text-main);
       font-family: var(--font-sans, 'PocketGull', 'PocketGull Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif);
-      padding-top: 80px;
+      padding-top: 112px;
       padding-bottom: 60px;
       line-height: 1.5;
       font-synthesis: none;
@@ -3714,6 +3714,275 @@
       0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
       40% { transform: scale(1.2); opacity: 1; }
     }
+
+    /* Doc Drill Socratic Auto-Tour & Stage Coupling */
+    .doc-drill-tour-btn {
+      background: rgba(16, 185, 129, 0.16);
+      border: 1px solid var(--emerald);
+      color: var(--emerald);
+      border-radius: 4px;
+      padding: 0.2rem 0.55rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .doc-drill-tour-btn:hover {
+      background: var(--emerald);
+      color: #ffffff !important;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+    }
+    .doc-drill-tour-btn.active {
+      background: var(--emerald) !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
+      animation: tourPulse 2s infinite ease-in-out;
+    }
+    @keyframes tourPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+      50% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+    }
+    .doc-drill-tour-bar {
+      padding: 8px 14px;
+      background: rgba(16, 185, 129, 0.08);
+      border-bottom: 1px solid rgba(16, 185, 129, 0.25);
+    }
+    .tour-ctrl-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      border-radius: 4px;
+      padding: 2px 7px;
+      font-size: 0.68rem;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .tour-ctrl-btn:hover {
+      border-color: var(--emerald);
+      color: var(--emerald);
+    }
+    .doc-drill-stage-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--cyan);
+      background: rgba(6, 182, 212, 0.12);
+      border: 1px solid rgba(6, 182, 212, 0.35);
+      border-radius: 4px;
+      padding: 3px 8px;
+      cursor: pointer;
+      margin-bottom: 0.85rem;
+      transition: all 0.15s ease;
+    }
+    .doc-drill-stage-btn:hover {
+      background: var(--cyan);
+      color: #000000 !important;
+      box-shadow: 0 0 12px rgba(6, 182, 212, 0.4);
+      transform: translateY(-1px);
+    }
+    .tour-highlighted-element {
+      outline: 3px solid var(--emerald) !important;
+      outline-offset: 4px !important;
+      box-shadow: 0 0 35px rgba(16, 185, 129, 0.55) !important;
+      transition: outline 0.3s ease, box-shadow 0.3s ease;
+    }
+    .doc-drill-search-popup {
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+      right: 0;
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 8px 8px 0 0;
+      max-height: 180px;
+      overflow-y: auto;
+      z-index: 1000;
+      box-shadow: 0 -8px 24px rgba(0,0,0,0.4);
+      padding: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .doc-drill-search-item {
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-main);
+      background: transparent;
+      border: none;
+      text-align: left;
+      width: 100%;
+      transition: background 0.15s ease;
+    }
+    .doc-drill-search-item:hover {
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--cyan);
+    }
+
+    [data-theme="washi"] .doc-drill-tour-btn,
+    [data-theme="light"] .doc-drill-tour-btn {
+      color: #064e3b !important;
+      border-color: #059669 !important;
+      background: #ecfdf5 !important;
+    }
+    [data-theme="washi"] .doc-drill-tour-btn.active,
+    [data-theme="light"] .doc-drill-tour-btn.active,
+    [data-theme="washi"] .doc-drill-tour-btn:hover,
+    [data-theme="light"] .doc-drill-tour-btn:hover {
+      background: #064e3b !important;
+      color: #ffffff !important;
+    }
+    [data-theme="washi"] .doc-drill-tour-bar,
+    [data-theme="light"] .doc-drill-tour-bar {
+      background: #f0fdf4 !important;
+      border-color: rgba(6, 78, 59, 0.2) !important;
+    }
+    [data-theme="washi"] .tour-ctrl-btn,
+    [data-theme="light"] .tour-ctrl-btn {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    [data-theme="washi"] .doc-drill-stage-btn,
+    [data-theme="light"] .doc-drill-stage-btn {
+      color: #075985 !important;
+      border-color: #0284c7 !important;
+      background: #f0f9ff !important;
+    }
+    [data-theme="washi"] .doc-drill-stage-btn:hover,
+    [data-theme="light"] .doc-drill-stage-btn:hover {
+      background: #0284c7 !important;
+      color: #ffffff !important;
+    }
+
+    /* Doc Drill Socratic Mystery & Directed Learning Scaffolding */
+    .doc-drill-mystery-box {
+      background: rgba(245, 158, 11, 0.08);
+      border-left: 3px solid var(--amber);
+      padding: 10px 12px;
+      margin-bottom: 0.85rem;
+      border-radius: 0 6px 6px 0;
+    }
+    .mystery-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--amber);
+      margin-bottom: 4px;
+      font-family: 'PocketGull Mono', monospace;
+    }
+    .mystery-text {
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: var(--text-main);
+      margin: 0;
+      font-style: italic;
+    }
+    .doc-drill-mission-box {
+      background: rgba(6, 182, 212, 0.08);
+      border-left: 3px solid var(--cyan);
+      padding: 10px 12px;
+      margin-bottom: 0.85rem;
+      border-radius: 0 6px 6px 0;
+    }
+    .mission-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--cyan);
+      margin-bottom: 4px;
+      font-family: 'PocketGull Mono', monospace;
+    }
+    .mission-list {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.78rem;
+      line-height: 1.55;
+      color: var(--text-main);
+    }
+    .mission-list li {
+      margin-bottom: 4px;
+    }
+    .doc-drill-discovery-details {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 8px 12px;
+      margin-top: 0.85rem;
+      margin-bottom: 0.85rem;
+    }
+    .discovery-summary {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--emerald);
+      cursor: pointer;
+      font-family: 'PocketGull Mono', monospace;
+      outline: none;
+      user-select: none;
+    }
+    .discovery-summary:hover {
+      text-decoration: underline;
+    }
+    .discovery-content {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      line-height: 1.6;
+      color: var(--text-main);
+      border-top: 1px dashed var(--card-border);
+      padding-top: 8px;
+    }
+    .discovery-highlight {
+      background: rgba(16, 185, 129, 0.1);
+      border-left: 3px solid var(--emerald);
+      padding: 6px 10px;
+      margin-bottom: 8px;
+      font-size: 0.78rem;
+      color: var(--emerald);
+      font-weight: 600;
+    }
+
+    [data-theme="washi"] .doc-drill-mystery-box,
+    [data-theme="light"] .doc-drill-mystery-box {
+      background: #fffbeb !important;
+      border-color: #d97706 !important;
+    }
+    [data-theme="washi"] .mystery-label,
+    [data-theme="light"] .mystery-label {
+      color: #92400e !important;
+    }
+    [data-theme="washi"] .doc-drill-mission-box,
+    [data-theme="light"] .doc-drill-mission-box {
+      background: #f0f9ff !important;
+      border-color: #0284c7 !important;
+    }
+    [data-theme="washi"] .mission-label,
+    [data-theme="light"] .mission-label {
+      color: #0369a1 !important;
+    }
+    [data-theme="washi"] .discovery-summary,
+    [data-theme="light"] .discovery-summary {
+      color: #065f46 !important;
+    }
+    [data-theme="washi"] .discovery-highlight,
+    [data-theme="light"] .discovery-highlight {
+      background: #ecfdf5 !important;
+      border-color: #059669 !important;
+      color: #064e3b !important;
+    }
+
     @media (max-width: 640px) {
       .doc-drill-panel {
         top: auto;
@@ -3730,6 +3999,326 @@
       .doc-drill-panel.open {
         transform: translateY(0);
       }
+    }
+
+    /* =========================================================================
+       Interactive Textbook Folio Chapter Strip & Progress Ribbon
+       ========================================================================= */
+    .folio-chapter-strip {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      height: 38px;
+      background: var(--surface-inner);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--card-border);
+      z-index: 998;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+    }
+    .folio-strip-track {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 0 20px;
+      white-space: nowrap;
+      height: 100%;
+    }
+    .folio-strip-track::-webkit-scrollbar {
+      display: none;
+    }
+    .folio-chapter-tab {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      border-radius: 4px;
+      padding: 3px 8px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+    .folio-chapter-tab .chap-badge {
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 0.64rem;
+      font-weight: 700;
+      color: var(--emerald);
+      background: rgba(16, 185, 129, 0.12);
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+    .folio-chapter-tab .chap-label {
+      font-weight: 600;
+    }
+    .folio-chapter-tab:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--card-border);
+    }
+    .folio-chapter-tab.active {
+      color: var(--text-main);
+      background: rgba(6, 182, 212, 0.12);
+      border-color: rgba(6, 182, 212, 0.4);
+    }
+    .folio-chapter-tab.active .chap-badge {
+      color: #000;
+      background: var(--cyan);
+    }
+    .folio-reading-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--emerald), var(--cyan));
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* Textbook Contents Button in Navbar */
+    .textbook-toc-btn {
+      background: rgba(6, 182, 212, 0.12);
+      border: 1px solid rgba(6, 182, 212, 0.35);
+      color: var(--cyan);
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+    .textbook-toc-btn:hover {
+      background: var(--cyan);
+      color: #000000 !important;
+      box-shadow: 0 0 12px rgba(6, 182, 212, 0.4);
+    }
+
+    /* Interactive Textbook Table of Contents (TOC) Syllabus Drawer */
+    .textbook-toc-drawer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 440px;
+      max-width: 90vw;
+      background: var(--bg);
+      border-right: 1px solid var(--card-border);
+      box-shadow: 10px 0 40px rgba(0, 0, 0, 0.6);
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      animation: tocSlideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes tocSlideIn {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
+    }
+    .textbook-toc-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 1999;
+    }
+    .toc-drawer-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface-inner);
+    }
+    .toc-close-btn {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      border-radius: 4px;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      transition: all 0.15s ease;
+    }
+    .toc-close-btn:hover {
+      color: var(--text-main);
+      border-color: var(--text-muted);
+    }
+    .toc-drawer-body {
+      padding: 16px 20px;
+      overflow-y: auto;
+      flex: 1;
+      scrollbar-width: thin;
+    }
+    .toc-curriculum-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px dashed var(--card-border);
+    }
+    .toc-meta-pill {
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      padding: 3px 8px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .toc-tour-pill {
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--emerald);
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid var(--emerald);
+      padding: 3px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s ease;
+    }
+    .toc-tour-pill:hover {
+      background: var(--emerald);
+      color: #fff !important;
+    }
+    .toc-chapters-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .toc-chapter-link {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.15s ease;
+    }
+    .toc-chapter-link:hover {
+      border-color: var(--cyan);
+      transform: translateX(4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+    .toc-chap-badge {
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--cyan);
+      background: rgba(6, 182, 212, 0.12);
+      padding: 2px 6px;
+      border-radius: 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .toc-chap-info {
+      flex: 1;
+    }
+    .toc-chap-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.3;
+      margin-bottom: 2px;
+    }
+    .toc-chap-sub {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .toc-chap-time {
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    /* Washi & Light Theme Overrides for Folio & TOC */
+    [data-theme="washi"] .folio-chapter-strip,
+    [data-theme="light"] .folio-chapter-strip {
+      background: rgba(255, 255, 255, 0.94) !important;
+      border-color: rgba(0, 0, 0, 0.12) !important;
+    }
+    [data-theme="washi"] .folio-chapter-tab,
+    [data-theme="light"] .folio-chapter-tab {
+      color: #334155 !important;
+    }
+    [data-theme="washi"] .folio-chapter-tab:hover,
+    [data-theme="light"] .folio-chapter-tab:hover {
+      background: #f1f5f9 !important;
+      color: #0f172a !important;
+    }
+    [data-theme="washi"] .folio-chapter-tab.active,
+    [data-theme="light"] .folio-chapter-tab.active {
+      background: #e0f2fe !important;
+      border-color: #0284c7 !important;
+      color: #0369a1 !important;
+    }
+    [data-theme="washi"] .folio-chapter-tab.active .chap-badge,
+    [data-theme="light"] .folio-chapter-tab.active .chap-badge {
+      background: #0284c7 !important;
+      color: #ffffff !important;
+    }
+    [data-theme="washi"] .textbook-toc-btn,
+    [data-theme="light"] .textbook-toc-btn {
+      background: #f0f9ff !important;
+      border-color: #0284c7 !important;
+      color: #0369a1 !important;
+    }
+    [data-theme="washi"] .textbook-toc-btn:hover,
+    [data-theme="light"] .textbook-toc-btn:hover {
+      background: #0284c7 !important;
+      color: #ffffff !important;
+    }
+    [data-theme="washi"] .textbook-toc-drawer,
+    [data-theme="light"] .textbook-toc-drawer {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 10px 0 40px rgba(0, 0, 0, 0.15) !important;
+    }
+    [data-theme="washi"] .toc-drawer-header,
+    [data-theme="light"] .toc-drawer-header {
+      background: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+    }
+    [data-theme="washi"] .toc-chapter-link,
+    [data-theme="light"] .toc-chapter-link {
+      background: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+    }
+    [data-theme="washi"] .toc-chapter-link:hover,
+    [data-theme="light"] .toc-chapter-link:hover {
+      border-color: #0284c7 !important;
+      background: #f0f9ff !important;
     }
 
   </style>
@@ -3823,6 +4412,9 @@
     </nav>
 
     <div class="nav-actions">
+      <button type="button" class="textbook-toc-btn" id="textbookTocBtn" onclick="toggleTextbookToc()" title="Open Interactive Textbook Table of Contents &amp; Curriculum">
+        <span>📖</span> <span class="toc-btn-label">Contents</span>
+      </button>
       <button type="button" class="theme-toggle-btn" id="themeToggleBtn" title="Switch Theme (Dark, Washi Rice Paper, Light)">
         <span id="themeIcon">◐</span> <span id="themeLabel">Dark</span>
       </button>
@@ -3832,10 +4424,170 @@
     </div>
   </header>
 
+  <!-- Interactive Textbook Folio Chapter Strip & Progress Ribbon -->
+  <nav class="folio-chapter-strip" id="folioChapterStrip" aria-label="Interactive Textbook Chapter Navigation">
+    <div class="folio-strip-track">
+      <button type="button" class="folio-chapter-tab active" data-chapter="header-broadside" onclick="jumpToChapter('header-broadside')" title="Frontispiece: Superfamily Genesis &amp; Felt-Marker DNA">
+        <span class="chap-badge">Vol. I</span>
+        <span class="chap-label">Frontispiece</span>
+      </button>
+      <button type="button" class="folio-chapter-tab" data-chapter="waterfall" onclick="jumpToChapter('waterfall')" title="Chapter 1: Optometrics &amp; Sloan 5:1 Acuity">
+        <span class="chap-badge">Ch. 1</span>
+        <span class="chap-label">Optometrics</span>
+      </button>
+      <button type="button" class="folio-chapter-tab" data-chapter="variable" onclick="jumpToChapter('variable')" title="Chapter 2: Kinematics &amp; 16-Axis Variable Engine">
+        <span class="chap-badge">Ch. 2</span>
+        <span class="chap-label">Variable Continuum</span>
+      </button>
+      <button type="button" class="folio-chapter-tab" data-chapter="ismp" onclick="jumpToChapter('ismp')" title="Chapter 3: Patient Safety &amp; ISMP Disambiguation">
+        <span class="chap-badge">Ch. 3</span>
+        <span class="chap-label">Clinical Safety</span>
+      </button>
+      <button type="button" class="folio-chapter-tab" data-chapter="telemetry" onclick="jumpToChapter('telemetry')" title="Chapter 4: Telemetry &amp; Fixed 600 UPM Monospace">
+        <span class="chap-badge">Ch. 4</span>
+        <span class="chap-label">ICU Telemetry</span>
+      </button>
+      <button type="button" class="folio-chapter-tab" data-chapter="scientific-lab" onclick="jumpToChapter('scientific-lab')" title="Chapter 5: Chemistry &amp; Dark-Sky Astronomy">
+        <span class="chap-badge">Ch. 5</span>
+        <span class="chap-label">Science &amp; Chemistry</span>
+      </button>
+      <button type="button" class="folio-chapter-tab" data-chapter="atelier" onclick="jumpToChapter('atelier')" title="Chapter 6: Polymath Acoustics &amp; Rainbow Piano">
+        <span class="chap-badge">Ch. 6</span>
+        <span class="chap-label">Polymath Acoustics</span>
+      </button>
+      <button type="button" class="folio-chapter-tab" data-chapter="scripts" onclick="jumpToChapter('scripts')" title="Chapter 7: Sovereign Cartography &amp; UNDRIP Accord">
+        <span class="chap-badge">Ch. 7</span>
+        <span class="chap-label">Sovereign Scripts</span>
+      </button>
+      <button type="button" class="folio-chapter-tab" data-chapter="download" onclick="jumpToChapter('download')" title="Chapter 8: Foundry Governance &amp; Package Registries">
+        <span class="chap-badge">Ch. 8</span>
+        <span class="chap-label">Foundry Governance</span>
+      </button>
+    </div>
+    <div class="folio-reading-progress" id="folioReadingProgress"></div>
+  </nav>
+
+  <!-- Interactive Textbook Table of Contents (TOC) Syllabus Drawer -->
+  <aside id="textbookTocDrawer" class="textbook-toc-drawer" role="dialog" aria-modal="true" aria-label="Interactive Textbook Curriculum &amp; Table of Contents" style="display: none;">
+    <div class="toc-drawer-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 1.25rem;">📖</span>
+        <div>
+          <div style="font-family: 'PocketGull Bold', sans-serif; font-size: 0.95rem; color: var(--text-main);">PocketGull Superfamily: Volume I</div>
+          <div style="font-family: 'PocketGull Mono', monospace; font-size: 0.68rem; color: var(--emerald);">Interactive Clinical &amp; Polymath Syllabus</div>
+        </div>
+      </div>
+      <button type="button" class="toc-close-btn" onclick="toggleTextbookToc()" aria-label="Close Table of Contents">✕</button>
+    </div>
+
+    <div class="toc-drawer-body">
+      <div class="toc-curriculum-meta">
+        <div class="toc-meta-pill"><span>⏱️</span> 8 Chapters • 32 min curriculum</div>
+        <div class="toc-meta-pill"><span>🔬</span> 10 Hands-on Laboratories</div>
+        <button type="button" class="toc-tour-pill" onclick="toggleTextbookToc(); toggleSocraticTour();">
+          <span>▶</span> Launch Hands-Free Auto-Tour
+        </button>
+      </div>
+
+      <div class="toc-chapters-list">
+        <!-- Frontispiece -->
+        <a href="#header-broadside" class="toc-chapter-link" onclick="toggleTextbookToc()">
+          <div class="toc-chap-badge">Vol. I</div>
+          <div class="toc-chap-info">
+            <div class="toc-chap-title">Frontispiece: Superfamily Genesis</div>
+            <div class="toc-chap-sub">Phil Gear cardstock felt-marker DNA • Dieter Rams 10 Invariants • UNDRIP Accord</div>
+          </div>
+          <div class="toc-chap-time">2 min</div>
+        </a>
+
+        <!-- Ch 1 -->
+        <a href="#waterfall" class="toc-chapter-link" onclick="toggleTextbookToc()">
+          <div class="toc-chap-badge">Ch. 1</div>
+          <div class="toc-chap-info">
+            <div class="toc-chap-title">Optometrics: Sloan 5:1 Acuity &amp; Bouma Crowding</div>
+            <div class="toc-chap-sub">Plate 1.1 The Sloan 5:1 Invariant • Plate 1.2 Phoropter Dilation • Plate 1.3 Lateral Clearance</div>
+          </div>
+          <div class="toc-chap-time">4 min</div>
+        </a>
+
+        <!-- Ch 2 -->
+        <a href="#variable" class="toc-chapter-link" onclick="toggleTextbookToc()">
+          <div class="toc-chap-badge">Ch. 2</div>
+          <div class="toc-chap-info">
+            <div class="toc-chap-title">Kinematics: The 16-Axis Variable Continuum</div>
+            <div class="toc-chap-sub">Plate 2.1 Continuous Weight/Stretch/Slant • Plate 2.2 16 Clinical Presets</div>
+          </div>
+          <div class="toc-chap-time">3 min</div>
+        </a>
+
+        <!-- Ch 3 -->
+        <a href="#ismp" class="toc-chapter-link" onclick="toggleTextbookToc()">
+          <div class="toc-chap-badge">Ch. 3</div>
+          <div class="toc-chap-info">
+            <div class="toc-chap-title">Clinical Safety: ISMP Life-Critical Disambiguation</div>
+            <div class="toc-chap-sub">Plate 3.1 Slashed Zero (cv08) • Plate 3.2 Curved l (cv05) • Plate 3.3 Bedside 203 DPI Thermal Label</div>
+          </div>
+          <div class="toc-chap-time">5 min</div>
+        </a>
+
+        <!-- Ch 4 -->
+        <a href="#telemetry" class="toc-chapter-link" onclick="toggleTextbookToc()">
+          <div class="toc-chap-badge">Ch. 4</div>
+          <div class="toc-chap-info">
+            <div class="toc-chap-title">ICU Telemetry: Fixed 600 UPM Monospace &amp; ECG</div>
+            <div class="toc-chap-sub">Plate 4.1 Rigid Tabular Alignment • Plate 4.2 Box Drawing &amp; Powerline Chevrons</div>
+          </div>
+          <div class="toc-chap-time">3 min</div>
+        </a>
+
+        <!-- Ch 5 -->
+        <a href="#scientific-lab" class="toc-chapter-link" onclick="toggleTextbookToc()">
+          <div class="toc-chap-badge">Ch. 5</div>
+          <div class="toc-chap-info">
+            <div class="toc-chap-title">Science &amp; Chemistry: 650nm Scotopic &amp; 118 Elements</div>
+            <div class="toc-chap-sub">Plate 5.1 Dark-Sky Stargazer Console • Plate 5.2 The 118-Element IUPAC Periodic Table</div>
+          </div>
+          <div class="toc-chap-time">6 min</div>
+        </a>
+
+        <!-- Ch 6 -->
+        <a href="#atelier" class="toc-chapter-link" onclick="toggleTextbookToc()">
+          <div class="toc-chap-badge">Ch. 6</div>
+          <div class="toc-chap-info">
+            <div class="toc-chap-title">Polymath Acoustics: Rainbow Piano &amp; Harmonica</div>
+            <div class="toc-chap-sub">Plate 6.1 88-Key Stretched Rainbow Piano • Plate 6.2 Key of C Richter Harmonica</div>
+          </div>
+          <div class="toc-chap-time">5 min</div>
+        </a>
+
+        <!-- Ch 7 -->
+        <a href="#scripts" class="toc-chapter-link" onclick="toggleTextbookToc()">
+          <div class="toc-chap-badge">Ch. 7</div>
+          <div class="toc-chap-info">
+            <div class="toc-chap-title">Sovereign Cartography: UNDRIP Accord &amp; Braille</div>
+            <div class="toc-chap-sub">Plate 7.1 Pan-Tribal Syllabics • Plate 7.2 256 Unicode Braille Tactile Matrix</div>
+          </div>
+          <div class="toc-chap-time">4 min</div>
+        </a>
+
+        <!-- Ch 8 -->
+        <a href="#download" class="toc-chapter-link" onclick="toggleTextbookToc()">
+          <div class="toc-chap-badge">Ch. 8</div>
+          <div class="toc-chap-info">
+            <div class="toc-chap-title">Foundry Governance: Memory Safety &amp; Distribution</div>
+            <div class="toc-chap-sub">Plate 8.1 Thomas Phinney loca%2==0 Audit • Plate 8.2 Package Registries (npm, brew, winget)</div>
+          </div>
+          <div class="toc-chap-time">2 min</div>
+        </a>
+      </div>
+    </div>
+  </aside>
+  <div id="textbookTocBackdrop" class="textbook-toc-backdrop" style="display: none;" onclick="toggleTextbookToc()"></div>
+
   <main class="container" id="mainContent">
 
     <!-- 1. Broadside Master Header -->
-    <header class="header-broadside">
+    <header class="header-broadside" id="header-broadside">
       <div class="badge-bar">
         <span class="badge">Open-Source Healthcare Typography</span>
         <span class="badge emerald">-22.4% Ink &bull; -34% OLED Power</span>
@@ -3869,12 +4621,12 @@
       </div>
     </header>
 
-    <!-- 1. Superfamily Hierarchy Waterfall -->
+    <!-- Chapter 1: Optometrics & Masters Waterfall -->
     <section class="specimen-card" id="waterfall">
-      <div class="section-label">Superfamily Architecture &amp; Masters</div>
+      <div class="section-label">Chapter 1 • Optometrics</div>
       <h2 class="section-title">
-        <span>The Four Production Cuts &amp; Styles</span>
-        <small>1000 UPM Em-Square • 600 UPM Fixed Monospace</small>
+        <span>Plate 1.1 • The Louise Sloan 5:1 Invariant &amp; Superfamily Waterfall</span>
+        <small>1000 UPM Em-Square • 600 UPM Fixed Monospace • 4 Production Masters</small>
       </h2>
 
       <div class="hierarchy-grid">
@@ -3940,11 +4692,11 @@
       </div>
     </section>
 
-    <!-- 3. Variable Font OpenType Specimen -->
+    <!-- Chapter 2: Kinematic Variable Typography -->
     <section class="specimen-card" id="variable" style="border-color: rgba(56, 189, 248, 0.4); text-align: left;">
-      <div class="section-label" style="color: var(--sky-accent, #38bdf8); text-align: left;">Variable Typography</div>
+      <div class="section-label" style="color: var(--sky-accent, #38bdf8); text-align: left;">Chapter 2 • Kinematic Typography</div>
       <h2 class="section-title" style="text-align: left; justify-content: flex-start; gap: 16px;">
-        <span>Variable Weight, Width &amp; Slant</span>
+        <span>Plate 2.1 • The 16-Axis Continuous Variable Continuum</span>
         <small>Continuous OpenType interpolation across the 1000 UPM em-square</small>
       </h2>
 
@@ -4154,15 +4906,15 @@
       </div>
     </section>
 
-    <!-- 4. ISMP Life-Critical Clinical Disambiguation Suite -->
+    <!-- Chapter 3: Clinical Safety & ISMP Disambiguation -->
     <section class="specimen-card" id="ismp">
       <div class="section-label" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
-        <span>Patient Safety &amp; Neuro-Ergonomic Standard</span>
+        <span>Chapter 3 • Clinical Safety &amp; Pharmacovigilance</span>
         <a href="standards/FDA_ISMP_CLINICAL_DIGITAL_TYPOGRAPHY_SPECIFICATION.md" target="_blank" rel="noopener" style="color: var(--cyan); font-family: 'PocketGull Mono'; font-size: 11px; text-decoration: underline;">Proposed FDA/ISMP Consensus Standard (AAMI HE75) →</a>
       </div>
       <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 20px;">
         <h2 class="section-title" style="margin-bottom: 0;">
-          <span>ISMP &amp; FDA Character Disambiguation Suite</span>
+          <span>Plate 3.1 • ISMP Character Disambiguation Matrix</span>
           <small>Louise Sloan 5:1 Optotypes • Dyslexia Mirror Protection • On-Hover Neuro-Ergonomic HUD</small>
         </h2>
         <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
@@ -4479,11 +5231,11 @@
       </div>
     </section>
 
-    <!-- 5. ICU Telemetry HUD Monospace Terminal -->
+    <!-- Chapter 4: Critical Care Telemetry -->
     <section class="specimen-card" id="telemetry">
-      <div class="section-label">Medical Telemetry Monospace (Fixed 600 UPM)</div>
+      <div class="section-label">Chapter 4 • Critical Care Telemetry</div>
       <h2 class="section-title">
-        <span>PocketGull Mono ICU Intensive Care Telemetry HUD</span>
+        <span>Plate 4.1 • ICU Telemetry HUD &amp; Fixed 600 UPM Monospace</span>
         <small>Gapless Rounded Box Drawing (U+256D–2570) • Sub-Cell Waveforms • Powerline Chevrons</small>
       </h2>
 
@@ -4506,7 +5258,7 @@
       </div>
 
       <!-- Tactile Braille Strip -->
-      <div class="braille-strip">
+      <div class="braille-strip" id="braille-strip">
         ⠁⠍⠕⠭⠊⠉⠊⠇⠇⠊⠝⠀⠼⠑⠚⠚⠀⠍⠛⠀•⠀Full 256 Unicode Braille Coverage (U+2800–U+28FF)
       </div>
     </section>
@@ -4606,11 +5358,11 @@
       </div>
     </section>
 
-    <!-- 5.6 Scientific, Astronomical & Mathematical Telemetry Laboratory -->
+    <!-- Chapter 5: Applied Chemistry, Physics & Dark-Sky Telemetry -->
     <section class="specimen-card" id="scientific-lab" style="border-color: rgba(96, 165, 250, 0.4); background: radial-gradient(circle at top right, rgba(96, 165, 250, 0.06) 0%, var(--card-bg) 100%);">
-      <div class="section-label" style="color: #60a5fa;">Scientific Superfamily Expansion &bull; Zero-Shear Telemetry</div>
+      <div class="section-label" style="color: #60a5fa;">Chapter 5 • Applied Chemistry &amp; Physics</div>
       <h2 class="section-title">
-        <span>Scientific, Astronomical &amp; Mathematical Laboratory</span>
+        <span>Plate 5.1 • 650nm Scotopic Night Observatory &amp; Math Laboratory</span>
         <small>Scotopic Night Red HUD &bull; 68 UPM Stem Math Formulas &bull; Zero-Shear FITS Telemetry</small>
       </h2>
       
@@ -5307,11 +6059,11 @@
       </div>
     </section>
 
-    <!-- 5.2 Dedicated Card: The Complete 118-Element IUPAC Periodic Table -->
+    <!-- Chapter 5 (Cont.): Stoichiometry & Crystallography -->
     <section class="specimen-card" id="periodic-table" style="border-color: rgba(16, 185, 129, 0.4); background: radial-gradient(circle at top left, rgba(16, 185, 129, 0.05) 0%, var(--card-bg) 100%);">
-      <div class="section-label" style="color: var(--emerald);">Stoichiometry • Crystallography • OpenType CPAL / COLR</div>
+      <div class="section-label" style="color: var(--emerald);">Chapter 5 (Cont.) • Stoichiometry &amp; Crystallography</div>
       <h2 class="section-title">
-        <span>The Standard 118-Element Periodic Table of Elements</span>
+        <span>Plate 5.2 • The Standard 118-Element Periodic Table of Elements</span>
         <small>Full Standard 18-Column Grid • Lanthanide &amp; Actinide Series • IUPAC / CPK Molecular Color Calibration</small>
       </h2>
 
@@ -5396,11 +6148,11 @@
     </section>
 
 
-    <!-- 5.5 GearArts Physical Atelier: Cardstock, Felt-Markers & Watercolor Kits -->
+    <!-- Chapter 6: Tactile Atelier & Polymath Provenance -->
     <section class="specimen-card" id="atelier" style="border-color: rgba(236, 72, 153, 0.4); background: radial-gradient(circle at top right, rgba(236, 72, 153, 0.06) 0%, var(--card-bg) 100%);">
-      <div class="section-label" style="color: #ec4899;">Tactile Art Materials • Physical GearArts Provenance</div>
+      <div class="section-label" style="color: #ec4899;">Chapter 6 • Tactile Atelier &amp; Polymath Provenance</div>
       <h2 class="section-title">
-        <span>The Felt-Marker &amp; Watercolor Atelier</span>
+        <span>Plate 6.1 • The Felt-Marker &amp; Watercolor Atelier</span>
         <small>Physical Cardstock • Cold-Press Watercolor Blocks • Chisel-Tip &amp; Fineliner Pigment Pens</small>
       </h2>
 
@@ -5869,12 +6621,12 @@
       </div>
     </section>
 
-    <!-- 7. Universal World Scripts SMoE Specimen Suite -->
+    <!-- Chapter 7: Sovereign Cartography & World Scripts -->
     <section class="specimen-card" id="scripts">
-      <div class="section-label">Mixture-of-Experts Sub-Foundry Architecture</div>
+      <div class="section-label">Chapter 7 • Sovereign Cartography</div>
       <h2 class="section-title">
-        <span>Universal World Scripts Expansion (Multi-Script SMoE)</span>
-        <small>27 Specialized Sub-Foundry Targets • Privacy-Preserving Zero-Egress Dispatch</small>
+        <span>Plate 7.1 • UNDRIP Accord &amp; Sovereign World Orthographies</span>
+        <small>27 Specialized Sub-Foundry Targets • Multi-Script SMoE • Privacy-Preserving Zero-Egress Dispatch</small>
       </h2>
 
       <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
@@ -7102,12 +7854,12 @@
       </div>
     </section>
 
-    <!-- 9. Direct Downloads & Package Distribution Hub -->
+    <!-- Chapter 8: Foundry Governance & Distribution Hub -->
     <section class="specimen-card download-hero-box" id="download">
-      <div class="section-label" style="color: var(--cyan);">Official Distribution Hub</div>
+      <div class="section-label" style="color: var(--cyan);">Chapter 8 • Foundry Governance</div>
       <h2 class="section-title">
-        <span>Download Production Font Binaries (.WOFF2 &amp; .TTF)</span>
-        <small>Apache License 2.0 • Version 3.1.0 Release</small>
+        <span>Plate 8.1 • Production Binaries &amp; Memory Safety Certification</span>
+        <small>Apache License 2.0 • SIL OFL 1.1 • Version 3.1.0 Release • Thomas Phinney loca%2==0 Audit</small>
       </h2>
       <p style="font-size: 15px; color: var(--text-muted); max-width: 860px; line-height: 1.6; margin-bottom: 24px;">
         Standardized 1000 UPM OpenType binaries with full Braille coverage, optotypic clarity, and disambiguated numerals. 100% open source, offline-ready, and free for personal and commercial use.
@@ -7385,9 +8137,26 @@
       <span class="doc-drill-title">Evidence Focus • Doc Drill</span>
       <span class="doc-drill-badge" id="drillBadge">OPHTHALMOLOGY</span>
       <div style="display: flex; align-items: center; gap: 0.4rem; margin-left: auto;">
+        <button type="button" id="docDrillTourBtn" class="doc-drill-tour-btn" title="Toggle Hands-Free Socratic Auto-Tour (guided walkthrough of live stages)" onclick="toggleSocraticTour()">
+          <span id="tourIcon">▶</span> <span id="tourLabel">Auto-Tour</span>
+        </button>
         <span id="docDrillSourceBadge" class="doc-drill-badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.4);">🛡️ Sovereign / 100% Offline</span>
         <button type="button" id="btnPromptKey" class="doc-drill-key-btn" title="Configure Google Gemini API Key for Socratic Tutoring" onclick="promptForGeminiKey()">🔑 Key</button>
         <button type="button" class="doc-drill-close" id="drillClose" aria-label="Close Evidence Focus Panel" onclick="closeDocDrill()">✕</button>
+      </div>
+    </div>
+    <div id="drillTourBar" class="doc-drill-tour-bar" style="display: none;">
+      <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.72rem; font-family: 'PocketGull Mono', monospace;">
+        <span id="tourProgressText" style="color: var(--emerald); font-weight: 700;">Stop 1 of 8</span>
+        <div style="display: flex; gap: 4px; align-items: center;">
+          <button type="button" class="tour-ctrl-btn" onclick="prevSocraticStop()" title="Previous Stop" aria-label="Previous Tour Stop">⏮ Prev</button>
+          <button type="button" class="tour-ctrl-btn" id="tourPlayPauseBtn" onclick="toggleTourPause()" title="Pause / Resume" aria-label="Pause or Resume Tour">⏸</button>
+          <button type="button" class="tour-ctrl-btn" onclick="nextSocraticStop()" title="Next Stop" aria-label="Next Tour Stop">Next ⏭</button>
+          <button type="button" class="tour-ctrl-btn" onclick="jumpToCurrentTourStage()" style="color: var(--cyan); border-color: var(--cyan);" title="Scroll &amp; Highlight Stage" aria-label="View current stage">📍 View</button>
+        </div>
+      </div>
+      <div class="tour-meter-track" style="margin-top: 6px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden;">
+        <div id="tourMeterFill" style="height: 100%; width: 0%; background: var(--emerald); transition: width 0.1s linear;"></div>
       </div>
     </div>
     <div class="doc-drill-body" id="drillBody"></div>
@@ -7400,8 +8169,9 @@
         <span>⚡</span> FDA/ISMP Consensus &rarr;
       </a>
     </div>
-    <div class="doc-drill-input-row">
-      <input class="doc-drill-input" id="drillInput" type="text" maxlength="300" autocomplete="off" placeholder="Ask about 5:1 Sloan ratios, Bouma crowding, or ISMP safety…" aria-label="Drill Down question input">
+    <div class="doc-drill-input-row" style="position: relative;">
+      <div id="drillSearchPopup" class="doc-drill-search-popup" style="display: none;"></div>
+      <input class="doc-drill-input" id="drillInput" type="text" maxlength="300" autocomplete="off" placeholder="Search or ask: Sloan, ISMP, Philocardia, Periodic Table…" aria-label="Drill Down question input">
       <button type="button" class="doc-drill-send" id="drillSend" aria-label="Send question" onclick="sendDrillFollowUp()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14">
           <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
@@ -10199,6 +10969,14 @@
           title: 'Louise Sloan 5:1 Optotype Invariant',
           category: 'OPHTHALMOLOGY',
           citation: 'Louise L. Sloan (1959), Am J Ophthalmol 48(6):807–813',
+          targetId: 'waterfall',
+          mystery: 'Traditional eye charts made some letters 40% easier to guess than others. Ten specific letters solved this in 1959 by locking to a single mathematical ratio. Can you find why a 1-arcminute stroke matters at 55 cm?',
+          mission: [
+            'Find the Waterfall stage at the top of the broadside.',
+            'Observe the 10 definitive Sloan characters: C, D, H, K, N, O, R, S, V, Z.',
+            'Notice how the stroke width is exactly 1/5th of the total letter height.'
+          ],
+          discovery: 'Snellen letters were unequal; Dr. Louise Sloan engineered 10 balanced optotypes where every letter shares identical psychometric legibility.',
           chips: ['Why 55cm distance?', 'How do apertures dilate?', 'Run Sloan stress test', 'Why not standard Snellen?'],
           content: '<h3>I. Biophysical Rationale &amp; Optics</h3><p>In 1959, Dr. Louise L. Sloan (Wilmer Ophthalmological Institute, Johns Hopkins University) proved that traditional Snellen optotypes exhibited irregular, non-standardized legibility thresholds. Sloan engineered the definitive 10-character optotype set (<strong>C, D, H, K, N, O, R, S, V, Z</strong>) bounded strictly by a <strong>5:1 proportion</strong>:</p><p><code>Height = 5 arcminutes (5′) | Stroke &amp; Counter Aperture = 1 arcminute (1′)</code></p><p>At standard testing distances (55 cm near reading, 6 m distance), this 1-arcminute stroke matches the physical resolving limit of human foveal cone photoreceptors.</p><h3>II. Foundry Geometry &amp; Vector Invariant</h3><p>All glyph counters in PocketGull are pinned to this 5:1 ratio on a 1000 UPM grid. During low-illumination (mesopic) ICU environments or acute resuscitations, PocketGull\'s Phoropter engine dynamically dilates letter apertures by <code>1.00×</code> to <code>1.35×</code> to prevent optical irradiation, blooming, and letter closure.</p><h3>III. Bedside Failure Modes Mitigated</h3><p>When typefaces use narrow counters (such as standard Helvetica or Times), characters like <code>C</code> and <code>O</code> or <code>8</code> and <code>0</code> bloom into solid black ellipses under dirty bedside monitors, creating catastrophic medication dosing errors.</p>'
         },
@@ -10206,6 +10984,14 @@
           title: "Herman Bouma's Law of Lateral Crowding",
           category: 'NEURO-ERGONOMICS',
           citation: 'Herman Bouma (1970), Nature 226(5241):177–178',
+          targetId: 'waterfall',
+          mystery: 'When your fovea focuses straight ahead, letters in your peripheral vision don\'t blur—they crowd together into unrecognizable shapes. What critical distance breaks this visual trap?',
+          mission: [
+            'In the waterfall stage, locate the tracking and lateral spacing metrics.',
+            'Observe how Bouma\'s constant (r ≈ 0.5 × eccentricity) governs the +0.12em lateral clearance.',
+            'Compare dense character packing against Bouma-spaced clinical alert numbers.'
+          ],
+          discovery: 'Adding +0.12em lateral tracking creates spatial isolation, allowing nurses and surgeons to read vital numbers in their peripheral vision without turning their heads.',
           chips: ['What is flanker masking?', 'Try +0.12em spacing', 'Peripheral vs foveal reading'],
           content: '<h3>I. The Bouma Crowding Phenomenon</h3><p>In 1970, Dutch vision scientist Herman Bouma published his landmark <em>Nature</em> paper showing that letters in parafoveal and peripheral vision are masked by neighboring flanker letters when they fall inside a critical spatial radius:</p><p><code>r ≈ 0.5 × eccentricity (degrees)</code></p><p>When a clinician focuses their gaze on a primary monitor (e.g. surgical camera), vital numbers in their peripheral field undergo severe flanker interference unless inter-letter spacing exceeds Bouma\'s critical distance.</p><h3>II. How PocketGull Solves Crowding</h3><p>PocketGull features native Bouma aperture compensation: clicking the <code>+0.12em</code> lateral tracking toggle expands character spacing to maintain spatial isolation, preserving peripheral scanning legibility across EHR and emergency dispatch HUDs.</p>'
         },
@@ -10213,13 +10999,74 @@
           title: 'ISMP / FDA Clinical Disambiguation',
           category: 'PATIENT SAFETY',
           citation: 'ISMP Guidelines (2023) &amp; FDA CDER Guidance (2016)',
+          targetId: 'ismp',
+          mystery: 'On a smudged ICU touchscreen, a single circular character can mean either an oxygen saturation reading or a patient\'s room letter. One diagonal line saves lives.',
+          mission: [
+            'Scroll to Section 3: ISMP Clinical Disambiguation.',
+            'Click the "0 vs O" inspection card.',
+            'Observe the internal 45° diagonal slash and optical thinning at the junctions.'
+          ],
+          discovery: 'Feature cv08 provides a crisp diagonal slash that never clots with ink or pixels, completely eliminating 0 vs O confusion in critical dosages like 500 mg.',
           chips: ['Why is 5.0 mg prohibited?', 'What is cv08 slashed zero?', 'What is cv12 dotted zero?', 'Explain curved l (cv05)'],
           content: '<h3>I. The Zero-Error Prescription Standard</h3><p>The Institute for Safe Medication Practices (ISMP) and the FDA have documented thousands of fatal medication errors caused by typographic ambiguities. PocketGull embeds native OpenType sets to eliminate these hazards:</p><ul><li><strong>Slashed Zero (<code>zero</code> / <code>cv08</code>):</strong> Unequivocally separates numeral <code>0</code> from uppercase letter <code>O</code> for ICU and trauma telemetry.</li><li><strong>Optical Core Dotted Zero (<code>cv12</code>):</strong> Empathetic centroid dot disambiguation for pediatric care, hospice, and bedside comfort without harsh diagonal cuts.</li><li><strong>Curved Lowercase l (<code>cv05</code>):</strong> Prominent terminal outward sweep distinguishes lowercase <code>l</code> from numeral <code>1</code> and uppercase <code>I</code>.</li><li><strong>Serifed Capital I (<code>ss02</code>):</strong> Symmetrical horizontal serifs distinguish uppercase <code>I</code> from lowercase <code>l</code>.</li><li><strong>Prohibition of Trailing Zeros:</strong> "5.0 mg" is prohibited because a stray speck on a dirty screen transforms it into "50 mg" (10-fold overdose).</li><li><strong>Tabular Numerals (<code>tnum</code>):</strong> Fixed-width numbers ensure decimal points align rigidly in vertical columns.</li></ul>'
+        },
+        philocardia: {
+          title: 'Philocardia Healer Hearts & 72 BPM Cardiac Pacing',
+          category: 'CLINICAL ERGONOMICS & PEDIATRICS',
+          citation: 'Phil Gear (GearArts 2026) — Humanist Heart Tittles & Respiratory Entrainment',
+          targetId: 'philocardiaInteractiveText',
+          mystery: 'Typefaces are usually cold and clinical metal. But can a font breathe at the exact resting heart rate of a child, and turn punctuation into lovingkindness?',
+          mission: [
+            'Locate the Philocardia Healer Banner with the beating green heart.',
+            'Click the "72 BPM", "60 BPM", and "Static" cadence buttons to feel the pacing shift.',
+            'Click into the live text editor and type lowercase "i", "j", or "!" to witness procedural heart tittles.'
+          ],
+          discovery: 'Features cv09 and ss07 replace standard square dots with humanist felt-marker hearts, paced to parasympathetic heart cadences (60–72 BPM) for pediatric comfort.',
+          chips: ['What is 72 BPM cadence?', 'How do heart tittles work (cv09)?', 'Why pediatric empathy matters', 'Test live typing'],
+          content: '<h3>I. The Philocardia Healing DNA</h3><p>In pediatric units and trauma recovery, traditional clinical typography feels cold, sterile, and intimidating. Philocardia introduces humanist heart tittles across lowercase <code>i</code> and <code>j</code>, exclamation points, and telemetry badges.</p><h3>II. Heartbeat Animation &amp; Parasympathetic Entrainment</h3><p>The interactive studio offers selectable cardiac cadences: <strong>72 BPM (Standard Rest)</strong>, <strong>60 BPM (Deep Sleep / Meditation)</strong>, and <strong>Static</strong>. By entraining visual pulsing to healthy cardiac rhythms, clinical interfaces can actively soothe acute patient anxiety.</p><h3>III. Stem Preservation Invariant</h3><p>Under OpenType feature <code>cv09</code> (Heart Tittles), the stem contour of <code>i</code> and <code>j</code> remains 100% bit-identical to the standard glyphs with zero collision, ensuring clinical legibility is never compromised.</p>'
+        },
+        scotopic: {
+          title: '650nm Scotopic Night Observatory Telemetry',
+          category: 'ASTRONOMY & CIRCADIAN',
+          citation: 'Shinhmar, Jeffery et al. (2020) & Dark-Sky International Standards',
+          targetId: 'scotopicContainer',
+          mystery: 'A single flash of white light at an observatory destroys 30 minutes of deep-sky dark adaptation. How can astronomers read celestial coordinates without bleaching their rhodopsin?',
+          mission: [
+            'Navigate to Section 5.1 in the Scientific Lab.',
+            'Click the button "Activate 650nm Scotopic Red Mode".',
+            'Watch the entire console shift into monochromatic deep-red photons (>650nm).'
+          ],
+          discovery: 'Light above 650nm bypasses retinal rod photopigments, preserving night vision at mountaintop observatories and sleep cycles during clinician night shifts.',
+          chips: ['Activate 650nm mode now', 'Why does 650nm protect rhodopsin?', 'How does blue light harm sleep?'],
+          content: '<h3>I. Rhodopsin Bleaching Dynamics</h3><p>Human scotopic (night) vision relies on rod photoreceptors containing rhodopsin, whose absorption sensitivity falls to near zero at wavelengths longer than <strong>650 nm</strong>. Exposure to white or blue light causes immediate photochemical photopigment bleaching, requiring up to 30–45 minutes of complete darkness to recover.</p><h3>II. Monochromatic Red Console Architecture</h3><p>PocketGull\'s Scotopic 650nm console renders telemetry strictly using pure red phosphor photons (<code>#ef4444</code> and <code>#991b1b</code>). This affords full typographic resolution to cone cells at the fovea while allowing rod cells in the eccentric retina to remain 100% dark-adapted for stargazing or night-shift nursing.</p>'
+        },
+        periodic: {
+          title: '118-Element IUPAC Periodic Table & CPK Stoichiometry',
+          category: 'CHEMISTRY & STOICHIOMETRY',
+          citation: 'IUPAC Compendium of Chemical Terminology & Corey-Pauling-Koltun Standards',
+          targetId: 'periodic-table',
+          mystery: '118 elements form the entire universe. Why does each element tile sit in an encapsulated dark chassis even when the website is set to cream paper or bright white?',
+          mission: [
+            'Scroll to Section 5.2: The Standard 118-Element Periodic Table.',
+            'Click Element 8 (Oxygen, O) or Element 26 (Iron, Fe).',
+            'Toggle through the Daltonism filters (Protanopia, Deuteranopia, Monochromacy) to test legibility.'
+          ],
+          discovery: 'The dark chassis protects vibrant CPK chemical tokens from photopic washout on white backgrounds, maintaining >15:1 WCAG AAA contrast in all lighting conditions.',
+          chips: ['Why dark chassis in washi/light?', 'Test Oxygen (8) vs Carbon (6)', 'How does Daltonism CVD affect CPK colors?'],
+          content: '<h3>I. The Universal Chemical Grid</h3><p>PocketGull renders all 118 chemical elements of the IUPAC Periodic Table using its Louise Sloan 5:1 optotype grid and ISMP character disambiguation. Every element tile embeds atomic number $Z$, chemical symbol, atomic weight, and standardized IUPAC/CPK chromatic classification.</p><h3>II. The Tri-Theme Contrast Invariant</h3><p>In bright photopic environments (<code>light</code> and <code>washi</code> paper themes), high-luminance chemical colors (such as alkali yellow, gas cyan, and halogen magenta) risk photopic washout on pale backgrounds. PocketGull encapsulates the periodic grid within a dark slate chassis (<code>#0f172a</code>) with high-contrast borders, guaranteeing <strong>>15:1 WCAG AAA contrast</strong> regardless of the global document theme.</p><h3>III. Daltonism &amp; CVD Neuro-Filters</h3><p>Clinicians and students can test the grid under Protanopia (red-blind), Deuteranopia (green-blind), Tritanopia (blue-blind), and Monochromacy (achromatopsia) filters to verify that character geometries remain legible even when hue discrimination is unavailable.</p>'
         },
         braille: {
           title: '256 Unicode Braille Patterns (U+2800–U+28FF)',
           category: 'ACCESSIBILITY',
           citation: 'ISO/TR 11548-1/2 &amp; Unicode Standard 16.0',
+          targetId: 'braille-strip',
+          mystery: 'Can a digital font on a glass screen simultaneously honor the physical geometry of an embossing pin on cardstock?',
+          mission: [
+            'Locate the Braille Strip in the clinical telemetry section.',
+            'Observe the 8-dot tactile cell geometry.',
+            'Inspect the 2.5 mm dot pitch and baseline grounding on y = 0.'
+          ],
+          discovery: 'PocketGull maps all 256 Unicode Braille codepoints (U+2800–U+28FF) with zero .notdef missing glyphs, matching international ISO/TR 11548 tactile standards.',
           chips: ['Try Braille Transcriber', 'What is 8-dot computer Braille?', 'ISO/TR 11548 spec'],
           content: '<h3>1. Full 256 Tactile Codepoints</h3><p>PocketGull embeds the complete 256-glyph Unicode Braille Patterns block (<code>U+2800</code> to <code>U+28FF</code>) across all superfamily weights.</p><h3>2. Physical Hardware Geometry</h3><p>Conforms to ISO/TR 11548 standards: dot center distance is 2.5 mm and cell pitch is 6.0 mm. On bedside thermal labels and high-resolution surgical tablets, tactile dots render with optical spherical caps for dual tactile/visual legibility.</p>'
         },
@@ -10227,6 +11074,14 @@
           title: 'UNDRIP Accord & Sovereign Indigenous Typography',
           category: 'INDIGENOUS SOVEREIGNTY',
           citation: 'UN Declaration on the Rights of Indigenous Peoples (A/RES/61/295)',
+          targetId: 'world-map-studio',
+          mystery: 'Many fonts force Indigenous languages into Latin metal boxes or clip their stacked high-tone nasal marks. Which international human rights accord guarantees typographic linguistic sovereignty?',
+          mission: [
+            'Visit the Global Health Atlas and World Scripts stage.',
+            'Inspect the Canadian Aboriginal Syllabics and Lushootseed Salishan orthographies.',
+            'Observe how stacked nasal marks (ą́, ę́, į́, ǫ́) maintain ≥ 110 UPM clearance without clipping.'
+          ],
+          discovery: 'Conforming to UNDRIP Articles 11, 13, 14, 24, and 31, PocketGull guarantees unencumbered SIL OFL 1.1 open licensing and zero forced Latinization for tribal immersion schools.',
           chips: [
             'Articles 11, 13, 14, 24, 31',
             'Salish & Osage GPOS Mark Anchors',
@@ -10235,10 +11090,33 @@
           ],
           content: '<h3>I. The UNDRIP Typographic Mandate</h3><p>In accordance with Articles 11, 13, 14, 24, and 31 of the <strong>United Nations Declaration on the Rights of Indigenous Peoples (UNDRIP)</strong>, PocketGull establishes that digital typography is an instrument of human rights and linguistic self-determination:</p><ul><li><strong>Article 13 (Language &amp; Writing Systems):</strong> Indigenous peoples have the right to revitalize, use, develop, and transmit their languages and writing systems. PocketGull ensures zero forced Latinization across all styles.</li><li><strong>Article 14 (Education Parity):</strong> Unencumbered SIL OFL 1.1 open licensing guarantees tribal immersion schools, language nests, and universities can publish without licensing barriers.</li><li><strong>Article 24 (Right to Health &amp; Healing):</strong> Indigenous peoples have the right to equal access to all health services. Non-clipping dosage numerals and unambiguous orthographies protect patient safety in rural community clinics.</li><li><strong>Articles 11 &amp; 31 (Cultural Heritage &amp; IP):</strong> Indigenous peoples maintain ownership and protection of traditional cultural heritage.</li></ul><h3>II. Technical Implementations in PocketGull</h3><ul><li><strong>Coast Salish / Lushootseed (dxʷləšucid):</strong> GPOS <code>mark</code> and <code>mkmk</code> anchors eliminate the +322 UPM ejective-labializer displacement defect (e.g. <code>x̌ʷ</code>, <code>q̓ʷ</code>, <code>k̓ʷ</code>).</li><li><strong>Osage Nation (Wahzhazhe):</strong> Complete 72-glyph SMP block (<code>U+104B0–U+104FB</code>) natively mapped in Format 12 cmap tables across all cuts.</li><li><strong>Diné Bizaad (Navajo):</strong> Stacked high-tone nasal vowels (<code>ą́, ę́, į́, ǫ́</code>) with &ge; 110 UPM clearance and barred <code>Ł, ł</code>.</li><li><strong>Canadian Aboriginal Syllabics:</strong> Full 640-glyph Unicode block (<code>U+1400–U+167F</code>) for Inuktitut and Cree with true rotational symmetry.</li><li><strong>Neo-Tifinagh (Amazigh):</strong> <code>U+2D30–U+2D7F</code> honoring historical North African epigraphic balance.</li><li><strong>Guarani:</strong> Full nasal tildes (<code>ã, ẽ, ĩ, õ, ũ, ỹ, g̃</code>) and first-class puso apostrophe (<code>ʼ</code>).</li></ul><h3>III. First Nations OCAP® &amp; CARE Principles</h3><p>Health data and lexical assets remain under sovereign tribal authority: Ownership, Control, Access, and Possession (OCAP®) with Collective Benefit, Authority to Control, Responsibility, and Ethics (CARE). PocketGull operates 100% locally with zero cloud telemetry egress.</p><p><a href="https://www.un.org/development/desa/indigenouspeoples/declaration-on-the-rights-of-indigenous-peoples.html" target="_blank" rel="noopener noreferrer" style="color: var(--cyan); text-decoration: underline;">📜 Read the Official UN Declaration (A/RES/61/295) &rarr;</a></p>'
         },
+        piano: {
+          title: '88-Key Stretched Rainbow Piano & Chromatic Pedagogy',
+          category: 'POLYMATH & ACOUSTICS',
+          citation: 'Phil Gear (GearArts 2026) — Harmonic Sound-Light Synesthesia',
+          targetId: 'atelier',
+          mystery: 'How do visual light wavelengths (ROYGBIV) map directly to acoustic sound frequencies across a grand piano?',
+          mission: [
+            'Scroll to Section 5.5: GearArts Physical Atelier.',
+            'Explore the 88-Key Stretched Rainbow Piano.',
+            'Click keys to hear WebAudio synthesized harmonics and observe chromatic octave tokens.'
+          ],
+          discovery: 'Chromatic note tokens bridge ophthalmological optics and auditory music theory, helping neurodivergent learners intuitively perceive pitch intervals through color.',
+          chips: ['How does ROYGBIV map to pitch?', 'Try WebAudio synth keys', 'What is harmonic cadence?'],
+          content: '<h3>I. The ROYGBIV Chromatic Bridge</h3><p>In music theory, octave intervals repeat logarithmically just like the optical light spectrum repeats in color octaves. The GearArts 88-Key Piano assigns standardized spectral rainbow hues across the 12 chromatic tones of the Western scale (from Red at C to Violet at B).</p><h3>II. Multi-Sensory Cognitive Scaffolding</h3><p>For children with dyslexia, autism, or cognitive fatigue, reading traditional musical notation can cause visual crowding. Color-coded keycaps and tactile felt-marker typography allow learners to associate melodic structure with hue harmony before translating to traditional notation.</p>'
+        },
         tek: {
           title: 'Traditional Ecological Knowledge (TEK) & UNDRIP Accord',
           category: 'INDIGENOUS SOVEREIGNTY',
           citation: 'Fikret Berkes (2018), Sacred Ecology & Nancy J. Turner (2014), Ancient Pathways',
+          targetId: 'world-map-studio',
+          mystery: 'How can ancient ecological botanical wisdom and tribal oral traditions be preserved in digital Unicode glyphs without Latin distortion?',
+          mission: [
+            'Explore the Global Health Atlas and World Scripts.',
+            'Examine traditional plant taxon tags rendered in Diné and Salishan orthographies.',
+            'Notice the high-contrast diacritical accents designed for outdoor field tablets.'
+          ],
+          discovery: 'Authentic glyph design supports indigenous land stewardship and traditional medicine documentation with zero data egress (OCAP® compliance).',
           chips: ['What is UNDRIP Accord?', 'Pan-Tribal 12 IHS areas', 'Chinuk Pipa & Syllabics', 'CARE & OCAP® data sovereignty'],
           content: '<h3>I. UNDRIP Typographic Accord & Sovereignty</h3><p>In accordance with Articles 11, 13, 14, 24, and 31 of the United Nations Declaration on the Rights of Indigenous Peoples (UNDRIP), PocketGull enforces strict typographic sovereignty: zero forced Latinization, unencumbered SIL OFL 1.1 licensing for tribal schools, and first-class rendering across all 574+ federally recognized tribes and 12 Indian Health Service (IHS) administrative jurisdictions.</p><h3>II. Pan-Tribal Orthographies & Syllabics</h3><ul><li><strong>Diné Bizaad:</strong> Non-clipping stacked nasal diacritics (<code>ą́, ę́, į́, ǫ́</code>) and barred consonants (<code>Ł, ł</code>).</li><li><strong>Coast Salish / Lushootseed:</strong> Schwa (<code>ə</code>), barred lambda (<code>ƛ</code>), lateral fricative (<code>ɬ</code>), labializer (<code>ʷ</code>), and ejective accents (<code>x̌</code>).</li><li><strong>Canadian Aboriginal Syllabics:</strong> Full 640-glyph Unicode block (<code>U+1400–U+167F</code>) for Inuktitut, Cree, and Ojibwe Arctic telehealth.</li><li><strong>Chinuk Pipa:</strong> Complete 143 Duployan shorthand signs (<code>U+1BC00–U+1BC9F</code>) for Pacific Northwest historical and immersion pedagogy.</li></ul><h3>III. First Nations OCAP® & CARE Principles</h3><p>Health data remains under sovereign tribal authority: Ownership, Control, Access, and Possession (OCAP®) with Collective Benefit, Authority to Control, Responsibility, and Ethics (CARE).</p>'
         },
@@ -10246,6 +11124,14 @@
           title: 'Prof. Karen Cheng Micro-Anatomical Architecture',
           category: 'MICRO-ANATOMY',
           citation: 'Karen Cheng (2020), Designing Type (2nd ed.), Yale University Press',
+          targetId: 'waterfall',
+          mystery: 'Why does a letter with mathematically centered horizontal bars look like it is falling over? What optical trick keeps letters stable?',
+          mission: [
+            'Inspect uppercase B, E, F, and H in the waterfall display.',
+            'Measure the height of the crossbars relative to the total cap-height.',
+            'Notice that the waistline sits at 52–54% rather than 50%.'
+          ],
+          discovery: 'Human eyes perceive geometric centers as sagging downward. Prof. Karen Cheng codified the 53% optical waistline and curved overshoots to create visual equilibrium.',
           chips: ['What is 53% waistline?', 'Explain optical overshoot', 'Why smooth extrema?'],
           content: '<h3>I. Anatomical Physics & Optical Balance</h3><p>In <em>Designing Type</em>, Prof. Karen Cheng codified the optical mechanics of type design. Letters cannot follow raw mechanical grids; they require optical compensation:</p><ul><li><strong>Optical Waistline (53%):</strong> Capital crossbars (<code>B, E, F, H, 8</code>) must sit above geometric midline (at 52–54% of cap height) to prevent letters from appearing top-heavy.</li><li><strong>Optical Overshoot:</strong> Curved letters (<code>O, C, G, S</code>) and pointed apexes (<code>A, V</code>) must extend 15–25 UPM beyond the baseline and cap-height to match the visual perceived volume of flat stems.</li><li><strong>Stroke Junction Thinning:</strong> Where strokes converge, inner contours must be sculpted to prevent dark ink pooling at joints.</li></ul>'
         },
@@ -10253,6 +11139,14 @@
           title: 'Ellen Lupton Humanist Cadence & Voice',
           category: 'HUMANIST TYPOGRAPHY',
           citation: 'Ellen Lupton (2014), Thinking with Type (2nd ed.), Princeton Architectural Press',
+          targetId: 'atelier',
+          mystery: 'How does a typeface convey empathy and humanist warmth instead of bureaucratic clinical coldness?',
+          mission: [
+            'Visit the GearArts Atelier section.',
+            'Observe the 25 UPM softened corner radii derived from physical cardstock drawings.',
+            'Notice how the open stroke terminals invite natural reading cadence.'
+          ],
+          discovery: 'Ellen Lupton proved type is an active human voice. PocketGull synthesizes felt-marker warmth with rigorous Sloan optometric ratios.',
           chips: ['What is humanist rhythm?', 'Aperture breathing', 'Felt-marker warmth'],
           content: '<h3>I. Typography as Human Communication</h3><p>In <em>Thinking with Type</em>, Ellen Lupton demonstrated that type is an active voice rather than a passive container. PocketGull synthesizes humanist cadence with life-critical clinical duty:</p><ul><li><strong>Humanist Rhythm:</strong> Derived from physical felt-marker drawing on cardstock, preserving 25 UPM corner softness.</li><li><strong>Aperture Breathing:</strong> Wide, open apertures on <code>c, e, s, 3, 6, 9</code> prevent retinal irradiation and letterform collapse under mesopic ICU lighting.</li><li><strong>Hierarchical Empathy:</strong> Clear weight, spacing, and proportion gradations prioritize life-safety alerts without cognitive strain.</li></ul>'
         },
@@ -10260,6 +11154,14 @@
           title: '670nm Retinal Photobiomodulation (PBM)',
           category: 'CIRCADIAN BIOLOGY',
           citation: 'Shinhmar, Jeffery et al. (2020), J Gerontol A 75(9):e49–e52',
+          targetId: 'scotopicContainer',
+          mystery: 'Can a specific wavelength of light actually boost cellular energy (ATP) in your retina while completely protecting your sleep hormone melatonin?',
+          mission: [
+            'Go to the 650nm Scotopic Console in Section 5.1.',
+            'Read the spectral photobiology report.',
+            'Notice that 670nm bypasses melanopsin (peak 480nm) completely.'
+          ],
+          discovery: 'Deep-red 670nm photons stimulate mitochondrial cytochrome c oxidase, boosting ATP production and retinal contrast sensitivity by up to 22% without sleep disruption.',
           chips: ['Toggle 670nm Mode now', 'What is melanopsin?', 'Mitochondrial ATP research'],
           content: '<h3>1. Mitochondrial ATP Stimulation</h3><p>Research led by Prof. Glen Jeffery (UCL Institute of Ophthalmology, 2020) demonstrated that retinal photoreceptor cells suffer steep mitochondrial ATP decline during aging and prolonged visual fatigue. Brief exposure to deep-red light (<strong>670 nm</strong>) stimulates <em>cytochrome c oxidase</em>, recharging mitochondrial membrane potential and boosting contrast sensitivity.</p><h3>2. Zero Circadian Melatonin Suppression</h3><p>Blue-green wavelengths (460–480 nm) stimulate melanopsin, suppressing nocturnal melatonin production. 670nm red light completely bypasses melanopsin, allowing clinicians to review charts during night shifts without circadian disruption.</p>'
         },
@@ -10267,6 +11169,14 @@
           title: 'Bedside 203 DPI Thermal Label Rasterization',
           category: 'HARDWARE INTEROP',
           citation: 'Zebra ZPL II Technical Documentation P1012728-011',
+          targetId: 'download',
+          mystery: 'Bedside wristband printers have zero grayscale smoothing. Every pixel is pure black or pure white. Why do standard fonts produce broken decimals and fatal misreads?',
+          mission: [
+            'Visit the Downloads & Technical Specs area.',
+            'Examine the 203 DPI integer stem quantization architecture.',
+            'Download the sample Zebra ZPL II wristband label template.'
+          ],
+          discovery: 'Quantizing font stems to exact integer pixel steps at 8pt, 10pt, and 12pt guarantees that numbers and decimals never fracture on binary thermal printheads.',
           chips: ['Show Zebra ZPL II code', 'Download .ZPL label', 'Test Bedside Print'],
           content: '<h3>1. Direct Thermal Rasterization Constraints</h3><p>Most bedside wristband and eMAR label printers operate at <strong>203 DPI</strong> (8 dots/mm). Thermal printheads cannot reproduce grayscale anti-aliasing; pixels are strictly binary (black or white).</p><h3>2. Integer Stem Quantization</h3><p>PocketGull\'s stem widths and slashed zero diagonals are aligned to integer pixel boundaries at 8 pt, 10 pt, and 12 pt, eliminating fuzzy dithering and broken decimals that cause fatal medication administration errors.</p>'
         },
@@ -10274,6 +11184,14 @@
           title: 'ETDRS LogMAR Visual Acuity Progression',
           category: 'CLINICAL TRIALS',
           citation: 'Ferris, Kassoff, Bresnick, &amp; Bailey (1982), Am J Ophthalmol 94(1):91–96',
+          targetId: 'waterfall',
+          mystery: 'Why does every line on an ETDRS vision chart shrink by exactly 1.2589x? Why is this geometric progression required for clinical trials?',
+          mission: [
+            'Examine the LogMAR scale progression in the optometry waterfall.',
+            'Observe how line spacing and character spacing scale proportionally with font size.',
+            'Calculate the logarithmic step: 10^0.1 ≈ 1.2589.'
+          ],
+          discovery: 'A constant ratio of 0.1 logMAR per line ensures that measuring visual acuity at 1 meter or 6 meters carries identical difficulty, eliminating chart bias.',
           chips: ['What is LogMAR 0.0?', 'Calculate 5 arcminutes', 'View Zoom Phoropter'],
           content: '<h3>1. The Logarithmic Standard</h3><p>The Early Treatment Diabetic Retinopathy Study (ETDRS) standardizes visual acuity measurement using a logarithmic progression of <strong>0.1 logMAR per line</strong> (a constant ratio of <code>10^0.1 ≈ 1.2589</code>). Letter spacing and line spacing are geometrically proportional to letter size, ensuring identical task difficulty across all viewing distances.</p>'
         },
@@ -10281,6 +11199,14 @@
           title: 'Rachel Nabors Ethical Motion &amp; Pacing',
           category: 'CLINICAL ERGONOMICS',
           citation: 'Rachel Nabors (2017), Animation at Work, A Book Apart',
+          targetId: 'waterfall',
+          mystery: 'Clinicians subconsciously hold their breath during stressful electronic charting ("screen apnea"). Can subtle interface motion gently restore a calming breathing cycle?',
+          mission: [
+            'Observe the gentle 10-second glowing pulses throughout the specimen.',
+            'Notice the 4-second inhalation expansion followed by a 6-second exhalation contraction.',
+            'Feel how this 0.1 Hz rhythm entrains slower breathing.'
+          ],
+          discovery: 'Ethical motion paced at 0.1 Hz (6 breaths per minute) stimulates the vagus nerve and activates the parasympathetic nervous system, easing acute charting fatigue.',
           chips: ['What is screen apnea?', 'Try breathing mascot', 'Ethical motion principles'],
           content: '<h3>1. Bio-Rhythmic Parasympathetic Calming (0.1 Hz)</h3><p>Clinical software frequently causes "screen apnea"—shallow breathing or breath-holding during acute data entry. PocketGull applies Rachel Nabors\' motion principles by pacing ambient visual transitions on a calming <strong>10-second (0.1 Hz) respiratory cycle</strong> (4s expansion / 6s contraction) to counteract nervous system strain.</p>'
         },
@@ -10288,6 +11214,14 @@
           title: 'Pelli &amp; Tillman Uncrowded Recognition Window',
           category: 'VISION SCIENCE',
           citation: 'Pelli &amp; Tillman (2008), Nature Neuroscience 11(10):1129–1135',
+          targetId: 'waterfall',
+          mystery: 'What is the physiological bottleneck that caps human reading speed? Why does crowded text slow your brain down even when letter resolution is sharp?',
+          mission: [
+            'Compare dense tracking against open Bouma tracking in the waterfall.',
+            'Observe how wide counters keep cortical feature detectors from overlapping.',
+            'Notice how reading pace accelerates with uncrowded margins.'
+          ],
+          discovery: 'Reading speed depends directly on the width of the "uncrowded window" of feature integration. PocketGull\'s spacious counters prevent cortical clutter.',
           chips: ['What is cortical integration?', 'Explain reading windows', 'Low vision typography'],
           content: '<h3>1. Cortical Integration Fields</h3><p>Pelli &amp; Tillman demonstrated that reading velocity depends directly on the width of the "uncrowded window" of feature integration. PocketGull\'s balanced negative space and generous counters preserve this uncrowded window even under severe physical eye fatigue.</p>'
         },
@@ -10295,6 +11229,14 @@
           title: '1000 UPM TrueType & Apple CoreText Standard',
           category: 'TYPEFACE ENGINEERING',
           citation: 'ISO/IEC 14496-22:2019 / Apple TrueType Reference Manual / OpenType v1.9.1',
+          targetId: 'download',
+          mystery: 'Why did Apple System 7 and OpenType settle on an em-square of 1000 units instead of power-of-two values like 1024 or 2048? What math simplifies for rasterizers?',
+          mission: [
+            'Review Pillar 1 in the Foundry Governance section.',
+            'Observe how 1000 UPM divides cleanly into Louise Sloan 5:1 units (200 UPM stroke / 200 UPM counter).',
+            'Inspect the dual Apple Platform ID 1 and Windows Platform ID 3 metadata.'
+          ],
+          discovery: 'A 1000 UPM grid allows all optical proportions (5:1, 10:1, 50%) to compute with exact integers, preventing rounding errors across CoreText and DirectWrite.',
           chips: ['Why 1000 UPM grid?', 'Explain G2 Bézier curvature', 'What is Apple Platform ID 1 vs 3?', 'What is winding order?'],
           content: '<h3>1. Hermetic Vector Precision &amp; Computer History Heritage</h3><p>Tracing back to Apple\'s 1991 System 7 TrueType genesis and the 1996 OpenType specification, PocketGull outlines are compiled on an exact 1000 Units-Per-Em (UPM) grid ($CAP=720$, $XH=480$, $DSC=-180$). Outlines utilize clockwise outer contour winding, counter-clockwise inner counters, and continuous G2 Bézier curvature for artifact-free rendering on both 8K surgical displays and 203 DPI thermal printers.</p><h3>2. Dual Platform ID Architecture (Apple &amp; Windows)</h3><p>PocketGull incorporates dual Platform ID 1 (Macintosh Roman) and Platform ID 3 (Windows Unicode) naming records, guaranteeing seamless typography execution across Apple CoreText, Linux FreeType, and Windows DirectWrite rasterizers.</p>'
         },
@@ -10302,6 +11244,14 @@
           title: 'Google Noto Sans Universal Multi-Script Lineage',
           category: 'OPEN-SOURCE LINEAGE',
           citation: 'Google Fonts &amp; Monotype — Apache License 2.0',
+          targetId: 'world-map-studio',
+          mystery: 'What does "No More Tofu" mean in computer science history, and how did Google Noto prove that free fonts could unite all humanity\'s writing systems?',
+          mission: [
+            'Visit Section 4: Global Health Atlas and World Scripts.',
+            'Observe how non-Latin scripts harmonize along standard baselines and cap-heights.',
+            'Inspect the SIL Open Font License 1.1 declaration in the downloads.'
+          ],
+          discovery: 'When a missing glyph produces a blank box ("tofu"), communication fails. Noto established open multi-script baseline locking that PocketGull adopts for clinical equity.',
           chips: ['What is "No More Tofu"?', 'Which world scripts are supported?', 'SIL Open Font License spec'],
           content: '<h3>1. Universal Multi-Script Harmony ("No More Tofu")</h3><p>Google Noto Sans established the global open-source gold standard for universal multi-script typographic harmony. PocketGull adapts its multi-script baseline locking for Pan-Asian CJK and Indic Devanagari clinical electronic health records.</p><h3>2. Healthcare Equity Through Open Fonts</h3><p>Distributed under the SIL Open Font License 1.1, Noto\'s open ethos enables global healthcare equity and interoperability without restrictive proprietary font licensing barriers.</p>'
         },
@@ -10309,6 +11259,14 @@
           title: 'Amazon Ember / Dalton Maag Humanist Grotesque Lineage',
           category: 'DESIGN LINEAGE',
           citation: 'Dalton Maag Ltd. — Humanist Grotesque Interface Typography',
+          targetId: 'waterfall',
+          mystery: 'Why do cold, geometric fonts tire out our eyes on e-readers and tablets? How did Dalton Maag soften grotesque geometry into human warmth?',
+          mission: [
+            'Look at the curved terminal strokes on PocketGull lowercase letters.',
+            'Observe the generous internal counter apertures.',
+            'Notice the absence of rigid mechanical straight lines.'
+          ],
+          discovery: 'Amazon Ember proved that warm humanist proportions and open counters drastically reduce eye strain over 12-hour shifts. PocketGull builds upon this ergonomic foundation.',
           chips: ['Who is Dalton Maag?', 'What makes a font "humanist"?', 'How do open apertures reduce eye fatigue?'],
           content: '<h3>1. Humanist Grotesque Digital Ergonomics</h3><p>Engineered by legendary type design studio Dalton Maag, Amazon Ember set benchmark standards for digital interface clarity across Kindle e-ink, mobile tablets, and ambient displays. PocketGull cites Ember\'s warm humanist proportions, generous counter apertures, and organic terminal curvature as foundational influences that counteract clinician visual fatigue during 12-hour shifts.</p><h3>2. Clinical Acuity Synthesis</h3><p>PocketGull elevates this humanist lineage by embedding Louise Sloan 5:1 optotype ratios, ISMP slashed zeroes (<code>cv08</code>), and 256 Unicode Braille codepoints for mission-critical medical applications.</p>'
         },
@@ -10316,6 +11274,14 @@
           title: 'Google PAIR Data Cards &amp; Healthsheets',
           category: 'AI ETHICS &amp; TRANSPARENCY',
           citation: 'Pushkarna et al. (ACM FAccT 2022) &amp; Rostamzadeh et al. (arXiv:2202.13028)',
+          targetId: 'download',
+          mystery: 'Why are medical algorithms and font metrics so often hidden behind opaque corporate claims? How does Google PAIR\'s Data Card make typography scientifically falsifiable?',
+          mission: [
+            'Locate the Google PAIR Healthsheet link in Section 7.',
+            'Review the verified optometric claims and test matrices.',
+            'Verify that zero data leaves your browser (100% offline sovereign execution).'
+          ],
+          discovery: 'PocketGull is the first typeface documented under PAIR Data Card standards, ensuring every claim is backed by reproducible empirical tests.',
           chips: ['What is a Data Card?', 'Explain Healthsheet framework', 'Why transparency matters in CDS', 'View PocketGull Data Card'],
           content: '<h3>1. The Transparency Crisis in Clinical Software</h3><p>In 2022, Google\'s People + AI Research (PAIR) team introduced <strong>Data Cards</strong> to eliminate opaque "black box" claims in clinical AI. PocketGull is the first typeface documented under this standard:</p><h3>2. How PocketGull Adheres to PAIR Standards</h3><p>Every claim made about PocketGull—from its 5:1 Sloan optotype ratio and 203 DPI thermal printhead survival to its ISMP slashed zero disambiguation—is structured as a verifiable, falsifiable Data Card Invariant. The typeface is not a closed proprietary file, but an open-source clinical artifact with complete provenance, SIL Open Font licensing, and zero telemetry egress.</p>'
         },
@@ -10323,6 +11289,14 @@
           title: 'Thomas Phinney Forensic Font Standards',
           category: 'TYPE ENGINEERING &amp; FORENSICS',
           citation: 'Thomas Phinney (ATypI / Font Detective) — Font Forensics &amp; TrueType Architecture',
+          targetId: 'download',
+          mystery: 'Why do some fonts work for one second in Chromium and then silently vanish from memory? A single odd number in an offset table causes silent font eviction.',
+          mission: [
+            'Scroll to the Downloads & Foundry Governance section.',
+            'Review the 7 Invariant Quality Pillars.',
+            'Notice the mathematical rule: loca[i] % 2 == 0 across all 32 font cuts.'
+          ],
+          discovery: 'DirectWrite and Chromium OTS evict fonts with odd table offsets. PocketGull pads every single glyph record to even 2-byte word boundaries for 100% memory safety.',
           chips: ['Why loca % 2 == 0?', 'Explain DirectWrite OTS eviction', 'Bit-7 flag masking invariant'],
           content: '<h3>1. Forensic Font Determinism</h3><p>Thomas Phinney pioneered forensic font analysis and TrueType/OpenType structural validation. PocketGull enforces Phinney\'s strict binary rules across all styles:</p><ul><li><strong>2-Byte Word Alignment:</strong> Every glyph record in <code>glyf</code> is even-padded; <code>loca[i] % 2 == 0</code> prevents silent Chromium and DirectWrite memory corruption.</li><li><strong>Bit-7 Flag Zeroing:</strong> Reserved Bit 7 in TrueType point flags is strictly masked to zero (<code>flag &amp; 0x3F</code>), avoiding kernel display driver crashes.</li><li><strong>100% W3C OTS Memory Safety:</strong> Sanitizes all OpenType tables against off-by-one buffer overflows.</li></ul>'
         }
@@ -10341,8 +11315,12 @@
         if (lower.includes('optotype') || lower.includes('acuity') || lower.includes('snellen') || lower.includes('sloan')) return DOC_DRILL_KNOWLEDGE['sloan'];
         if (lower.includes('crowd') || lower.includes('lateral') || lower.includes('peripheral') || lower.includes('bouma')) return DOC_DRILL_KNOWLEDGE['bouma'];
         if (lower.includes('safe') || lower.includes('drug') || lower.includes('medication') || lower.includes('zero') || lower.includes('dosage') || lower.includes('ismp') || lower.includes('disambiguation')) return DOC_DRILL_KNOWLEDGE['ismp'];
+        if (lower.includes('philocardia') || lower.includes('heart') || lower.includes('pediatric') || lower.includes('bpm')) return DOC_DRILL_KNOWLEDGE['philocardia'];
+        if (lower.includes('periodic') || lower.includes('element') || lower.includes('cpk') || lower.includes('chemistry') || lower.includes('stoichiometry')) return DOC_DRILL_KNOWLEDGE['periodic'];
+        if (lower.includes('piano') || lower.includes('music') || lower.includes('harmonic') || lower.includes('atelier')) return DOC_DRILL_KNOWLEDGE['piano'];
+        if (lower.includes('scotopic') || lower.includes('observatory') || lower.includes('rhodopsin') || lower.includes('night')) return DOC_DRILL_KNOWLEDGE['scotopic'];
         if (lower.includes('braille') || lower.includes('tactile') || lower.includes('emboss')) return DOC_DRILL_KNOWLEDGE['braille'];
-        if (lower.includes('pbm') || lower.includes('670') || lower.includes('retina') || lower.includes('night') || lower.includes('scotopic')) return DOC_DRILL_KNOWLEDGE['pbm'];
+        if (lower.includes('pbm') || lower.includes('670') || lower.includes('retina')) return DOC_DRILL_KNOWLEDGE['pbm'];
         if (lower.includes('thermal') || lower.includes('zpl') || lower.includes('zebra') || lower.includes('203')) return DOC_DRILL_KNOWLEDGE['thermal'];
         if (lower.includes('motion') || lower.includes('breath') || lower.includes('nabors')) return DOC_DRILL_KNOWLEDGE['nabors'];
         if (lower.includes('logmar') || lower.includes('etdrs')) return DOC_DRILL_KNOWLEDGE['etdrs'];
@@ -10403,10 +11381,53 @@
         h2.textContent = k.title;
 
         const cite = document.createElement('div');
-        cite.style.cssText = 'font-family: var(--font-code); font-size: 0.72rem; color: var(--amber); margin-bottom: 1rem;';
+        cite.style.cssText = 'font-family: var(--font-code); font-size: 0.72rem; color: var(--amber); margin-bottom: 0.65rem;';
         cite.textContent = k.citation;
 
-        const contentDiv = document.createElement('div');
+        drillBody.append(h2, cite);
+
+        if (k.targetId) {
+          const stageBtn = document.createElement('button');
+          stageBtn.type = 'button';
+          stageBtn.className = 'doc-drill-stage-btn';
+          stageBtn.innerHTML = '<span>📍</span> Jump to Live Stage';
+          stageBtn.title = 'Scroll and highlight this interactive instrument on the specimen';
+          stageBtn.onclick = () => jumpToElementStage(k.targetId);
+          drillBody.append(stageBtn);
+        }
+
+        if (k.mystery) {
+          const mysteryBox = document.createElement('div');
+          mysteryBox.className = 'doc-drill-mystery-box';
+          mysteryBox.innerHTML = `
+            <div class="mystery-label">🔍 Socratic Mystery</div>
+            <p class="mystery-text">${escapeHtml(k.mystery)}</p>
+          `;
+          drillBody.append(mysteryBox);
+        }
+
+        if (k.mission && k.mission.length) {
+          const missionBox = document.createElement('div');
+          missionBox.className = 'doc-drill-mission-box';
+          const items = k.mission.map(step => `<li>${escapeHtml(step)}</li>`).join('');
+          missionBox.innerHTML = `
+            <div class="mission-label">🎯 Directed Learning Mission (Where to Go &amp; What to Do)</div>
+            <ol class="mission-list">${items}</ol>
+          `;
+          drillBody.append(missionBox);
+        }
+
+        const details = document.createElement('details');
+        details.className = 'doc-drill-discovery-details';
+        if (k.isFallback) details.open = true;
+
+        const summary = document.createElement('summary');
+        summary.className = 'discovery-summary';
+        summary.innerHTML = '💡 Reveal Architectural Lesson &amp; Evidence';
+        details.appendChild(summary);
+
+        const discContent = document.createElement('div');
+        discContent.className = 'discovery-content';
         if (k.isFallback) {
           const overviewH3 = document.createElement('h3');
           overviewH3.textContent = 'Overview';
@@ -10416,12 +11437,20 @@
           p1.append(strong, document.createTextNode(" is a core concept in PocketGull's ophthalmological and clinical design architecture."));
           const p2 = document.createElement('p');
           p2.textContent = 'Type a specific question below or click one of the suggested query chips to explore further.';
-          contentDiv.append(overviewH3, p1, p2);
+          discContent.append(overviewH3, p1, p2);
         } else {
-          contentDiv.innerHTML = k.content;
+          if (k.discovery) {
+            const discP = document.createElement('div');
+            discP.className = 'discovery-highlight';
+            discP.innerHTML = `✨ <strong>Core Discovery:</strong> ${escapeHtml(k.discovery)}`;
+            discContent.appendChild(discP);
+          }
+          const htmlContainer = document.createElement('div');
+          htmlContainer.innerHTML = k.content || '';
+          discContent.appendChild(htmlContainer);
         }
-
-        drillBody.append(h2, cite, contentDiv);
+        details.appendChild(discContent);
+        drillBody.append(details);
 
         // Render Chips
         if (drillChips) {
@@ -10508,7 +11537,7 @@
         const apiKey = getApiKey();
         if (apiKey) {
           try {
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.7-flash:generateContent?key=${apiKey}`;
             const systemPrompt = `You are the PocketGull Doc Drill educator embedded in the official PocketGull Font specification.
 Explain concepts concisely, highlighting clinical safety, ophthalmology, and typeface engineering:
 - Louise Sloan 5:1 optotype invariant (5' arc height / 1' stroke)
@@ -10772,6 +11801,49 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
             <p>All clinic telemetry adheres to the First Nations OCAP® principles and the CARE Principles for Indigenous Data Governance with zero cloud egress.</p>
             <p><a href="https://www.un.org/development/desa/indigenouspeoples/declaration-on-the-rights-of-indigenous-peoples.html" target="_blank" rel="noopener noreferrer" style="color: #f59e0b; text-decoration: underline;">📜 Official United Nations UNDRIP Declaration &rarr;</a></p>`;
           }
+          // 25b. PHILOCARDIA HEARTS & 72 BPM CADENCE
+          else if (qLower.includes('philocardia') || qLower.includes('heart') || qLower.includes('pediatric') || qLower.includes('bpm')) {
+            answer = `<h4 style="color: var(--emerald); margin-bottom: 6px; font-size: 0.9rem;">💚 Philocardia Hearts &amp; 72 BPM Cardiac Pacing</h4>
+            <p>Philocardia introduces humanist heart-shaped tittles across lowercase <code>i</code> and <code>j</code>, exclamation points, and telemetry badges for pediatric care and trauma recovery.</p>
+            <div style="background: rgba(16, 185, 129, 0.08); border-left: 3px solid var(--emerald); padding: 8px 12px; margin: 8px 0; font-family: var(--font-code); font-size: 0.74rem;">
+              • Resting Heart Pacing: 72 BPM (standard rest) and 60 BPM (calming relaxation)<br>
+              • OpenType Feature: cv09 replaces dots with cardstock felt-marker hearts<br>
+              • Stem Invariant: Stem contours are 100% bit-identical to standard glyphs with 0 collision
+            </div>
+            <p>This gentle biological entrainment soothes acute patient anxiety without altering underlying clinical legibility.</p>`;
+          }
+          // 25c. PERIODIC TABLE & 118-ELEMENT CPK CHEMISTRY
+          else if (qLower.includes('periodic') || qLower.includes('cpk') || qLower.includes('chemistry') || qLower.includes('stoichiometry') || qLower.includes('element')) {
+            answer = `<h4 style="color: var(--emerald); margin-bottom: 6px; font-size: 0.9rem;">⚛️ The 118-Element IUPAC Periodic Table &amp; CPK Color Calibration</h4>
+            <p>PocketGull renders all 118 chemical elements using Louise Sloan 5:1 optotypes and ISMP character disambiguation, embedding atomic number $Z$, chemical symbol, atomic weight, and CPK chromatic tokens.</p>
+            <div style="background: rgba(16, 185, 129, 0.08); border-left: 3px solid var(--emerald); padding: 8px 12px; margin: 8px 0; font-family: var(--font-code); font-size: 0.74rem;">
+              • Dark Chassis Invariant: Enclosed in #0f172a slate housing in all themes (washi, light, dark)<br>
+              • WCAG AAA Contrast: Maintains >15:1 contrast against photopic washout<br>
+              • Daltonism CVD Verification: 100% verified under Protanopia, Deuteranopia, and Monochromacy
+            </div>
+            <p>This guarantees that volatile chemical formulas and elemental symbols remain unmistakably legible across mobile laboratory devices.</p>`;
+          }
+          // 25d. 650NM SCOTOPIC NIGHT OBSERVATORY CONSOLE
+          else if (qLower.includes('scotopic') || qLower.includes('observatory') || qLower.includes('rhodopsin') || qLower.includes('dark sky')) {
+            answer = `<h4 style="color: var(--rose); margin-bottom: 6px; font-size: 0.9rem;">🔭 650nm Scotopic Dark-Sky Observatory Architecture</h4>
+            <p>Exposure to light below 600nm bleaches rhodopsin in retinal rod cells, destroying dark adaptation for up to 45 minutes.</p>
+            <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid var(--rose); padding: 8px 12px; margin: 8px 0; font-family: var(--font-code); font-size: 0.74rem;">
+              • Photon Wavelength: > 650 nm pure deep red phosphor spectrum<br>
+              • Zero Rhodopsin Bleaching: Preserves rod photoreceptor dark adaptation<br>
+              • Zero Melanopsin Trigger: Bypasses circadian sleep receptors (peak 480nm)
+            </div>
+            <p>PocketGull's Scotopic mode allows astronomers and ICU night nurses to read critical charts in pitch darkness without losing night acuity.</p>`;
+          }
+          // 25e. 88-KEY STRETCHED RAINBOW PIANO & CHROMATICS
+          else if (qLower.includes('piano') || qLower.includes('music') || qLower.includes('harmonic') || qLower.includes('rainbow')) {
+            answer = `<h4 style="color: var(--cyan); margin-bottom: 6px; font-size: 0.9rem;">🎹 88-Key Stretched Rainbow Piano &amp; Acoustic Harmonics</h4>
+            <p>The GearArts 88-Key Stretched Piano maps optical light wavelengths (ROYGBIV) directly to the 12 chromatic tones of the musical scale.</p>
+            <div style="background: rgba(6, 182, 212, 0.08); border-left: 3px solid var(--cyan); padding: 8px 12px; margin: 8px 0; font-family: var(--font-code); font-size: 0.74rem;">
+              • Optical Bridge: C = Red, D = Orange, E = Yellow, G = Cyan, A = Blue, B = Violet<br>
+              • WebAudio Synthesis: Real-time harmonic oscillators simulate felt-damped piano resonance<br>
+              • Neurodivergent Accessibility: Color tokens eliminate visual crowding for dyslexic musicians
+            </div>`;
+          }
           // 26. GEMINI API KEY INFO
           else if (qLower.includes('gemini') || qLower.includes('api key')) {
             answer = `<h4 style="color: var(--amber); margin-bottom: 6px; font-size: 0.9rem;">🔑 Google Gemini Socratic Educator</h4>
@@ -10805,6 +11877,218 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
         }, 180);
       }
 
+      // =========================================================================
+      // 14b. Socratic Auto-Tour & Directed Stage Navigation Engine
+      // =========================================================================
+      const SOCRATIC_TOUR_STOPS = [
+        { key: 'sloan', targetId: 'waterfall', label: '1. Louise Sloan 5:1 Optotype Waterfall' },
+        { key: 'bouma', targetId: 'waterfall', label: '2. Herman Bouma Lateral Crowding' },
+        { key: 'ismp', targetId: 'ismp', label: '3. ISMP Clinical Disambiguation' },
+        { key: 'philocardia', targetId: 'philocardiaInteractiveText', label: '4. Philocardia Heart Tittles & 72 BPM' },
+        { key: 'scotopic', targetId: 'scotopicContainer', label: '5. 650nm Scotopic Night Observatory' },
+        { key: 'periodic', targetId: 'periodic-table', label: '6. 118-Element IUPAC Periodic Table' },
+        { key: 'undrip', targetId: 'world-map-studio', label: '7. UNDRIP Accord & World Scripts' },
+        { key: 'braille', targetId: 'braille-strip', label: '8. 256 Unicode Braille Matrix' },
+        { key: 'piano', targetId: 'atelier', label: '9. 88-Key Stretched Rainbow Piano' },
+        { key: 'phinney', targetId: 'download', label: '10. Thomas Phinney Forensic Safety' }
+      ];
+
+      let isTourActive = false;
+      let isTourPaused = false;
+      let currentTourIndex = 0;
+      let tourTimerInterval = null;
+      let tourRemainingMs = 8500;
+      const TOUR_DURATION_MS = 8500;
+      const TOUR_TICK_MS = 100;
+
+      function toggleSocraticTour() {
+        if (isTourActive) {
+          stopSocraticTour();
+        } else {
+          startSocraticTour();
+        }
+      }
+
+      function startSocraticTour() {
+        isTourActive = true;
+        isTourPaused = false;
+        const tourBtn = document.getElementById('docDrillTourBtn');
+        const tourBar = document.getElementById('drillTourBar');
+        const tourIcon = document.getElementById('tourIcon');
+        const tourLabel = document.getElementById('tourLabel');
+
+        if (tourBtn) tourBtn.classList.add('active');
+        if (tourBar) tourBar.style.display = 'block';
+        if (tourIcon) tourIcon.textContent = '⏹';
+        if (tourLabel) tourLabel.textContent = 'Stop Tour';
+
+        currentTourIndex = 0;
+        renderTourStop(currentTourIndex);
+      }
+
+      function stopSocraticTour() {
+        isTourActive = false;
+        isTourPaused = false;
+        clearInterval(tourTimerInterval);
+        tourTimerInterval = null;
+
+        const tourBtn = document.getElementById('docDrillTourBtn');
+        const tourBar = document.getElementById('drillTourBar');
+        const tourIcon = document.getElementById('tourIcon');
+        const tourLabel = document.getElementById('tourLabel');
+        const tourMeter = document.getElementById('tourMeterFill');
+
+        if (tourBtn) tourBtn.classList.remove('active');
+        if (tourBar) tourBar.style.display = 'none';
+        if (tourIcon) tourIcon.textContent = '▶';
+        if (tourLabel) tourLabel.textContent = 'Auto-Tour';
+        if (tourMeter) tourMeter.style.width = '0%';
+      }
+
+      function renderTourStop(index) {
+        if (index < 0) index = 0;
+        if (index >= SOCRATIC_TOUR_STOPS.length) {
+          index = 0;
+        }
+        currentTourIndex = index;
+        const stop = SOCRATIC_TOUR_STOPS[currentTourIndex];
+
+        const progressText = document.getElementById('tourProgressText');
+        if (progressText) {
+          progressText.textContent = `Stop ${currentTourIndex + 1} of ${SOCRATIC_TOUR_STOPS.length}: ${stop.label.split('•')[0].trim()}`;
+        }
+
+        const playPauseBtn = document.getElementById('tourPlayPauseBtn');
+        if (playPauseBtn) playPauseBtn.textContent = isTourPaused ? '▶' : '⏸';
+
+        // Load stop into Doc Drill
+        openDocDrill(stop.key);
+
+        // Smooth scroll & pulsed highlight on live stage
+        jumpToElementStage(stop.targetId);
+
+        // Reset and trigger countdown
+        restartTourCountdown();
+      }
+
+      function restartTourCountdown() {
+        clearInterval(tourTimerInterval);
+        tourRemainingMs = TOUR_DURATION_MS;
+        const meter = document.getElementById('tourMeterFill');
+        if (meter) meter.style.width = '0%';
+
+        if (isTourPaused) return;
+
+        tourTimerInterval = setInterval(() => {
+          if (isTourPaused) return;
+          tourRemainingMs -= TOUR_TICK_MS;
+          const pct = Math.min(100, Math.max(0, ((TOUR_DURATION_MS - tourRemainingMs) / TOUR_DURATION_MS) * 100));
+          if (meter) meter.style.width = pct + '%';
+
+          if (tourRemainingMs <= 0) {
+            clearInterval(tourTimerInterval);
+            nextSocraticStop();
+          }
+        }, TOUR_TICK_MS);
+      }
+
+      function nextSocraticStop() {
+        currentTourIndex = (currentTourIndex + 1) % SOCRATIC_TOUR_STOPS.length;
+        renderTourStop(currentTourIndex);
+      }
+
+      function prevSocraticStop() {
+        currentTourIndex = (currentTourIndex - 1 + SOCRATIC_TOUR_STOPS.length) % SOCRATIC_TOUR_STOPS.length;
+        renderTourStop(currentTourIndex);
+      }
+
+      function toggleTourPause() {
+        isTourPaused = !isTourPaused;
+        const playPauseBtn = document.getElementById('tourPlayPauseBtn');
+        if (playPauseBtn) playPauseBtn.textContent = isTourPaused ? '▶' : '⏸';
+      }
+
+      function jumpToElementStage(targetId) {
+        if (!targetId) return;
+        const target = document.getElementById(targetId);
+        if (!target) return;
+
+        document.querySelectorAll('.tour-highlighted-element').forEach(el => {
+          el.classList.remove('tour-highlighted-element');
+        });
+
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        target.classList.add('tour-highlighted-element');
+        setTimeout(() => {
+          target.classList.remove('tour-highlighted-element');
+        }, 3200);
+      }
+
+      function jumpToCurrentTourStage() {
+        const stop = SOCRATIC_TOUR_STOPS[currentTourIndex];
+        if (stop && stop.targetId) {
+          jumpToElementStage(stop.targetId);
+        }
+      }
+
+      // =========================================================================
+      // 14c. Autocomplete Search Popup for Doc Drill
+      // =========================================================================
+      function initDrillSearchPopup() {
+        const drillInput = document.getElementById('drillInput');
+        const popup = document.getElementById('drillSearchPopup');
+        if (!drillInput || !popup) return;
+
+        function updatePopup() {
+          const q = (drillInput.value || '').trim().toLowerCase();
+          if (q.length < 1) {
+            popup.style.display = 'none';
+            popup.replaceChildren();
+            return;
+          }
+
+          const matches = [];
+          for (const [key, item] of Object.entries(DOC_DRILL_KNOWLEDGE)) {
+            if (key.includes(q) || item.title.toLowerCase().includes(q) || item.category.toLowerCase().includes(q)) {
+              matches.push({ key, ...item });
+            }
+          }
+
+          if (matches.length === 0) {
+            popup.style.display = 'none';
+            popup.replaceChildren();
+            return;
+          }
+
+          popup.replaceChildren();
+          matches.slice(0, 6).forEach(m => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'doc-drill-search-item';
+            btn.innerHTML = `<span><strong>${escapeHtml(m.title)}</strong></span><span style="font-size: 0.65rem; color: var(--emerald); font-family: 'PocketGull Mono', monospace;">${escapeHtml(m.category)}</span>`;
+            btn.addEventListener('mousedown', (e) => {
+              e.preventDefault();
+              openDocDrill(m.key);
+              drillInput.value = '';
+              popup.style.display = 'none';
+            });
+            popup.appendChild(btn);
+          });
+          popup.style.display = 'flex';
+        }
+
+        drillInput.addEventListener('input', updatePopup);
+        drillInput.addEventListener('focus', updatePopup);
+        drillInput.addEventListener('blur', () => {
+          setTimeout(() => { popup.style.display = 'none'; }, 200);
+        });
+        drillInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            popup.style.display = 'none';
+          }
+        });
+      }
+
       function initDocDrill() {
         const drillClose = document.getElementById('drillClose');
         const drillSend = document.getElementById('drillSend');
@@ -10830,14 +12114,122 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           });
         });
 
+        initDrillSearchPopup();
         window.addEventListener('storage', updateDocDrillBadge);
         updateDocDrillBadge();
+      }
+
+      // =========================================================================
+      // 14.5. Interactive Textbook Controller & Folio Reading Progress
+      // =========================================================================
+      function toggleTextbookToc(forceOpen) {
+        const drawer = document.getElementById('textbookTocDrawer');
+        const backdrop = document.getElementById('textbookTocBackdrop');
+        const btn = document.getElementById('textbookTocBtn');
+        if (!drawer || !backdrop) return;
+        const isCurrentlyOpen = drawer.style.display !== 'none';
+        const shouldOpen = (typeof forceOpen === 'boolean') ? forceOpen : !isCurrentlyOpen;
+
+        if (shouldOpen) {
+          drawer.style.display = 'flex';
+          backdrop.style.display = 'block';
+          if (btn) btn.setAttribute('aria-expanded', 'true');
+          document.body.style.overflow = 'hidden';
+        } else {
+          drawer.style.display = 'none';
+          backdrop.style.display = 'none';
+          if (btn) btn.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        }
+      }
+
+      function jumpToChapter(targetId) {
+        toggleTextbookToc(false);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+
+      function initTextbookController() {
+        const chapterIds = [
+          'header-broadside',
+          'waterfall',
+          'variable',
+          'ismp',
+          'telemetry',
+          'scientific-lab',
+          'atelier',
+          'scripts',
+          'download'
+        ];
+
+        const updateFolioProgress = () => {
+          const docEl = document.documentElement;
+          const winScroll = window.scrollY || docEl.scrollTop || document.body.scrollTop;
+          const totalScroll = docEl.scrollHeight - docEl.clientHeight;
+          const progressEl = document.getElementById('folioReadingProgress');
+          if (progressEl && totalScroll > 0) {
+            const pct = Math.min(Math.max((winScroll / totalScroll) * 100, 0), 100);
+            progressEl.style.width = pct.toFixed(1) + '%';
+          }
+
+          let currentChapter = chapterIds[0];
+          for (const id of chapterIds) {
+            const el = document.getElementById(id);
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              if (rect.top <= 180) {
+                currentChapter = id;
+              }
+            }
+          }
+
+          const tabs = document.querySelectorAll('.folio-chapter-tab');
+          tabs.forEach(tab => {
+            const isMatch = tab.dataset.chapter === currentChapter;
+            tab.classList.toggle('active', isMatch);
+            if (isMatch && tab.parentElement) {
+              const track = tab.parentElement;
+              const tabLeft = tab.offsetLeft;
+              const tabWidth = tab.offsetWidth;
+              const trackScroll = track.scrollLeft;
+              const trackWidth = track.clientWidth;
+              if (tabLeft < trackScroll || (tabLeft + tabWidth) > (trackScroll + trackWidth)) {
+                track.scrollTo({ left: tabLeft - 20, behavior: 'smooth' });
+              }
+            }
+          });
+        };
+
+        window.addEventListener('scroll', updateFolioProgress, { passive: true });
+        updateFolioProgress();
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            const drawer = document.getElementById('textbookTocDrawer');
+            if (drawer && drawer.style.display !== 'none') {
+              toggleTextbookToc(false);
+            }
+          }
+        });
       }
 
       window.openDocDrill = openDocDrill;
       window.closeDocDrill = closeDocDrill;
       window.promptForGeminiKey = promptForGeminiKey;
       window.sendDrillFollowUp = sendDrillFollowUp;
+      window.toggleSocraticTour = toggleSocraticTour;
+      window.startSocraticTour = startSocraticTour;
+      window.stopSocraticTour = stopSocraticTour;
+      window.nextSocraticStop = nextSocraticStop;
+      window.prevSocraticStop = prevSocraticStop;
+      window.toggleTourPause = toggleTourPause;
+      window.jumpToElementStage = jumpToElementStage;
+      window.jumpToCurrentTourStage = jumpToCurrentTourStage;
+      window.toggleTextbookToc = toggleTextbookToc;
+      window.jumpToChapter = jumpToChapter;
+      window.initTextbookController = initTextbookController;
 
       // =========================================================================
       // 15. Lazy Load Observers for Heavy Below-the-Fold Fonts
@@ -11812,6 +13204,7 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
       window.initWorldMapStudio = initWorldMapStudio;
 
       initDocDrill();
+      initTextbookController();
       initWorldMapStudio();
     })();
   </script>

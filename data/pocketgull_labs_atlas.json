@@ -1,0 +1,246 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "PocketGull Superfamily On-Device Labs Atlas & Directed Learning Engine",
+  "version": "3.1.0",
+  "description": "On-device sovereign knowledge index covering all interactive laboratories, optometric stages, and scientific instruments across the PocketGull typeface ecosystem.",
+  "tracks": [
+    {
+      "id": "healer",
+      "name": "The Healer's Path",
+      "icon": "💚",
+      "description": "Clinical medication safety, ISMP error prevention, and pediatric bedside empathy."
+    },
+    {
+      "id": "optometry",
+      "name": "The Optometrist's Path",
+      "icon": "👁️",
+      "description": "Louise Sloan 5:1 optotypes, Bouma peripheral crowding, and foveal resolving limits."
+    },
+    {
+      "id": "astronomy",
+      "name": "The Stargazer's Path",
+      "icon": "🔭",
+      "description": "Scotopic 650nm rhodopsin preservation, dark-sky observatories, and Vernier slide rules."
+    },
+    {
+      "id": "chemistry",
+      "name": "The Alchemist's Path",
+      "icon": "⚛️",
+      "description": "The 118-element IUPAC periodic table, CPK molecular models, and Daltonism CVD testing."
+    },
+    {
+      "id": "sovereign",
+      "name": "The Sovereign Cartographer",
+      "icon": "🌍",
+      "description": "UNDRIP Accord, Indigenous orthographic sovereignty, and 256 tactile Braille cells."
+    },
+    {
+      "id": "polymath",
+      "name": "The Polymath's Atelier",
+      "icon": "🎹",
+      "description": "88-key harmonic piano, Richter harmonica, OKLCH chroma radar, and felt-marker DNA."
+    },
+    {
+      "id": "forensics",
+      "name": "The Forensic Engineer",
+      "icon": "🛡️",
+      "description": "W3C OTS memory safety, 2-byte word boundaries (loca % 2 == 0), and 203 DPI thermal ZPL."
+    }
+  ],
+  "labs": [
+    {
+      "id": "sloan-acuity",
+      "track": "optometry",
+      "title": "Louise Sloan 5:1 Optotype Waterfall",
+      "location": {
+        "page": "index.html",
+        "targetId": "waterfall",
+        "label": "Card 1 • The Waterfall & 5:1 Acuity Stage"
+      },
+      "mystery": "Traditional eye charts made some letters 40% easier to guess than others. Ten specific letters solved this in 1959 by locking to a single mathematical ratio. Can you find why a 1-arcminute stroke matters at 55 cm?",
+      "mission": [
+        "Find the Waterfall stage at the top of the broadside.",
+        "Observe the 10 definitive Sloan characters: C, D, H, K, N, O, R, S, V, Z.",
+        "Notice how the stroke width is exactly 1/5th of the total letter height."
+      ],
+      "discovery": "Snellen letters were unequal; Dr. Louise Sloan engineered 10 balanced optotypes where every letter shares identical psychometric legibility.",
+      "actionType": "scroll",
+      "targetSelector": "#waterfall"
+    },
+    {
+      "id": "bouma-crowding",
+      "track": "optometry",
+      "title": "Herman Bouma Lateral Crowding & Anti-Masking",
+      "location": {
+        "page": "index.html",
+        "targetId": "waterfall",
+        "label": "Card 1 • Bouma Clearance Invariant"
+      },
+      "mystery": "When your fovea focuses straight ahead, letters in your peripheral vision don't blur—they crowd together into unrecognizable shapes. What critical distance breaks this visual trap?",
+      "mission": [
+        "In the waterfall stage, locate the tracking and lateral spacing metrics.",
+        "Observe how Bouma's constant (r ≈ 0.5 × eccentricity) governs the +0.12em lateral clearance.",
+        "Compare dense character packing against Bouma-spaced clinical alert numbers."
+      ],
+      "discovery": "Adding +0.12em lateral tracking creates spatial isolation, allowing nurses and surgeons to read vital numbers in their peripheral vision without turning their heads.",
+      "actionType": "scroll",
+      "targetSelector": "#waterfall"
+    },
+    {
+      "id": "ismp-zero",
+      "track": "healer",
+      "title": "Slashed Zero vs Capital O (cv08)",
+      "location": {
+        "page": "index.html",
+        "targetId": "ismp",
+        "label": "Chapter 3 • ISMP Disambiguation Matrix"
+      },
+      "mystery": "On a smudged ICU touchscreen, a single circular character can mean either an oxygen saturation reading or a patient's room letter. One diagonal line saves lives.",
+      "mission": [
+        "Scroll to Section 3: ISMP Clinical Disambiguation.",
+        "Click the '0 vs O' inspection card.",
+        "Observe the internal 45° diagonal slash and optical thinning at the junctions."
+      ],
+      "discovery": "Feature cv08 provides a crisp diagonal slash that never clots with ink or pixels, completely eliminating 0 vs O confusion in critical dosages like 500 mg.",
+      "actionType": "inspect",
+      "inspectKey": "slashed_zero",
+      "targetSelector": "[data-inspect=\"slashed_zero\"]"
+    },
+    {
+      "id": "philocardia-healer",
+      "track": "healer",
+      "title": "Philocardia Hearts & 72 BPM Cardiac Pacing",
+      "location": {
+        "page": "index.html",
+        "targetId": "philocardiaInteractiveText",
+        "label": "Section 3.5 • Philocardia Live Heart Tittle Studio"
+      },
+      "mystery": "Typefaces are usually cold and clinical metal. But can a font breathe at the exact resting heart rate of a child, and turn punctuation into lovingkindness?",
+      "mission": [
+        "Locate the Philocardia Healer Banner with the beating green heart.",
+        "Click the '72 BPM', '60 BPM', and 'Static' cadence buttons to feel the pacing shift.",
+        "Click into the live text editor and type lowercase 'i', 'j', or '!' to witness procedural heart tittles."
+      ],
+      "discovery": "Features cv09 and ss07 replace standard square dots with humanist felt-marker hearts, paced to parasympathetic heart cadences (60–72 BPM) for pediatric comfort.",
+      "actionType": "variety",
+      "variety": "heart",
+      "cadence": "72",
+      "targetSelector": "#philocardiaInteractiveText"
+    },
+    {
+      "id": "scotopic-night",
+      "track": "astronomy",
+      "title": "650nm Scotopic Night-Shift Observatory Console",
+      "location": {
+        "page": "index.html",
+        "targetId": "scotopicContainer",
+        "label": "Card 5.1 • Dark-Sky Observatory Telemetry"
+      },
+      "mystery": "A single flash of white light at an observatory destroys 30 minutes of deep-sky dark adaptation. How can astronomers read celestial coordinates without bleaching their rhodopsin?",
+      "mission": [
+        "Navigate to Section 5.1 in the Scientific Lab.",
+        "Click the button 'Activate 650nm Scotopic Red Mode'.",
+        "Watch the entire console shift into monochromatic deep-red photons (>650nm)."
+      ],
+      "discovery": "Light above 650nm bypasses retinal rod photopigments, preserving night vision at mountaintop observatories and sleep cycles during clinician night shifts.",
+      "actionType": "custom",
+      "targetSelector": "#scotopicContainer"
+    },
+    {
+      "id": "periodic-table-118",
+      "track": "chemistry",
+      "title": "The 118-Element IUPAC Periodic Table",
+      "location": {
+        "page": "index.html",
+        "targetId": "periodic-table",
+        "label": "Card 5.2 • Complete 118-Element Grid"
+      },
+      "mystery": "118 elements form the entire universe. Why does each element tile sit in an encapsulated dark chassis even when the website is set to cream paper or bright white?",
+      "mission": [
+        "Scroll to Section 5.2: The Standard 118-Element Periodic Table.",
+        "Click Element 8 (Oxygen, O) or Element 26 (Iron, Fe).",
+        "Toggle through the Daltonism filters (Protanopia, Deuteranopia, Monochromacy) to test legibility."
+      ],
+      "discovery": "The dark chassis protects vibrant CPK chemical tokens from photopic washout on white backgrounds, maintaining >15:1 WCAG AAA contrast in all lighting conditions.",
+      "actionType": "ptable",
+      "elementZ": 8,
+      "targetSelector": "#fullPeriodicTableGrid"
+    },
+    {
+      "id": "undrip-sovereignty",
+      "track": "sovereign",
+      "title": "UNDRIP Accord & Pan-Tribal Typography",
+      "location": {
+        "page": "index.html",
+        "targetId": "world-map-studio",
+        "label": "Chapter 7 • Global Health Atlas & World Scripts"
+      },
+      "mystery": "Many fonts force Indigenous languages into Latin metal boxes or clip their stacked high-tone nasal marks. Which international human rights accord guarantees typographic linguistic sovereignty?",
+      "mission": [
+        "Visit the Global Health Atlas and World Scripts stage.",
+        "Inspect the Canadian Aboriginal Syllabics and Lushootseed Salishan orthographies.",
+        "Observe how stacked nasal marks (ą́, ę́, į́, ǫ́) maintain ≥ 110 UPM clearance without clipping."
+      ],
+      "discovery": "Conforming to UNDRIP Articles 11, 13, 14, 24, and 31, PocketGull guarantees unencumbered SIL OFL 1.1 open licensing and zero forced Latinization for tribal immersion schools.",
+      "actionType": "scroll",
+      "targetSelector": "#world-map-studio"
+    },
+    {
+      "id": "braille-256",
+      "track": "sovereign",
+      "title": "Full 256 Unicode Braille ISO/TR 11548 Matrix",
+      "location": {
+        "page": "index.html",
+        "targetId": "braille-strip",
+        "label": "Chapter 4 • Tactile Braille Strip (U+2800–U+28FF)"
+      },
+      "mystery": "Can a digital font on a glass screen simultaneously honor the physical geometry of an embossing pin on cardstock?",
+      "mission": [
+        "Locate the Braille Studio or tactile strip in ICU Telemetry.",
+        "Type any clinical dosage or phrase in the transcriber.",
+        "Inspect the 2.5 mm dot pitch and baseline grounding on y = 0."
+      ],
+      "discovery": "PocketGull maps all 256 Unicode Braille codepoints (U+2800–U+28FF) with zero .notdef missing glyphs, matching international ISO/TR 11548 tactile standards.",
+      "actionType": "scroll",
+      "targetSelector": "#braille-strip"
+    },
+    {
+      "id": "rainbow-piano",
+      "track": "polymath",
+      "title": "88-Key Stretched Rainbow Piano & Chromatic Pedagogy",
+      "location": {
+        "page": "index.html",
+        "targetId": "atelier",
+        "label": "Chapter 6 • GearArts Physical Atelier & Piano"
+      },
+      "mystery": "How do visual light wavelengths (ROYGBIV) map directly to acoustic sound frequencies across a grand piano?",
+      "mission": [
+        "Scroll to Chapter 6: GearArts Physical Atelier.",
+        "Explore the 88-Key Stretched Rainbow Piano.",
+        "Click keys to hear WebAudio synthesized harmonics and observe chromatic octave tokens."
+      ],
+      "discovery": "Chromatic note tokens bridge ophthalmological optics and auditory music theory, helping neurodivergent learners intuitively perceive pitch intervals through color.",
+      "actionType": "scroll",
+      "targetSelector": "#atelier"
+    },
+    {
+      "id": "phinney-ots",
+      "track": "forensics",
+      "title": "Thomas Phinney Forensic 2-Byte Alignment & OTS Safety",
+      "location": {
+        "page": "index.html",
+        "targetId": "download",
+        "label": "Chapter 8 • Downloads & Forensic Verification"
+      },
+      "mystery": "Why do some fonts work for one second in Chromium and then silently vanish from memory? A single odd number in an offset table causes silent font eviction.",
+      "mission": [
+        "Scroll to the Downloads & Foundry Governance section.",
+        "Review the 7 Invariant Quality Pillars.",
+        "Notice the mathematical rule: loca[i] % 2 == 0 across all 32 font cuts."
+      ],
+      "discovery": "DirectWrite and Chromium OTS evict fonts with odd table offsets. PocketGull pads every single glyph record to even 2-byte word boundaries for 100% memory safety.",
+      "actionType": "scroll",
+      "targetSelector": "#download"
+    }
+  ]
+}

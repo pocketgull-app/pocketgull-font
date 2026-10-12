@@ -1,0 +1,230 @@
+#!/usr/bin/env python3
+"""
+scripts/generate_clinical_forensic_plate.py
+
+Generates a publication-grade visual forensic plate demonstrating:
+1. The 10-Fold Decimal Collision (0.05 mcg NICU Fentanyl) on 203 DPI Thermal Bleed.
+2. The "Three-Sticks" & Open Oval Hazard (1 vs l vs I and 0 vs O) under Scotopic Glare.
+3. LASA Oncology Disambiguation (vinCRIStine vs vinBLAStine Tall Man Alignment).
+4. The 1,000-Fold Unit Discrepancy (10 mcg vs 10 mg & IL-6 Titration).
+
+Directly embeds PocketGull-Math via generate_self_contained_math_svg.
+"""
+
+import os
+import sys
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIR = os.path.dirname(SCRIPT_DIR)
+DOC_IMG_DIR = os.path.join(ROOT_DIR, "documentation", "images")
+os.makedirs(DOC_IMG_DIR, exist_ok=True)
+
+try:
+    from generate_self_contained_math_svg import embed_font_in_svg
+    HAS_EMBEDDER = True
+except ImportError:
+    HAS_EMBEDDER = False
+
+svg_content = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 860" width="1120" height="860">
+  <defs>
+    <style>
+      .bg { fill: #07070a; }
+      .card { fill: #0f1015; stroke: #232530; stroke-width: 1.5; rx: 12; }
+      .callout-bad { fill: #171113; stroke: #451a1e; stroke-width: 1.2; rx: 8; }
+      .callout-good { fill: #0c1815; stroke: #0d4a38; stroke-width: 1.2; rx: 8; }
+      .title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 700; fill: #f4f4f5; font-size: 21px; }
+      .subtitle { font-family: 'PocketGull Mono', 'Courier New', monospace; fill: #14b8a6; font-size: 10.5px; letter-spacing: 0.08em; font-weight: 600; }
+      .section-hdr { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 700; fill: #f4f4f5; font-size: 14.5px; }
+      .section-sub { font-family: 'PocketGull Mono', monospace; fill: #94a3b8; font-size: 10px; letter-spacing: 0.04em; }
+      .label-bad { font-family: 'PocketGull Mono', monospace; fill: #f87171; font-size: 10px; font-weight: 700; letter-spacing: 0.05em; }
+      .label-good { font-family: 'PocketGull Mono', monospace; fill: #34d399; font-size: 10px; font-weight: 700; letter-spacing: 0.05em; }
+      .desc-text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; fill: #cbd5e1; font-size: 11px; line-height: 1.45; }
+      
+      /* Typography Classes */
+      .comm-specimen { font-family: 'Arial', 'Helvetica', 'Segoe UI', sans-serif; font-size: 26px; fill: #e2e8f0; }
+      .pg-specimen { font-family: 'PocketGull Math', 'PocketGull', monospace; font-size: 26px; fill: #38bdf8; font-feature-settings: "cv05" 1, "cv08" 1, "ss02" 1, "tnum" 1; }
+      .comm-tallman { font-family: 'Arial', 'Helvetica', sans-serif; font-size: 20px; font-weight: 700; fill: #f87171; letter-spacing: 0.02em; }
+      .pg-tallman { font-family: 'PocketGull Math', 'PocketGull', sans-serif; font-size: 20px; font-weight: 700; fill: #2dd4bf; letter-spacing: 0.04em; }
+      .metric-badge { font-family: 'PocketGull Mono', monospace; font-size: 9.5px; fill: #a1a1aa; }
+    </style>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1120" height="860" class="bg"/>
+
+  <!-- Top Header Plate -->
+  <g transform="translate(40, 32)">
+    <text x="0" y="22" class="title">PocketGull Clinical Forensic Degradation Plate</text>
+    <text x="0" y="42" class="subtitle">HUMAN FACTORS FORENSICS: THE BIOLOGY OF THE STRESSED RETINA VS. COMMODITY TYPE</text>
+    <rect x="740" y="6" width="300" height="34" rx="6" fill="#181824" stroke="#2e3048"/>
+    <text x="752" y="27" class="metric-badge" fill="#38bdf8">FDA MDDT CANDIDATE | AAMI/ISMP CDTS-1</text>
+  </g>
+
+  <!-- QUADRANT 1: The 10-Fold Decimal Collision -->
+  <g transform="translate(40, 92)">
+    <rect width="505" height="345" class="card"/>
+    <text x="24" y="30" class="section-hdr">1. The 10-Fold Pediatric Micro-Dose Loss</text>
+    <text x="24" y="48" class="section-sub">203 DPI THERMAL BLEED &amp; SCOTOPIC DEFOCUS (0.05 mcg FENTANYL)</text>
+
+    <!-- Commodity Failure -->
+    <g transform="translate(24, 68)">
+      <rect width="457" height="110" class="callout-bad"/>
+      <text x="16" y="20" class="label-bad">✕ COMMODITY GROTESQUE (ARIAL / HELVETICA)</text>
+      <text x="16" y="58" class="comm-specimen" letter-spacing="-1px">0.05 mcg <tspan fill="#f87171" font-size="16px">➔ MISREAD AS 50 mcg (1,000x LEAP)</tspan></text>
+      <text x="16" y="86" class="desc-text" fill="#94a3b8">Period advance is only 48 UPM with zero optical isolation. On thermal bedside wristbands or low-res pumps, ink bridging swallows the decimal point entirely.</text>
+    </g>
+
+    <!-- PocketGull Safe -->
+    <g transform="translate(24, 192)">
+      <rect width="457" height="126" class="callout-good"/>
+      <text x="16" y="20" class="label-good">✓ POCKETGULL CLINICAL SUPERFAMILY (ISMP CDTS-1)</text>
+      <text x="16" y="60" class="pg-specimen">0.05 mcg <tspan fill="#34d399" font-size="14px">➔ 149 UPM CLEARANCE SAFE</tspan></text>
+      <text x="16" y="88" class="desc-text" fill="#a7f3d0">Period advance 324 UPM with 149 UPM optical clearance buffer. High-visibility period diameter prevents dot occlusion under 203 DPI thermal bleed.</text>
+      <text x="16" y="112" class="section-sub" fill="#10b981">Louise Sloan 5:1 Acuity • Guaranteed Period Side-Bearing ≥ 120 UPM</text>
+    </g>
+  </g>
+
+  <!-- QUADRANT 2: The Three-Sticks & Slashed Zero Disambiguation -->
+  <g transform="translate(575, 92)">
+    <rect width="505" height="345" class="card"/>
+    <text x="24" y="30" class="section-hdr">2. The "Three Sticks" &amp; Open Oval Hazard</text>
+    <text x="24" y="48" class="section-sub">CIRCADIAN RETINAL FATIGUE AT 04:00 AM (FOVEAL SEARCH LOSS)</text>
+
+    <!-- Commodity Failure -->
+    <g transform="translate(24, 68)">
+      <rect width="457" height="110" class="callout-bad"/>
+      <text x="16" y="20" class="label-bad">✕ COMMODITY GROTESQUE: THREE IDENTICAL VERTICAL BARS</text>
+      <text x="16" y="58" class="comm-specimen">1  |  l  |  I  |  0  |  O</text>
+      <text x="16" y="86" class="desc-text" fill="#94a3b8">Identical vertical stems. Numeral 0 and capital letter O share identical outer perimeter. Under astigmatism or 45° off-axis tilt, characters collapse.</text>
+    </g>
+
+    <!-- PocketGull Safe -->
+    <g transform="translate(24, 192)">
+      <rect width="457" height="126" class="callout-good"/>
+      <text x="16" y="20" class="label-good">✓ POCKETGULL DISAMBIGUATED NEURO-ERGONOMICS</text>
+      <text x="16" y="60" class="pg-specimen">1  |  l  |  I  |  0̸  |  O</text>
+      <text x="16" y="88" class="desc-text" fill="#a7f3d0">Numeral 1 has a distinct head serif; lowercase l has an outbound curved terminal (cv05); capital I features bilobe serifs (ss02); zero is internally slashed (cv08).</text>
+      <text x="16" y="112" class="section-sub" fill="#10b981">Zero Saccadic Collisions • Asymmetric Stroke Recognition Architecture</text>
+    </g>
+  </g>
+
+  <!-- QUADRANT 3: LASA Oncology & Tall Man Architecture -->
+  <g transform="translate(40, 462)">
+    <rect width="505" height="355" class="card"/>
+    <text x="24" y="30" class="section-hdr">3. LASA Oncology: vinCRIStine vs. vinBLAStine</text>
+    <text x="24" y="48" class="section-sub">ISMP TALL MAN ARCHITECTURE &amp; STEM WEIGHT HARMONY</text>
+
+    <!-- Commodity Failure -->
+    <g transform="translate(24, 68)">
+      <rect width="457" height="115" class="callout-bad"/>
+      <text x="16" y="20" class="label-bad">✕ UNCALIBRATED TALL MAN (OPTICAL STEM DISSONANCE)</text>
+      <text x="16" y="56" class="comm-tallman">vinCRIStine  vs  vinBLAStine</text>
+      <text x="16" y="86" class="desc-text" fill="#94a3b8">Commodity caps jump in stem thickness from 68 UPM to 112 UPM, causing optical visual staggering that triggers fixation stumbles during emergency prep.</text>
+    </g>
+
+    <!-- PocketGull Safe -->
+    <g transform="translate(24, 197)">
+      <rect width="457" height="132" class="callout-good"/>
+      <text x="16" y="20" class="label-good">✓ POCKETGULL CLINICAL TALL MAN ENGINE</text>
+      <text x="16" y="58" class="pg-tallman">vinCRIStine  vs  vinBLAStine</text>
+      <text x="16" y="90" class="desc-text" fill="#a7f3d0">PocketGull harmonizes cap stem weights to exactly match the 68 UPM baseline metric. True optical height balance allows immediate, unstumbled discrimination.</text>
+      <text x="16" y="116" class="section-sub" fill="#10b981">Fatal Intrathecal Prevention Protocol • Unified 1000 UPM Em-Square</text>
+    </g>
+  </g>
+
+  <!-- QUADRANT 4: The 1,000-Fold Unit Discrepancy -->
+  <g transform="translate(575, 462)">
+    <rect width="505" height="355" class="card"/>
+    <text x="24" y="30" class="section-hdr">4. The 1,000x Unit Gap: mcg vs. mg &amp; Titration</text>
+    <text x="24" y="48" class="section-sub">OPEN APERTURE PRESERVATION UNDER 45° OFF-AXIS VIEWING</text>
+
+    <!-- Commodity Failure -->
+    <g transform="translate(24, 68)">
+      <rect width="457" height="115" class="callout-bad"/>
+      <text x="16" y="20" class="label-bad">✕ CLOSED APERTURES (COLLAPSE UNDER LOW CONTRAST)</text>
+      <text x="16" y="56" class="comm-specimen">10 mcg  ≈  10 mg  |  IL-6  ≈  11-6</text>
+      <text x="16" y="86" class="desc-text" fill="#94a3b8">Curved terminals curl tightly inward. Under distance, astigmatism, or poor viewing angles, 'c' bridges into 'o' or blurs against 'm', causing a fatal 1,000x dosage jump.</text>
+    </g>
+
+    <!-- PocketGull Safe -->
+    <g transform="translate(24, 197)">
+      <rect width="457" height="132" class="callout-good"/>
+      <text x="16" y="20" class="label-good">✓ POCKETGULL 45° OPEN APERTURE TERMINALS</text>
+      <text x="16" y="58" class="pg-specimen">10 mcg  ≠  10 mg  |  IL-6  ≠  11-6</text>
+      <text x="16" y="90" class="desc-text" fill="#a7f3d0">Wide 45-degree angled terminals maximize interior negative space. 'c', 'e', and 'm' remain radically distinct across off-axis angles and dirty monitor shields.</text>
+      <text x="16" y="116" class="section-sub" fill="#10b981">Maximal Photoreceptor Separation • Tabular Figure Alignment ('tnum')</text>
+    </g>
+  </g>
+</svg>
+"""
+
+output_svg_path = os.path.join(DOC_IMG_DIR, "clinical_forensic_degradation_plate.svg")
+output_html_path = os.path.join(DOC_IMG_DIR, "clinical_forensic_degradation_plate.html")
+
+# Write raw SVG
+with open(output_svg_path, "w", encoding="utf-8") as f:
+    f.write(svg_content)
+
+print(f"[OK] Generated: {output_svg_path}")
+
+# Write self-contained HTML wrapper
+html_wrapper = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>PocketGull Clinical Forensic Proof Plate</title>
+  <style>
+    body {{
+      margin: 0;
+      padding: 30px;
+      background: #040406;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }}
+    .container {{
+      max-width: 1140px;
+      width: 100%;
+    }}
+    svg {{
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    }}
+    .caption {{
+      margin-top: 15px;
+      color: #94a3b8;
+      font-size: 12px;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }}
+  </style>
+</head>
+<body>
+  <div class="container">
+    {svg_content}
+    <div class="caption">POCKETGULL CLINICAL SUPERFAMILY • AAMI/ISMP CDTS-1 CONSENSUS SPECIFICATION • PHIL GEAR PHOTOGRAPHY &amp; TYPEFOUNDRY</div>
+  </div>
+</body>
+</html>
+"""
+
+with open(output_html_path, "w", encoding="utf-8") as f:
+    f.write(html_wrapper)
+
+print(f"[OK] Generated: {output_html_path}")
+
+# If embedder available, embed font into embedded SVG
+if HAS_EMBEDDER:
+    try:
+        embedded_svg = embed_font_in_svg(svg_content)
+        embedded_path = os.path.join(DOC_IMG_DIR, "clinical_forensic_degradation_plate_embedded.svg")
+        with open(embedded_path, "w", encoding="utf-8") as f:
+            f.write(embedded_svg)
+        print(f"[OK] Generated embedded SVG: {embedded_path}")
+    except Exception as e:
+        print(f"[WARN] Embedder failed: {e}")

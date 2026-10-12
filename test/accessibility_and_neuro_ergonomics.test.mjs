@@ -315,3 +315,34 @@ test('Interactive Specimen: On-Hover Neuro-Ergonomic Inspector HUD Invariants', 
   assert.ok(indexHtml.includes('standards/FDA_ISMP_CLINICAL_DIGITAL_TYPOGRAPHY_SPECIFICATION.md'), 'Must link to FDA/ISMP standard');
 });
 
+test('Superfamily On-Device Labs Atlas & Directed Learning Engine Invariants', () => {
+  const atlasPath = path.join(ROOT_DIR, 'data', 'pocketgull_labs_atlas.json');
+  assert.ok(fs.existsSync(atlasPath), 'data/pocketgull_labs_atlas.json must exist');
+  
+  const atlasRaw = fs.readFileSync(atlasPath, 'utf8');
+  const atlas = JSON.parse(atlasRaw);
+
+  assert.equal(atlas.version, '3.1.0', 'Atlas version must match SSOT SemVer 3.1.0');
+  assert.ok(Array.isArray(atlas.tracks) && atlas.tracks.length >= 7, 'Must declare at least 7 learning tracks');
+  assert.ok(Array.isArray(atlas.labs) && atlas.labs.length >= 10, 'Must declare at least 10 directed learning labs');
+
+  const indexPath = path.join(ROOT_DIR, 'index.html');
+  const indexHtml = fs.readFileSync(indexPath, 'utf8');
+
+  for (const lab of atlas.labs) {
+    assert.ok(lab.id, 'Every lab must have an id');
+    assert.ok(lab.track, `Lab ${lab.id} must declare a track`);
+    assert.ok(lab.title, `Lab ${lab.id} must declare a title`);
+    assert.ok(lab.mission && lab.mission.length > 0, `Lab ${lab.id} must declare missions`);
+    assert.ok(lab.discovery, `Lab ${lab.id} must declare a discovery takeaway`);
+
+    if (lab.location && lab.location.page === 'index.html') {
+      const targetId = lab.location.targetId;
+      assert.ok(
+        indexHtml.includes(`id="${targetId}"`),
+        `index.html must contain target element id="${targetId}" for lab ${lab.id}`
+      );
+    }
+  }
+});
+
