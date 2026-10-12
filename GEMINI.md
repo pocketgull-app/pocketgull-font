@@ -165,5 +165,16 @@ dart run tool/pocketgull_foundry.dart sync
    - Only preload critical display fonts (`PocketGull-Fineliner.woff2`, `PocketGull-Bold.woff2`, or `PocketGull-VF.woff2`).
    - All secondary/specialty fonts (`Math`, `Emoji`, `ASL`) MUST declare `font-display: swap` and be loaded lazily on demand.
 
+---
+
+## 🛡️ The Porter-Gull Autonomous Triage Protocol & Decision Gate
+To preserve developer cognitive flow, prevent compute/token waste, and ensure unyielding security:
+1. **Tier 1 (Deterministic / Invariants)**: CI build failures, untracked files, W3C OTS memory alignment (`loca[i] % 2 == 0`), CodeQL SAST integer/DOM vulnerabilities $\to$ **Auto-remediate locally, verify 100% via unit tests, commit & push directly**.
+2. **Tier 2 (Typographic DNA & Aesthetics)**: Felt-marker corner radii (25 UPM), Louise Sloan 5:1 ratio changes, variable `fvar` axis redesigns $\to$ **Halt auto-commit, generate visual specimen artifact, prompt Architect with a 1-click decision**.
+3. **Tier 3 (Upstream Supply Chain)**: Dependabot bumps, Python 3.11 lockfile constraints, Fontbakery profile adjustments $\to$ **Validate in isolated container sandbox, verify peer compatibility, produce atomic PR Blueprint**.
+4. **Tier 4 (Foundry Negative Space Invariants)**: SaMD autonomous diagnostic calculators, DOM tracking overlays, automated sign language translation $\to$ **Autonomously decline and close citing Negative Space Invariants**.
+5. **Circuit Breaker**: Hard cap of 3 local repair attempts; zero push to remote without 100% test pass (`npm run test:unit`).
+
+
 
 
