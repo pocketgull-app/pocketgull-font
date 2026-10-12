@@ -4,21 +4,23 @@ Academic report format for [Quarto](https://quarto.org), typeset in **PocketGull
 
 ## Installation
 
-Install the extension in your Quarto project directory:
+Install the extension directly from the PocketGull repository:
 
 ```bash
-quarto add pocketgull-app/quarto-pocketgull-math
+quarto add pocketgull-app/pocketgull-font/distribution/quarto
 ```
 
-## Usage
-
-Use the template to create a new scientific paper or lab notebook:
+Or install locally in your project:
 
 ```bash
-quarto use template pocketgull-app/quarto-pocketgull-math
+quarto use template pocketgull-app/pocketgull-font/distribution/quarto
 ```
 
-Render to HTML and PDF:
+## Quick Start Template
+
+If you have downloaded this folder, you can render the included scientific template immediately:
+
 ```bash
-quarto render report.qmd
+quarto render template.qmd --to html
+quarto render template.qmd --to pdf
 ```
