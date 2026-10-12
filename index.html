@@ -3915,11 +3915,12 @@
             By mapping Middle C ($C_4$) through $B_4$ to the 7 spectral wavelengths of Newton's rainbow (ROYGBIV / Chroma-Notes standard), beginners and students with dyslexia or motor tremors bypass cognitive ledger-line crowding. Each key synthesizes procedural 100% offline WebAudio sound and displays its exact Sloan letter and solfège degree.
           </p>
 
-          <!-- Interactive Piano Note Readout Banner with Traffic Light Pacer -->
+          <!-- Interactive Piano Note Readout Banner with Traffic Light Pacer & VF Dynamics -->
           <div class="piano-staff-stage" id="pianoStaffDisplay">
-            <div style="display: flex; align-items: center; gap: 14px;">
-              <span style="font-size: 26px; color: #ef4444;" id="pianoStaffNote">♩ C₄ (Middle C)</span>
+            <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+              <span style="font-size: 26px; color: #ef4444; font-family: 'PocketGull VF', sans-serif;" id="pianoStaffNote">♩ C₄ (Middle C)</span>
               <span style="font-size: 13px; color: var(--text-muted); font-family: 'PocketGull Mono';" id="pianoStaffDetail">Solfège: Do &bull; 261.63 Hz &bull; 650nm Red Tonic Anchor</span>
+              <span id="vfDynamicsBadge" style="font-family: 'PocketGull Mono'; font-size: 11px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 2px 8px; border-radius: 4px;">VF: 'wght' 600 • Zero-CLS</span>
             </div>
 
             <!-- Traffic Light Duration & Hold Metronome -->
@@ -3931,6 +3932,7 @@
               <span id="trafficPhaseText" style="font-size: 11px; font-family: 'PocketGull Mono'; color: #10b981; font-weight: 700;">FLOW (🟢)</span>
             </div>
           </div>
+
 
           <!-- Instrument Switcher & Web MIDI Integration Strip -->
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; background: rgba(0,0,0,0.2); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--card-border);">
@@ -7134,6 +7136,32 @@
         const ctx = getPianoAudioCtx();
         if (!ctx) return;
 
+        // Dynamic Variable Font (VF) Weight Adaptation from Velocity or Stroke
+        let dynamicWght = 600;
+        let gainMax = 0.35;
+        if (role && role.includes('MIDI Vel:')) {
+          const match = role.match(/MIDI Vel:\s*(\d+)/);
+          if (match) {
+            const vel = parseInt(match[1], 10);
+            // Map MIDI velocity (1..127) to PocketGull VF wght axis (400..900)
+            dynamicWght = Math.round(400 + (vel / 127) * 500);
+            gainMax = Math.max(0.05, Math.min(0.65, (vel / 127) * 0.55));
+          }
+        }
+        if (staffNote) {
+          staffNote.style.fontVariationSettings = `'wght' ${dynamicWght}, 'SOFT' 0.5`;
+          staffNote.style.transition = 'font-variation-settings 0.08s ease, transform 0.08s ease';
+          staffNote.style.transform = `scale(${1 + (dynamicWght - 400) / 2500})`;
+          setTimeout(() => {
+            staffNote.style.transform = 'scale(1)';
+          }, 200);
+        }
+        const vfBadge = document.getElementById('vfDynamicsBadge');
+        if (vfBadge) {
+          vfBadge.textContent = `VF: 'wght' ${dynamicWght} • Zero-CLS (${gainMax > 0.4 ? 'Fortissimo' : 'Mezzo'})`;
+        }
+
+
         try {
           const now = ctx.currentTime;
           // Dual-oscillator acoustic piano synthesis (fundamental + harmonic chime)
@@ -7148,7 +7176,7 @@
           osc2.frequency.setValueAtTime(freq * 2, now); // 2nd harmonic sparkle
 
           gain.gain.setValueAtTime(0.001, now);
-          gain.gain.exponentialRampToValueAtTime(0.35, now + 0.015);
+          gain.gain.exponentialRampToValueAtTime(gainMax, now + 0.015);
           gain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
 
           osc1.connect(gain);
@@ -7162,6 +7190,7 @@
         } catch (e) {
           // Non-blocking fallback on silent contexts
         }
+
 
         // Trigger Traffic Light Hold Metronome Phase
         const green = document.getElementById('trafficDiscGreen');

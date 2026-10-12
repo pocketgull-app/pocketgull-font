@@ -118,4 +118,17 @@ def simulate_cvd_color(hex_color: str, deficiency: str) -> str:
     
     return f"#{int(round(sim_r * 255)):02x}{int(round(sim_g * 255)):02x}{int(round(sim_b * 255)):02x}"
 
+def get_daltonism_piano_palette(deficiency: str) -> dict:
+    """Generates an entire simulated 7-note solfège palette for a specified color vision deficiency."""
+    palette = {}
+    for note, data in PIANO_ROYGBIV_PALETTE.items():
+        palette[note] = {
+            "note": data["note"],
+            "solfege": data["solfege"],
+            "original_hex": data["hex"],
+            "simulated_hex": simulate_cvd_color(data["hex"], deficiency)
+        }
+    return palette
+
+
 
