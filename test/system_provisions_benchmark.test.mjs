@@ -102,3 +102,34 @@ test('Benchmark 5: Scotopic 650nm Circadian Night-Shift Token Benchmark', () => 
   assert.match(rCode, /#f43f5e/, 'R theme must utilize 650nm scotopic red token');
   assert.match(mCode, /scotopic/, 'MATLAB theme must declare scotopic mode');
 });
+
+test('Benchmark 6: R ggplot2 Theme Provisions vs Default theme_grey', () => {
+  const rPath = path.join('distribution', 'r', 'R', 'theme_pocketgull.R');
+  const rCode = fs.readFileSync(rPath, 'utf8');
+
+  // Verify PocketGull R theme enforces optometric standards over default ggplot2 theme_grey:
+  // 1. Replaces default grey background with clean high-contrast surface
+  assert.match(rCode, /ggplot2::theme_minimal/, 'PocketGull theme must build upon minimal high-contrast baseline');
+  // 2. Sets base_family to PocketGull
+  assert.match(rCode, /base_family\s*=\s*"PocketGull"/, 'PocketGull theme must set base_family to PocketGull');
+  // 3. Configures crisp axis lines for physiological reading
+  assert.match(rCode, /axis\.line\s*=\s*ggplot2::element_line/, 'PocketGull theme must define explicit axis lines');
+  // 4. Eliminates visual grid clutter (minor grid lines)
+  assert.match(rCode, /panel\.grid\.minor\s*=\s*ggplot2::element_blank\(\)/, 'PocketGull theme must suppress 1+1=3 noise minor gridlines');
+});
+
+test('Benchmark 7: MATLAB Figure Provisions vs Default Factory Axes', () => {
+  const mPath = path.join('distribution', 'matlab', 'theme_pocketgull.m');
+  const mCode = fs.readFileSync(mPath, 'utf8');
+
+  // Verify PocketGull MATLAB function overrides default factory axes:
+  // 1. Sets FontName to PocketGull
+  assert.match(mCode, /fontName\s*=\s*'PocketGull'/, 'MATLAB theme must set fontName to PocketGull');
+  // 2. Turns on grid with explicit color contrast
+  assert.match(mCode, /GridColor/, 'MATLAB theme must configure explicit GridColor');
+  // 3. Configures outward ticks (TickDir = out) to prevent data occlusion
+  assert.match(mCode, /'TickDir',\s*'out'/, 'MATLAB theme must direct ticks outward to prevent signal occlusion');
+  // 4. Strips redundant top/right chart junk (Box = off)
+  assert.match(mCode, /'Box',\s*'off'/, 'MATLAB theme must set Box off to eliminate Edward Tufte chart junk');
+});
+
