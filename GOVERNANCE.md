@@ -53,6 +53,30 @@ PocketGull formally commits to and implements the **United Nations Declaration o
    - Article 24 affirms Indigenous rights to the highest attainable standard of physical and mental health, while Article 13.2 mandates that Indigenous peoples must be understood in administrative and health proceedings.
    - PocketGull applies the exact same life-critical Louise Sloan 5:1 optotype clarity, ISMP error prevention, and anti-clipping vertical margins (>= 110 UPM headspace for stacked high-tone nasals like *ą́*, *ę́*, *į́*, *ǫ́*) to Indian Health Service (IHS) and First Nations electronic health records (EHR), prescription labeling, and emergency signage as it does to Latin clinical dosage charts.
 
+### 1.3 The "Clean Pipe" Invariant & Negative Space Charter (The Prohibitions)
+
+To maintain ethical rigor, clinical humility, and community trust, PocketGull explicitly delineates what it **MUST NEVER DO**:
+
+1. **PROHIBITION 1: No Medical Device Claims or Diagnostic Overreach**
+   - PocketGull is a passive optometric and typographical conduit. It is **not** Software as a Medical Device (SaMD) under FDA 510(k) or EU MDR regulations.
+   - The typeface never makes diagnostic assertions, calculates medication dosages, or claims to "treat" dyslexia or vision loss. It improves legibility through optical physics (Louise Sloan 5:1 ratio, ISMP character disambiguation), but never replaces clinical vigilance or institutional double-checks.
+
+2. **PROHIBITION 2: No Simulated Automated Sign Language (ASL) "Translation"**
+   - American Sign Language (ASL) and world sign languages are complete, natural 3D visual-spatial languages with complex syntax, spatial grammars, and Deaf cultural heritage—not a word-for-word substitution cipher of spoken English.
+   - PocketGull provides 2D cheremic transcription glyphs (Sutton SignWriting, Stokoe notation) strictly for linguistic documentation and academic pedagogy. It will **never** market itself as an automated "ASL translation engine" or presume to replace certified Deaf interpreters.
+
+3. **PROHIBITION 3: No Invasive Accessibility Overlays**
+   - PocketGull strictly rejects third-party JavaScript "accessibility overlay" widgets that inject DOM wrappers or attempt to override browser accessibility APIs, which frequently disrupt screen readers (NVDA, JAWS, VoiceOver).
+   - PocketGull adheres exclusively to native semantic HTML, high-contrast CSS (WCAG AAA 7:1 ratio), and standard 256 Unicode Braille codepoints (`U+2800`–`U+28FF`).
+
+4. **PROHIBITION 4: Zero Telemetry Egress & Zero PHI Tracking**
+   - In healthcare environments and sovereign tribal clinics, text entered into an interface often constitutes Protected Health Information (PHI) under HIPAA, PIPEDA, and OCAP®.
+   - PocketGull enforces a strict **Zero-Egress Invariant**: no tracking pixels, no analytics beacons, no keystroke recording, and no remote license verification calls. Fonts execute 100% locally on client hardware or from immutable static edge CDNs without request logging.
+
+5. **PROHIBITION 5: No Cultural Overreach or Mock Prescriptions**
+   - Traditional Indigenous words for wellness, sacred botany, or ceremonial practices will **never** be appropriated, commercialized, or converted into synthetic pharmaceutical dosage orders (e.g., mock milligram prescriptions).
+   - Specimen copy for sovereign orthographies must remain strictly focused on authentic technical glyph verification, vowel rotation matrices, diacritic stacking clearance, and verified public educational or human rights declarations.
+
 ---
 
 ## 👥 2. Roles & Responsibilities

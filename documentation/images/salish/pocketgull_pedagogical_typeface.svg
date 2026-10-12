@@ -78,7 +78,7 @@
 
   <!-- Section 3: 8-Word Pharmacopeia Broadside Cards -->
   <g transform="translate(160, 1920)">
-    <text x="0" y="0" class="font-mono" font-size="30" font-weight="bold" fill="#475569">03 / CULTURAL PHARMACOPEIA &amp; PHILOSOPHICAL FOUNDATIONS</text>
+    <text x="0" y="0" class="font-mono" font-size="30" font-weight="bold" fill="#475569">03 / LUSHOOTSEED VOCABULARY &amp; PHILOSOPHICAL FOUNDATIONS</text>
     <g transform="translate(0, 30)">
 
       <g transform="translate(0, 0)">
@@ -90,7 +90,7 @@
       <g transform="translate(1210, 0)">
         <rect width="1160" height="150" rx="12" fill="#FFFFFF" stroke="#E2DACB" stroke-width="1.8"/>
         <text x="40" y="65" class="font-native" font-size="44" font-weight="bold" fill="#0369A1">sʔuladxʷ</text>
-        <text x="40" y="115" class="font-title" font-size="24" font-weight="600" fill="#475569">Wild salmon; the sacred sustenance of the river</text>
+        <text x="40" y="115" class="font-title" font-size="24" font-weight="600" fill="#475569">Wild salmon; river nourishment and ecological vitality</text>
       </g>
 
       <g transform="translate(0, 180)">
@@ -126,7 +126,7 @@
       <g transform="translate(1210, 540)">
         <rect width="1160" height="150" rx="12" fill="#FFFFFF" stroke="#E2DACB" stroke-width="1.8"/>
         <text x="40" y="65" class="font-native" font-size="44" font-weight="bold" fill="#0369A1">qʷəl̕qʷələb</text>
-        <text x="40" y="115" class="font-title" font-size="24" font-weight="600" fill="#475569">The sacred killer whale (Orca) of the deep waters</text>
+        <text x="40" y="115" class="font-title" font-size="24" font-weight="600" fill="#475569">Orca; maritime guardian of deep Salish Sea waters</text>
       </g>
 
     </g>

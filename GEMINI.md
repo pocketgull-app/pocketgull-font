@@ -59,6 +59,13 @@ PocketGull is an open-source clinical sans-serif, display, and telemetry monospa
 - **Duployan / Chinuk Pipa (`U+1BC00`–`U+1BC9F`)**: Respects phonemic size ratios (130 UPM vowel loops vs. consonant stems), anchored along the optical waist (y = 270 UPM) to harmonize with Latin x-height.
 - **Pan-Tribal Orthographies & Syllabics**: Stacked diacritic elevation (>= 110 UPM clearance for *ą́*, *ę́*, *į́*, *ǫ́*), barred consonant contrast (crossbar >= 1.4x optical aperture for *Ł*, *ł*, *ƛ*), and first-class glottal letter status (*ʼ*, *ʻ*, *ʔ*). Conforms to UNDRIP Articles 11, 13, 14, 24, and 31.
 
+### 9. The Negative Space Invariant & Boundary Prohibitions
+1. **Not a Medical Device (SaMD)**: Passive optometric clarity only; zero autonomous diagnostic claims or dosage calculations.
+2. **Not an Automated ASL Translator**: 2D cheremic notation for academic pedagogy; never replaces human certified Deaf interpreters.
+3. **Not an Accessibility Overlay**: 100% native semantic HTML & WCAG AAA; zero third-party DOM-hijacking script widgets.
+4. **Zero Telemetry / Zero PHI Egress**: 100% offline air-gapped execution; zero keystroke logging, analytics pings, or font phone-home calls.
+5. **No Cultural Overreach or Mock Prescriptions**: Zero medicalization of traditional/sacred concepts into artificial milligram prescriptions; specimen copy strictly validates verified orthography.
+
 ---
 
 ## 📐 Dieter Rams & Human-Computer Interaction (HCI) Design Invariants

@@ -725,6 +725,17 @@
 
 /* Expert A: Latin Core, ISMP Safety & 256-Glyph Braille Matrix */
 @font-face {
+  font-family: 'PocketGull Braille';
+  src: url('fonts/woff2/PocketGull-Bold.woff2?v=3.1.0') format('woff2'),
+       url('fonts/woff2/PocketGull-Fineliner.woff2?v=3.1.0') format('woff2'),
+       local('Segoe UI Symbol'), local('Apple Symbols'), local('DejaVu Sans'), local('Noto Sans Symbols 2');
+  font-weight: 400 700 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+2800-28FF;
+}
+
+@font-face {
   font-family: 'PocketGull-SMoE';
   src: url('fonts/woff2/PocketGull-Fineliner.woff2?v=3.1.0') format('woff2');
   font-weight: 400;
@@ -1264,7 +1275,8 @@
 /* 4.1 Universal Sans Fallback (size-adjusted to 1000 UPM PocketGull em-square) */
 @font-face {
   font-family: 'PocketGull Fallback';
-  src: local('Segoe UI'), local('Roboto'), local('Helvetica Neue'), local('Arial');
+  src: local('Segoe UI'), local('Roboto'), local('Helvetica Neue'), local('Arial'),
+       local('Segoe UI Symbol'), local('Apple Symbols'), local('DejaVu Sans'), local('Noto Sans Symbols 2');
   font-display: swap;
   ascent-override: 96%;
   descent-override: 24%;
@@ -1275,7 +1287,8 @@
 /* 4.2 Telemetry Monospace Fallback (fixed 600 UPM pitch equivalent) */
 @font-face {
   font-family: 'PocketGull Mono Fallback';
-  src: local('Cascadia Code'), local('Segoe UI Mono'), local('Consolas'), local('SFMono-Regular'), local('Menlo'), local('Courier New');
+  src: local('Cascadia Code'), local('Segoe UI Mono'), local('Consolas'), local('SFMono-Regular'), local('Menlo'), local('Courier New'),
+       local('Segoe UI Symbol'), local('Apple Symbols'), local('DejaVu Sans'), local('Noto Sans Symbols 2');
   font-display: swap;
   ascent-override: 96%;
   descent-override: 24%;

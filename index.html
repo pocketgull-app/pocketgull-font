@@ -141,6 +141,142 @@
       color: var(--sky-accent, #0369a1) !important;
     }
 
+    /* World Map Studio Styles */
+    .map-land {
+      transition: fill 0.2s ease, stroke 0.2s ease;
+      cursor: pointer;
+    }
+    .map-land:hover {
+      fill: #1e3a5f;
+      stroke: var(--cyan);
+    }
+    .map-pin {
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.2s ease;
+    }
+    .map-pin:hover, .map-pin.active {
+      transform: scale(1.35);
+      filter: drop-shadow(0 0 8px var(--cyan));
+    }
+    .map-filter-btn {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .map-filter-btn:hover {
+      border-color: var(--cyan);
+      color: var(--text-main);
+    }
+    .map-filter-btn.active {
+      background: rgba(6, 182, 212, 0.2);
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+    .country-pill {
+      background: #090e17;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      white-space: nowrap;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .country-pill:hover, .country-pill.active {
+      border-color: var(--cyan);
+      color: #ffffff;
+      background: rgba(6, 182, 212, 0.12);
+    }
+
+    /* Vexillological Pavilion Styles */
+    .vex-view-switch-btn {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .vex-view-switch-btn:hover {
+      border-color: var(--cyan);
+      color: var(--text-main);
+    }
+    .vex-view-switch-btn.active {
+      background: rgba(6, 182, 212, 0.2);
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+    .flag-card {
+      background: #080d16;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+    .flag-card:hover {
+      border-color: var(--cyan);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(6, 182, 212, 0.18);
+    }
+    .flag-card.active {
+      border-color: var(--cyan);
+      background: rgba(6, 182, 212, 0.12);
+      box-shadow: 0 0 12px rgba(6, 182, 212, 0.25);
+    }
+    .flag-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .flag-card-emoji {
+      font-size: 24px;
+      line-height: 1;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+    }
+    .flag-card-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+    .flag-card-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+      font-family: 'PocketGull Mono', monospace;
+    }
+    .flag-card-motto {
+      font-size: 11px;
+      color: #94a3b8;
+      line-height: 1.35;
+      font-style: italic;
+      border-top: 1px dashed rgba(255,255,255,0.08);
+      padding-top: 4px;
+      margin-top: 2px;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -3849,6 +3985,228 @@
             </p>
           </div>
         </div>
+
+        <!-- ================================================================= -->
+        <!-- Interactive Global Typographic & Clinical Health Dashboard       -->
+        <!-- ================================================================= -->
+        <div id="world-map-studio" style="margin-top: 32px; background: radial-gradient(circle at 50% 20%, rgba(6, 182, 212, 0.08) 0%, var(--surface-inner) 75%); border: 1px solid rgba(6, 182, 212, 0.35); border-radius: 12px; padding: 24px; box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);">
+          
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 20px;">
+            <div>
+              <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 6px;">
+                <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); background: rgba(6, 182, 212, 0.15); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(6, 182, 212, 0.3);">
+                  🌍 Global Health Atlas
+                </span>
+                <span style="font-size: 12px; color: var(--text-muted); font-family: 'PocketGull Mono', monospace;">
+                  Wikipedia Demographics &bull; ISMP Standards &bull; Auto-Prescription
+                </span>
+                <button type="button" onclick="openDocDrill('UNDRIP Accord', 'INDIGENOUS SOVEREIGNTY')" style="font-size: 11px; font-weight: 700; color: #f59e0b; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); padding: 2px 8px; border-radius: 4px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+                  🪶 UNDRIP Accord Doc Drill
+                </button>
+                <a href="https://www.un.org/development/desa/indigenouspeoples/declaration-on-the-rights-of-indigenous-peoples.html" target="_blank" rel="noopener noreferrer" style="font-size: 11px; font-weight: 600; color: var(--text-muted); text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.3); display: inline-flex; align-items: center; gap: 3px;" title="Official United Nations Declaration on the Rights of Indigenous Peoples">
+                  Official UN Accord ↗
+                </a>
+              </div>
+              <h3 style="font-size: 22px; font-weight: 800; color: var(--text-main); margin: 0;">
+                Interactive World Map &amp; Country Healthcare Font Prescription
+              </h3>
+              <p style="font-size: 13px; color: var(--text-muted); margin: 4px 0 0 0; max-width: 680px;">
+                Click any continent or country pin to inspect national demographics, health agency safety requirements, authentic script geometry, and generate a tailored, copy-ready CSS/JSON prescription.
+              </p>
+            </div>
+
+            <!-- View Mode & Regional Filter Pills -->
+            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
+              <!-- View Switcher: Map vs Vexillological Pavilion -->
+              <div style="display: flex; gap: 6px; background: rgba(0,0,0,0.3); padding: 3px; border-radius: 8px; border: 1px solid var(--card-border);">
+                <button id="viewSwitchMap" class="vex-view-switch-btn active" data-view="map">
+                  🗺️ Map View
+                </button>
+                <button id="viewSwitchPavilion" class="vex-view-switch-btn" data-view="pavilion">
+                  🚩 Vexillological Pavilion
+                </button>
+              </div>
+
+              <!-- Regional Filter Pills -->
+              <div id="world-map-filters" style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+                <button class="map-filter-btn active" data-region="all">All Nations</button>
+                <button class="map-filter-btn" data-region="indigenous" style="border-color: rgba(245, 158, 11, 0.6); color: #f59e0b;">🪶 Indigenous &amp; Sovereign</button>
+                <button class="map-filter-btn" data-region="americas">Americas</button>
+                <button class="map-filter-btn" data-region="europe">Europe</button>
+                <button class="map-filter-btn" data-region="mena">MENA &amp; Africa</button>
+                <button class="map-filter-btn" data-region="asia">Asia &amp; Pacific</button>
+                <button class="map-filter-btn" data-region="universal">Universal</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Map & Inspector Layout Grid -->
+          <div style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(320px, 1fr); gap: 20px;">
+            
+            <!-- Left: Interactive Vector Map & Vexillological Stage -->
+            <div style="background: #05080e; border: 1px solid var(--card-border); border-radius: 10px; padding: 16px; position: relative; overflow: hidden; display: flex; flex-direction: column;">
+              
+              <!-- 1. Map Canvas View Container -->
+              <div id="mapCanvasContainer" style="position: relative; width: 100%; aspect-ratio: 1.85 / 1; min-height: 280px; background: radial-gradient(circle at 50% 50%, #0a1120 0%, #04070c 100%); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: center;">
+                <svg id="worldMapSvg" viewBox="0 0 1000 520" style="width: 100%; height: 100%; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5)); cursor: pointer;" aria-label="Interactive Typographic World Map">
+                  <!-- SVG Defs & Glow Filters -->
+                  <defs>
+                    <radialGradient id="oceanGlow" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#0a192f" stop-opacity="0.6"/>
+                      <stop offset="100%" stop-color="#020610" stop-opacity="0.9"/>
+                    </radialGradient>
+                    <filter id="puckGlow" x="-50%" y="-50%" width="200%" height="200%">
+                      <feGaussianBlur stdDeviation="3" result="blur"/>
+                      <feMerge>
+                        <feMergeNode in="blur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
+                    </filter>
+                  </defs>
+
+                  <!-- Background Ocean Grid Coordinates -->
+                  <rect width="1000" height="520" fill="url(#oceanGlow)" />
+                  <g stroke="rgba(255, 255, 255, 0.04)" stroke-width="0.5" stroke-dasharray="3,3">
+                    <line x1="0" y1="130" x2="1000" y2="130" />
+                    <line x1="0" y1="260" x2="1000" y2="260" /> <!-- Equator -->
+                    <line x1="0" y1="390" x2="1000" y2="390" />
+                    <line x1="250" y1="0" x2="250" y2="520" />
+                    <line x1="500" y1="0" x2="500" y2="520" /> <!-- Prime Meridian -->
+                    <line x1="750" y1="0" x2="750" y2="520" />
+                  </g>
+
+                  <!-- Continental Vector Landmass Silhouettes (Simplified Stylized Projections) -->
+                  <g fill="#162235" stroke="#24344d" stroke-width="1.2" stroke-linejoin="round">
+                    <!-- North America & Arctic -->
+                    <path class="map-land" data-region="americas" d="M 90,80 L 150,70 L 220,60 L 290,75 L 310,120 L 270,160 L 290,190 L 240,240 L 200,280 L 190,260 L 160,250 L 130,220 L 100,160 L 80,120 Z" />
+                    <!-- Greenland -->
+                    <path class="map-land" data-region="americas" d="M 330,45 L 390,40 L 380,85 L 335,90 Z" />
+                    <!-- Central & South America -->
+                    <path class="map-land" data-region="americas" d="M 210,290 L 260,285 L 320,330 L 340,390 L 300,470 L 270,480 L 260,420 L 240,350 L 210,310 Z" />
+                    <!-- Europe -->
+                    <path class="map-land" data-region="europe" d="M 450,110 L 530,95 L 560,130 L 550,180 L 510,190 L 470,195 L 440,160 Z" />
+                    <!-- British Isles & Scandinavia -->
+                    <path class="map-land" data-region="europe" d="M 440,120 L 460,110 L 455,140 Z M 490,70 L 530,60 L 525,100 L 495,105 Z" />
+                    <!-- Africa & MENA -->
+                    <path class="map-land" data-region="mena" d="M 460,205 L 560,195 L 610,230 L 610,310 L 560,410 L 510,420 L 470,360 L 450,280 L 450,230 Z" />
+                    <!-- Middle East & Central Asia -->
+                    <path class="map-land" data-region="mena" d="M 570,180 L 650,175 L 670,230 L 630,260 L 580,240 Z" />
+                    <!-- Asia / CJK / Siberia -->
+                    <path class="map-land" data-region="asia" d="M 570,95 L 750,80 L 880,100 L 860,180 L 810,230 L 730,280 L 680,240 L 650,160 Z" />
+                    <!-- India & South Asia -->
+                    <path class="map-land" data-region="asia" d="M 670,240 L 730,245 L 710,320 L 680,300 Z" />
+                    <!-- Southeast Asia / Indonesia / Philippines -->
+                    <path class="map-land" data-region="asia" d="M 750,280 L 790,290 L 830,340 L 790,360 L 740,320 Z M 840,220 L 860,210 L 850,250 Z" />
+                    <!-- Australia & New Zealand -->
+                    <path class="map-land" data-region="asia" d="M 770,390 L 860,380 L 870,440 L 810,470 L 760,440 Z M 890,440 L 910,435 L 900,470 Z" />
+                  </g>
+
+                  <!-- Dynamic Pins / Telemetry Hotspots -->
+                  <g id="mapPinLayer">
+                    <!-- Pins will be injected dynamically or rendered as SVG circles with tooltips -->
+                  </g>
+                </svg>
+
+                <div style="position: absolute; bottom: 8px; left: 12px; font-size: 11px; font-family: 'PocketGull Mono', monospace; color: var(--text-muted); pointer-events: none;">
+                  Grid: WGS-84 Optical &bull; Target: <span id="mapHoverLabel" style="color: var(--cyan); font-weight: 700;">Hover or click a nation</span>
+                </div>
+              </div>
+
+              <!-- 2. Vexillological Pavilion Grid Container (Equal-Area Flag Heraldry) -->
+              <div id="vexillologicalPavilionContainer" style="display: none; width: 100%; aspect-ratio: 1.85 / 1; min-height: 280px; max-height: 380px; overflow-y: auto; background: #04070d; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05); padding: 12px;" tabindex="0" aria-label="Vexillological Healthcare Pavilion">
+                <div id="flagGalleryGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px;">
+                  <!-- Flag cards populated via JS -->
+                </div>
+              </div>
+
+              <!-- Quick Switcher Bar -->
+              <div style="margin-top: 12px; display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px;" id="countryPillBar" tabindex="0" aria-label="Country Presets List">
+                <!-- Pills populated via JS -->
+              </div>
+            </div>
+
+            <!-- Right: Clinical Telemetry & Prescription Dock -->
+            <div id="countryHudDock" style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between;">
+              
+              <div>
+                <!-- Header: Country & Health Agency -->
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid var(--card-border); padding-bottom: 12px; margin-bottom: 12px;">
+                  <div>
+                    <span id="hudFlag" style="font-size: 28px; line-height: 1; vertical-align: middle; margin-right: 6px;">🇨🇦</span>
+                    <strong id="hudCountryName" style="font-size: 18px; color: var(--text-main); vertical-align: middle;">Canada</strong>
+                    <div id="hudScriptFamily" style="font-size: 11px; font-family: 'PocketGull Mono', monospace; color: var(--cyan); margin-top: 4px;">
+                      SCRIPT: Latin + Canadian Aboriginal Syllabics (Inuktitut / Cree)
+                    </div>
+                  </div>
+                  <div style="text-align: right;">
+                    <span id="hudAuthority" style="font-size: 10px; font-weight: 800; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 2px 6px; border-radius: 4px;">
+                      HEALTH CANADA
+                    </span>
+                    <div id="hudWikiPop" style="font-size: 11px; color: var(--text-muted); margin-top: 4px; font-family: 'PocketGull Mono', monospace;">
+                      Pop: 40.5M &bull; Bilingual + Indigenous
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Live Clinical Specimen Box -->
+                <div style="margin-bottom: 14px;">
+                  <div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; display: flex; justify-content: space-between;">
+                    <span>Live EHR Clinical Display</span>
+                    <span id="hudLangTag" style="color: var(--amber); font-family: 'PocketGull Mono', monospace;">locl: CAN</span>
+                  </div>
+                  <div id="hudSpecimenStage" style="background: #060a12; border: 1px solid rgba(6, 182, 212, 0.3); border-radius: 6px; padding: 12px; font-family: 'PocketGull', 'PocketGull Braille', 'PocketGull Bold', 'Segoe UI Symbol', 'Apple Symbols', 'DejaVu Sans', sans-serif;">
+                    <div id="hudPhraseNative" style="font-size: 18px; font-weight: 700; color: #ffffff; line-height: 1.4;">
+                      ᐊᓂᕐᓂᖃᕐᓂᖅ • ᐋᓐᓂᐊᖃᕐᓇᙱᑦᑐᓕᕆᓂᖅ
+                    </div>
+                    <div id="hudPhraseTranslation" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">
+                      Vital Breathing • Healthcare Delivery (Inuktitut)
+                    </div>
+                    <div id="hudDosageAlert" style="margin-top: 8px; padding-top: 6px; border-top: 1px dashed var(--card-border); font-size: 13px; color: #38bdf8; font-family: 'PocketGull Mono', monospace;">
+                      DOSE: 500 mg Amoxicillin (0̸ Slashed / 1-l-I Disambiguated)
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Typographic & Clinical Safeguards Rules (Wikipedia & ISMP Grounded) -->
+                <div style="margin-bottom: 14px;">
+                  <div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--text-muted); margin-bottom: 6px;">
+                    Wikipedia Grounding &amp; Typographic Safeguards
+                  </div>
+                  <ul id="hudRulesList" style="margin: 0; padding-left: 18px; font-size: 12px; color: var(--text-muted); line-height: 1.5;">
+                    <li><strong>Rotational Invariance</strong>: Syllabic vowels rotate around optical mass center (ᐱ, ᐳ, ᐸ, ᐯ).</li>
+                    <li><strong>UNDRIP Accord</strong>: SIL OFL 1.1 unencumbered use for sovereign First Nations health systems.</li>
+                    <li><strong>Bilingual French/English</strong>: High-clearance diacritics prevent acute/grave accent clipping on patient armbands.</li>
+                  </ul>
+                  <!-- Doc Drill & UNDRIP Evidence Actions -->
+                  <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
+                    <button id="hudDocDrillBtn" type="button" style="font-size: 11px; font-weight: 700; background: rgba(6, 182, 212, 0.15); border: 1px solid var(--cyan); color: var(--cyan); border-radius: 4px; padding: 4px 10px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+                      🔬 Doc Drill Evidence
+                    </button>
+                    <a id="hudUndripAccordLink" href="https://www.un.org/development/desa/indigenouspeoples/declaration-on-the-rights-of-indigenous-peoples.html" target="_blank" rel="noopener noreferrer" style="font-size: 11px; font-weight: 700; color: #f59e0b; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 4px; padding: 4px 10px; text-decoration: none; display: none; align-items: center; gap: 4px;" title="United Nations Declaration on the Rights of Indigenous Peoples">
+                      🪶 UNDRIP Accord (UN DESA) ↗
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 1-Click CSS/JSON Prescription Generator -->
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--cyan);">
+                    Tailored EHR Stylesheet Prescription
+                  </div>
+                  <button id="btnCopyPrescription" style="font-size: 11px; background: rgba(6, 182, 212, 0.2); border: 1px solid var(--cyan); color: var(--cyan); border-radius: 4px; padding: 2px 8px; cursor: pointer; font-weight: 600;">
+                    📋 Copy CSS
+                  </button>
+                </div>
+                <pre id="hudCssCode" tabindex="0" aria-label="Generated CSS Prescription Code" style="margin: 0; background: #03060a; border: 1px solid var(--card-border); border-radius: 6px; padding: 10px; font-size: 11px; font-family: 'PocketGull Mono', monospace; color: #38bdf8; overflow-x: auto; max-height: 110px; line-height: 1.45;"></pre>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
       </div>
     </section>
 
@@ -6912,6 +7270,18 @@
           chips: ['Try Braille Transcriber', 'What is 8-dot computer Braille?', 'ISO/TR 11548 spec'],
           content: '<h3>1. Full 256 Tactile Codepoints</h3><p>PocketGull embeds the complete 256-glyph Unicode Braille Patterns block (<code>U+2800</code> to <code>U+28FF</code>) across all superfamily weights.</p><h3>2. Physical Hardware Geometry</h3><p>Conforms to ISO/TR 11548 standards: dot center distance is 2.5 mm and cell pitch is 6.0 mm. On bedside thermal labels and high-resolution surgical tablets, tactile dots render with optical spherical caps for dual tactile/visual legibility.</p>'
         },
+        undrip: {
+          title: 'UNDRIP Accord & Sovereign Indigenous Typography',
+          category: 'INDIGENOUS SOVEREIGNTY',
+          citation: 'UN Declaration on the Rights of Indigenous Peoples (A/RES/61/295)',
+          chips: [
+            'Articles 11, 13, 14, 24, 31',
+            'Salish & Osage GPOS Mark Anchors',
+            'OCAP® & CARE Data Sovereignty',
+            'Pan-Tribal EHR & Telehealth Parity'
+          ],
+          content: '<h3>I. The UNDRIP Typographic Mandate</h3><p>In accordance with Articles 11, 13, 14, 24, and 31 of the <strong>United Nations Declaration on the Rights of Indigenous Peoples (UNDRIP)</strong>, PocketGull establishes that digital typography is an instrument of human rights and linguistic self-determination:</p><ul><li><strong>Article 13 (Language &amp; Writing Systems):</strong> Indigenous peoples have the right to revitalize, use, develop, and transmit their languages and writing systems. PocketGull ensures zero forced Latinization across all styles.</li><li><strong>Article 14 (Education Parity):</strong> Unencumbered SIL OFL 1.1 open licensing guarantees tribal immersion schools, language nests, and universities can publish without licensing barriers.</li><li><strong>Article 24 (Right to Health &amp; Healing):</strong> Indigenous peoples have the right to equal access to all health services. Non-clipping dosage numerals and unambiguous orthographies protect patient safety in rural community clinics.</li><li><strong>Articles 11 &amp; 31 (Cultural Heritage &amp; IP):</strong> Indigenous peoples maintain ownership and protection of traditional cultural heritage.</li></ul><h3>II. Technical Implementations in PocketGull</h3><ul><li><strong>Coast Salish / Lushootseed (dxʷləšucid):</strong> GPOS <code>mark</code> and <code>mkmk</code> anchors eliminate the +322 UPM ejective-labializer displacement defect (e.g. <code>x̌ʷ</code>, <code>q̓ʷ</code>, <code>k̓ʷ</code>).</li><li><strong>Osage Nation (Wahzhazhe):</strong> Complete 72-glyph SMP block (<code>U+104B0–U+104FB</code>) natively mapped in Format 12 cmap tables across all cuts.</li><li><strong>Diné Bizaad (Navajo):</strong> Stacked high-tone nasal vowels (<code>ą́, ę́, į́, ǫ́</code>) with &ge; 110 UPM clearance and barred <code>Ł, ł</code>.</li><li><strong>Canadian Aboriginal Syllabics:</strong> Full 640-glyph Unicode block (<code>U+1400–U+167F</code>) for Inuktitut and Cree with true rotational symmetry.</li><li><strong>Neo-Tifinagh (Amazigh):</strong> <code>U+2D30–U+2D7F</code> honoring historical North African epigraphic balance.</li><li><strong>Guarani:</strong> Full nasal tildes (<code>ã, ẽ, ĩ, õ, ũ, ỹ, g̃</code>) and first-class puso apostrophe (<code>ʼ</code>).</li></ul><h3>III. First Nations OCAP® &amp; CARE Principles</h3><p>Health data and lexical assets remain under sovereign tribal authority: Ownership, Control, Access, and Possession (OCAP®) with Collective Benefit, Authority to Control, Responsibility, and Ethics (CARE). PocketGull operates 100% locally with zero cloud telemetry egress.</p><p><a href="https://www.un.org/development/desa/indigenouspeoples/declaration-on-the-rights-of-indigenous-peoples.html" target="_blank" rel="noopener noreferrer" style="color: var(--cyan); text-decoration: underline;">📜 Read the Official UN Declaration (A/RES/61/295) &rarr;</a></p>'
+        },
         tek: {
           title: 'Traditional Ecological Knowledge (TEK) & UNDRIP Accord',
           category: 'INDIGENOUS SOVEREIGNTY',
@@ -7028,6 +7398,7 @@
         if (lower.includes('noto') || lower.includes('tofu')) return DOC_DRILL_KNOWLEDGE['noto'];
         if (lower.includes('ember') || lower.includes('dalton') || lower.includes('maag')) return DOC_DRILL_KNOWLEDGE['ember'];
         if (lower.includes('pair') || lower.includes('data card') || lower.includes('healthsheet') || lower.includes('transparency')) return DOC_DRILL_KNOWLEDGE['pair'];
+        if (lower.includes('undrip') || lower.includes('indigenous') || lower.includes('sovereign') || lower.includes('tribal') || lower.includes('salish') || lower.includes('osage') || lower.includes('cherokee') || lower.includes('navajo') || lower.includes('inuit') || lower.includes('cree') || lower.includes('tifinagh') || lower.includes('amazigh') || lower.includes('guarani') || lower.includes('nko') || lower.includes('adlam') || lower.includes('tek') || lower.includes('ocap')) return DOC_DRILL_KNOWLEDGE['undrip'];
         if (lower.includes('phinney') || lower.includes('forensic') || lower.includes('ots')) return DOC_DRILL_KNOWLEDGE['phinney'];
 
         return {
@@ -7436,10 +7807,17 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
             <p>PocketGull directly eliminates these failure modes by enforcing optical invariants at the font binary level: numbers cannot blur into letters, trailing zeros are blocked, decimal points align vertically, and reading fatigue is minimized through bio-rhythmic pacing.</p>`;
           }
           // 25. TRADITIONAL ECOLOGICAL KNOWLEDGE (TEK) & UNDRIP SOVEREIGNTY
-          else if (qLower.includes('tek') || qLower.includes('undrip') || qLower.includes('indigenous') || qLower.includes('tribal') || qLower.includes('syllabics') || qLower.includes('chinuk')) {
-            answer = `<h4 style="color: var(--cyan); margin-bottom: 6px; font-size: 0.9rem;">🌿 Traditional Ecological Knowledge (TEK) &amp; UNDRIP Accord</h4>
-            <p>PocketGull enforces sovereign typographic equity under UNDRIP Articles 11, 13, 14, 24, and 31. It provides zero-tofu coverage for all 12 Indian Health Service (IHS) jurisdictions, including Diné Bizaad (nasals ą́, ę́, į́, ǫ́, barred Ł/ł), Lushootseed (schwa ə, barred lambda ƛ, lateral fricative ɬ, uvular x̌), 640 Canadian Aboriginal Syllabics (Inuktitut/Cree), and 143 Chinuk Pipa shorthand glyphs.</p>
-            <p>All clinical herbal telemetry adheres to the First Nations OCAP® principles and the CARE Principles for Indigenous Data Governance.</p>`;
+          else if (qLower.includes('tek') || qLower.includes('undrip') || qLower.includes('indigenous') || qLower.includes('sovereign') || qLower.includes('tribal') || qLower.includes('syllabics') || qLower.includes('chinuk') || qLower.includes('article') || qLower.includes('salish') || qLower.includes('osage') || qLower.includes('cherokee') || qLower.includes('navajo') || qLower.includes('inuit') || qLower.includes('cree') || qLower.includes('guarani') || qLower.includes('amazigh') || qLower.includes('tifinagh') || qLower.includes('nko') || qLower.includes('ocap')) {
+            answer = `<h4 style="color: var(--cyan); margin-bottom: 6px; font-size: 0.9rem;">🪶 UNDRIP Accord &amp; Indigenous Typographic Sovereignty</h4>
+            <p>PocketGull enforces sovereign typographic equity under <strong>UNDRIP Articles 11, 13, 14, 24, and 31</strong>:</p>
+            <ul>
+              <li><strong>Article 13 (Language Revitalization):</strong> Uncompromised, zero-tofu rendering for all 574+ federally recognized tribes and 12 Indian Health Service (IHS) administrative areas.</li>
+              <li><strong>Article 14 (Educational Parity):</strong> Unencumbered SIL OFL 1.1 open licensing for tribal immersion schools and language preservation centers.</li>
+              <li><strong>Article 24 (Right to Health):</strong> Life-critical disambiguation on clinic prescription labels in community health centers.</li>
+              <li><strong>Technical Precision:</strong> GPOS mark/mkmk anchors for Salish (x̌ʷ, q̓ʷ), Format 12 cmap for Osage (𐒰𐓘𐓲𐓟), 640 Canadian Aboriginal Syllabics (ᐃᓄᒃᑎᑐᑦ, ᓀᐦᐃᔭᐍウィン), Cherokee bicameral Syllabary, Diné stacked nasals (ą́, ę́, į́, ǫ́), Amazigh Neo-Tifinagh (ⵣ), Guarani nasal tildes (ã, ẽ, ĩ, õ, ũ, ỹ, g̃), and West African N'Ko / Adlam.</li>
+            </ul>
+            <p>All clinic telemetry adheres to the First Nations OCAP® principles and the CARE Principles for Indigenous Data Governance with zero cloud egress.</p>
+            <p><a href="https://www.un.org/development/desa/indigenouspeoples/declaration-on-the-rights-of-indigenous-peoples.html" target="_blank" rel="noopener noreferrer" style="color: #f59e0b; text-decoration: underline;">📜 Official United Nations UNDRIP Declaration &rarr;</a></p>`;
           }
           // 26. GEMINI API KEY INFO
           else if (qLower.includes('gemini') || qLower.includes('api key')) {
@@ -7536,7 +7914,952 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
       window.activateMath = activateMath;
       window.activateWaterfall = activateWaterfall;
 
+      // =========================================================================
+      // 16. Interactive Global Typographic & Clinical Health World Map Studio
+      // =========================================================================
+      const GLOBAL_HEALTH_ATLAS = [
+        {
+          id: 'can',
+          name: 'Canada',
+          flag: '🇨🇦',
+          region: 'americas',
+          x: 210, y: 130,
+          authority: 'HEALTH CANADA',
+          pop: '40.5M • Bilingual + Indigenous',
+          scriptFamily: 'Latin + Canadian Aboriginal Syllabics (Inuktitut / Cree)',
+          langTag: 'locl: CAN / cr / iu',
+          phraseNative: 'ᐊᓂᕐᓂᖃᕐᓂᖅ • ᐋᓐᓂᐊᖃᕐᓇᙱᑦᑐᓕᕆᓂᖅ',
+          phraseTranslation: 'Vital Breathing • Healthcare Delivery (Inuktitut Syllabics)',
+          dosageAlert: 'DOSE: 500 mg Amoxicillin (0̸ Slashed / 1-l-I Disambiguated)',
+          rules: [
+            '<strong>Rotational Invariance</strong>: Syllabic vowels rotate around optical mass center (ᐱ, ᐳ, ᐸ, ᐯ).',
+            '<strong>UNDRIP Accord</strong>: SIL OFL 1.1 unencumbered use for sovereign First Nations health systems.',
+            '<strong>Bilingual Health Labeling</strong>: High-clearance diacritics prevent acute/grave accent clipping on French/English wristbands.'
+          ],
+          css: `/* PocketGull Health Canada Clinical Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+:root {
+  --ehr-font-family: 'PocketGull', 'PocketGull Syllabics', -apple-system, sans-serif;
+  --ehr-mono-family: 'PocketGull Mono', monospace;
+}
+
+.clinical-chart, .rx-dosage {
+  font-family: var(--ehr-font-family);
+  font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1; /* ISMP Disambiguation */
+  font-variant-numeric: tabular-nums slashed-zero;
+}`
+        },
+        {
+          id: 'usa',
+          name: 'United States',
+          flag: '🇺🇸',
+          region: 'americas',
+          x: 200, y: 190,
+          authority: 'FDA / ISMP SAFE 500',
+          pop: '340M • Multilingual Telemetry',
+          scriptFamily: 'Latin (English / Spanish) + Navajo / Cherokee',
+          langTag: 'locl: USA / es-US / nv',
+          phraseNative: 'Hózhǫ́ náhásdlį́į́ʼ • Urgent Care 24/7',
+          phraseTranslation: 'Restoration of Health & Harmony (Navajo / Diné Bizaad)',
+          dosageAlert: 'DOSE: 10 mg HYDROcodone vs OxyCODONE (Tall Man Lettering)',
+          rules: [
+            '<strong>ISMP Life-Critical Standards</strong>: Mandates slashed zero (0̸) and curved lowercase (l) to prevent fatal 1/l/I collisions.',
+            '<strong>Navajo Nasal Diacritics</strong>: High clearance for ogonek + acute (ą́, ę́, į́, ǫ́) without thermal label clipping.',
+            '<strong>FDA Tall Man Lettering</strong>: Optimized weight ratio between lower and upper case in compound medication names.'
+          ],
+          css: `/* PocketGull US FDA & ISMP Clinical Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+.rx-label, .telemetry-readout {
+  font-family: 'PocketGull', 'PocketGull Mono', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1;
+  letter-spacing: 0.02em; /* Louise Sloan 5:1 legibility */
+}`
+        },
+        {
+          id: 'gbr',
+          name: 'United Kingdom',
+          flag: '🇬🇧',
+          region: 'europe',
+          x: 450, y: 130,
+          authority: 'NHS DIGITAL / MHRA',
+          pop: '68M • NHS Single Health Spine',
+          scriptFamily: 'Latin (English, Welsh, Scots Gaelic)',
+          langTag: 'locl: GBR / cy',
+          phraseNative: 'Iechyd Da • Emergency Department (A&E)',
+          phraseTranslation: 'Good Health (Welsh / Cymraeg) • National Health Service',
+          dosageAlert: 'DOSE: 2.5 mg Levothyroxine (Strict Decimal Period Point)',
+          rules: [
+            '<strong>NHS Digital Accessibility</strong>: Sloan 5:1 optotype ratio ensures sub-second acuity on mobile triage tablets.',
+            '<strong>Welsh Circumflex Diacritics</strong>: Full headroom for ŵ, ŷ, â, ê, î, ô, û prevents clipping in Welsh NHS regional charts.',
+            '<strong>DirectWrite & ClearType Rendering</strong>: GASP table bytecode tuned for legacy NHS Windows terminals.'
+          ],
+          css: `/* PocketGull NHS Digital Spine Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+.nhs-patient-record {
+  font-family: 'PocketGull', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1;
+  text-rendering: optimizeLegibility;
+}`
+        },
+        {
+          id: 'deu',
+          name: 'Germany / EU',
+          flag: '🇩🇪',
+          region: 'europe',
+          x: 495, y: 145,
+          authority: 'BfArM / EMA EUROPE',
+          pop: '84M • DIN 1450 Readability',
+          scriptFamily: 'Latin Extended (German, French, Polish, Czech)',
+          langTag: 'locl: DEU / fra / pol',
+          phraseNative: 'Notaufnahme • Notfallmedizin • Intensiv',
+          phraseTranslation: 'Emergency Department • Intensive Care Unit (German)',
+          dosageAlert: 'DOSE: 0,5 mg Digoxin (DIN Comma Decimal Alignment)',
+          rules: [
+            '<strong>DIN 1450 Optical Legibility</strong>: Open apertures on c, e, s prevent character confusion under photopic glare.',
+            '<strong>German Capital Sharp S (ẞ)</strong>: Distinctive uppercase ẞ with top-corner arc disambiguates legal medical records.',
+            '<strong>EMA Cross-Border Exchange</strong>: Full CE diacritic support (ä, ö, ü, ß, é, è, ł, č) across EU cross-border patient passports.'
+          ],
+          css: `/* PocketGull EMA / DIN 1450 Medical Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+.krankenakte, .medikamentenplan {
+  font-family: 'PocketGull', sans-serif;
+  font-feature-settings: "cv08" 1, "ss02" 1;
+  font-variant-numeric: tabular-nums;
+}`
+        },
+        {
+          id: 'rou',
+          name: 'Romania',
+          flag: '🇷🇴',
+          region: 'europe',
+          x: 540, y: 165,
+          authority: 'ANMDMR / EU HEALTH',
+          pop: '19M • Extended Eastern Latin',
+          scriptFamily: 'Latin (Romanian Comma-Below)',
+          langTag: 'locl: ROM (Ș ș / Ț ț)',
+          phraseNative: 'Secția de Terapie Intensivă • Sănătate',
+          phraseTranslation: 'Intensive Care Unit • Health (Romanian)',
+          dosageAlert: 'DOSE: 250 mg Ceftriaxonă (Comma-Below Accent Clearance)',
+          rules: [
+            '<strong>Romanian locl Invariant</strong>: Strict comma-below diacritic rendering (Ș, ș, Ț, ț) instead of incorrect Turkish cedillas (Ş, ş, Ţ, ţ).',
+            '<strong>Zero Collision on Low-Cost Hardware</strong>: 110 UPM descent clearance guarantees comma marks remain visible on low-DPI patient wristband printers.',
+            '<strong>OpenType Automation</strong>: Automatic locl tag mapping prevents database identity errors in national EHR registries.'
+          ],
+          css: `/* PocketGull Romanian Clinical EHR Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+:lang(ro) {
+  font-family: 'PocketGull', sans-serif;
+  font-language-override: "ROM";
+  font-feature-settings: "locl" 1, "cv08" 1;
+}`
+        },
+        {
+          id: 'sau',
+          name: 'Saudi Arabia & MENA',
+          flag: '🇸🇦',
+          region: 'mena',
+          x: 605, y: 235,
+          authority: 'SFDA / MOH SAUDI',
+          pop: '36M • Arabic Healthcare Network',
+          scriptFamily: 'Arabic (Authentic Qalam Reed-Pen)',
+          langTag: 'locl: ARA / ar-SA',
+          phraseNative: 'شِفَاء • رِعَايَة • طِوَارِئ • سَلَامَة',
+          phraseTranslation: 'Healing • Care • Emergency • Safety (Arabic)',
+          dosageAlert: 'DOSE: ٥٠٠ ملغ باراسيتامول (Arabic-Indic Numeral Clarity)',
+          rules: [
+            '<strong>Reed-Pen Nuqṭa Angle</strong>: Diacritical dots honor authentic 45°–60° calligraphic diamond angle, avoiding sterile circular blobs.',
+            '<strong>Kashida Baseline Continuity</strong>: Smooth cursive joining ensures clinical drug terms do not break across syllables.',
+            '<strong>Numeral Disambiguation</strong>: Clear optical distinction between Arabic zero (٠) and five (٥) to prevent 10x dosage fatalities.'
+          ],
+          css: `/* PocketGull Arabic & MENA Healthcare Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+[dir="rtl"], :lang(ar) {
+  font-family: 'PocketGull Arabic', 'PocketGull', 'Noto Sans Arabic', sans-serif;
+  line-height: 1.7;
+  font-feature-settings: "cv08" 1;
+}`
+        },
+        {
+          id: 'ind',
+          name: 'India & South Asia',
+          flag: '🇮🇳',
+          region: 'asia',
+          x: 700, y: 255,
+          authority: 'CDSCO / AYUSH / ABDM',
+          pop: '1.4B • Ayushman Bharat Digital Mission',
+          scriptFamily: 'Indic (Devanagari, Tamil, Telugu, Bengali)',
+          langTag: 'locl: HIN / ben / tam / tel',
+          phraseNative: 'स्वास्थ्य • आशा • जीवन रक्षा • आरोग्य',
+          phraseTranslation: 'Health • Hope • Life Protection • Wellness (Devanagari)',
+          dosageAlert: 'DOSE: 650 mg Paracetamol (Shirorekha Cap-Height Align)',
+          rules: [
+            '<strong>Shirorekha Headline Balance</strong>: Top hanging bar aligns with Latin cap-height (y = 700 UPM) for seamless bilingual charts.',
+            '<strong>Conjunct Ligature Integrity</strong>: Critical clinical terms in Hindi, Tamil, and Bengali render without glyph fragmentation.',
+            '<strong>ABDM Health Card Optimization</strong>: High optical contrast Sloan ratios ensure QR-code patient cards remain legible after heavy wear.'
+          ],
+          css: `/* PocketGull Ayushman Bharat Digital Mission Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+.abdm-health-record {
+  font-family: 'PocketGull', 'Noto Sans Devanagari', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1;
+  font-variant-numeric: tabular-nums;
+}`
+        },
+        {
+          id: 'jpn',
+          name: 'Japan',
+          flag: '🇯🇵',
+          region: 'asia',
+          x: 855, y: 195,
+          authority: 'PMDA / MHLW JAPAN',
+          pop: '124M • High-Density Geriatric EHR',
+          scriptFamily: 'CJK (Kanji, Hiragana, Katakana) + Full-Width Latin',
+          langTag: 'locl: JPN / ja',
+          phraseNative: '救急医療 • 集中治療室 • 回復',
+          phraseTranslation: 'Emergency Medicine • ICU • Recovery (Japanese)',
+          dosageAlert: 'DOSE: 20 mg アトルバスタチン (Half/Full-Width Monospace)',
+          rules: [
+            '<strong>1000 UPM Em-Box Harmony</strong>: Latin optotypes align with standard square CJK ideographic grid without vertical clipping.',
+            '<strong>Geriatric Readability</strong>: High optical clarity Sloan ratios assist elderly patients reading pharmaceutical blister packs.',
+            '<strong>Kana-Latin Optical Weight</strong>: Fineliner and Bold weights maintain consistent ink density across mixed Japanese/English telemetry.'
+          ],
+          css: `/* PocketGull PMDA Japan Healthcare Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+:lang(ja) {
+  font-family: 'PocketGull', 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1;
+  letter-spacing: 0.04em;
+}`
+        },
+        {
+          id: 'bra',
+          name: 'Brazil & Latin America',
+          flag: '🇧🇷',
+          region: 'americas',
+          x: 320, y: 380,
+          authority: 'ANVISA / SUS BRASIL',
+          pop: '215M • Sistema Único de Saúde (SUS)',
+          scriptFamily: 'Latin (Portuguese, Spanish, Guarani, Tupi)',
+          langTag: 'locl: BRA / pt-BR / gn',
+          phraseNative: 'Saúde Pública • Emergência SUS • Cuidado',
+          phraseTranslation: 'Public Healthcare • SUS Emergency • Care (Portuguese)',
+          dosageAlert: 'DOSE: 1 g Dipirona (Thermal Wristband High Clearance)',
+          rules: [
+            '<strong>Guarani Nasal Tildes</strong>: Complete support for nasal vowels (ã, ẽ, ĩ, õ, ũ, ỹ, g̃) without diacritic clipping in indigenous health clinics.',
+            '<strong>SUS Thermal Wristband Safety</strong>: Slashed zero (0̸) prevents dosage misinterpretation on humid thermal printer rolls.',
+            '<strong>Cedilla & Tilde Optical Balance</strong>: Hand-tuned marker radii ensure ç and ã do not clog with ink on absorbent cardstock.'
+          ],
+          css: `/* PocketGull SUS Brasil Healthcare Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+.prontuario-sus {
+  font-family: 'PocketGull', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
+  font-variant-numeric: tabular-nums slashed-zero;
+}`
+        },
+        {
+          id: 'sgp',
+          name: 'Singapore',
+          flag: '🇸🇬',
+          region: 'asia',
+          x: 775, y: 310,
+          authority: 'HSA / MOH SINGAPORE',
+          pop: '5.9M • 4-Language Healthcare Parity',
+          scriptFamily: 'Quad-Script (Latin, Chinese Hanzi, Malay, Tamil)',
+          langTag: 'locl: SGP / en / ms / zh / ta',
+          motto: 'Majulah Singapura • Forward Singapore',
+          phraseNative: 'Kesihatan • 健康 • சுகாதாரம் • Health',
+          phraseTranslation: 'Health & Vitality across 4 Official Languages',
+          dosageAlert: 'DOSE: 500 mg Metformin (Quad-Linguistic Prescription)',
+          rules: [
+            '<strong>Quad-Linguistic Parity</strong>: Standard 1000 UPM em-square ensures Latin, Hanzi, and Tamil align seamlessly on polyclinic kiosks.',
+            '<strong>Dense Layout Precision</strong>: High-contrast stroke counters maintain optotypic acuity on high-density mobile health apps.',
+            '<strong>HSA Patient Safeguards</strong>: Strict ISMP tall-man distinction prevents fatal look-alike sound-alike drug mix-ups.'
+          ],
+          css: `/* PocketGull Singapore HSA Quad-Language Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+.sg-health-hub {
+  font-family: 'PocketGull', 'Noto Sans CJK SC', 'Noto Sans Tamil', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
+  font-variant-numeric: tabular-nums;
+}`
+        },
+        {
+          id: 'mlt',
+          name: 'Malta',
+          flag: '🇲🇹',
+          region: 'europe',
+          x: 495, y: 195,
+          authority: 'HEALTHCARE SERVICES MALTA',
+          pop: '535K • Semitic-Romance Synthesis',
+          scriptFamily: 'Latin (Maltese Barred ħ, Dotted ċ ġ ż)',
+          langTag: 'locl: MLT / mt',
+          motto: 'Virtute et Constantia • Strength & Consistency',
+          phraseNative: 'Saħħa • Sptar Mater Dei • Kura',
+          phraseTranslation: 'Health • Mater Dei Hospital • Care (Maltese)',
+          dosageAlert: 'DOSE: 250 mg Cefuroxime (Barred ħ & Dotted ż Clearance)',
+          rules: [
+            '<strong>Barred Consonant Aperture</strong>: Horizontal crossbar on ħ and Ħ maintains >= 1.4x stroke aperture for thermal readability.',
+            '<strong>Diacritical Dot Centering</strong>: High-precision centered tittle dots on ċ, ġ, and ż prevent ink clotting on hospital wristbands.',
+            '<strong>National EHR Standardization</strong>: Full locl: MLT support for Mater Dei Hospital digital patient registries.'
+          ],
+          css: `/* PocketGull Maltese National Health Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+:lang(mt) {
+  font-family: 'PocketGull', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
+  letter-spacing: 0.02em;
+}`
+        },
+        {
+          id: 'isl',
+          name: 'Iceland',
+          flag: '🇮🇸',
+          region: 'europe',
+          x: 410, y: 65,
+          authority: 'ICELANDIC MEDICINES AGENCY (Lyfjastofnun)',
+          pop: '390K • Nordic Preservation',
+          scriptFamily: 'Latin (Icelandic Eth ð, Thorn þ, Æ æ, Ö ö)',
+          langTag: 'locl: ISL / is',
+          motto: 'Með lögum skal land byggja • With Law Shall Land Be Built',
+          phraseNative: 'Heilsugæslan • Bráðamóttaka • Öryggi',
+          phraseTranslation: 'Primary Healthcare • Emergency Room • Safety (Icelandic)',
+          dosageAlert: 'DOSE: 100 mg Parasetamól (Eth & Thorn Silhouette Clarity)',
+          rules: [
+            '<strong>Archaic Rune-Derived Characters</strong>: Distinctive curved ascender on Thorn (Þ, þ) and crossbar on Eth (Ð, ð) eliminate stroke collisions.',
+            '<strong>High-Latitude Photopic Contrast</strong>: Optimized Sloan 5:1 luminance ratios maintain reading speed in arctic winter low-light settings.',
+            '<strong>Nordic e-Health Interoperability</strong>: Zero-CLS metric parity across Icelandic and Scandinavian EHR databases.'
+          ],
+          css: `/* PocketGull Icelandic Healthcare Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+:lang(is) {
+  font-family: 'PocketGull', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1;
+}`
+        },
+        {
+          id: 'rwa',
+          name: 'Rwanda',
+          flag: '🇷🇼',
+          region: 'mena',
+          x: 560, y: 320,
+          authority: 'RWANDA FDA / MOH',
+          pop: '14M • Digital Health Leader (Kinyarwanda)',
+          scriptFamily: 'Latin Extended (Kinyarwanda, French, English, Swahili)',
+          langTag: 'locl: RWA / rw',
+          motto: 'Ubumwe, Umurimo, Gukunda Igihugu • Unity, Work, Patriotism',
+          phraseNative: 'Ubuzima • Ubuvuzi Bwihuse • Kwivuza',
+          phraseTranslation: 'Health • Emergency Medical Care • Recovery (Kinyarwanda)',
+          dosageAlert: 'DOSE: 20 mg Artemether (Rural Drone Health Delivery)',
+          rules: [
+            '<strong>Drone & Field Triage Optimization</strong>: High optical acuity enables field doctors to read drug packs under harsh equatorial sunlight.',
+            '<strong>Ultra-Light SMoE Delivery</strong>: 15–25 KB subset saves emergency satellite bandwidth for solar-powered rural clinics.',
+            '<strong>East African Community Parity</strong>: Harmonized typographic rhythm across Kinyarwanda, Swahili, and French medical records.'
+          ],
+          css: `/* PocketGull Rwanda MOH & Digital Health Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+.ubuzima-record {
+  font-family: 'PocketGull', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
+}`
+        },
+        {
+          id: 'jam',
+          name: 'Jamaica & Caribbean',
+          flag: '🇯🇲',
+          region: 'americas',
+          x: 245, y: 265,
+          authority: 'CARPHA / MOHW JAMAICA',
+          pop: '2.8M • Caribbean Community (CARICOM)',
+          scriptFamily: 'Latin (English, Jamaican Patois)',
+          langTag: 'locl: JAM / jam',
+          motto: 'Out of Many, One People',
+          phraseNative: 'Good Health &amp; Strength • Clinic Care',
+          phraseTranslation: 'Community Wellness • Caribbean Public Health Agency',
+          dosageAlert: 'DOSE: 500 mg Amoxicillin (High Humidity Resilient)',
+          rules: [
+            '<strong>Tropical Humidity Resilience</strong>: Felt-marker 25 UPM fillets prevent ink bleeding on thermal pharmacy prescription rolls in humid clinics.',
+            '<strong>Sloan 5:1 Community Legibility</strong>: Calibrated for elderly clinic attendees on outpatient prescription instructions.',
+            '<strong>CARPHA Island Interoperability</strong>: Unified typographic baseline across all CARICOM member territories.'
+          ],
+          css: `/* PocketGull CARPHA / Jamaica MOHW Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+.caribbean-rx-label {
+  font-family: 'PocketGull', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
+}`
+        },
+        {
+          id: 'sal',
+          name: 'Coast Salish & Lushootseed',
+          flag: '🌊',
+          region: 'indigenous',
+          subRegion: 'americas',
+          x: 135, y: 180,
+          authority: 'UNDRIP ACCORD / SALISHAN HEALTH',
+          pop: 'Coast Salish Nations • Salish Sea Basin',
+          scriptFamily: 'Salishan Latin (Combining Marks & GPOS Anchors)',
+          langTag: 'locl: SAL / dxʷləšucid',
+          motto: 'ʔiɬ tə swatixʷtət • Our Land, Our Life',
+          phraseNative: 'ʔəyʔ šxʷəli • x̌ʷəl̕č (Good Breath / Spirit • Salish Sea)',
+          phraseTranslation: 'Holistic Wellness • Zero Colliding Combining Marks',
+          dosageAlert: 'DISAMBIGUATION: x̌ʷ vs q̓ʷ optical clearance, ʔ glottal stop',
+          rules: [
+            '<strong>UNDRIP Article 13 &amp; 14 Sovereignty</strong>: First-class glyph treatment for phonetic apostrophe/glottal stop (ʔ, ʡ) and barred/ejective consonants without borrowing Latin substitutes.',
+            '<strong>Zero-Collision GPOS mark/mkmk Anchors</strong>: Stacking caron-hachek (x̌) and labializer (ʷ) eliminates the +322 UPM rightward displacement error where the ejective comma collides with the labializer.',
+            '<strong>Sloan Optotype Ratio for Elder Care</strong>: High-contrast 5:1 Sloan ratios protect elders reading clinic prescription labels in community health centers.'
+          ],
+          css: `/* PocketGull Coast Salish / Lushootseed Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+.salish-clinic-label {
+  font-family: 'PocketGull', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1, "mark" 1, "mkmk" 1;
+}`
+        },
+        {
+          id: 'osa',
+          name: 'Osage Nation (Wahzhazhe)',
+          flag: '𐒰',
+          region: 'indigenous',
+          subRegion: 'americas',
+          x: 195, y: 215,
+          authority: 'WAHZHAZHE HEALTH / OSAGE CONGRESS',
+          pop: '25,000+ Citizens • Osage Nation Reservation',
+          scriptFamily: 'Osage Script (U+104B0–U+104FB, Format 12 cmap)',
+          langTag: 'locl: OSA / osa',
+          motto: '𐒰𐓘𐓲𐓟 • Wahzhazhe Sovereignty',
+          phraseNative: '𐒻𐓟𐓤𐓘𐓲𐓟 𐓵𐓘𐓲𐓟 (Wahzhazhe Health & Vitality)',
+          phraseTranslation: 'Osage Nation Clinical & Public Health Standard',
+          dosageAlert: 'ORTHOGRAPHY: 𐒰𐓘𐓲𐓟 (Wahzhazhe) • 72 SMP Characters (U+104B0–U+104FB) Format 12 cmap',
+          rules: [
+            '<strong>SMP Format 12 Native cmap Support</strong>: All 72 Osage characters (U+104B0–U+104FB) natively mapped and drawn with felt-marker stroke integrity across all font cuts.',
+            '<strong>Bicameral Casing &amp; Accent Anchoring</strong>: Uppercase and lowercase pairs maintain strict optical x-height harmonization with Latin optotypes.',
+            '<strong>EHR &amp; Tribal Clinic Ready</strong>: Ensures zero tofu boxes on health portal records, prescription bottles, and tribal governance documents.'
+          ],
+          css: `/* PocketGull Osage Nation Healthcare Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+.osage-health-record {
+  font-family: 'PocketGull', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1;
+}`
+        },
+        {
+          id: 'inu',
+          name: 'Inuit Nunangat & Nunavut',
+          flag: '🍁',
+          region: 'indigenous',
+          subRegion: 'americas',
+          x: 235, y: 105,
+          authority: 'INUIT TAPIRIIT KANATAMI / NUNAVUT HEALTH',
+          pop: '70,000+ Inuit across 4 Arctic Regions',
+          scriptFamily: 'Unified Canadian Aboriginal Syllabics (U+1400–U+167F)',
+          langTag: 'locl: IKU / iu',
+          motto: 'ᐃᓅᖃᑎᒌᑦᓯᐊᕐᓂᖅ • Inuuqatigiittiarniq (Respecting People)',
+          phraseNative: 'ᐃᓅᓯᖃᑦᑎᐊᕐᓂᖅ • ᐋᓐᓂᐊᖃᕐᓇᙱᑦᑐᓕᕆᓂᖅ',
+          phraseTranslation: 'Good Life • Health & Well-being (Inuktitut)',
+          dosageAlert: 'ORTHOGRAPHY: ᐱ ᐳ ᐸ ᐯ (Rotational Symmetry) • ᐟ ᐠ ᐨ (Elevated Finals)',
+          rules: [
+            '<strong>Authentic Syllabic Rotational Symmetry</strong>: 90° and 180° rotations maintain exact stroke optical weight without distortion across i, u, a, and ai series.',
+            '<strong>Finals &amp; Super-Script Terminals</strong>: Elevated small terminals (ᐟ, ᐠ, ᐨ) preserve Sloan 5:1 legibility without blurring into primary syllabic glyphs.',
+            '<strong>Cold-Climate &amp; Field Clinic Contrast</strong>: High-contrast stroke junctions resist optical blooming on low-power outdoor telehealth screens across Nunavut.'
+          ],
+          css: `/* PocketGull Inuit Nunangat Syllabics Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+.inuit-rx-label {
+  font-family: 'PocketGull', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1;
+}`
+        },
+        {
+          id: 'cre',
+          name: 'Cree Nation (nēhiyawēwin)',
+          flag: '🪶',
+          region: 'indigenous',
+          subRegion: 'americas',
+          x: 185, y: 140,
+          authority: 'CREE BOARD OF HEALTH / JAMES BAY',
+          pop: '350,000+ Cree across Canada',
+          scriptFamily: 'Cree Syllabics & Standard Roman Orthography (SRO)',
+          langTag: 'locl: CRE / cr',
+          motto: 'ᒥᔪ ᐱᒫᑎᓯウィン • Miyo-pimātisiwin (The Good Life)',
+          phraseNative: 'ᒥᔪ ᐱᒫᑎᓯウィン • miyo-pimātisiwin',
+          phraseTranslation: 'Holistic Indigenous Health & Community Wholeness',
+          dosageAlert: 'ORTHOGRAPHY: ᒪ ᒣ ᒥ ᒧ (Syllabic Vowels) • ā, ē, ī, ō SRO Elevated Macrons',
+          rules: [
+            '<strong>Standard Roman Orthography (SRO) Macron Preservation</strong>: Long vowels (ā, ē, ī, ō) feature non-colliding elevated macrons with >= 110 UPM cap clearance.',
+            '<strong>Plains &amp; Woods Syllabic Balance</strong>: Optical center-of-mass tuning prevents dot diacritics (w-dot, vowel length) from disappearing at small print sizes.',
+            '<strong>Bilingual James Bay EHR Standard</strong>: Synchronized vertical metrics between Cree Syllabics and Latin prevent erratic line shifts in medical records.'
+          ],
+          css: `/* PocketGull Cree Health Board Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+.cree-health-chart {
+  font-family: 'PocketGull', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
+}`
+        },
+        {
+          id: 'chr',
+          name: 'Cherokee Nation (ᏣᎳᎩᎯ ᎠᏰᎵ)',
+          flag: '⭐',
+          region: 'indigenous',
+          subRegion: 'americas',
+          x: 220, y: 230,
+          authority: 'CHEROKEE NATION HEALTH SERVICES (CNHS)',
+          pop: '450,000+ Citizens • Tahlequah Sovereign Capital',
+          scriptFamily: 'Cherokee Syllabary (U+13A0–U+13FF, U+AB70–U+ABBF)',
+          langTag: 'locl: CHR / chr',
+          motto: 'ᎣᏏᏲ • ᎤᎵᎮᎵᏍᏗ • Osiyo & Peace',
+          phraseNative: 'ᏙᎯᏱ ᏄᏍᏛ ᎢᏳᎵᏍᏙᏗ (Good Health & Balance)',
+          phraseTranslation: 'Cherokee Nation Comprehensive Health Services',
+          dosageAlert: 'ORTHOGRAPHY: ᏣᎳᎩ Syllabary (U+13A0–U+13FF) • Bicameral Lowercase (U+AB70–U+ABBF)',
+          rules: [
+            '<strong>Sequoyah Syllabic Balance</strong>: Preserves the authentic 1821 felt-marker handwriting origins without mechanical warping into Latin typography.',
+            '<strong>Bicameral Lowercase Support (U+AB70–U+ABBF)</strong>: Full lowercase Cherokee support with matched stroke weights for EHR clinical body copy.',
+            '<strong>CNHS Health Informatics Parity</strong>: Zero character loss across Cherokee Nation hospital networks and outpatient pharmacy terminals.'
+          ],
+          css: `/* PocketGull Cherokee Nation Health Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+.cherokee-health-rx {
+  font-family: 'PocketGull', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1;
+}`
+        },
+        {
+          id: 'nav',
+          name: 'Navajo Nation (Diné Bikéyah)',
+          flag: '☀️',
+          region: 'indigenous',
+          subRegion: 'americas',
+          x: 165, y: 225,
+          authority: 'NAVAJO NATION DIV. OF HEALTH / IHS',
+          pop: '400,000+ Citizens • 27,000 sq mi Sovereign Nation',
+          scriptFamily: 'Navajo Latin (High-Tone & Nasal Ogonek Diacritics)',
+          langTag: 'locl: NAV / nv',
+          motto: 'Hózhǫ́ Náhásdlį́į́ʼ • Walk in Beauty & Wholeness',
+          phraseNative: 'Hózhǫ́ogo Iinaʼ • Kʼé (Walk in Beauty & Kinship)',
+          phraseTranslation: 'Harmonious Life & Relations • Diné Health Standard',
+          dosageAlert: 'DISAMBIGUATION: ł (barred l) vs t • ą́ / ę́ / į́ / ǫ́ stacked marks',
+          rules: [
+            '<strong>Stacked High-Tone Nasal Clearance (>= 110 UPM)</strong>: Acute accents stacked over ogonek-hooked vowels (ą́, ę́, į́, ǫ́) maintain zero ink collision under damp thermal print.',
+            '<strong>Barred Consonant Aperture (Ł, ł)</strong>: Crossbar optical aperture is 1.4x standard stroke width, eliminating confusion with \'t\' or \'l\' in emergency dosage scripts.',
+            '<strong>Hózhǫ́ Holistic Legibility</strong>: Designed for rural Diné clinics, elder community transport, and Indian Health Service mobile clinics.'
+          ],
+          css: `/* PocketGull Navajo Nation Clinical Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+.dine-clinic-rx {
+  font-family: 'PocketGull', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
+}`
+        },
+        {
+          id: 'ber',
+          name: 'Amazigh & Tamazight',
+          flag: 'ⵣ',
+          region: 'indigenous',
+          subRegion: 'mena',
+          x: 465, y: 240,
+          authority: 'IRCAM / NORTH AFRICAN PUBLIC HEALTH',
+          pop: '35M+ Imazighen across Tamazgha (North Africa)',
+          scriptFamily: 'Neo-Tifinagh (U+2D30–U+2D7F)',
+          langTag: 'locl: BER / zgh',
+          motto: 'ⵉⵎⴰⵣⵉⵖⵏ ⵉⵍⴻⵍⵍⵉⵢⵏ • Free Human Beings',
+          phraseNative: 'ⵜⴰⴷⵓⵙⵉ • ⵜⴰⵣⵎⴻⵔⵜ • ⵜⴰⴷⵓⵙⵉ ⵉ ⵡⴰⴽⴽ',
+          phraseTranslation: 'Health & Vitality for All • Authentic Tifinagh Geometry',
+          dosageAlert: 'ORTHOGRAPHY: ⵣ ⵢ ⴹ ⵟ (Neo-Tifinagh U+2D30–U+2D7F) • Sloan 5:1 Apertures',
+          rules: [
+            '<strong>Authentic Geometric Archetypes</strong>: Circular, bi-symmetrical, and crossbar primitives engineered to preserve historical North African epigraphic balance.',
+            '<strong>Equal-Aperture Legibility</strong>: Tifinagh letterforms (ⵢ, ⵣ, ⴹ, ⵟ) calibrated against Latin Sloan optotypes to ensure equal clarity on hospital triage charts.',
+            '<strong>Multi-Lingual Clinical Concordance</strong>: Harmonized cap-heights with French and Arabic for trilingual prescription pads across the Maghreb.'
+          ],
+          css: `/* PocketGull Amazigh / Tifinagh Healthcare Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+.tifinagh-clinic-label {
+  font-family: 'PocketGull', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1;
+}`
+        },
+        {
+          id: 'gug',
+          name: 'Guarani Nation (Avañe\'ẽ)',
+          flag: '🏹',
+          region: 'indigenous',
+          subRegion: 'americas',
+          x: 300, y: 420,
+          authority: 'GUARANI HEALTH COUNCIL / MERCOSUR',
+          pop: '12M+ Speakers across South America',
+          scriptFamily: 'Guarani Latin (Nasal Tildes: ã, ẽ, ĩ, õ, ũ, ỹ, g̃)',
+          langTag: 'locl: GUG / gn',
+          motto: 'Tekoporã • Living Well in Community',
+          phraseNative: 'Tesãirã • Tekoporã (Health for All • Community Wellbeing)',
+          phraseTranslation: 'Health for All • Community Wellbeing (Guarani)',
+          dosageAlert: 'ORTHOGRAPHY: ã, ẽ, ĩ, õ, ũ, ỹ, g̃ (Nasal Tildes) • Puso (ʼ) Consonant Status',
+          rules: [
+            '<strong>Nasal Tilde Harmony (ã, ẽ, ĩ, õ, ũ, ỹ, g̃)</strong>: Tilde diacritics maintain balanced optical weight and 100 UPM clearance over both vowels and g.',
+            '<strong>Glottal Puso (ʼ) Letter Status</strong>: The puso (U+02BC) is engineered as a first-class alphabetic consonant with full advance width rather than punctuation.',
+            '<strong>MERCOSUR Border Health Standard</strong>: Ensures seamless typographic legibility across bilingual Paraguayan and Brazilian clinic records.'
+          ],
+          css: `/* PocketGull Guarani Healthcare Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+.guarani-health-rx {
+  font-family: 'PocketGull', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
+}`
+        },
+        {
+          id: 'nqo',
+          name: 'Manding & Fulani (N’Ko & Adlam)',
+          flag: '📜',
+          region: 'indigenous',
+          subRegion: 'mena',
+          x: 445, y: 295,
+          authority: 'WAHO / N’KO ACADEMY',
+          pop: '40M+ Manding & Fulani Speakers (West Africa)',
+          scriptFamily: 'N’Ko (U+07C0–U+07FF) & Adlam (U+1E900–U+1E95F)',
+          langTag: 'locl: NQO / nqo / fuf',
+          motto: 'ߞߊ߲ ߞߘߐߕߊ • Uplift the Mother Tongue',
+          phraseNative: 'ߞߍ߲ߘߍߦߊ • ߝߙߍ • Kɛndɛya',
+          phraseTranslation: 'Health & Wellbeing • West African Indigenous Scripts',
+          dosageAlert: 'ORTHOGRAPHY: ߒߞߏ (N’Ko U+07C0–U+07FF) • 𞤀𞤣𞤤𞤢𞤥 (Adlam U+1E900–U+1E95F) • RTL Tone Anchors',
+          rules: [
+            '<strong>RTL Calligraphic Stroke Ductility</strong>: Right-to-left baseline flow honors authentic reed-pen stroke tapering and non-breaking ligatures.',
+            '<strong>Tone Diacritic Stacking</strong>: Clear 95 UPM vertical separation between base consonants and short/long tone accents prevents misreadings in clinical instructions.',
+            '<strong>Cross-Border WAHO Telemedicine</strong>: Empowers rural community health workers across Guinea, Mali, Côte d\'Ivoire, and Senegal.'
+          ],
+          css: `/* PocketGull West African Scripts Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+.nko-health-guide {
+  font-family: 'PocketGull', sans-serif;
+  direction: rtl;
+}`
+        },
+        {
+          id: 'uni',
+          name: 'Universal Access',
+          flag: '🌐',
+          region: 'universal',
+          x: 500, y: 310,
+          authority: 'ISO 11548 / WHO TELEMETRY',
+          pop: '8.1B • Global Accessibility & Telemetry',
+          scriptFamily: 'Unicode Braille (U+2800–U+28FF) + ASL + ICU Waveforms',
+          langTag: 'locl: UNI / ISO-11548',
+          motto: 'Nihil De Nobis, Sine Nobis • Nothing About Us Without Us',
+          phraseNative: '⠓⠑⠁⠇⠞⠓ • ⠎⠁⠋⠑⠞⠽ (Health • Safety)',
+          phraseTranslation: 'Tactile 8-Dot Braille • ISO/TR 11548 & ISO 17049 Standard',
+          dosageAlert: 'WAVEFORM: ╭─╮ sub-cell ECG telemetry & ICU box drawing',
+          rules: [
+            '<strong>ISO Standard Tactile Dome</strong>: r = 60 UPM, 2.5 mm dot pitch, grounded on baseline (y = 0) with zero floating cells.',
+            '<strong>Fixed 600 UPM Monospace</strong>: True rounded corners (╭, ╮, ╯, ╰) for flicker-free ICU vitals monitors.',
+            '<strong>Zero-Egress SMoE Subsetting</strong>: Rural field clinics download only 15–25 KB per script, preserving emergency satellite bandwidth.'
+          ],
+          css: `/* PocketGull Universal Tactile & ICU Telemetry Preset */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+.braille-signage, .icu-telemetry {
+  font-family: 'PocketGull Mono', 'PocketGull Braille', monospace;
+  font-size: 20px;
+  line-height: 1.25;
+}`
+        }
+      ];
+
+      function initWorldMapStudio() {
+        const svg = document.getElementById('worldMapSvg');
+        const pinLayer = document.getElementById('mapPinLayer');
+        const pillBar = document.getElementById('countryPillBar');
+        const hoverLabel = document.getElementById('mapHoverLabel');
+        const filterBtns = document.querySelectorAll('.map-filter-btn');
+        const btnCopy = document.getElementById('btnCopyPrescription');
+
+        if (!svg || !pinLayer || !pillBar) return;
+
+        let activeCountryId = 'can';
+
+        const mapContainer = document.getElementById('mapCanvasContainer');
+        const pavilionContainer = document.getElementById('vexillologicalPavilionContainer');
+        const flagGrid = document.getElementById('flagGalleryGrid');
+        const viewSwitchMap = document.getElementById('viewSwitchMap');
+        const viewSwitchPavilion = document.getElementById('viewSwitchPavilion');
+
+        let currentView = 'map';
+        let currentRegionFilter = 'all';
+
+        function renderPavilion(regionFilter = 'all') {
+          if (!flagGrid) return;
+          flagGrid.innerHTML = '';
+
+          GLOBAL_HEALTH_ATLAS.forEach(c => {
+            if (regionFilter !== 'all') {
+              const match = (c.region === regionFilter) || (c.subRegion === regionFilter);
+              if (!match) return;
+            }
+
+            const card = document.createElement('div');
+            card.className = 'flag-card' + (c.id === activeCountryId ? ' active' : '');
+            card.dataset.id = c.id;
+            card.tabIndex = 0;
+            card.setAttribute('role', 'button');
+            card.setAttribute('aria-label', `${c.name} Flag Pavilion`);
+
+            const header = document.createElement('div');
+            header.className = 'flag-card-header';
+
+            const emoji = document.createElement('span');
+            emoji.className = 'flag-card-emoji';
+            emoji.textContent = c.flag;
+
+            const textWrap = document.createElement('div');
+            const title = document.createElement('div');
+            title.className = 'flag-card-title';
+            title.textContent = c.name;
+
+            const sub = document.createElement('div');
+            sub.className = 'flag-card-sub';
+            sub.textContent = c.pop.split('•')[0].trim();
+
+            textWrap.append(title, sub);
+            header.append(emoji, textWrap);
+
+            const motto = document.createElement('div');
+            motto.className = 'flag-card-motto';
+            motto.textContent = c.motto || c.phraseTranslation;
+
+            card.append(header, motto);
+
+            const selectCard = () => {
+              selectCountry(c.id);
+            };
+
+            card.addEventListener('click', selectCard);
+            card.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                selectCard();
+              }
+            });
+
+            flagGrid.appendChild(card);
+          });
+        }
+
+        function setView(view) {
+          currentView = view;
+          if (view === 'map') {
+            if (mapContainer) mapContainer.style.display = 'flex';
+            if (pavilionContainer) pavilionContainer.style.display = 'none';
+            if (viewSwitchMap) viewSwitchMap.classList.add('active');
+            if (viewSwitchPavilion) viewSwitchPavilion.classList.remove('active');
+          } else {
+            if (mapContainer) mapContainer.style.display = 'none';
+            if (pavilionContainer) pavilionContainer.style.display = 'block';
+            if (viewSwitchMap) viewSwitchMap.classList.remove('active');
+            if (viewSwitchPavilion) viewSwitchPavilion.classList.add('active');
+            renderPavilion(currentRegionFilter);
+          }
+        }
+
+        if (viewSwitchMap) viewSwitchMap.addEventListener('click', () => setView('map'));
+        if (viewSwitchPavilion) viewSwitchPavilion.addEventListener('click', () => setView('pavilion'));
+
+        function renderPins(regionFilter = 'all') {
+          currentRegionFilter = regionFilter;
+          pinLayer.innerHTML = '';
+          pillBar.innerHTML = '';
+
+          GLOBAL_HEALTH_ATLAS.forEach(c => {
+            if (regionFilter !== 'all') {
+              const match = (c.region === regionFilter) || (c.subRegion === regionFilter);
+              if (!match) return;
+            }
+
+            // Create SVG Pin Group
+            const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            g.classList.add('map-pin');
+            g.dataset.id = c.id;
+            if (c.id === activeCountryId) g.classList.add('active');
+
+            const pulse = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            pulse.setAttribute('cx', c.x);
+            pulse.setAttribute('cy', c.y);
+            pulse.setAttribute('r', '14');
+            pulse.setAttribute('fill', 'rgba(6, 182, 212, 0.25)');
+            pulse.setAttribute('stroke', 'rgba(6, 182, 212, 0.6)');
+            pulse.setAttribute('stroke-width', '1');
+
+            const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            dot.setAttribute('cx', c.x);
+            dot.setAttribute('cy', c.y);
+            dot.setAttribute('r', '5');
+            dot.setAttribute('fill', c.id === activeCountryId ? '#38bdf8' : '#06b6d4');
+            dot.setAttribute('filter', 'url(#puckGlow)');
+
+            const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            label.setAttribute('x', c.x + 8);
+            label.setAttribute('y', c.y + 4);
+            label.setAttribute('fill', '#ffffff');
+            label.setAttribute('font-size', '10');
+            label.setAttribute('font-family', 'PocketGull Mono, monospace');
+            label.setAttribute('font-weight', '700');
+            label.textContent = c.flag + ' ' + c.name;
+
+            g.append(pulse, dot, label);
+
+            g.addEventListener('mouseenter', () => {
+              hoverLabel.textContent = `${c.flag} ${c.name} (${c.authority})`;
+            });
+            g.addEventListener('mouseleave', () => {
+              const active = GLOBAL_HEALTH_ATLAS.find(item => item.id === activeCountryId);
+              if (active) hoverLabel.textContent = `${active.flag} ${active.name} (${active.authority})`;
+            });
+            g.addEventListener('click', () => {
+              selectCountry(c.id);
+            });
+
+            pinLayer.appendChild(g);
+
+            // Create Pill Bar Button
+            const pill = document.createElement('button');
+            pill.className = 'country-pill' + (c.id === activeCountryId ? ' active' : '');
+            pill.innerHTML = `<span>${c.flag}</span> <span>${c.name}</span>`;
+            pill.addEventListener('click', () => selectCountry(c.id));
+            pillBar.appendChild(pill);
+          });
+
+          renderPavilion(regionFilter);
+        }
+
+        function selectCountry(id) {
+          activeCountryId = id;
+          const country = GLOBAL_HEALTH_ATLAS.find(c => c.id === id);
+          if (!country) return;
+
+          // Update Map Pin and Pavilion Card Active States
+          document.querySelectorAll('.map-pin').forEach(pin => {
+            pin.classList.toggle('active', pin.dataset.id === id);
+          });
+          document.querySelectorAll('.country-pill').forEach(pill => {
+            pill.classList.toggle('active', pill.textContent.includes(country.name));
+          });
+          document.querySelectorAll('.flag-card').forEach(card => {
+            card.classList.toggle('active', card.dataset.id === id);
+          });
+
+          // Update HUD Telemetry
+          const flagEl = document.getElementById('hudFlag');
+          const nameEl = document.getElementById('hudCountryName');
+          const scriptEl = document.getElementById('hudScriptFamily');
+          const authEl = document.getElementById('hudAuthority');
+          const wikiPopEl = document.getElementById('hudWikiPop');
+          const langTagEl = document.getElementById('hudLangTag');
+          const phraseNativeEl = document.getElementById('hudPhraseNative');
+          const phraseTransEl = document.getElementById('hudPhraseTranslation');
+          const doseAlertEl = document.getElementById('hudDosageAlert');
+          const rulesListEl = document.getElementById('hudRulesList');
+          const cssCodeEl = document.getElementById('hudCssCode');
+
+          if (flagEl) flagEl.textContent = country.flag;
+          if (nameEl) nameEl.textContent = country.name;
+          if (scriptEl) scriptEl.textContent = 'SCRIPT: ' + country.scriptFamily;
+          if (authEl) authEl.textContent = country.authority;
+          if (wikiPopEl) wikiPopEl.textContent = 'Pop: ' + country.pop;
+          if (langTagEl) langTagEl.textContent = country.langTag;
+          if (phraseNativeEl) phraseNativeEl.textContent = country.phraseNative;
+          if (phraseTransEl) phraseTransEl.textContent = country.phraseTranslation;
+          if (doseAlertEl) doseAlertEl.textContent = country.dosageAlert;
+
+          if (rulesListEl) {
+            rulesListEl.innerHTML = '';
+            country.rules.forEach(r => {
+              const li = document.createElement('li');
+              li.innerHTML = r;
+              rulesListEl.appendChild(li);
+            });
+          }
+
+          if (cssCodeEl) cssCodeEl.textContent = country.css;
+          if (hoverLabel) hoverLabel.textContent = `${country.flag} ${country.name} (${country.authority})`;
+
+          // Connect Doc Drill & UNDRIP Action Buttons
+          const hudDocDrillBtn = document.getElementById('hudDocDrillBtn');
+          const hudUndripLink = document.getElementById('hudUndripAccordLink');
+          if (hudDocDrillBtn) {
+            hudDocDrillBtn.onclick = () => {
+              if (country.region === 'indigenous') {
+                openDocDrill('UNDRIP Accord', 'INDIGENOUS SOVEREIGNTY');
+              } else if (country.region === 'universal') {
+                openDocDrill('256 Unicode Braille Patterns', 'ACCESSIBILITY');
+              } else {
+                openDocDrill(country.name, 'GLOBAL HEALTH');
+              }
+            };
+          }
+          if (hudUndripLink) {
+            if (country.region === 'indigenous' || country.id === 'can' || country.id === 'usa') {
+              hudUndripLink.style.display = 'inline-flex';
+            } else {
+              hudUndripLink.style.display = 'none';
+            }
+          }
+        }
+
+        // Region Filter Buttons
+        filterBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderPins(btn.dataset.region);
+          });
+        });
+
+        // 1-Click Copy Prescription
+        if (btnCopy) {
+          btnCopy.addEventListener('click', () => {
+            const country = GLOBAL_HEALTH_ATLAS.find(c => c.id === activeCountryId);
+            if (!country) return;
+            navigator.clipboard.writeText(country.css).then(() => {
+              const orig = btnCopy.textContent;
+              btnCopy.textContent = '✓ Copied!';
+              btnCopy.style.borderColor = '#10b981';
+              btnCopy.style.color = '#10b981';
+              setTimeout(() => {
+                btnCopy.textContent = orig;
+                btnCopy.style.borderColor = 'var(--cyan)';
+                btnCopy.style.color = 'var(--cyan)';
+              }, 2000);
+            });
+          });
+        }
+
+        renderPins('all');
+        selectCountry('can');
+      }
+
+      window.initWorldMapStudio = initWorldMapStudio;
+
       initDocDrill();
+      initWorldMapStudio();
     })();
   </script>
 

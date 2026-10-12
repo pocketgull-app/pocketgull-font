@@ -78,7 +78,7 @@
 
   <!-- Section 3: 8-Word Pharmacopeia Broadside Cards -->
   <g transform="translate(160, 1920)">
-    <text x="0" y="0" class="font-mono" font-size="30" font-weight="bold" fill="#475569">03 / CULTURAL PHARMACOPEIA &amp; PHILOSOPHICAL FOUNDATIONS</text>
+    <text x="0" y="0" class="font-mono" font-size="30" font-weight="bold" fill="#475569">03 / DINÉ BIZAAD VOCABULARY &amp; PHILOSOPHICAL FOUNDATIONS</text>
     <g transform="translate(0, 30)">
 
       <g transform="translate(0, 0)">
@@ -90,13 +90,13 @@
       <g transform="translate(1210, 0)">
         <rect width="1160" height="150" rx="12" fill="#FFFFFF" stroke="#E2DACB" stroke-width="1.8"/>
         <text x="40" y="65" class="font-native" font-size="44" font-weight="bold" fill="#991B1B">Azeeʼ</text>
-        <text x="40" y="115" class="font-title" font-size="24" font-weight="600" fill="#475569">Medicine, botanical remedy, or treatment</text>
+        <text x="40" y="115" class="font-title" font-size="24" font-weight="600" fill="#475569">Health, medical care, and clinical healing</text>
       </g>
 
       <g transform="translate(0, 180)">
         <rect width="1160" height="150" rx="12" fill="#FFFFFF" stroke="#E2DACB" stroke-width="1.8"/>
         <text x="40" y="65" class="font-native" font-size="44" font-weight="bold" fill="#991B1B">Tádídíín</text>
-        <text x="40" y="115" class="font-title" font-size="24" font-weight="600" fill="#475569">Sacred blue corn pollen used in blessing rituals</text>
+        <text x="40" y="115" class="font-title" font-size="24" font-weight="600" fill="#475569">Corn pollen; agricultural sustenance and vitality</text>
       </g>
 
       <g transform="translate(1210, 180)">
@@ -114,13 +114,13 @@
       <g transform="translate(1210, 360)">
         <rect width="1160" height="150" rx="12" fill="#FFFFFF" stroke="#E2DACB" stroke-width="1.8"/>
         <text x="40" y="65" class="font-native" font-size="44" font-weight="bold" fill="#991B1B">Łichííʼ</text>
-        <text x="40" y="115" class="font-title" font-size="24" font-weight="600" fill="#475569">Red sandstone earth and sacred hematite color</text>
+        <text x="40" y="115" class="font-title" font-size="24" font-weight="600" fill="#475569">Red sandstone earth and mineral ochre pigments</text>
       </g>
 
       <g transform="translate(0, 540)">
         <rect width="1160" height="150" rx="12" fill="#FFFFFF" stroke="#E2DACB" stroke-width="1.8"/>
         <text x="40" y="65" class="font-native" font-size="44" font-weight="bold" fill="#991B1B">Tsʼah</text>
-        <text x="40" y="115" class="font-title" font-size="24" font-weight="600" fill="#475569">Wild sagebrush medicine for purification and lungs</text>
+        <text x="40" y="115" class="font-title" font-size="24" font-weight="600" fill="#475569">Fragrant wild sagebrush; high-desert botanical ecology</text>
       </g>
 
       <g transform="translate(1210, 540)">

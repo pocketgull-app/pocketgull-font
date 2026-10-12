@@ -78,7 +78,7 @@
 
   <!-- Section 3: 8-Word Pharmacopeia Broadside Cards -->
   <g transform="translate(160, 1920)">
-    <text x="0" y="0" class="font-mono" font-size="30" font-weight="bold" fill="#475569">03 / CULTURAL PHARMACOPEIA &amp; PHILOSOPHICAL FOUNDATIONS</text>
+    <text x="0" y="0" class="font-mono" font-size="30" font-weight="bold" fill="#475569">03 / ANISHINAABEMOWIN VOCABULARY &amp; PHILOSOPHICAL FOUNDATIONS</text>
     <g transform="translate(0, 30)">
 
       <g transform="translate(0, 0)">
@@ -90,13 +90,13 @@
       <g transform="translate(1210, 0)">
         <rect width="1160" height="150" rx="12" fill="#FFFFFF" stroke="#E2DACB" stroke-width="1.8"/>
         <text x="40" y="65" class="font-native" font-size="44" font-weight="bold" fill="#047857">Manoomin</text>
-        <text x="40" y="115" class="font-title" font-size="24" font-weight="600" fill="#475569">Wild rice ("The Good Berry"); gift of the Creator</text>
+        <text x="40" y="115" class="font-title" font-size="24" font-weight="600" fill="#475569">Wild rice ("The Good Berry"); river marsh harvest</text>
       </g>
 
       <g transform="translate(0, 180)">
         <rect width="1160" height="150" rx="12" fill="#FFFFFF" stroke="#E2DACB" stroke-width="1.8"/>
         <text x="40" y="65" class="font-native" font-size="44" font-weight="bold" fill="#047857">Wiingashk</text>
-        <text x="40" y="115" class="font-title" font-size="24" font-weight="600" fill="#475569">Sweetgrass; sacred hair of Mother Earth for healing</text>
+        <text x="40" y="115" class="font-title" font-size="24" font-weight="600" fill="#475569">Fragrant sweetgrass; northern botanical ecology and braiding</text>
       </g>
 
       <g transform="translate(1210, 180)">
@@ -108,7 +108,7 @@
       <g transform="translate(0, 360)">
         <rect width="1160" height="150" rx="12" fill="#FFFFFF" stroke="#E2DACB" stroke-width="1.8"/>
         <text x="40" y="65" class="font-native" font-size="44" font-weight="bold" fill="#047857">Odeʼ</text>
-        <text x="40" y="115" class="font-title" font-size="24" font-weight="600" fill="#475569">The spiritual and anatomical human heart</text>
+        <text x="40" y="115" class="font-title" font-size="24" font-weight="600" fill="#475569">The human heart; center of feeling and vitality</text>
       </g>
 
       <g transform="translate(1210, 360)">
@@ -120,7 +120,7 @@
       <g transform="translate(0, 540)">
         <rect width="1160" height="150" rx="12" fill="#FFFFFF" stroke="#E2DACB" stroke-width="1.8"/>
         <text x="40" y="65" class="font-native" font-size="44" font-weight="bold" fill="#047857">Mashkiki</text>
-        <text x="40" y="115" class="font-title" font-size="24" font-weight="600" fill="#475569">Medicine, botanical cure, or medicinal herb</text>
+        <text x="40" y="115" class="font-title" font-size="24" font-weight="600" fill="#475569">Strength of the earth, healing care, and medicine</text>
       </g>
 
       <g transform="translate(1210, 540)">
