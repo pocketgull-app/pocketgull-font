@@ -1,0 +1,18 @@
+<!DOCTYPE qgis_style>
+<qgis_style version="1">
+  <symbols/>
+  <colorramps/>
+  <textformats>
+    <textformat name="PocketGull Navigation Day" font="PocketGull" size="9" size_unit="Point" color="30,41,59,255">
+      <font_properties style="Regular" bold="0" italic="0"/>
+      <buffer bufferSize="1.5" bufferColor="255,255,255,230" bufferDraw="1"/>
+    </textformat>
+    <textformat name="PocketGull Scotopic 650nm Night Vision" font="PocketGull Mono" size="9.5" size_unit="Point" color="244,63,94,255">
+      <font_properties style="Regular" bold="1" italic="0"/>
+      <buffer bufferSize="1.2" bufferColor="9,9,11,255" bufferDraw="1"/>
+    </textformat>
+    <textformat name="PocketGull Sounding Depth" font="PocketGull Mono" size="8" size_unit="Point" color="15,23,42,255">
+      <font_properties style="Regular" bold="0" italic="0"/>
+    </textformat>
+  </textformats>
+</qgis_style>
