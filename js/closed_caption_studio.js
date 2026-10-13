@@ -377,12 +377,18 @@ export class ClosedCaptionStudio {
     this.aperture = 50;
 
     // Roll-up line buffer (for roll-up mode)
+    // Roll-up line buffer (for roll-up mode)
     this.rollupBuffer = [];
 
     // Emotion & Atmospheric Scene Blending
     this.currentEmotion = null;
     this.currentAtmosphericBlend = 'clinical_teal';
     this.currentSpatialDirection = 'center';
+
+    // Philocardia Hearts & Tittle Varieties
+    this.philocardiaEnabled = false;
+    this.tittleVariety = 'dot';
+    this.cardiacPacing = 'philocardia-pacing-72';
   }
 
   getScene(id = this.currentSceneId) {
@@ -462,12 +468,94 @@ export class ClosedCaptionStudio {
     return SPATIAL_DIRECTIONS.center;
   }
 
+  setPhilocardia(enabled) {
+    this.philocardiaEnabled = Boolean(enabled);
+    if (this.philocardiaEnabled && this.tittleVariety === 'dot') {
+      this.tittleVariety = 'heart';
+    } else if (!this.philocardiaEnabled) {
+      this.tittleVariety = 'dot';
+    }
+    return this.philocardiaEnabled;
+  }
+
+  setTittleVariety(variety) {
+    if (TITTLE_VARIETIES[variety]) {
+      this.tittleVariety = variety;
+      this.philocardiaEnabled = (variety !== 'dot');
+      return TITTLE_VARIETIES[variety];
+    }
+    this.tittleVariety = 'dot';
+    this.philocardiaEnabled = false;
+    return TITTLE_VARIETIES.dot;
+  }
+
+  setCardiacPacing(pacingId) {
+    if (CARDIAC_PACING_PRESETS[pacingId]) {
+      this.cardiacPacing = CARDIAC_PACING_PRESETS[pacingId].cssClass;
+      return CARDIAC_PACING_PRESETS[pacingId];
+    }
+    return CARDIAC_PACING_PRESETS.pace_72;
+  }
+
   calculateLineFit(text, targetCpl = 37) {
     // Calculates optical width adjustment (75% to 100%) to fit text within broadcast CPL
     if (!text || text.length <= targetCpl) return 100;
     const ratio = targetCpl / text.length;
     const widthPercent = Math.max(75, Math.min(100, Math.round(ratio * 100)));
     return widthPercent;
+  }
+}
+
+export const TITTLE_VARIETIES = {
+  heart: { id: 'heart', name: 'Philocardia Heart', glyph: '♥', desc: 'Optical S1/S2 heart tittle with cardiac pacing' },
+  blossom: { id: 'blossom', name: 'Regenerative Blossom', glyph: '✤', desc: 'Fireweed 4-petal botanical rebirth' },
+  star: { id: 'star', name: 'Celestial Star', glyph: '✦', desc: '4-point astrometric diamond star' },
+  droplet: { id: 'droplet', name: 'Somatic Droplet', glyph: '💧', desc: 'Tranquil fluid teardrop' },
+  nuqta: { id: 'nuqta', name: 'Calligraphic Nuqṭa', glyph: '◆', desc: 'Authentic 45° reed-pen diamond' },
+  dot: { id: 'dot', name: 'Louise Sloan Dot', glyph: '●', desc: 'Standard circular optotype dot' }
+};
+
+export const CARDIAC_PACING_PRESETS = {
+  pace_72: { id: 'pace_72', name: '72 BPM Resting Pulse', cssClass: 'philocardia-pacing-72', bpm: 72 },
+  pace_60: { id: 'pace_60', name: '60 BPM Vagal Coherence', cssClass: 'philocardia-pacing-60', bpm: 60 },
+  pace_breath: { id: 'pace_breath', name: '0.10 Hz 4-7-8 Breath', cssClass: 'philocardia-pacing-breath', bpm: 15 },
+  stillness: { id: 'stillness', name: 'Stillness (Static Heart)', cssClass: 'philocardia-stillness', bpm: 0 }
+};
+
+/**
+ * Renders raw text with Philocardia heart tittles safely using programmatic DOM nodes.
+ * Guarantees zero DOM XSS and preserves strict stem alignment.
+ */
+export function renderPhilocardiaNodes(container, rawText, pacingClass = 'philocardia-pacing-72', variety = 'heart') {
+  container.replaceChildren();
+  if (variety === 'dot') {
+    container.textContent = rawText;
+    if (container.dataset) {
+      delete container.dataset.tittleVariety;
+    }
+    if (typeof container.removeAttribute === 'function') {
+      container.removeAttribute('data-tittle-variety');
+    }
+    return;
+  }
+
+  container.dataset.tittleVariety = variety;
+
+  for (let i = 0; i < rawText.length; i++) {
+    const ch = rawText[i];
+    if (ch === 'i') {
+      const span = document.createElement('span');
+      span.className = `philocardia-heart ${pacingClass}`;
+      span.textContent = 'ı'; // dotless i
+      container.appendChild(span);
+    } else if (ch === 'j') {
+      const span = document.createElement('span');
+      span.className = `philocardia-j ${pacingClass}`;
+      span.textContent = 'ȷ'; // dotless j
+      container.appendChild(span);
+    } else {
+      container.appendChild(document.createTextNode(ch));
+    }
   }
 }
 
@@ -479,6 +567,9 @@ if (typeof window !== 'undefined') {
     EMOTION_TOKENS,
     ATMOSPHERIC_BLENDS,
     SPATIAL_DIRECTIONS,
+    TITTLE_VARIETIES,
+    CARDIAC_PACING_PRESETS,
+    renderPhilocardiaNodes,
     ClosedCaptionStudio
   };
 }

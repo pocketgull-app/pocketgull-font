@@ -174,3 +174,86 @@ test('Emotion Tokens, Atmospheric Blends & Spatial Directions: Archetypal Semios
   assert.ok(htmlContent.includes('data-blend="clinical_teal"'), 'HTML must declare clinical_teal blend pill');
   assert.ok(htmlContent.includes('data-spatial="left"'), 'HTML must declare left spatial pill');
 });
+
+test('Philocardia Heart Tittles & Cardiac Pacing Invariants: Grounding & Pacing Rules', async () => {
+  const {
+    TITTLE_VARIETIES,
+    CARDIAC_PACING_PRESETS,
+    renderPhilocardiaNodes,
+    ClosedCaptionStudio
+  } = await import('../js/closed_caption_studio.js');
+
+  // Verify all 6 tittle varieties are registered
+  const expectedVarieties = ['heart', 'blossom', 'star', 'droplet', 'nuqta', 'dot'];
+  assert.deepEqual(Object.keys(TITTLE_VARIETIES).sort(), expectedVarieties.sort());
+
+  // Verify all 4 cardiac pacing presets
+  const expectedPacing = ['pace_72', 'pace_60', 'pace_breath', 'stillness'];
+  assert.deepEqual(Object.keys(CARDIAC_PACING_PRESETS).sort(), expectedPacing.sort());
+
+  // Test Studio instance manipulation
+  const studio = new ClosedCaptionStudio();
+  assert.equal(studio.philocardiaEnabled, false);
+  assert.equal(studio.tittleVariety, 'dot');
+
+  studio.setPhilocardia(true);
+  assert.equal(studio.philocardiaEnabled, true);
+  assert.equal(studio.tittleVariety, 'heart');
+
+  studio.setTittleVariety('blossom');
+  assert.equal(studio.tittleVariety, 'blossom');
+  assert.equal(studio.philocardiaEnabled, true);
+
+  studio.setCardiacPacing('pace_breath');
+  assert.equal(studio.cardiacPacing, 'philocardia-pacing-breath');
+
+  // Test DOM rendering helper (mock container)
+  const mockChildren = [];
+  const mockContainer = {
+    dataset: {},
+    replaceChildren() { this.children = []; },
+    appendChild(node) { this.children.push(node); },
+    children: [],
+    removeAttribute(key) { delete this.dataset[key]; }
+  };
+
+  // Mock global document if in Node
+  const originalDoc = globalThis.document;
+  globalThis.document = {
+    createElement(tag) {
+      return { tagName: tag.toUpperCase(), className: '', textContent: '' };
+    },
+    createTextNode(text) {
+      return { textContent: text, nodeType: 3 };
+    }
+  };
+
+  try {
+    // Render text with 'i' and 'j' in Philocardia mode
+    renderPhilocardiaNodes(mockContainer, 'vital sign', 'philocardia-pacing-72', 'heart');
+    assert.equal(mockContainer.dataset.tittleVariety, 'heart');
+    const heartNodes = mockContainer.children.filter(n => n.className && n.className.includes('philocardia-heart'));
+    assert.equal(heartNodes.length, 2, 'Must create 2 philocardia-heart nodes for "vital sign"');
+    assert.equal(heartNodes[0].textContent, 'ı', 'Philocardia heart must use dotless i (ı) to prevent double tittle collision');
+
+    // Render with dot (standard) mode
+    renderPhilocardiaNodes(mockContainer, 'vital sign', 'philocardia-pacing-72', 'dot');
+    assert.equal(mockContainer.textContent, 'vital sign');
+    assert.equal(mockContainer.dataset.tittleVariety, undefined);
+  } finally {
+    globalThis.document = originalDoc;
+  }
+
+  // Verify HTML contains Philocardia triggers and reads
+  const htmlContent = fs.readFileSync(path.join(ROOT_DIR, 'closed_caption_studio.html'), 'utf8');
+  assert.ok(htmlContent.includes('id="togglePhilocardiaBtn"'), 'HTML must declare togglePhilocardiaBtn');
+  assert.ok(htmlContent.includes('data-tittle="heart"'), 'HTML must declare heart tittle button');
+  assert.ok(htmlContent.includes('data-pacing="pace_72"'), 'HTML must declare pace_72 button');
+  assert.ok(htmlContent.includes('data-pacing="stillness"'), 'HTML must declare stillness button');
+
+  // Verify CSS contains stillness override and caption box active glow
+  const cssContent = fs.readFileSync(path.join(ROOT_DIR, 'css', 'closed_caption_studio.css'), 'utf8');
+  assert.ok(cssContent.includes('.philocardia-stillness::after'), 'CSS must declare .philocardia-stillness::after');
+  assert.ok(cssContent.includes('.cc-caption-box.cc-philocardia-active'), 'CSS must declare .cc-caption-box.cc-philocardia-active');
+});
+

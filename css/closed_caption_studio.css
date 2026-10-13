@@ -652,6 +652,15 @@ body.cc-studio-body {
   min-height: 90px;
 }
 
+/* Philocardia Heart Tittle Alternate in Closed Captions */
+.philocardia-stillness::after {
+  animation: none !important;
+}
+
+.cc-caption-box.cc-philocardia-active {
+  --aura-color: #f43f5e;
+}
+
 /* Footer / Invariant Notes */
 .cc-footer-notes {
   margin-top: 1rem;

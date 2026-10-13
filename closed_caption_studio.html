@@ -255,6 +255,47 @@
           </div>
         </div>
 
+        <!-- Philocardia Hearts & Tittle Varieties -->
+        <div class="cc-control-group" style="border-top: 1px solid var(--cc-border); padding-top: 0.8rem;">
+          <label class="cc-control-label">
+            <span>Philocardia Hearts &amp; Tittles</span>
+            <span class="cc-val-readout" id="activeTittleLabel">Classic Dot</span>
+          </label>
+          <div class="cc-pill-row">
+            <button type="button" class="cc-pill-btn" id="togglePhilocardiaBtn" style="border-color: rgba(244, 63, 94, 0.4); color: #f43f5e;">
+              💖 Philocardia Hearts: OFF
+            </button>
+          </div>
+          <!-- Tittle Varieties -->
+          <div style="margin-top: 6px;">
+            <div class="cc-control-label" style="font-size: 0.72rem; margin-bottom: 4px;">
+              <span>Tittle Stylistic Alternate</span>
+              <span class="cc-val-readout" id="varietyReadout">Dot (●)</span>
+            </div>
+            <div class="cc-pill-row" id="tittlePills">
+              <button type="button" class="cc-pill-btn" data-tittle="heart">💖 Heart (♥)</button>
+              <button type="button" class="cc-pill-btn" data-tittle="blossom">🌸 Blossom (✤)</button>
+              <button type="button" class="cc-pill-btn" data-tittle="star">✨ Star (✦)</button>
+              <button type="button" class="cc-pill-btn" data-tittle="droplet">💧 Droplet</button>
+              <button type="button" class="cc-pill-btn" data-tittle="nuqta">♦️ Nuqṭa (◆)</button>
+              <button type="button" class="cc-pill-btn active" data-tittle="dot">⚪ Dot (●)</button>
+            </div>
+          </div>
+          <!-- Cardiac Co-Regulation Pacing -->
+          <div style="margin-top: 6px;">
+            <div class="cc-control-label" style="font-size: 0.72rem; margin-bottom: 4px;">
+              <span>Cardiac Pacing Rhythm</span>
+              <span class="cc-val-readout" id="pacingReadout">72 BPM</span>
+            </div>
+            <div class="cc-pill-row" id="pacingPills">
+              <button type="button" class="cc-pill-btn active" data-pacing="pace_72">❤️ 72 BPM Pulse</button>
+              <button type="button" class="cc-pill-btn" data-pacing="pace_60">🫀 60 BPM Vagal</button>
+              <button type="button" class="cc-pill-btn" data-pacing="pace_breath">🧘 4-7-8 Breath</button>
+              <button type="button" class="cc-pill-btn" data-pacing="stillness">✨ Stillness</button>
+            </div>
+          </div>
+        </div>
+
         <!-- Optometric Acuity & Degradation Filters -->
         <div class="cc-control-group" style="border-top: 1px solid var(--cc-border); padding-top: 0.8rem;">
           <label class="cc-control-label">
@@ -386,6 +427,9 @@
       EMOTION_TOKENS,
       ATMOSPHERIC_BLENDS,
       SPATIAL_DIRECTIONS,
+      TITTLE_VARIETIES,
+      CARDIAC_PACING_PRESETS,
+      renderPhilocardiaNodes,
       ClosedCaptionStudio
     } from './js/closed_caption_studio.js';
 
@@ -426,6 +470,10 @@
     const activeBlendLabel = document.getElementById('activeBlendLabel');
     const activeSpatialLabel = document.getElementById('activeSpatialLabel');
     const triggerBloomBtn = document.getElementById('triggerBloomBtn');
+    const togglePhilocardiaBtn = document.getElementById('togglePhilocardiaBtn');
+    const activeTittleLabel = document.getElementById('activeTittleLabel');
+    const varietyReadout = document.getElementById('varietyReadout');
+    const pacingReadout = document.getElementById('pacingReadout');
 
     // Timecode simulation clock
     let frameCount = 0;
@@ -482,7 +530,19 @@
         rollupContainer.style.display = 'none';
 
         speakerEl.textContent = cue.speaker;
-        textLineEl.textContent = cue.text;
+
+        // Render with Philocardia hearts if active
+        if (studio.philocardiaEnabled || studio.tittleVariety !== 'dot') {
+          captionBox.classList.add('cc-philocardia-active');
+          renderPhilocardiaNodes(textLineEl, cue.text, studio.cardiacPacing, studio.tittleVariety);
+          renderPhilocardiaNodes(samplePocketgull, cue.text, studio.cardiacPacing, studio.tittleVariety);
+        } else {
+          captionBox.classList.remove('cc-philocardia-active');
+          textLineEl.textContent = cue.text;
+          textLineEl.removeAttribute('data-tittle-variety');
+          samplePocketgull.textContent = cue.text;
+          samplePocketgull.removeAttribute('data-tittle-variety');
+        }
 
         if (cue.prosody === 'soundfx') {
           soundCueEl.style.display = 'flex';
@@ -493,8 +553,7 @@
           textLineEl.style.color = '#ffffff';
         }
 
-        // A/B test sample update
-        samplePocketgull.textContent = cue.text;
+        // A/B test fallback sample update
         sampleFallback.textContent = cue.text;
 
       } else if (studio.mode === 'roll-up') {
@@ -788,6 +847,44 @@
       });
     });
 
+    // Philocardia Hearts & Tittle Varieties Listeners
+    togglePhilocardiaBtn.addEventListener('click', () => {
+      const newState = !studio.philocardiaEnabled;
+      studio.setPhilocardia(newState);
+      togglePhilocardiaBtn.textContent = `💖 Philocardia Hearts: ${newState ? 'ON' : 'OFF'}`;
+      togglePhilocardiaBtn.classList.toggle('active', newState);
+      activeTittleLabel.textContent = newState ? 'Philocardia Heart (♥)' : 'Classic Dot';
+      varietyReadout.textContent = newState ? 'Heart (♥)' : 'Dot (●)';
+      document.querySelectorAll('[data-tittle]').forEach(b => {
+        b.classList.toggle('active', b.dataset.tittle === (newState ? 'heart' : 'dot'));
+      });
+      renderCue();
+    });
+
+    document.querySelectorAll('[data-tittle]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-tittle]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const v = btn.dataset.tittle;
+        const variety = studio.setTittleVariety(v);
+        activeTittleLabel.textContent = variety.name;
+        varietyReadout.textContent = `${variety.name} (${variety.glyph})`;
+        togglePhilocardiaBtn.textContent = `💖 Philocardia Hearts: ${studio.philocardiaEnabled ? 'ON' : 'OFF'}`;
+        togglePhilocardiaBtn.classList.toggle('active', studio.philocardiaEnabled);
+        renderCue();
+      });
+    });
+
+    document.querySelectorAll('[data-pacing]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-pacing]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const pacing = studio.setCardiacPacing(btn.dataset.pacing);
+        pacingReadout.textContent = pacing.name;
+        renderCue();
+      });
+    });
+
     // Filter stress-test buttons with auto-timeout & toggle for vibration
     let vibeTimeout = null;
 
@@ -859,8 +956,13 @@
 
       if (val.length > 0) {
         speakerEl.textContent = 'USER INPUT';
-        textLineEl.textContent = customInput.value;
-        samplePocketgull.textContent = customInput.value;
+        if (studio.philocardiaEnabled || studio.tittleVariety !== 'dot') {
+          renderPhilocardiaNodes(textLineEl, customInput.value, studio.cardiacPacing, studio.tittleVariety);
+          renderPhilocardiaNodes(samplePocketgull, customInput.value, studio.cardiacPacing, studio.tittleVariety);
+        } else {
+          textLineEl.textContent = customInput.value;
+          samplePocketgull.textContent = customInput.value;
+        }
         sampleFallback.textContent = customInput.value;
 
         // Auto-calculate line-fit width
