@@ -1,0 +1,606 @@
+/**
+ * PocketGull Closed Caption & Broadcast Teletext Studio Stylesheet
+ * =================================================================
+ * High-legibility broadcast typography, CEA-708 & WebVTT styling,
+ * 16:9 dynamic scene simulation, and scotopic 650nm night-shift tokens.
+ *
+ * Licensed under SIL Open Font License 1.1
+ */
+
+:root {
+  --cc-bg: #070b14;
+  --cc-surface: rgba(15, 23, 42, 0.85);
+  --cc-surface-elevated: #1e293b;
+  --cc-border: rgba(255, 255, 255, 0.12);
+  --cc-border-focus: #38bdf8;
+  --cc-text: #f8fafc;
+  --cc-text-muted: #94a3b8;
+  --cc-accent-cyan: #06b6d4;
+  --cc-accent-sky: #38bdf8;
+  --cc-accent-amber: #f59e0b;
+  --cc-accent-emerald: #10b981;
+  --cc-accent-rose: #f43f5e;
+  --cc-font-sans: 'PocketGull VF', 'PocketGull', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --cc-font-mono: 'PocketGull Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Subtitle Scrim / Box Tokens */
+  --cc-scrim-bg: rgba(0, 0, 0, 0.82);
+  --cc-scrim-radius: 4px;
+  --cc-scrim-shadow: 0 4px 18px rgba(0, 0, 0, 0.85);
+}
+
+/* Scotopic 650nm Red Mode (Preserves Rhodopsin & Dark Adaptation) */
+[data-theme="scotopic"] {
+  --cc-bg: #050202;
+  --cc-surface: rgba(30, 8, 8, 0.9);
+  --cc-surface-elevated: #280a0a;
+  --cc-border: rgba(239, 68, 68, 0.35);
+  --cc-border-focus: #ef4444;
+  --cc-text: #fca5a5;
+  --cc-text-muted: #b91c1c;
+  --cc-accent-cyan: #ef4444;
+  --cc-accent-sky: #f87171;
+  --cc-accent-amber: #dc2626;
+  --cc-accent-emerald: #ef4444;
+  --cc-accent-rose: #ff2222;
+  --cc-scrim-bg: rgba(20, 0, 0, 0.92);
+}
+
+/* Base Layout */
+body.cc-studio-body {
+  background-color: var(--cc-bg);
+  color: var(--cc-text);
+  font-family: var(--cc-font-sans);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+/* Navigation Header */
+.cc-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--cc-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--cc-border);
+  padding: 0.85rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cc-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.cc-brand-badge {
+  font-family: var(--cc-font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--cc-accent-sky);
+  border: 1px solid var(--cc-border);
+  border-radius: 6px;
+}
+
+.cc-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cc-nav-btn {
+  font-family: var(--cc-font-mono);
+  font-size: 0.82rem;
+  color: var(--cc-text-muted);
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  background: transparent;
+  cursor: pointer;
+}
+
+.cc-nav-btn:hover {
+  color: var(--cc-text);
+  border-color: var(--cc-border);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.cc-nav-btn.active {
+  color: var(--cc-accent-cyan);
+  border-color: var(--cc-accent-cyan);
+  background: rgba(6, 182, 212, 0.1);
+}
+
+/* Studio Container */
+.cc-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Hero Section */
+.cc-hero {
+  border-bottom: 1px solid var(--cc-border);
+  padding-bottom: 1.5rem;
+}
+
+.cc-hero-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.cc-hero-tagline {
+  font-size: 1.05rem;
+  color: var(--cc-text-muted);
+  max-width: 900px;
+  line-height: 1.6;
+}
+
+/* Main Studio Layout: Monitor vs Controls */
+.cc-workbench-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .cc-workbench-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 16:9 Broadcast Monitor Frame */
+.cc-monitor-wrapper {
+  background: #000000;
+  border-radius: 12px;
+  border: 2px solid #1e293b;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  padding: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cc-monitor-bezel-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px 10px 8px;
+  font-family: var(--cc-font-mono);
+  font-size: 0.75rem;
+  color: var(--cc-text-muted);
+}
+
+.cc-monitor-status-leds {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cc-led {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #334155;
+}
+
+.cc-led.live {
+  background: #ef4444;
+  box-shadow: 0 0 8px #ef4444;
+  animation: cc-pulse-red 1.5s infinite ease-in-out;
+}
+
+.cc-led.sync {
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+}
+
+@keyframes cc-pulse-red {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.9); }
+}
+
+/* The 16:9 Aspect Ratio Stage */
+.cc-screen {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #0b0f19;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+}
+
+/* Dynamic Scene Background Layers */
+.cc-scene-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+/* Scene 1: Trauma Resuscitation */
+.cc-scene-trauma {
+  background: radial-gradient(circle at 70% 30%, rgba(239, 68, 68, 0.25), transparent 60%),
+              radial-gradient(circle at 30% 70%, rgba(245, 158, 11, 0.2), transparent 50%),
+              linear-gradient(180deg, #090e17 0%, #03060a 100%);
+}
+
+.cc-trauma-ecg-canvas {
+  position: absolute;
+  top: 15%;
+  left: 5%;
+  width: 90%;
+  height: 35%;
+  opacity: 0.65;
+}
+
+/* Scene 2: Arctic Blizzard */
+.cc-scene-blizzard {
+  background: linear-gradient(180deg, #dbeafe 0%, #e2e8f0 40%, #cbd5e1 100%);
+  color: #0f172a;
+}
+
+.cc-snowfield {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(#ffffff 1.5px, transparent 1.5px),
+                    radial-gradient(rgba(255,255,255,0.7) 1px, transparent 1px);
+  background-size: 40px 40px, 20px 20px;
+  background-position: 0 0, 20px 20px;
+  opacity: 0.8;
+  animation: cc-snow 8s linear infinite;
+}
+
+@keyframes cc-snow {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(40px); }
+}
+
+/* Scene 3: Midnight Noir */
+.cc-scene-noir {
+  background: radial-gradient(circle at 50% 120%, rgba(56, 189, 248, 0.12), transparent 70%),
+              linear-gradient(180deg, #020408 0%, #080d1a 100%);
+}
+
+/* Scene 4: EAS Emergency Alert */
+.cc-scene-eas {
+  background: #020202;
+  border-top: 18px solid #ef4444;
+}
+
+.cc-eas-header-bar {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  right: 0;
+  background: #ef4444;
+  color: #ffffff;
+  font-family: var(--cc-font-mono);
+  font-weight: 700;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  display: flex;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+/* Scene 5: Sovereign APTN Northern Lights */
+.cc-scene-aptn {
+  background: radial-gradient(ellipse at 40% 0%, rgba(16, 185, 129, 0.35) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(168, 85, 247, 0.25) 0%, transparent 50%),
+              linear-gradient(180deg, #05101e 0%, #010409 100%);
+}
+
+/* Subtitle Safe Area & Display Zone */
+.cc-safe-area {
+  position: relative;
+  z-index: 10;
+  padding: 1.5rem 2rem;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+/* Subtitle Box / Scrim */
+.cc-caption-box {
+  background: var(--cc-scrim-bg);
+  border-radius: var(--cc-scrim-radius);
+  box-shadow: var(--cc-scrim-shadow);
+  padding: 0.6rem 1.1rem;
+  max-width: 90%;
+  text-align: center;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-feature-settings: "cv05" 1, "cv08" 1, "ss02" 1, "cv11" 1;
+}
+
+/* Caption Speaker Tag */
+.cc-speaker {
+  font-family: var(--cc-font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--cc-accent-amber);
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Caption Main Line */
+.cc-text-line {
+  font-size: 1.35rem;
+  line-height: 1.35;
+  color: #ffffff;
+  transition: font-weight 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              font-stretch 0.2s ease,
+              font-style 0.2s ease;
+  word-wrap: break-word;
+}
+
+/* Non-Speech Audio / Sound Effects Line */
+.cc-sound-cue {
+  font-size: 1.05rem;
+  font-family: var(--cc-font-sans);
+  color: var(--cc-accent-cyan);
+  font-style: italic;
+  margin-top: 0.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Roll-Up Mode Styling (3-Line Teletext / Steno) */
+.cc-rollup-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-align: left;
+  width: 100%;
+  font-family: var(--cc-font-mono);
+  font-size: 1.15rem;
+}
+
+.cc-rollup-line {
+  background: rgba(0, 0, 0, 0.88);
+  padding: 0.2rem 0.5rem;
+  display: inline-block;
+  align-self: flex-start;
+  border-left: 3px solid var(--cc-accent-cyan);
+}
+
+/* Optometric Blur / Degradation Filter Overlays */
+.cc-filter-blur {
+  filter: blur(2.2px) !important;
+}
+
+.cc-filter-distance {
+  transform: scale(0.68);
+  transform-origin: center bottom;
+}
+
+.cc-filter-vibe {
+  animation: cc-vibe-shake 0.15s infinite alternate !important;
+}
+
+@keyframes cc-vibe-shake {
+  0% { transform: translate(1px, -1px); }
+  50% { transform: translate(-1.5px, 1.5px); }
+  100% { transform: translate(1px, 0.5px); }
+}
+
+/* Controls Workbench Column */
+.cc-controls-card {
+  background: var(--cc-surface);
+  border: 1px solid var(--cc-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.cc-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cc-control-label {
+  font-family: var(--cc-font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--cc-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cc-val-readout {
+  color: var(--cc-accent-sky);
+  font-weight: 700;
+}
+
+/* Button & Pill Rows */
+.cc-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.cc-pill-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--cc-border);
+  color: var(--cc-text);
+  padding: 0.45rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  font-family: var(--cc-font-sans);
+}
+
+.cc-pill-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--cc-border-focus);
+}
+
+.cc-pill-btn.active {
+  background: rgba(6, 182, 212, 0.15);
+  border-color: var(--cc-accent-cyan);
+  color: var(--cc-accent-cyan);
+  font-weight: 600;
+}
+
+/* Range Sliders */
+.cc-slider {
+  width: 100%;
+  accent-color: var(--cc-accent-cyan);
+  height: 6px;
+  border-radius: 3px;
+  background: #1e293b;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Playback Control Bar */
+.cc-playback-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--cc-surface-elevated);
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid var(--cc-border);
+}
+
+.cc-playback-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--cc-border);
+  color: var(--cc-text);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: var(--cc-font-mono);
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.cc-playback-btn:hover {
+  background: var(--cc-accent-cyan);
+  color: #000000;
+  border-color: var(--cc-accent-cyan);
+}
+
+/* A/B Comparator Card */
+.cc-ab-card {
+  grid-column: 1 / -1;
+  background: var(--cc-surface);
+  border: 1px solid var(--cc-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.cc-ab-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .cc-ab-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cc-ab-column {
+  background: #000000;
+  border: 1px solid var(--cc-border);
+  border-radius: 8px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.cc-ab-header {
+  font-family: var(--cc-font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cc-ab-sample {
+  font-size: 1.35rem;
+  line-height: 1.4;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 6px;
+  min-height: 90px;
+}
+
+/* Footer / Invariant Notes */
+.cc-footer-notes {
+  margin-top: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--cc-border);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  color: var(--cc-text-muted);
+  font-size: 0.88rem;
+}
+
+.cc-footer-col h4 {
+  color: var(--cc-text);
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+  font-family: var(--cc-font-mono);
+}

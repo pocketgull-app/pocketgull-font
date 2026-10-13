@@ -363,32 +363,128 @@
       color: var(--text-main) !important;
     }
 
-    /* Periodic table chips in washi & light themes - preserve IUPAC category color contrast */
+    /* Periodic table in washi & light themes - pristine white laboratory chart & tiles */
+    [data-theme="washi"] #periodic-table,
+    [data-theme="light"] #periodic-table,
+    #periodic-table.ptable-white-mode {
+      background: #ffffff !important;
+      border-color: rgba(16, 185, 129, 0.4) !important;
+    }
+
+    [data-theme="washi"] #periodic-table .ptable-inspector-box,
+    [data-theme="light"] #periodic-table .ptable-inspector-box,
+    #periodic-table.ptable-white-mode .ptable-inspector-box,
+    [data-theme="washi"] #periodic-table .daltonism-bar,
+    [data-theme="light"] #periodic-table .daltonism-bar,
+    #periodic-table.ptable-white-mode .daltonism-bar {
+      background: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+    }
+
+    [data-theme="washi"] #periodic-table .ptable-wrapper,
+    [data-theme="light"] #periodic-table .ptable-wrapper,
+    #periodic-table.ptable-white-mode .ptable-wrapper {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 8px;
+      padding: 16px 12px;
+    }
+
     [data-theme="washi"] .ptable-cell,
-    [data-theme="light"] .ptable-cell {
-      background: #0f172a !important;
+    [data-theme="light"] .ptable-cell,
+    #periodic-table.ptable-white-mode .ptable-cell {
+      background: #ffffff !important;
+      border: 1px solid #cbd5e1 !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
 
     [data-theme="washi"] .ptable-cell-z,
     [data-theme="light"] .ptable-cell-z,
+    #periodic-table.ptable-white-mode .ptable-cell-z {
+      color: #64748b !important;
+      font-weight: 700;
+    }
+
     [data-theme="washi"] .ptable-cell-name,
-    [data-theme="light"] .ptable-cell-name {
-      color: #94a3b8 !important;
+    [data-theme="light"] .ptable-cell-name,
+    #periodic-table.ptable-white-mode .ptable-cell-name {
+      color: #1e293b !important;
+      font-weight: 600;
     }
 
     [data-theme="washi"] .ptable-cell:hover,
     [data-theme="light"] .ptable-cell:hover,
     [data-theme="washi"] .ptable-cell.active,
-    [data-theme="light"] .ptable-cell.active {
-      background: #1e293b !important;
-      border-color: #ffffff !important;
+    [data-theme="light"] .ptable-cell.active,
+    #periodic-table.ptable-white-mode .ptable-cell:hover,
+    #periodic-table.ptable-white-mode .ptable-cell.active {
+      background: #ffffff !important;
+      border-color: #0284c7 !important;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16) !important;
+      transform: scale(1.15);
+    }
+
+    /* Light symbol contrast overrides on white tiles */
+    [data-theme="washi"] .ptable-cell-sym[style*="rgb(244, 244, 245)"],
+    [data-theme="light"] .ptable-cell-sym[style*="rgb(244, 244, 245)"],
+    [data-theme="washi"] .ptable-cell-sym[style*="#f4f4f5"],
+    [data-theme="light"] .ptable-cell-sym[style*="#f4f4f5"],
+    #periodic-table.ptable-white-mode .ptable-cell-sym[style*="#f4f4f5"],
+    #periodic-table.ptable-white-mode .ptable-cell-sym[style*="rgb(244, 244, 245)"] {
+      color: #0f172a !important;
+    }
+
+    [data-theme="washi"] .ptable-cell-sym[style*="#e2e8f0"],
+    [data-theme="light"] .ptable-cell-sym[style*="#e2e8f0"],
+    #periodic-table.ptable-white-mode .ptable-cell-sym[style*="#e2e8f0"] {
+      color: #475569 !important;
+    }
+
+    [data-theme="washi"] .ptable-legend-pill,
+    [data-theme="light"] .ptable-legend-pill,
+    #periodic-table.ptable-white-mode .ptable-legend-pill {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #334155 !important;
+    }
+
+    [data-theme="washi"] #fullPtableHeroTile,
+    [data-theme="light"] #fullPtableHeroTile,
+    #periodic-table.ptable-white-mode #fullPtableHeroTile {
+      background: #ffffff !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1) !important;
     }
 
     [data-theme="washi"] #fullPtableHeroHex,
     [data-theme="light"] #fullPtableHeroHex,
     [data-theme="washi"] #fullPtableHeroCategory,
-    [data-theme="light"] #fullPtableHeroCategory {
+    [data-theme="light"] #fullPtableHeroCategory,
+    #periodic-table.ptable-white-mode #fullPtableHeroCategory {
       color: var(--text-main) !important;
+    }
+
+    [data-theme="washi"] #periodic-table .section-title span,
+    [data-theme="light"] #periodic-table .section-title span,
+    #periodic-table.ptable-white-mode .section-title span {
+      color: #0f172a !important;
+    }
+
+    [data-theme="washi"] #periodic-table p,
+    [data-theme="light"] #periodic-table p,
+    #periodic-table.ptable-white-mode p {
+      color: #334155 !important;
+    }
+
+    [data-theme="washi"] #fullPtableHeroName,
+    [data-theme="light"] #fullPtableHeroName,
+    #periodic-table.ptable-white-mode #fullPtableHeroName {
+      color: #0f172a !important;
+    }
+
+    [data-theme="washi"] #fullPtableHeroState,
+    [data-theme="light"] #fullPtableHeroState,
+    #periodic-table.ptable-white-mode #fullPtableHeroState {
+      color: #0f172a !important;
     }
 
     /* CRT Terminal Phosphor Buttons inside dark chassis */
@@ -553,8 +649,55 @@
       transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.2s ease;
     }
     .map-pin:hover, .map-pin.active {
-      transform: scale(1.35);
-      filter: drop-shadow(0 0 8px var(--cyan));
+      filter: drop-shadow(0 0 10px var(--cyan));
+    }
+    .map-pin .map-pin-callout {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.16s ease, transform 0.16s ease;
+      transform: translateY(2px);
+    }
+    .map-pin:hover .map-pin-callout,
+    .map-pin.active .map-pin-callout {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .map-zoom-controls {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 10;
+    }
+    .map-zoom-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(6px);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 15px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+      user-select: none;
+    }
+    .map-zoom-btn:hover {
+      background: rgba(6, 182, 212, 0.25);
+      border-color: var(--cyan);
+      color: #ffffff;
+      transform: scale(1.08);
+    }
+    .map-zoom-btn:active {
+      transform: scale(0.95);
     }
     .map-filter-btn {
       background: var(--surface-inner);
@@ -733,12 +876,18 @@
 
     @media (max-width: 960px) {
       .world-map-grid {
-        grid-template-columns: 1fr !important;
+        grid-template-columns: minmax(0, 1fr) !important;
         gap: 16px;
+      }
+      .world-map-grid > div {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
       }
       #world-map-studio {
         padding: 16px 12px !important;
         margin-top: 20px !important;
+        overflow: hidden !important;
       }
       .world-map-header {
         flex-direction: column;
@@ -759,12 +908,24 @@
         flex-shrink: 0;
       }
       .world-map-canvas-box {
-        aspect-ratio: 1.65 / 1;
-        min-height: 220px;
+        aspect-ratio: 1.85 / 1 !important;
+        min-height: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      #worldMapSvg {
+        max-width: 100% !important;
+        height: auto !important;
       }
       #countryHudDock {
         margin-top: 4px;
         padding: 14px 12px !important;
+      }
+      .map-zoom-btn {
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 13px !important;
       }
       .mobile-scroll-hint {
         display: flex !important;
@@ -4615,6 +4776,7 @@
           <a href="asl_studio.html">🤟 Global Sign &amp; ASL Studio</a>
           <a href="music_studio.html">🎼 Music Studio (WebAudio)</a>
           <a href="kinetic_laboratory.html">⚙️ Kinetic Lab (TIM Contraption)</a>
+          <a href="closed_caption_studio.html">📺 Closed Caption &amp; Teletext Studio</a>
           <a href="#scientific-lab" onclick="toggleStudioDrawer('scientific-lab', true)">🔬 Scientific &amp; Math Lab</a>
           <a href="#chromatic-studio" onclick="toggleStudioDrawer('chromatic-studio', true)">🎨 Chromatic Multi-Layer Studio</a>
           <a href="#scripts" onclick="toggleStudioDrawer('scripts', true)">🌐 Universal World Scripts (SMoE)</a>
@@ -5468,6 +5630,15 @@
           </div>
         </a>
 
+        <!-- Card: Closed Caption & Broadcast Teletext Studio -->
+        <a href="closed_caption_studio.html" class="studio-portal-item" style="border-color: rgba(6, 182, 212, 0.4); background: radial-gradient(circle at top left, rgba(6, 182, 212, 0.1) 0%, var(--surface-inner) 100%);">
+          <div class="studio-portal-icon" style="background: rgba(6, 182, 212, 0.2); color: #06b6d4;">📺</div>
+          <div class="studio-portal-content">
+            <h3>Closed Caption &amp; Teletext Studio <span style="background: rgba(6, 182, 212, 0.2); color: var(--cyan); border-color: rgba(6, 182, 212, 0.4);">Suite ↗</span></h3>
+            <p><strong>Broadcast CC:</strong> Dynamic Variable Font audio prosody (whisper to siren), CEA-708 roll-up &amp; pop-on, Louise Sloan 5:1 acuity &amp; A/B optometric comparator.</p>
+          </div>
+        </a>
+
         <!-- Card 2: Scientific & Math Lab -->
         <a href="#scientific-lab" class="studio-portal-item" onclick="toggleStudioDrawer('scientific-lab', true)">
           <div class="studio-portal-icon" style="background: rgba(96, 165, 250, 0.15); color: #60a5fa;">🔬</div>
@@ -6265,6 +6436,7 @@
           <button type="button" class="sci-tab-btn" data-cvd="monochromacy" onclick="setDaltonismFilter('monochromacy')" title="Total color blindness / Achromatopsia">Monochromacy (100% Greyscale)</button>
           <button type="button" class="sci-tab-btn" data-optical="glare" onclick="toggleOpticalGlare()" title="Simulate high-intensity surgical lamp or sunlight direct glare">☀️ Direct Glare</button>
           <button type="button" class="sci-tab-btn" data-optical="veiling" onclick="toggleVeilingGlare()" title="Simulate veiling specular reflection / ambient washout">🌫️ Veiling Washout</button>
+          <button type="button" class="sci-tab-btn" id="btnPtableWhiteBoard" onclick="togglePtableWhiteBoard()" title="Toggle White Laboratory Chart presentation">⚪ White Board</button>
         </div>
       </div>
 
@@ -7085,8 +7257,15 @@
                   </g>
                 </svg>
 
-                <div style="position: absolute; bottom: 8px; left: 12px; font-size: 11px; font-family: 'PocketGull Mono', monospace; color: rgba(255, 255, 255, 0.75); pointer-events: none;">
+                <div style="position: absolute; bottom: 8px; left: 10px; right: 80px; font-size: 10px; font-family: 'PocketGull Mono', monospace; color: rgba(255, 255, 255, 0.75); pointer-events: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                   Grid: WGS-84 Optical &bull; Target: <span id="mapHoverLabel" style="color: #38bdf8; font-weight: 700;">Hover or click a nation</span>
+                </div>
+
+                <!-- Floating Map Zoom Controls -->
+                <div class="map-zoom-controls">
+                  <button type="button" id="mapZoomIn" class="map-zoom-btn" title="Zoom In" aria-label="Zoom In">+</button>
+                  <button type="button" id="mapZoomOut" class="map-zoom-btn" title="Zoom Out" aria-label="Zoom Out">−</button>
+                  <button type="button" id="mapZoomReset" class="map-zoom-btn" title="Reset Global View" aria-label="Reset Global View">⟲</button>
                 </div>
               </div>
 
@@ -10031,6 +10210,14 @@
 
       // Backward-compatible safe stub for legacy audio telemetry test assertion
       window.toggleAudioTelemetrySim = function() { return false; };
+
+      window.togglePtableWhiteBoard = function() {
+        const ptable = document.getElementById('periodic-table');
+        const btn = document.getElementById('btnPtableWhiteBoard');
+        if (!ptable) return;
+        const isWhite = ptable.classList.toggle('ptable-white-mode');
+        if (btn) btn.classList.toggle('active', isWhite);
+      };
 
       // --- Astrometric Solar System & Planetary Ephemeris Controller ---
       const solarSystemBodies = [
@@ -13388,6 +13575,63 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
         if (viewSwitchMap) viewSwitchMap.addEventListener('click', () => setView('map'));
         if (viewSwitchPavilion) viewSwitchPavilion.addEventListener('click', () => setView('pavilion'));
 
+        const REGION_BOUNDS = {
+          all: { x: 0, y: 0, w: 1000, h: 520 },
+          universal: { x: 0, y: 0, w: 1000, h: 520 },
+          indigenous: { x: 60, y: 20, w: 420, h: 320 },
+          americas: { x: 60, y: 30, w: 380, h: 460 },
+          europe: { x: 390, y: 40, w: 260, h: 220 },
+          mena: { x: 420, y: 150, w: 290, h: 280 },
+          asia: { x: 560, y: 60, w: 400, h: 430 }
+        };
+
+        const mapSvg = svg;
+        let currentVb = { x: 0, y: 0, w: 1000, h: 520 };
+        let zoomAnimFrame = null;
+
+        function animateViewBox(targetX, targetY, targetW, targetH, duration = 300) {
+          if (!mapSvg) return;
+          if (zoomAnimFrame) cancelAnimationFrame(zoomAnimFrame);
+
+          const startX = currentVb.x;
+          const startY = currentVb.y;
+          const startW = currentVb.w;
+          const startH = currentVb.h;
+          const startTime = performance.now();
+
+          function step(now) {
+            const progress = Math.min(1, (now - startTime) / duration);
+            const ease = 1 - Math.pow(1 - progress, 3);
+
+            const curX = startX + (targetX - startX) * ease;
+            const curY = startY + (targetY - startY) * ease;
+            const curW = startW + (targetW - startW) * ease;
+            const curH = startH + (targetH - startH) * ease;
+
+            mapSvg.setAttribute('viewBox', `${curX.toFixed(2)} ${curY.toFixed(2)} ${curW.toFixed(2)} ${curH.toFixed(2)}`);
+
+            if (progress < 1) {
+              zoomAnimFrame = requestAnimationFrame(step);
+            } else {
+              currentVb = { x: targetX, y: targetY, w: targetW, h: targetH };
+              mapSvg.setAttribute('viewBox', `${targetX} ${targetY} ${targetW} ${targetH}`);
+              zoomAnimFrame = null;
+            }
+          }
+
+          zoomAnimFrame = requestAnimationFrame(step);
+        }
+
+        function zoomDelta(factor) {
+          const cx = currentVb.x + currentVb.w / 2;
+          const cy = currentVb.y + currentVb.h / 2;
+          const nw = Math.max(180, Math.min(1000, currentVb.w * factor));
+          const nh = nw * (520 / 1000);
+          const nx = Math.max(0, Math.min(1000 - nw, cx - nw / 2));
+          const ny = Math.max(0, Math.min(520 - nh, cy - nh / 2));
+          animateViewBox(nx, ny, nw, nh, 200);
+        }
+
         function renderPins(regionFilter = 'all') {
           currentRegionFilter = regionFilter;
           pinLayer.innerHTML = '';
@@ -13414,34 +13658,64 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
             hitbox.style.cursor = 'pointer';
             hitbox.style.pointerEvents = 'all';
 
+            const isIndig = c.region === 'indigenous';
             const pulse = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
             pulse.setAttribute('cx', c.x);
             pulse.setAttribute('cy', c.y);
-            pulse.setAttribute('r', '14');
-            pulse.setAttribute('fill', 'rgba(6, 182, 212, 0.25)');
-            pulse.setAttribute('stroke', 'rgba(6, 182, 212, 0.6)');
+            pulse.setAttribute('r', '13');
+            pulse.setAttribute('fill', isIndig ? 'rgba(245, 158, 11, 0.22)' : 'rgba(6, 182, 212, 0.22)');
+            pulse.setAttribute('stroke', isIndig ? 'rgba(245, 158, 11, 0.65)' : 'rgba(6, 182, 212, 0.6)');
             pulse.setAttribute('stroke-width', '1');
 
             const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
             dot.setAttribute('cx', c.x);
             dot.setAttribute('cy', c.y);
-            dot.setAttribute('r', '5');
-            dot.setAttribute('fill', c.id === activeCountryId ? '#38bdf8' : '#06b6d4');
+            dot.setAttribute('r', '4.5');
+            dot.setAttribute('fill', isIndig ? '#f59e0b' : (c.id === activeCountryId ? '#38bdf8' : '#06b6d4'));
             dot.setAttribute('filter', 'url(#puckGlow)');
 
+            // Elevated Callout Badge on Hover / Active
+            const callout = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            callout.classList.add('map-pin-callout');
+            callout.style.pointerEvents = 'none';
+
+            const labelStr = `${c.flag} ${c.name}`;
+            const badgeW = Math.max(76, labelStr.length * 6.6 + 14);
+            const badgeH = 20;
+            const badgeX = c.x - badgeW / 2;
+            const badgeY = c.y - 28;
+
+            const badgeBg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            badgeBg.setAttribute('x', badgeX);
+            badgeBg.setAttribute('y', badgeY);
+            badgeBg.setAttribute('width', badgeW);
+            badgeBg.setAttribute('height', badgeH);
+            badgeBg.setAttribute('rx', '4');
+            badgeBg.setAttribute('fill', 'rgba(10, 18, 32, 0.94)');
+            badgeBg.setAttribute('stroke', isIndig ? '#f59e0b' : '#06b6d4');
+            badgeBg.setAttribute('stroke-width', '1');
+            badgeBg.setAttribute('filter', 'drop-shadow(0 2px 6px rgba(0,0,0,0.6))');
+
+            const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            arrow.setAttribute('points', `${c.x - 4},${badgeY + badgeH} ${c.x + 4},${badgeY + badgeH} ${c.x},${badgeY + badgeH + 4}`);
+            arrow.setAttribute('fill', isIndig ? '#f59e0b' : '#06b6d4');
+
             const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-            label.setAttribute('x', c.x + 8);
-            label.setAttribute('y', c.y + 4);
+            label.setAttribute('x', c.x);
+            label.setAttribute('y', badgeY + 13.5);
+            label.setAttribute('text-anchor', 'middle');
             label.setAttribute('fill', '#ffffff');
-            label.setAttribute('font-size', '10');
+            label.setAttribute('font-size', '9.5');
             label.setAttribute('font-family', 'PocketGull Mono, monospace');
             label.setAttribute('font-weight', '700');
-            label.textContent = c.flag + ' ' + c.name;
+            label.textContent = labelStr;
 
-            g.append(hitbox, pulse, dot, label);
+            callout.append(badgeBg, arrow, label);
+            g.append(hitbox, pulse, dot, callout);
 
             g.addEventListener('mouseenter', () => {
               hoverLabel.textContent = `${c.flag} ${c.name} (${c.authority})`;
+              pinLayer.appendChild(g);
             });
             g.addEventListener('mouseleave', () => {
               const active = GLOBAL_HEALTH_ATLAS.find(item => item.id === activeCountryId);
@@ -13484,6 +13758,20 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           document.querySelectorAll('.flag-card').forEach(card => {
             card.classList.toggle('active', card.dataset.id === id);
           });
+
+          // Bring active pin to front in SVG layer
+          const activePin = document.querySelector(`.map-pin[data-id="${id}"]`);
+          if (activePin && activePin.parentNode) {
+            activePin.parentNode.appendChild(activePin);
+          }
+
+          // If pin is outside current viewBox, gently pan to include it
+          if (country.x < currentVb.x + 30 || country.x > currentVb.x + currentVb.w - 30 ||
+              country.y < currentVb.y + 30 || country.y > currentVb.y + currentVb.h - 30) {
+            const nx = Math.max(0, Math.min(1000 - currentVb.w, country.x - currentVb.w / 2));
+            const ny = Math.max(0, Math.min(520 - currentVb.h, country.y - currentVb.h / 2));
+            animateViewBox(nx, ny, currentVb.w, currentVb.h, 280);
+          }
 
           // Update HUD Telemetry
           const flagEl = document.getElementById('hudFlag');
@@ -13543,13 +13831,28 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           }
         }
 
-        // Region Filter Buttons
+        // Region Filter Buttons with Dynamic ViewBox Zoom
         filterBtns.forEach(btn => {
           btn.addEventListener('click', () => {
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            renderPins(btn.dataset.region);
+            const region = btn.dataset.region || 'all';
+            renderPins(region);
+            const target = REGION_BOUNDS[region] || REGION_BOUNDS.all;
+            animateViewBox(target.x, target.y, target.w, target.h, 320);
           });
+        });
+
+        // Floating Map Zoom Buttons
+        const btnZoomIn = document.getElementById('mapZoomIn');
+        const btnZoomOut = document.getElementById('mapZoomOut');
+        const btnZoomReset = document.getElementById('mapZoomReset');
+
+        if (btnZoomIn) btnZoomIn.addEventListener('click', () => zoomDelta(0.72));
+        if (btnZoomOut) btnZoomOut.addEventListener('click', () => zoomDelta(1.38));
+        if (btnZoomReset) btnZoomReset.addEventListener('click', () => {
+          const target = REGION_BOUNDS[currentRegionFilter] || REGION_BOUNDS.all;
+          animateViewBox(target.x, target.y, target.w, target.h, 250);
         });
 
         // 1-Click Copy Prescription
