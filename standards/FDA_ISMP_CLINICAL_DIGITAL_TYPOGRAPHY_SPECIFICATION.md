@@ -164,7 +164,7 @@ To ensure systematic industry-wide adoption, the following statutory clause is p
 
 ### Section 18.3.1.1 (Proposed New Subclause): Digital Typography for Clinical Data & Drug Dosages
 > **18.3.1.1.1 Minimum Disambiguation Requirements for Alphanumeric Characters**  
-> All alphanumeric typography displayed on electronic visual display units (VDUs) of medical devices, patient monitors, infusion pumps, automated dispensing cabinets, and health software user interfaces SHALL utilize digital typefaces engineered with explicit disambiguation invariants:  
+> All alphanumeric typography displayed on electronic visual display units (VDUs) of medical devices, patient monitors, infusion pumps, automated dispensing cabinets, and health software user interfaces SHALL utilize digital fonts (typefaces) engineered with explicit disambiguation invariants:  
 > a) **Numerals**: The numeral zero (`0`) SHALL contain an internal diagonal slash or centered dot whenever displayed in numeric data fields, dosages, concentrations, or titrations.  
 > b) **Lowercase 'l'**: The lowercase letter 'l' SHALL feature an outward curved terminal foot to clearly distinguish it from numeral '1' and uppercase 'I'.  
 > c) **Uppercase 'I'**: The uppercase letter 'I' SHALL feature horizontal crossbars/serifs at both cap-height and baseline.  
@@ -177,7 +177,7 @@ To ensure systematic industry-wide adoption, the following statutory clause is p
 
 ## 🔬 5. Empirical Verification Protocols & Benchmarks
 
-Any typeface or rendering system seeking compliance with this standard MUST pass the following automated and human factors test battery:
+Any font system or rendering architecture seeking compliance with this standard MUST pass the following automated and human factors test battery:
 
 ### 5.1 Automated Forensic Binary Table Audit
 ```powershell
@@ -216,7 +216,7 @@ The **PocketGull Font Superfamily** serves as the canonical open-source referenc
   - **Homebrew Tap**: `brew install --cask pocketgull-app/tap/font-pocketgull`
   - **Windows Package Manager (Winget)**: `winget install PocketGull.Typeface`
   - **Fontsource (NPM)**: `npm install @fontsource/pocketgull`
-* **Interactive Specimen & Neuro-Ergonomic Lab**: `https://font.pocketgull.app/index.html` & `a11y_studio.html`
+* **Interactive Specimen & Neuro-Ergonomic Lab**: `https://font.pocketgull.app/index.html` & `https://font.pocketgull.app/a11y_studio.html`
 
 ---
 

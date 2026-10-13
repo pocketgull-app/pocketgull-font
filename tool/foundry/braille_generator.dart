@@ -99,11 +99,13 @@ class BrailleGenerator {
       }
     }
 
+    final advance = philocardiaHearts ? (cellWidth + 40) : cellWidth;
+
     return GlyphRecord(
       glyphId: gid,
       codePoint: codePoint,
       name: 'uni${codePoint.toRadixString(16).toUpperCase().padLeft(4, "0")}',
-      advanceWidth: cellWidth,
+      advanceWidth: advance,
       lsb: contours.isEmpty ? 0 : 210 - radius,
       contours: contours,
     );

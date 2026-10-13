@@ -1,0 +1,89 @@
+{{Infobox font
+| name           = PocketGull
+| style          = [[Sans-serif]], [[Display typeface|Display]], [[Monospaced font|Monospace]]
+| classifications= [[Humanist sans-serif|Humanist]]
+| creator        = Phil Gear
+| foundry        = The PocketGull Project Authors
+| date-released  = 2026
+| latest_release_version = 3.1.0
+| latest_release_date    = 2026
+| glyph-count    = About 14,000 in the main styles
+| characters     = Latin, Greek, Cyrillic, Cherokee, Canadian Aboriginal syllabics, Duployan, Braille patterns
+| license        = [[SIL Open Font License]] 1.1
+| website        = {{URL|https://font.pocketgull.app}}
+}}
+
+'''PocketGull''' is an [[open-source]] [[sans-serif]] [[font superfamily]] designed by Phil Gear, with display and [[monospaced font|monospace]] members. According to its designer, it began as felt-marker lettering on cardstock and was developed for legibility in healthcare settings, drawing on [[Louise Sloan]]'s optotype proportions and character-disambiguation guidance from the [[Institute for Safe Medication Practices]] (ISMP).<ref name="specimen">{{cite web |title=PocketGull Interactive Specimen |url=https://font.pocketgull.app |publisher=The PocketGull Project Authors |access-date=2026-10-13}}</ref>
+
+The typeface is released under the [[SIL Open Font License]] 1.1 and is available through [[Homebrew (package manager)|Homebrew]], [[Windows Package Manager]] and [[jsDelivr]].<ref name="repo">{{cite web |title=PocketGull Typeface Repository |url=https://github.com/pocketgull-app/pocketgull-font |publisher=GitHub |access-date=2026-10-13}}</ref>
+
+== Design and history ==
+=== Origins ===
+The design originated in drawing sessions using chisel-tip and fine-point felt markers on cardstock.<ref name="specimen" /> The designer states that, unlike geometric sans-serifs such as [[Helvetica]], PocketGull uses rounded corners (25 [[units per em]]) and asymmetric bowl shapes.<ref name="specimen" />
+
+=== Stated design rationale ===
+The project's documentation argues that fatigue, glare and stress can degrade character recognition among clinicians, and that features aimed at readers with [[dyslexia]] or [[attention deficit hyperactivity disorder|ADHD]] therefore benefit all readers, an application of the [[curb-cut effect]].<ref name="ISMP-spec">{{cite web |title=Clinical Digital Typography Standard (POCKETGULL-STD-2026-01) |url=https://font.pocketgull.app |publisher=The PocketGull Project Authors |date=2026 |access-date=2026-10-13}}</ref> This is the project's own position and has not been independently validated. The typeface is not a medical device.
+
+== Typographic characteristics ==
+=== Character disambiguation ===
+The design aims to reduce confusion between look-alike characters, a concern raised by the ISMP in connection with medication errors.<ref name="ISMP-spec" /> The following features are provided as defaults or through [[OpenType]] feature tags:
+* '''Slashed zero''' ({{mono|zero}} / {{mono|cv08}}): distinguishes {{mono|0}} from {{mono|O}}.
+* '''Curved-foot lowercase l''' ({{mono|cv05}}): distinguishes {{mono|l}} from {{mono|1}} and {{mono|I}}.
+* '''Serifed capital I''' ({{mono|ss02}}): adds serifs to capital {{mono|I}}.
+* '''Crossbar Z''' ({{mono|cv11}}): distinguishes {{mono|Z}} from {{mono|2}}.
+* '''Asymmetric bowls''': {{mono|b}}/{{mono|d}} and {{mono|p}}/{{mono|q}} are not exact mirror images.
+
+=== Optotype proportions ===
+The designer states that letter proportions follow the 5:1 ratio of height to stroke width used in the Sloan optotypes.<ref name="Sloan">{{cite journal |last1=Sloan |first1=Louise L. |title=New Test Charts for the Measurement of Visual Acuity at Far and Near Distances |journal=American Journal of Ophthalmology |volume=48 |issue=6 |pages=807–813 |year=1959 |doi=10.1016/0002-9394(59)90626-7}}</ref>
+
+=== Font engineering ===
+The fonts use a 1000 [[units per em]] grid, and the project reports that they pass the [[OpenType Sanitizer]] (OTS) used by browsers.<ref name="repo" />
+
+== Superfamily structure ==
+The PocketGull superfamily encompasses multiple weights and specialized optical variants:
+
+{| class="wikitable"
+! Style / File !! Weight (wght) !! Intended Application !! Key Characteristics
+|-
+| '''PocketGull Fineliner'''<br />{{mono|PocketGull-Fineliner.ttf}} || 400 (Regular) || EHR clinical records, body text, patient discharge documentation || High counter aperture, optical legibility at small sizes (8–12 pt).
+|-
+| '''PocketGull Bold'''<br />{{mono|PocketGull-Bold.ttf}} || 700 / 800 || Display titling, clinical alarm banners, Bionic reading anchors || High visual impact without loss of internal counter-space.
+|-
+| '''PocketGull Chiseltip'''<br />{{mono|PocketGull-Chiseltip.ttf}} || 900 (Black) || Directional signage, high-contrast hospital placards || Calligraphic felt-marker stroke modulation, extreme visual punch.
+|-
+| '''PocketGull Mono'''<br />{{mono|PocketGullMono-Regular.ttf}} || 400 / 500 || ICU telemetry consoles, code editors, medical instrumentation || Fixed 600 UPM pitch invariant, gapless [[box-drawing characters]] ({{mono|U+2500}}–{{mono|U+257F}}), and sub-cell [[electrocardiography|ECG]] telemetry waveforms.
+|-
+| '''PocketGull VF'''<br />{{mono|PocketGull-VF.ttf}} || 100–900 || Responsive web interfaces and operating system UI || Continuous variable font weight axis with zero [[cumulative layout shift]] (CLS) metrics.
+|}
+
+== Script coverage ==
+The main styles cover [[Unicode]] Latin, Greek and Cyrillic, as well as:
+* '''Braille''': all 256 Unicode Braille patterns ({{mono|U+2800}}–{{mono|U+28FF}}).
+* '''Indigenous scripts''': [[Cherokee syllabary|Cherokee]], [[Canadian Aboriginal syllabics]] and [[Duployan shorthand]].
+* '''Specialty styles''': separate styles for American Sign Language notation, chemistry and other notations (for example {{mono|PocketGull-ASL}} and {{mono|PocketGull-Chem}}).<ref name="repo" />
+
+== Distribution and licensing ==
+PocketGull is libre software licensed under the [[SIL Open Font License]] 1.1 with no Reserved Font Names (RFN). It is distributed through:
+* Official website and interactive specimen broadside ({{URL|https://font.pocketgull.app}})
+* [[GitHub]] repository ({{mono|pocketgull-app/pocketgull-font}})
+* [[Homebrew (package manager)|Homebrew]] Cask ({{mono|pocketgull-app/tap/font-pocketgull}})
+* [[Windows Package Manager]] ({{mono|winget install PocketGull.Typeface}})
+* [[Node Package Manager|NPM]] via Fontsource ({{mono|@fontsource/pocketgull}})
+* [[LaTeX]] CTAN package ({{mono|pocketgull-math.sty}})
+* Global edge [[content delivery network]] mirrors via [[jsDelivr]]
+
+== References ==
+{{reflist}}
+
+== External links ==
+* {{Official website|https://font.pocketgull.app}}
+* [https://github.com/pocketgull-app/pocketgull-font PocketGull on GitHub]
+
+{{DEFAULTSORT:Pocketgull}}
+[[Category:Sans-serif typefaces]]
+[[Category:Humanist sans-serif typefaces]]
+[[Category:Monospaced typefaces]]
+[[Category:Display typefaces]]
+[[Category:Variable fonts]]
+[[Category:Open-source typefaces]]
+[[Category:Typefaces and fonts introduced in 2026]]

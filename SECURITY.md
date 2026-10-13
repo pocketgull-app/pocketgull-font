@@ -30,6 +30,7 @@ Please report vulnerabilities through our coordinated private disclosure channel
 * **Initial Acknowledgement**: Within **24–48 hours**.
 * **Triage & Reproduction**: Within **3 business days**.
 * **Remediation & Patch Release**: Within **7 business days**, accompanied by a cryptographically signed GitHub Release with SHA-256 binary manifests.
+* **Google & Alphabet VRP Alignment**: For vulnerabilities affecting upstream Google Fonts infrastructure (`fonts.googleapis.com`), Chromium OTS/HarfBuzz/FreeType, or Unicode BiDi spoofing (`CVE-2021-42574`), see our **[Unicode Security, PUA & Anti-Spoofing Specification](file:///c:/Users/philg/Pocketgull/pocketgull-typeface/standards/UNICODE_SECURITY_AND_PUA_SPECIFICATION.md)** and the official **[Google and Alphabet Vulnerability Reward Program (VRP) Rules](https://bughunters.google.com/about/rules/google-friends/google-and-alphabet-vulnerability-reward-program-vrp-rules)**.
 
 ---
 

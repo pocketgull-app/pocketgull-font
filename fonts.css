@@ -2521,3 +2521,9 @@ body.eco-dark-canopy {
   filter: grayscale(100%) contrast(1.15);
 }
 
+/* Global Anti-Aliasing, Text-Rendering & Subpixel Smoothing Invariants */
+:root, html, body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
