@@ -363,11 +363,10 @@
       color: var(--text-main) !important;
     }
 
-    /* Periodic table chips in washi & light themes */
+    /* Periodic table chips in washi & light themes - preserve IUPAC category color contrast */
     [data-theme="washi"] .ptable-cell,
     [data-theme="light"] .ptable-cell {
       background: #0f172a !important;
-      border-color: rgba(255, 255, 255, 0.15) !important;
     }
 
     [data-theme="washi"] .ptable-cell-z,
@@ -375,11 +374,6 @@
     [data-theme="washi"] .ptable-cell-name,
     [data-theme="light"] .ptable-cell-name {
       color: #94a3b8 !important;
-    }
-
-    [data-theme="washi"] .ptable-cell .ptable-cell-sym,
-    [data-theme="light"] .ptable-cell .ptable-cell-sym {
-      color: #f8fafc !important;
     }
 
     [data-theme="washi"] .ptable-cell:hover,
@@ -689,7 +683,7 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 112px;
+      scroll-padding-top: 68px;
     }
 
     
@@ -706,7 +700,7 @@
       background-color: var(--bg);
       color: var(--text-main);
       font-family: var(--font-sans, 'PocketGull', 'PocketGull Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif);
-      padding-top: 112px;
+      padding-top: 56px;
       padding-bottom: 60px;
       line-height: 1.5;
       font-synthesis: none;
@@ -716,13 +710,13 @@
       transition: background-color 0.25s ease, color 0.25s ease;
     }
 
-    /* Sticky Top Navigation Bar */
+    /* Sticky Top Navigation Bar (Unified 56px Masthead) */
     .top-navbar {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      height: 64px;
+      height: 56px;
       background: var(--nav-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -731,7 +725,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 24px;
+      padding: 0 20px;
     }
 
     .brand-group {
@@ -3421,7 +3415,10 @@
         display: none;
       }
       .top-navbar {
-        padding: 0 16px;
+        padding: 0 14px;
+      }
+      .chapter-hud-display .chap-label {
+        max-width: 100px;
       }
       .container {
         padding: 0 16px;
@@ -3431,6 +3428,15 @@
       }
       .specimen-card {
         padding: 24px 18px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .masthead-divider {
+        display: none;
+      }
+      .chapter-hud-display .chap-label {
+        display: none;
       }
     }
   
@@ -3616,33 +3622,85 @@
       margin-bottom: 0.35rem;
       color: var(--sample-text-dim);
     }
+    /* Doc Drill Vernier Slide-Rule Rail & Precision Optical Runner Chips */
     .doc-drill-chips {
       display: flex;
-      gap: 0.45rem;
-      padding: 0.6rem 1rem;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1rem;
       overflow-x: auto;
-      border-top: 1px solid var(--card-border);
-      background: var(--card-bg);
+      border-top: 1px solid var(--slide-rule-border, rgba(6, 182, 212, 0.3));
+      border-bottom: 1px solid var(--slide-rule-border, rgba(6, 182, 212, 0.15));
+      background-color: var(--surface-inner);
+      background-image:
+        repeating-linear-gradient(
+          to right,
+          var(--cyan) 0px,
+          var(--cyan) 1.5px,
+          transparent 1.5px,
+          transparent 24px
+        ),
+        repeating-linear-gradient(
+          to right,
+          rgba(6, 182, 212, 0.45) 0px,
+          rgba(6, 182, 212, 0.45) 1px,
+          transparent 1px,
+          transparent 12px
+        ),
+        repeating-linear-gradient(
+          to right,
+          rgba(6, 182, 212, 0.2) 0px,
+          rgba(6, 182, 212, 0.2) 1px,
+          transparent 1px,
+          transparent 3px
+        );
+      background-size: 100% 5px, 100% 3px, 100% 2px;
+      background-position: top left, top left, top left;
+      background-repeat: no-repeat;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35);
       scrollbar-width: thin;
     }
     .doc-drill-chip {
       white-space: nowrap;
       font-family: 'PocketGull Mono', monospace;
       font-size: 0.7rem;
-      font-weight: 600;
+      font-weight: 700;
+      letter-spacing: 0.03em;
       color: var(--cyan);
-      background: var(--surface-inner);
-      border: 1px solid var(--card-border);
-      padding: 0.3rem 0.7rem;
-      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(15, 23, 42, 0.9) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.45);
+      padding: 0.32rem 0.75rem 0.32rem 0.55rem;
+      border-radius: 3px;
       cursor: pointer;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .doc-drill-chip::before {
+      content: '';
+      display: inline-block;
+      width: 2px;
+      height: 12px;
+      background: var(--slide-rule-hairline, #ef4444);
+      opacity: 0.75;
+      box-shadow: 0 0 3px rgba(239, 68, 68, 0.5);
       transition: all 0.15s ease;
     }
     .doc-drill-chip:hover {
-      background: rgba(6, 182, 212, 0.15);
+      background: linear-gradient(180deg, rgba(6, 182, 212, 0.22) 0%, rgba(15, 23, 42, 0.98) 100%);
       border-color: var(--cyan);
-      color: #fff;
+      color: #ffffff;
       transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(6, 182, 212, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+    }
+    .doc-drill-chip:hover::before {
+      opacity: 1;
+      height: 16px;
+      box-shadow: 0 0 8px #ef4444;
+      background: #ff2222;
     }
     .doc-drill-cta-bar {
       padding: 0.5rem 1rem;
@@ -4002,85 +4060,102 @@
     }
 
     /* =========================================================================
-       Interactive Textbook Folio Chapter Strip & Progress Ribbon
+       Single Unified 56px Masthead & Integrated Chapter HUD Scrubber
        ========================================================================= */
-    .folio-chapter-strip {
-      position: fixed;
-      top: 64px;
-      left: 0;
-      right: 0;
-      height: 38px;
-      background: var(--surface-inner);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--card-border);
-      z-index: 998;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      transition: background-color 0.25s ease, border-color 0.25s ease;
-    }
-    .folio-strip-track {
+    .masthead-left {
       display: flex;
       align-items: center;
-      gap: 4px;
-      overflow-x: auto;
-      scrollbar-width: none;
-      padding: 0 20px;
-      white-space: nowrap;
-      height: 100%;
+      gap: 12px;
     }
-    .folio-strip-track::-webkit-scrollbar {
-      display: none;
+
+    .masthead-divider {
+      width: 1px;
+      height: 22px;
+      background: var(--card-border);
+      opacity: 0.6;
     }
-    .folio-chapter-tab {
+
+    .masthead-chapter-hud {
+      display: inline-flex;
+      align-items: center;
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 2px;
+      gap: 2px;
+      transition: all 0.2s ease;
+    }
+    .masthead-chapter-hud:hover {
+      border-color: var(--cyan);
+    }
+
+    .chapter-hud-btn {
       background: transparent;
-      border: 1px solid transparent;
+      border: none;
       color: var(--text-muted);
+      width: 22px;
+      height: 26px;
       border-radius: 4px;
-      padding: 3px 8px;
-      font-size: 0.72rem;
+      font-size: 15px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .chapter-hud-btn:hover:not(:disabled) {
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--cyan);
+    }
+    .chapter-hud-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .chapter-hud-display {
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      padding: 3px 8px;
+      border-radius: 4px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: all 0.15s ease;
+      cursor: pointer;
       font-family: inherit;
+      transition: all 0.15s ease;
     }
-    .folio-chapter-tab .chap-badge {
+    .chapter-hud-display:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .chapter-hud-display .chap-badge {
       font-family: 'PocketGull Mono', monospace;
-      font-size: 0.64rem;
+      font-size: 0.68rem;
       font-weight: 700;
-      color: var(--emerald);
-      background: rgba(16, 185, 129, 0.12);
-      padding: 1px 4px;
+      color: var(--cyan);
+      background: rgba(6, 182, 212, 0.12);
+      padding: 1px 5px;
       border-radius: 3px;
     }
-    .folio-chapter-tab .chap-label {
+    .chapter-hud-display .chap-label {
+      font-size: 0.78rem;
       font-weight: 600;
+      max-width: 170px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .folio-chapter-tab:hover {
-      color: var(--text-main);
-      background: rgba(255, 255, 255, 0.05);
-      border-color: var(--card-border);
-    }
-    .folio-chapter-tab.active {
-      color: var(--text-main);
-      background: rgba(6, 182, 212, 0.12);
-      border-color: rgba(6, 182, 212, 0.4);
-    }
-    .folio-chapter-tab.active .chap-badge {
-      color: #000;
-      background: var(--cyan);
-    }
+
     .folio-reading-progress {
       position: absolute;
       bottom: 0;
       left: 0;
-      height: 2px;
+      height: 2.5px;
       background: linear-gradient(90deg, var(--emerald), var(--cyan));
       width: 0%;
       transition: width 0.1s linear;
+      z-index: 1001;
     }
 
     /* Textbook Contents Button in Navbar */
@@ -4262,31 +4337,33 @@
       margin-top: 3px;
     }
 
-    /* Washi & Light Theme Overrides for Folio & TOC */
-    [data-theme="washi"] .folio-chapter-strip,
-    [data-theme="light"] .folio-chapter-strip {
-      background: rgba(255, 255, 255, 0.94) !important;
-      border-color: rgba(0, 0, 0, 0.12) !important;
-    }
-    [data-theme="washi"] .folio-chapter-tab,
-    [data-theme="light"] .folio-chapter-tab {
-      color: #334155 !important;
-    }
-    [data-theme="washi"] .folio-chapter-tab:hover,
-    [data-theme="light"] .folio-chapter-tab:hover {
+    /* Washi & Light Theme Overrides for Masthead Chapter HUD & TOC */
+    [data-theme="washi"] .masthead-chapter-hud,
+    [data-theme="light"] .masthead-chapter-hud {
       background: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+    }
+    [data-theme="washi"] .chapter-hud-display:hover,
+    [data-theme="light"] .chapter-hud-display:hover {
+      background: #e2e8f0 !important;
+    }
+    [data-theme="washi"] .chapter-hud-display .chap-badge,
+    [data-theme="light"] .chapter-hud-display .chap-badge {
+      color: #0369a1 !important;
+      background: #e0f2fe !important;
+    }
+    [data-theme="washi"] .chapter-hud-display .chap-label,
+    [data-theme="light"] .chapter-hud-display .chap-label {
       color: #0f172a !important;
     }
-    [data-theme="washi"] .folio-chapter-tab.active,
-    [data-theme="light"] .folio-chapter-tab.active {
-      background: #e0f2fe !important;
-      border-color: #0284c7 !important;
-      color: #0369a1 !important;
+    [data-theme="washi"] .chapter-hud-btn,
+    [data-theme="light"] .chapter-hud-btn {
+      color: #64748b !important;
     }
-    [data-theme="washi"] .folio-chapter-tab.active .chap-badge,
-    [data-theme="light"] .folio-chapter-tab.active .chap-badge {
-      background: #0284c7 !important;
-      color: #ffffff !important;
+    [data-theme="washi"] .chapter-hud-btn:hover:not(:disabled),
+    [data-theme="light"] .chapter-hud-btn:hover:not(:disabled) {
+      background: #e2e8f0 !important;
+      color: #0284c7 !important;
     }
     [data-theme="washi"] .textbook-toc-btn,
     [data-theme="light"] .textbook-toc-btn {
@@ -4353,38 +4430,48 @@
     </filter>
   </svg>
 
-  <!-- Sticky Top Navigation Bar -->
-  <header class="top-navbar">
-    <a href="#" class="brand-group" aria-label="PocketGull Home">
-      <!-- Official PocketGull Cute Origami Mascot Bird -->
-      <svg class="brand-mascot-bird" viewBox="0 0 134 100" width="38" height="29" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PocketGull Origami Seagull Mascot">
-        <g id="origami-gull" transform="translate(2, 6)">
-          <!-- Tail Wing -->
-          <polygon points="10,38 68,22 38,88 10,38" fill="#ffffff" stroke="#0f172a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-          <polygon points="10,38 38,88 28,60" fill="#e2e8f0"/>
-          <!-- Body Base -->
-          <polygon points="38,88 68,22 92,34 100,78 38,88" fill="#f8fafc" stroke="#0f172a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-          <!-- Folded Wing / Breast (Honest Teal #0d9488) -->
-          <polygon points="68,22 100,78 110,38 68,22" fill="#0d9488" stroke="#0f172a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-          <!-- Wing Crease Depth -->
-          <polygon points="100,78 110,38 94,52" fill="#0f766e"/>
-          <!-- Head & Neck -->
-          <polygon points="68,22 80,6 100,8 110,38 92,34 68,22" fill="#ffffff" stroke="#0f172a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-          <!-- Smiling Eye Arc (^) -->
-          <path d="M 82,18 Q 88,12 94,18" fill="none" stroke="#0f172a" stroke-width="3" stroke-linecap="round"/>
-          <!-- Origami Beak (Vivid Terracotta #ea580c / #f97316) -->
-          <polygon points="100,8 124,14 108,24 100,18" fill="#ea580c" stroke="#0f172a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-          <polygon points="100,18 124,14 110,38 100,18" fill="#f97316" stroke="#0f172a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-        </g>
-      </svg>
-      <span class="brand-title">PocketGull<span>.</span></span>
-    </a>
+  <!-- Sticky Unified 56px Textbook Masthead -->
+  <header class="top-navbar" id="topNavbar">
+    <div class="masthead-left">
+      <a href="#header-broadside" class="brand-group" aria-label="PocketGull Home">
+        <!-- Official PocketGull Cute Origami Mascot Bird -->
+        <svg class="brand-mascot-bird" viewBox="0 0 134 100" width="34" height="26" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PocketGull Origami Seagull Mascot">
+          <g id="origami-gull" transform="translate(2, 6)">
+            <!-- Tail Wing -->
+            <polygon points="10,38 68,22 38,88 10,38" fill="#ffffff" stroke="#0f172a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+            <polygon points="10,38 38,88 28,60" fill="#e2e8f0"/>
+            <!-- Body Base -->
+            <polygon points="38,88 68,22 92,34 100,78 38,88" fill="#f8fafc" stroke="#0f172a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+            <!-- Folded Wing / Breast (Honest Teal #0d9488) -->
+            <polygon points="68,22 100,78 110,38 68,22" fill="#0d9488" stroke="#0f172a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+            <!-- Wing Crease Depth -->
+            <polygon points="100,78 110,38 94,52" fill="#0f766e"/>
+            <!-- Head & Neck -->
+            <polygon points="68,22 80,6 100,8 110,38 92,34 68,22" fill="#ffffff" stroke="#0f172a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+            <!-- Smiling Eye Arc (^) -->
+            <path d="M 82,18 Q 88,12 94,18" fill="none" stroke="#0f172a" stroke-width="3" stroke-linecap="round"/>
+            <!-- Origami Beak (Vivid Terracotta #ea580c / #f97316) -->
+            <polygon points="100,8 124,14 108,24 100,18" fill="#ea580c" stroke="#0f172a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+            <polygon points="100,18 124,14 110,38 100,18" fill="#f97316" stroke="#0f172a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+          </g>
+        </svg>
+        <span class="brand-title">PocketGull<span>.</span></span>
+      </a>
+
+      <span class="masthead-divider" aria-hidden="true"></span>
+
+      <!-- Integrated Chapter HUD Scrubber -->
+      <div class="masthead-chapter-hud" id="mastheadChapterHud" role="navigation" aria-label="Current Chapter Navigation">
+        <button type="button" class="chapter-hud-btn" id="prevChapterBtn" onclick="prevChapter()" aria-label="Previous Chapter" title="Previous Chapter">‹</button>
+        <button type="button" class="chapter-hud-display" id="chapterHudDisplay" onclick="toggleTextbookToc()" title="Current Chapter • Click to open Curriculum Syllabus">
+          <span class="chap-badge" id="chapterHudBadge">Vol. I</span>
+          <span class="chap-label" id="chapterHudTitle">Frontispiece</span>
+        </button>
+        <button type="button" class="chapter-hud-btn" id="nextChapterBtn" onclick="nextChapter()" aria-label="Next Chapter" title="Next Chapter">›</button>
+      </div>
+    </div>
 
     <nav class="nav-links">
-      <a href="#waterfall" class="nav-link">Specimen</a>
-      <a href="#ismp" class="nav-link">Clinical Safety</a>
-      <a href="#telemetry" class="nav-link">ICU Telemetry</a>
-      <a href="standards/FDA_ISMP_CLINICAL_DIGITAL_TYPOGRAPHY_SPECIFICATION.md" target="_blank" rel="noopener" class="nav-link" title="Formal FDA & ISMP Clinical Digital Typography Specification (AAMI HE75 Consensus Standard)">🏛️ FDA/ISMP Spec</a>
       <div class="nav-dropdown">
         <button type="button" class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
           Studios &amp; Labs <span style="font-size: 10px;">▾</span>
@@ -4405,10 +4492,8 @@
           <a href="#raster-benchmark" onclick="toggleStudioDrawer('raster-benchmark', true)">⚡ 30.8× Speed Benchmark</a>
         </div>
       </div>
-      <a href="#docDrillPanel" onclick="openDocDrill('Louise Sloan 5:1 Optotype Invariant', 'OPHTHALMOLOGY')" class="nav-link" style="color: var(--cyan); font-weight: 600;">🔬 Doc Drill</a>
-      <a href="#charter" class="nav-link">Principles</a>
-      <a href="#pillars" class="nav-link">Pillars</a>
-      <a href="#download" class="nav-link" style="color: var(--cyan); font-weight: 700;">Downloads</a>
+      <a href="#docDrillPanel" onclick="openDocDrill('Louise Sloan 5:1 Optotype Invariant', 'OPHTHALMOLOGY')" class="nav-link" style="color: var(--cyan); font-weight: 600;" title="Evidence-Backed Socratic Tutor">🔬 Doc Drill</a>
+      <a href="standards/FDA_ISMP_CLINICAL_DIGITAL_TYPOGRAPHY_SPECIFICATION.md" target="_blank" rel="noopener" class="nav-link" title="Formal FDA &amp; ISMP Clinical Digital Typography Specification (AAMI HE75 Standard)">🏛️ FDA Spec</a>
     </nav>
 
     <div class="nav-actions">
@@ -4422,50 +4507,10 @@
         <span id="navDlLabel">Download Fonts</span>
       </a>
     </div>
-  </header>
 
-  <!-- Interactive Textbook Folio Chapter Strip & Progress Ribbon -->
-  <nav class="folio-chapter-strip" id="folioChapterStrip" aria-label="Interactive Textbook Chapter Navigation">
-    <div class="folio-strip-track">
-      <button type="button" class="folio-chapter-tab active" data-chapter="header-broadside" onclick="jumpToChapter('header-broadside')" title="Frontispiece: Superfamily Genesis &amp; Felt-Marker DNA">
-        <span class="chap-badge">Vol. I</span>
-        <span class="chap-label">Frontispiece</span>
-      </button>
-      <button type="button" class="folio-chapter-tab" data-chapter="waterfall" onclick="jumpToChapter('waterfall')" title="Chapter 1: Optometrics &amp; Sloan 5:1 Acuity">
-        <span class="chap-badge">Ch. 1</span>
-        <span class="chap-label">Optometrics</span>
-      </button>
-      <button type="button" class="folio-chapter-tab" data-chapter="variable" onclick="jumpToChapter('variable')" title="Chapter 2: Kinematics &amp; 16-Axis Variable Engine">
-        <span class="chap-badge">Ch. 2</span>
-        <span class="chap-label">Variable Continuum</span>
-      </button>
-      <button type="button" class="folio-chapter-tab" data-chapter="ismp" onclick="jumpToChapter('ismp')" title="Chapter 3: Patient Safety &amp; ISMP Disambiguation">
-        <span class="chap-badge">Ch. 3</span>
-        <span class="chap-label">Clinical Safety</span>
-      </button>
-      <button type="button" class="folio-chapter-tab" data-chapter="telemetry" onclick="jumpToChapter('telemetry')" title="Chapter 4: Telemetry &amp; Fixed 600 UPM Monospace">
-        <span class="chap-badge">Ch. 4</span>
-        <span class="chap-label">ICU Telemetry</span>
-      </button>
-      <button type="button" class="folio-chapter-tab" data-chapter="scientific-lab" onclick="jumpToChapter('scientific-lab')" title="Chapter 5: Chemistry &amp; Dark-Sky Astronomy">
-        <span class="chap-badge">Ch. 5</span>
-        <span class="chap-label">Science &amp; Chemistry</span>
-      </button>
-      <button type="button" class="folio-chapter-tab" data-chapter="atelier" onclick="jumpToChapter('atelier')" title="Chapter 6: Polymath Acoustics &amp; Rainbow Piano">
-        <span class="chap-badge">Ch. 6</span>
-        <span class="chap-label">Polymath Acoustics</span>
-      </button>
-      <button type="button" class="folio-chapter-tab" data-chapter="scripts" onclick="jumpToChapter('scripts')" title="Chapter 7: Sovereign Cartography &amp; UNDRIP Accord">
-        <span class="chap-badge">Ch. 7</span>
-        <span class="chap-label">Sovereign Scripts</span>
-      </button>
-      <button type="button" class="folio-chapter-tab" data-chapter="download" onclick="jumpToChapter('download')" title="Chapter 8: Foundry Governance &amp; Package Registries">
-        <span class="chap-badge">Ch. 8</span>
-        <span class="chap-label">Foundry Governance</span>
-      </button>
-    </div>
+    <!-- 2.5px Hairline Reading Progress Bar -->
     <div class="folio-reading-progress" id="folioReadingProgress"></div>
-  </nav>
+  </header>
 
   <!-- Interactive Textbook Table of Contents (TOC) Syllabus Drawer -->
   <aside id="textbookTocDrawer" class="textbook-toc-drawer" role="dialog" aria-modal="true" aria-label="Interactive Textbook Curriculum &amp; Table of Contents" style="display: none;">
@@ -6069,7 +6114,7 @@
 
       <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; max-width: 960px;">
         Every chemical element rendered with PocketGull’s Louise Sloan 5:1 optotypes and ISMP character disambiguation. 
-        Each tile features atomic number $Z$, chemical symbol, atomic weight, and IUPAC/CPK chromatic classification. 
+        Each tile features atomic number <em>Z</em>, chemical symbol, atomic weight, and IUPAC/CPK chromatic classification. 
         Click any of the 118 elements to inspect its crystallographic role, electron shell configuration, and stoichiometry in the real-time laboratory stage.
       </p>
 
@@ -8137,11 +8182,6 @@
       <span class="doc-drill-title">Evidence Focus • Doc Drill</span>
       <span class="doc-drill-badge" id="drillBadge">OPHTHALMOLOGY</span>
       <div style="display: flex; align-items: center; gap: 0.4rem; margin-left: auto;">
-        <button type="button" id="docDrillTourBtn" class="doc-drill-tour-btn" title="Toggle Hands-Free Socratic Auto-Tour (guided walkthrough of live stages)" onclick="toggleSocraticTour()">
-          <span id="tourIcon">▶</span> <span id="tourLabel">Auto-Tour</span>
-        </button>
-        <span id="docDrillSourceBadge" class="doc-drill-badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.4);">🛡️ Sovereign / 100% Offline</span>
-        <button type="button" id="btnPromptKey" class="doc-drill-key-btn" title="Configure Google Gemini API Key for Socratic Tutoring" onclick="promptForGeminiKey()">🔑 Key</button>
         <button type="button" class="doc-drill-close" id="drillClose" aria-label="Close Evidence Focus Panel" onclick="closeDocDrill()">✕</button>
       </div>
     </div>
@@ -8182,18 +8222,27 @@
 
   <script>
     (function() {
-      // 1. Theme Controller
+      // 1. Theme Controller (Default: Dark)
       const themes = ['dark', 'washi', 'light'];
       const themeIcons = { dark: '◐', washi: '◈', light: '☼' };
       const themeLabels = { dark: 'Dark', washi: 'Washi', light: 'Light' };
       let currentTheme = 'dark';
       try {
-        currentTheme = localStorage.getItem('pg_theme') || 'dark';
-      } catch (e) {}
+        const saved = localStorage.getItem('pg_theme_v2');
+        if (saved && themes.includes(saved)) {
+          currentTheme = saved;
+        } else {
+          currentTheme = 'dark';
+          localStorage.removeItem('pg_theme'); // Clear legacy washi session if present
+        }
+      } catch (e) {
+        currentTheme = 'dark';
+      }
 
       function applyTheme(t) {
         document.documentElement.setAttribute('data-theme', t);
         try {
+          localStorage.setItem('pg_theme_v2', t);
           localStorage.setItem('pg_theme', t);
         } catch (e) {}
         const iconEl = document.getElementById('themeIcon');
@@ -10101,6 +10150,116 @@
           hexEl.style.color = el.hex;
         }
 
+        if (stateEl) {
+          const gases = [1, 2, 7, 8, 9, 10, 17, 18, 36, 54, 86, 118];
+          const liquids = [35, 80];
+          const synthetics = [43, 61, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117];
+          let state = 'Solid';
+          if (gases.includes(el.z)) state = 'Gas';
+          else if (liquids.includes(el.z)) state = 'Liquid';
+          else if (synthetics.includes(el.z)) state = 'Synthetic';
+          stateEl.textContent = state;
+        }
+
+        if (enEl) {
+          const enMap = {
+            1: '2.20', 2: '—', 3: '0.98', 4: '1.57', 5: '2.04', 6: '2.55', 7: '3.04', 8: '3.44', 9: '3.98', 10: '—',
+            11: '0.93', 12: '1.31', 13: '1.61', 14: '1.90', 15: '2.19', 16: '2.58', 17: '3.16', 18: '—',
+            19: '0.82', 20: '1.00', 21: '1.36', 22: '1.54', 23: '1.63', 24: '1.66', 25: '1.55', 26: '1.83', 27: '1.88', 28: '1.91', 29: '1.90', 30: '1.65',
+            31: '1.81', 32: '2.01', 33: '2.18', 34: '2.55', 35: '2.96', 36: '3.00',
+            37: '0.82', 38: '0.95', 39: '1.22', 40: '1.33', 41: '1.60', 42: '2.16', 43: '1.90', 44: '2.20', 45: '2.28', 46: '2.20', 47: '1.93', 48: '1.69',
+            49: '1.78', 50: '1.96', 51: '2.05', 52: '2.10', 53: '2.66', 54: '2.60',
+            55: '0.79', 56: '0.89', 57: '1.10', 72: '1.30', 73: '1.50', 74: '2.36', 75: '1.90', 76: '2.20', 77: '2.20', 78: '2.28', 79: '2.54', 80: '2.00',
+            81: '1.62', 82: '2.33', 83: '2.02', 84: '2.00', 85: '2.20', 86: '2.20',
+            87: '0.70', 88: '0.90', 89: '1.10', 92: '1.38'
+          };
+          const val = enMap[el.z] || '—';
+          enEl.textContent = val !== '—' ? `${val} (Pauling)` : '— (Synthetic / Inert)';
+        }
+
+        if (roleEl) {
+          const roleMap = {
+            1: 'Cosmic proton baseline; universal hydrogen-bonding donor across DNA and proteins.',
+            2: 'Inert noble gas cryogenic coolant for MRI superconducting magnet coils.',
+            3: 'Lightest alkali metal; psychiatric mood stabilizer and high-density battery anode.',
+            4: 'Low-absorption beryllium X-ray tube windows and aerospace structural alloys.',
+            5: 'Semiconductor p-type dopant and borosilicate thermal shock laboratory glassware.',
+            6: 'Organic tetrahedral tetravalent backbone of all biochemistry, polymers, and life.',
+            7: 'Universal peptide backbone, purine/pyrimidine nitrogenous bases, and nitric oxide signaling.',
+            8: 'Electronegative carbonyl/hydroxyl red in molecular modeling and respiratory cellular metabolism.',
+            9: 'Peak electronegative halogen; fluoro-pharmaceutical metabolic stability and dental apatite.',
+            10: 'Noble gas cryogenic indicator lighting and high-voltage vacuum tube discharge.',
+            11: 'Primary extracellular osmotic cation driving nervous action-potential depolarization.',
+            12: 'Essential ATP phosphate-chelation cofactor and neuromuscular transmission regulator.',
+            13: 'Lightweight structural amphoteric metal; adjuvants in vaccines and dialysis chemistry.',
+            14: 'Tetrahedral semiconductor silicon lattice powering microprocessors and vitreous silicates.',
+            15: 'High-energy phosphoanhydride bonds in ATP, DNA phosphodiester backbone, and membranes.',
+            16: 'Cysteine disulfide covalent crosslinks stabilizing 3D protein folding and keratin.',
+            17: 'Principal extracellular physiological anion (Cl⁻) and gastric hydrochloric acid (HCl).',
+            18: 'Inert noble gas shielding in arc welding and laser surgical eye photocoagulation.',
+            19: 'Principal intracellular cation (K⁺) maintaining cardiac resting membrane potential.',
+            20: 'Second messenger intracellular signaling cation and hydroxyapatite bone mineral matrix.',
+            21: 'Transition metal scandium aerospace alloy strengthener and metal-halide lighting.',
+            22: 'Biocompatible osseointegrating titanium for orthopedic implants and surgical bone screws.',
+            23: 'Transition catalyst metal in sulfuric acid production and insulin-mimetic compounds.',
+            24: 'Refractory stainless steel passive oxide passivator and glucose tolerance factor.',
+            25: 'Photosystem II oxygen-evolving complex catalyst and superoxide dismutase (SOD) cofactor.',
+            26: 'Heme cofactor oxygen carrier in hemoglobin, myoglobin, and mitochondrial cytochromes.',
+            27: 'Central coordinate metal ion in Vitamin B12 (cobalamin) for myelin and erythrocyte synthesis.',
+            28: 'Corrosion-resistant surgical alloy component and urease metalloenzyme active center.',
+            29: 'Essential electron transport cofactor in cytochrome c oxidase and superoxide dismutase.',
+            30: 'Structural zinc-finger DNA transcription factors and carbonic anhydrase hydration.',
+            31: 'Low-melting gallium liquid metal thermal interface and GaN optoelectronic blue lasers.',
+            32: 'Infrared optical lens optics and high-purity gamma-ray radiation spectrometry detectors.',
+            33: 'Historical metalloid toxicon; Fowler solution and acute promyelocytic leukemia therapy.',
+            34: 'Selenocysteine antioxidant enzyme active site in glutathione peroxidase and thioredoxin.',
+            35: 'Only liquid nonmetal halogen; sedative bromides and flame-retardant chemistry.',
+            36: 'Noble gas krypton laser surgery photocoagulator and high-efficiency incandescent lighting.',
+            37: 'Alkali rubidium standard in atomic clocks and cardiac myocardial perfusion PET imaging.',
+            38: 'Alkaline strontium bone-seeking agent; Sr-89 palliative bone metastases therapy.',
+            39: 'Yttrium barium copper oxide (YBCO) high-temperature superconductors and Y-90 microspheres.',
+            40: 'High-corrosion nuclear fuel cladding and cubic zirconia gemological refractor.',
+            41: 'Superconducting radio-frequency cavities and orthodontic shape-memory wires.',
+            42: 'Xanthine oxidase and nitrogenase molybdenum cofactor essential for purine metabolism.',
+            43: 'First synthetic element; Tc-99m clinical gamma-scintigraphy diagnostic radiotracer.',
+            44: 'Ruthenium cancer-drug complexes and catalytic water-splitting coordination chemistry.',
+            45: 'High-catalytic rhodium automotive reduction of nitrogen oxides (NOx) to N2.',
+            46: 'Hydrogen absorption catalytic palladium sponge in fuel cells and dental alloys.',
+            47: 'Oligodynamic antimicrobial silver nanoparticles, photographic halide crystals, and conductors.',
+            48: 'Toxic heavy metal nephrotoxin; cadmium telluride (CdTe) thin-film photovoltaic panels.',
+            49: 'Indium tin oxide (ITO) transparent conductive electrodes on touchscreens and displays.',
+            50: 'Non-toxic low-melting tin solder and stannous fluoride cavity prevention.',
+            51: 'Ancient kohl cosmetic; antimony potassium tartrate antiparasitic for leishmaniasis.',
+            52: 'Chalcogenide phase-change optical memory discs (CD-RW/DVD-RAM) and thermal sensors.',
+            53: 'Thyroid hormone thyroxine (T4/T3) iodine atom and radiocontrast CT angiography.',
+            54: 'Heavy noble gas anesthetic bypassing hepatic metabolism and flash-lamp photography.',
+            55: 'Primary international definition of SI second (9,192,631,770 Hz hyperfine cesium transition).',
+            56: 'High-attenuation barium sulfate radiopaque swallow suspension for GI fluoroscopy.',
+            57: 'Lanthanum optical camera lenses and hydrogen-storage nickel-metal hydride batteries.',
+            72: 'Hafnium oxide high-k dielectric gate insulator in 7nm and smaller silicon transistors.',
+            73: 'Ultra-chemically inert tantalum surgical staples, pacemakers, and electrolytic capacitors.',
+            74: 'Refractory tungsten incandescent filament (3422°C melting point) and heavy kinetic darts.',
+            75: 'Ultra-dense rhenium turbine blades for extreme-temperature jet engines and Re-186 oncology.',
+            76: 'Densest natural element (22.59 g/cm³); osmium tetroxide lipid stain in electron microscopy.',
+            77: 'Corrosion-resistant iridium spark plugs and iridium crucible single-crystal laser growth.',
+            78: 'Cisplatin chemotherapeutic DNA crosslinker and automotive catalytic converter mesh.',
+            79: 'Noble unreactive gold colloidal lateral-flow diagnostic test strips and photonic nano-shells.',
+            80: 'Liquid transition metal; historical mercury sphygmomanometers and fluorescent vapor lamps.',
+            81: 'Thallium-201 nuclear medicine myocardial stress testing perfusion radiotracer.',
+            82: 'High-atomic-number lead radiation shielding apron for X-ray and CT imaging suites.',
+            83: 'Non-toxic diamagnetic bismuth subsalicylate (Pepto-Bismol) gastrointestinal coating.',
+            84: 'Rare intense alpha-emitting polonium discovered by Marie Curie in pitchblende ore.',
+            85: 'Rarest natural halogen; astatine-211 targeted alpha-particle radiotherapy in oncology.',
+            86: 'Radioactive noble gas radon daughter of radium; underground environmental lung risk.',
+            87: 'Highly radioactive alkali francium with 22-minute half-life; atomic parity violation physics.',
+            88: 'Alkaline earth radium isolated by the Curies; Ra-223 alpha-emitter for bone metastases.',
+            89: 'Actinium targeted alpha-therapy (Ac-225) in clinical prostate oncology trials.',
+            92: 'Dense fissile actinide uranium powering commercial nuclear reactors and cosmic nucleosynthesis.',
+            94: 'Plutonium-238 radioisotope thermoelectric generators (RTGs) powering deep-space Voyager probes.'
+          };
+          roleEl.textContent = roleMap[el.z] || `${el.name} (${el.sym}) is a ${el.cat.replace('-', ' ')} in Period ${el.p} and Group ${el.g}. Conforms strictly to Louise Sloan 5:1 optotype legibility and ISMP disambiguation.`;
+        }
+
         // Highlight selected cell in grid
         document.querySelectorAll('#fullPeriodicTableGrid .ptable-cell').forEach(c => {
           c.classList.remove('active');
@@ -10117,7 +10276,61 @@
         for (let row = 1; row <= 9; row++) {
           for (let col = 1; col <= 18; col++) {
             const el = full118Elements.find(e => e.p === row && e.g === col);
-            if (el) {
+            if (row === 6 && col === 3) {
+              // Group 3 Lanthanide marker cell
+              const marker = document.createElement('div');
+              marker.className = 'ptable-cell ptable-cell-marker';
+              marker.style.borderColor = '#ec4899';
+              marker.style.borderTop = '3px dashed #ec4899';
+              marker.style.background = 'rgba(236, 72, 153, 0.08)';
+              marker.title = 'Lanthanide Series (57–71: La–Lu)';
+              marker.innerHTML = `
+                <div class="ptable-cell-z" style="color: #ec4899;">57–71</div>
+                <div class="ptable-cell-sym" style="color: #ec4899; font-size: 11px;">La–Lu</div>
+                <div class="ptable-cell-name" style="color: #ec4899;">Lanthanides</div>
+              `;
+              marker.addEventListener('click', () => inspectFullPtableElement(57));
+              grid.appendChild(marker);
+            } else if (row === 7 && col === 3) {
+              // Group 3 Actinide marker cell
+              const marker = document.createElement('div');
+              marker.className = 'ptable-cell ptable-cell-marker';
+              marker.style.borderColor = '#f43f5e';
+              marker.style.borderTop = '3px dashed #f43f5e';
+              marker.style.background = 'rgba(244, 63, 94, 0.08)';
+              marker.title = 'Actinide Series (89–103: Ac–Lr)';
+              marker.innerHTML = `
+                <div class="ptable-cell-z" style="color: #f43f5e;">89–103</div>
+                <div class="ptable-cell-sym" style="color: #f43f5e; font-size: 11px;">Ac–Lr</div>
+                <div class="ptable-cell-name" style="color: #f43f5e;">Actinides</div>
+              `;
+              marker.addEventListener('click', () => inspectFullPtableElement(89));
+              grid.appendChild(marker);
+            } else if (row === 8 && col === 3) {
+              const label = document.createElement('div');
+              label.style.fontFamily = "'PocketGull Mono', monospace";
+              label.style.fontSize = '9px';
+              label.style.fontWeight = '700';
+              label.style.color = '#ec4899';
+              label.style.display = 'flex';
+              label.style.alignItems = 'center';
+              label.style.justifyContent = 'flex-end';
+              label.style.paddingRight = '4px';
+              label.textContent = '★ 57–71';
+              grid.appendChild(label);
+            } else if (row === 9 && col === 3) {
+              const label = document.createElement('div');
+              label.style.fontFamily = "'PocketGull Mono', monospace";
+              label.style.fontSize = '9px';
+              label.style.fontWeight = '700';
+              label.style.color = '#f43f5e';
+              label.style.display = 'flex';
+              label.style.alignItems = 'center';
+              label.style.justifyContent = 'flex-end';
+              label.style.paddingRight = '4px';
+              label.textContent = '★★ 89–103';
+              grid.appendChild(label);
+            } else if (el) {
               const cell = document.createElement('div');
               cell.className = 'ptable-cell' + (el.z === 8 ? ' active' : '');
               cell.dataset.z = el.z;
@@ -12143,6 +12356,20 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
         }
       }
 
+      const textbookChapters = [
+        { id: 'header-broadside', badge: 'Vol. I', title: 'Frontispiece' },
+        { id: 'waterfall', badge: 'Ch. 1', title: 'Optometrics' },
+        { id: 'variable', badge: 'Ch. 2', title: 'Variable Continuum' },
+        { id: 'ismp', badge: 'Ch. 3', title: 'Clinical Safety' },
+        { id: 'telemetry', badge: 'Ch. 4', title: 'ICU Telemetry' },
+        { id: 'scientific-lab', badge: 'Ch. 5', title: 'Science & Chemistry' },
+        { id: 'atelier', badge: 'Ch. 6', title: 'Polymath Acoustics' },
+        { id: 'scripts', badge: 'Ch. 7', title: 'Sovereign Scripts' },
+        { id: 'download', badge: 'Ch. 8', title: 'Foundry Governance' }
+      ];
+
+      let currentChapterIndex = 0;
+
       function jumpToChapter(targetId) {
         toggleTextbookToc(false);
         const target = document.getElementById(targetId);
@@ -12151,19 +12378,19 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
         }
       }
 
-      function initTextbookController() {
-        const chapterIds = [
-          'header-broadside',
-          'waterfall',
-          'variable',
-          'ismp',
-          'telemetry',
-          'scientific-lab',
-          'atelier',
-          'scripts',
-          'download'
-        ];
+      function prevChapter() {
+        if (currentChapterIndex > 0) {
+          jumpToChapter(textbookChapters[currentChapterIndex - 1].id);
+        }
+      }
 
+      function nextChapter() {
+        if (currentChapterIndex < textbookChapters.length - 1) {
+          jumpToChapter(textbookChapters[currentChapterIndex + 1].id);
+        }
+      }
+
+      function initTextbookController() {
         const updateFolioProgress = () => {
           const docEl = document.documentElement;
           const winScroll = window.scrollY || docEl.scrollTop || document.body.scrollTop;
@@ -12174,32 +12401,28 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
             progressEl.style.width = pct.toFixed(1) + '%';
           }
 
-          let currentChapter = chapterIds[0];
-          for (const id of chapterIds) {
-            const el = document.getElementById(id);
+          let activeIdx = 0;
+          for (let i = 0; i < textbookChapters.length; i++) {
+            const el = document.getElementById(textbookChapters[i].id);
             if (el) {
               const rect = el.getBoundingClientRect();
-              if (rect.top <= 180) {
-                currentChapter = id;
+              if (rect.top <= 140) {
+                activeIdx = i;
               }
             }
           }
+          currentChapterIndex = activeIdx;
+          const cur = textbookChapters[activeIdx];
 
-          const tabs = document.querySelectorAll('.folio-chapter-tab');
-          tabs.forEach(tab => {
-            const isMatch = tab.dataset.chapter === currentChapter;
-            tab.classList.toggle('active', isMatch);
-            if (isMatch && tab.parentElement) {
-              const track = tab.parentElement;
-              const tabLeft = tab.offsetLeft;
-              const tabWidth = tab.offsetWidth;
-              const trackScroll = track.scrollLeft;
-              const trackWidth = track.clientWidth;
-              if (tabLeft < trackScroll || (tabLeft + tabWidth) > (trackScroll + trackWidth)) {
-                track.scrollTo({ left: tabLeft - 20, behavior: 'smooth' });
-              }
-            }
-          });
+          const badgeEl = document.getElementById('chapterHudBadge');
+          const titleEl = document.getElementById('chapterHudTitle');
+          if (badgeEl) badgeEl.textContent = cur.badge;
+          if (titleEl) titleEl.textContent = cur.title;
+
+          const prevBtn = document.getElementById('prevChapterBtn');
+          const nextBtn = document.getElementById('nextChapterBtn');
+          if (prevBtn) prevBtn.disabled = activeIdx === 0;
+          if (nextBtn) nextBtn.disabled = activeIdx === textbookChapters.length - 1;
         };
 
         window.addEventListener('scroll', updateFolioProgress, { passive: true });
@@ -12229,6 +12452,8 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
       window.jumpToCurrentTourStage = jumpToCurrentTourStage;
       window.toggleTextbookToc = toggleTextbookToc;
       window.jumpToChapter = jumpToChapter;
+      window.prevChapter = prevChapter;
+      window.nextChapter = nextChapter;
       window.initTextbookController = initTextbookController;
 
       // =========================================================================
