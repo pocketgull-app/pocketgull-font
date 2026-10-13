@@ -170,12 +170,16 @@ for (const { name: browserName, launcher } of BROWSERS) {
 
       // Click Philocardia preset
       const philocardiaPill = page.locator('#vfPresetControls .preset-pill[data-preset="philocardia"]');
+      await philocardiaPill.scrollIntoViewIfNeeded();
       await philocardiaPill.click();
+      await page.waitForTimeout(150);
       assert.ok(await philocardiaPill.evaluate(el => el.classList.contains('active')), `[${browserName}] Philocardia pill must be active`);
 
       // Click Healing Sanctuary preset
       const healingPill = page.locator('#vfPresetControls .preset-pill[data-preset="healing"]');
+      await healingPill.scrollIntoViewIfNeeded();
       await healingPill.click();
+      await page.waitForTimeout(150);
       assert.ok(await healingPill.evaluate(el => el.classList.contains('active')), `[${browserName}] Healing pill must be active`);
 
       // 6. Test 650nm Scotopic Red Mode Toggle

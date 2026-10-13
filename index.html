@@ -675,6 +675,128 @@
       margin-top: 2px;
     }
 
+    /* Responsive World Map Studio & Mobile Touch Layout */
+    .world-map-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(320px, 1fr);
+      gap: 20px;
+    }
+
+    .world-map-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .world-map-controls {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .world-map-canvas-box {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1.85 / 1;
+      min-height: 280px;
+      background: radial-gradient(circle at 50% 50%, #0a1120 0%, #04070c 100%);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .country-pill-bar {
+      margin-top: 12px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .mobile-scroll-hint {
+      display: none;
+      font-size: 11px;
+      font-family: 'PocketGull Mono', monospace;
+      color: var(--emerald);
+      margin-bottom: 8px;
+      align-items: center;
+      gap: 6px;
+    }
+
+    @media (max-width: 960px) {
+      .world-map-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px;
+      }
+      #world-map-studio {
+        padding: 16px 12px !important;
+        margin-top: 20px !important;
+      }
+      .world-map-header {
+        flex-direction: column;
+        align-items: stretch !important;
+        gap: 14px;
+      }
+      .world-map-controls {
+        align-items: stretch !important;
+        width: 100%;
+      }
+      #world-map-filters {
+        overflow-x: auto;
+        flex-wrap: nowrap !important;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .map-filter-btn {
+        flex-shrink: 0;
+      }
+      .world-map-canvas-box {
+        aspect-ratio: 1.65 / 1;
+        min-height: 220px;
+      }
+      #countryHudDock {
+        margin-top: 4px;
+        padding: 14px 12px !important;
+      }
+      .mobile-scroll-hint {
+        display: flex !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+      #world-map-studio {
+        padding: 12px 8px !important;
+      }
+      #flagGalleryGrid {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)) !important;
+        gap: 6px !important;
+      }
+      .flag-card {
+        padding: 8px 10px !important;
+      }
+      .flag-card-emoji {
+        font-size: 20px !important;
+      }
+      .flag-card-title {
+        font-size: 12px !important;
+      }
+      .world-map-canvas-box {
+        min-height: 190px;
+      }
+      .ptable-inspector-box {
+        padding: 12px !important;
+        gap: 12px !important;
+      }
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -3497,10 +3619,14 @@
       display: flex;
       flex-direction: column;
       transform: translateX(100%);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s;
+      visibility: hidden;
+      pointer-events: none;
     }
     .doc-drill-panel.open {
       transform: translateX(0);
+      visibility: visible;
+      pointer-events: all;
     }
     .doc-drill-header {
       display: flex;
@@ -4053,9 +4179,13 @@
         border-left: none;
         border-top: 1px solid var(--card-border);
         transform: translateY(100%);
+        visibility: hidden;
+        pointer-events: none;
       }
       .doc-drill-panel.open {
         transform: translateY(0);
+        visibility: visible;
+        pointer-events: all;
       }
     }
 
@@ -6139,7 +6269,7 @@
       </div>
 
       <!-- Active Element Inspector HUD for Card 5.2 -->
-      <div style="background: var(--surface-inner); border: 1.5px solid var(--card-border); border-radius: 12px; padding: 18px 24px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);" id="fullPtableInspectorBox">
+      <div class="ptable-inspector-box" style="background: var(--surface-inner); border: 1.5px solid var(--card-border); border-radius: 12px; padding: 18px 24px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);" id="fullPtableInspectorBox">
         <div style="display: flex; align-items: center; gap: 20px;">
           <div id="fullPtableHeroTile" style="width: 80px; height: 90px; border-radius: 8px; border: 2px solid #ef4444; background: rgba(239, 68, 68, 0.12); display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 16px rgba(0,0,0,0.5);">
             <span id="fullPtableHeroZ" style="font-family: 'PocketGull Mono'; font-size: 11px; color: var(--text-muted); align-self: flex-start; padding-left: 8px;">8</span>
@@ -6168,6 +6298,11 @@
           <div style="margin-top: 4px;">Electronegativity: <strong id="fullPtableHeroEN" style="color: var(--cyan);">3.44 (Pauling)</strong></div>
           <div style="margin-top: 4px;">CPK Palette Token: <strong id="fullPtableHeroHex" style="color: #ef4444;">#ef4444</strong></div>
         </div>
+      </div>
+
+      <!-- Mobile Scroll Hint -->
+      <div class="mobile-scroll-hint">
+        <span>↔</span> Swipe horizontally to navigate all 18 columns, or rotate device to landscape for full table view
       </div>
 
       <!-- The 18-Column Interactive Periodic Table Grid -->
@@ -6834,7 +6969,7 @@
         <!-- ================================================================= -->
         <div id="world-map-studio" style="margin-top: 32px; background: radial-gradient(circle at 50% 20%, rgba(6, 182, 212, 0.08) 0%, var(--surface-inner) 75%); border: 1px solid rgba(6, 182, 212, 0.35); border-radius: 12px; padding: 24px; box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);">
           
-          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 20px;">
+          <div class="world-map-header">
             <div>
               <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 6px;">
                 <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); background: rgba(6, 182, 212, 0.15); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(6, 182, 212, 0.3);">
@@ -6859,7 +6994,7 @@
             </div>
 
             <!-- View Mode & Regional Filter Pills -->
-            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
+            <div class="world-map-controls">
               <!-- View Switcher: Map vs Vexillological Pavilion -->
               <div style="display: flex; gap: 6px; background: rgba(0,0,0,0.3); padding: 3px; border-radius: 8px; border: 1px solid var(--card-border);">
                 <button id="viewSwitchMap" class="vex-view-switch-btn active" data-view="map">
@@ -6884,13 +7019,13 @@
           </div>
 
           <!-- Map & Inspector Layout Grid -->
-          <div style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(320px, 1fr); gap: 20px;">
+          <div class="world-map-grid">
             
             <!-- Left: Interactive Vector Map & Vexillological Stage -->
             <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 10px; padding: 16px; position: relative; overflow: hidden; display: flex; flex-direction: column;">
               
               <!-- 1. Map Canvas View Container -->
-              <div id="mapCanvasContainer" style="position: relative; width: 100%; aspect-ratio: 1.85 / 1; min-height: 280px; background: radial-gradient(circle at 50% 50%, #0a1120 0%, #04070c 100%); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: center;">
+              <div id="mapCanvasContainer" class="world-map-canvas-box">
                 <svg id="worldMapSvg" viewBox="0 0 1000 520" style="width: 100%; height: 100%; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5)); cursor: pointer;" aria-label="Interactive Typographic World Map">
                   <!-- SVG Defs & Glow Filters -->
                   <defs>
@@ -6963,7 +7098,7 @@
               </div>
 
               <!-- Quick Switcher Bar -->
-              <div style="margin-top: 12px; display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px;" id="countryPillBar" tabindex="0" aria-label="Country Presets List">
+              <div class="country-pill-bar" id="countryPillBar" tabindex="0" aria-label="Country Presets List">
                 <!-- Pills populated via JS -->
               </div>
             </div>
@@ -13270,6 +13405,15 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
             g.dataset.id = c.id;
             if (c.id === activeCountryId) g.classList.add('active');
 
+            // Large 44px transparent touch hitbox for mobile precision (WCAG 2.5.5 / 2.5.8)
+            const hitbox = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            hitbox.setAttribute('cx', c.x);
+            hitbox.setAttribute('cy', c.y);
+            hitbox.setAttribute('r', '22');
+            hitbox.setAttribute('fill', 'transparent');
+            hitbox.style.cursor = 'pointer';
+            hitbox.style.pointerEvents = 'all';
+
             const pulse = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
             pulse.setAttribute('cx', c.x);
             pulse.setAttribute('cy', c.y);
@@ -13294,7 +13438,7 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
             label.setAttribute('font-weight', '700');
             label.textContent = c.flag + ' ' + c.name;
 
-            g.append(pulse, dot, label);
+            g.append(hitbox, pulse, dot, label);
 
             g.addEventListener('mouseenter', () => {
               hoverLabel.textContent = `${c.flag} ${c.name} (${c.authority})`;
@@ -13312,6 +13456,7 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
             // Create Pill Bar Button
             const pill = document.createElement('button');
             pill.className = 'country-pill' + (c.id === activeCountryId ? ' active' : '');
+            pill.dataset.id = c.id;
             pill.innerHTML = `<span>${c.flag}</span> <span>${c.name}</span>`;
             pill.addEventListener('click', () => selectCountry(c.id));
             pillBar.appendChild(pill);
@@ -13330,7 +13475,11 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
             pin.classList.toggle('active', pin.dataset.id === id);
           });
           document.querySelectorAll('.country-pill').forEach(pill => {
-            pill.classList.toggle('active', pill.textContent.includes(country.name));
+            const isActive = (pill.dataset.id === id) || pill.textContent.includes(country.name);
+            pill.classList.toggle('active', isActive);
+            if (isActive) {
+              pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
           });
           document.querySelectorAll('.flag-card').forEach(card => {
             card.classList.toggle('active', card.dataset.id === id);
