@@ -215,9 +215,9 @@
     "sri": "sha384-eNpjsWjyfYDokfn6VYZcT4gZeSAJv9PBiVQiu7GB3UWymUOa2gZSpBe0l88awveW"
   },
   "fonts/woff2/PocketGull-Bold-Core.woff2": {
-    "size": 15608,
-    "sha256": "78a54e651319f01160d105d70f54d7a97c211552b275e6fe84f0cb1f3bc58c4a",
-    "sri": "sha384-bKOfdDCf7Q15PulbL/SHHKVuY/j8pXRSRHS5iakYhzMO+S8hk774dcYMqznViM3U"
+    "size": 14272,
+    "sha256": "39f5a019fce2bc1bbd78dc2e813535f25a458024b8991cb8b286fdf5a28a303d",
+    "sri": "sha384-kKp4/Lr7cj9pyzj7YUzPoh3n+DZSfriKEvRySRBxnWEzrcliVhqluXXLDbMaC+Ro"
   },
   "fonts/woff2/PocketGull-Bold.woff2": {
     "size": 1022676,
@@ -250,9 +250,9 @@
     "sri": "sha384-mzLj2Zc2GeyTyBCo+V13Yzj2jcoUphn9jhBq8syWtBy2JlGDv1uhVOQCE2x4VX/0"
   },
   "fonts/woff2/PocketGull-Fineliner-Core.woff2": {
-    "size": 15356,
-    "sha256": "ebb34407e6b8bbb7f7156e4949ee657e3e42092bfb163ee0736736b06e11beaa",
-    "sri": "sha384-l+rrhbCQO/nC9Cf76NOR+Wz12VfN4VgkDhEVpDd8+zn/61o0lg0dWy7wM2VHtyB+"
+    "size": 14364,
+    "sha256": "8549dcddcc2e332df5386f043b7211cd87108f9378238688a879f52869f74a03",
+    "sri": "sha384-XybNNYuAV2z7uO3v9LAns8Flu1XfwiqpZrQF7paRjQ0yQuexspSwlVFWLMRWIXVc"
   },
   "fonts/woff2/PocketGull-Fineliner.woff2": {
     "size": 1017000,
@@ -300,9 +300,9 @@
     "sri": "sha384-btOqMo9qOf3CcTLVv9B+gijPP+/OTFpkAF1FeuVOXvaLdvB1C21E+RBVqaJYvCxi"
   },
   "fonts/woff2/PocketGull-Micro-Core.woff2": {
-    "size": 18540,
-    "sha256": "e158e2690e5cc2c5a464bd21c409dcc5929371cd1d322eca3b9b554746c813c9",
-    "sri": "sha384-vHvG+4tmaL1/P1BpieyZ3y/05yIRxocbPmVSFzCU+z1RzkX2vysJIrUxnUtp5PJ0"
+    "size": 15104,
+    "sha256": "cc6671ebdb9e84524c8fb3f44bb7e89842eb808e69065449119a44fb8e252754",
+    "sri": "sha384-c/sUPfthHtVW7sH+AWYgx2ss/F5qRgq1IJJONfAxDRJB4N1ilKuA7GMvnA90FrA6"
   },
   "fonts/woff2/PocketGull-Micro.woff2": {
     "size": 832888,
@@ -330,9 +330,9 @@
     "sri": "sha384-xpidQN27TUON7qzpFex1pBufk3GEfSCZw4/HSLGAmBLNMtM9sqsrX1487Q3J0Xx8"
   },
   "fonts/woff2/PocketGull-Regular-Core.woff2": {
-    "size": 15356,
-    "sha256": "5955693026ec20f83d6825e81749e313da4650648353a1b0da533c50b6967647",
-    "sri": "sha384-drh0PgzRUR28KmNBJM3jIddapVFgLe5l73d77hX+g+KJzka/E/tUA76OLR/1wts6"
+    "size": 14364,
+    "sha256": "fdfd22747f0125520be463cfe8d8b40489a270b2c4fcaf65d10e7b5c99d8ba21",
+    "sri": "sha384-1JQ8jSvKmoMNDdZCjWcodk5bAlsA6+n8tchh2rGJ1GhJ1JuINjgJXH278tf4ypEw"
   },
   "fonts/woff2/PocketGull-Regular.woff2": {
     "size": 1018700,
