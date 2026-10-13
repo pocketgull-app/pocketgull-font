@@ -370,6 +370,11 @@ body.cc-studio-body {
   font-size: 1.35rem;
   line-height: 1.35;
   color: #ffffff;
+  font-feature-settings: "zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1;
+  font-variant-numeric: slashed-zero;
+  letter-spacing: 0.015em;
+  --tittle-top-i: 18%;
+  --tittle-top-j: 18%;
   transition: font-weight 0.2s cubic-bezier(0.16, 1, 0.3, 1),
               font-stretch 0.2s ease,
               font-style 0.2s ease;
@@ -406,6 +411,8 @@ body.cc-studio-body {
   display: inline-block;
   align-self: flex-start;
   border-left: 3px solid var(--cc-accent-cyan);
+  font-feature-settings: "zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1;
+  font-variant-numeric: slashed-zero;
 }
 
 /* Optometric Blur & Distance Overlays (Monitor Viewport) */
@@ -650,6 +657,15 @@ body.cc-studio-body {
   background: rgba(255, 255, 255, 0.04);
   border-radius: 6px;
   min-height: 90px;
+}
+
+#samplePocketgull {
+  font-family: var(--cc-font-sans);
+  font-feature-settings: "zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1;
+  font-variant-numeric: slashed-zero;
+  letter-spacing: 0.015em;
+  --tittle-top-i: 18%;
+  --tittle-top-j: 18%;
 }
 
 /* Philocardia Heart Tittle Alternate in Closed Captions */
