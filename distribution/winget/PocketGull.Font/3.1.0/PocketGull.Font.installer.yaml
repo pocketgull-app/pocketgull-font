@@ -5,7 +5,7 @@ Installers:
   - Architecture: neutral
     InstallerType: zip
     InstallerUrl: https://github.com/pocketgull-app/pocketgull-font/releases/download/v3.1.0/pocketgull-typeface-v3.1.0.zip
-    InstallerSha256: D5082DA5217C81557BC616D8D616F9FC0C6A5AC9D0C61E2F0E50DBF994B23CFB
+    InstallerSha256: 1DA6D18845F19C162A92698E77D851ECBF11C89FE9193D70721427302CFED3B9
     NestedInstallerType: font
     NestedInstallerFiles:
       - RelativeFilePath: fonts/ttf/PocketGull-Regular.ttf
