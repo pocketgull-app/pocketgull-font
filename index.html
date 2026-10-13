@@ -883,9 +883,10 @@
         min-width: 0 !important;
         max-width: 100% !important;
         box-sizing: border-box !important;
+        padding: 8px !important;
       }
       #world-map-studio {
-        padding: 16px 12px !important;
+        padding: 12px 8px !important;
         margin-top: 20px !important;
         overflow: hidden !important;
       }
@@ -3720,6 +3721,15 @@
       }
       .chapter-hud-display .chap-label {
         display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 10px !important;
+      }
+      .specimen-card {
+        padding: 18px 10px !important;
       }
     }
   
@@ -7135,10 +7145,11 @@
             </p>
           </div>
         </div>
+      </div>
 
-        <!-- ================================================================= -->
-        <!-- Interactive Global Typographic & Clinical Health Dashboard       -->
-        <!-- ================================================================= -->
+      <!-- ================================================================= -->
+      <!-- Interactive Global Typographic & Clinical Health Dashboard       -->
+      <!-- ================================================================= -->
         <div id="world-map-studio" style="margin-top: 32px; background: radial-gradient(circle at 50% 20%, rgba(6, 182, 212, 0.08) 0%, var(--surface-inner) 75%); border: 1px solid rgba(6, 182, 212, 0.35); border-radius: 12px; padding: 24px; box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);">
           
           <div class="world-map-header">
@@ -7364,8 +7375,7 @@
           </div>
 
         </div>
-      </div>
-    </section>
+      </section>
 
     <!-- 7. Monospace Box Geometry & Clinical Telemetry -->
     <section class="specimen-card" id="box-geometry" style="border-color: rgba(56, 189, 248, 0.45);">

@@ -119,3 +119,20 @@ test('WCAG AAA & Scotopic 650nm Red Mode: Stylesheet Tokens', () => {
   // Must declare 16:9 aspect ratio container
   assert.ok(cssContent.includes('aspect-ratio: 16 / 9'), 'Broadcast screen must declare 16:9 aspect ratio');
 });
+
+test('Ergonomics & Vibration Isolation: Scoped Vibration & Auto-Reset Timeout', () => {
+  const cssContent = fs.readFileSync(path.join(ROOT_DIR, 'css', 'closed_caption_studio.css'), 'utf8');
+  const htmlContent = fs.readFileSync(path.join(ROOT_DIR, 'closed_caption_studio.html'), 'utf8');
+
+  // Must scope cc-filter-vibe strictly to in-monitor caption elements
+  assert.ok(cssContent.includes('.cc-caption-box.cc-filter-vibe'), 'Vibration must be scoped to .cc-caption-box');
+  assert.ok(cssContent.includes('.cc-rollup-container.cc-filter-vibe'), 'Vibration must be scoped to .cc-rollup-container');
+  assert.ok(cssContent.includes('prefers-reduced-motion'), 'Must support prefers-reduced-motion');
+
+  // Must NOT attach vibration to samplePocketgull or sampleFallback
+  assert.ok(!htmlContent.includes('samplePocketgull.classList.add(\'cc-filter-vibe\')'), 'A/B sample must not vibrate');
+  assert.ok(!htmlContent.includes('sampleFallback.classList.add(\'cc-filter-vibe\')'), 'A/B fallback must not vibrate');
+
+  // Must have auto-reset timeout
+  assert.match(htmlContent, /setTimeout\(\(\)\s*=>\s*\{\s*resetToNormalAcuity\(\);?\s*\},\s*4000\)/, 'Must automatically reset vibration after 4 seconds');
+});

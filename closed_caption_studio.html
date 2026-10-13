@@ -635,19 +635,47 @@
       });
     });
 
-    // Filter stress-test buttons
+    // Filter stress-test buttons with auto-timeout & toggle for vibration
+    let vibeTimeout = null;
+
+    function clearFilters() {
+      if (vibeTimeout) {
+        clearTimeout(vibeTimeout);
+        vibeTimeout = null;
+      }
+      screen.classList.remove('cc-filter-blur', 'cc-filter-distance');
+      captionBox.classList.remove('cc-filter-vibe');
+      rollupContainer.classList.remove('cc-filter-vibe');
+      // Ensure A/B test samples never have any lingering filter classes
+      samplePocketgull.classList.remove('cc-filter-blur', 'cc-filter-distance', 'cc-filter-vibe');
+      sampleFallback.classList.remove('cc-filter-blur', 'cc-filter-distance', 'cc-filter-vibe');
+    }
+
+    function resetToNormalAcuity() {
+      clearFilters();
+      studio.setFilter('none');
+      document.querySelectorAll('[data-filter]').forEach(b => {
+        b.classList.toggle('active', b.dataset.filter === 'none');
+      });
+      filterLabel.textContent = 'Normal 20/20';
+    }
+
     document.querySelectorAll('[data-filter]').forEach(btn => {
       btn.addEventListener('click', () => {
+        const f = btn.dataset.filter;
+
+        // Toggle behavior: If clicking active vibration button again, turn it off immediately
+        if (f === 'vibe' && btn.classList.contains('active')) {
+          resetToNormalAcuity();
+          return;
+        }
+
+        clearFilters();
+
         document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        const f = btn.dataset.filter;
         studio.setFilter(f);
         filterLabel.textContent = btn.textContent.replace(/^[^\s]+\s*/, '');
-
-        // Remove old classes
-        screen.classList.remove('cc-filter-blur', 'cc-filter-distance', 'cc-filter-vibe');
-        samplePocketgull.classList.remove('cc-filter-blur', 'cc-filter-distance', 'cc-filter-vibe');
-        sampleFallback.classList.remove('cc-filter-blur', 'cc-filter-distance', 'cc-filter-vibe');
 
         if (f === 'blur') {
           screen.classList.add('cc-filter-blur');
@@ -658,9 +686,15 @@
           samplePocketgull.classList.add('cc-filter-distance');
           sampleFallback.classList.add('cc-filter-distance');
         } else if (f === 'vibe') {
-          screen.classList.add('cc-filter-vibe');
-          samplePocketgull.classList.add('cc-filter-vibe');
-          sampleFallback.classList.add('cc-filter-vibe');
+          // Vibration is strictly scoped to the in-monitor caption container
+          captionBox.classList.add('cc-filter-vibe');
+          rollupContainer.classList.add('cc-filter-vibe');
+          filterLabel.textContent = 'Ambulance Vibration (4s Test)';
+
+          // Auto-reset after 4 seconds to prevent continuous vestibular stress
+          vibeTimeout = setTimeout(() => {
+            resetToNormalAcuity();
+          }, 4000);
         }
       });
     });

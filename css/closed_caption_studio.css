@@ -408,24 +408,34 @@ body.cc-studio-body {
   border-left: 3px solid var(--cc-accent-cyan);
 }
 
-/* Optometric Blur / Degradation Filter Overlays */
+/* Optometric Blur & Distance Overlays (Monitor Viewport) */
 .cc-filter-blur {
-  filter: blur(2.2px) !important;
+  filter: blur(2.2px);
 }
 
 .cc-filter-distance {
-  transform: scale(0.68);
+  transform: scale(0.72);
   transform-origin: center bottom;
 }
 
-.cc-filter-vibe {
-  animation: cc-vibe-shake 0.15s infinite alternate !important;
+/* Vehicular Vibration Stress Test (Strictly Scoped to In-Monitor Captions Only) */
+.cc-caption-box.cc-filter-vibe,
+.cc-rollup-container.cc-filter-vibe {
+  animation: cc-vibe-shake 0.14s ease-in-out infinite alternate !important;
+  will-change: transform;
 }
 
 @keyframes cc-vibe-shake {
-  0% { transform: translate(1px, -1px); }
-  50% { transform: translate(-1.5px, 1.5px); }
-  100% { transform: translate(1px, 0.5px); }
+  0% { transform: translate(0.6px, -0.6px); }
+  50% { transform: translate(-0.8px, 0.7px); }
+  100% { transform: translate(0.5px, 0.4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-caption-box.cc-filter-vibe,
+  .cc-rollup-container.cc-filter-vibe {
+    animation: none !important;
+  }
 }
 
 /* Controls Workbench Column */
