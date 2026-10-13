@@ -427,6 +427,10 @@ def build_trojan_defense_badge(is_bidi=True):
     sanitize_contour_points(g.coordinates, g.endPtsOfContours)
     return g
 
+def build_zero_width_joiner_glyph():
+    """Constructs a clean 0-width, 0-contour glyph for legitimate script joiners (ZWNJ, ZWJ, MVS, ALM, LRM, RLM, ZWSP, BOM) to prevent false positives in Persian, Arabic, Mongolian, and Indic shaping."""
+    return Glyph()
+
 def inject_glyphs_into_font(font_path):
     is_bold = "Bold" in font_path.name or "Black" in font_path.name or "Chiseltip" in font_path.name
     font = TTFont(str(font_path))
@@ -450,10 +454,16 @@ def inject_glyphs_into_font(font_path):
                 gvar.variations[extra_g] = []
     gorder = list(font.getGlyphOrder())
 
-    # Trojan Source BiDi (CVE-2021-42574) & Zero-Width Spoofing codepoints
-    trojan_bidi_cps = [0x202A, 0x202B, 0x202C, 0x202D, 0x202E, 0x2066, 0x2067, 0x2068, 0x2069, 0x200E, 0x200F, 0x061C]
-    zero_width_cps = [0x200B, 0x200C, 0x200D, 0x2060, 0xFEFF]
-    spoof_filler_cps = [0x115F, 0x1160, 0x180E, 0x3164, 0xFFA0]
+    # 1. TRUE CVE-2021-42574 Trojan Source Explicit BiDi Overrides & Isolates (9 codepoints - 0 false positives)
+    trojan_bidi_cps = [0x202A, 0x202B, 0x202C, 0x202D, 0x202E, 0x2066, 0x2067, 0x2068, 0x2069]
+    # 2. Hangul Blank Fillers & Invisible Math Operators used for fake-space/steganographic spoofing (8 codepoints - 0 false positives)
+    spoof_filler_cps = [0x115F, 0x1160, 0x3164, 0xFFA0, 0x2061, 0x2062, 0x2063, 0x2064]
+    # 3. Legitimate Multilingual Script Joiners & Presentation Selectors (Persian ZWNJ, Arabic ALM/LRM/RLM, Mongolian MVS, Indic ZWJ, ZWSP, SHY, VS1-VS16, BOM)
+    # Mapped to clean 0-width (or 600 UPM in strict Mono) empty glyph to guarantee ZERO false positives in sovereign scripts & emoji
+    legit_joiner_cps = [0x00AD, 0x061C, 0x180E, 0x200B, 0x200C, 0x200D, 0x200E, 0x200F, 0x2060, 0xFEFF] + list(range(0xFE00, 0xFE10))
+
+    is_mono = "Mono" in font_path.name
+    joiner_adv = 600 if is_mono else 0
 
     glyph_map = {
         "u1F4C1": (build_folder_glyph(is_bold), [0x1F4C1, 0xF07B, 0xF115]),
@@ -475,13 +485,15 @@ def inject_glyphs_into_font(font_path):
         "uni25C1": (build_chevron_thin("left", False), [0x25C1]),
         "uni25D7": (build_pill_cap("right", False, False), [0x25D7]),
         "uni25D6": (build_pill_cap("left", False, False), [0x25D6]),
-        "uni202E.guard": (build_trojan_defense_badge(True), trojan_bidi_cps + zero_width_cps + spoof_filler_cps),
+        "uni202E.guard": (build_trojan_defense_badge(True), trojan_bidi_cps + spoof_filler_cps),
+        "uni200C.joiner": (build_zero_width_joiner_glyph(), legit_joiner_cps),
     }
 
     for gname, (glyph_obj, codepoints) in glyph_map.items():
         glyf[gname] = glyph_obj
         glyph_obj.recalcBounds(glyf)
-        hmtx[gname] = (600, getattr(glyph_obj, "xMin", 0))
+        adv = joiner_adv if gname == "uni200C.joiner" else 600
+        hmtx[gname] = (adv, getattr(glyph_obj, "xMin", 0))
         if gname not in gorder:
             gorder.append(gname)
 
