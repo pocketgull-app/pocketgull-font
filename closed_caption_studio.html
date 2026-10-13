@@ -208,6 +208,53 @@
           </div>
         </div>
 
+        <!-- Semantic Emotion Tokens -->
+        <div class="cc-control-group" style="border-top: 1px solid var(--cc-border); padding-top: 0.8rem;">
+          <label class="cc-control-label">
+            <span>Semantic Emotion Tokens</span>
+            <span class="cc-val-readout" id="activeEmotionLabel">None (Default)</span>
+          </label>
+          <div class="cc-pill-row" id="emotionPills">
+            <button type="button" class="cc-pill-btn" data-emotion="intimate">🤫 Intimate / Whisper</button>
+            <button type="button" class="cc-pill-btn" data-emotion="panic">🚨 Trauma / Panic</button>
+            <button type="button" class="cc-pill-btn" data-emotion="relief">🌿 Vagal Relief</button>
+            <button type="button" class="cc-pill-btn" data-emotion="awe">🌌 Cosmic Awe</button>
+          </div>
+          <!-- Kinetic Acoustic Bloom Trigger -->
+          <div style="margin-top: 6px;">
+            <button type="button" class="cc-playback-btn" id="triggerBloomBtn" style="width: 100%; text-align: center; background: rgba(56, 189, 248, 0.15); color: var(--cc-accent-sky); border-color: rgba(56, 189, 248, 0.3);">
+              🎵 Trigger Acoustic Weight Bloom (Attack ➔ Decay)
+            </button>
+          </div>
+        </div>
+
+        <!-- Atmospheric Scene Blending & Ambient Bleed -->
+        <div class="cc-control-group" style="border-top: 1px solid var(--cc-border); padding-top: 0.8rem;">
+          <label class="cc-control-label">
+            <span>Atmospheric Scene Blending</span>
+            <span class="cc-val-readout" id="activeBlendLabel">Surgical Teal</span>
+          </label>
+          <div class="cc-pill-row" id="blendPills">
+            <button type="button" class="cc-pill-btn active" data-blend="clinical_teal">🏥 Surgical Teal</button>
+            <button type="button" class="cc-pill-btn" data-blend="noir_shadow">🌧️ Noir Shadow</button>
+            <button type="button" class="cc-pill-btn" data-blend="hearth_amber">🕯️ Hearth Amber</button>
+            <button type="button" class="cc-pill-btn" data-blend="arctic_frost">❄️ Arctic Frost</button>
+          </div>
+        </div>
+
+        <!-- Spatial Acoustic Directionality -->
+        <div class="cc-control-group" style="border-top: 1px solid var(--cc-border); padding-top: 0.8rem;">
+          <label class="cc-control-label">
+            <span>Spatial Sound Directionality</span>
+            <span class="cc-val-readout" id="activeSpatialLabel">Center Dialogue</span>
+          </label>
+          <div class="cc-pill-row" id="spatialPills">
+            <button type="button" class="cc-pill-btn" data-spatial="left">◄ Left Speaker</button>
+            <button type="button" class="cc-pill-btn active" data-spatial="center">▲ Center Dialogue</button>
+            <button type="button" class="cc-pill-btn" data-spatial="right">Right Speaker ►</button>
+          </div>
+        </div>
+
         <!-- Optometric Acuity & Degradation Filters -->
         <div class="cc-control-group" style="border-top: 1px solid var(--cc-border); padding-top: 0.8rem;">
           <label class="cc-control-label">
@@ -333,7 +380,14 @@
 
   <!-- Interactive Studio Script -->
   <script type="module">
-    import { BROADCAST_SCENES, PROSODY_PRESETS, ClosedCaptionStudio } from './js/closed_caption_studio.js';
+    import {
+      BROADCAST_SCENES,
+      PROSODY_PRESETS,
+      EMOTION_TOKENS,
+      ATMOSPHERIC_BLENDS,
+      SPATIAL_DIRECTIONS,
+      ClosedCaptionStudio
+    } from './js/closed_caption_studio.js';
 
     const studio = new ClosedCaptionStudio();
     let autoProsody = true;
@@ -368,6 +422,10 @@
     const activeModeLabel = document.getElementById('activeModeLabel');
     const scrimLabel = document.getElementById('scrimLabel');
     const filterLabel = document.getElementById('filterLabel');
+    const activeEmotionLabel = document.getElementById('activeEmotionLabel');
+    const activeBlendLabel = document.getElementById('activeBlendLabel');
+    const activeSpatialLabel = document.getElementById('activeSpatialLabel');
+    const triggerBloomBtn = document.getElementById('triggerBloomBtn');
 
     // Timecode simulation clock
     let frameCount = 0;
@@ -631,6 +689,101 @@
           captionBox.style.background = 'transparent';
           captionBox.style.border = 'none';
           textLineEl.style.textShadow = '0 2px 10px rgba(0, 0, 0, 0.95), 0 0 3px #000000';
+        }
+      });
+    });
+
+    // Emotion Token Handlers
+    document.querySelectorAll('[data-emotion]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const emoId = btn.dataset.emotion;
+        const isActive = btn.classList.contains('active');
+
+        document.querySelectorAll('[data-emotion]').forEach(b => b.classList.remove('active'));
+
+        if (isActive) {
+          activeEmotionLabel.textContent = 'None (Default)';
+          captionBox.style.boxShadow = '';
+          textLineEl.style.letterSpacing = '0';
+          renderCue();
+          return;
+        }
+
+        btn.classList.add('active');
+        const token = studio.setEmotion(emoId);
+        if (token) {
+          activeEmotionLabel.textContent = token.name;
+          autoProsody = false;
+          toggleAutoProsodyBtn.textContent = 'Auto Prosody: OFF';
+          toggleAutoProsodyBtn.classList.remove('active');
+          document.getElementById('prosodyStatusLabel').textContent = `EMOTION: ${token.id.toUpperCase()}`;
+
+          // Apply emotion token font metrics
+          applyFontSettings(token.weight, token.width, token.slant, token.aptr);
+          textLineEl.style.letterSpacing = token.tracking;
+
+          // Apply emotional aura
+          captionBox.style.boxShadow = token.aura;
+
+          // If current mode is pop-on, update text with characteristic emotion sample
+          if (studio.mode === 'pop-on' && token.sampleText) {
+            textLineEl.textContent = token.sampleText;
+            samplePocketgull.textContent = token.sampleText;
+            sampleFallback.textContent = token.sampleText;
+          }
+        }
+      });
+    });
+
+    // Acoustic Weight Bloom Trigger
+    triggerBloomBtn.addEventListener('click', () => {
+      textLineEl.classList.remove('cc-acoustic-bloom');
+      // Force DOM reflow to retrigger CSS animation cleanly
+      void textLineEl.offsetWidth;
+      textLineEl.classList.add('cc-acoustic-bloom');
+      setTimeout(() => {
+        textLineEl.classList.remove('cc-acoustic-bloom');
+      }, 1300);
+    });
+
+    // Atmospheric Scene Blending Handlers
+    document.querySelectorAll('[data-blend]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-blend]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const blendId = btn.dataset.blend;
+        const blend = studio.setAtmosphericBlend(blendId);
+        activeBlendLabel.textContent = blend.name;
+
+        // Apply photometric diffusion to caption box
+        captionBox.classList.add('cc-photometric-diffusion');
+        captionBox.style.background = blend.scrimBg;
+        captionBox.style.borderColor = blend.scrimBorder;
+        captionBox.style.boxShadow = blend.aura;
+        textLineEl.style.color = blend.textTint;
+      });
+    });
+
+    // Spatial Acoustic Directionality Handlers
+    document.querySelectorAll('[data-spatial]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-spatial]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const spatialId = btn.dataset.spatial;
+        const dir = studio.setSpatialDirection(spatialId);
+        activeSpatialLabel.textContent = dir.name;
+
+        // Update spatial classes
+        captionBox.classList.remove('cc-spatial-left', 'cc-spatial-center', 'cc-spatial-right');
+        if (dir.align === 'left') {
+          captionBox.classList.add('cc-spatial-left');
+          applyFontSettings(weightSlider.value, widthSlider.value, dir.slant, aptrSlider.value);
+        } else if (dir.align === 'right') {
+          captionBox.classList.add('cc-spatial-right');
+          applyFontSettings(weightSlider.value, widthSlider.value, dir.slant, aptrSlider.value);
+        } else {
+          captionBox.classList.add('cc-spatial-center');
+          applyFontSettings(weightSlider.value, widthSlider.value, 0, aptrSlider.value);
         }
       });
     });

@@ -433,9 +433,65 @@ body.cc-studio-body {
 
 @media (prefers-reduced-motion: reduce) {
   .cc-caption-box.cc-filter-vibe,
-  .cc-rollup-container.cc-filter-vibe {
+  .cc-rollup-container.cc-filter-vibe,
+  .cc-text-line.cc-acoustic-bloom {
     animation: none !important;
   }
+}
+
+/* Acoustic Weight Blooming (Attack, Sustain, Decay) */
+.cc-text-line.cc-acoustic-bloom {
+  animation: cc-bloom-attack 1.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cc-bloom-attack {
+  0% {
+    font-variation-settings: 'wght' 320, 'wdth' 100, 'slnt' 0, 'APTR' 50;
+    letter-spacing: -0.01em;
+  }
+  18% {
+    /* Peak Decibel Attack */
+    font-variation-settings: 'wght' 850, 'wdth' 92, 'slnt' 0, 'APTR' 95;
+    letter-spacing: -0.02em;
+    text-shadow: 0 0 14px rgba(255, 255, 255, 0.6);
+  }
+  55% {
+    /* Acoustic Sustain */
+    font-variation-settings: 'wght' 620, 'wdth' 96, 'slnt' 0, 'APTR' 75;
+    letter-spacing: 0;
+  }
+  100% {
+    /* Gentle Decay into Baseline Resting Cadence */
+    font-variation-settings: 'wght' 400, 'wdth' 100, 'slnt' 0, 'APTR' 50;
+    letter-spacing: 0;
+    text-shadow: none;
+  }
+}
+
+/* Spatial Sound Directionality Classes */
+.cc-spatial-left {
+  text-align: left !important;
+  align-self: flex-start !important;
+  transform-origin: left bottom;
+}
+
+.cc-spatial-center {
+  text-align: center !important;
+  align-self: center !important;
+  transform-origin: center bottom;
+}
+
+.cc-spatial-right {
+  text-align: right !important;
+  align-self: flex-end !important;
+  transform-origin: right bottom;
+}
+
+/* Photometric Diffused Scrim Edge (Inhabiting the Scene) */
+.cc-photometric-diffusion {
+  backdrop-filter: blur(12px) saturate(135%);
+  -webkit-backdrop-filter: blur(12px) saturate(135%);
+  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, color 0.4s ease;
 }
 
 /* Controls Workbench Column */

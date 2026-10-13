@@ -240,6 +240,124 @@ export const PROSODY_PRESETS = {
   soundfx: { weight: 500, slant: 0, letterSpacing: '0.02em', label: 'Non-Speech FX (500)' }
 };
 
+export const EMOTION_TOKENS = {
+  intimate: {
+    id: 'intimate',
+    name: 'Intimate / Whisper',
+    weight: 230,
+    width: 98,
+    slant: -6.5,
+    tracking: '0.04em',
+    aptr: 65,
+    scrimHue: '210, 30%, 10%',
+    scrimAlpha: 0.78,
+    aura: '0 0 16px rgba(56, 189, 248, 0.15)',
+    pacingMs: 3800,
+    sampleText: 'I never wanted anyone else to know about this.'
+  },
+  panic: {
+    id: 'panic',
+    name: 'Trauma / Acute Panic',
+    weight: 820,
+    width: 88,
+    slant: 0,
+    tracking: '-0.01em',
+    aptr: 95,
+    scrimHue: '0, 45%, 8%',
+    scrimAlpha: 0.88,
+    aura: '0 0 20px rgba(239, 68, 68, 0.35)',
+    pacingMs: 2200,
+    sampleText: 'DEFIBRILLATOR CHARGED TO 200 JOULES! ALL CLEAR!'
+  },
+  relief: {
+    id: 'relief',
+    name: 'Vagal Relief / Grounding',
+    weight: 390,
+    width: 100,
+    slant: 0,
+    tracking: '0.02em',
+    aptr: 70,
+    scrimHue: '160, 30%, 8%',
+    scrimAlpha: 0.80,
+    aura: '0 0 16px rgba(16, 185, 129, 0.2)',
+    pacingMs: 4200,
+    sampleText: 'The pulse has stabilized. Normal sinus rhythm restored.'
+  },
+  awe: {
+    id: 'awe',
+    name: 'Cosmic Awe / Reverence',
+    weight: 280,
+    width: 100,
+    slant: 0,
+    tracking: '0.08em',
+    aptr: 80,
+    scrimHue: '260, 35%, 8%',
+    scrimAlpha: 0.75,
+    aura: '0 0 24px rgba(168, 85, 247, 0.28)',
+    pacingMs: 4600,
+    sampleText: 'Beyond the horizon, the northern lights began to sing.'
+  }
+};
+
+export const ATMOSPHERIC_BLENDS = {
+  clinical_teal: {
+    id: 'clinical_teal',
+    name: 'Hospital Surgical Teal',
+    scrimBg: 'rgba(4, 20, 28, 0.85)',
+    scrimBorder: 'rgba(6, 182, 212, 0.28)',
+    textTint: '#f0fdfa',
+    aura: '0 4px 20px rgba(6, 182, 212, 0.18)'
+  },
+  noir_shadow: {
+    id: 'noir_shadow',
+    name: 'Midnight Noir Shadow',
+    scrimBg: 'rgba(5, 7, 14, 0.88)',
+    scrimBorder: 'rgba(255, 255, 255, 0.1)',
+    textTint: '#f8fafc',
+    aura: '0 4px 18px rgba(0, 0, 0, 0.7)'
+  },
+  hearth_amber: {
+    id: 'hearth_amber',
+    name: 'Warm Hearth Candlelight',
+    scrimBg: 'rgba(24, 14, 6, 0.86)',
+    scrimBorder: 'rgba(245, 158, 11, 0.32)',
+    textTint: '#fffbeb',
+    aura: '0 4px 22px rgba(245, 158, 11, 0.22)'
+  },
+  arctic_frost: {
+    id: 'arctic_frost',
+    name: 'Arctic Frost Diffusion',
+    scrimBg: 'rgba(215, 230, 245, 0.88)',
+    scrimBorder: 'rgba(147, 197, 253, 0.65)',
+    textTint: '#032541',
+    aura: '0 4px 18px rgba(147, 197, 253, 0.35)'
+  }
+};
+
+export const SPATIAL_DIRECTIONS = {
+  left: {
+    id: 'left',
+    name: 'Off-Screen Left',
+    slant: -5.5,
+    align: 'left',
+    label: '◄ Left Speaker'
+  },
+  center: {
+    id: 'center',
+    name: 'On-Screen Center',
+    slant: 0,
+    align: 'center',
+    label: '▲ Center Dialogue'
+  },
+  right: {
+    id: 'right',
+    name: 'Off-Screen Right',
+    slant: -1.5,
+    align: 'right',
+    label: 'Right Speaker ►'
+  }
+};
+
 export class ClosedCaptionStudio {
   constructor(options = {}) {
     this.currentSceneId = options.sceneId || 'trauma_bay';
@@ -260,6 +378,11 @@ export class ClosedCaptionStudio {
 
     // Roll-up line buffer (for roll-up mode)
     this.rollupBuffer = [];
+
+    // Emotion & Atmospheric Scene Blending
+    this.currentEmotion = null;
+    this.currentAtmosphericBlend = 'clinical_teal';
+    this.currentSpatialDirection = 'center';
   }
 
   getScene(id = this.currentSceneId) {
@@ -314,6 +437,31 @@ export class ClosedCaptionStudio {
     this.abFont = font;
   }
 
+  setEmotion(id) {
+    if (EMOTION_TOKENS[id]) {
+      this.currentEmotion = id;
+      return EMOTION_TOKENS[id];
+    }
+    this.currentEmotion = null;
+    return null;
+  }
+
+  setAtmosphericBlend(id) {
+    if (ATMOSPHERIC_BLENDS[id]) {
+      this.currentAtmosphericBlend = id;
+      return ATMOSPHERIC_BLENDS[id];
+    }
+    return ATMOSPHERIC_BLENDS.clinical_teal;
+  }
+
+  setSpatialDirection(id) {
+    if (SPATIAL_DIRECTIONS[id]) {
+      this.currentSpatialDirection = id;
+      return SPATIAL_DIRECTIONS[id];
+    }
+    return SPATIAL_DIRECTIONS.center;
+  }
+
   calculateLineFit(text, targetCpl = 37) {
     // Calculates optical width adjustment (75% to 100%) to fit text within broadcast CPL
     if (!text || text.length <= targetCpl) return 100;
@@ -328,6 +476,9 @@ if (typeof window !== 'undefined') {
   window.PocketGullCC = {
     BROADCAST_SCENES,
     PROSODY_PRESETS,
+    EMOTION_TOKENS,
+    ATMOSPHERIC_BLENDS,
+    SPATIAL_DIRECTIONS,
     ClosedCaptionStudio
   };
 }

@@ -136,3 +136,41 @@ test('Ergonomics & Vibration Isolation: Scoped Vibration & Auto-Reset Timeout', 
   // Must have auto-reset timeout
   assert.match(htmlContent, /setTimeout\(\(\)\s*=>\s*\{\s*resetToNormalAcuity\(\);?\s*\},\s*4000\)/, 'Must automatically reset vibration after 4 seconds');
 });
+
+test('Emotion Tokens, Atmospheric Blends & Spatial Directions: Archetypal Semiosis', async () => {
+  const { EMOTION_TOKENS, ATMOSPHERIC_BLENDS, SPATIAL_DIRECTIONS, ClosedCaptionStudio } = await import('../js/closed_caption_studio.js');
+
+  assert.ok(EMOTION_TOKENS.intimate, 'Must define intimate emotion token');
+  assert.ok(EMOTION_TOKENS.panic, 'Must define panic emotion token');
+  assert.ok(EMOTION_TOKENS.relief, 'Must define relief emotion token');
+  assert.ok(EMOTION_TOKENS.awe, 'Must define awe emotion token');
+
+  assert.ok(ATMOSPHERIC_BLENDS.clinical_teal, 'Must define clinical_teal atmospheric blend');
+  assert.ok(ATMOSPHERIC_BLENDS.noir_shadow, 'Must define noir_shadow atmospheric blend');
+  assert.ok(ATMOSPHERIC_BLENDS.hearth_amber, 'Must define hearth_amber atmospheric blend');
+  assert.ok(ATMOSPHERIC_BLENDS.arctic_frost, 'Must define arctic_frost atmospheric blend');
+
+  assert.ok(SPATIAL_DIRECTIONS.left, 'Must define left spatial direction');
+  assert.ok(SPATIAL_DIRECTIONS.center, 'Must define center spatial direction');
+  assert.ok(SPATIAL_DIRECTIONS.right, 'Must define right spatial direction');
+
+  const studio = new ClosedCaptionStudio();
+  assert.strictEqual(studio.setEmotion('panic')?.id, 'panic');
+  assert.strictEqual(studio.setAtmosphericBlend('hearth_amber')?.id, 'hearth_amber');
+  assert.strictEqual(studio.setSpatialDirection('left')?.id, 'left');
+
+  // Verify CSS classes exist for acoustic blooming and photometric diffusion
+  const cssContent = fs.readFileSync(path.join(ROOT_DIR, 'css', 'closed_caption_studio.css'), 'utf8');
+  assert.ok(cssContent.includes('.cc-acoustic-bloom'), 'CSS must declare .cc-acoustic-bloom animation class');
+  assert.ok(cssContent.includes('@keyframes cc-bloom-attack'), 'CSS must declare @keyframes cc-bloom-attack');
+  assert.ok(cssContent.includes('.cc-photometric-diffusion'), 'CSS must declare .cc-photometric-diffusion');
+  assert.ok(cssContent.includes('.cc-spatial-left'), 'CSS must declare .cc-spatial-left');
+  assert.ok(cssContent.includes('.cc-spatial-right'), 'CSS must declare .cc-spatial-right');
+
+  // Verify HTML contains emotion, blend, and bloom triggers
+  const htmlContent = fs.readFileSync(path.join(ROOT_DIR, 'closed_caption_studio.html'), 'utf8');
+  assert.ok(htmlContent.includes('id="triggerBloomBtn"'), 'HTML must declare triggerBloomBtn');
+  assert.ok(htmlContent.includes('data-emotion="intimate"'), 'HTML must declare intimate emotion pill');
+  assert.ok(htmlContent.includes('data-blend="clinical_teal"'), 'HTML must declare clinical_teal blend pill');
+  assert.ok(htmlContent.includes('data-spatial="left"'), 'HTML must declare left spatial pill');
+});
