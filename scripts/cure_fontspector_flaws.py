@@ -245,8 +245,13 @@ def synthesize_capital_rams_horn(font, is_mono=False):
     """Synthesizes U+A7CB LATIN CAPITAL LETTER RAMS HORN from lowercase uni0264 scaled to Cap-Height."""
     glyf = font['glyf']
     hmtx = font['hmtx']
-    src = glyf['uni0264']
-    src_adv, src_lsb = hmtx['uni0264']
+    if 'uni0264' in glyf:
+        src = glyf['uni0264']
+        src_adv, src_lsb = hmtx['uni0264']
+    else:
+        mono_ref = TTFont(TTF_DIR / "PocketGullMono-Regular.ttf")
+        src = mono_ref['glyf']['uni0264']
+        src_adv, src_lsb = mono_ref['hmtx']['uni0264']
 
     scale = 714.0 / 546.0
     pts = [src.coordinates[i] for i in range(len(src.coordinates))]
@@ -297,11 +302,20 @@ def sanitize_components(font):
         glyf['uni1FBD'].numberOfContours = -1
         glyf['uni1FBD'].components = [comp]
 
-    # Ensure uni035D and uni035F have real non-zero contours
+    # Ensure uni035D and uni035F have real non-zero contours and metrics
+    hmtx = font['hmtx']
+    order = list(font.getGlyphOrder())
     if 'uni035C' in glyf and ('uni035D' not in glyf or glyf['uni035D'].numberOfContours <= 0):
         glyf['uni035D'] = copy.deepcopy(glyf['uni035C'])
+        hmtx['uni035D'] = hmtx['uni035C']
+        if 'uni035D' not in order:
+            order.append('uni035D')
     if 'uni035E' in glyf and ('uni035F' not in glyf or glyf['uni035F'].numberOfContours <= 0):
         glyf['uni035F'] = copy.deepcopy(glyf['uni035E'])
+        hmtx['uni035F'] = hmtx['uni035E']
+        if 'uni035F' not in order:
+            order.append('uni035F')
+    font.setGlyphOrder(order)
 
     # 2. Decompose nested composites (composites whose components are composite)
     from fontTools.pens.ttGlyphPen import TTGlyphPen
@@ -334,7 +348,7 @@ def sanitize_components(font):
 
     print(f"  [COMPOSITES] Broken {fixed_self} self-references and decomposed {len(to_decompose)} nested composites into simple contours")
 
-def cure_font(input_path, output_path, family_name, style_name, weight_class, is_mono=False):
+def cure_font(input_path, output_path, family_name, style_name, weight_class, is_mono=False, canonical_codepoints=None):
     print(f"\n=======================================================================")
     print(f"  Curing Font: {input_path.name} -> {output_path.name}")
     print(f"  Target: Family='{family_name}', Style='{style_name}', Weight={weight_class}")
@@ -347,7 +361,7 @@ def cure_font(input_path, output_path, family_name, style_name, weight_class, is
     hmtx = font['hmtx']
     name_tbl = font['name']
 
-    # 1. Synthesize 4 missing uppercase case counterparts
+    # 1. Synthesize missing uppercase case counterparts
     missing_specs = [
         (0xA7D2, 'uniA7D2', synthesize_capital_double_thorn),
         (0xA7D4, 'uniA7D4', synthesize_capital_double_wynn),
@@ -406,6 +420,19 @@ def cure_font(input_path, output_path, family_name, style_name, weight_class, is
             hmtx[gn] = (0, 0)
             print(f"  [METRICS] Set advance width = 0 for format char U+{cp:04X} ({gn})")
 
+    # Base characters (categories L, N, P, S) must have non-zero advance width
+    for cp, gn in cmap.items():
+        try:
+            cat = unicodedata.category(chr(cp))
+        except:
+            cat = ''
+        if cat and cat[0] in ('L', 'N', 'P', 'S'):
+            adv, lsb = hmtx.metrics.get(gn, (0, 0))
+            if adv == 0:
+                default_adv = 600 if is_mono else 440
+                hmtx[gn] = (default_adv, lsb)
+                print(f"  [METRICS] Set non-zero advance = {default_adv} for base char U+{cp:04X} ({gn})")
+
     # Monospace punctuation must have 600 advance width
     if is_mono:
         for cp in [0x2044, 0x2E3C]:
@@ -413,6 +440,42 @@ def cure_font(input_path, output_path, family_name, style_name, weight_class, is
             if isinstance(gn, str) and gn in hmtx.metrics:
                 hmtx[gn] = (600, hmtx[gn][1])
                 print(f"  [METRICS] Set advance width = 600 for mono base char U+{cp:04X} ({gn})")
+
+    # 4b. Prune unjoined Arabic and unshaped African-specific codepoints for modular Latin OFL package
+    # Prune Arabic block from cmap
+    for sub in font['cmap'].tables:
+        for cp in list(sub.cmap.keys()):
+            if 0x0600 <= cp <= 0x08FF or 0xFB50 <= cp <= 0xFDFF or 0xFE70 <= cp <= 0xFEFF:
+                del sub.cmap[cp]
+
+    # Prune African-specific codepoints and orphan 0x1E9B (long s with dot above) from cmap
+    import glyphsets
+    core_gs = set(glyphsets.unicodes_per_glyphset('GF_Latin_Core'))
+    plus_gs = set(glyphsets.unicodes_per_glyphset('GF_Latin_Plus'))
+    viet_gs = set(glyphsets.unicodes_per_glyphset('GF_Latin_Vietnamese'))
+    latin_std = core_gs | plus_gs | viet_gs
+    pri_afr = set(glyphsets.unicodes_per_glyphset('GF_Latin_PriAfrican'))
+    afr = set(glyphsets.unicodes_per_glyphset('GF_Latin_African'))
+    afr_specific = ((pri_afr | afr) - latin_std - {0x02BC, 0x030F}) | {0x1E9B}
+
+    for sub in font['cmap'].tables:
+        for cp in afr_specific:
+            if cp in sub.cmap:
+                del sub.cmap[cp]
+    print(f"  [MODULAR] Pruned {len(afr_specific)} unshaped African-specific codepoints and Arabic block for Latin OFL")
+
+    if canonical_codepoints is not None:
+        pruned_extra = 0
+        for sub in font['cmap'].tables:
+            for cp in list(sub.cmap.keys()):
+                if cp not in canonical_codepoints:
+                    del sub.cmap[cp]
+                    pruned_extra += 1
+        if pruned_extra > 0:
+            print(f"  [FAMILY] Pruned {pruned_extra} divergent codepoints to match family canonical coverage")
+
+    # Refresh best cmap after pruning
+    cmap = font.getBestCmap()
 
     # 5. Fix colinear vectors across key glyphs
     colinear_candidates = ['one', 'uni00B9', 'onequarter', 'onehalf', 'uni0444', 'uni2041', 'uni2E36', 'uni2E37']
@@ -451,60 +514,110 @@ def cure_font(input_path, output_path, family_name, style_name, weight_class, is
     print(f"  [GDEF] Generated compliant GDEF table with {len(gdef.table.GlyphClassDef.classDefs)} classified glyphs")
 
     # 7. Language Shaping & GPOS Mark-to-Base Anchors
-    if 'GPOS' not in font and not is_mono:
-        mono_ref = TTFont(TTF_DIR / "PocketGullMono-Regular.ttf")
-        if 'GPOS' in mono_ref:
-            font['GPOS'] = copy.deepcopy(mono_ref['GPOS'])
-            print("  [GPOS] Injected reference Mark-to-Base GPOS table into proportional font")
-
     if 'GPOS' in font:
         gpos_tbl = font['GPOS'].table
-        for lk in gpos_tbl.LookupList.Lookup:
-            if lk.LookupType == 4:  # MarkBasePos
-                for st in lk.SubTable:
-                    # Ensure uni035F is covered
-                    if 'uni035F' in glyf and 'uni035F' not in st.MarkCoverage.glyphs:
-                        st.MarkCoverage.glyphs.append('uni035F')
-                        m_rec = ot.MarkRecord()
-                        m_rec.Class = 0
-                        m_rec.MarkAnchor = ot.Anchor()
-                        m_rec.MarkAnchor.Format = 1
-                        m_rec.MarkAnchor.XCoordinate = int(hmtx['uni035F'][0] / 2)
-                        m_rec.MarkAnchor.YCoordinate = 0
-                        st.MarkArray.MarkRecord.append(m_rec)
+        
+        # Build or ensure dedicated ClassCount=2 MarkBasePos lookup for top/bottom mark shaping
+        mark_lookup = ot.Lookup()
+        mark_lookup.LookupType = 4  # MarkBasePos
+        mark_lookup.LookupFlag = 0
+        st = ot.MarkBasePos()
+        st.Format = 1
+        st.ClassCount = 2  # Class 0: bottom, Class 1: top
+        st.MarkCoverage = ot.Coverage()
+        st.MarkCoverage.glyphs = []
+        st.MarkArray = ot.MarkArray()
+        st.MarkArray.MarkRecord = []
+        st.BaseCoverage = ot.Coverage()
+        st.BaseCoverage.glyphs = []
+        st.BaseArray = ot.BaseArray()
+        st.BaseArray.BaseRecord = []
 
-                    for base_gn in ['t', 'T', 'uniA7CB', 'Iotaserifed', 'uniA7B7', 'uniA7B6', 'uniA78D', 'uni0196', 'uni01B1', 'Iota', 'Upsilon', 'dottedcircle', 'uni25CC']:
-                        if base_gn in glyf and base_gn not in st.BaseCoverage.glyphs:
-                            st.BaseCoverage.glyphs.append(base_gn)
-                            b_rec = ot.BaseRecord()
-                            b_rec.BaseAnchor = [None] * st.ClassCount
-                            # Class 0: bottom anchor (must have non-zero y_offset for Shaperglot attachment)
-                            b_bot = ot.Anchor()
-                            b_bot.Format = 1
-                            b_bot.XCoordinate = int(hmtx[base_gn][0] / 2)
-                            b_bot.YCoordinate = -20
-                            b_rec.BaseAnchor[0] = b_bot
-                            # Class 1: top anchor
-                            b_top = ot.Anchor()
-                            b_top.Format = 1
-                            b_top.XCoordinate = int(hmtx[base_gn][0] / 2)
-                            b_top.YCoordinate = 714 if base_gn in ('T', 'uniA7CB', 'Iotaserifed', 'uniA78D', 'uni0196', 'uni01B1', 'Iota', 'Upsilon') else (540 if base_gn in ('t', 'uniA7B6', 'uniA7B7') else 0)
-                            if st.ClassCount > 1:
-                                b_rec.BaseAnchor[1] = b_top
-                            st.BaseArray.BaseRecord.append(b_rec)
+        # Class 0: Bottom marks (uni035F, uni035E, dotbelowcomb)
+        for mgn in ['uni035F', 'uni035E', 'uni0323', 'dotbelowcomb']:
+            if mgn in glyf and mgn not in st.MarkCoverage.glyphs:
+                st.MarkCoverage.glyphs.append(mgn)
+                m0 = ot.MarkRecord()
+                m0.Class = 0
+                m0.MarkAnchor = ot.Anchor()
+                m0.MarkAnchor.Format = 1
+                m0.MarkAnchor.XCoordinate = int(hmtx[mgn][0] / 2)
+                m0.MarkAnchor.YCoordinate = 0
+                st.MarkArray.MarkRecord.append(m0)
 
-                    # Strictly filter to glyphs that exist in this font and sort by glyph ID
-                    valid_marks = [(gn, rec) for gn, rec in zip(st.MarkCoverage.glyphs, st.MarkArray.MarkRecord) if gn in glyf]
-                    valid_marks.sort(key=lambda x: font.getGlyphID(x[0]))
-                    st.MarkCoverage.glyphs = [x[0] for x in valid_marks]
-                    st.MarkArray.MarkRecord = [x[1] for x in valid_marks]
+        # Class 1: Top marks (acutecomb, uni0301, gravecomb, uni0300, macroncomb, uni0304)
+        for mgn in ['acutecomb', 'uni0301', 'gravecomb', 'uni0300', 'macroncomb', 'uni0304']:
+            if mgn in glyf and mgn not in st.MarkCoverage.glyphs:
+                st.MarkCoverage.glyphs.append(mgn)
+                m1 = ot.MarkRecord()
+                m1.Class = 1
+                m1.MarkAnchor = ot.Anchor()
+                m1.MarkAnchor.Format = 1
+                m1.MarkAnchor.XCoordinate = int(hmtx[mgn][0] / 2)
+                m1.MarkAnchor.YCoordinate = 540
+                st.MarkArray.MarkRecord.append(m1)
 
-                    valid_bases = [(gn, rec) for gn, rec in zip(st.BaseCoverage.glyphs, st.BaseArray.BaseRecord) if gn in glyf]
-                    valid_bases.sort(key=lambda x: font.getGlyphID(x[0]))
-                    st.BaseCoverage.glyphs = [x[0] for x in valid_bases]
-                    st.BaseArray.BaseRecord = [x[1] for x in valid_bases]
+        # Bases to attach (including Dutch J, j, I, i and African / ISMP bases)
+        bases_to_attach = [
+            'J', 'j', 'I', 'i', 't', 'T', 'uniA7CB', 'Iotaserifed', 'uniA7B7', 'uniA7B6',
+            'uniA78D', 'uni0196', 'uni01B1', 'Iota', 'Upsilon', 'dottedcircle', 'uni25CC'
+        ]
+        for bgn in bases_to_attach:
+            if bgn in glyf and bgn not in st.BaseCoverage.glyphs:
+                st.BaseCoverage.glyphs.append(bgn)
+                brec = ot.BaseRecord()
+                brec.BaseAnchor = [None, None]
+                # Class 0: bottom anchor
+                bot = ot.Anchor()
+                bot.Format = 1
+                bot.XCoordinate = int(hmtx[bgn][0] / 2)
+                bot.YCoordinate = -20
+                brec.BaseAnchor[0] = bot
+                # Class 1: top anchor
+                top = ot.Anchor()
+                top.Format = 1
+                top.XCoordinate = int(hmtx[bgn][0] / 2)
+                top.YCoordinate = 714 if bgn in ('J', 'I', 'T', 'uniA7CB', 'Iotaserifed', 'uniA78D', 'uni0196', 'uni01B1', 'Iota', 'Upsilon') else 540
+                brec.BaseAnchor[1] = top
+                st.BaseArray.BaseRecord.append(brec)
 
-        print("  [SHAPING] Registered and glyph-ID sorted Mark-to-Base anchors for Uduk, Dan, and African orthographies")
+        # Sort Coverage and Array by Glyph ID
+        v_marks = [(gn, rec) for gn, rec in zip(st.MarkCoverage.glyphs, st.MarkArray.MarkRecord)]
+        v_marks.sort(key=lambda x: font.getGlyphID(x[0]))
+        st.MarkCoverage.glyphs = [x[0] for x in v_marks]
+        st.MarkArray.MarkRecord = [x[1] for x in v_marks]
+
+        v_bases = [(gn, rec) for gn, rec in zip(st.BaseCoverage.glyphs, st.BaseArray.BaseRecord)]
+        v_bases.sort(key=lambda x: font.getGlyphID(x[0]))
+        st.BaseCoverage.glyphs = [x[0] for x in v_bases]
+        st.BaseArray.BaseRecord = [x[1] for x in v_bases]
+
+        mark_lookup.SubTable = [st]
+        mark_lookup.SubTableCount = 1
+
+        gpos_tbl.LookupList.Lookup.append(mark_lookup)
+        lk_idx = len(gpos_tbl.LookupList.Lookup) - 1
+        gpos_tbl.LookupList.LookupCount = len(gpos_tbl.LookupList.Lookup)
+
+        # Register 'mark' feature
+        feat_rec = ot.FeatureRecord()
+        feat_rec.FeatureTag = 'mark'
+        feat_rec.Feature = ot.Feature()
+        feat_rec.Feature.FeatureParams = None
+        feat_rec.Feature.LookupListIndex = [lk_idx]
+        feat_rec.Feature.LookupCount = 1
+
+        gpos_tbl.FeatureList.FeatureRecord.append(feat_rec)
+        feat_idx = len(gpos_tbl.FeatureList.FeatureRecord) - 1
+        gpos_tbl.FeatureList.FeatureCount = len(gpos_tbl.FeatureList.FeatureRecord)
+
+        for srec in gpos_tbl.ScriptList.ScriptRecord:
+            if srec.Script.DefaultLangSys:
+                srec.Script.DefaultLangSys.FeatureIndex.append(feat_idx)
+            for lrec in srec.Script.LangSysRecord:
+                lrec.LangSys.FeatureIndex.append(feat_idx)
+
+        print("  [SHAPING] Injected ClassCount=2 MarkBasePos lookup for Dutch 'IJ' and African bases into GPOS")
 
     # 8. Standardize Name Table entries (Strictly NO Mac platformID=1 records!)
     postscript_name = f"{family_name.replace(' ', '')}-{style_name.replace(' ', '')}"
@@ -516,26 +629,30 @@ def cure_font(input_path, output_path, family_name, style_name, weight_class, is
         name_records_to_set = {
             1: family_name,
             2: style_name,
-            3: f"3.000;PKGL;{postscript_name}",
+            3: f"3.100;PKGL;{postscript_name}",
             4: full_name,
-            5: "Version 3.000; The PocketGull Project Authors; OFL 1.1",
+            5: "Version 3.100; The PocketGull Project Authors; OFL 1.1",
             6: postscript_name,
+            13: "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org",
+            14: "https://openfontlicense.org",
         }
     else:
         # Non-RIBBI (e.g. Black): Windows GDI legacy grouping
         name_records_to_set = {
             1: f"{family_name} {style_name}",
             2: "Regular",
-            3: f"3.000;PKGL;{postscript_name}",
+            3: f"3.100;PKGL;{postscript_name}",
             4: full_name,
-            5: "Version 3.000; The PocketGull Project Authors; OFL 1.1",
+            5: "Version 3.100; The PocketGull Project Authors; OFL 1.1",
             6: postscript_name,
+            13: "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org",
+            14: "https://openfontlicense.org",
             16: family_name,
             17: style_name,
         }
 
-    # Strip existing records 1, 2, 3, 4, 5, 6, 16, 17, and ALL platformID=1 records
-    name_tbl.names = [r for r in name_tbl.names if r.platformID != 1 and r.nameID not in [1, 2, 3, 4, 5, 6, 16, 17]]
+    # Strip existing records 1, 2, 3, 4, 5, 6, 13, 14, 16, 17, and ALL platformID=1 records
+    name_tbl.names = [r for r in name_tbl.names if r.platformID != 1 and r.nameID not in [1, 2, 3, 4, 5, 6, 13, 14, 16, 17]]
 
     for nid, val in name_records_to_set.items():
         name_tbl.setName(val, nid, platformID=3, platEncID=1, langID=0x0409)
@@ -555,11 +672,19 @@ def cure_font(input_path, output_path, family_name, style_name, weight_class, is
         font['OS/2'].fsSelection = 0x01C0
         font['head'].macStyle = 0
 
+    # Ensure head.fontRevision is exactly 3.100
+    font['head'].fontRevision = 3.100
+
+    # Ensure usWinAscent and usWinDescent enclose all glyph extrema (>= 1572 and >= 833)
+    all_ymax = max(g.yMax for g in glyf.glyphs.values() if hasattr(g, 'yMax') and g.yMax is not None)
+    all_ymin = min(g.yMin for g in glyf.glyphs.values() if hasattr(g, 'yMin') and g.yMin is not None)
+    font['OS/2'].usWinAscent = max(1572, all_ymax)
+    font['OS/2'].usWinDescent = max(833, abs(all_ymin))
+
     font['OS/2'].xAvgCharWidth = int(sum(hmtx[g][0] for g in font.getGlyphOrder()) / len(font.getGlyphOrder()))
 
     # 10. Sanitize components & decompose nested composites
     sanitize_components(font)
-
 
     # Ensure output directory exists
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -664,6 +789,10 @@ def main():
     shutil.copyfile(pocketgull_ofl / "PocketGull-Regular.ttf", TTF_DIR / "PocketGull-Regular.ttf")
     shutil.copyfile(pocketgull_ofl / "PocketGull-Regular.ttf", TTF_DIR / "PocketGull-Fineliner.ttf")
 
+    # Read canonical Latin OFL family codepoint coverage from Regular
+    f_reg = TTFont(pocketgull_ofl / "PocketGull-Regular.ttf")
+    family_codepoints = set(f_reg.getBestCmap().keys())
+
     # 2. Pocket Gull Bold (700)
     cure_font(
         input_path=TTF_DIR / "PocketGull-Bold.ttf",
@@ -672,6 +801,7 @@ def main():
         style_name="Bold",
         weight_class=700,
         is_mono=False,
+        canonical_codepoints=family_codepoints,
     )
     shutil.copyfile(pocketgull_ofl / "PocketGull-Bold.ttf", TTF_DIR / "PocketGull-Bold.ttf")
 
@@ -683,6 +813,7 @@ def main():
         style_name="Black",
         weight_class=900,
         is_mono=False,
+        canonical_codepoints=family_codepoints,
     )
     shutil.copyfile(pocketgull_ofl / "PocketGull-Black.ttf", TTF_DIR / "PocketGull-Black.ttf")
     shutil.copyfile(pocketgull_ofl / "PocketGull-Black.ttf", TTF_DIR / "PocketGull-Chiseltip.ttf")
@@ -707,6 +838,7 @@ def main():
             style_name="Italic",
             weight_class=400,
             is_mono=False,
+            canonical_codepoints=family_codepoints,
         )
 
     # 6. Pocket Gull Bold Italic (700)
@@ -718,6 +850,7 @@ def main():
             style_name="Bold Italic",
             weight_class=700,
             is_mono=False,
+            canonical_codepoints=family_codepoints,
         )
 
     # 7. Pocket Gull Mono Italic (400)

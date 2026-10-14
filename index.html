@@ -1650,12 +1650,24 @@
     /* Section Cards */
     .specimen-card {
       content-visibility: auto;
-      contain-intrinsic-size: auto 600px;
+      contain-intrinsic-size: auto 800px;
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 16px;
       padding: 36px;
       position: relative;
+    }
+
+    #scripts.specimen-card {
+      contain-intrinsic-size: auto 2400px;
+    }
+
+    #periodic-table.specimen-card {
+      contain-intrinsic-size: auto 2200px;
+    }
+
+    #classic-systems.specimen-card {
+      contain-intrinsic-size: auto 1800px;
     }
 
     .section-label {
@@ -4419,15 +4431,19 @@
       background: transparent;
       border: none;
       color: var(--text-muted);
-      width: 22px;
-      height: 26px;
-      border-radius: 4px;
-      font-size: 15px;
+      min-width: 36px;
+      min-height: 36px;
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      font-size: 18px;
       line-height: 1;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      position: relative;
+      touch-action: manipulation;
       transition: all 0.15s ease;
     }
     .chapter-hud-btn:hover:not(:disabled) {
@@ -4443,12 +4459,15 @@
       background: transparent;
       border: none;
       color: var(--text-main);
-      padding: 3px 8px;
-      border-radius: 4px;
+      padding: 6px 10px;
+      min-height: 36px;
+      border-radius: 6px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       cursor: pointer;
+      position: relative;
+      touch-action: manipulation;
       font-family: inherit;
       transition: all 0.15s ease;
     }
@@ -4490,13 +4509,17 @@
       border: 1px solid rgba(6, 182, 212, 0.35);
       color: var(--cyan);
       border-radius: 6px;
-      padding: 5px 10px;
-      font-size: 0.78rem;
+      padding: 7px 12px;
+      min-height: 38px;
+      min-width: 44px;
+      font-size: 0.8rem;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 6px;
+      touch-action: manipulation;
       transition: all 0.15s ease;
       font-family: inherit;
     }
@@ -4840,7 +4863,7 @@
   </header>
 
   <!-- Interactive Textbook Table of Contents (TOC) Syllabus Drawer -->
-  <aside id="textbookTocDrawer" class="textbook-toc-drawer" role="dialog" aria-modal="true" aria-label="Interactive Textbook Curriculum &amp; Table of Contents" style="display: none;">
+  <div id="textbookTocDrawer" class="textbook-toc-drawer" role="dialog" aria-modal="true" aria-label="Interactive Textbook Curriculum &amp; Table of Contents" style="display: none;">
     <div class="toc-drawer-header">
       <div style="display: flex; align-items: center; gap: 8px;">
         <span style="font-size: 1.25rem;">📖</span>
@@ -4953,7 +4976,7 @@
         </a>
       </div>
     </div>
-  </aside>
+  </div>
   <div id="textbookTocBackdrop" class="textbook-toc-backdrop" style="display: none;" onclick="toggleTextbookToc()"></div>
 
   <main class="container" id="mainContent">
@@ -5307,7 +5330,7 @@
             <span class="ismp-inspect-badge">🔬 Inspect</span>
           </div>
           <div class="ismp-comparison">
-            <span class="ismp-standard" style="text-decoration: none; opacity: 0.72;">b d</span>
+            <span class="ismp-standard" style="text-decoration: none;">b d</span>
             <span class="ismp-safe" style="color: #38bdf8;">b d</span>
           </div>
           <p class="ismp-desc">Ascender 45° spur &amp; +12 UPM lower bowl bias break 180° horizontal flip.</p>
@@ -5320,7 +5343,7 @@
             <span class="ismp-inspect-badge">🔬 Inspect</span>
           </div>
           <div class="ismp-comparison">
-            <span class="ismp-standard" style="text-decoration: none; opacity: 0.72;">p q</span>
+            <span class="ismp-standard" style="text-decoration: none;">p q</span>
             <span class="ismp-safe" style="color: #2dd4bf;">p q</span>
           </div>
           <p class="ismp-desc">+30 UPM ascender overshoot on p; distinct 35° baseline exit foot on q.</p>
@@ -5333,7 +5356,7 @@
             <span class="ismp-inspect-badge">🔬 Inspect</span>
           </div>
           <div class="ismp-comparison">
-            <span class="ismp-standard" style="text-decoration: none; opacity: 0.72;">n u</span>
+            <span class="ismp-standard" style="text-decoration: none;">n u</span>
             <span class="ismp-safe" style="color: #f59e0b;">n u</span>
           </div>
           <p class="ismp-desc">Shoulder arch (y=540) vs rounded trough cradle (y=0) stops vertical flip.</p>
@@ -5346,7 +5369,7 @@
             <span class="ismp-inspect-badge">🔬 Inspect</span>
           </div>
           <div class="ismp-comparison">
-            <span class="ismp-standard" style="text-decoration: none; opacity: 0.72;">m w</span>
+            <span class="ismp-standard" style="text-decoration: none;">m w</span>
             <span class="ismp-safe" style="color: #e879f9;">m w</span>
           </div>
           <p class="ismp-desc">Dual humanist rounded arches vs Euclidean 15° sharp outward vertices.</p>
@@ -6564,13 +6587,13 @@
           <div>
             <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-top: 14px;">Available Suppliers:</div>
             <div class="atelier-btn-row">
-              <a href="https://www.amazon.com/s?k=heavyweight+cardstock+300gsm+watercolor+cold+press" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-amazon">
+              <a href="https://www.amazon.com/s?k=heavyweight+cardstock+300gsm+watercolor+cold+press" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-amazon" aria-label="Search Heavyweight Artist Cardstock on Amazon">
                 🛒 Amazon
               </a>
-              <a href="https://www.dickblick.com/search/?q=watercolor+paper+cold+press+cardstock" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-blick">
+              <a href="https://www.dickblick.com/search/?q=watercolor+paper+cold+press+cardstock" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-blick" aria-label="Search Heavyweight Artist Cardstock on Dick Blick">
                 🎨 Dick Blick
               </a>
-              <a href="https://www.walmart.com/search?q=heavyweight+cardstock+watercolor+paper" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-walmart">
+              <a href="https://www.walmart.com/search?q=heavyweight+cardstock+watercolor+paper" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-walmart" aria-label="Search Heavyweight Artist Cardstock on Walmart">
                 🏬 Walmart
               </a>
             </div>
@@ -6592,13 +6615,13 @@
           <div>
             <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-top: 14px;">Available Suppliers:</div>
             <div class="atelier-btn-row">
-              <a href="https://www.amazon.com/s?k=artist+watercolor+paint+set+half+pans" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-amazon">
+              <a href="https://www.amazon.com/s?k=artist+watercolor+paint+set+half+pans" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-amazon" aria-label="Search Full-Spectrum Watercolor Kits on Amazon">
                 🛒 Amazon
               </a>
-              <a href="https://www.dickblick.com/categories/painting/watercolor/sets/" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-blick">
+              <a href="https://www.dickblick.com/categories/painting/watercolor/sets/" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-blick" aria-label="Search Full-Spectrum Watercolor Kits on Dick Blick">
                 🎨 Dick Blick
               </a>
-              <a href="https://www.walmart.com/search?q=artist+watercolor+paint+set" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-walmart">
+              <a href="https://www.walmart.com/search?q=artist+watercolor+paint+set" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-walmart" aria-label="Search Full-Spectrum Watercolor Kits on Walmart">
                 🏬 Walmart
               </a>
             </div>
@@ -6620,13 +6643,13 @@
           <div>
             <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-top: 14px;">Available Suppliers:</div>
             <div class="atelier-btn-row">
-              <a href="https://www.amazon.com/s?k=chisel+tip+calligraphy+markers+pigment+ink" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-amazon">
+              <a href="https://www.amazon.com/s?k=chisel+tip+calligraphy+markers+pigment+ink" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-amazon" aria-label="Search Broad Chisel-Tip Felt Markers on Amazon">
                 🛒 Amazon
               </a>
-              <a href="https://www.dickblick.com/search/?q=chisel+tip+marker" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-blick">
+              <a href="https://www.dickblick.com/search/?q=chisel+tip+marker" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-blick" aria-label="Search Broad Chisel-Tip Felt Markers on Dick Blick">
                 🎨 Dick Blick
               </a>
-              <a href="https://www.walmart.com/search?q=chisel+tip+markers" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-walmart">
+              <a href="https://www.walmart.com/search?q=chisel+tip+markers" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-walmart" aria-label="Search Broad Chisel-Tip Felt Markers on Walmart">
                 🏬 Walmart
               </a>
             </div>
@@ -6648,13 +6671,13 @@
           <div>
             <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-top: 14px;">Available Suppliers:</div>
             <div class="atelier-btn-row">
-              <a href="https://www.amazon.com/s?k=archival+fineliner+pigment+pens+black" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-amazon">
+              <a href="https://www.amazon.com/s?k=archival+fineliner+pigment+pens+black" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-amazon" aria-label="Search Archival Fineliner Micro-Pens on Amazon">
                 🛒 Amazon
               </a>
-              <a href="https://www.dickblick.com/search/?q=fineliner+pens+pigment" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-blick">
+              <a href="https://www.dickblick.com/search/?q=fineliner+pens+pigment" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-blick" aria-label="Search Archival Fineliner Micro-Pens on Dick Blick">
                 🎨 Dick Blick
               </a>
-              <a href="https://www.walmart.com/search?q=fineliner+pens+archival" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-walmart">
+              <a href="https://www.walmart.com/search?q=fineliner+pens+archival" target="_blank" rel="noopener noreferrer" class="atelier-buy-btn atelier-buy-walmart" aria-label="Search Archival Fineliner Micro-Pens on Walmart">
                 🏬 Walmart
               </a>
             </div>
@@ -8484,7 +8507,7 @@
         <a href="https://doi.org/10.5281/zenodo.22309379" target="_blank" rel="noopener" class="trust-link">
           <span>🔬</span> CERN Zenodo DOI: 10.5281/zenodo.22309379
         </a>
-        <a href="LICENSE.txt" target="_blank" class="trust-link">
+        <a href="OFL.txt" target="_blank" class="trust-link">
           <span>⚖️</span> SIL OFL 1.1 License
         </a>
       </div>
@@ -12748,7 +12771,9 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
       }
 
       function initTextbookController() {
-        const updateFolioProgress = () => {
+        let isTicking = false;
+
+        const performUpdate = () => {
           const docEl = document.documentElement;
           const winScroll = window.scrollY || docEl.scrollTop || document.body.scrollTop;
           const totalScroll = docEl.scrollHeight - docEl.clientHeight;
@@ -12780,10 +12805,19 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           const nextBtn = document.getElementById('nextChapterBtn');
           if (prevBtn) prevBtn.disabled = activeIdx === 0;
           if (nextBtn) nextBtn.disabled = activeIdx === textbookChapters.length - 1;
+
+          isTicking = false;
+        };
+
+        const updateFolioProgress = () => {
+          if (!isTicking) {
+            isTicking = true;
+            window.requestAnimationFrame(performUpdate);
+          }
         };
 
         window.addEventListener('scroll', updateFolioProgress, { passive: true });
-        updateFolioProgress();
+        performUpdate();
 
         document.addEventListener('keydown', (e) => {
           if (e.key === 'Escape') {

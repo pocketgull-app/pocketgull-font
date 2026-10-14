@@ -17,6 +17,7 @@ console.log('⚡ [WOFF2 Compressor] Compressing webfonts via Brotli Q11...');
 
 // Strategy 1: Test native Python with fontTools and brotli
 const pythonCmds = [
+  path.resolve(rootDir, 'sources', '.venv', 'Scripts', 'python.exe'),
   'C:\\Users\\philg\\anaconda3\\python.exe',
   'python',
   'py',
