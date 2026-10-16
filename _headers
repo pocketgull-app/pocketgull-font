@@ -6,7 +6,7 @@
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: SAMEORIGIN
   X-Content-Type-Options: nosniff
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-nvkOBKQvLMXAjNqVOB1tzcLe6zaW/dbBeLCGViWuZow=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.paypal.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https:; frame-src 'self' https://www.paypal.com https://*.paypal.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self';
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-ULPN4HruT8vjHphTixK2casCTJ+GQt0c7I5nXtjooWU=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.paypal.com https://maps.googleapis.com https://*.googleapis.com https://*.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https:; worker-src 'self' blob:; frame-src 'self' https://www.paypal.com https://*.paypal.com https://*.google.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self';
 
 # 1-year immutable cache for all font binaries (eliminates transfer on repeat visits)
 /fonts/**

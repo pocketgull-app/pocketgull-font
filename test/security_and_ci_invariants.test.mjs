@@ -162,4 +162,45 @@ test('Security & CodeQL SAST: Web MIDI & Laboratory controllers enforce strict b
   assert.match(indexContent, /window\.switchSciTab\s*=/, 'index.html must export switchSciTab');
 });
 
+test('Global Health Atlas & World Map Studio Invariants: Authentic Cree Syllabics, Negative Space Compliance, and CSS/JSON Exporter', () => {
+  const indexContent = fs.readFileSync('index.html', 'utf8');
+
+  // 1. Zero Katakana corruption in Cree Syllabics (must use ᐏန် U+140F U+1423, never Katakana ウィン)
+  assert.ok(!indexContent.includes('ウィン'), 'Cree Syllabics must not contain corrupted Japanese Katakana ウィン');
+  assert.ok(indexContent.includes('ᒥᔪ ᐱᒫᑎᓯᐏန်'), 'Cree Nation entry must contain authentic Cree Syllabics ᒥᔪ ᐱᒫᑎᓯᐏန်');
+  assert.ok(indexContent.includes('ᓀᐦᐃᔭᐍᐏန်'), 'Doc Drill UNDRIP entry must contain authentic Cree Syllabics ᓀᐦᐃᔭᐍᐏန်');
+
+  // 2. Negative Space Invariant #9.5: Zero mock milligram DOSE prescriptions in GLOBAL_HEALTH_ATLAS
+  const atlasStart = indexContent.indexOf('const GLOBAL_HEALTH_ATLAS = [');
+  const atlasEnd = indexContent.indexOf('function initWorldMapStudio()');
+  assert.ok(atlasStart !== -1 && atlasEnd > atlasStart, 'GLOBAL_HEALTH_ATLAS block must exist');
+  const atlasSection = indexContent.slice(atlasStart, atlasEnd);
+  assert.ok(!/dosageAlert:\s*'DOSE:/i.test(atlasSection), 'GLOBAL_HEALTH_ATLAS must not contain mock milligram DOSE prescriptions');
+
+  // 3. Dual CSS/JSON profile exporter and continent landmass click handlers
+  assert.match(indexContent, /id="btnFormatCss"/, 'World Map HUD must include CSS format toggle button');
+  assert.match(indexContent, /id="btnFormatJson"/, 'World Map HUD must include JSON format toggle button');
+  assert.match(indexContent, /function buildCountryJson\(/, 'World Map studio must define deterministic JSON profile builder');
+  assert.match(indexContent, /indigenous:\s*\{\s*x:\s*60,\s*y:\s*30,\s*w:\s*500,\s*h:\s*430\s*\}/, 'Indigenous region bounds must encompass South American and African sovereign scripts');
+
+  // 4. Zero vertical scroll-hijacking in World Map pill bar & Google Maps Platform Live compliance
+  assert.ok(!indexContent.includes('pill.scrollIntoView'), 'selectCountry must not call pill.scrollIntoView (causes vertical viewport jump to Section 6/7)');
+  assert.match(indexContent, /pillBar\.scrollTo\(/, 'selectCountry must scroll pillBar horizontally via pillBar.scrollTo');
+  assert.match(indexContent, /id="viewSwitchGoogleMap"/, 'World Map Studio must include Google Maps Live view toggle');
+  assert.match(indexContent, /id="googleMapCanvas"/, 'World Map Studio must include Google Maps canvas container');
+  assert.match(indexContent, /importLibrary\("maps"\)/, 'Google Maps integration must use dynamic importLibrary("maps")');
+  assert.match(indexContent, /importLibrary\("marker"\)/, 'Google Maps integration must use dynamic importLibrary("marker")');
+  assert.match(indexContent, /AdvancedMarkerElement/, 'Google Maps integration must use AdvancedMarkerElement');
+  assert.match(indexContent, /mapId:\s*'DEMO_MAP_ID'/, 'Google Maps integration must specify DEMO_MAP_ID for AdvancedMarkerElement');
+  assert.match(indexContent, /internalUsageAttributionIds:\s*\['gmp_git_agentskills_v1'\]/, 'Google Maps integration must include internalUsageAttributionIds');
+
+  // 5. Modular Written-Language Builder & Flag-Free Written Language Switcher
+  assert.match(indexContent, /id="languagePackBuilder"/, 'Chapter 7 must include the interactive Mix Your Written Languages Builder');
+  assert.match(indexContent, /function initLanguagePackBuilder\(\)/, 'index.html must define initLanguagePackBuilder()');
+  assert.match(indexContent, /id="viewSwitchWrittenLang"/, 'World Map Studio must include the By Written Language switcher button');
+  assert.match(indexContent, /WRITTEN_LANGUAGE_METADATA/, 'World Map Studio must define flag-free WRITTEN_LANGUAGE_METADATA mappings');
+});
+
+
+
 

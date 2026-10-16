@@ -9,9 +9,8 @@
   <!-- High-Priority Webfont Preloads (Sub-Second FCP / Core Web Vitals Optimization) -->
   <link rel="preload" href="fonts/woff2/PocketGull-Fineliner-Core.woff2?v=3.1.0" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/woff2/PocketGull-Bold-Core.woff2?v=3.1.0" as="font" type="font/woff2" crossorigin>
-  <!-- Non-Blocking Stylesheet with Asynchronous Preload Pattern -->
-  <link rel="preload" href="fonts.css?v=3.1.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="fonts.css?v=3.1.0"></noscript>
+  <!-- Master Webfont Stylesheet (Zero-CSP-Violation Direct Load) -->
+  <link rel="stylesheet" href="fonts.css?v=3.1.0">
   <style>
     /* Critical Above-the-Fold Optotypes (Zero-Render-Blocking Initial Paint) */
     @font-face {
@@ -612,6 +611,12 @@
       color: var(--text-main) !important;
     }
 
+    [data-theme="washi"] .flag-card-motto,
+    [data-theme="light"] .flag-card-motto {
+      color: var(--text-muted) !important;
+      border-top-color: var(--card-border) !important;
+    }
+
     [data-theme="washi"] #hudSpecimenStage,
     [data-theme="light"] #hudSpecimenStage {
       background: var(--surface-inner) !important;
@@ -621,6 +626,11 @@
     [data-theme="washi"] #hudPhraseNative,
     [data-theme="light"] #hudPhraseNative {
       color: var(--text-main) !important;
+    }
+
+    [data-theme="washi"] #hudDosageAlert,
+    [data-theme="light"] #hudDosageAlert {
+      color: var(--cyan) !important;
     }
 
     [data-theme="washi"] #hudCssCode,
@@ -665,9 +675,28 @@
       transition: fill 0.2s ease, stroke 0.2s ease;
       cursor: pointer;
     }
-    .map-land:hover {
+    .map-land:hover,
+    .map-land.active-region {
       fill: #1e3a5f;
       stroke: var(--cyan);
+      stroke-width: 1.6;
+    }
+    .hud-format-btn {
+      font-size: 10px;
+      font-family: 'PocketGull Mono', monospace;
+      font-weight: 700;
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      border-radius: 4px;
+      padding: 2px 7px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .hud-format-btn.active {
+      background: rgba(6, 182, 212, 0.18);
+      border-color: var(--cyan);
+      color: var(--cyan);
     }
     .map-pin {
       cursor: pointer;
@@ -4939,8 +4968,8 @@
         <a href="#scientific-lab" class="toc-chapter-link" onclick="toggleTextbookToc()">
           <div class="toc-chap-badge">Ch. 5</div>
           <div class="toc-chap-info">
-            <div class="toc-chap-title">Science &amp; Chemistry: 650nm Scotopic &amp; 118 Elements</div>
-            <div class="toc-chap-sub">Plate 5.1 Dark-Sky Stargazer Console • Plate 5.2 The 118-Element IUPAC Periodic Table</div>
+            <div class="toc-chap-title">Science, Chemistry &amp; Acoustics: 650nm, 118 Elements &amp; 88-Key Piano</div>
+            <div class="toc-chap-sub">Plate 5.1 Dark-Sky Stargazer • Plate 5.2 88-Key Stretched Rainbow Piano • Plate 5.3 118-Element Periodic Table</div>
           </div>
           <div class="toc-chap-time">6 min</div>
         </a>
@@ -4949,8 +4978,8 @@
         <a href="#atelier" class="toc-chapter-link" onclick="toggleTextbookToc()">
           <div class="toc-chap-badge">Ch. 6</div>
           <div class="toc-chap-info">
-            <div class="toc-chap-title">Polymath Acoustics: Rainbow Piano &amp; Harmonica</div>
-            <div class="toc-chap-sub">Plate 6.1 88-Key Stretched Rainbow Piano • Plate 6.2 Key of C Richter Harmonica</div>
+            <div class="toc-chap-title">Tactile Atelier &amp; Polymath Provenance: Cardstock &amp; Pigments</div>
+            <div class="toc-chap-sub">Plate 6.1 300 GSM Cold-Press Cardstock • Lightfast Watercolor Kits • Chisel-Tip &amp; Fineliner Pens</div>
           </div>
           <div class="toc-chap-time">5 min</div>
         </a>
@@ -7033,93 +7062,249 @@
 
     <!-- Chapter 7: Sovereign Cartography & World Scripts -->
     <section class="specimen-card" id="scripts">
-      <div class="section-label">Chapter 7 • Sovereign Cartography</div>
+      <div class="section-label">Chapter 7 • Letters for Every Voice</div>
       <h2 class="section-title">
-        <span>Plate 7.1 • UNDRIP Accord &amp; Sovereign World Orthographies</span>
-        <small>27 Specialized Sub-Foundry Targets • Multi-Script SMoE • Privacy-Preserving Zero-Egress Dispatch</small>
+        <span>Plate 7.1 • World Writing Systems &amp; Shared Human Heritage</span>
+        <small>Equal Visual Warmth • Clear Everyday Reading • Respect for Every Community’s Script</small>
       </h2>
 
-      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
-        PocketGull routes multi-script typography dynamically via 27 specialized SMoE experts, preserving the Louise Sloan 5:1 optotype invariant and ISMP clinical safeguards across all major global language families without monolithic font bloat:
-      </p>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px;">
+        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.65; margin: 0; flex: 1 1 520px;">
+          Every writing system is a home for someone’s voice—on a child’s storybook, a grandparent’s medicine bottle, a neighborhood clinic sign, or a letter home. Writing systems belong to people and communities, not political borders or software specs. Here, every script is given the exact same size, brightness, and care, and the display order rotates naturally on every visit so we never pick favorites:
+        </p>
+        <button type="button" id="btnShuffleSmoeScripts" style="background: rgba(192, 132, 252, 0.12); border: 1px solid rgba(192, 132, 252, 0.45); color: #e9d5ff; font-family: 'PocketGull', 'Segoe UI', sans-serif; font-size: 12px; font-weight: 600; padding: 8px 14px; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;">
+          <span>↻</span> <span>Rotate Display Order</span>
+        </button>
+      </div>
 
-      <div class="smoe-tier-grid">
-        <!-- RTL & Semitic -->
+      <div class="smoe-tier-grid" id="smoeTierGrid">
+        <!-- Right-to-Left & Semitic Writing Systems -->
         <div class="smoe-tier-card" style="border-color: rgba(192, 132, 252, 0.4);">
           <div>
             <div class="smoe-tier-badge" style="color: #c084fc;">
-              <span>🇸🇦 🇮🇱 🇲🇻</span> RTL &amp; Semitic Scripts (Live Native)
+              <span>✒️</span> Right-to-Left &amp; Semitic Scripts
             </div>
-            <div style="font-size: 11px; font-family: 'PocketGull Mono'; color: var(--text-muted);">
-              ARAB (696), HEBR (134), SYRC (77), THAA (50)
+            <div class="smoe-tier-codes" style="font-size: 12px; color: var(--text-muted);">
+              Arabic • Hebrew • Syriac &amp; Dhivehi (Thaana)
             </div>
-            <div class="smoe-tier-specimen" dir="rtl" style="font-family: 'PocketGull Arabic', 'Noto Sans Arabic', 'Segoe UI', sans-serif; font-size: 26px; line-height: 1.7; color: #c084fc;">
-              شِفَاء • قُوَّة • أَمَل • رِعَايَة
-              <span dir="rtl" style="font-family: 'Noto Sans Hebrew', 'David Libre', 'Arial Hebrew', 'Segoe UI', sans-serif; font-size: 22px; color: var(--text-muted); display: block; margin-top: 6px;">רְפוּאָה • תִּקְוָה • אוֹמֶץ</span>
+            <div class="smoe-tier-specimen" style="font-size: 20px; line-height: 1.65; color: #c084fc; text-align: left;">
+              <span class="smoe-script-line" data-code="Arabic" data-desc="Arabic with natural reed-pen flow" dir="rtl" lang="ar" style="font-family: 'PocketGull Arabic', 'Noto Sans Arabic', 'Segoe UI', sans-serif; display: block; text-align: left; unicode-bidi: isolate; font-size: 20px; margin-top: 4px; color: #c084fc; font-weight: 600;">شِفَاء • قُوَّة • أَمَل • رِعَايَة</span>
+              <span class="smoe-script-line" data-code="Hebrew" data-desc="Hebrew with clear vowel points" dir="rtl" lang="he" style="font-family: 'PocketGull Hebrew', 'Noto Sans Hebrew', 'David Libre', 'Arial Hebrew', 'Segoe UI', sans-serif; display: block; text-align: left; unicode-bidi: isolate; font-size: 20px; margin-top: 4px; color: #c084fc; font-weight: 600;">רְפוּאָה • תִּקְוָה • אוֹמֶץ • חֶמְלָה</span>
+              <span class="smoe-script-line" data-code="Syriac &amp; Dhivehi" data-desc="Syriac &amp; Dhivehi (Thaana)" dir="rtl" style="font-family: 'Segoe UI Historic', 'Estrangelo Edessa', 'MV Boli', 'Segoe UI', sans-serif; display: block; text-align: left; unicode-bidi: isolate; font-size: 20px; margin-top: 4px; color: #c084fc; font-weight: 600;"><span style="font-family: 'Segoe UI Historic', 'Estrangelo Edessa', 'Noto Sans Syriac', sans-serif;">ܐܳܣܝܽܘܬܳܐ</span> • <span style="font-family: 'PocketGull Arabic', 'Noto Sans Arabic', 'Segoe UI', sans-serif;">سَبْرُ</span> • <span style="font-family: 'MV Boli', 'Noto Sans Thaana', sans-serif;">އުއްމީދު</span></span>
             </div>
           </div>
-          <div class="smoe-tier-meta">
-            Healing • Strength • Hope • Care — Arabic with authentic reed-pen cursive joining, Hebrew with full niqqud diacritics.
+          <div class="smoe-tier-meta" data-prefix="Healing • Strength • Hope • Care — ">
+            Healing • Strength • Hope • Care — Arabic with natural reed-pen flow, Hebrew with clear vowel points, Syriac &amp; Dhivehi (Thaana).
           </div>
         </div>
 
-        <!-- Indic Core -->
+        <!-- South Asian & Indic Writing Systems -->
         <div class="smoe-tier-card" style="border-color: rgba(245, 158, 11, 0.4);">
           <div>
             <div class="smoe-tier-badge" style="color: #f59e0b;">
-              <span>🇮🇳 🇧🇩 🇱🇰</span> South Asian &amp; Indic Scripts (Live Native)
+              <span>🪷</span> South Asian &amp; Indic Scripts
             </div>
-            <div style="font-size: 11px; font-family: 'PocketGull Mono'; color: var(--text-muted);">
-              DEVA, BENG, TAML, TELU, GURM, GUJR, ORYA, KNDA
+            <div class="smoe-tier-codes" style="font-size: 12px; color: var(--text-muted);">
+              Hindi &amp; Marathi • Tamil • Telugu • Bengali • Punjabi
             </div>
-            <div class="smoe-tier-specimen" style="font-size: 22px; line-height: 1.65; color: #f59e0b;">
-              <span style="font-family: 'Noto Sans Devanagari', sans-serif;">आशा • शक्ति • स्वास्थ्य</span>
-              <span style="font-family: 'Noto Sans Tamil', sans-serif; display: block; font-size: 20px; margin-top: 4px;">நம்பிக்கை • குணமடைதல்</span>
-              <span style="font-family: 'Noto Sans Telugu', sans-serif; display: block; font-size: 20px; margin-top: 2px;">స్వస్థత • ఆశ • శక్తి</span>
+            <div class="smoe-tier-specimen" style="font-size: 20px; line-height: 1.65; color: #f59e0b;">
+              <span class="smoe-script-line" data-code="Hindi, Marathi &amp; Nepali" data-desc="Devanagari headline warmth" style="font-family: 'PocketGull Indic', 'Nirmala UI', 'Noto Sans Devanagari', sans-serif; display: block; font-size: 20px; margin-top: 4px; color: #f59e0b; font-weight: 600;">आशा • शक्ति • स्वास्थ्य</span>
+              <span class="smoe-script-line" data-code="Tamil &amp; Malayalam" data-desc="graceful Tamil loops" style="font-family: 'PocketGull Indic', 'Nirmala UI', 'Noto Sans Tamil', sans-serif; display: block; font-size: 20px; margin-top: 4px; color: #f59e0b; font-weight: 600;">நம்பிக்கை • குணமடைதல்</span>
+              <span class="smoe-script-line" data-code="Telugu, Kannada &amp; Bengali" data-desc="rounded Telugu letterforms" style="font-family: 'PocketGull Indic', 'Nirmala UI', 'Noto Sans Telugu', sans-serif; display: block; font-size: 20px; margin-top: 4px; color: #f59e0b; font-weight: 600;">స్వస్థత • ఆశ • శక్తి</span>
             </div>
           </div>
-          <div class="smoe-tier-meta">
-            Hope • Strength • Wellness • Recovery — 1,000 base codepoints with Shirorekha headline balance across 8 Indic scripts.
+          <div class="smoe-tier-meta" data-prefix="Hope • Strength • Wellness • Recovery — ">
+            Hope • Strength • Wellness • Recovery — Devanagari headline warmth, graceful Tamil loops, rounded Telugu letterforms.
           </div>
         </div>
 
-        <!-- Southeast Asian -->
+        <!-- Southeast Asian Writing Systems -->
         <div class="smoe-tier-card" style="border-color: rgba(56, 189, 248, 0.4);">
           <div>
             <div class="smoe-tier-badge" style="color: #38bdf8;">
-              <span>🇹🇭 🇱🇦 🇰🇭 🇲🇲</span> Southeast Asian Scripts
+              <span>🌿</span> Southeast Asian Scripts
             </div>
-            <div style="font-size: 11px; font-family: 'PocketGull Mono'; color: var(--text-muted);">
-              THAI (87), LAOO (83), KHMR (146), MYMR (223)
+            <div class="smoe-tier-codes" style="font-size: 12px; color: var(--text-muted);">
+              Thai • Lao • Khmer &amp; Burmese
             </div>
-            <div class="smoe-tier-specimen" style="font-size: 20px; line-height: 1.8; color: #38bdf8;">
-              <span style="font-family: 'Leelawadee UI', 'Noto Sans Thai', sans-serif;">การรักษา • ความหวัง • ความแข็งแกร่ง</span>
-              <span style="font-family: 'Noto Sans Lao', sans-serif; display: block; font-size: 18px; margin-top: 4px;">ການດູແລ • ຄວາມຫວັງ</span>
-              <span style="font-family: 'Khmer UI', 'Noto Sans Khmer', sans-serif; display: block; font-size: 18px; margin-top: 2px;">ការព្យាបាល • សង្ឃឹម</span>
+            <div class="smoe-tier-specimen" style="font-size: 20px; line-height: 1.65; color: #38bdf8;">
+              <span class="smoe-script-line" data-code="Thai" data-desc="Thai with breathing room for tone marks" style="font-family: 'PocketGull SE Asian', 'Leelawadee UI', 'Noto Sans Thai', sans-serif; display: block; font-size: 20px; margin-top: 4px; color: #38bdf8; font-weight: 600;">การรักษา • ความหวัง • พลัง</span>
+              <span class="smoe-script-line" data-code="Lao" data-desc="open Lao vowel loops" style="font-family: 'PocketGull SE Asian', 'Leelawadee UI', 'Noto Sans Lao', sans-serif; display: block; font-size: 20px; margin-top: 4px; color: #38bdf8; font-weight: 600;">ການດູແລ • ຄວາມຫວັງ</span>
+              <span class="smoe-script-line" data-code="Khmer &amp; Burmese" data-desc="clear Khmer &amp; Burmese stacked letters" style="font-family: 'PocketGull SE Asian', 'Leelawadee UI', 'Khmer UI', 'Noto Sans Khmer', sans-serif; display: block; font-size: 20px; margin-top: 4px; color: #38bdf8; font-weight: 600;">ការព្យាបាល • សង្ឃឹម</span>
             </div>
           </div>
-          <div class="smoe-tier-meta">
-            Recovery • Hope • Strength • Care — complex tone-mark stacking routed with zero cumulative layout shift (CLS = 0.000).
+          <div class="smoe-tier-meta" data-prefix="Recovery • Hope • Strength • Care — ">
+            Recovery • Hope • Strength • Care — Thai with breathing room for tone marks, open Lao vowel loops, clear Khmer &amp; Burmese stacked letters.
           </div>
         </div>
 
-        <!-- CJK Clinical Core -->
+        <!-- East Asian Writing Systems -->
         <div class="smoe-tier-card" style="border-color: rgba(52, 211, 153, 0.4);">
           <div>
             <div class="smoe-tier-badge" style="color: #34d399;">
-              <span>🇨🇳 🇯🇵 🇰🇷</span> East Asian Scripts (CJK)
+              <span>🎋</span> East Asian Scripts
             </div>
-            <div style="font-size: 11px; font-family: 'PocketGull Mono'; color: var(--text-muted);">
-              Hanzi (3,500), Kana (205), Hangul Syllables (708)
+            <div class="smoe-tier-codes" style="font-size: 12px; color: var(--text-muted);">
+              Chinese • Japanese • Korean
             </div>
-            <div class="smoe-tier-specimen" style="font-size: 24px; line-height: 1.6; color: #34d399;">
-              <span style="font-family: 'Noto Sans CJK SC', 'Microsoft YaHei', sans-serif;">康复 • 希望 • 关爱 • 力量</span>
-              <span style="font-family: 'Noto Sans JP', 'Yu Gothic', sans-serif; display: block; font-size: 20px; margin-top: 4px; color: #6ee7b7;">回復 • 希望 • 勇気 • 癒し</span>
-              <span style="font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif; display: block; font-size: 20px; margin-top: 2px; color: #a7f3d0;">회복 • 희망 • 용기 • 치유</span>
+            <div class="smoe-tier-specimen" style="font-size: 20px; line-height: 1.65; color: #34d399;">
+              <span class="smoe-script-line" data-code="Chinese" data-desc="Chinese characters" style="font-family: 'PocketGull CJK Fallback', 'Noto Sans CJK SC', 'Microsoft YaHei', sans-serif; display: block; font-size: 20px; margin-top: 4px; color: #34d399; font-weight: 600;">康复 • 希望 • 关爱 • 力量</span>
+              <span class="smoe-script-line" data-code="Japanese" data-desc="Japanese Kanji &amp; Kana" style="font-family: 'PocketGull CJK Fallback', 'Noto Sans JP', 'Yu Gothic', sans-serif; display: block; font-size: 20px; margin-top: 4px; color: #34d399; font-weight: 600;">回復 • 希望 • 勇気 • 癒し</span>
+              <span class="smoe-script-line" data-code="Korean" data-desc="Korean Hangul" style="font-family: 'PocketGull CJK Fallback', 'Noto Sans KR', 'Malgun Gothic', sans-serif; display: block; font-size: 20px; margin-top: 4px; color: #34d399; font-weight: 600;">회복 • 희망 • 용기 • 치유</span>
             </div>
           </div>
-          <div class="smoe-tier-meta">
-            Recovery • Hope • Care • Strength — Simplified Chinese, Japanese, and Korean with 1000 UPM em-box balance.
+          <div class="smoe-tier-meta" data-prefix="Recovery • Hope • Care • Strength — ">
+            Recovery • Hope • Care • Strength — Chinese characters, Japanese Kanji &amp; Kana, Korean Hangul balanced for effortless reading.
+          </div>
+        </div>
+
+        <!-- Indigenous & First Nations Writing Systems -->
+        <div class="smoe-tier-card" style="border-color: rgba(251, 113, 133, 0.4);">
+          <div>
+            <div class="smoe-tier-badge" style="color: #fb7185;">
+              <span>🪶</span> Indigenous &amp; First Nations Scripts
+            </div>
+            <div class="smoe-tier-codes" style="font-size: 12px; color: var(--text-muted);">
+              Cree &amp; Inuktitut Syllabics • Cherokee • Hawaiian, Māori &amp; Diné
+            </div>
+            <div class="smoe-tier-specimen" style="font-size: 20px; line-height: 1.65; color: #fb7185;">
+              <span class="smoe-script-line" data-code="Cree &amp; Inuktitut Syllabics" data-desc="Cree &amp; Inuktitut Syllabics" style="font-family: 'PocketGull Inuktitut', 'PocketGull', 'Gadugi', 'Euphemia', 'Noto Sans Canadian Aboriginal', sans-serif; display: block; font-size: 20px; margin-top: 4px; color: #fb7185; font-weight: 600;">ᓀᐦᐃᔭᐍᐏᐣ • mino-ayâwin • ᐃᓄᒃᑎᑐᑦ</span>
+              <span class="smoe-script-line" data-code="Cherokee Syllabary" data-desc="Cherokee Syllabary" style="font-family: 'PocketGull Cherokee', 'PocketGull', 'Gadugi', 'Plantagenet Cherokee', 'Noto Sans Cherokee', sans-serif; display: block; font-size: 20px; margin-top: 4px; color: #fb7185; font-weight: 600;">ᏣᎳᎩ • tohi • nvdo</span>
+              <span class="smoe-script-line" data-code="Hawaiian, Māori, Lakota &amp; Diné" data-desc="Hawaiian, Māori, Lakota &amp; Diné" style="font-family: 'PocketGull', 'Segoe UI', sans-serif; display: block; font-size: 20px; margin-top: 4px; color: #fb7185; font-weight: 600;">Aloha • Mālama • Wóčhekiye • Diné</span>
+            </div>
+          </div>
+          <div class="smoe-tier-meta" data-prefix="Good Health • Peace • Harmony — ">
+            Good Health • Peace • Harmony — Cree &amp; Inuktitut Syllabics, Cherokee Syllabary, Hawaiian, Māori, Lakota &amp; Diné under the UNDRIP Accord.
+          </div>
+        </div>
+
+        <!-- African, Hellenic, Cyrillic & Tactile Braille -->
+        <div class="smoe-tier-card" style="border-color: rgba(167, 139, 250, 0.4);">
+          <div>
+            <div class="smoe-tier-badge" style="color: #a78bfa;">
+              <span>🌍</span> African, European &amp; Tactile Braille
+            </div>
+            <div class="smoe-tier-codes" style="font-size: 12px; color: var(--text-muted);">
+              Amharic (Ge’ez) &amp; Kiswahili • Cyrillic, Greek &amp; Latin • Tactile Braille
+            </div>
+            <div class="smoe-tier-specimen" style="font-size: 20px; line-height: 1.65; color: #a78bfa;">
+              <span class="smoe-script-line" data-code="Amharic (Ge’ez) &amp; Kiswahili" data-desc="Amharic Ge’ez &amp; Kiswahili" style="font-family: 'PocketGull Ethiopic', 'PocketGull', 'Ebrima', 'Nyala', 'Noto Sans Ethiopic', 'Segoe UI', sans-serif; display: block; font-size: 20px; margin-top: 4px; color: #a78bfa; font-weight: 600;">ጤና • ተስፋ • ፍቅር • Afya • Upendo</span>
+              <span class="smoe-script-line" data-code="Cyrillic, Greek &amp; Latin" data-desc="Cyrillic, Greek &amp; Latin" style="font-family: 'PocketGull', 'Segoe UI', sans-serif; display: block; font-size: 20px; margin-top: 4px; color: #a78bfa; font-weight: 600;">Здоров’я • Ελπίδα • Esperanza</span>
+              <span class="smoe-script-line" data-code="Universal Tactile Braille" data-desc="Universal 8-dot Braille" style="font-family: 'PocketGull Braille', 'PocketGull', 'Segoe UI Symbol', 'Segoe UI', sans-serif; display: block; font-size: 20px; margin-top: 4px; color: #a78bfa; font-weight: 600;">⠇⠕⠧⠑ • ⠓⠕⠏⠑ • care for all</span>
+            </div>
+          </div>
+          <div class="smoe-tier-meta" data-prefix="Health • Hope • Love • Care — ">
+            Health • Hope • Love • Care — Amharic Ge’ez &amp; Kiswahili, Cyrillic, Greek &amp; Latin, Universal 8-dot Braille.
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- Interactive "Mix Your Written Languages" Builder (For Everybody)  -->
+      <!-- ================================================================= -->
+      <div id="languagePackBuilder" style="margin-top: 28px; background: radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.08) 0%, var(--surface-inner) 75%); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 12px; padding: 24px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 14px; margin-bottom: 16px;">
+          <div>
+            <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+              <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--emerald); background: rgba(16, 185, 129, 0.14); padding: 3px 9px; border-radius: 999px; border: 1px solid rgba(16, 185, 129, 0.35);">
+                🧩 Mix Your Written Languages • Modular &amp; Border-Free
+              </span>
+              <span style="font-size: 12px; color: var(--text-muted);">
+                For Families, Schools, Clinics &amp; Communities
+              </span>
+            </div>
+            <h3 style="font-size: 20px; font-weight: 800; color: var(--text-main); margin: 0 0 6px 0;">
+              Build Your Own Community Language Mix
+            </h3>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.55; margin: 0; max-width: 780px;">
+              Written languages belong to people, not just borders. Pick any <strong>2 or 3 written languages</strong> below to see them side-by-side at equal size and warmth on everyday cards — while downloading only the tiny language packs your community actually uses.
+            </p>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <button type="button" id="btnRandomLangMix" style="font-size: 12px; font-weight: 700; color: #f8fafc; background: rgba(16, 185, 129, 0.18); border: 1px solid rgba(16, 185, 129, 0.5); border-radius: 999px; padding: 7px 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+              <span>🎲</span> Surprise Language Mix
+            </button>
+            <button type="button" id="btnCopyLangMixCss" style="font-size: 12px; font-weight: 700; color: var(--cyan); background: rgba(6, 182, 212, 0.14); border: 1px solid rgba(6, 182, 212, 0.45); border-radius: 999px; padding: 7px 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+              <span>📋</span> Copy Font Pack Setup
+            </button>
+          </div>
+        </div>
+
+        <!-- Written Language Selector Chips -->
+        <div id="langBuilderChips" role="group" aria-label="Choose written languages to mix" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px;">
+          <!-- Populated dynamically and shuffled fairly on load -->
+        </div>
+
+        <!-- 3 Real-Life Everyday Cards (Medicine Label, Welcome Sign, Storybook Card) -->
+        <div id="langBuilderCardsGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; margin-bottom: 16px;">
+          <!-- Card 1: Family Medicine Label -->
+          <div style="background: rgba(6, 10, 18, 0.85); border: 1px solid rgba(56, 189, 248, 0.3); border-top: 3px solid #38bdf8; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #38bdf8;">
+                  💊 Family Medicine Label
+                </span>
+                <span style="font-size: 11px; color: var(--text-muted); font-family: 'PocketGull Mono', monospace;">
+                  Clear Numbers: 0̸ / 1 / l / I
+                </span>
+              </div>
+              <div id="mixSceneMedicine" style="display: flex; flex-direction: column; gap: 10px; min-height: 120px;"></div>
+            </div>
+            <div style="margin-top: 12px; padding-top: 8px; border-top: 1px dashed var(--card-border); font-size: 11px; color: var(--text-muted);">
+              Every language renders at the same clear 20px size so grandparents and parents never misread instructions.
+            </div>
+          </div>
+
+          <!-- Card 2: Community Welcome Sign -->
+          <div style="background: rgba(6, 10, 18, 0.85); border: 1px solid rgba(16, 185, 129, 0.3); border-top: 3px solid #10b981; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #10b981;">
+                  🪧 Community Welcome Sign
+                </span>
+                <span style="font-size: 11px; color: var(--text-muted);">
+                  School • Library • Clinic Door
+                </span>
+              </div>
+              <div id="mixSceneWelcome" style="display: flex; flex-direction: column; gap: 10px; min-height: 120px;"></div>
+            </div>
+            <div style="margin-top: 12px; padding-top: 8px; border-top: 1px dashed var(--card-border); font-size: 11px; color: var(--text-muted);">
+              Right-to-left and left-to-right scripts sit side-by-side in harmony without shifting or crowding.
+            </div>
+          </div>
+
+          <!-- Card 3: Children's Storybook & Wisdom Card -->
+          <div style="background: rgba(6, 10, 18, 0.85); border: 1px solid rgba(192, 132, 252, 0.3); border-top: 3px solid #c084fc; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #c084fc;">
+                  📖 Storybook &amp; Elder Wisdom Card
+                </span>
+                <span style="font-size: 11px; color: var(--text-muted);">
+                  Home &amp; Classroom Reading
+                </span>
+              </div>
+              <div id="mixSceneStory" style="display: flex; flex-direction: column; gap: 10px; min-height: 120px;"></div>
+            </div>
+            <div style="margin-top: 12px; padding-top: 8px; border-top: 1px dashed var(--card-border); font-size: 11px; color: var(--text-muted);">
+              Warm felt-marker curves keep long reading gentle on young eyes and elders alike.
+            </div>
+          </div>
+        </div>
+
+        <!-- Friendly Modular Pack Size Bar -->
+        <div style="background: rgba(2, 6, 16, 0.65); border: 1px solid var(--card-border); border-radius: 8px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <span style="font-size: 12px; font-weight: 700; color: var(--emerald);" id="langMixSummaryBadge">
+              ✓ 3 Written Language Packs Active
+            </span>
+            <span style="font-size: 12px; color: var(--text-muted);" id="langMixSizeLabel">
+              Lightweight Modular Download: ~50 KB total (vs. 18,000 KB traditional all-in-one font)
+            </span>
+          </div>
+          <div style="font-size: 11px; color: var(--text-muted);">
+            Instant loading on neighborhood phones, rural clinic tablets, and offline school laptops
           </div>
         </div>
       </div>
@@ -7127,69 +7312,69 @@
       <!-- Cross-Script Spacing & Typographic Harmony Protocol -->
       <div style="margin-top: 28px; background: var(--surface-inner); border: 1px solid var(--card-border); border-left: 4px solid var(--purple); border-radius: 12px; padding: 22px;">
         <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--purple); letter-spacing: 0.08em; margin-bottom: 8px;">
-          Cross-Script Orthography &amp; Optical Spacing Governance
+          Designed for Readers Everywhere — Not Just Software Engineers
         </div>
         <h3 style="font-size: 18px; font-weight: 700; color: var(--text-main); margin: 0 0 12px 0;">
-          Script-Specific Spatial Proportions &amp; Harmony Invariants
+          How Every Writing System Keeps Its Natural Voice
         </h3>
         <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0 0 20px 0; max-width: 960px;">
-          Typography across non-Latin writing systems requires distinct spatial mechanics. PocketGull rejects Eurocentric flattening: each script adheres to its authentic native optical centers, rotational axes, and cursive joining baselines.
+          Different writing systems move in different ways across a page. Instead of forcing every alphabet into a rigid Western box, PocketGull respects the natural brushwork, pen angle, and breathing room that native readers expect at home, in school, or in a clinic.
         </p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
           <!-- Canadian Syllabics -->
           <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 14px;">
-            <div style="font-size: 12px; font-weight: 700; color: var(--cyan); margin-bottom: 4px;">🇨🇦 Canadian Syllabics (Rotational Symmetry)</div>
+            <div style="font-size: 12px; font-weight: 700; color: var(--cyan); margin-bottom: 4px;">🪶 Cree &amp; Inuktitut Syllabics (Balanced Turns)</div>
             <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5; margin: 0;">
-              Vowel orientation (ᐱ, ᐳ, ᐸ, ᐯ) rotates about the optical center of mass rather than geometric bounding box center, with uniform 80 UPM optical bearings preventing spacing wobble across 90° turns.
+              Syllabic characters (ᐱ, ᐳ, ᐸ, ᐯ) rotate smoothly around their visual center so words stay steady and balanced across every direction.
             </p>
           </div>
 
           <!-- Arabic Cursive -->
           <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 14px;">
-            <div style="font-size: 12px; font-weight: 700; color: #c084fc; margin-bottom: 4px;">🇸🇦 Arabic &amp; Semitic (Reed-Pen Baseline)</div>
+            <div style="font-size: 12px; font-weight: 700; color: #c084fc; margin-bottom: 4px;">✒️ Arabic, Hebrew &amp; Syriac (Natural Pen Angle)</div>
             <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5; margin: 0;">
-              Honors authentic 45° reed-pen (qalam) dot angles. Continuous cursive joining along the baseline preserves natural kashida flow without artificial Latinate vertical stem shearing.
+              Honors the traditional reed-pen angle and vowel marks so right-to-left words flow naturally without cramped dots or stiff mechanical stems.
             </p>
           </div>
 
           <!-- ISO Braille -->
           <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 14px;">
-            <div style="font-size: 12px; font-weight: 700; color: var(--emerald); margin-bottom: 4px;">⠎ ISO/TR 11548 Braille (Tactile Pitch)</div>
+            <div style="font-size: 12px; font-weight: 700; color: var(--emerald); margin-bottom: 4px;">⠎ Tactile Braille (True Finger Spacing)</div>
             <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5; margin: 0;">
-              Complete 256-cell Unicode coverage (U+2800–U+28FF) with standard 2.5 mm dot pitch (r = 60 UPM). Grounded on the Latin baseline (y = 0) to eliminate floating tactile artifacts.
+              All 256 Braille patterns keep authentic tactile dot spacing so screen and print guides match real embossed Braille under the fingertips.
             </p>
           </div>
 
           <!-- Global Sign & ASL -->
           <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 14px;">
-            <div style="font-size: 12px; font-weight: 700; color: #34d399; margin-bottom: 4px;">🤟 Global Sign &amp; ASL (<a href="asl_studio.html" style="color: #34d399; text-decoration: underline;">Sign Studio</a>)</div>
+            <div style="font-size: 12px; font-weight: 700; color: #34d399; margin-bottom: 4px;">🤟 Visual Sign &amp; Fingerspelling (<a href="asl_studio.html" style="color: #34d399; text-decoration: underline;">Sign Studio</a>)</div>
             <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5; margin: 0;">
-              One-handed ASL fingerspelling, two-handed BSL comparative engine, and clinical emergency hand signals engineered on a 600 UPM telemetry grid with 25 UPM felt-marker fillets.
+              Warm, friendly handshapes for learning American and British Sign Language fingerspelling alongside everyday community signs.
             </p>
           </div>
 
           <!-- Shorthand / Chinuk Pipa -->
           <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 14px;">
-            <div style="font-size: 12px; font-weight: 700; color: var(--amber); margin-bottom: 4px;">✒️ Chinuk Pipa &amp; Duployan (Waist Anchor)</div>
+            <div style="font-size: 12px; font-weight: 700; color: var(--amber); margin-bottom: 4px;">🌊 Chinuk Pipa &amp; Shorthand (Flowing Loops)</div>
             <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5; margin: 0;">
-              Stenographic vowel loops (130 UPM) vs. consonant stems are anchored along the optical waist (y = 270 UPM), harmonizing shorthand rhythm directly with Latin x-height.
+              Preserves the gentle size contrast between small vowel loops and long consonant strokes used in historic Pacific Northwest writing.
             </p>
           </div>
 
           <!-- Diacritic Headroom -->
           <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 14px;">
-            <div style="font-size: 12px; font-weight: 700; color: #fb7185; margin-bottom: 4px;">🌍 Pan-European Diacritics (Clearance)</div>
+            <div style="font-size: 12px; font-weight: 700; color: #fb7185; margin-bottom: 4px;">🌍 Accents &amp; Tone Marks (Breathing Room)</div>
             <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5; margin: 0;">
-              Ascender envelope extends to y = 960 UPM, guaranteeing zero collision between uppercase acute, caron, and hungarumlaut accents (Á, Č, Ő, Å) in dense medical tables.
+              Tall headroom ensures stacked accents and tone marks (Á, Č, Ő, ą́, ę́) never collide or blur into the line above.
             </p>
           </div>
 
           <!-- Indic Matras -->
           <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 14px;">
-            <div style="font-size: 12px; font-weight: 700; color: #38bdf8; margin-bottom: 4px;">🇮🇳 Indic Scripts (Shirorekha Line)</div>
+            <div style="font-size: 12px; font-weight: 700; color: #38bdf8; margin-bottom: 4px;">🪷 South Asian Headlines (Unified Rhythm)</div>
             <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5; margin: 0;">
-              Devanagari continuous top hanging headline (shirorekha) aligns precisely with Latin cap-height (y = 700 UPM), creating unified multi-lingual baseline rhythm.
+              The top connecting bar in Devanagari and Bengali aligns harmoniously alongside other alphabets on bilingual community signs.
             </p>
           </div>
         </div>
@@ -7204,10 +7389,10 @@
             <div>
               <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 6px;">
                 <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); background: rgba(6, 182, 212, 0.15); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(6, 182, 212, 0.3);">
-                  🌍 Global Health Atlas
+                  🌍 Global Health &amp; Script Atlas
                 </span>
-                <span style="font-size: 12px; color: var(--text-muted); font-family: 'PocketGull Mono', monospace;">
-                  Wikipedia Demographics &bull; ISMP Standards &bull; Auto-Prescription
+                <span style="font-size: 12px; color: var(--text-muted); font-family: 'PocketGull', 'Segoe UI', sans-serif;">
+                  Browse by Written Language or by Country/Place &bull; Safe Medicine Labels
                 </span>
                 <button type="button" onclick="openDocDrill('UNDRIP Accord', 'INDIGENOUS SOVEREIGNTY')" style="font-size: 11px; font-weight: 700; color: #f59e0b; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); padding: 2px 8px; border-radius: 4px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
                   🪶 UNDRIP Accord Doc Drill
@@ -7217,28 +7402,34 @@
                 </a>
               </div>
               <h3 style="font-size: 22px; font-weight: 800; color: var(--text-main); margin: 0;">
-                Interactive World Map &amp; Country Healthcare Font Prescription
+                Explore by Written Language or by Place
               </h3>
               <p style="font-size: 13px; color: var(--text-muted); margin: 4px 0 0 0; max-width: 680px;">
-                Click any continent or country pin to inspect national demographics, health agency safety requirements, authentic script geometry, and generate a tailored, copy-ready CSS/JSON prescription.
+                Switch between <strong>✒️ By Written Language</strong> (flag-free script cards) and <strong>🗺️ By Country / Map</strong> to see everyday phrases of care, learn how clear lettering prevents mix-ups on family medicine labels, and explore each community’s living writing tradition.
               </p>
             </div>
 
             <!-- View Mode & Regional Filter Pills -->
             <div class="world-map-controls">
-              <!-- View Switcher: Map vs Vexillological Pavilion -->
-              <div style="display: flex; gap: 6px; background: rgba(0,0,0,0.3); padding: 3px; border-radius: 8px; border: 1px solid var(--card-border);">
-                <button id="viewSwitchMap" class="vex-view-switch-btn active" data-view="map">
+              <!-- View Switcher: Written Language vs Map vs Google Maps Live vs By Country/Place -->
+              <div style="display: flex; flex-wrap: wrap; gap: 6px; background: rgba(0,0,0,0.3); padding: 3px; border-radius: 8px; border: 1px solid var(--card-border);">
+                <button id="viewSwitchWrittenLang" class="vex-view-switch-btn" data-view="languages" title="Browse by Written Language & Script without nation-state flags">
+                  ✒️ By Written Language
+                </button>
+                <button id="viewSwitchMap" class="vex-view-switch-btn active" data-view="map" title="Explore on the Interactive World Map">
                   🗺️ Map View
                 </button>
-                <button id="viewSwitchPavilion" class="vex-view-switch-btn" data-view="pavilion">
-                  🚩 Vexillological Pavilion
+                <button id="viewSwitchGoogleMap" class="vex-view-switch-btn" data-view="gmaps" title="Interactive Google Maps Platform Live View (AdvancedMarkerElement)">
+                  🌐 Google Maps Live
+                </button>
+                <button id="viewSwitchPavilion" class="vex-view-switch-btn" data-view="pavilion" title="Browse by Country, Sovereign Nation & Place">
+                  🏛️ By Country / Place
                 </button>
               </div>
 
               <!-- Regional Filter Pills -->
               <div id="world-map-filters" style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
-                <button class="map-filter-btn active" data-region="all">All Nations</button>
+                <button class="map-filter-btn active" data-region="all">All Communities</button>
                 <button class="map-filter-btn" data-region="indigenous" style="border-color: rgba(245, 158, 11, 0.6); color: #f59e0b;">🪶 Indigenous &amp; Sovereign</button>
                 <button class="map-filter-btn" data-region="americas">Americas</button>
                 <button class="map-filter-btn" data-region="europe">Europe</button>
@@ -7261,8 +7452,8 @@
                   <!-- SVG Defs & Glow Filters -->
                   <defs>
                     <radialGradient id="oceanGlow" cx="50%" cy="50%" r="50%">
-                      <stop offset="0%" stop-color="#0a192f" stop-opacity="0.6"/>
-                      <stop offset="100%" stop-color="#020610" stop-opacity="0.9"/>
+                      <stop offset="0%" stop-color="#0a192f" stop-opacity="0.65"/>
+                      <stop offset="100%" stop-color="#020610" stop-opacity="0.92"/>
                     </radialGradient>
                     <filter id="puckGlow" x="-50%" y="-50%" width="200%" height="200%">
                       <feGaussianBlur stdDeviation="3" result="blur"/>
@@ -7275,39 +7466,45 @@
 
                   <!-- Background Ocean Grid Coordinates -->
                   <rect width="1000" height="520" fill="url(#oceanGlow)" />
-                  <g stroke="rgba(255, 255, 255, 0.04)" stroke-width="0.5" stroke-dasharray="3,3">
-                    <line x1="0" y1="130" x2="1000" y2="130" />
-                    <line x1="0" y1="260" x2="1000" y2="260" /> <!-- Equator -->
-                    <line x1="0" y1="390" x2="1000" y2="390" />
-                    <line x1="250" y1="0" x2="250" y2="520" />
-                    <line x1="500" y1="0" x2="500" y2="520" /> <!-- Prime Meridian -->
-                    <line x1="750" y1="0" x2="750" y2="520" />
+                  <g stroke="rgba(255, 255, 255, 0.045)" stroke-width="0.6" stroke-dasharray="3,3">
+                    <line x1="0" y1="86" x2="1000" y2="86" />   <!-- Arctic Circle approx -->
+                    <line x1="0" y1="185" x2="1000" y2="185" /> <!-- Tropic of Cancer -->
+                    <line x1="0" y1="260" x2="1000" y2="260" stroke="rgba(6, 182, 212, 0.14)" stroke-dasharray="none" /> <!-- Equator -->
+                    <line x1="0" y1="335" x2="1000" y2="335" /> <!-- Tropic of Capricorn -->
+                    <line x1="0" y1="434" x2="1000" y2="434" />
+                    <line x1="166" y1="0" x2="166" y2="520" />
+                    <line x1="333" y1="0" x2="333" y2="520" />
+                    <line x1="500" y1="0" x2="500" y2="520" stroke="rgba(6, 182, 212, 0.14)" stroke-dasharray="none" /> <!-- Prime Meridian -->
+                    <line x1="666" y1="0" x2="666" y2="520" />
+                    <line x1="833" y1="0" x2="833" y2="520" />
                   </g>
 
-                  <!-- Continental Vector Landmass Silhouettes (Simplified Stylized Projections) -->
-                  <g fill="#162235" stroke="#24344d" stroke-width="1.2" stroke-linejoin="round">
-                    <!-- North America & Arctic -->
-                    <path class="map-land" data-region="americas" d="M 90,80 L 150,70 L 220,60 L 290,75 L 310,120 L 270,160 L 290,190 L 240,240 L 200,280 L 190,260 L 160,250 L 130,220 L 100,160 L 80,120 Z" />
+                  <!-- Continental Vector Landmass Silhouettes (Calibrated Robinson-Equirectangular Projection) -->
+                  <g id="mapLandGroup" fill="#16243a" stroke="#283d5c" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round">
+                    <!-- North America, Alaska, Hudson Bay, Mexico & Central America -->
+                    <path class="map-land" data-region="americas" d="M 48,92 L 72,76 L 105,74 L 138,85 L 168,78 L 198,66 L 228,62 L 254,72 L 245,96 L 222,112 L 214,132 L 232,144 L 252,126 L 272,102 L 296,112 L 312,134 L 295,152 L 278,165 L 265,186 L 246,204 L 242,222 L 235,212 L 218,210 L 204,224 L 206,242 L 222,248 L 228,262 L 244,284 L 260,292 L 250,296 L 230,282 L 214,268 L 194,258 L 176,242 L 160,218 L 154,198 L 162,212 L 146,194 L 132,168 L 126,142 L 112,118 L 88,112 L 66,120 L 54,108 Z M 224,78 L 252,68 L 276,74 L 268,92 L 238,90 Z M 234,242 L 258,246 L 266,254 L 246,254 Z M 266,256 L 280,258 L 276,264 L 262,262 Z" />
                     <!-- Greenland -->
-                    <path class="map-land" data-region="americas" d="M 330,45 L 390,40 L 380,85 L 335,90 Z" />
-                    <!-- Central & South America -->
-                    <path class="map-land" data-region="americas" d="M 210,290 L 260,285 L 320,330 L 340,390 L 300,470 L 270,480 L 260,420 L 240,350 L 210,310 Z" />
-                    <!-- Europe -->
-                    <path class="map-land" data-region="europe" d="M 450,110 L 530,95 L 560,130 L 550,180 L 510,190 L 470,195 L 440,160 Z" />
-                    <!-- British Isles & Scandinavia -->
-                    <path class="map-land" data-region="europe" d="M 440,120 L 460,110 L 455,140 Z M 490,70 L 530,60 L 525,100 L 495,105 Z" />
-                    <!-- Africa & MENA -->
-                    <path class="map-land" data-region="mena" d="M 460,205 L 560,195 L 610,230 L 610,310 L 560,410 L 510,420 L 470,360 L 450,280 L 450,230 Z" />
-                    <!-- Middle East & Central Asia -->
-                    <path class="map-land" data-region="mena" d="M 570,180 L 650,175 L 670,230 L 630,260 L 580,240 Z" />
-                    <!-- Asia / CJK / Siberia -->
-                    <path class="map-land" data-region="asia" d="M 570,95 L 750,80 L 880,100 L 860,180 L 810,230 L 730,280 L 680,240 L 650,160 Z" />
-                    <!-- India & South Asia -->
-                    <path class="map-land" data-region="asia" d="M 670,240 L 730,245 L 710,320 L 680,300 Z" />
-                    <!-- Southeast Asia / Indonesia / Philippines -->
-                    <path class="map-land" data-region="asia" d="M 750,280 L 790,290 L 830,340 L 790,360 L 740,320 Z M 840,220 L 860,210 L 850,250 Z" />
-                    <!-- Australia & New Zealand -->
-                    <path class="map-land" data-region="asia" d="M 770,390 L 860,380 L 870,440 L 810,470 L 760,440 Z M 890,440 L 910,435 L 900,470 Z" />
+                    <path class="map-land" data-region="americas" d="M 308,36 L 352,28 L 392,36 L 402,58 L 384,86 L 358,104 L 336,98 L 324,74 L 306,54 Z" />
+                    <!-- South America -->
+                    <path class="map-land" data-region="americas" d="M 260,290 L 284,284 L 312,292 L 334,310 L 368,324 L 382,346 L 372,374 L 352,402 L 328,426 L 314,456 L 302,486 L 288,494 L 280,474 L 278,438 L 274,398 L 264,368 L 250,338 L 252,310 Z" />
+                    <!-- Iceland & British Isles -->
+                    <path class="map-land" data-region="europe" d="M 402,88 L 424,84 L 428,96 L 406,98 Z M 446,126 L 458,120 L 464,138 L 458,150 L 444,148 Z M 434,134 L 444,132 L 442,144 L 432,144 Z" />
+                    <!-- Continental Europe & Scandinavia -->
+                    <path class="map-land" data-region="europe" d="M 476,102 L 492,72 L 516,58 L 542,64 L 556,82 L 542,106 L 528,116 L 516,104 L 504,116 L 492,118 Z M 442,172 L 452,156 L 472,146 L 494,132 L 522,126 L 556,118 L 578,128 L 574,158 L 556,174 L 538,186 L 526,198 L 514,186 L 502,178 L 508,194 L 498,198 L 486,180 L 472,184 L 462,196 L 442,194 Z" />
+                    <!-- Africa & Madagascar -->
+                    <path class="map-land" data-region="mena" d="M 448,204 L 482,198 L 512,204 L 538,212 L 564,214 L 576,236 L 594,262 L 614,272 L 606,298 L 588,324 L 582,354 L 566,384 L 552,416 L 528,434 L 512,422 L 504,392 L 494,358 L 496,326 L 482,302 L 458,298 L 436,286 L 428,262 L 434,232 Z M 596,364 L 608,358 L 612,388 L 598,398 L 592,380 Z" />
+                    <!-- Anatolia, Levant & Arabian Peninsula -->
+                    <path class="map-land" data-region="mena" d="M 544,182 L 582,178 L 604,186 L 622,202 L 642,226 L 634,252 L 604,266 L 590,254 L 574,224 L 564,206 L 546,196 Z" />
+                    <!-- Northern & East Asia, Siberia, China & Korea -->
+                    <path class="map-land" data-region="asia" d="M 576,78 L 628,68 L 692,64 L 764,68 L 836,76 L 896,88 L 916,106 L 892,126 L 876,146 L 856,142 L 844,162 L 832,186 L 838,202 L 828,210 L 818,198 L 806,214 L 814,234 L 796,256 L 774,268 L 752,262 L 732,248 L 696,232 L 664,218 L 638,202 L 612,184 L 582,174 L 574,148 L 576,116 Z" />
+                    <!-- Indian Subcontinent & Sri Lanka -->
+                    <path class="map-land" data-region="asia" d="M 658,218 L 698,224 L 732,244 L 718,274 L 698,312 L 686,310 L 672,272 L 656,244 Z M 702,314 L 710,314 L 708,326 L 700,324 Z" />
+                    <!-- Mainland & Maritime Southeast Asia (Indochina, Malaya, Indonesia, Philippines) -->
+                    <path class="map-land" data-region="asia" d="M 736,246 L 774,258 L 784,282 L 770,302 L 758,318 L 748,296 L 738,272 Z M 742,316 L 768,336 L 762,344 L 736,324 Z M 772,344 L 808,350 L 806,358 L 770,352 Z M 782,316 L 804,312 L 808,334 L 784,336 Z M 816,272 L 830,270 L 836,298 L 820,302 Z M 836,334 L 874,340 L 882,356 L 842,352 Z" />
+                    <!-- Japanese Archipelago -->
+                    <path class="map-land" data-region="asia" d="M 858,166 L 872,162 L 874,176 L 860,178 Z M 850,182 L 868,184 L 864,208 L 844,216 L 838,206 Z" />
+                    <!-- Australia, Tasmania & Aotearoa New Zealand -->
+                    <path class="map-land" data-region="asia" d="M 784,388 L 816,374 L 844,376 L 856,364 L 868,384 L 884,408 L 878,438 L 854,454 L 826,444 L 794,446 L 776,426 L 776,402 Z M 848,462 L 858,462 L 856,472 L 846,470 Z M 908,444 L 920,438 L 916,456 L 904,462 Z M 892,464 L 906,460 L 898,480 L 886,478 Z" />
                   </g>
 
                   <!-- Dynamic Pins / Telemetry Hotspots -->
@@ -7328,7 +7525,42 @@
                 </div>
               </div>
 
-              <!-- 2. Vexillological Pavilion Grid Container (Equal-Area Flag Heraldry) -->
+              <!-- 2. Google Maps Platform Live Canvas Container (Maps JS API + AdvancedMarkerElement) -->
+              <div id="googleMapCanvasContainer" style="display: none; flex-direction: column; width: 100%; border-radius: 8px; border: 1px solid var(--card-border); overflow: hidden; background: #060a12;" aria-label="Interactive Google Maps Global Health Atlas">
+                <!-- Google Maps Key & Status Bar -->
+                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding: 8px 12px; background: rgba(15, 23, 42, 0.92); border-bottom: 1px solid var(--card-border); font-size: 11px;">
+                  <div style="display: flex; align-items: center; gap: 6px; font-family: 'PocketGull Mono', monospace;">
+                    <span id="gmapsStatusBadge" style="color: #38bdf8; font-weight: 700;">🌐 Google Maps Platform (Maps JS API)</span>
+                    <span style="color: var(--text-muted);">&bull; AdvancedMarkerElement &bull; DEMO_MAP_ID</span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 6px;">
+                    <input id="gmapsApiKeyInput" type="password" maxlength="120" placeholder="Enter Google Maps API Key (or Demo Key)..." aria-label="Google Maps API Key" style="font-family: 'PocketGull Mono', monospace; font-size: 11px; padding: 4px 8px; width: 230px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.35); background: #020617; color: #f8fafc;" />
+                    <button type="button" id="btnSaveGmapsKey" style="font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--cyan); background: rgba(6, 182, 212, 0.18); color: var(--cyan); cursor: pointer;">
+                      🔑 Load Map
+                    </button>
+                    <button type="button" id="btnClearGmapsKey" title="Clear saved API key from browser localStorage" style="font-size: 11px; padding: 4px 8px; border-radius: 4px; border: 1px solid var(--card-border); background: transparent; color: var(--text-muted); cursor: pointer;">
+                      ✕
+                    </button>
+                  </div>
+                </div>
+                <!-- Explicit Height Container (Prevents CF2 Map Height Collapse) -->
+                <div id="googleMapCanvas" style="width: 100%; height: 350px; position: relative; background: radial-gradient(circle at 50% 50%, #0a192f 0%, #020610 100%); display: flex; align-items: center; justify-content: center;">
+                  <div id="gmapsPlaceholderOverlay" style="text-align: center; padding: 24px; max-width: 460px;">
+                    <div style="font-size: 28px; margin-bottom: 8px;">🗺️</div>
+                    <div style="font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 6px;">
+                      Google Maps Platform Live Telemetry Stage
+                    </div>
+                    <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5; margin: 0 0 12px 0;">
+                      Enter your Google Maps API Key (or the public prototyping Maps Demo Key) above and click <strong>Load Map</strong> to initialize interactive <code>AdvancedMarkerElement</code> pins across all 19 sovereign &amp; national health regions. Keys are stored strictly in local browser storage (zero server transmission).
+                    </p>
+                    <div style="font-size: 10px; font-family: 'PocketGull Mono', monospace; color: var(--cyan);">
+                      Powered by Google Maps &bull; Dynamic <code>importLibrary(&quot;maps&quot;, &quot;marker&quot;)</code>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3. Vexillological Pavilion Grid Container (Equal-Area Flag Heraldry) -->
               <div id="vexillologicalPavilionContainer" style="display: none; width: 100%; aspect-ratio: 1.85 / 1; min-height: 280px; max-height: 380px; overflow-y: auto; background: var(--surface-inner); border-radius: 8px; border: 1px solid var(--card-border); padding: 12px;" tabindex="0" aria-label="Vexillological Healthcare Pavilion">
                 <div id="flagGalleryGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px;">
                   <!-- Flag cards populated via JS -->
@@ -7341,7 +7573,7 @@
               </div>
             </div>
 
-            <!-- Right: Clinical Telemetry & Prescription Dock -->
+            <!-- Right: Clinical Telemetry & Typography Profile Dock -->
             <div id="countryHudDock" style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between;">
               
               <div>
@@ -7359,7 +7591,7 @@
                       HEALTH CANADA
                     </span>
                     <div id="hudWikiPop" style="font-size: 11px; color: var(--text-muted); margin-top: 4px; font-family: 'PocketGull Mono', monospace;">
-                      Pop: 40.5M &bull; Bilingual + Indigenous
+                      Pop: 41.0M &bull; Bilingual + Indigenous
                     </div>
                   </div>
                 </div>
@@ -7367,18 +7599,18 @@
                 <!-- Live Clinical Specimen Box -->
                 <div style="margin-bottom: 14px;">
                   <div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; display: flex; justify-content: space-between;">
-                    <span>Live EHR Clinical Display</span>
-                    <span id="hudLangTag" style="color: var(--amber); font-family: 'PocketGull Mono', monospace;">locl: CAN</span>
+                    <span>Live Orthographic &amp; Clinical Display</span>
+                    <span id="hudLangTag" style="color: var(--amber); font-family: 'PocketGull Mono', monospace;">locl: CAN / cr / iu</span>
                   </div>
-                  <div id="hudSpecimenStage" style="background: #060a12; border: 1px solid rgba(6, 182, 212, 0.3); border-radius: 6px; padding: 12px; font-family: 'PocketGull', 'PocketGull Braille', 'PocketGull Bold', 'Segoe UI Symbol', 'Apple Symbols', 'DejaVu Sans', sans-serif;">
+                  <div id="hudSpecimenStage" style="background: #060a12; border: 1px solid rgba(6, 182, 212, 0.3); border-radius: 6px; padding: 12px; font-family: 'PocketGull VF', 'PocketGull', 'PocketGull Arabic', 'PocketGull Hebrew', 'PocketGull NKo', 'PocketGull Indic', 'PocketGull Braille', 'PocketGull Bold', 'Noto Sans Arabic', 'Noto Sans Hebrew', 'Noto Sans Devanagari', 'Segoe UI', 'Segoe UI Historic', 'Segoe UI Symbol', 'Apple Symbols', 'DejaVu Sans', sans-serif;">
                     <div id="hudPhraseNative" style="font-size: 18px; font-weight: 700; color: #ffffff; line-height: 1.4;">
                       ᐊᓂᕐᓂᖃᕐᓂᖅ • ᐋᓐᓂᐊᖃᕐᓇᙱᑦᑐᓕᕆᓂᖅ
                     </div>
                     <div id="hudPhraseTranslation" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">
-                      Vital Breathing • Healthcare Delivery (Inuktitut)
+                      Vital Breathing • Healthcare Delivery (Inuktitut Syllabics)
                     </div>
                     <div id="hudDosageAlert" style="margin-top: 8px; padding-top: 6px; border-top: 1px dashed var(--card-border); font-size: 13px; color: #38bdf8; font-family: 'PocketGull Mono', monospace;">
-                      DOSE: 500 mg Amoxicillin (0̸ Slashed / 1-l-I Disambiguated)
+                      DISAMBIGUATION: 0̸ Slashed Zero (cv08) • 1 / l / I Tri-Character Clarity (cv05, ss02)
                     </div>
                   </div>
                 </div>
@@ -7391,31 +7623,35 @@
                   <ul id="hudRulesList" style="margin: 0; padding-left: 18px; font-size: 12px; color: var(--text-muted); line-height: 1.5;">
                     <li><strong>Rotational Invariance</strong>: Syllabic vowels rotate around optical mass center (ᐱ, ᐳ, ᐸ, ᐯ).</li>
                     <li><strong>UNDRIP Accord</strong>: SIL OFL 1.1 unencumbered use for sovereign First Nations health systems.</li>
-                    <li><strong>Bilingual French/English</strong>: High-clearance diacritics prevent acute/grave accent clipping on patient armbands.</li>
+                    <li><strong>Bilingual Health Labeling</strong>: High-clearance diacritics prevent acute/grave accent clipping on French/English wristbands.</li>
                   </ul>
                   <!-- Doc Drill & UNDRIP Evidence Actions -->
                   <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
                     <button id="hudDocDrillBtn" type="button" style="font-size: 11px; font-weight: 700; background: rgba(6, 182, 212, 0.15); border: 1px solid var(--cyan); color: var(--cyan); border-radius: 4px; padding: 4px 10px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
                       🔬 Doc Drill Evidence
                     </button>
-                    <a id="hudUndripAccordLink" href="https://www.un.org/development/desa/indigenouspeoples/declaration-on-the-rights-of-indigenous-peoples.html" target="_blank" rel="noopener noreferrer" style="font-size: 11px; font-weight: 700; color: #f59e0b; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 4px; padding: 4px 10px; text-decoration: none; display: none; align-items: center; gap: 4px;" title="United Nations Declaration on the Rights of Indigenous Peoples">
+                    <a id="hudUndripAccordLink" href="https://www.un.org/development/desa/indigenouspeoples/declaration-on-the-rights-of-indigenous-peoples.html" target="_blank" rel="noopener noreferrer" style="font-size: 11px; font-weight: 700; color: #f59e0b; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 4px; padding: 4px 10px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;" title="United Nations Declaration on the Rights of Indigenous Peoples">
                       🪶 UNDRIP Accord (UN DESA) ↗
                     </a>
                   </div>
                 </div>
               </div>
 
-              <!-- 1-Click CSS/JSON Prescription Generator -->
+              <!-- 1-Click CSS / JSON Typography Profile Exporter -->
               <div>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; gap: 8px; flex-wrap: wrap;">
                   <div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--cyan);">
-                    Tailored EHR Stylesheet Prescription
+                    Regional EHR CSS / JSON Profile
                   </div>
-                  <button id="btnCopyPrescription" style="font-size: 11px; background: rgba(6, 182, 212, 0.2); border: 1px solid var(--cyan); color: var(--cyan); border-radius: 4px; padding: 2px 8px; cursor: pointer; font-weight: 600;">
-                    📋 Copy CSS
-                  </button>
+                  <div style="display: flex; align-items: center; gap: 4px;">
+                    <button type="button" id="btnFormatCss" class="hud-format-btn active" data-format="css" aria-label="Show CSS Profile">CSS</button>
+                    <button type="button" id="btnFormatJson" class="hud-format-btn" data-format="json" aria-label="Show JSON Profile">JSON</button>
+                    <button type="button" id="btnCopyPrescription" style="font-size: 11px; background: rgba(6, 182, 212, 0.2); border: 1px solid var(--cyan); color: var(--cyan); border-radius: 4px; padding: 2px 8px; cursor: pointer; font-weight: 600;">
+                      📋 Copy CSS
+                    </button>
+                  </div>
                 </div>
-                <pre id="hudCssCode" tabindex="0" aria-label="Generated CSS Prescription Code" style="margin: 0; background: #03060a; border: 1px solid var(--card-border); border-radius: 6px; padding: 10px; font-size: 11px; font-family: 'PocketGull Mono', monospace; color: #38bdf8; overflow-x: auto; max-height: 110px; line-height: 1.45;"></pre>
+                <pre id="hudCssCode" tabindex="0" aria-label="Generated Typography Profile Code" style="margin: 0; background: #03060a; border: 1px solid var(--card-border); border-radius: 6px; padding: 10px; font-size: 11px; font-family: 'PocketGull Mono', monospace; color: #38bdf8; overflow-x: auto; max-height: 115px; line-height: 1.45;"></pre>
               </div>
 
             </div>
@@ -11925,6 +12161,34 @@
         if (lower.includes('undrip') || lower.includes('indigenous') || lower.includes('sovereign') || lower.includes('tribal') || lower.includes('salish') || lower.includes('osage') || lower.includes('cherokee') || lower.includes('navajo') || lower.includes('inuit') || lower.includes('cree') || lower.includes('tifinagh') || lower.includes('amazigh') || lower.includes('guarani') || lower.includes('nko') || lower.includes('adlam') || lower.includes('tek') || lower.includes('ocap')) return DOC_DRILL_KNOWLEDGE['undrip'];
         if (lower.includes('phinney') || lower.includes('forensic') || lower.includes('ots')) return DOC_DRILL_KNOWLEDGE['phinney'];
 
+        const atlasList = window.GLOBAL_HEALTH_ATLAS;
+        if (Array.isArray(atlasList)) {
+          const atlasMatch = atlasList.find(c =>
+            c.name.toLowerCase() === lower ||
+            lower.includes(c.name.toLowerCase()) ||
+            c.name.toLowerCase().includes(lower) ||
+            c.id === lower
+          );
+          if (atlasMatch) {
+            const rulesHtml = (atlasMatch.rules || []).map(r => `<li>${r}</li>`).join('');
+            return {
+              title: `${atlasMatch.flag} ${atlasMatch.name} — Regional Healthcare Typography`,
+              category: atlasMatch.region === 'indigenous' ? 'INDIGENOUS SOVEREIGNTY' : 'GLOBAL HEALTH ATLAS',
+              citation: `${atlasMatch.authority} • ${atlasMatch.langTag} • ${atlasMatch.pop}`,
+              targetId: 'world-map-studio',
+              mystery: `How does ${atlasMatch.name} (${atlasMatch.scriptFamily}) maintain sub-second optometric legibility and zero-collision diacritic clearance across clinical displays and 203 DPI wristbands?`,
+              mission: [
+                `Inspect the ${atlasMatch.name} specimen in the Global Health Atlas HUD.`,
+                `Observe the orthographic benchmark: "${atlasMatch.phraseNative}" (${atlasMatch.phraseTranslation}).`,
+                `Export the CSS or JSON profile for ${atlasMatch.langTag}.`
+              ],
+              discovery: `${atlasMatch.dosageAlert}`,
+              chips: ['Explain clinical significance', 'Why 1000 UPM grid?', 'UNDRIP Accord', '203 DPI thermal printing'],
+              content: `<h3>1. Script &amp; Orthographic Architecture</h3><p><strong>${escapeHtml(atlasMatch.scriptFamily)}</strong> (${escapeHtml(atlasMatch.langTag)}) is calibrated to the standard 1000 UPM em-square and Louise Sloan 5:1 optotype proportions.</p><h3>2. Regional Typographic Safeguards</h3><ul>${rulesHtml}</ul>`
+            };
+          }
+        }
+
         return {
           title: term,
           category: 'CLINICAL SCIENCE',
@@ -12389,7 +12653,7 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
               <li><strong>Article 13 (Language Revitalization):</strong> Uncompromised, zero-tofu rendering for all 574+ federally recognized tribes and 12 Indian Health Service (IHS) administrative areas.</li>
               <li><strong>Article 14 (Educational Parity):</strong> Unencumbered SIL OFL 1.1 open licensing for tribal immersion schools and language preservation centers.</li>
               <li><strong>Article 24 (Right to Health):</strong> Life-critical disambiguation on clinic prescription labels in community health centers.</li>
-              <li><strong>Technical Precision:</strong> GPOS mark/mkmk anchors for Salish (x̌ʷ, q̓ʷ), Format 12 cmap for Osage (𐒰𐓘𐓲𐓟), 640 Canadian Aboriginal Syllabics (ᐃᓄᒃᑎᑐᑦ, ᓀᐦᐃᔭᐍウィン), Cherokee bicameral Syllabary, Diné stacked nasals (ą́, ę́, į́, ǫ́), Amazigh Neo-Tifinagh (ⵣ), Guarani nasal tildes (ã, ẽ, ĩ, õ, ũ, ỹ, g̃), and West African N'Ko / Adlam.</li>
+              <li><strong>Technical Precision:</strong> GPOS mark/mkmk anchors for Salish (x̌ʷ, q̓ʷ), Format 12 cmap for Osage (𐒰𐓘𐓲𐓟), 640 Canadian Aboriginal Syllabics (ᐃᓄᒃᑎᑐᑦ, ᓀᐦᐃᔭᐍᐏန်), Cherokee bicameral Syllabary, Diné stacked nasals (ą́, ę́, į́, ǫ́), Amazigh Neo-Tifinagh (ⵣ), Guarani nasal tildes (ã, ẽ, ĩ, õ, ũ, ỹ, g̃), and West African N'Ko / Adlam.</li>
             </ul>
             <p>All clinic telemetry adheres to the First Nations OCAP® principles and the CARE Principles for Indigenous Data Governance with zero cloud egress.</p>
             <p><a href="https://www.un.org/development/desa/indigenouspeoples/declaration-on-the-rights-of-indigenous-peoples.html" target="_blank" rel="noopener noreferrer" style="color: #f59e0b; text-decoration: underline;">📜 Official United Nations UNDRIP Declaration &rarr;</a></p>`;
@@ -12742,8 +13006,8 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
         { id: 'variable', badge: 'Ch. 2', title: 'Variable Continuum' },
         { id: 'ismp', badge: 'Ch. 3', title: 'Clinical Safety' },
         { id: 'telemetry', badge: 'Ch. 4', title: 'ICU Telemetry' },
-        { id: 'scientific-lab', badge: 'Ch. 5', title: 'Science & Chemistry' },
-        { id: 'atelier', badge: 'Ch. 6', title: 'Polymath Acoustics' },
+        { id: 'scientific-lab', badge: 'Ch. 5', title: 'Science & Acoustics' },
+        { id: 'atelier', badge: 'Ch. 6', title: 'Tactile Atelier' },
         { id: 'scripts', badge: 'Ch. 7', title: 'Sovereign Scripts' },
         { id: 'download', badge: 'Ch. 8', title: 'Foundry Governance' }
       ];
@@ -12884,30 +13148,31 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           name: 'Canada',
           flag: '🇨🇦',
           region: 'americas',
-          x: 210, y: 130,
+          x: 205, y: 125,
           authority: 'HEALTH CANADA',
-          pop: '40.5M • Bilingual + Indigenous',
+          pop: '41.0M • Bilingual + Indigenous',
           scriptFamily: 'Latin + Canadian Aboriginal Syllabics (Inuktitut / Cree)',
           langTag: 'locl: CAN / cr / iu',
+          motto: 'A Mari Usque Ad Mare • From Sea to Sea',
           phraseNative: 'ᐊᓂᕐᓂᖃᕐᓂᖅ • ᐋᓐᓂᐊᖃᕐᓇᙱᑦᑐᓕᕆᓂᖅ',
           phraseTranslation: 'Vital Breathing • Healthcare Delivery (Inuktitut Syllabics)',
-          dosageAlert: 'DOSE: 500 mg Amoxicillin (0̸ Slashed / 1-l-I Disambiguated)',
+          dosageAlert: 'DISAMBIGUATION: 0̸ Slashed Zero (cv08) • 1 / l / I Tri-Character Clarity (cv05, ss02)',
           rules: [
             '<strong>Rotational Invariance</strong>: Syllabic vowels rotate around optical mass center (ᐱ, ᐳ, ᐸ, ᐯ).',
             '<strong>UNDRIP Accord</strong>: SIL OFL 1.1 unencumbered use for sovereign First Nations health systems.',
             '<strong>Bilingual Health Labeling</strong>: High-clearance diacritics prevent acute/grave accent clipping on French/English wristbands.'
           ],
-          css: `/* PocketGull Health Canada Clinical Preset */
+          css: `/* PocketGull Health Canada Clinical Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
 :root {
-  --ehr-font-family: 'PocketGull', 'PocketGull Syllabics', -apple-system, sans-serif;
+  --ehr-font-family: 'PocketGull VF', 'PocketGull', 'PocketGull Syllabics', sans-serif;
   --ehr-mono-family: 'PocketGull Mono', monospace;
 }
 
-.clinical-chart, .rx-dosage {
+.clinical-chart, .rx-label {
   font-family: var(--ehr-font-family);
-  font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1; /* ISMP Disambiguation */
+  font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
   font-variant-numeric: tabular-nums slashed-zero;
 }`
         },
@@ -12916,26 +13181,55 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           name: 'United States',
           flag: '🇺🇸',
           region: 'americas',
-          x: 200, y: 190,
-          authority: 'FDA / ISMP SAFE 500',
-          pop: '340M • Multilingual Telemetry',
-          scriptFamily: 'Latin (English / Spanish) + Navajo / Cherokee',
-          langTag: 'locl: USA / es-US / nv',
-          phraseNative: 'Hózhǫ́ náhásdlį́į́ʼ • Urgent Care 24/7',
-          phraseTranslation: 'Restoration of Health & Harmony (Navajo / Diné Bizaad)',
-          dosageAlert: 'DOSE: 10 mg HYDROcodone vs OxyCODONE (Tall Man Lettering)',
+          x: 200, y: 185,
+          authority: 'FDA / ISMP SAFE STANDARDS',
+          pop: '341M • Multilingual Telemetry',
+          scriptFamily: 'Latin Extended (English / Spanish) + Regional Sovereign Scripts',
+          langTag: 'locl: USA / en-US / es-US',
+          motto: 'E Pluribus Unum • Clinical & Optometric Equity',
+          phraseNative: 'Emergency Triage • Atención de Urgencias 24/7',
+          phraseTranslation: 'Bilingual Clinical Charting & Tall-Man Casing Contrast',
+          dosageAlert: 'SAFEGUARD: Tall-Man Casing Contrast • 0̸ Slashed Zero (cv08) • Zero Trailing Decimal Rule',
           rules: [
-            '<strong>ISMP Life-Critical Standards</strong>: Mandates slashed zero (0̸) and curved lowercase (l) to prevent fatal 1/l/I collisions.',
-            '<strong>Navajo Nasal Diacritics</strong>: High clearance for ogonek + acute (ą́, ę́, į́, ǫ́) without thermal label clipping.',
-            '<strong>FDA Tall Man Lettering</strong>: Optimized weight ratio between lower and upper case in compound medication names.'
+            '<strong>ISMP Life-Critical Standards</strong>: Mandates slashed zero (0̸) and curved lowercase (l) to prevent 1/l/I character collisions.',
+            '<strong>Tall-Man Casing Contrast</strong>: Optimized x-height to cap-height ratio differentiates look-alike clinical terms.',
+            '<strong>Bilingual Spanish/English Parity</strong>: Full clearance for acute accents and ñ across 203 DPI bedside thermal wristbands.'
           ],
-          css: `/* PocketGull US FDA & ISMP Clinical Preset */
+          css: `/* PocketGull US FDA & ISMP Clinical Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
-.rx-label, .telemetry-readout {
-  font-family: 'PocketGull', 'PocketGull Mono', sans-serif;
+.ehr-record, .telemetry-readout {
+  font-family: 'PocketGull VF', 'PocketGull', 'PocketGull Mono', sans-serif;
   font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1;
   letter-spacing: 0.02em; /* Louise Sloan 5:1 legibility */
+}`
+        },
+        {
+          id: 'mex',
+          name: 'Mexico',
+          flag: '🇲🇽',
+          region: 'americas',
+          x: 185, y: 242,
+          authority: 'COFEPRIS / INALI MEXICO',
+          pop: '130M • 68 National Indigenous Languages',
+          scriptFamily: 'Latin Extended (Spanish, Nahuatl, Yucatec Maya, Zapotec)',
+          langTag: 'locl: MEX / es-MX / nah / yua',
+          motto: 'La Patria es Primero • Pluricultural Health Access',
+          phraseNative: 'Salud Comunitaria • Nemiliztli • Toj óolal',
+          phraseTranslation: 'Community Health (Spanish) • Life/Vitality (Nahuatl) • Good Health (Maya)',
+          dosageAlert: 'ORTHOGRAPHY: Saltillo (Ꞌ / ʼ) Glottal Stop & Macron Clearance • 0̸ Slashed Zero (cv08)',
+          rules: [
+            '<strong>INALI Pluricultural Parity</strong>: Supports saltillo glottal consonants and vowel length macrons for Nahuatl and Maya community clinics.',
+            '<strong>COFEPRIS Labeling Acuity</strong>: Louise Sloan 5:1 optotypes prevent character crowding on compact bilingual packaging.',
+            '<strong>203 DPI Thermal Resilience</strong>: Open counter apertures resist ink spread in high-heat coastal and rural clinics.'
+          ],
+          css: `/* PocketGull Mexico COFEPRIS & INALI Profile (v3.1.0) */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+:lang(es-MX), .salud-chart {
+  font-family: 'PocketGull VF', 'PocketGull', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
+  font-variant-numeric: tabular-nums slashed-zero;
 }`
         },
         {
@@ -12943,25 +13237,26 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           name: 'United Kingdom',
           flag: '🇬🇧',
           region: 'europe',
-          x: 450, y: 130,
+          x: 452, y: 136,
           authority: 'NHS DIGITAL / MHRA',
           pop: '68M • NHS Single Health Spine',
           scriptFamily: 'Latin (English, Welsh, Scots Gaelic)',
-          langTag: 'locl: GBR / cy',
+          langTag: 'locl: GBR / cy / gd',
+          motto: 'National Health Service • Universal Care at Point of Need',
           phraseNative: 'Iechyd Da • Emergency Department (A&E)',
           phraseTranslation: 'Good Health (Welsh / Cymraeg) • National Health Service',
-          dosageAlert: 'DOSE: 2.5 mg Levothyroxine (Strict Decimal Period Point)',
+          dosageAlert: 'DISAMBIGUATION: ŵ, ŷ, â Circumflex Headroom • Strict Decimal Period Alignment',
           rules: [
             '<strong>NHS Digital Accessibility</strong>: Sloan 5:1 optotype ratio ensures sub-second acuity on mobile triage tablets.',
             '<strong>Welsh Circumflex Diacritics</strong>: Full headroom for ŵ, ŷ, â, ê, î, ô, û prevents clipping in Welsh NHS regional charts.',
-            '<strong>DirectWrite & ClearType Rendering</strong>: GASP table bytecode tuned for legacy NHS Windows terminals.'
+            '<strong>DirectWrite &amp; ClearType Rendering</strong>: GASP table bytecode tuned for NHS clinical workstation displays.'
           ],
-          css: `/* PocketGull NHS Digital Spine Preset */
+          css: `/* PocketGull NHS Digital Spine Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
 .nhs-patient-record {
-  font-family: 'PocketGull', sans-serif;
-  font-feature-settings: "cv08" 1, "cv05" 1;
+  font-family: 'PocketGull VF', 'PocketGull', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
   text-rendering: optimizeLegibility;
 }`
         },
@@ -12970,26 +13265,27 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           name: 'Germany / EU',
           flag: '🇩🇪',
           region: 'europe',
-          x: 495, y: 145,
+          x: 498, y: 152,
           authority: 'BfArM / EMA EUROPE',
           pop: '84M • DIN 1450 Readability',
           scriptFamily: 'Latin Extended (German, French, Polish, Czech)',
           langTag: 'locl: DEU / fra / pol',
-          phraseNative: 'Notaufnahme • Notfallmedizin • Intensiv',
+          motto: 'DIN 1450 Legibility • European Health Data Space',
+          phraseNative: 'Notaufnahme • Notfallmedizin • Intensivstation',
           phraseTranslation: 'Emergency Department • Intensive Care Unit (German)',
-          dosageAlert: 'DOSE: 0,5 mg Digoxin (DIN Comma Decimal Alignment)',
+          dosageAlert: 'DISAMBIGUATION: Capital Sharp S (ẞ vs ß) • DIN Tabular Comma Decimal Alignment',
           rules: [
             '<strong>DIN 1450 Optical Legibility</strong>: Open apertures on c, e, s prevent character confusion under photopic glare.',
             '<strong>German Capital Sharp S (ẞ)</strong>: Distinctive uppercase ẞ with top-corner arc disambiguates legal medical records.',
-            '<strong>EMA Cross-Border Exchange</strong>: Full CE diacritic support (ä, ö, ü, ß, é, è, ł, č) across EU cross-border patient passports.'
+            '<strong>EMA Cross-Border Exchange</strong>: Full CE diacritic support (ä, ö, ü, ß, é, è, ł, č) across EU cross-border patient summaries.'
           ],
-          css: `/* PocketGull EMA / DIN 1450 Medical Preset */
+          css: `/* PocketGull EMA / DIN 1450 Clinical Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
 .krankenakte, .medikamentenplan {
-  font-family: 'PocketGull', sans-serif;
-  font-feature-settings: "cv08" 1, "ss02" 1;
-  font-variant-numeric: tabular-nums;
+  font-family: 'PocketGull VF', 'PocketGull', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
+  font-variant-numeric: tabular-nums slashed-zero;
 }`
         },
         {
@@ -12997,26 +13293,27 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           name: 'Romania',
           flag: '🇷🇴',
           region: 'europe',
-          x: 540, y: 165,
+          x: 538, y: 168,
           authority: 'ANMDMR / EU HEALTH',
           pop: '19M • Extended Eastern Latin',
           scriptFamily: 'Latin (Romanian Comma-Below)',
           langTag: 'locl: ROM (Ș ș / Ț ț)',
+          motto: 'Sănătate Publică • Authentic Comma-Below Orthography',
           phraseNative: 'Secția de Terapie Intensivă • Sănătate',
           phraseTranslation: 'Intensive Care Unit • Health (Romanian)',
-          dosageAlert: 'DOSE: 250 mg Ceftriaxonă (Comma-Below Accent Clearance)',
+          dosageAlert: 'ORTHOGRAPHY: Ș ș / Ț ț Comma-Below (U+0218–U+021B) vs Cedilla Disambiguation',
           rules: [
-            '<strong>Romanian locl Invariant</strong>: Strict comma-below diacritic rendering (Ș, ș, Ț, ț) instead of incorrect Turkish cedillas (Ş, ş, Ţ, ţ).',
-            '<strong>Zero Collision on Low-Cost Hardware</strong>: 110 UPM descent clearance guarantees comma marks remain visible on low-DPI patient wristband printers.',
+            '<strong>Romanian locl Invariant</strong>: Strict comma-below diacritic rendering (Ș, ș, Ț, ț) instead of incorrect cedillas (Ş, ş, Ţ, ţ).',
+            '<strong>Zero Collision on Low-Cost Hardware</strong>: 110 UPM descent clearance guarantees comma marks remain visible on low-DPI wristband printers.',
             '<strong>OpenType Automation</strong>: Automatic locl tag mapping prevents database identity errors in national EHR registries.'
           ],
-          css: `/* PocketGull Romanian Clinical EHR Preset */
+          css: `/* PocketGull Romanian Clinical EHR Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
 :lang(ro) {
-  font-family: 'PocketGull', sans-serif;
+  font-family: 'PocketGull VF', 'PocketGull', sans-serif;
   font-language-override: "ROM";
-  font-feature-settings: "locl" 1, "cv08" 1;
+  font-feature-settings: "locl" 1, "cv08" 1, "cv05" 1;
 }`
         },
         {
@@ -13024,24 +13321,25 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           name: 'Saudi Arabia & MENA',
           flag: '🇸🇦',
           region: 'mena',
-          x: 605, y: 235,
+          x: 605, y: 232,
           authority: 'SFDA / MOH SAUDI',
-          pop: '36M • Arabic Healthcare Network',
+          pop: '37M • Arabic Healthcare Network',
           scriptFamily: 'Arabic (Authentic Qalam Reed-Pen)',
           langTag: 'locl: ARA / ar-SA',
+          motto: 'رِعَايَة صِحِّيَّة شَامِلَة • Authentic Calligraphic Clarity',
           phraseNative: 'شِفَاء • رِعَايَة • طِوَارِئ • سَلَامَة',
           phraseTranslation: 'Healing • Care • Emergency • Safety (Arabic)',
-          dosageAlert: 'DOSE: ٥٠٠ ملغ باراسيتامول (Arabic-Indic Numeral Clarity)',
+          dosageAlert: 'DISAMBIGUATION: Arabic-Indic Zero (٠) vs Five (٥) • Qalam Diamond Nuqṭa',
           rules: [
             '<strong>Reed-Pen Nuqṭa Angle</strong>: Diacritical dots honor authentic 45°–60° calligraphic diamond angle, avoiding sterile circular blobs.',
-            '<strong>Kashida Baseline Continuity</strong>: Smooth cursive joining ensures clinical drug terms do not break across syllables.',
-            '<strong>Numeral Disambiguation</strong>: Clear optical distinction between Arabic zero (٠) and five (٥) to prevent 10x dosage fatalities.'
+            '<strong>Kashida Baseline Continuity</strong>: Smooth cursive joining ensures clinical terms do not fragment across syllables.',
+            '<strong>Numeral Disambiguation</strong>: Clear optical distinction between Arabic-Indic zero (٠) and five (٥) prevents 10x numeric misreadings.'
           ],
-          css: `/* PocketGull Arabic & MENA Healthcare Preset */
+          css: `/* PocketGull Arabic & MENA Healthcare Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
 [dir="rtl"], :lang(ar) {
-  font-family: 'PocketGull Arabic', 'PocketGull', 'Noto Sans Arabic', sans-serif;
+  font-family: 'PocketGull Arabic', 'PocketGull VF', 'PocketGull', 'Noto Sans Arabic', sans-serif;
   line-height: 1.7;
   font-feature-settings: "cv08" 1;
 }`
@@ -13051,26 +13349,55 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           name: 'India & South Asia',
           flag: '🇮🇳',
           region: 'asia',
-          x: 700, y: 255,
+          x: 695, y: 258,
           authority: 'CDSCO / AYUSH / ABDM',
-          pop: '1.4B • Ayushman Bharat Digital Mission',
+          pop: '1.44B • Ayushman Bharat Digital Mission',
           scriptFamily: 'Indic (Devanagari, Tamil, Telugu, Bengali)',
           langTag: 'locl: HIN / ben / tam / tel',
+          motto: 'सर्वे सन्तु निरामयाः • May All Be Free from Illness',
           phraseNative: 'स्वास्थ्य • आशा • जीवन रक्षा • आरोग्य',
           phraseTranslation: 'Health • Hope • Life Protection • Wellness (Devanagari)',
-          dosageAlert: 'DOSE: 650 mg Paracetamol (Shirorekha Cap-Height Align)',
+          dosageAlert: 'ORTHOGRAPHY: Shirorekha Cap-Height Alignment (y = 700 UPM) • Matra Clearance',
           rules: [
             '<strong>Shirorekha Headline Balance</strong>: Top hanging bar aligns with Latin cap-height (y = 700 UPM) for seamless bilingual charts.',
             '<strong>Conjunct Ligature Integrity</strong>: Critical clinical terms in Hindi, Tamil, and Bengali render without glyph fragmentation.',
             '<strong>ABDM Health Card Optimization</strong>: High optical contrast Sloan ratios ensure QR-code patient cards remain legible after heavy wear.'
           ],
-          css: `/* PocketGull Ayushman Bharat Digital Mission Preset */
+          css: `/* PocketGull Ayushman Bharat Digital Mission Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
 .abdm-health-record {
-  font-family: 'PocketGull', 'Noto Sans Devanagari', sans-serif;
+  font-family: 'PocketGull VF', 'PocketGull', 'Noto Sans Devanagari', sans-serif;
   font-feature-settings: "cv08" 1, "cv05" 1;
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: tabular-nums slashed-zero;
+}`
+        },
+        {
+          id: 'kor',
+          name: 'South Korea',
+          flag: '🇰🇷',
+          region: 'asia',
+          x: 832, y: 196,
+          authority: 'MFDS / HIRA KOREA',
+          pop: '51.7M • Smart Hospital & DUR Network',
+          scriptFamily: 'Hangul Jamo & Syllables + Tabular Latin Telemetry',
+          langTag: 'locl: KOR / ko-KR',
+          motto: '홍익인간 • Universal Human Benefit & Precision Care',
+          phraseNative: '응급의료센터 • 중환자실 • 환자안전',
+          phraseTranslation: 'Emergency Medical Center • Intensive Care Unit • Patient Safety (Korean)',
+          dosageAlert: 'ORTHOGRAPHY: Hangul Syllable Block Counter Clearance • 600 UPM Telemetry Grid',
+          rules: [
+            '<strong>Hangul Jamo Counter Openness</strong>: Spacious interior counters between initial, medial, and final jamo prevent stroke fusion at 12px.',
+            '<strong>HIRA DUR Real-Time Legibility</strong>: Tabular numerals and slashed zeroes align seamlessly with Korean Drug Utilization Review screens.',
+            '<strong>Mixed Hangul-Latin Optical Weight</strong>: Balanced stroke density across Korean clinical headers and English biomarker abbreviations (IL-6, IgA).'
+          ],
+          css: `/* PocketGull South Korea MFDS & HIRA Profile (v3.1.0) */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+:lang(ko) {
+  font-family: 'PocketGull VF', 'PocketGull', 'Noto Sans KR', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
+  font-variant-numeric: tabular-nums slashed-zero;
 }`
         },
         {
@@ -13078,26 +13405,55 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           name: 'Japan',
           flag: '🇯🇵',
           region: 'asia',
-          x: 855, y: 195,
+          x: 862, y: 192,
           authority: 'PMDA / MHLW JAPAN',
           pop: '124M • High-Density Geriatric EHR',
           scriptFamily: 'CJK (Kanji, Hiragana, Katakana) + Full-Width Latin',
           langTag: 'locl: JPN / ja',
+          motto: '医療安全 • Zero-Error Geriatric & Emergency Acuity',
           phraseNative: '救急医療 • 集中治療室 • 回復',
           phraseTranslation: 'Emergency Medicine • ICU • Recovery (Japanese)',
-          dosageAlert: 'DOSE: 20 mg アトルバスタチン (Half/Full-Width Monospace)',
+          dosageAlert: 'ORTHOGRAPHY: 1000 UPM CJK Em-Box Harmony • Half/Full-Width Kana Disambiguation',
           rules: [
             '<strong>1000 UPM Em-Box Harmony</strong>: Latin optotypes align with standard square CJK ideographic grid without vertical clipping.',
-            '<strong>Geriatric Readability</strong>: High optical clarity Sloan ratios assist elderly patients reading pharmaceutical blister packs.',
+            '<strong>Geriatric Readability</strong>: High optical clarity Sloan ratios assist elderly patients reading clinical instruction sheets.',
             '<strong>Kana-Latin Optical Weight</strong>: Fineliner and Bold weights maintain consistent ink density across mixed Japanese/English telemetry.'
           ],
-          css: `/* PocketGull PMDA Japan Healthcare Preset */
+          css: `/* PocketGull PMDA Japan Healthcare Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
 :lang(ja) {
-  font-family: 'PocketGull', 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+  font-family: 'PocketGull VF', 'PocketGull', 'Noto Sans JP', 'Hiragino Sans', sans-serif;
   font-feature-settings: "cv08" 1, "cv05" 1;
   letter-spacing: 0.04em;
+}`
+        },
+        {
+          id: 'aus',
+          name: 'Australia & Aotearoa NZ',
+          flag: '🇦🇺',
+          region: 'asia',
+          x: 842, y: 418,
+          authority: 'TGA / MEDSAFE / ACSQHC',
+          pop: '32M • Trans-Tasman Digital Health & First Nations',
+          scriptFamily: 'Latin (English, Te Reo Māori Macrons ā ē ī ō ū, First Nations)',
+          langTag: 'locl: AUS / NZL / mi',
+          motto: 'Hauora • Holistic Wellbeing & High-UV Field Acuity',
+          phraseNative: 'Hauora • Whānau Ora • Royal Flying Doctor Service',
+          phraseTranslation: 'Holistic Health & Family Wellbeing (Te Reo Māori) • Remote Outback Telemetry',
+          dosageAlert: 'ORTHOGRAPHY: Te Reo Māori Tohutō Macrons (ā, ē, ī, ō, ū) • ACSQHC Tall-Man Standard',
+          rules: [
+            '<strong>Te Reo Māori Tohutō (Macron) Clearance</strong>: Elevated macrons on ā, ē, ī, ō, ū (>= 110 UPM clearance) prevent clipping on Medsafe clinical labels.',
+            '<strong>RFDS Remote Outback Contrast</strong>: High-luminance Sloan 5:1 apertures ensure readability under extreme Australian solar glare and night aviation.',
+            '<strong>ACSQHC National Tall-Man List</strong>: Calibrated uppercase/lowercase contrast supports Australian Commission on Safety and Quality in Health Care standards.'
+          ],
+          css: `/* PocketGull Trans-Tasman TGA & Medsafe Profile (v3.1.0) */
+@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
+
+.hauora-chart, .rfds-telemetry {
+  font-family: 'PocketGull VF', 'PocketGull', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
+  font-variant-numeric: tabular-nums slashed-zero;
 }`
         },
         {
@@ -13105,24 +13461,25 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           name: 'Brazil & Latin America',
           flag: '🇧🇷',
           region: 'americas',
-          x: 320, y: 380,
+          x: 342, y: 365,
           authority: 'ANVISA / SUS BRASIL',
-          pop: '215M • Sistema Único de Saúde (SUS)',
+          pop: '216M • Sistema Único de Saúde (SUS)',
           scriptFamily: 'Latin (Portuguese, Spanish, Guarani, Tupi)',
           langTag: 'locl: BRA / pt-BR / gn',
+          motto: 'Saúde é Direito de Todos • Universal Public Health',
           phraseNative: 'Saúde Pública • Emergência SUS • Cuidado',
           phraseTranslation: 'Public Healthcare • SUS Emergency • Care (Portuguese)',
-          dosageAlert: 'DOSE: 1 g Dipirona (Thermal Wristband High Clearance)',
+          dosageAlert: 'ORTHOGRAPHY: Cedilla (ç) & Nasal Tildes (ã, õ) • 203 DPI Thermal Wristband Clarity',
           rules: [
-            '<strong>Guarani Nasal Tildes</strong>: Complete support for nasal vowels (ã, ẽ, ĩ, õ, ũ, ỹ, g̃) without diacritic clipping in indigenous health clinics.',
-            '<strong>SUS Thermal Wristband Safety</strong>: Slashed zero (0̸) prevents dosage misinterpretation on humid thermal printer rolls.',
-            '<strong>Cedilla & Tilde Optical Balance</strong>: Hand-tuned marker radii ensure ç and ã do not clog with ink on absorbent cardstock.'
+            '<strong>Guarani &amp; Portuguese Nasal Tildes</strong>: Complete support for nasal vowels (ã, ẽ, ĩ, õ, ũ, ỹ, g̃) without diacritic clipping in indigenous health clinics.',
+            '<strong>SUS Thermal Wristband Safety</strong>: Slashed zero (0̸) prevents numeric misinterpretation on humid thermal printer rolls.',
+            '<strong>Cedilla &amp; Tilde Optical Balance</strong>: Hand-tuned marker radii ensure ç and ã do not clog with ink on absorbent cardstock.'
           ],
-          css: `/* PocketGull SUS Brasil Healthcare Preset */
+          css: `/* PocketGull SUS Brasil Healthcare Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
 .prontuario-sus {
-  font-family: 'PocketGull', sans-serif;
+  font-family: 'PocketGull VF', 'PocketGull', sans-serif;
   font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
   font-variant-numeric: tabular-nums slashed-zero;
 }`
@@ -13132,7 +13489,7 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           name: 'Singapore',
           flag: '🇸🇬',
           region: 'asia',
-          x: 775, y: 310,
+          x: 762, y: 312,
           authority: 'HSA / MOH SINGAPORE',
           pop: '5.9M • 4-Language Healthcare Parity',
           scriptFamily: 'Quad-Script (Latin, Chinese Hanzi, Malay, Tamil)',
@@ -13140,19 +13497,19 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           motto: 'Majulah Singapura • Forward Singapore',
           phraseNative: 'Kesihatan • 健康 • சுகாதாரம் • Health',
           phraseTranslation: 'Health & Vitality across 4 Official Languages',
-          dosageAlert: 'DOSE: 500 mg Metformin (Quad-Linguistic Prescription)',
+          dosageAlert: 'ORTHOGRAPHY: Quad-Script 1000 UPM Baseline Lock • Tabular Polyclinic Telemetry',
           rules: [
             '<strong>Quad-Linguistic Parity</strong>: Standard 1000 UPM em-square ensures Latin, Hanzi, and Tamil align seamlessly on polyclinic kiosks.',
             '<strong>Dense Layout Precision</strong>: High-contrast stroke counters maintain optotypic acuity on high-density mobile health apps.',
-            '<strong>HSA Patient Safeguards</strong>: Strict ISMP tall-man distinction prevents fatal look-alike sound-alike drug mix-ups.'
+            '<strong>HSA Patient Safeguards</strong>: Strict ISMP disambiguation (cv08, cv05, ss02) across multilingual clinical summaries.'
           ],
-          css: `/* PocketGull Singapore HSA Quad-Language Preset */
+          css: `/* PocketGull Singapore HSA Quad-Language Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
 .sg-health-hub {
-  font-family: 'PocketGull', 'Noto Sans CJK SC', 'Noto Sans Tamil', sans-serif;
+  font-family: 'PocketGull VF', 'PocketGull', 'Noto Sans CJK SC', 'Noto Sans Tamil', sans-serif;
   font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: tabular-nums slashed-zero;
 }`
         },
         {
@@ -13160,7 +13517,7 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           name: 'Malta',
           flag: '🇲🇹',
           region: 'europe',
-          x: 495, y: 195,
+          x: 504, y: 196,
           authority: 'HEALTHCARE SERVICES MALTA',
           pop: '535K • Semitic-Romance Synthesis',
           scriptFamily: 'Latin (Maltese Barred ħ, Dotted ċ ġ ż)',
@@ -13168,17 +13525,17 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           motto: 'Virtute et Constantia • Strength & Consistency',
           phraseNative: 'Saħħa • Sptar Mater Dei • Kura',
           phraseTranslation: 'Health • Mater Dei Hospital • Care (Maltese)',
-          dosageAlert: 'DOSE: 250 mg Cefuroxime (Barred ħ & Dotted ż Clearance)',
+          dosageAlert: 'ORTHOGRAPHY: Barred Ħ/ħ (>= 1.4x Aperture) & Centered Overdot (Ċ ċ, Ġ ġ, Ż ż)',
           rules: [
             '<strong>Barred Consonant Aperture</strong>: Horizontal crossbar on ħ and Ħ maintains >= 1.4x stroke aperture for thermal readability.',
             '<strong>Diacritical Dot Centering</strong>: High-precision centered tittle dots on ċ, ġ, and ż prevent ink clotting on hospital wristbands.',
             '<strong>National EHR Standardization</strong>: Full locl: MLT support for Mater Dei Hospital digital patient registries.'
           ],
-          css: `/* PocketGull Maltese National Health Preset */
+          css: `/* PocketGull Maltese National Health Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
 :lang(mt) {
-  font-family: 'PocketGull', sans-serif;
+  font-family: 'PocketGull VF', 'PocketGull', sans-serif;
   font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
   letter-spacing: 0.02em;
 }`
@@ -13188,7 +13545,7 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           name: 'Iceland',
           flag: '🇮🇸',
           region: 'europe',
-          x: 410, y: 65,
+          x: 414, y: 92,
           authority: 'ICELANDIC MEDICINES AGENCY (Lyfjastofnun)',
           pop: '390K • Nordic Preservation',
           scriptFamily: 'Latin (Icelandic Eth ð, Thorn þ, Æ æ, Ö ö)',
@@ -13196,18 +13553,18 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           motto: 'Með lögum skal land byggja • With Law Shall Land Be Built',
           phraseNative: 'Heilsugæslan • Bráðamóttaka • Öryggi',
           phraseTranslation: 'Primary Healthcare • Emergency Room • Safety (Icelandic)',
-          dosageAlert: 'DOSE: 100 mg Parasetamól (Eth & Thorn Silhouette Clarity)',
+          dosageAlert: 'ORTHOGRAPHY: Thorn (Þ, þ) & Eth (Ð, ð) Distinct Crossbar & Ascender Silhouettes',
           rules: [
             '<strong>Archaic Rune-Derived Characters</strong>: Distinctive curved ascender on Thorn (Þ, þ) and crossbar on Eth (Ð, ð) eliminate stroke collisions.',
             '<strong>High-Latitude Photopic Contrast</strong>: Optimized Sloan 5:1 luminance ratios maintain reading speed in arctic winter low-light settings.',
             '<strong>Nordic e-Health Interoperability</strong>: Zero-CLS metric parity across Icelandic and Scandinavian EHR databases.'
           ],
-          css: `/* PocketGull Icelandic Healthcare Preset */
+          css: `/* PocketGull Icelandic Healthcare Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
 :lang(is) {
-  font-family: 'PocketGull', sans-serif;
-  font-feature-settings: "cv08" 1, "cv05" 1;
+  font-family: 'PocketGull VF', 'PocketGull', sans-serif;
+  font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
 }`
         },
         {
@@ -13215,7 +13572,7 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           name: 'Rwanda',
           flag: '🇷🇼',
           region: 'mena',
-          x: 560, y: 320,
+          x: 558, y: 315,
           authority: 'RWANDA FDA / MOH',
           pop: '14M • Digital Health Leader (Kinyarwanda)',
           scriptFamily: 'Latin Extended (Kinyarwanda, French, English, Swahili)',
@@ -13223,17 +13580,17 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           motto: 'Ubumwe, Umurimo, Gukunda Igihugu • Unity, Work, Patriotism',
           phraseNative: 'Ubuzima • Ubuvuzi Bwihuse • Kwivuza',
           phraseTranslation: 'Health • Emergency Medical Care • Recovery (Kinyarwanda)',
-          dosageAlert: 'DOSE: 20 mg Artemether (Rural Drone Health Delivery)',
+          dosageAlert: 'SAFEGUARD: High-Glare Equatorial Acuity • 15–25 KB SMoE Low-Bandwidth Subset',
           rules: [
-            '<strong>Drone & Field Triage Optimization</strong>: High optical acuity enables field doctors to read drug packs under harsh equatorial sunlight.',
+            '<strong>Field Triage Optimization</strong>: High optical acuity enables field clinicians to read labels under harsh equatorial sunlight.',
             '<strong>Ultra-Light SMoE Delivery</strong>: 15–25 KB subset saves emergency satellite bandwidth for solar-powered rural clinics.',
             '<strong>East African Community Parity</strong>: Harmonized typographic rhythm across Kinyarwanda, Swahili, and French medical records.'
           ],
-          css: `/* PocketGull Rwanda MOH & Digital Health Preset */
+          css: `/* PocketGull Rwanda MOH & Digital Health Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
 .ubuzima-record {
-  font-family: 'PocketGull', sans-serif;
+  font-family: 'PocketGull VF', 'PocketGull', sans-serif;
   font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
 }`
         },
@@ -13242,25 +13599,25 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           name: 'Jamaica & Caribbean',
           flag: '🇯🇲',
           region: 'americas',
-          x: 245, y: 265,
+          x: 248, y: 256,
           authority: 'CARPHA / MOHW JAMAICA',
           pop: '2.8M • Caribbean Community (CARICOM)',
           scriptFamily: 'Latin (English, Jamaican Patois)',
           langTag: 'locl: JAM / jam',
           motto: 'Out of Many, One People',
-          phraseNative: 'Good Health &amp; Strength • Clinic Care',
+          phraseNative: 'Good Health & Strength • Clinic Care',
           phraseTranslation: 'Community Wellness • Caribbean Public Health Agency',
-          dosageAlert: 'DOSE: 500 mg Amoxicillin (High Humidity Resilient)',
+          dosageAlert: 'SAFEGUARD: 25 UPM Corner Fillets (Anti-Bleed Thermal Paper) • Sloan 5:1 Acuity',
           rules: [
-            '<strong>Tropical Humidity Resilience</strong>: Felt-marker 25 UPM fillets prevent ink bleeding on thermal pharmacy prescription rolls in humid clinics.',
-            '<strong>Sloan 5:1 Community Legibility</strong>: Calibrated for elderly clinic attendees on outpatient prescription instructions.',
+            '<strong>Tropical Humidity Resilience</strong>: Felt-marker 25 UPM fillets prevent ink bleeding on thermal clinic rolls in humid coastal environments.',
+            '<strong>Sloan 5:1 Community Legibility</strong>: Calibrated for elderly clinic attendees reading outpatient health instructions.',
             '<strong>CARPHA Island Interoperability</strong>: Unified typographic baseline across all CARICOM member territories.'
           ],
-          css: `/* PocketGull CARPHA / Jamaica MOHW Preset */
+          css: `/* PocketGull CARPHA / Jamaica MOHW Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
-.caribbean-rx-label {
-  font-family: 'PocketGull', sans-serif;
+.caribbean-health-label {
+  font-family: 'PocketGull VF', 'PocketGull', sans-serif;
   font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
 }`
         },
@@ -13270,7 +13627,7 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           flag: '🌊',
           region: 'indigenous',
           subRegion: 'americas',
-          x: 135, y: 180,
+          x: 138, y: 162,
           authority: 'UNDRIP ACCORD / SALISHAN HEALTH',
           pop: 'Coast Salish Nations • Salish Sea Basin',
           scriptFamily: 'Salishan Latin (Combining Marks & GPOS Anchors)',
@@ -13278,17 +13635,17 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           motto: 'ʔiɬ tə swatixʷtət • Our Land, Our Life',
           phraseNative: 'ʔəyʔ šxʷəli • x̌ʷəl̕č (Good Breath / Spirit • Salish Sea)',
           phraseTranslation: 'Holistic Wellness • Zero Colliding Combining Marks',
-          dosageAlert: 'DISAMBIGUATION: x̌ʷ vs q̓ʷ optical clearance, ʔ glottal stop',
+          dosageAlert: 'ORTHOGRAPHY: x̌ʷ vs q̓ʷ GPOS mark/mkmk Anchors • First-Class Glottal Stop (ʔ)',
           rules: [
             '<strong>UNDRIP Article 13 &amp; 14 Sovereignty</strong>: First-class glyph treatment for phonetic apostrophe/glottal stop (ʔ, ʡ) and barred/ejective consonants without borrowing Latin substitutes.',
             '<strong>Zero-Collision GPOS mark/mkmk Anchors</strong>: Stacking caron-hachek (x̌) and labializer (ʷ) eliminates the +322 UPM rightward displacement error where the ejective comma collides with the labializer.',
-            '<strong>Sloan Optotype Ratio for Elder Care</strong>: High-contrast 5:1 Sloan ratios protect elders reading clinic prescription labels in community health centers.'
+            '<strong>Sloan Optotype Ratio for Elder Care</strong>: High-contrast 5:1 Sloan ratios protect elders reading clinic labels in community health centers.'
           ],
-          css: `/* PocketGull Coast Salish / Lushootseed Preset */
+          css: `/* PocketGull Coast Salish / Lushootseed Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
 .salish-clinic-label {
-  font-family: 'PocketGull', sans-serif;
+  font-family: 'PocketGull VF', 'PocketGull', sans-serif;
   font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1, "mark" 1, "mkmk" 1;
 }`
         },
@@ -13298,7 +13655,7 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           flag: '𐒰',
           region: 'indigenous',
           subRegion: 'americas',
-          x: 195, y: 215,
+          x: 196, y: 204,
           authority: 'WAHZHAZHE HEALTH / OSAGE CONGRESS',
           pop: '25,000+ Citizens • Osage Nation Reservation',
           scriptFamily: 'Osage Script (U+104B0–U+104FB, Format 12 cmap)',
@@ -13310,13 +13667,13 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           rules: [
             '<strong>SMP Format 12 Native cmap Support</strong>: All 72 Osage characters (U+104B0–U+104FB) natively mapped and drawn with felt-marker stroke integrity across all font cuts.',
             '<strong>Bicameral Casing &amp; Accent Anchoring</strong>: Uppercase and lowercase pairs maintain strict optical x-height harmonization with Latin optotypes.',
-            '<strong>EHR &amp; Tribal Clinic Ready</strong>: Ensures zero tofu boxes on health portal records, prescription bottles, and tribal governance documents.'
+            '<strong>EHR &amp; Tribal Clinic Ready</strong>: Ensures zero tofu boxes on health portal records, community signage, and tribal governance documents.'
           ],
-          css: `/* PocketGull Osage Nation Healthcare Preset */
+          css: `/* PocketGull Osage Nation Healthcare Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
 .osage-health-record {
-  font-family: 'PocketGull', sans-serif;
+  font-family: 'PocketGull VF', 'PocketGull', sans-serif;
   font-feature-settings: "cv08" 1, "cv05" 1;
 }`
         },
@@ -13326,7 +13683,7 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           flag: '🍁',
           region: 'indigenous',
           subRegion: 'americas',
-          x: 235, y: 105,
+          x: 242, y: 92,
           authority: 'INUIT TAPIRIIT KANATAMI / NUNAVUT HEALTH',
           pop: '70,000+ Inuit across 4 Arctic Regions',
           scriptFamily: 'Unified Canadian Aboriginal Syllabics (U+1400–U+167F)',
@@ -13340,11 +13697,11 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
             '<strong>Finals &amp; Super-Script Terminals</strong>: Elevated small terminals (ᐟ, ᐠ, ᐨ) preserve Sloan 5:1 legibility without blurring into primary syllabic glyphs.',
             '<strong>Cold-Climate &amp; Field Clinic Contrast</strong>: High-contrast stroke junctions resist optical blooming on low-power outdoor telehealth screens across Nunavut.'
           ],
-          css: `/* PocketGull Inuit Nunangat Syllabics Preset */
+          css: `/* PocketGull Inuit Nunangat Syllabics Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
-.inuit-rx-label {
-  font-family: 'PocketGull', sans-serif;
+.inuit-health-label {
+  font-family: 'PocketGull VF', 'PocketGull', sans-serif;
   font-feature-settings: "cv08" 1, "cv05" 1;
 }`
         },
@@ -13354,13 +13711,13 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           flag: '🪶',
           region: 'indigenous',
           subRegion: 'americas',
-          x: 185, y: 140,
+          x: 182, y: 132,
           authority: 'CREE BOARD OF HEALTH / JAMES BAY',
           pop: '350,000+ Cree across Canada',
           scriptFamily: 'Cree Syllabics & Standard Roman Orthography (SRO)',
           langTag: 'locl: CRE / cr',
-          motto: 'ᒥᔪ ᐱᒫᑎᓯウィン • Miyo-pimātisiwin (The Good Life)',
-          phraseNative: 'ᒥᔪ ᐱᒫᑎᓯウィン • miyo-pimātisiwin',
+          motto: 'ᒥᔪ ᐱᒫᑎᓯᐏန် • Miyo-pimātisiwin (The Good Life)',
+          phraseNative: 'ᒥᔪ ᐱᒫᑎᓯᐏန် • miyo-pimātisiwin',
           phraseTranslation: 'Holistic Indigenous Health & Community Wholeness',
           dosageAlert: 'ORTHOGRAPHY: ᒪ ᒣ ᒥ ᒧ (Syllabic Vowels) • ā, ē, ī, ō SRO Elevated Macrons',
           rules: [
@@ -13368,11 +13725,11 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
             '<strong>Plains &amp; Woods Syllabic Balance</strong>: Optical center-of-mass tuning prevents dot diacritics (w-dot, vowel length) from disappearing at small print sizes.',
             '<strong>Bilingual James Bay EHR Standard</strong>: Synchronized vertical metrics between Cree Syllabics and Latin prevent erratic line shifts in medical records.'
           ],
-          css: `/* PocketGull Cree Health Board Preset */
+          css: `/* PocketGull Cree Health Board Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
 .cree-health-chart {
-  font-family: 'PocketGull', sans-serif;
+  font-family: 'PocketGull VF', 'PocketGull', sans-serif;
   font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
 }`
         },
@@ -13382,7 +13739,7 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           flag: '⭐',
           region: 'indigenous',
           subRegion: 'americas',
-          x: 220, y: 230,
+          x: 222, y: 208,
           authority: 'CHEROKEE NATION HEALTH SERVICES (CNHS)',
           pop: '450,000+ Citizens • Tahlequah Sovereign Capital',
           scriptFamily: 'Cherokee Syllabary (U+13A0–U+13FF, U+AB70–U+ABBF)',
@@ -13394,13 +13751,13 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           rules: [
             '<strong>Sequoyah Syllabic Balance</strong>: Preserves the authentic 1821 felt-marker handwriting origins without mechanical warping into Latin typography.',
             '<strong>Bicameral Lowercase Support (U+AB70–U+ABBF)</strong>: Full lowercase Cherokee support with matched stroke weights for EHR clinical body copy.',
-            '<strong>CNHS Health Informatics Parity</strong>: Zero character loss across Cherokee Nation hospital networks and outpatient pharmacy terminals.'
+            '<strong>CNHS Health Informatics Parity</strong>: Zero character loss across Cherokee Nation hospital networks and outpatient clinic terminals.'
           ],
-          css: `/* PocketGull Cherokee Nation Health Preset */
+          css: `/* PocketGull Cherokee Nation Health Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
-.cherokee-health-rx {
-  font-family: 'PocketGull', sans-serif;
+.cherokee-health-record {
+  font-family: 'PocketGull VF', 'PocketGull', sans-serif;
   font-feature-settings: "cv08" 1, "cv05" 1;
 }`
         },
@@ -13410,7 +13767,7 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           flag: '☀️',
           region: 'indigenous',
           subRegion: 'americas',
-          x: 165, y: 225,
+          x: 165, y: 206,
           authority: 'NAVAJO NATION DIV. OF HEALTH / IHS',
           pop: '400,000+ Citizens • 27,000 sq mi Sovereign Nation',
           scriptFamily: 'Navajo Latin (High-Tone & Nasal Ogonek Diacritics)',
@@ -13418,17 +13775,17 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           motto: 'Hózhǫ́ Náhásdlį́į́ʼ • Walk in Beauty & Wholeness',
           phraseNative: 'Hózhǫ́ogo Iinaʼ • Kʼé (Walk in Beauty & Kinship)',
           phraseTranslation: 'Harmonious Life & Relations • Diné Health Standard',
-          dosageAlert: 'DISAMBIGUATION: ł (barred l) vs t • ą́ / ę́ / į́ / ǫ́ stacked marks',
+          dosageAlert: 'ORTHOGRAPHY: Ł / ł (Barred L >= 1.4x Aperture) • ą́, ę́, į́, ǫ́ (>= 110 UPM Stacked Clearance)',
           rules: [
-            '<strong>Stacked High-Tone Nasal Clearance (>= 110 UPM)</strong>: Acute accents stacked over ogonek-hooked vowels (ą́, ę́, į́, ǫ́) maintain zero ink collision under damp thermal print.',
-            '<strong>Barred Consonant Aperture (Ł, ł)</strong>: Crossbar optical aperture is 1.4x standard stroke width, eliminating confusion with \'t\' or \'l\' in emergency dosage scripts.',
-            '<strong>Hózhǫ́ Holistic Legibility</strong>: Designed for rural Diné clinics, elder community transport, and Indian Health Service mobile clinics.'
+            '<strong>Stacked High-Tone Nasal Clearance (>= 110 UPM)</strong>: Acute accents stacked over ogonek-hooked vowels (ą́, ę́, į́, ǫ́) maintain zero ink collision under thermal print.',
+            '<strong>Barred Consonant Aperture (Ł, ł)</strong>: Crossbar optical aperture is 1.4x standard stroke width, eliminating confusion with \'t\' or \'l\' in clinical records.',
+            '<strong>Hózhǫ́ Holistic Legibility</strong>: Designed for rural Diné clinics, elder community transport, and sovereign health centers.'
           ],
-          css: `/* PocketGull Navajo Nation Clinical Preset */
+          css: `/* PocketGull Navajo Nation Clinical Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
-.dine-clinic-rx {
-  font-family: 'PocketGull', sans-serif;
+.dine-clinic-record {
+  font-family: 'PocketGull VF', 'PocketGull', sans-serif;
   font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
 }`
         },
@@ -13438,7 +13795,7 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           flag: 'ⵣ',
           region: 'indigenous',
           subRegion: 'mena',
-          x: 465, y: 240,
+          x: 465, y: 226,
           authority: 'IRCAM / NORTH AFRICAN PUBLIC HEALTH',
           pop: '35M+ Imazighen across Tamazgha (North Africa)',
           scriptFamily: 'Neo-Tifinagh (U+2D30–U+2D7F)',
@@ -13450,13 +13807,13 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           rules: [
             '<strong>Authentic Geometric Archetypes</strong>: Circular, bi-symmetrical, and crossbar primitives engineered to preserve historical North African epigraphic balance.',
             '<strong>Equal-Aperture Legibility</strong>: Tifinagh letterforms (ⵢ, ⵣ, ⴹ, ⵟ) calibrated against Latin Sloan optotypes to ensure equal clarity on hospital triage charts.',
-            '<strong>Multi-Lingual Clinical Concordance</strong>: Harmonized cap-heights with French and Arabic for trilingual prescription pads across the Maghreb.'
+            '<strong>Multi-Lingual Clinical Concordance</strong>: Harmonized cap-heights with French and Arabic for trilingual health records across the Maghreb.'
           ],
-          css: `/* PocketGull Amazigh / Tifinagh Healthcare Preset */
+          css: `/* PocketGull Amazigh / Tifinagh Healthcare Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
 .tifinagh-clinic-label {
-  font-family: 'PocketGull', sans-serif;
+  font-family: 'PocketGull VF', 'PocketGull', sans-serif;
   font-feature-settings: "cv08" 1, "cv05" 1;
 }`
         },
@@ -13466,7 +13823,7 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           flag: '🏹',
           region: 'indigenous',
           subRegion: 'americas',
-          x: 300, y: 420,
+          x: 312, y: 405,
           authority: 'GUARANI HEALTH COUNCIL / MERCOSUR',
           pop: '12M+ Speakers across South America',
           scriptFamily: 'Guarani Latin (Nasal Tildes: ã, ẽ, ĩ, õ, ũ, ỹ, g̃)',
@@ -13480,11 +13837,11 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
             '<strong>Glottal Puso (ʼ) Letter Status</strong>: The puso (U+02BC) is engineered as a first-class alphabetic consonant with full advance width rather than punctuation.',
             '<strong>MERCOSUR Border Health Standard</strong>: Ensures seamless typographic legibility across bilingual Paraguayan and Brazilian clinic records.'
           ],
-          css: `/* PocketGull Guarani Healthcare Preset */
+          css: `/* PocketGull Guarani Healthcare Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
-.guarani-health-rx {
-  font-family: 'PocketGull', sans-serif;
+.guarani-health-record {
+  font-family: 'PocketGull VF', 'PocketGull', sans-serif;
   font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;
 }`
         },
@@ -13494,7 +13851,7 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           flag: '📜',
           region: 'indigenous',
           subRegion: 'mena',
-          x: 445, y: 295,
+          x: 446, y: 278,
           authority: 'WAHO / N’KO ACADEMY',
           pop: '40M+ Manding & Fulani Speakers (West Africa)',
           scriptFamily: 'N’Ko (U+07C0–U+07FF) & Adlam (U+1E900–U+1E95F)',
@@ -13508,11 +13865,11 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
             '<strong>Tone Diacritic Stacking</strong>: Clear 95 UPM vertical separation between base consonants and short/long tone accents prevents misreadings in clinical instructions.',
             '<strong>Cross-Border WAHO Telemedicine</strong>: Empowers rural community health workers across Guinea, Mali, Côte d\'Ivoire, and Senegal.'
           ],
-          css: `/* PocketGull West African Scripts Preset */
+          css: `/* PocketGull West African Scripts Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
 .nko-health-guide {
-  font-family: 'PocketGull', sans-serif;
+  font-family: 'PocketGull VF', 'PocketGull', sans-serif;
   direction: rtl;
 }`
         },
@@ -13521,7 +13878,7 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           name: 'Universal Access',
           flag: '🌐',
           region: 'universal',
-          x: 500, y: 310,
+          x: 500, y: 260,
           authority: 'ISO 11548 / WHO TELEMETRY',
           pop: '8.1B • Global Accessibility & Telemetry',
           scriptFamily: 'Unicode Braille (U+2800–U+28FF) + ASL + ICU Waveforms',
@@ -13529,13 +13886,13 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           motto: 'Nihil De Nobis, Sine Nobis • Nothing About Us Without Us',
           phraseNative: '⠓⠑⠁⠇⠞⠓ • ⠎⠁⠋⠑⠞⠽ (Health • Safety)',
           phraseTranslation: 'Tactile 8-Dot Braille • ISO/TR 11548 & ISO 17049 Standard',
-          dosageAlert: 'WAVEFORM: ╭─╮ sub-cell ECG telemetry & ICU box drawing',
+          dosageAlert: 'WAVEFORM: ╭─╮ sub-cell ECG telemetry & ICU box drawing (Fixed 600 UPM)',
           rules: [
             '<strong>ISO Standard Tactile Dome</strong>: r = 60 UPM, 2.5 mm dot pitch, grounded on baseline (y = 0) with zero floating cells.',
             '<strong>Fixed 600 UPM Monospace</strong>: True rounded corners (╭, ╮, ╯, ╰) for flicker-free ICU vitals monitors.',
             '<strong>Zero-Egress SMoE Subsetting</strong>: Rural field clinics download only 15–25 KB per script, preserving emergency satellite bandwidth.'
           ],
-          css: `/* PocketGull Universal Tactile & ICU Telemetry Preset */
+          css: `/* PocketGull Universal Tactile & ICU Telemetry Profile (v3.1.0) */
 @import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');
 
 .braille-signage, .icu-telemetry {
@@ -13545,6 +13902,43 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
 }`
         }
       ];
+      window.GLOBAL_HEALTH_ATLAS = GLOBAL_HEALTH_ATLAS;
+
+      const ATLAS_WGS84_COORDS = {
+        can: { lat: 45.4215, lng: -75.6972 },
+        usa: { lat: 38.9072, lng: -77.0369 },
+        mex: { lat: 19.4326, lng: -99.1332 },
+        gbr: { lat: 51.5074, lng: -0.1278 },
+        deu: { lat: 50.7374, lng: 7.0982 },
+        rou: { lat: 44.4268, lng: 26.1025 },
+        sau: { lat: 24.7136, lng: 46.6753 },
+        ind: { lat: 28.6139, lng: 77.2090 },
+        kor: { lat: 37.5665, lng: 126.9780 },
+        jpn: { lat: 35.6762, lng: 139.6503 },
+        aus: { lat: -35.2809, lng: 149.1300 },
+        bra: { lat: -15.7975, lng: -47.8919 },
+        sgp: { lat: 1.3521, lng: 103.8198 },
+        mlt: { lat: 35.8997, lng: 14.5146 },
+        isl: { lat: 64.1466, lng: -21.9426 },
+        rwa: { lat: -1.9441, lng: 30.0619 },
+        jam: { lat: 17.9714, lng: -76.7936 },
+        sal: { lat: 47.6062, lng: -122.3321 },
+        osa: { lat: 36.6673, lng: -96.3372 },
+        inu: { lat: 63.7467, lng: -68.5170 },
+        cre: { lat: 53.7609, lng: -98.8139 },
+        chr: { lat: 35.9154, lng: -94.9700 },
+        nav: { lat: 35.6811, lng: -109.0526 },
+        ber: { lat: 33.9716, lng: -6.8498 },
+        gug: { lat: -25.2637, lng: -57.5759 },
+        nqo: { lat: 10.3712, lng: -9.3057 },
+        uni: { lat: 46.2044, lng: 6.1432 }
+      };
+      GLOBAL_HEALTH_ATLAS.forEach(c => {
+        if (ATLAS_WGS84_COORDS[c.id]) {
+          c.lat = ATLAS_WGS84_COORDS[c.id].lat;
+          c.lng = ATLAS_WGS84_COORDS[c.id].lng;
+        }
+      });
 
       function initWorldMapStudio() {
         const svg = document.getElementById('worldMapSvg');
@@ -13552,24 +13946,329 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
         const pillBar = document.getElementById('countryPillBar');
         const hoverLabel = document.getElementById('mapHoverLabel');
         const filterBtns = document.querySelectorAll('.map-filter-btn');
+        const landPaths = document.querySelectorAll('#worldMapSvg .map-land');
         const btnCopy = document.getElementById('btnCopyPrescription');
+        const btnFormatCss = document.getElementById('btnFormatCss');
+        const btnFormatJson = document.getElementById('btnFormatJson');
 
         if (!svg || !pinLayer || !pillBar) return;
 
         let activeCountryId = 'can';
+        let activeExportFormat = 'css';
 
         const mapContainer = document.getElementById('mapCanvasContainer');
+        const gmapsContainer = document.getElementById('googleMapCanvasContainer');
+        const gmapsCanvas = document.getElementById('googleMapCanvas');
+        const gmapsKeyInput = document.getElementById('gmapsApiKeyInput');
+        const btnSaveGmapsKey = document.getElementById('btnSaveGmapsKey');
+        const btnClearGmapsKey = document.getElementById('btnClearGmapsKey');
+        const gmapsStatusBadge = document.getElementById('gmapsStatusBadge');
         const pavilionContainer = document.getElementById('vexillologicalPavilionContainer');
         const flagGrid = document.getElementById('flagGalleryGrid');
+        const viewSwitchWrittenLang = document.getElementById('viewSwitchWrittenLang');
         const viewSwitchMap = document.getElementById('viewSwitchMap');
+        const viewSwitchGoogleMap = document.getElementById('viewSwitchGoogleMap');
         const viewSwitchPavilion = document.getElementById('viewSwitchPavilion');
 
         let currentView = 'map';
         let currentRegionFilter = 'all';
+        let gmapInstance = null;
+        let gmapMarkers = [];
+        let gmapsLoaderBootstrapped = false;
+
+        const WRITTEN_LANGUAGE_METADATA = {
+          can: { glyph: 'ᐊ', title: 'Inuktitut Syllabics & Bilingual Latin', sub: 'Unified Canadian Syllabics & Latin' },
+          usa: { glyph: 'Aa', title: 'English & Spanish (High-Clarity Latin)', sub: 'Sloan 5:1 & Tall-Man Casing' },
+          mex: { glyph: 'Ꞌ', title: 'Spanish, Nahuatl & Yucatec Maya', sub: 'Saltillo Glottal & Macron Latin' },
+          gbr: { glyph: 'Ŵ', title: 'English, Welsh (Cymraeg) & Gaelic', sub: 'Circumflex Headroom Latin' },
+          deu: { glyph: 'ẞ', title: 'German, French, Polish & Czech', sub: 'DIN 1450 Extended European Latin' },
+          rou: { glyph: 'Ș', title: 'Romanian Comma-Below Latin', sub: 'Authentic Ș ș / Ț ț Orthography' },
+          sau: { glyph: 'ع', title: 'Arabic Reed-Pen Script (العربية)', sub: 'Right-to-Left Qalam Calligraphy' },
+          ind: { glyph: 'अ', title: 'Devanagari, Tamil, Telugu & Bengali', sub: 'South Asian Shirorekha & Matras' },
+          kor: { glyph: '한', title: 'Korean Hangul Syllables (한글)', sub: 'Spacious Jamo Counter Geometry' },
+          jpn: { glyph: '文', title: 'Japanese Kanji, Hiragana & Katakana', sub: '1000 UPM Square Em-Box Harmony' },
+          aus: { glyph: 'Ā', title: 'Te Reo Māori (Tohutō) & English', sub: 'Elevated Macron Vowel Clarity' },
+          bra: { glyph: 'Ã', title: 'Portuguese & Guarani Nasal Latin', sub: 'Tilde & Cedilla Thermal Clarity' },
+          sgp: { glyph: '四', title: 'Malay, Chinese, Tamil & English', sub: '4-Script Shared Baseline' },
+          mlt: { glyph: 'Ħ', title: 'Maltese Barred Ħ & Dotted Latin', sub: 'Semitic-Romance Orthography' },
+          isl: { glyph: 'Þ', title: 'Icelandic Thorn (Þ) & Eth (Ð)', sub: 'Nordic Rune-Derived Latin' },
+          rwa: { glyph: 'Rw', title: 'Kinyarwanda, Kiswahili & French', sub: 'High-Glare Equatorial Latin' },
+          jam: { glyph: 'Jm', title: 'English & Jamaican Patwa', sub: 'Anti-Bleed Warm Felt-Marker Latin' },
+          sal: { glyph: 'ʔ', title: 'Coast Salish & Lushootseed (dxʷləšucid)', sub: 'Stacked Combining Marks & Glottal ʔ' },
+          osa: { glyph: '𐒰', title: 'Osage Script (Wahzhazhe)', sub: '72-Character Bicameral Indigenous Script' },
+          inu: { glyph: 'ᐃ', title: 'Inuktitut Syllabics (ᐃᓄᒃᑎᑐᑦ)', sub: 'Rotational Syllabic Geometry' },
+          cre: { glyph: 'ᓀ', title: 'Plains & Woods Cree (ᓀᐦᐃᔭᐍᐏန်)', sub: 'Syllabics & Macron Roman (SRO)' },
+          chr: { glyph: 'Ꮳ', title: 'Cherokee Syllabary (ᏣᎳᎩ)', sub: 'Sequoyah 85-Syllable Writing System' },
+          nav: { glyph: 'Ł', title: 'Diné Bizaad / Navajo (Hózhǫ́)', sub: 'Stacked High-Tone & Nasal Ogonek' },
+          ber: { glyph: 'ⵣ', title: 'Amazigh Neo-Tifinagh (ⵜⴰⵎⴰⵣⵉⵖⵜ)', sub: 'Geometric North African Alphabet' },
+          gug: { glyph: 'G̃', title: 'Avañe’ẽ / Guarani (Tekoporã)', sub: 'Nasal Tildes & Glottal Puso (ʼ)' },
+          nqo: { glyph: 'ߒ', title: 'Manding N’Ko & Fulani Adlam', sub: 'Right-to-Left West African Scripts' },
+          uni: { glyph: '⠇', title: 'Universal 8-Dot Tactile Braille', sub: 'ISO 11548 Fingertip Dot Spacing' }
+        };
+
+        function getDisplayEmblem(c) {
+          if (currentView === 'languages' && WRITTEN_LANGUAGE_METADATA[c.id]) {
+            return WRITTEN_LANGUAGE_METADATA[c.id].glyph;
+          }
+          return c.flag;
+        }
+
+        function getDisplayTitle(c) {
+          if (currentView === 'languages' && WRITTEN_LANGUAGE_METADATA[c.id]) {
+            return WRITTEN_LANGUAGE_METADATA[c.id].title;
+          }
+          return c.name;
+        }
+
+        function getDisplaySub(c) {
+          if (currentView === 'languages' && WRITTEN_LANGUAGE_METADATA[c.id]) {
+            return WRITTEN_LANGUAGE_METADATA[c.id].sub;
+          }
+          return c.pop.split('•')[0].trim();
+        }
+
+        const GMAPS_STORAGE_KEY = 'POCKETGULL_GMAPS_KEY';
+
+        function getGmapsKey() {
+          try {
+            const params = new URLSearchParams(window.location.search);
+            const urlKey = params.get('gmapsKey');
+            if (urlKey && urlKey.trim()) {
+              localStorage.setItem(GMAPS_STORAGE_KEY, urlKey.trim());
+              return urlKey.trim();
+            }
+            return (localStorage.getItem(GMAPS_STORAGE_KEY) || '').trim();
+          } catch (_) {
+            return '';
+          }
+        }
+
+        function bootstrapGoogleMapsLoader(apiKey) {
+          if (window.google && window.google.maps && typeof window.google.maps.importLibrary === 'function') {
+            return;
+          }
+          if (gmapsLoaderBootstrapped) return;
+          gmapsLoaderBootstrapped = true;
+          ((g) => {
+            var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window;
+            b = b[c] || (b[c] = {});
+            var d = b.maps || (b.maps = {}), r = new Set(), e = new URLSearchParams(),
+              u = () => h || (h = new Promise(async (f, n) => {
+                await (a = m.createElement("script"));
+                e.set("libraries", [...r] + "");
+                for (k in g) e.set(k.replace(/[A-Z]/g, (t) => "_" + t[0].toLowerCase()), g[k]);
+                e.set("callback", c + ".maps." + q);
+                a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+                d[q] = f;
+                a.onerror = () => (h = n(Error(p + " could not load.")));
+                a.nonce = m.querySelector("script[nonce]")?.nonce || "";
+                m.head.append(a);
+              }));
+            d[l] ? console.warn(p + " only loads once. Ignoring:", g) : (d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)));
+          })({
+            key: apiKey,
+            v: "weekly"
+          });
+        }
+
+        async function renderGoogleMapMarkers(regionFilter = 'all') {
+          if (!gmapInstance || !window.google || !window.google.maps) return;
+          const { AdvancedMarkerElement } = await window.google.maps.importLibrary("marker");
+
+          gmapMarkers.forEach(item => {
+            if (item.marker) item.marker.map = null;
+          });
+          gmapMarkers = [];
+
+          GLOBAL_HEALTH_ATLAS.forEach(c => {
+            if (typeof c.lat !== 'number' || typeof c.lng !== 'number') return;
+            if (regionFilter !== 'all') {
+              const match = (c.region === regionFilter) || (c.subRegion === regionFilter);
+              if (!match) return;
+            }
+
+            const isIndig = c.region === 'indigenous';
+            const isActive = c.id === activeCountryId;
+
+            const badgeEl = document.createElement('div');
+            badgeEl.className = 'gmap-custom-marker';
+            badgeEl.dataset.id = c.id;
+            badgeEl.style.cssText = [
+              'display: inline-flex',
+              'align-items: center',
+              'gap: 4px',
+              'padding: 3px 8px',
+              'border-radius: 999px',
+              'font-family: "PocketGull Mono", monospace',
+              'font-size: 11px',
+              'font-weight: 700',
+              'color: #ffffff',
+              `background: ${isActive ? 'rgba(6, 182, 212, 0.95)' : 'rgba(10, 18, 32, 0.92)'}`,
+              `border: 1.5px solid ${isIndig ? '#f59e0b' : '#38bdf8'}`,
+              'box-shadow: 0 2px 8px rgba(0, 0, 0, 0.65)',
+              'cursor: pointer',
+              'white-space: nowrap'
+            ].join(';');
+
+            const flagSpan = document.createElement('span');
+            flagSpan.textContent = c.flag;
+            const labelSpan = document.createElement('span');
+            labelSpan.textContent = c.name;
+            badgeEl.append(flagSpan, labelSpan);
+
+            const marker = new AdvancedMarkerElement({
+              map: gmapInstance,
+              position: { lat: c.lat, lng: c.lng },
+              title: `${c.name} (${c.authority})`,
+              content: badgeEl,
+              gmpClickable: true
+            });
+
+            marker.addListener('gmp-click', () => {
+              selectCountry(c.id, true);
+            });
+
+            gmapMarkers.push({ id: c.id, marker, badgeEl, isIndig });
+          });
+        }
+
+        async function initGoogleMapsLive() {
+          if (!gmapsCanvas) return;
+          const apiKey = getGmapsKey();
+          if (gmapsKeyInput && apiKey && !gmapsKeyInput.value) {
+            gmapsKeyInput.value = apiKey;
+          }
+          if (!apiKey) {
+            if (gmapsStatusBadge) {
+              gmapsStatusBadge.textContent = '🔑 Enter Google Maps API Key to activate live map';
+              gmapsStatusBadge.style.color = '#f59e0b';
+            }
+            return;
+          }
+
+          try {
+            if (gmapsStatusBadge) {
+              gmapsStatusBadge.textContent = '⏳ Loading Google Maps JS API...';
+              gmapsStatusBadge.style.color = '#38bdf8';
+            }
+            bootstrapGoogleMapsLoader(apiKey);
+            const { Map } = await window.google.maps.importLibrary("maps");
+            await window.google.maps.importLibrary("marker");
+
+            if (!gmapInstance) {
+              const activeC = GLOBAL_HEALTH_ATLAS.find(c => c.id === activeCountryId) || GLOBAL_HEALTH_ATLAS[0];
+              gmapsCanvas.replaceChildren();
+              gmapInstance = new Map(gmapsCanvas, {
+                center: { lat: activeC.lat || 45.4215, lng: activeC.lng || -75.6972 },
+                zoom: 3,
+                mapId: 'DEMO_MAP_ID',
+                internalUsageAttributionIds: ['gmp_git_agentskills_v1'],
+                mapTypeControl: false,
+                streetViewControl: false,
+                fullscreenControl: true
+              });
+            }
+
+            await renderGoogleMapMarkers(currentRegionFilter);
+
+            if (gmapsStatusBadge) {
+              gmapsStatusBadge.textContent = '✓ Google Maps Live Active (AdvancedMarkerElement)';
+              gmapsStatusBadge.style.color = '#10b981';
+            }
+          } catch (err) {
+            if (gmapsStatusBadge) {
+              gmapsStatusBadge.textContent = '⚠️ Google Maps failed to load (verify API key & CSP)';
+              gmapsStatusBadge.style.color = '#ef4444';
+            }
+            console.warn('Google Maps initialization warning:', err);
+          }
+        }
+
+        if (btnSaveGmapsKey) {
+          btnSaveGmapsKey.addEventListener('click', () => {
+            const val = gmapsKeyInput ? gmapsKeyInput.value.trim().replace(/[^A-Za-z0-9_\-]/g, '') : '';
+            if (!val) return;
+            try {
+              localStorage.setItem(GMAPS_STORAGE_KEY, val);
+            } catch (_) {}
+            gmapsLoaderBootstrapped = false;
+            gmapInstance = null;
+            initGoogleMapsLive();
+          });
+        }
+
+        if (btnClearGmapsKey) {
+          btnClearGmapsKey.addEventListener('click', () => {
+            try {
+              localStorage.removeItem(GMAPS_STORAGE_KEY);
+            } catch (_) {}
+            if (gmapsKeyInput) gmapsKeyInput.value = '';
+            if (gmapsStatusBadge) {
+              gmapsStatusBadge.textContent = '🌐 Key cleared from localStorage';
+              gmapsStatusBadge.style.color = '#94a3b8';
+            }
+          });
+        }
+
+        function buildCountryJson(country) {
+          return JSON.stringify({
+            id: country.id,
+            region: country.region,
+            name: country.name,
+            authority: country.authority,
+            coordinates: { lat: country.lat, lng: country.lng },
+            langTag: country.langTag,
+            scriptFamily: country.scriptFamily,
+            undripSovereign: country.region === 'indigenous' || country.id === 'can' || country.id === 'mex' || country.id === 'aus',
+            version: '3.1.0',
+            license: 'OFL-1.1',
+            fontFamily: [
+              'PocketGull VF',
+              'PocketGull',
+              country.id === 'sau' ? 'PocketGull Arabic' : (country.id === 'uni' ? 'PocketGull Braille' : 'PocketGull Mono')
+            ],
+            fontFeatureSettings: {
+              cv08: 1,
+              cv05: 1,
+              ss02: 1,
+              locl: 1,
+              ...(country.id === 'sal' ? { mark: 1, mkmk: 1 } : {})
+            },
+            safeguardBenchmark: country.dosageAlert
+          }, null, 2);
+        }
+
+        function updateExportCodeView() {
+          const country = GLOBAL_HEALTH_ATLAS.find(c => c.id === activeCountryId);
+          const cssCodeEl = document.getElementById('hudCssCode');
+          if (!country || !cssCodeEl) return;
+          if (activeExportFormat === 'json') {
+            cssCodeEl.textContent = buildCountryJson(country);
+            if (btnCopy) btnCopy.textContent = '📋 Copy JSON';
+          } else {
+            cssCodeEl.textContent = country.css;
+            if (btnCopy) btnCopy.textContent = '📋 Copy CSS';
+          }
+          if (btnFormatCss) btnFormatCss.classList.toggle('active', activeExportFormat === 'css');
+          if (btnFormatJson) btnFormatJson.classList.toggle('active', activeExportFormat === 'json');
+        }
+
+        if (btnFormatCss) {
+          btnFormatCss.addEventListener('click', () => {
+            activeExportFormat = 'css';
+            updateExportCodeView();
+          });
+        }
+        if (btnFormatJson) {
+          btnFormatJson.addEventListener('click', () => {
+            activeExportFormat = 'json';
+            updateExportCodeView();
+          });
+        }
 
         function renderPavilion(regionFilter = 'all') {
           if (!flagGrid) return;
-          flagGrid.innerHTML = '';
+          flagGrid.replaceChildren();
 
           GLOBAL_HEALTH_ATLAS.forEach(c => {
             if (regionFilter !== 'all') {
@@ -13582,30 +14281,33 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
             card.dataset.id = c.id;
             card.tabIndex = 0;
             card.setAttribute('role', 'button');
-            card.setAttribute('aria-label', `${c.name} Flag Pavilion`);
+            card.setAttribute('aria-label', `${getDisplayTitle(c)} Card`);
 
             const header = document.createElement('div');
             header.className = 'flag-card-header';
 
             const emoji = document.createElement('span');
             emoji.className = 'flag-card-emoji';
-            emoji.textContent = c.flag;
+            emoji.textContent = getDisplayEmblem(c);
+            if (currentView === 'languages') {
+              emoji.style.cssText = 'display: inline-flex; align-items: center; justify-content: center; min-width: 34px; height: 34px; border-radius: 8px; background: rgba(6, 182, 212, 0.14); border: 1px solid rgba(6, 182, 212, 0.35); color: #38bdf8; font-size: 17px; font-weight: 800; font-family: "PocketGull", "PocketGull Arabic", "PocketGull Inuktitut", "PocketGull Cherokee", "PocketGull Indic", "PocketGull Braille", "Segoe UI", sans-serif;';
+            }
 
             const textWrap = document.createElement('div');
             const title = document.createElement('div');
             title.className = 'flag-card-title';
-            title.textContent = c.name;
+            title.textContent = getDisplayTitle(c);
 
             const sub = document.createElement('div');
             sub.className = 'flag-card-sub';
-            sub.textContent = c.pop.split('•')[0].trim();
+            sub.textContent = getDisplaySub(c);
 
             textWrap.append(title, sub);
             header.append(emoji, textWrap);
 
             const motto = document.createElement('div');
             motto.className = 'flag-card-motto';
-            motto.textContent = c.motto || c.phraseTranslation;
+            motto.textContent = currentView === 'languages' ? c.phraseNative : (c.motto || c.phraseTranslation);
 
             card.append(header, motto);
 
@@ -13627,31 +14329,52 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
 
         function setView(view) {
           currentView = view;
+          if (viewSwitchWrittenLang) viewSwitchWrittenLang.classList.toggle('active', view === 'languages');
+          if (viewSwitchMap) viewSwitchMap.classList.toggle('active', view === 'map');
+          if (viewSwitchGoogleMap) viewSwitchGoogleMap.classList.toggle('active', view === 'gmaps');
+          if (viewSwitchPavilion) viewSwitchPavilion.classList.toggle('active', view === 'pavilion');
+
           if (view === 'map') {
             if (mapContainer) mapContainer.style.display = 'flex';
+            if (gmapsContainer) gmapsContainer.style.display = 'none';
             if (pavilionContainer) pavilionContainer.style.display = 'none';
-            if (viewSwitchMap) viewSwitchMap.classList.add('active');
-            if (viewSwitchPavilion) viewSwitchPavilion.classList.remove('active');
+          } else if (view === 'gmaps') {
+            if (mapContainer) mapContainer.style.display = 'none';
+            if (gmapsContainer) gmapsContainer.style.display = 'flex';
+            if (pavilionContainer) pavilionContainer.style.display = 'none';
+            initGoogleMapsLive();
           } else {
             if (mapContainer) mapContainer.style.display = 'none';
+            if (gmapsContainer) gmapsContainer.style.display = 'none';
             if (pavilionContainer) pavilionContainer.style.display = 'block';
-            if (viewSwitchMap) viewSwitchMap.classList.remove('active');
-            if (viewSwitchPavilion) viewSwitchPavilion.classList.add('active');
-            renderPavilion(currentRegionFilter);
           }
+          renderPins(currentRegionFilter);
+          selectCountry(activeCountryId, false);
         }
 
+        if (viewSwitchWrittenLang) viewSwitchWrittenLang.addEventListener('click', () => setView('languages'));
         if (viewSwitchMap) viewSwitchMap.addEventListener('click', () => setView('map'));
+        if (viewSwitchGoogleMap) viewSwitchGoogleMap.addEventListener('click', () => setView('gmaps'));
         if (viewSwitchPavilion) viewSwitchPavilion.addEventListener('click', () => setView('pavilion'));
 
         const REGION_BOUNDS = {
           all: { x: 0, y: 0, w: 1000, h: 520 },
           universal: { x: 0, y: 0, w: 1000, h: 520 },
-          indigenous: { x: 60, y: 20, w: 420, h: 320 },
-          americas: { x: 60, y: 30, w: 380, h: 460 },
-          europe: { x: 390, y: 40, w: 260, h: 220 },
-          mena: { x: 420, y: 150, w: 290, h: 280 },
-          asia: { x: 560, y: 60, w: 400, h: 430 }
+          indigenous: { x: 60, y: 30, w: 500, h: 430 },
+          americas: { x: 40, y: 25, w: 380, h: 480 },
+          europe: { x: 385, y: 45, w: 230, h: 185 },
+          mena: { x: 410, y: 165, w: 260, h: 280 },
+          asia: { x: 630, y: 60, w: 330, h: 430 }
+        };
+
+        const GMAPS_REGION_VIEWPORTS = {
+          all: { lat: 25, lng: 10, zoom: 2 },
+          universal: { lat: 46.2044, lng: 6.1432, zoom: 3 },
+          indigenous: { lat: 35, lng: -60, zoom: 2 },
+          americas: { lat: 18, lng: -82, zoom: 3 },
+          europe: { lat: 50, lng: 10, zoom: 4 },
+          mena: { lat: 18, lng: 24, zoom: 3 },
+          asia: { lat: 15, lng: 115, zoom: 3 }
         };
 
         const mapSvg = svg;
@@ -13701,10 +14424,34 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           animateViewBox(nx, ny, nw, nh, 200);
         }
 
+        function applyRegionFilter(region) {
+          filterBtns.forEach(b => b.classList.toggle('active', (b.dataset.region || 'all') === region));
+          landPaths.forEach(p => p.classList.toggle('active-region', region !== 'all' && p.dataset.region === region));
+          renderPins(region);
+          const target = REGION_BOUNDS[region] || REGION_BOUNDS.all;
+          animateViewBox(target.x, target.y, target.w, target.h, 320);
+
+          if (gmapInstance) {
+            renderGoogleMapMarkers(region);
+            const gVp = GMAPS_REGION_VIEWPORTS[region] || GMAPS_REGION_VIEWPORTS.all;
+            gmapInstance.panTo({ lat: gVp.lat, lng: gVp.lng });
+            gmapInstance.setZoom(gVp.zoom);
+          }
+
+          if (region !== 'all') {
+            const currentCountry = GLOBAL_HEALTH_ATLAS.find(c => c.id === activeCountryId);
+            const inRegion = currentCountry && (currentCountry.region === region || currentCountry.subRegion === region);
+            if (!inRegion) {
+              const firstMatch = GLOBAL_HEALTH_ATLAS.find(c => c.region === region || c.subRegion === region);
+              if (firstMatch) selectCountry(firstMatch.id, false);
+            }
+          }
+        }
+
         function renderPins(regionFilter = 'all') {
           currentRegionFilter = regionFilter;
-          pinLayer.innerHTML = '';
-          pillBar.innerHTML = '';
+          pinLayer.replaceChildren();
+          pillBar.replaceChildren();
 
           GLOBAL_HEALTH_ATLAS.forEach(c => {
             if (regionFilter !== 'all') {
@@ -13783,24 +14530,30 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
             g.append(hitbox, pulse, dot, callout);
 
             g.addEventListener('mouseenter', () => {
-              hoverLabel.textContent = `${c.flag} ${c.name} (${c.authority})`;
+              hoverLabel.textContent = `${getDisplayEmblem(c)} ${getDisplayTitle(c)} (${c.authority})`;
               pinLayer.appendChild(g);
             });
             g.addEventListener('mouseleave', () => {
               const active = GLOBAL_HEALTH_ATLAS.find(item => item.id === activeCountryId);
-              if (active) hoverLabel.textContent = `${active.flag} ${active.name} (${active.authority})`;
+              if (active) hoverLabel.textContent = `${getDisplayEmblem(active)} ${getDisplayTitle(active)} (${active.authority})`;
             });
-            g.addEventListener('click', () => {
+            g.addEventListener('click', (e) => {
+              e.stopPropagation();
               selectCountry(c.id);
             });
 
             pinLayer.appendChild(g);
 
-            // Create Pill Bar Button
+            // Create Pill Bar Button using safe DOM nodes
             const pill = document.createElement('button');
+            pill.type = 'button';
             pill.className = 'country-pill' + (c.id === activeCountryId ? ' active' : '');
             pill.dataset.id = c.id;
-            pill.innerHTML = `<span>${c.flag}</span> <span>${c.name}</span>`;
+            const flagSpan = document.createElement('span');
+            flagSpan.textContent = getDisplayEmblem(c);
+            const nameSpan = document.createElement('span');
+            nameSpan.textContent = getDisplayTitle(c);
+            pill.append(flagSpan, document.createTextNode(' '), nameSpan);
             pill.addEventListener('click', () => selectCountry(c.id));
             pillBar.appendChild(pill);
           });
@@ -13808,7 +14561,28 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           renderPavilion(regionFilter);
         }
 
-        function selectCountry(id) {
+        function appendSafeRuleItem(ul, ruleStr) {
+          const li = document.createElement('li');
+          const openTag = '<strong>';
+          const closeTag = '</strong>';
+          const startIdx = ruleStr.indexOf(openTag);
+          const endIdx = ruleStr.indexOf(closeTag);
+          if (startIdx !== -1 && endIdx > startIdx) {
+            const before = ruleStr.slice(0, startIdx).replace(/&amp;/g, '&');
+            const boldText = ruleStr.slice(startIdx + openTag.length, endIdx).replace(/&amp;/g, '&');
+            const after = ruleStr.slice(endIdx + closeTag.length).replace(/&amp;/g, '&');
+            if (before) li.appendChild(document.createTextNode(before));
+            const strong = document.createElement('strong');
+            strong.textContent = boldText;
+            li.appendChild(strong);
+            if (after) li.appendChild(document.createTextNode(after));
+          } else {
+            li.textContent = ruleStr.replace(/&amp;/g, '&');
+          }
+          ul.appendChild(li);
+        }
+
+        function selectCountry(id, allowPan = true) {
           activeCountryId = id;
           const country = GLOBAL_HEALTH_ATLAS.find(c => c.id === id);
           if (!country) return;
@@ -13820,13 +14594,28 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           document.querySelectorAll('.country-pill').forEach(pill => {
             const isActive = (pill.dataset.id === id) || pill.textContent.includes(country.name);
             pill.classList.toggle('active', isActive);
-            if (isActive) {
-              pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            if (isActive && allowPan && pillBar) {
+              const targetLeft = pill.offsetLeft - (pillBar.clientWidth / 2) + (pill.clientWidth / 2);
+              pillBar.scrollTo({ left: Math.max(0, targetLeft), behavior: 'smooth' });
             }
           });
           document.querySelectorAll('.flag-card').forEach(card => {
             card.classList.toggle('active', card.dataset.id === id);
           });
+
+          // Sync Google Maps Live marker highlight and camera pan
+          if (gmapMarkers.length > 0) {
+            gmapMarkers.forEach(item => {
+              if (!item.badgeEl) return;
+              const isAct = item.id === id;
+              item.badgeEl.style.background = isAct ? 'rgba(6, 182, 212, 0.95)' : 'rgba(10, 18, 32, 0.92)';
+              item.badgeEl.style.borderColor = item.isIndig ? '#f59e0b' : (isAct ? '#ffffff' : '#38bdf8');
+              if (item.marker) item.marker.zIndex = isAct ? 100 : 1;
+            });
+          }
+          if (gmapInstance && allowPan && typeof country.lat === 'number' && typeof country.lng === 'number') {
+            gmapInstance.panTo({ lat: country.lat, lng: country.lng });
+          }
 
           // Bring active pin to front in SVG layer
           const activePin = document.querySelector(`.map-pin[data-id="${id}"]`);
@@ -13835,8 +14624,8 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           }
 
           // If pin is outside current viewBox, gently pan to include it
-          if (country.x < currentVb.x + 30 || country.x > currentVb.x + currentVb.w - 30 ||
-              country.y < currentVb.y + 30 || country.y > currentVb.y + currentVb.h - 30) {
+          if (allowPan && (country.x < currentVb.x + 30 || country.x > currentVb.x + currentVb.w - 30 ||
+              country.y < currentVb.y + 30 || country.y > currentVb.y + currentVb.h - 30)) {
             const nx = Math.max(0, Math.min(1000 - currentVb.w, country.x - currentVb.w / 2));
             const ny = Math.max(0, Math.min(520 - currentVb.h, country.y - currentVb.h / 2));
             animateViewBox(nx, ny, currentVb.w, currentVb.h, 280);
@@ -13853,29 +14642,30 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           const phraseTransEl = document.getElementById('hudPhraseTranslation');
           const doseAlertEl = document.getElementById('hudDosageAlert');
           const rulesListEl = document.getElementById('hudRulesList');
-          const cssCodeEl = document.getElementById('hudCssCode');
 
-          if (flagEl) flagEl.textContent = country.flag;
-          if (nameEl) nameEl.textContent = country.name;
+          if (flagEl) flagEl.textContent = getDisplayEmblem(country);
+          if (nameEl) nameEl.textContent = getDisplayTitle(country);
           if (scriptEl) scriptEl.textContent = 'SCRIPT: ' + country.scriptFamily;
           if (authEl) authEl.textContent = country.authority;
-          if (wikiPopEl) wikiPopEl.textContent = 'Pop: ' + country.pop;
+          if (wikiPopEl) wikiPopEl.textContent = currentView === 'languages' ? ('Place: ' + country.name + ' • ' + country.pop) : ('Pop: ' + country.pop);
           if (langTagEl) langTagEl.textContent = country.langTag;
-          if (phraseNativeEl) phraseNativeEl.textContent = country.phraseNative;
+          if (phraseNativeEl) {
+            phraseNativeEl.textContent = country.phraseNative;
+            const isRtlCountry = country.id === 'sau' || country.id === 'nqo';
+            phraseNativeEl.dir = isRtlCountry ? 'rtl' : 'ltr';
+            phraseNativeEl.style.textAlign = 'left';
+            phraseNativeEl.style.unicodeBidi = 'isolate';
+          }
           if (phraseTransEl) phraseTransEl.textContent = country.phraseTranslation;
           if (doseAlertEl) doseAlertEl.textContent = country.dosageAlert;
 
           if (rulesListEl) {
-            rulesListEl.innerHTML = '';
-            country.rules.forEach(r => {
-              const li = document.createElement('li');
-              li.innerHTML = r;
-              rulesListEl.appendChild(li);
-            });
+            rulesListEl.replaceChildren();
+            country.rules.forEach(r => appendSafeRuleItem(rulesListEl, r));
           }
 
-          if (cssCodeEl) cssCodeEl.textContent = country.css;
-          if (hoverLabel) hoverLabel.textContent = `${country.flag} ${country.name} (${country.authority})`;
+          updateExportCodeView();
+          if (hoverLabel) hoverLabel.textContent = `${getDisplayEmblem(country)} ${getDisplayTitle(country)} (${country.authority})`;
 
           // Connect Doc Drill & UNDRIP Action Buttons
           const hudDocDrillBtn = document.getElementById('hudDocDrillBtn');
@@ -13887,12 +14677,12 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
               } else if (country.region === 'universal') {
                 openDocDrill('256 Unicode Braille Patterns', 'ACCESSIBILITY');
               } else {
-                openDocDrill(country.name, 'GLOBAL HEALTH');
+                openDocDrill(country.name, 'GLOBAL HEALTH ATLAS');
               }
             };
           }
           if (hudUndripLink) {
-            if (country.region === 'indigenous' || country.id === 'can' || country.id === 'usa') {
+            if (country.region === 'indigenous' || country.id === 'can' || country.id === 'usa' || country.id === 'mex' || country.id === 'aus') {
               hudUndripLink.style.display = 'inline-flex';
             } else {
               hudUndripLink.style.display = 'none';
@@ -13903,12 +14693,18 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
         // Region Filter Buttons with Dynamic ViewBox Zoom
         filterBtns.forEach(btn => {
           btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
             const region = btn.dataset.region || 'all';
-            renderPins(region);
-            const target = REGION_BOUNDS[region] || REGION_BOUNDS.all;
-            animateViewBox(target.x, target.y, target.w, target.h, 320);
+            applyRegionFilter(region);
+          });
+        });
+
+        // Interactive Continent Landmass Click & Hover Handlers
+        landPaths.forEach(pathEl => {
+          pathEl.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const region = pathEl.dataset.region || 'all';
+            const nextRegion = (currentRegionFilter === region) ? 'all' : region;
+            applyRegionFilter(nextRegion);
           });
         });
 
@@ -13920,22 +14716,21 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
         if (btnZoomIn) btnZoomIn.addEventListener('click', () => zoomDelta(0.72));
         if (btnZoomOut) btnZoomOut.addEventListener('click', () => zoomDelta(1.38));
         if (btnZoomReset) btnZoomReset.addEventListener('click', () => {
-          const target = REGION_BOUNDS[currentRegionFilter] || REGION_BOUNDS.all;
-          animateViewBox(target.x, target.y, target.w, target.h, 250);
+          applyRegionFilter('all');
         });
 
-        // 1-Click Copy Prescription
+        // 1-Click Copy CSS / JSON Profile
         if (btnCopy) {
           btnCopy.addEventListener('click', () => {
             const country = GLOBAL_HEALTH_ATLAS.find(c => c.id === activeCountryId);
             if (!country) return;
-            navigator.clipboard.writeText(country.css).then(() => {
-              const orig = btnCopy.textContent;
+            const payload = activeExportFormat === 'json' ? buildCountryJson(country) : country.css;
+            navigator.clipboard.writeText(payload).then(() => {
               btnCopy.textContent = '✓ Copied!';
               btnCopy.style.borderColor = '#10b981';
               btnCopy.style.color = '#10b981';
               setTimeout(() => {
-                btnCopy.textContent = orig;
+                btnCopy.textContent = activeExportFormat === 'json' ? '📋 Copy JSON' : '📋 Copy CSS';
                 btnCopy.style.borderColor = 'var(--cyan)';
                 btnCopy.style.color = 'var(--cyan)';
               }, 2000);
@@ -13944,11 +14739,356 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
         }
 
         renderPins('all');
-        selectCountry('can');
+        const randomInitial = GLOBAL_HEALTH_ATLAS[Math.floor(Math.random() * GLOBAL_HEALTH_ATLAS.length)];
+        selectCountry(randomInitial ? randomInitial.id : 'can', false);
       }
 
       window.initWorldMapStudio = initWorldMapStudio;
 
+      function initSmoeFairShuffle() {
+        const grid = document.getElementById('smoeTierGrid');
+        if (!grid) return;
+
+        function fisherYates(arr) {
+          const copy = arr.slice();
+          for (let i = copy.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            const tmp = copy[i];
+            copy[i] = copy[j];
+            copy[j] = tmp;
+          }
+          if (copy.length > 1 && copy.every((item, idx) => item === arr[idx])) {
+            copy.push(copy.shift());
+          }
+          return copy;
+        }
+
+        function shuffleAllCards() {
+          const cards = Array.from(grid.querySelectorAll('.smoe-tier-card'));
+          const shuffledCards = fisherYates(cards);
+          shuffledCards.forEach(card => {
+            const specimen = card.querySelector('.smoe-tier-specimen');
+            if (specimen) {
+              const lines = Array.from(specimen.querySelectorAll('.smoe-script-line'));
+              const shuffledLines = fisherYates(lines);
+              shuffledLines.forEach(line => specimen.appendChild(line));
+
+              const flagsEl = card.querySelector('.smoe-tier-flags');
+              if (flagsEl) {
+                flagsEl.textContent = shuffledLines.map(l => l.getAttribute('data-flag') || '').filter(Boolean).join(' ');
+              }
+              const codesEl = card.querySelector('.smoe-tier-codes');
+              if (codesEl) {
+                codesEl.textContent = shuffledLines.map(l => l.getAttribute('data-code') || '').filter(Boolean).join(' • ');
+              }
+              const metaEl = card.querySelector('.smoe-tier-meta');
+              if (metaEl) {
+                const prefix = metaEl.getAttribute('data-prefix') || '';
+                const descs = shuffledLines.map(l => l.getAttribute('data-desc') || '').filter(Boolean).join(', ');
+                if (prefix && descs) {
+                  metaEl.textContent = prefix + descs + '.';
+                }
+              }
+            }
+            grid.appendChild(card);
+          });
+        }
+
+        shuffleAllCards();
+
+        const btnShuffle = document.getElementById('btnShuffleSmoeScripts');
+        if (btnShuffle) {
+          btnShuffle.addEventListener('click', () => {
+            shuffleAllCards();
+          });
+        }
+      }
+
+      function initLanguagePackBuilder() {
+        const chipsContainer = document.getElementById('langBuilderChips');
+        const sceneMedicine = document.getElementById('mixSceneMedicine');
+        const sceneWelcome = document.getElementById('mixSceneWelcome');
+        const sceneStory = document.getElementById('mixSceneStory');
+        const summaryBadge = document.getElementById('langMixSummaryBadge');
+        const sizeLabel = document.getElementById('langMixSizeLabel');
+        const btnRandom = document.getElementById('btnRandomLangMix');
+        const btnCopy = document.getElementById('btnCopyLangMixCss');
+
+        if (!chipsContainer || !sceneMedicine || !sceneWelcome || !sceneStory) return;
+
+        const LANGUAGE_BUILDER_PACKS = [
+          {
+            id: 'latin',
+            emblem: 'Aa',
+            label: 'Latin (English • Español • Français)',
+            fontFamily: "'PocketGull', 'Segoe UI', sans-serif",
+            rtl: false,
+            kb: 18,
+            color: '#38bdf8',
+            medicine: 'Take 1 tablet with water every morning • Tomar 1 comprimido con agua',
+            welcome: 'Everyone Is Welcome Here • Bienvenidos a Todos • Bienvenue à Tous',
+            story: '“Kindness is a language every heart understands.”'
+          },
+          {
+            id: 'arabic',
+            emblem: 'ع',
+            label: 'Arabic (العربية)',
+            fontFamily: "'PocketGull Arabic', 'PocketGull', 'Noto Sans Arabic', 'Segoe UI', sans-serif",
+            rtl: true,
+            kb: 19,
+            color: '#c084fc',
+            medicine: 'شِفَاء وَرِعَايَة • يُؤْخَذ مَعَ المَاء كُلَّ صَبَاح',
+            welcome: 'أَهْلًا وَسَهْلًا بِالجَمِيع • مَكَانٌ آمِنٌ لِكُلِّ عَائِلَة',
+            story: '«المَحَبَّةُ وَالأَمَلُ نُورٌ يَجْمَعُ القُلُوب»'
+          },
+          {
+            id: 'hebrew',
+            emblem: 'א',
+            label: 'Hebrew (עברית)',
+            fontFamily: "'PocketGull Hebrew', 'PocketGull', 'Noto Sans Hebrew', 'Segoe UI', sans-serif",
+            rtl: true,
+            kb: 15,
+            color: '#c084fc',
+            medicine: 'רְפוּאָה שְׁלֵמָה • לָקַחַת עִם מַיִם בַּבֹּקֶר',
+            welcome: 'בְּרוּכִים הַבָּאִים • בַּיִת חַם וּבָטוּחַ לְכֻלָּם',
+            story: '״חֶסֶד וְתִקְוָה מְאִירִים אֶת הַדֶּרֶךְ״'
+          },
+          {
+            id: 'syllabics',
+            emblem: 'ᓀ',
+            label: 'Cree & Inuktitut (ᓀᐦᐃᔭᐍᐏန် • ᐃᓄᒃᑎᑐᑦ)',
+            fontFamily: "'PocketGull Inuktitut', 'PocketGull', 'Gadugi', 'Euphemia', 'Segoe UI', sans-serif",
+            rtl: false,
+            kb: 16,
+            color: '#fbbf24',
+            medicine: 'ᒥᔪ ᐱᒫᑎᓯᐏန် • ᐃᓅᓯᖃᑦᑎᐊᕐᓂᖅ (Miyo-pimātisiwin • Good Health)',
+            welcome: 'ᐯ ᐱᐦᒉᐘᐣ • ᑐᙵᓱᒋᑦ (Welcome Inside • All Relations)',
+            story: '“ᓀᐦᐃᔭᐍᐏန် • ᐃᓅᖃᑎᒌᑦᓯᐊᕐᓂᖅ — Walking in Respect Together.”'
+          },
+          {
+            id: 'cherokee',
+            emblem: 'Ꮳ',
+            label: 'Cherokee Syllabary (ᏣᎳᎩ)',
+            fontFamily: "'PocketGull Cherokee', 'PocketGull', 'Gadugi', 'Plantagenet Cherokee', 'Segoe UI', sans-serif",
+            rtl: false,
+            kb: 15,
+            color: '#fbbf24',
+            medicine: 'ᏙᎯᏱ ᏄᏍᏛ • ᎣᏏᏲ ᎤᎵᎮᎵᏍᏗ (Good Health & Peace)',
+            welcome: 'ᎣᏏᏲ • Nigada ᎤᎵᎮᎵᏍᏗ (Welcome to All)',
+            story: '“ᏣᎳᎩ • ᎠᏓᎨᏳᏗ ᎠᎴ ᏚᏚᎩ — Cherokee Love & Hope.”'
+          },
+          {
+            id: 'devanagari',
+            emblem: 'अ',
+            label: 'Hindi & Tamil (हिन्दी • தமிழ்)',
+            fontFamily: "'PocketGull Indic', 'PocketGull', 'Nirmala UI', 'Noto Sans Devanagari', 'Segoe UI', sans-serif",
+            rtl: false,
+            kb: 22,
+            color: '#34d399',
+            medicine: 'स्वास्थ्य और देखभाल • நலம் மற்றும் பாதுகாப்பு',
+            welcome: 'सबका स्वागत है • அனைவரையும் வரவேற்கிறோம்',
+            story: '“आशा, करुणा और प्रेम हर घर की रोशनी हैं।”'
+          },
+          {
+            id: 'cjk',
+            emblem: '文',
+            label: 'Chinese, Japanese & Korean (中文 • 日本語 • 한국어)',
+            fontFamily: "'PocketGull CJK Fallback', 'PocketGull', 'Yu Gothic UI', 'Malgun Gothic', 'Microsoft YaHei', sans-serif",
+            rtl: false,
+            kb: 24,
+            color: '#f59e0b',
+            medicine: '健康与关怀 • 健やかな毎日 • 건강한 내일과 돌봄',
+            welcome: '欢迎大家 • みなさまを歓迎します • 모두를 환영합니다',
+            story: '「希望与温暖，陪伴每一个家庭。」'
+          },
+          {
+            id: 'ethiopic',
+            emblem: 'ሀ',
+            label: 'Amharic Ge’ez & Kiswahili (አማርኛ • Kiswahili)',
+            fontFamily: "'PocketGull Ethiopic', 'PocketGull', 'Ebrima', 'Nyala', 'Segoe UI', sans-serif",
+            rtl: false,
+            kb: 17,
+            color: '#a78bfa',
+            medicine: 'ጤና እና እንክብካቤ • Afya na Utunzaji Bora',
+            welcome: 'እንኳን ደህና መጡ • Karibuni Nyote Nyumbani',
+            story: '“ተስፋ እና ፍቅር • Matumaini na Upendo kwa Wote.”'
+          },
+          {
+            id: 'cyrillic_greek',
+            emblem: 'Я',
+            label: 'Cyrillic & Greek (Кирилиця • Ελληνικά)',
+            fontFamily: "'PocketGull', 'Segoe UI', sans-serif",
+            rtl: false,
+            kb: 16,
+            color: '#38bdf8',
+            medicine: 'Здоров’я та турбота • Υγεία και Φροντίδα',
+            welcome: 'Ласкаво просимо всіх • Καλώς ήρθατε όλοι',
+            story: '«Надія, доброта і світло для кожної родини • Ελπίδα για όλους.»'
+          },
+          {
+            id: 'braille',
+            emblem: '⠇',
+            label: 'Universal Tactile Braille (⠇⠕⠧⠑ • 8-Dot)',
+            fontFamily: "'PocketGull Braille', 'PocketGull', 'Segoe UI Symbol', 'Segoe UI', sans-serif",
+            rtl: false,
+            kb: 12,
+            color: '#10b981',
+            medicine: '⠓⠑⠁⠇⠞⠓ • ⠎⠁⠋⠑⠞⠽ (Tactile Health & Safety Guide)',
+            welcome: '⠺⠑⠇⠉⠕⠍⠑ • ⠁⠇⠇ (Tactile Welcome Sign)',
+            story: '⠇⠕⠧⠑ • ⠓⠕⠏⠑ • ⠅⠊⠝⠙⠝⠑⠎⠎ (Love, Hope & Kindness)'
+          }
+        ];
+
+        function shuffleArray(arr) {
+          const copy = arr.slice();
+          for (let i = copy.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            const tmp = copy[i];
+            copy[i] = copy[j];
+            copy[j] = tmp;
+          }
+          return copy;
+        }
+
+        const displayPacks = shuffleArray(LANGUAGE_BUILDER_PACKS);
+        let selectedIds = displayPacks.slice(0, 3).map(p => p.id);
+
+        function renderSceneLine(pack, text) {
+          const row = document.createElement('div');
+          row.style.cssText = 'padding: 6px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid ' + pack.color + ';';
+
+          const meta = document.createElement('div');
+          meta.style.cssText = 'font-size: 10px; font-weight: 700; color: var(--text-muted); margin-bottom: 3px; display: flex; justify-content: space-between;';
+          const nameSpan = document.createElement('span');
+          nameSpan.textContent = pack.emblem + ' ' + pack.label;
+          const kbSpan = document.createElement('span');
+          kbSpan.textContent = '~' + pack.kb + ' KB pack';
+          meta.append(nameSpan, kbSpan);
+
+          const spec = document.createElement('div');
+          spec.textContent = text;
+          spec.style.fontFamily = pack.fontFamily;
+          spec.style.fontSize = '18px';
+          spec.style.fontWeight = '600';
+          spec.style.lineHeight = '1.5';
+          spec.style.color = pack.color;
+          if (pack.rtl) {
+            spec.dir = 'rtl';
+            spec.style.textAlign = 'left';
+            spec.style.unicodeBidi = 'isolate';
+          }
+
+          row.append(meta, spec);
+          return row;
+        }
+
+        function renderBuilder() {
+          chipsContainer.replaceChildren();
+          displayPacks.forEach(pack => {
+            const isSel = selectedIds.includes(pack.id);
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.setAttribute('aria-pressed', isSel ? 'true' : 'false');
+            btn.style.cssText = [
+              'display: inline-flex',
+              'align-items: center',
+              'gap: 6px',
+              'padding: 6px 12px',
+              'border-radius: 999px',
+              'font-size: 12px',
+              'font-weight: 700',
+              'cursor: pointer',
+              'transition: all 0.15s ease',
+              isSel
+                ? `background: rgba(16, 185, 129, 0.22); border: 1.5px solid #10b981; color: #ffffff; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25)`
+                : `background: rgba(15, 23, 42, 0.75); border: 1px solid var(--card-border); color: var(--text-muted)`
+            ].join(';');
+
+            const emb = document.createElement('span');
+            emb.textContent = pack.emblem;
+            emb.style.fontFamily = pack.fontFamily;
+            emb.style.color = isSel ? '#34d399' : pack.color;
+            emb.style.fontWeight = '800';
+
+            const lbl = document.createElement('span');
+            lbl.textContent = pack.label;
+
+            btn.append(emb, lbl);
+            btn.addEventListener('click', () => {
+              if (selectedIds.includes(pack.id)) {
+                if (selectedIds.length > 1) {
+                  selectedIds = selectedIds.filter(id => id !== pack.id);
+                }
+              } else {
+                if (selectedIds.length >= 3) {
+                  selectedIds = [...selectedIds.slice(1), pack.id];
+                } else {
+                  selectedIds = [...selectedIds, pack.id];
+                }
+              }
+              renderBuilder();
+            });
+            chipsContainer.appendChild(btn);
+          });
+
+          sceneMedicine.replaceChildren();
+          sceneWelcome.replaceChildren();
+          sceneStory.replaceChildren();
+
+          let totalKb = 0;
+          selectedIds.forEach(id => {
+            const pack = LANGUAGE_BUILDER_PACKS.find(p => p.id === id);
+            if (!pack) return;
+            totalKb += pack.kb;
+            sceneMedicine.appendChild(renderSceneLine(pack, pack.medicine));
+            sceneWelcome.appendChild(renderSceneLine(pack, pack.welcome));
+            sceneStory.appendChild(renderSceneLine(pack, pack.story));
+          });
+
+          if (summaryBadge) {
+            summaryBadge.textContent = `✓ ${selectedIds.length} Written Language ${selectedIds.length === 1 ? 'Pack' : 'Packs'} Active`;
+          }
+          if (sizeLabel) {
+            sizeLabel.textContent = `Lightweight Modular Download: ~${totalKb} KB total (vs. 18,000 KB traditional all-in-one font)`;
+          }
+        }
+
+        if (btnRandom) {
+          btnRandom.addEventListener('click', () => {
+            const picks = shuffleArray(LANGUAGE_BUILDER_PACKS).slice(0, 3);
+            selectedIds = picks.map(p => p.id);
+            renderBuilder();
+          });
+        }
+
+        if (btnCopy) {
+          btnCopy.addEventListener('click', () => {
+            const activePacks = selectedIds.map(id => LANGUAGE_BUILDER_PACKS.find(p => p.id === id)).filter(Boolean);
+            const names = activePacks.map(p => p.label).join(' + ');
+            const families = Array.from(new Set(activePacks.map(p => p.fontFamily.split(',')[0].trim())));
+            const snippet = [
+              `/* PocketGull Custom Written Language Mix: ${names} */`,
+              `@import url('https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css');`,
+              ``,
+              `.community-multilingual-card {`,
+              `  font-family: ${families.join(', ')}, 'PocketGull', sans-serif;`,
+              `  font-feature-settings: "cv08" 1, "cv05" 1, "ss02" 1;`,
+              `}`
+            ].join('\n');
+            navigator.clipboard.writeText(snippet).then(() => {
+              btnCopy.textContent = '✓ Copied Font Pack Setup!';
+              setTimeout(() => {
+                btnCopy.textContent = '📋 Copy Font Pack Setup';
+              }, 2000);
+            });
+          });
+        }
+
+        renderBuilder();
+      }
+
+      initSmoeFairShuffle();
+      initLanguagePackBuilder();
       initDocDrill();
       initTextbookController();
       initWorldMapStudio();
