@@ -728,9 +728,9 @@ glyphsets==1.1.3 \
     --hash=sha256:609e6136ad90808810167309fb22463b3b0b46951a6d2a89b6d5445ac44305a4 \
     --hash=sha256:622802095a213ec7296a06f43cf43d702aa4e881bf9ed3fd56c7c5130026de24
     # via gftools
-glyphslib==6.15.0 \
-    --hash=sha256:8d2c14be02955e692eb2337e98f686835ba45b8a07632a426798902ddc5bd146 \
-    --hash=sha256:f8edc3aa49dee39a9154b824ea45cf7fc43c534d9daf98e06e0f99b1ecce5d1a
+glyphslib==6.16.0 \
+    --hash=sha256:0664441b1667b6c4f9e70550329503af9704a8cc341884c2d1868856d65142fc \
+    --hash=sha256:de3ae34aa94c9613532dcedf9d6fe55c6e61833516b82239286598681efd5fed
     # via
     #   fontmake
     #   gftools
