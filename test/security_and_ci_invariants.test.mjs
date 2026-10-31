@@ -201,6 +201,22 @@ test('Global Health Atlas & World Map Studio Invariants: Authentic Cree Syllabic
   assert.match(indexContent, /WRITTEN_LANGUAGE_METADATA/, 'World Map Studio must define flag-free WRITTEN_LANGUAGE_METADATA mappings');
 });
 
+test('Kinetic Synesthetic Laboratory Invariant: Multi-Script Font Stacks, Intl.Segmenter, and BiDi Support', () => {
+  const kineticPath = 'kinetic_laboratory.html';
+  assert.ok(fs.existsSync(kineticPath), 'kinetic_laboratory.html must exist');
+  const code = fs.readFileSync(kineticPath, 'utf8');
 
+  // 1. Font Stack declarations must include PocketGull Arabic and system fallbacks
+  assert.match(code, /--sans-stack:[^;]*'PocketGull Arabic'/, 'kinetic_laboratory.html must include PocketGull Arabic in --sans-stack');
+  assert.match(code, /--display-stack:[^;]*'PocketGull Arabic'/, 'kinetic_laboratory.html must include PocketGull Arabic in --display-stack');
+  assert.match(code, /--mono-stack:[^;]*'PocketGull Arabic'/, 'kinetic_laboratory.html must include PocketGull Arabic in --mono-stack');
+  assert.match(code, /c\.font\s*=\s*[^]*PocketGull Arabic/, 'InstrumentGlyph.draw must declare PocketGull Arabic in canvas font');
 
+  // 2. Grapheme cluster segmentation to preserve tashkil / diacritics
+  assert.match(code, /Intl\.Segmenter/, 'buildLayout must utilize Intl.Segmenter for grapheme cluster preservation');
 
+  // 3. BiDi and RTL reading direction support
+  assert.match(code, /\\u0591-\\u07FF/, 'kinetic_laboratory.html must include RTL Unicode block detection');
+  assert.match(code, /data-scale="maqam"/, 'kinetic_laboratory.html must provide Maqam scale preset');
+  assert.match(code, /data-timpreset="arabic"/, 'kinetic_laboratory.html must provide Arabic contraption preset');
+});

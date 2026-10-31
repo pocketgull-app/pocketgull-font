@@ -25,9 +25,9 @@
       --purple: #a855f7;
       --gold: #d4af37;
       --canvas-bg: #04070d;
-      --sans-stack: 'PocketGull', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      --display-stack: 'PocketGull Bold', 'PocketGull', sans-serif;
-      --mono-stack: 'PocketGull Mono', monospace;
+      --sans-stack: 'PocketGull', 'PocketGull Arabic', 'Noto Sans Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --display-stack: 'PocketGull Bold', 'PocketGull Arabic', 'Noto Sans Arabic', 'PocketGull', sans-serif;
+      --mono-stack: 'PocketGull Mono', 'PocketGull Arabic', 'Noto Sans Arabic', monospace;
     }
 
     [data-theme="washi"] {
@@ -746,6 +746,7 @@
           <div class="preset-grid">
             <button type="button" class="btn-preset active" data-scale="pentatonic">Pentatonic Calm</button>
             <button type="button" class="btn-preset" data-scale="dorian">Dorian Healing</button>
+            <button type="button" class="btn-preset" data-scale="maqam">Maqam Hijaz</button>
             <button type="button" class="btn-preset" data-scale="lydian">Lydian Celestial</button>
             <button type="button" class="btn-preset" data-scale="vitals">ICU 72 bpm Vitals</button>
           </div>
@@ -798,6 +799,7 @@
             <button type="button" class="btn-preset" data-timpreset="cascade">Domino Cascade</button>
             <button type="button" class="btn-preset" data-timpreset="seesaw">Telemetry Seesaw</button>
             <button type="button" class="btn-preset" data-timpreset="funnel">Zero Funnel Loop</button>
+            <button type="button" class="btn-preset" data-timpreset="arabic">شفاء • رعاية Rx</button>
           </div>
         </div>
 
@@ -862,6 +864,7 @@
         pentatonic: [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25, 783.99, 880.00, 1046.50],
         dorian:     [261.63, 293.66, 311.13, 349.23, 392.00, 440.00, 466.16, 523.25, 587.33, 622.25, 698.46],
         lydian:     [261.63, 293.66, 329.63, 369.99, 392.00, 440.00, 493.88, 523.25, 587.33, 659.25, 739.99],
+        maqam:      [261.63, 277.18, 329.63, 349.23, 392.00, 415.30, 493.88, 523.25, 554.37, 659.25, 698.46], // Maqam Hijaz
         vitals:     [130.81, 164.81, 196.00, 246.94, 261.63, 329.63, 392.00, 493.88, 523.25, 659.25, 783.99]
       };
 
@@ -1329,7 +1332,7 @@
           // Draw Acoustic Tone Bar Skeletons
           const isGlowing = (performance.now() - this.hitTime) < 350;
 
-          c.font = `800 ${this.size}px 'PocketGull Bold', 'PocketGull Mono', sans-serif`;
+          c.font = `800 ${this.size}px 'PocketGull Bold', 'PocketGull Arabic', 'Noto Sans Arabic', 'PocketGull Mono', 'Segoe UI', sans-serif`;
           c.textAlign = 'center';
           c.textBaseline = 'middle';
 
@@ -1651,7 +1654,21 @@
         state.seesaws = [];
         state.gears = [];
 
-        const chars = state.text.toUpperCase().split('');
+        // Check for Right-to-Left script (Arabic, Hebrew, Syriac, Thaana)
+        const isRtl = /[\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC]/.test(state.text);
+        
+        // Preserve case and diacritics for non-Latin; uppercase standard Latin
+        const rawText = isRtl ? state.text : (/^[a-zA-Z0-9\s.,!?:;'\-_\/\\()]+$/.test(state.text) ? state.text.toUpperCase() : state.text);
+        
+        // Grapheme cluster segmentation to respect Arabic tashkil and combining characters
+        let chars = [];
+        if (typeof Intl !== 'undefined' && Intl.Segmenter) {
+          const segmenter = new Intl.Segmenter(undefined, { granularity: 'grapheme' });
+          chars = Array.from(segmenter.segment(rawText)).map(s => s.segment);
+        } else {
+          chars = Array.from(rawText);
+        }
+
         const count = chars.length;
         if (count === 0) return;
 
@@ -1661,8 +1678,10 @@
         const centerY = height * 0.44;
 
         chars.forEach((ch, i) => {
-          const gx = startX + i * glyphSize;
-          const gy = centerY + Math.sin(i * 0.5) * 20; // Gentle sine wave contour
+          // If RTL, lay out glyphs right-to-left so reading direction is authentic
+          const colIndex = isRtl ? (count - 1 - i) : i;
+          const gx = startX + colIndex * glyphSize;
+          const gy = centerY + Math.sin(colIndex * 0.5) * 20; // Gentle sine wave contour
           state.glyphs.push(new InstrumentGlyph(ch, gx, gy, glyphSize, i));
         });
 
@@ -2033,6 +2052,8 @@
       const contraptionInput = document.getElementById('contraptionText');
       contraptionInput.addEventListener('input', (e) => {
         state.text = e.target.value || 'A';
+        const isRtl = /[\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC]/.test(state.text);
+        contraptionInput.dir = isRtl ? 'rtl' : 'ltr';
         buildLayout();
       });
 
@@ -2198,8 +2219,17 @@
           } else if (p === 'funnel') {
             state.text = '0̸0̸0̸';
             state.gravTim = 1.4;
+          } else if (p === 'arabic') {
+            state.text = 'شِفَاء';
+            state.scale = 'maqam';
+            state.gravTim = 1.0;
+            document.querySelectorAll('[data-scale]').forEach(b => {
+              b.classList.toggle('active', b.getAttribute('data-scale') === 'maqam');
+            });
           }
           contraptionInput.value = state.text;
+          const isRtl = /[\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC]/.test(state.text);
+          contraptionInput.dir = isRtl ? 'rtl' : 'ltr';
           buildLayout();
         });
       });
