@@ -1,0 +1,29 @@
+{
+  "metadata": {
+    "framework": "Cabrera Research Lab DSRP Cognitive Theory (4x2 Universal Patterns)",
+    "authors": "Drs. Derek & Laura Cabrera (Cornell University)",
+    "podcast": "https://www.cabreralab.science/podcast",
+    "cornell_course": "https://ecornell.cornell.edu/certificates/leadership-and-strategic-management/systems-thinking/",
+    "stsi_institute": "https://www.stsi.pro/"
+  },
+  "D": [
+    "Identity vs. Other (i × o): What is the single core problem we are solving right now, and what is outside the boundary?",
+    "Distinction Check: Where might two different concepts (like memory alignment vs. typographic warmth) be getting blurred together?",
+    "Boundary Clarity: What is explicitly IN scope for this 4-slot milestone, and what can safely wait outside the boundary?"
+  ],
+  "S": [
+    "Part vs. Whole (p × w): What are the 3–4 essential sub-parts of this system, and how do they form a coherent whole?",
+    "Holarchy Check: Zoom out one level—what larger clinical or human workflow does this component live inside?",
+    "Emergence Check: Which property only emerges when the binary engine, visual optotypes, and human pacing work together?"
+  ],
+  "R": [
+    "Action vs. Reaction (a × r): What is the primary causal feedback loop (R+ reinforcing or B− balancing) governing this state?",
+    "RDS Check: If we change this interface or parameter, what downstream reaction or time delay (//) occurs in the user's nervous system?",
+    "Leverage Point: Where is the Donella Meadows fulcrum (Δ) where a small, clean change eliminates a whole class of errors?"
+  ],
+  "P": [
+    "Point vs. View (ρ × v): How does this look from the perspective of a fatigued clinician or reader at 3:00 AM under 650nm red light?",
+    "Metacognitive Shift: What unseen assumption is our current framing lens hiding, and how would a fresh observer see it?",
+    "Compassionate Perspective: How can we offload vigilance onto the machine so the human architect can breathe and rest?"
+  ]
+}

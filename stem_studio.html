@@ -488,6 +488,10 @@
         <svg class="icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
         3D Print &amp; Press
       </button>
+      <button class="tab-btn" id="tab-systems-btn" role="tab" aria-selected="false" aria-controls="panel-systems" onclick="switchTab('systems')">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        Systems &amp; DSRP
+      </button>
     </nav>
 
     <!-- Theme and Nav buttons -->
@@ -504,7 +508,202 @@
     </div>
   </header>
 
+  <style>
+    .steam-pillar-matrix {
+      margin: 0 0 1.5rem 0;
+      padding: 16px 18px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06) 0%, rgba(56, 189, 248, 0.06) 50%, rgba(168, 85, 247, 0.06) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 14px;
+    }
+    .steam-matrix-kicker {
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--cyan);
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .steam-pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+      gap: 10px;
+    }
+    .steam-pillar-card {
+      background: rgba(5, 8, 17, 0.65);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 11px 13px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .steam-pillar-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--pillar-color, var(--cyan));
+    }
+    .steam-pillar-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 5px;
+    }
+    .steam-letter-monogram {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'PocketGull Bold', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: #050811;
+      background: var(--pillar-color, #38bdf8);
+    }
+    .steam-pillar-name {
+      font-family: 'PocketGull Bold', sans-serif;
+      font-size: 13px;
+      color: var(--text-main);
+      flex: 1;
+    }
+    .steam-pillar-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin: 0;
+    }
+    .steam-challenge-box {
+      margin: 0 0 1.5rem 0;
+      padding: 16px 20px;
+      background: linear-gradient(90deg, rgba(15, 23, 42, 0.85) 0%, rgba(5, 8, 17, 0.9) 100%);
+      border: 1px solid rgba(192, 132, 252, 0.35);
+      border-left: 4px solid #c084fc;
+      border-radius: 12px;
+    }
+    .steam-challenge-title {
+      font-family: 'PocketGull Bold', sans-serif;
+      font-size: 14px;
+      color: var(--text-main);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .steam-challenge-prompt {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin: 0 0 10px 0;
+    }
+    .steam-challenge-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .steam-exp-btn {
+      background: rgba(192, 132, 252, 0.14);
+      border: 1px solid #c084fc;
+      color: var(--text-main);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+    .steam-exp-btn:hover {
+      background: #c084fc;
+      color: #050811;
+    }
+    .steam-solution-details {
+      margin-top: 10px;
+      border-top: 1px dashed rgba(148, 163, 184, 0.25);
+      padding-top: 8px;
+      font-size: 12px;
+      color: var(--text-main);
+      line-height: 1.55;
+    }
+    .steam-solution-details summary {
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: #c084fc;
+      cursor: pointer;
+    }
+    .oakley-chunk-pill {
+      margin-top: 8px;
+      padding: 7px 11px;
+      border-radius: 7px;
+      background: rgba(16, 185, 129, 0.12);
+      border-left: 3px solid #34d399;
+      font-size: 11.5px;
+    }
+  </style>
+
   <main>
+
+    <!-- 5-Pillar STEAM Curriculum Matrix (Collapsible Calm Studio Default) -->
+    <details class="steam-pillar-matrix" id="stemSteamMatrix" aria-label="STEM Studio 5-Pillar STEAM Matrix">
+      <summary class="steam-matrix-kicker" style="cursor: pointer; list-style: none; margin-bottom: 0;">
+        <span>🎓 STEM STUDIO • 5-PILLAR STEAM &amp; BARBARA OAKLEY CHUNKING ARCHITECTURE ▸ Click to Expand</span>
+        <span style="color: var(--text-muted); font-weight: 400;">Click any pillar to switch active laboratory tab</span>
+      </summary>
+      <div class="steam-pillars-grid" style="margin-top: 12px;">
+        <div class="steam-pillar-card" style="--pillar-color: #34d399;" onclick="switchTab('lab')">
+          <div class="steam-pillar-top"><span class="steam-letter-monogram">S</span><span class="steam-pillar-name">Science</span></div>
+          <p class="steam-pillar-desc">Clinical Lab: IUPAC stoichiometry, molarity titration, and 650nm dark-room telemetry.</p>
+        </div>
+        <div class="steam-pillar-card" style="--pillar-color: #38bdf8;" onclick="switchTab('algo')">
+          <div class="steam-pillar-top"><span class="steam-letter-monogram">T</span><span class="steam-pillar-name">Technology</span></div>
+          <p class="steam-pillar-desc">Algo &amp; CS: 600 UPM AST trees, Big-O complexity (<code>uniE950–E957</code>), and hex endianness.</p>
+        </div>
+        <div class="steam-pillar-card" style="--pillar-color: #fbbf24;" onclick="switchTab('press')">
+          <div class="steam-pillar-top"><span class="steam-letter-monogram">E</span><span class="steam-pillar-name">Engineering</span></div>
+          <p class="steam-pillar-desc">3D Print &amp; Press: 0.4mm FDM nozzle kerf compensation and physical Braille embossing.</p>
+        </div>
+        <div class="steam-pillar-card" style="--pillar-color: #f472b6;" onclick="switchTab('learn')">
+          <div class="steam-pillar-top"><span class="steam-letter-monogram">A</span><span class="steam-pillar-name">Arts &amp; K-12</span></div>
+          <p class="steam-pillar-desc">K-12 &amp; Dyslexia: Visual fraction bars, phonetic scaffolding, and mirror-breaking letterforms.</p>
+        </div>
+        <div class="steam-pillar-card" style="--pillar-color: #c084fc;" onclick="switchTab('algo')">
+          <div class="steam-pillar-top"><span class="steam-letter-monogram">M</span><span class="steam-pillar-name">Mathematics</span></div>
+          <p class="steam-pillar-desc">Formal Lambda Calculus ($\lambda x.\,x+y \to_\beta$), OpenType <code>MATH</code> 68 UPM stems &amp; Knuth METAFONT.</p>
+        </div>
+      </div>
+    </details>
+
+    <!-- STEAM Lab Challenge M.1 -->
+    <div class="steam-challenge-box" id="steamChallengeStem1">
+      <div class="steam-challenge-title">
+        <span>🧪 STEAM Lab Challenge M.1: Asymptotic Big-O Bounds, 600 UPM AST Trees &amp; OpenType MATH ScaleDown</span>
+        <span style="font-family: 'PocketGull Mono', monospace; font-size: 10.5px; color: #c084fc;">[MATH × TECHNOLOGY × ENGINEERING]</span>
+      </div>
+      <p class="steam-challenge-prompt">
+        <strong>Focused Question:</strong> Why do nested mathematical subscripts ($x_{i_k}$) and ASCII Abstract Syntax Trees (`├──`, `└──`) collapse or misalign in standard proportional fonts, and how does <code>PocketGull Algo &amp; Math</code> preserve structural integrity across all 4 tabs?
+      </p>
+      <div class="steam-challenge-actions">
+        <button type="button" class="steam-exp-btn" onclick="switchTab('algo'); generateAST('dag');">🌲 Generate 600 UPM DAG Pipeline</button>
+        <button type="button" class="steam-exp-btn" onclick="switchTab('learn');">📚 Test K-12 &amp; Dyslexia Math Scaffolding</button>
+        <button type="button" class="steam-exp-btn" onclick="switchTab('press');">🖨️ Inspect 0.4mm 3D Nozzle Tolerance</button>
+      </div>
+      <details class="steam-solution-details">
+        <summary>▸ View Mathematical &amp; Algorithmic Derivation + Barbara Oakley Key Chunk</summary>
+        <div style="margin-top: 8px;">
+          <strong>1. OpenType <code>MATH</code> &amp; Knuth <code>METAFONT</code> Stem Floor:</strong> Standard academic serifs thin nested sub/superscripts linearly, dropping stems below 1 device pixel on dark screens. PocketGull enforces a $68\text{ UPM}$ stem floor with `ScriptPercentScaleDown = 73%` and `ScriptScriptPercentScaleDown = 58%`.<br>
+          <strong>2. Contiguous 600 UPM Box Topology:</strong> By locking every box-drawing glyph (`U+2500`–`U+257F`) to exact $[0, 600]\times[-180, 780]\text{ UPM}$ boundaries, tree edges connect with zero subpixel drift at any zoom level.
+          <div class="oakley-chunk-pill">
+            <strong>🧠 Key Chunk Synthesis (Barbara Oakley):</strong> <code>68 UPM Stem Floor (73% / 58% ScaleDown)</code> + <code>600 UPM AST Cell Lock</code> &mdash; Prevents dark-mode formula dropout while keeping algorithmic trees and Big-O notation rock-solid.
+          </div>
+        </div>
+      </details>
+    </div>
 
     <!-- ================================================================= -->
     <!-- TAB 1: POCKETGULL ALGO (Computer Science & Logic)                -->
@@ -985,6 +1184,156 @@ Flow Vector: &#xe95f; LSB (Byte 0) &rarr; MSB (Byte 7)
       </div>
     </section>
 
+
+    <!-- ================================================================= -->
+    <!-- TAB 5: SYSTEMS THINKING, CYBERNETICS & CAUSAL DYNAMICS            -->
+    <!-- ================================================================= -->
+    <section id="panel-systems" class="tab-content" role="tabpanel" aria-labelledby="tab-systems-btn">
+      <div class="control-row">
+        <div>
+          <h2>Systems Thinking, Cybernetics &amp; Causal Dynamics</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Native 600 UPM vector glyphs for Boundary/Set Topology, Part-Whole Holarchies, Cybernetic Coupling, Observer Framing (<code>uniE9E0–uniE9E7</code>), and Forrester/Meadows System Dynamics (<code>uniE9E8–uniE9EF</code>).</p>
+        </div>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <button class="btn-action" onclick="setSystemsPreset('dsrp')">&#xe9e1; Structural 4&times;2 Matrix</button>
+          <button class="btn-action" onclick="setSystemsPreset('feedback')">&#xe9e8; Causal Loop Diagram</button>
+          <button class="btn-action" onclick="setSystemsPreset('ataxia')">&#xe9ee; Project Ataxia Homeostasis</button>
+        </div>
+      </div>
+
+      <div class="studio-grid">
+        <!-- 1. Universal Cognitive & Cybernetic Patterns -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span class="font-algo" style="color: var(--cyan); font-size: 1.25rem;">&#xe9e1;</span>
+              Cognitive &amp; Cybernetic Topology: The 4 Structural Primitives
+            </div>
+            <span class="panel-badge">uniE9E0–uniE9E7</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+            <div class="glyph-pill" onclick="inspectSystemsGlyph('&#xe9e0;', 'U+E9E0 • sys_boundary_set', 'Distinctions / Boundary Set (Identity × Other): System vs. Environment boundary clarity — prevents cognitive blurring.')">
+              <span class="font-algo" style="font-size: 1.5rem; color: #38bdf8;">&#xe9e0;</span>
+              <div><strong>D &bull; Distinctions</strong><br><small style="color: var(--text-muted);">Identity (i) &times; Other (o)</small></div>
+            </div>
+            <div class="glyph-pill" onclick="inspectSystemsGlyph('&#xe9e1;', 'U+E9E1 • sys_holon_triad', 'Systems / Holon Triad (Part × Whole): Part-Whole containment network — every node is simultaneously a part and a whole.')">
+              <span class="font-algo" style="font-size: 1.5rem; color: #34d399;">&#xe9e1;</span>
+              <div><strong>S &bull; Systems</strong><br><small style="color: var(--text-muted);">Part (p) &times; Whole (w)</small></div>
+            </div>
+            <div class="glyph-pill" onclick="inspectSystemsGlyph('&#xe9e2;', 'U+E9E2 • sys_causal_coupling', 'Relationships / Cybernetic Coupling (Action × Reaction): Bidirectional causal vectors connecting distinct elements.')">
+              <span class="font-algo" style="font-size: 1.5rem; color: #fb7185;">&#xe9e2;</span>
+              <div><strong>R &bull; Relationships</strong><br><small style="color: var(--text-muted);">Action (a) &times; Reaction (r)</small></div>
+            </div>
+            <div class="glyph-pill" onclick="inspectSystemsGlyph('&#xe9e3;', 'U+E9E3 • sys_observer_frame', 'Perspectives / Observer Frame (Point × View): Second-order cybernetic observer projecting a frame onto a target view.')">
+              <span class="font-algo" style="font-size: 1.5rem; color: #c084fc;">&#xe9e3;</span>
+              <div><strong>P &bull; Perspectives</strong><br><small style="color: var(--text-muted);">Point (&rho;) &times; View (v)</small></div>
+            </div>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.25rem;">
+            <button type="button" class="glyph-pill" onclick="inspectSystemsGlyph('&#xe9e4;', 'U+E9E4 • sys_bipartite_split', 'Bipartite Boundary Split (i | o): Explicit distinction wall between system identity and external environment.')"><span class="font-algo" style="color: #38bdf8;">&#xe9e4;</span> i | o Split</button>
+            <button type="button" class="glyph-pill" onclick="inspectSystemsGlyph('&#xe9e5;', 'U+E9E5 • sys_nested_holarchy', 'Concentric Nested Holarchy (p ⊂ w): Three-tier concentric holon hierarchy.')"><span class="font-algo" style="color: #34d399;">&#xe9e5;</span> p &sub; w Holon</button>
+            <button type="button" class="glyph-pill" onclick="inspectSystemsGlyph('&#xe9e6;', 'U+E9E6 • sys_relational_node', 'Mediated Relational Channel: A causal edge carrying its own nested system state node.')"><span class="font-algo" style="color: #fb7185;">&#xe9e6;</span> Edge-Node Link</button>
+            <button type="button" class="glyph-pill" onclick="inspectSystemsGlyph('&#xe9e7;', 'U+E9E7 • sys_metacognitive_lens', 'Metacognitive Observer Aperture (ρ ↔ v): Conscious awareness of the framing lens.')"><span class="font-algo" style="color: #c084fc;">&#xe9e7;</span> &rho; &harr; v Lens</button>
+          </div>
+        </div>
+
+        <!-- 2. Forrester & Meadows System Dynamics Glyphs -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span class="font-algo" style="color: var(--emerald); font-size: 1.25rem;">&#xe9e8;</span>
+              System Dynamics: Stocks, Flows &amp; Feedback Loops
+            </div>
+            <span class="panel-badge">uniE9E8–uniE9EF</span>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.55rem;">
+            <button type="button" class="glyph-pill" onclick="inspectSystemsGlyph('&#xe9e8;', 'U+E9E8 • sys_loop_reinforcing', 'Reinforcing Feedback Loop (R+): Exponential growth or runaway cascade amplification.')"><span class="font-algo" style="color: var(--emerald);">&#xe9e8;</span> R+ Reinforcing</button>
+            <button type="button" class="glyph-pill" onclick="inspectSystemsGlyph('&#xe9e9;', 'U+E9E9 • sys_loop_balancing', 'Balancing Feedback Loop (B−): Goal-seeking homeostasis, error correction, and stability.')"><span class="font-algo" style="color: var(--cyan);">&#xe9e9;</span> B&minus; Balancing</button>
+            <button type="button" class="glyph-pill" onclick="inspectSystemsGlyph('&#xe9ea;', 'U+E9EA • sys_stock_accumulator', 'Stock / Accumulator Reservoir: System memory and state buffer that integrates flows over time.')"><span class="font-algo" style="color: var(--amber);">&#xe9ea;</span> Stock Box</button>
+            <button type="button" class="glyph-pill" onclick="inspectSystemsGlyph('&#xe9eb;', 'U+E9EB • sys_flow_valve', 'Rate / Flow Control Valve: Bowtie regulator governing inflow and outflow rates (dS/dt).')"><span class="font-algo" style="color: var(--indigo);">&#xe9eb;</span> Flow Valve</button>
+            <button type="button" class="glyph-pill" onclick="inspectSystemsGlyph('&#xe9ec;', 'U+E9EC • sys_delay_hash', 'Causal Time Delay (//): Phase lag between action and system response that triggers oscillation.')"><span class="font-algo" style="color: var(--rose);">&#xe9ec;</span> Time Delay //</button>
+            <button type="button" class="glyph-pill" onclick="inspectSystemsGlyph('&#xe9ed;', 'U+E9ED • sys_source_sink_cloud', 'Source / Sink Boundary Cloud: External boundary outside the modeled stock-and-flow horizon.')"><span class="font-algo" style="color: var(--text-muted);">&#xe9ed;</span> Source/Sink</button>
+            <button type="button" class="glyph-pill" onclick="inspectSystemsGlyph('&#xe9ee;', 'U+E9EE • sys_leverage_fulcrum', 'High-Leverage Fulcrum (Δ): Intervention point where small structural shifts transform system behavior.')"><span class="font-algo" style="color: var(--amber);">&#xe9ee;</span> Leverage &Delta;</button>
+            <button type="button" class="glyph-pill" onclick="inspectSystemsGlyph('&#xe9ef;', 'U+E9EF • sys_emergence_attractor', 'Phase-Space Strange Attractor (∞): Coupled non-linear basin of attraction and emergent order.')"><span class="font-algo" style="color: var(--purple);">&#xe9ef;</span> Emergence &infin;</button>
+          </div>
+          <div class="specimen-stage" style="min-height: 115px; flex-direction: row; align-items: center; gap: 1.25rem;">
+            <div id="systemsGlyphLarge" class="font-algo" style="font-size: 3.6rem; color: var(--cyan); min-width: 72px; text-align: center;">&#xe9e0;</div>
+            <div>
+              <div id="systemsGlyphCode" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--amber); font-weight: 700;">U+E9E0 &bull; sys_boundary_set</div>
+              <div id="systemsGlyphDesc" style="font-size: 0.88rem; color: var(--text-main); margin-top: 0.25rem;">Distinctions / Boundary Set (Identity &times; Other): System vs. Environment boundary clarity &mdash; prevents cognitive blurring.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Interactive 600 UPM Systems Thinking Diagram Canvas -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span class="font-algo" style="color: var(--amber);">&#xe9ea;</span>
+              600 UPM Monospace Causal &amp; Stock-Flow Schematic
+            </div>
+            <span class="panel-badge">Zero-Jitter Grid</span>
+          </div>
+          <div class="specimen-stage">
+            <div id="systemsCanvasOutput" class="ast-canvas" style="color: var(--cyan); font-size: 1.05rem; line-height: 1.55;">&#xe9ed; ──&rarr; &#xe9eb; [Inflow] ──&rarr; &#xe9ea; [Working Memory ≤ 4] ──&rarr; &#xe9eb; [Action] ──&rarr; &#xe9ed;
+                     │                                  │
+                     └────── &#xe9e9; [B&minus; Pacing Loop] &larr;── &#xe9ec; ──┘
+&#xe9e0; Boundary(i|o)  &#xe9e1; Holarchy(p&sub;w)  &#xe9e2; Coupling(a&rlarr;r)  &#xe9e3; Frame(&rho;&rarr;v)</div>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">
+            Because every cybernetic and system-dynamics symbol is locked to an exact <strong>600 UPM advance width</strong>, complex Stock-and-Flow pipelines and Causal Loop Diagrams align in plain-text Markdown, IDE comments, and terminal HUDs without SVG plugins.
+          </p>
+        </div>
+
+        <!-- 4. Academic Tribute & Open Educational Links (With Explicit Non-Affiliation Notice) -->
+        <div class="panel" style="border-color: rgba(56, 189, 248, 0.45); background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.08) 0%, var(--card-bg) 100%);">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span class="font-algo" style="color: var(--purple);">&#xe9e3;</span>
+              Further Study: Systems Thinking Podcasts, Courses &amp; Pioneers
+            </div>
+            <span class="panel-badge">Academic Tribute</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.55;">
+            These original geometric glyphs celebrate the lineage of systems science—from Jay Forrester, Donella Meadows, and Ludwig von Bertalanffy to the contemporary cognitive systems research of <strong>Drs. Derek &amp; Laura Cabrera</strong> (Cornell University / Cabrera Research Lab):
+          </p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem;">
+            <a href="https://www.cabreralab.science/podcast" target="_blank" rel="noopener noreferrer" class="btn-nav" style="justify-content: flex-start; border-color: rgba(56, 189, 248, 0.4);">
+              <span>🎙️</span>
+              <div>
+                <div style="font-weight: 700; color: var(--cyan);">The Cabrera Lab Podcast ↗</div>
+                <div style="font-size: 0.72rem; color: var(--text-muted);">Systems Thinking &amp; Mental Models</div>
+              </div>
+            </a>
+            <a href="https://ecornell.cornell.edu/certificates/leadership-and-strategic-management/systems-thinking/" target="_blank" rel="noopener noreferrer" class="btn-nav" style="justify-content: flex-start; border-color: rgba(251, 113, 133, 0.4);">
+              <span>🎓</span>
+              <div>
+                <div style="font-weight: 700; color: var(--rose);">eCornell Systems Thinking ↗</div>
+                <div style="font-size: 0.72rem; color: var(--text-muted);">Cornell Certificate Program</div>
+              </div>
+            </a>
+            <a href="https://donellameadows.org/systems-thinking-resources/" target="_blank" rel="noopener noreferrer" class="btn-nav" style="justify-content: flex-start; border-color: rgba(110, 231, 183, 0.4);">
+              <span>🌿</span>
+              <div>
+                <div style="font-weight: 700; color: var(--emerald);">Academy for Systems Change ↗</div>
+                <div style="font-size: 0.72rem; color: var(--text-muted);">Donella Meadows Leverage Points</div>
+              </div>
+            </a>
+            <a href="https://www.cabreralab.science/" target="_blank" rel="noopener noreferrer" class="btn-nav" style="justify-content: flex-start; border-color: rgba(216, 180, 254, 0.4);">
+              <span>🔬</span>
+              <div>
+                <div style="font-weight: 700; color: var(--purple);">Cabrera Research Lab ↗</div>
+                <div style="font-size: 0.72rem; color: var(--text-muted);">Peer-Reviewed Systems Research</div>
+              </div>
+            </a>
+          </div>
+          <div style="background: var(--surface-inner); border: 1px solid var(--card-border); border-radius: 8px; padding: 0.65rem 0.9rem; font-size: 0.74rem; color: var(--text-muted); line-height: 1.45;">
+            <strong>Independent Open-Source Notice (Nominative Fair Use):</strong> PocketGull is an independent, free open-source typeface project (SIL OFL 1.1) and is not affiliated with, sponsored by, or endorsed by Cornell University, eCornell, the Cabrera Research Lab, STSI, or Plectica. All glyph outlines (<code>U+E9E0–U+E9EF</code>) are original clean-room mathematical drawings. External links are provided purely for scholarly attribution and educational discovery.
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <script>
@@ -1122,6 +1471,40 @@ Flow Vector: &#xe960; MSB (Byte 7) &larr; LSB (Byte 0)`;
         text.style.fontWeight = '600';
         text.style.filter = 'contrast(1.4)';
         stats.textContent = 'Direct Thermal Paper: Thermal spread compensated';
+      }
+    }
+
+    // Tab 5: Systems Thinking & DSRP Inspector
+    function inspectSystemsGlyph(glyphEntity, codeTitle, description) {
+      const gEl = document.getElementById('systemsGlyphLarge');
+      const cEl = document.getElementById('systemsGlyphCode');
+      const dEl = document.getElementById('systemsGlyphDesc');
+      if (gEl) gEl.innerHTML = glyphEntity;
+      if (cEl) cEl.textContent = codeTitle;
+      if (dEl) dEl.textContent = description;
+    }
+
+    function setSystemsPreset(preset) {
+      const out = document.getElementById('systemsCanvasOutput');
+      if (!out) return;
+      if (preset === 'dsrp') {
+        out.textContent =
+`\uE9E0 Distinction [D = i × o] ──\uE9E4──► Identity: Sloan 5:1 Optotype | Other: Noise
+\uE9E1 System      [S = p × w] ──\uE9E5──► Parts: {glyf, loca, cmap} ⊂ Whole: SFNT Binary
+\uE9E2 Relationship[R = a × r] ──\uE9E6──► Action: Keystroke ⇄ Reaction: 0-Jitter Glyph
+\uE9E3 Perspective [P = ρ × v] ──\uE9E7──► Point: Ataxia / ICU Clinician 👁 View: WCAG AAA`;
+      } else if (preset === 'feedback') {
+        out.textContent =
+`\uE9ED ──► \uE9EB [Inflow] ──► \uE9EA [Stock: System State] ──► \uE9EB [Outflow] ──► \uE9ED
+          ▲                        │
+          └── \uE9E8 [R+ Gain] ─────────┼──► \uE9E9 [B− Equilibrium] ◄── \uE9EC [Delay //]
+                                   └──► \uE9EE [Meadows Leverage Δ] ──► \uE9EF [Emergence]`;
+      } else {
+        out.textContent =
+`┌── \uE9E1 Project Ataxia Salutogenic Homeostasis [4-Slot Ceiling]
+├── \uE9EA Stock: Working Memory Load (N ≤ 4 Chunks)
+├── \uE9E9 Balancing Loop (B−): 0.1 Hz Mayer Wave (\uE937) + 650nm Scotopic Red
+└── \uE9EE High-Leverage Point: Zero-Manual-Typing & Poka-Yoke Binary Alignment`;
       }
     }
   </script>

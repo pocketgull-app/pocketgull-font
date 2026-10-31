@@ -288,9 +288,9 @@
           else if (feat === 'dlig') btn.textContent = "'dlig' ON";
           else if (feat === 'ss07') {
             btn.textContent = "'ss07' (♥ Tittles) ON";
-            btn.style.borderColor = 'rgba(244, 63, 94, 0.4)';
-            btn.style.background = 'rgba(244, 63, 94, 0.15)';
-            btn.style.color = '#fb7185';
+            btn.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+            btn.style.background = 'rgba(16, 185, 129, 0.15)';
+            btn.style.color = '#10b981';
           }
         } else {
           btn.style.background = 'rgba(255, 255, 255, 0.04)';
@@ -309,9 +309,9 @@
           else if (feat === 'dlig') btn.textContent = "'dlig' OFF";
           else if (feat === 'ss07') {
             btn.textContent = "'ss07' (♥ Tittles) OFF";
-            btn.style.borderColor = 'rgba(244, 63, 94, 0.4)';
-            btn.style.background = 'rgba(244, 63, 94, 0.08)';
-            btn.style.color = '#fb7185';
+            btn.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+            btn.style.background = 'rgba(16, 185, 129, 0.08)';
+            btn.style.color = '#10b981';
           }
         }
 
@@ -450,7 +450,7 @@
           rootStyle.setProperty('--bio-halo-color', 'rgba(14, 165, 233, 0.7)');
         } else if (mode === 'aura') {
           rootStyle.setProperty('--bio-pulse-period', '1.2s');
-          rootStyle.setProperty('--bio-halo-color', 'rgba(251, 113, 133, 0.65)');
+          rootStyle.setProperty('--bio-halo-color', 'rgba(16, 185, 129, 0.65)');
         } else {
           rootStyle.setProperty('--bio-pulse-period', '1.0s');
           rootStyle.setProperty('--bio-halo-color', 'rgba(45, 212, 191, 0.5)');
@@ -540,9 +540,9 @@
         btn.classList.toggle('active', isMatch);
         if (isMatch) {
           if (variety === 'heart') {
-            btn.style.borderColor = '#fb7185';
-            btn.style.background = 'rgba(244,63,94,0.25)';
-            btn.style.color = '#fb7185';
+            btn.style.borderColor = '#10b981';
+            btn.style.background = 'rgba(16,185,129,0.25)';
+            btn.style.color = '#10b981';
           } else {
             btn.style.borderColor = '#2dd4bf';
             btn.style.background = 'rgba(45,212,191,0.2)';
@@ -598,9 +598,9 @@
             btn.style.background = 'rgba(45,212,191,0.2)';
             btn.style.color = '#2dd4bf';
           } else if (level === 'super') {
-            btn.style.borderColor = '#fb7185';
-            btn.style.background = 'rgba(244,63,94,0.25)';
-            btn.style.color = '#fb7185';
+            btn.style.borderColor = '#10b981';
+            btn.style.background = 'rgba(16,185,129,0.25)';
+            btn.style.color = '#10b981';
           }
         } else {
           btn.style.background = 'transparent';
@@ -630,9 +630,9 @@
           tittleVarietyBtns.forEach(btn => {
             const isHeart = (btn.dataset.variety === 'heart');
             btn.classList.toggle('active', isHeart);
-            btn.style.borderColor = isHeart ? '#fb7185' : 'rgba(45,212,191,0.3)';
-            btn.style.background = isHeart ? 'rgba(244,63,94,0.18)' : 'transparent';
-            btn.style.color = isHeart ? '#fb7185' : '#94a3b8';
+            btn.style.borderColor = isHeart ? '#10b981' : 'rgba(45,212,191,0.3)';
+            btn.style.background = isHeart ? 'rgba(16,185,129,0.18)' : 'transparent';
+            btn.style.color = isHeart ? '#10b981' : '#94a3b8';
           });
         }
       } else if (level === 'super') {
@@ -643,9 +643,9 @@
           tittleVarietyBtns.forEach(btn => {
             const isHeart = (btn.dataset.variety === 'heart');
             btn.classList.toggle('active', isHeart);
-            btn.style.borderColor = isHeart ? '#fb7185' : 'rgba(45,212,191,0.3)';
-            btn.style.background = isHeart ? 'rgba(244,63,94,0.18)' : 'transparent';
-            btn.style.color = isHeart ? '#fb7185' : '#94a3b8';
+            btn.style.borderColor = isHeart ? '#10b981' : 'rgba(45,212,191,0.3)';
+            btn.style.background = isHeart ? 'rgba(16,185,129,0.18)' : 'transparent';
+            btn.style.color = isHeart ? '#10b981' : '#94a3b8';
           });
         }
       }
@@ -750,7 +750,7 @@
 
           const scale = 1.00 + (0.15 * factor); // Subtle optical scaling from 1.00x up to 1.15x max
           const glow = Math.round(14 * factor);
-          const color = factor > 0.55 ? '#fb7185' : (factor > 0.2 ? '#2dd4bf' : 'currentColor');
+          const color = factor > 0.55 ? '#10b981' : (factor > 0.2 ? '#2dd4bf' : 'currentColor');
           heart.style.setProperty('--aura-scale', scale.toFixed(2));
           heart.style.setProperty('--aura-glow', `${glow}px`);
           heart.style.setProperty('--aura-color', color);
@@ -2831,7 +2831,7 @@ Sincerely,
           desc: 'Thump-thump! Thump-thump! Your heart is a mighty muscular engine that beats over 100,000 times every day, sending fresh oxygen and warmth to your toes, fingers, and dreaming brain.',
           kinetics: '✨ Energy Power: Beating over 100,000 times today without ever stopping to nap!',
           svg: `<svg viewBox="0 0 200 150" style="width: 100%; height: 160px;">
-                  <path d="M 100,45 C 90,15 45,15 45,55 C 45,95 100,135 100,135 C 100,135 155,95 155,55 C 155,15 110,15 100,45 Z" fill="#f43f5e" stroke="#fb7185" stroke-width="4" />
+                  <path d="M 100,45 C 90,15 45,15 45,55 C 45,95 100,135 100,135 C 100,135 155,95 155,55 C 155,15 110,15 100,45 Z" fill="#10b981" stroke="#34d399" stroke-width="4" />
                   <!-- Friendly smiling heart face -->
                   <circle cx="80" cy="65" r="4" fill="#fff" />
                   <circle cx="120" cy="65" r="4" fill="#fff" />
@@ -2839,8 +2839,8 @@ Sincerely,
                   <circle cx="121" cy="65" r="2" fill="#09090b" />
                   <path d="M 90,82 Q 100,92 110,82" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" />
                   <!-- Rosy cheeks -->
-                  <circle cx="72" cy="74" r="5" fill="#fda4af" opacity="0.6" />
-                  <circle cx="128" cy="74" r="5" fill="#fda4af" opacity="0.6" />
+                  <circle cx="72" cy="74" r="5" fill="#6ee7b7" opacity="0.6" />
+                  <circle cx="128" cy="74" r="5" fill="#6ee7b7" opacity="0.6" />
                   <text x="50" y="25" fill="#fef08a" font-size="8" font-family="'PocketGull Bold'">OXYGEN EXPRESSWAY</text>
                 </svg>`
         },
@@ -3246,7 +3246,7 @@ Sincerely,
           switch (organ) {
             case 'brain': return '✨ Wonder Power: 86 Billion idea sparklers thinking together!';
             case 'lungs': return '🎈 Breath Power: 300 Million tiny balloon helpers filling with fresh air!';
-            case 'heart': return '💖 Love & Strength: Over 100,000 strong beats every single day!';
+            case 'heart': return '💚 Love & Strength: Over 100,000 strong beats every single day!';
             case 'liver': return '🍓 Kitchen Magic: Turning fruit & veggies into running sparks!';
             case 'skeletal': return '🏃 Playground Speed: Leaping and skipping with friendly muscle rowers!';
             default: return '';
@@ -4016,10 +4016,10 @@ Sincerely,
           if (heartNode) {
             if (frame >= 14 && frame <= 24) {
               heartNode.setAttribute('transform', 'scale(1.2) translate(-28, -25)');
-              heartNode.setAttribute('fill', '#f43f5e');
+              heartNode.setAttribute('fill', '#10b981');
             } else {
               heartNode.removeAttribute('transform');
-              heartNode.setAttribute('fill', 'rgba(244, 63, 94, 0.25)');
+              heartNode.setAttribute('fill', 'rgba(16, 185, 129, 0.25)');
             }
           }
         }

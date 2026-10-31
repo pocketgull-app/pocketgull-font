@@ -1921,10 +1921,10 @@
     .healer-cadence-btn.active,
     .variety-btn:hover,
     .variety-btn.active {
-      background: #be123c !important;
-      border-color: #e11d48 !important;
+      background: #059669 !important;
+      border-color: #10b981 !important;
       color: #ffffff !important;
-      box-shadow: 0 0 10px rgba(225, 29, 72, 0.35);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.35);
     }
 
     .ismp-desc {
@@ -2243,7 +2243,7 @@
       text-decoration: underline;
     }
     .hud-cardiac-strip {
-      border-top: 1px solid rgba(251, 113, 133, 0.25);
+      border-top: 1px solid rgba(16, 185, 129, 0.25);
       padding-top: 8px;
       display: flex;
       flex-direction: column;
@@ -2253,8 +2253,8 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--rose);
-      box-shadow: 0 0 8px var(--rose);
+      background: var(--emerald);
+      box-shadow: 0 0 8px var(--emerald);
       display: inline-block;
       animation: hudHeartPulse 0.833s infinite;
     }
@@ -5128,7 +5128,7 @@
       <div id="vfPresetControls" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; justify-content: flex-start;">
         <button type="button" class="preset-pill active" data-preset="healing">🌿 Happy &amp; Healing Sanctuary</button>
         <button type="button" class="preset-pill" data-preset="heading_home">🌱 Heading Home (72 bpm)</button>
-        <button type="button" class="preset-pill" data-preset="philocardia">💖 The Healer Font (Heart 'i's)</button>
+        <button type="button" class="preset-pill" data-preset="philocardia">💚 The Healer Font (Heart 'i's)</button>
         <button type="button" class="preset-pill" data-preset="hairline">Hairline 100</button>
         <button type="button" class="preset-pill" data-preset="thin">Thin 200</button>
         <button type="button" class="preset-pill" data-preset="fineliner">Fineliner 400</button>
@@ -5143,7 +5143,7 @@
         <button type="button" class="preset-pill" data-preset="bionic">Bionic Fixation</button>
         <button type="button" class="preset-pill" data-preset="thermal">203 DPI Thermal</button>
         <button type="button" class="preset-pill" data-preset="braille">Tactile Braille</button>
-        <button type="button" class="preset-pill" data-preset="braille_philocardia">💖 Philocardia Braille</button>
+        <button type="button" class="preset-pill" data-preset="braille_philocardia">💚 Philocardia Braille</button>
       </div>
 
       <!-- 16-Axis Console: 4 Structured Domains -->
@@ -5313,7 +5313,7 @@
         <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; align-items: center;">
           <span style="font-size: 11px; color: var(--text-muted); font-family: 'PocketGull Mono'; margin-right: 4px;">Quick Insert:</span>
           <button type="button" class="vf-chip vf-chip-purple" onclick="setVfSample('braille')">⠁⠃⠉ Tactile Braille</button>
-          <button type="button" class="vf-chip vf-chip-purple" onclick="setVfSample('braille_philocardia')">💖 Philocardia Braille</button>
+          <button type="button" class="vf-chip vf-chip-purple" onclick="setVfSample('braille_philocardia')">💚 Philocardia Braille</button>
           <button type="button" class="vf-chip vf-chip-emerald" onclick="setVfSample('hearts')">💚 Philocardia Hearts</button>
           <button type="button" class="vf-chip vf-chip-cyan" onclick="setVfSample('ismp')">0̸ Slashed Zero &amp; Dosage</button>
           <button type="button" class="vf-chip vf-chip-emerald" onclick="setVfSample('sloan')">👁️ Sloan 5:1 Acuity</button>
@@ -5541,7 +5541,8 @@
             <strong class="hud-title" id="hudTitle">Character Inspection</strong>
           </div>
           <div class="hud-controls">
-            <button type="button" id="hudAudioToggleBtn" class="hud-btn" title="Toggle calming cardiac chime audio">🔊 Audio: ON</button>
+            <span id="hudAudioVisualCue" class="hud-audio-visual-cue" style="display: none; font-size: 10px; font-family: 'PocketGull Mono', monospace; color: var(--emerald); padding: 2px 6px; border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 4px; background: rgba(16, 185, 129, 0.08);">♪ 432Hz</span>
+            <button type="button" id="hudAudioToggleBtn" class="hud-btn" title="Toggle calming cardiac chime audio (Defaults to OFF to prevent CI / hearing aid startle)">🔇 Audio: OFF</button>
             <button type="button" id="hudPinBtn" class="hud-btn" title="Pin inspector in place">📌 Pin</button>
             <button type="button" id="hudCloseBtn" class="hud-btn" title="Close inspector (Esc)">✕</button>
           </div>
@@ -5608,12 +5609,12 @@
 
         <!-- Autonomic ECG Cardiac Telemetry Waveform (Active on Philocardia / Hearts) -->
         <div id="hudCardiacStrip" class="hud-cardiac-strip" style="display: none;">
-          <span style="font-size: 11px; color: var(--rose); font-weight: 700; display: flex; align-items: center; gap: 6px;">
+          <span style="font-size: 11px; color: var(--emerald); font-weight: 700; display: flex; align-items: center; gap: 6px;">
             <span class="hud-cardiac-dot"></span> <span>AUTONOMIC SINUS RHYTHM (72 BPM) • CUSHIONED APEX FILLET</span>
           </span>
           <div class="hud-ecg-canvas-wrap">
             <svg viewBox="0 0 500 40" width="100%" height="28" preserveAspectRatio="none">
-              <path class="hud-ecg-path" d="M 0 20 L 80 20 L 90 20 L 95 14 L 100 28 L 105 2 L 112 36 L 118 18 L 125 22 L 135 20 L 220 20 L 230 20 L 235 14 L 240 28 L 245 2 L 252 36 L 258 18 L 265 22 L 275 20 L 360 20 L 370 20 L 375 14 L 380 28 L 385 2 L 392 36 L 398 18 L 405 22 L 415 20 L 500 20" fill="none" stroke="var(--rose)" stroke-width="2"/>
+              <path class="hud-ecg-path" d="M 0 20 L 80 20 L 90 20 L 95 14 L 100 28 L 105 2 L 112 36 L 118 18 L 125 22 L 135 20 L 220 20 L 230 20 L 235 14 L 240 28 L 245 2 L 252 36 L 258 18 L 265 22 L 275 20 L 360 20 L 370 20 L 375 14 L 380 28 L 385 2 L 392 36 L 398 18 L 405 22 L 415 20 L 500 20" fill="none" stroke="var(--emerald)" stroke-width="2"/>
             </svg>
           </div>
         </div>
@@ -9298,7 +9299,7 @@
 
       // 3.5 Philocardia Heart Tittles & Tittle Varieties Engine
       const varietyMeanings = {
-        heart: '💖 <strong>Philocardia:</strong> Bedside warmth, pediatric comfort, and lovingkindness.',
+        heart: '💚 <strong>Philocardia:</strong> Bedside warmth, pediatric comfort, and lovingkindness.',
         blossom: '🌸 <strong>Blossom:</strong> Re-wilding, ecological rebirth, and native pollinator sanctuaries.',
         nuqta: '💎 <strong>Nuqṭa:</strong> Authentic calligraphic reed-pen footprint and sacred geometric origin.',
         star: '✨ <strong>Star:</strong> Orientation and calm in dark, anxious times.',
@@ -11261,8 +11262,9 @@
 
         let inspectorActive = true;
         let inspectorPinned = false;
-        let audioEnabled = true;
+        let audioEnabled = false; // Default OFF for Cochlear Implant & sensory safety
         let audioCtx = null;
+        const audioVisualCue = document.getElementById('hudAudioVisualCue');
         let activeCard = null;
         let hideTimeout = null;
 
@@ -11607,8 +11609,22 @@
           });
         }
 
-        // Web Audio Synth for Calming Cardiac Rhythm
+        // Web Audio Synth for Calming Cardiac Rhythm (CI & Sensory-Safe Soft Envelope)
+        function triggerVisualAudioCue(label) {
+          if (audioVisualCue) {
+            audioVisualCue.textContent = label || '♪ 432Hz';
+            audioVisualCue.style.display = 'inline-block';
+            clearTimeout(audioVisualCue._timer);
+            audioVisualCue._timer = setTimeout(() => {
+              audioVisualCue.style.display = 'none';
+            }, 600);
+          }
+        }
+
         function playCalmingPulse() {
+          // Always trigger visual caption cue for cochlear implant / DHH parity
+          triggerVisualAudioCue('♪ 432Hz Pulse');
+
           if (!audioEnabled) return;
           try {
             if (!audioCtx) {
@@ -11624,19 +11640,21 @@
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
 
+            // Soft-knee pure sine without harsh pitch-slide clicks
             osc.type = 'sine';
             osc.frequency.setValueAtTime(432, now); // Warm 432 Hz Pythagorean tuning
-            osc.frequency.exponentialRampToValueAtTime(216, now + 0.18);
+            osc.frequency.exponentialRampToValueAtTime(324, now + 0.25); // Subtle, gradual drop
 
+            // 35ms gentle linear attack to protect Cochlear Implant dynamic range compression
             gain.gain.setValueAtTime(0.0001, now);
-            gain.gain.linearRampToValueAtTime(0.04, now + 0.03);
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.22);
+            gain.gain.linearRampToValueAtTime(0.035, now + 0.035);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.28);
 
             osc.connect(gain);
             gain.connect(audioCtx.destination);
 
             osc.start(now);
-            osc.stop(now + 0.25);
+            osc.stop(now + 0.30);
           } catch (e) {}
         }
 
@@ -11729,7 +11747,8 @@
         if (audioBtn) {
           audioBtn.addEventListener('click', () => {
             audioEnabled = !audioEnabled;
-            audioBtn.textContent = audioEnabled ? '🔊 Audio: ON' : '🔇 Audio: MUTED';
+            audioBtn.textContent = audioEnabled ? '🔊 Audio: ON' : '🔇 Audio: OFF';
+            audioBtn.title = audioEnabled ? 'Audio chime enabled (432Hz soft pulse)' : 'Audio chime muted (safe for CIs)';
             audioBtn.classList.toggle('active', audioEnabled);
             if (audioEnabled) playCalmingPulse();
           });

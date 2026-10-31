@@ -35,10 +35,10 @@ Instead of leaving dangerous control characters unmapped (which triggers invisib
 
 | Category | Codepoints | Standard Name / Vector | PocketGull Font Rendering & Scanner Posture |
 | :--- | :--- | :--- | :--- |
-| **1. Trojan Source Explicit BiDi Overrides & Isolates** *(CVE-2021-42574)* | `U+202A`–`U+202E`,<br>`U+2066`–`U+2069` | `LRE`, `RLE`, `PDF`, `LRO`, `RLO`,<br>`LRI`, `RLI`, `FSI`, `PDI` | **Visible 600-UPM Warning Badge (`[!]`)** — Impossible to hide in source code or terminal prompts (0 false positives in code). |
-| **2. Fake-Space Filename & CLI Spoofers** | `U+115F`, `U+1160`, `U+3164`, `U+FFA0` | Hangul Choseong/Jungseong/Caeum & Halfwidth Fillers | **Visible 600-UPM Warning Badge (`[!]`)** — Eliminates fake-space authentication and CLI argument spoofing. |
-| **3. Emoji Smuggling & Invisible Watermark Stash Vectors** *(Paul Butler / SOS Intel / Layer A)* | `U+2061`–`U+2064`,<br>`U+E0100`–`U+E01EF` | Invisible Math (`Function Application`, `Invisible Times/Separator/Plus`) & **Variation Selectors Supplement (`VS17`–`VS256`)** | **Visible 600-UPM Warning Badge (`[!]`)** — Reveals multi-byte steganographic payloads smuggled inside innocent characters or emoji (`U+E0100`–`U+E01EF` have zero use in clinical/Latin/Braille text). |
-| **4. Context-Dependent Orthographic Joiners, Presentation Selectors & Flag Tags** *(Zero False Positives)* | `U+00AD`, `U+061C`, `U+180E`, `U+200B`–`U+200F`, `U+2060`, `U+FE00`–`U+FE0F`, `U+FEFF`, `U+E0000`–`U+E007F` | `SHY`, `ALM`, `MVS`, `ZWSP`, `ZWNJ`, `ZWJ`, `LRM`, `RLM`, `WJ`, `VS1`–`VS16`, `BOM`, Subdivision Flag Tags | **Clean Non-Marking Control Glyph (`uni200C.joiner`)** at the font layer so Persian (*Rubáiyát* `ZWNJ`), Arabic (`ALM`), Mongolian (`MVS`), family emoji (`ZWJ`/`VS16`), and Scotland/Wales flags (`U+1F3F4...U+E007F`) never break; paired with **Contextual AST/MCP Inspection** (flagging detached `U+E0000`–`U+E007F` without `U+1F3F4`, `ZWJ` outside pictographs, and `ZWNJ` outside Arabic/Indic scripts). |
+| **1. Trojan Source Explicit BiDi Overrides & Isolates** *(CVE-2021-42574)* | `U+202A`–`U+202E`,<br>`U+2066`–`U+2069` | `LRE`, `RLE`, `PDF`, `LRO`, `RLO`,<br>`LRI`, `RLI`, `FSI`, `PDI` | **Visible 600-UPM Warning Badge (`[!]`)** — Impossible to hide in source code or terminal prompts (host HarfBuzz terminals should pass `HB_BUFFER_FLAG_PRESERVE_DEFAULT_IGNORABLES`). |
+| **2. Fake-Space Filename & CLI Spoofers** | `U+115F`, `U+1160`, `U+3164`, `U+FFA0` | Hangul Choseong/Jungseong/Caeum & Halfwidth Fillers (`Lo` letters) | **Visible 600-UPM Warning Badge (`[!]`)** — Unconditionally caught across all shapers; eliminates fake-space authentication and CLI argument spoofing. |
+| **3. Emoji Smuggling, ASCII Tag Prompt Injection & Invisible Math** | `U+2061`–`U+2064`,<br>`U+E0000`–`U+E007F`,<br>`U+E0100`–`U+E01EF` | Invisible Math, **Unicode ASCII Tags**, & **Variation Selectors Supplement (`VS17`–`VS256`)** | **Visible 600-UPM Warning Badge (`[!]`)** — In `PocketGullMono` & `PocketGull-Numerics`, `U+E0000`–`U+E007F` routes unconditionally to `uni202E.guard` (`[!]`). In proportional cuts, `U+E0000`–`U+E007F` maps to `uni202E.guard` (`[!]`) by default in `cmap` with a contextual `GSUB` rule substituting `uni200C.joiner` only after `U+1F3F4` (`Waving Black Flag`). |
+| **4. Context-Dependent Orthographic Joiners & Presentation Selectors** *(Zero False Positives)* | `U+00AD`, `U+061C`, `U+180E`, `U+200B`–`U+200F`, `U+2060`, `U+FE00`–`U+FE0F`, `U+FEFF` | `SHY`, `ALM`, `MVS`, `ZWSP`, `ZWNJ`, `ZWJ`, `LRM`, `RLM`, `WJ`, `VS1`–`VS16`, `BOM` | **Clean Non-Marking Control Glyph (`uni200C.joiner`)** at the font layer so Persian (*Rubáiyát* `ZWNJ`), Arabic (`ALM`), Mongolian (`MVS`), and family emoji (`ZWJ`/`VS16`) never break; paired with **Contextual AST/MCP Inspection**. |
 
 ---
 
@@ -61,8 +61,8 @@ To support legacy developer tools while guiding the ecosystem toward official, n
 
 ### Layer 3: Binary Memory Safety (W3C OTS & DirectWrite Invariants)
 Every synthesized glyph in PocketGull strictly satisfies:
-1. **2-Byte Word Alignment (`loca[i] % 2 == 0`)**: Prevents unaligned memory reads in Windows `fontdrvhost.exe` and Chromium OTS.
-2. **Reserved Bit-7 Flag Masking (`flag & 0x3F`)**: Guarantees zero illegal TrueType point flags.
+1. **2-Byte Word Alignment (`loca[i] % 2 == 0`) & 4-Byte SFNT Table Alignment (`offset & 3 == 0`)**: Prevents unaligned memory reads in Windows `fontdrvhost.exe` and Chromium OTS.
+2. **Dual Bit-6 & Bit-7 Flag Masking (`flag & 0x3F`)**: Masks off both Bit 7 (`0x80` Reserved) and Bit 6 (`0x40` `OVERLAP_SIMPLE`) once overlaps are removed at build time, ensuring pre-2017 rasterizer safety and 0 OTS violations.
 3. **Zero Duplicate Nodes**: Eliminates division-by-zero rasterizer hazards in FreeType and DirectWrite.
 
 ---
@@ -88,4 +88,33 @@ Because PocketGull is engineered for upstream **Google Fonts (`google/fonts`)** 
 | **Upstream Monospace QA Checks (`google/fonts`, `googlefonts/fontspector`, `fontbakery`)** | **Google Fonts Upstream GitHub** | [googlefonts/fontspector](https://github.com/googlefonts/fontspector/issues) & [google/fonts](https://github.com/google/fonts/issues) |
 | **Parser Memory Safety in Chromium Blink, Skia, HarfBuzz, FreeType, or W3C OTS** | **Chrome VRP / Google OSS VRP** | [bughunters.google.com](https://bughunters.google.com/) |
 
+---
 
+## 4. Field Guide: What PocketGull Glyphs Mean on Your Machine & How to Verify Font Safety
+
+When you install PocketGull on a workstation, clinical terminal, or legacy device, the font uses distinct visual shapes to protect you from hidden text attacks and reading errors without disrupting normal work.
+
+### 4.1 What the Glyphs Mean When Installed (`Field Guide for Users`)
+
+| Glyph / Visual Shape | Codepoints / OpenType Feature | What It Means on Your Screen | Recommended Action |
+| :--- | :--- | :--- | :--- |
+| **`[!]` Warning Badge**<br>*(`uni202E.guard`)* | `U+202A`–`U+202E`, `U+2066`–`U+2069` *(BiDi)*,<br>`U+115F`, `U+1160`, `U+3164`, `U+FFA0` *(Fake Spaces)*,<br>`U+2061`–`U+2064`, `U+E0100`–`U+E01EF` *(`VS17`–`VS256`)* | **Hidden Spoofing or Smuggling Character Detected.** Reveals an invisible character trying to reverse text direction (*Trojan Source* `CVE-2021-42574`), fake a space in a CLI command/filename, or smuggle hidden LLM prompt bytes. | **Pause and inspect.** Do not run the command or approve the record until the hidden character is removed or re-typed cleanly. |
+| **Clean Non-Marking Join**<br>*(`uni200C.joiner`)* | `U+200C` (`ZWNJ`), `U+200D` (`ZWJ`), `U+061C` (`ALM`), `U+180E` (`MVS`), `U+FE00`–`U+FE0F`, `U+E0000`–`U+E007F` | **Legitimate Multilingual Joiner or Emoji Selector.** Required for natural shaping in Persian (*Rubáiyát*), Arabic, Mongolian, family emoji (`👨‍👩‍👧`), and regional subdivision flags (`🏴󠁧󠁢󠁳󠁣󠁴󠁿`). | **No action needed in prose.** Renders cleanly with zero false-positive `[!]` badges so non-Latin scripts and emoji work naturally. |
+| **`0̸` Slashed Zero, Curved `l`, Serifed `I`, Crossbar `Ƶ`** | ASCII `0` (`zero`/`cv08`), `l` (`cv05`), `I` (`ss02`), `Z` (`cv11`) | **ISMP Clinical Disambiguation.** Built-in optical distinction so `0` never looks like `O`, `1` never looks like `l` or `I`, and `2` never looks like `Z` (`500 mg`, `IL-6`, `IgA`). | **Normal reading.** Engineered to prevent human transcription and dosage misreads on both modern and aging low-contrast displays. |
+| **`⎇` Branch, `⚿` Padlock, `▶︎` Chevron, `LN` Line** | Official `U+2387`, `U+26BF`, `U+25B6`–`U+25D7` + Dual PUA `U+E0A0`–`U+E0B7` | **Developer & Terminal HUD Telemetry.** Indicates an active Git branch (`⎇`), a read-only/locked file (`⚿`), or prompt segment dividers in VS Code, Windows Terminal, and Starship. | **Normal HUD status.** Dual-mapped so both legacy Powerline tools and modern Unicode terminals render crisp icons instead of broken boxes. |
+| **`.notdef` Box (`□`)** | `GID 0` *(Unmapped Codepoint)* | **Unsupported Character or Encoding Mismatch.** The text contains a codepoint outside the installed font subset or a corrupted non-UTF-8 byte sequence. | **Check encoding or load subset.** Verify the file is `UTF-8` or enable the matching PocketGull specialist pack (`Math`, `Chem`, `ASL`). |
+
+---
+
+### 4.2 How Anyone Can Ensure a Font Is Safe (Modern & Legacy Hardware Checklist)
+
+Learned from historical font-layer vulnerabilities (**Stuxnet** `CVE-2010-2743` in `win32k.sys` and **Pegasus / FORCEDENTRY** `CVE-2021-30860`), use this 6-point checklist to verify that a font is safe for both modern workstations and older hardware:
+
+| Safety Check | Legacy Danger (What Used to Break) | What Safe Fonts (PocketGull) Do | How to Verify Locally |
+| :--- | :--- | :--- | :--- |
+| **1. Zero Bytecode VM (`instructionLength = 0`)** | Legacy TrueType hinting tables (`fpgm`, `prep`, `cvt `) run a stack-based virtual machine inside the OS/printer rasterizer—historically exploited for Ring 0 kernel execution. | Omit `fpgm`/`prep` VM bytecode and set `instructionLength = 0` on every glyph, using declarative `gasp` smoothing (`0x0006`) instead. | `dart run tool/pocketgull_foundry.dart audit` |
+| **2. 2-Byte Word Alignment (`loca[i] % 2 == 0`)** | Odd-length glyph records in `glyf` cause unaligned memory reads in Windows `fontdrvhost.exe`, legacy printer firmware, and Chromium W3C OTS. | Pad every `glyf` record with `0x00` to an even byte boundary and mask all point flags to `flag & 0x3F` (Bit 7 = `0`). | `dart run tool/pocketgull_foundry.dart audit` |
+| **3. Flat Contours & Zero Duplicate Nodes** | Deeply nested composite glyphs (`numberOfContours == -1`) and 0-length segments trigger stack overflows or division-by-zero crashes in older `FreeType` / `CoreText` engines. | Flatten outlines into closed quadratic contours (`numberOfContours > 0`) with `0` duplicate control points and valid bounding boxes (`xMin <= xMax`). | `python sources/validate_fonts.py` |
+| **4. Static `.ttf` Fallback for Pre-2017 Hardware** | Shipping *only* a Variable Font (`gvar`/`fvar`) breaks pre-2017 OS engines, Citrix thin clients, and embedded medical monitors that cannot parse `gvar` deltas. | Ship static `.ttf` and `.woff2` binaries (`Fineliner`, `Bold`, `Chiseltip`, `Mono`) alongside `PocketGull-VF` and cascade `.woff2` $\to$ `.ttf` in `fonts.css`. | Check `fonts/ttf/` and `fonts.css` `@font-face` rules |
+| **5. Zero DRM Print Locks (`OS/2.fsType = 0x0000`)** | Restrictive `fsType` bits cause legacy hospital PDF archivers and printer spoolers to silently reject or drop embedded fonts when printing charts. | Lock `OS/2.fsType = 0x0000` (*Installable Embedding*) across all styles so legacy printers and PDF tools never block output. | `python sources/validate_fonts.py` |
+| **6. Cryptographic SHA-256 & SRI Verification** | Unsigned fonts downloaded over unverified mirrors can be modified in transit. | Verify release binaries against `fonts/SHA256SUMS`, W3C `sha384` hashes (`fonts/sri-hashes.json`), and GitHub Sigstore SLSA attestations. | `sha256sum -c fonts/SHA256SUMS` |

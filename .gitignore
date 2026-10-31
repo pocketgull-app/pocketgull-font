@@ -26,6 +26,8 @@ desktop.ini
 build/
 dist/
 distribution/release/
+distribution/windows-installer/stage_ttf/
+distribution/windows-installer/assets/_*.ttf
 distribution/android/magisk*/system/
 instance_ufo/
 master_ufo/

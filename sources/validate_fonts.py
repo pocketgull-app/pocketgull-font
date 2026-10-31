@@ -177,7 +177,47 @@ def validate():
             log_fail("STAT Table: Missing")
             failed_checks += 1
 
-        # I. OpenType Sanitizer (OTS) Security & Memory Safety
+        # I. Blueprint v3.2.0 Binary Security Gate (PUA Bit 57, Zero-VM, 2-Byte Loca, 0x3F Flags)
+        total_checks += 4
+        pua_bit_57 = bool(font["OS/2"].ulUnicodeRange2 & (1 << 25))
+        if pua_bit_57:
+            log_pass("OS/2.ulUnicodeRange2 Bit 25 (Overall Bit 57 PUA): Enabled")
+        else:
+            log_fail("OS/2.ulUnicodeRange2 Bit 25 (Overall Bit 57 PUA): Unset")
+            failed_checks += 1
+
+        forbidden_vm = [t for t in ("fpgm", "cvt ") if t in font]
+        if not forbidden_vm:
+            log_pass("Zero-VM Table Gate: No 'fpgm' or 'cvt ' bytecode tables present")
+        else:
+            log_fail(f"Zero-VM Table Gate: Forbidden VM table(s) present: {forbidden_vm}")
+            failed_checks += 1
+
+        loca_offsets = list(font["loca"].locations)
+        odd_loca = [idx for idx, off in enumerate(loca_offsets) if (off & 1) != 0]
+        if not odd_loca:
+            log_pass(f"2-Byte Word Alignment: All {len(loca_offsets)} loca offsets are even (loca[i] % 2 == 0)")
+        else:
+            log_fail(f"2-Byte Word Alignment: Found {len(odd_loca)} odd loca offsets")
+            failed_checks += 1
+
+        bad_insn = 0
+        bad_flags = 0
+        for gname in font.getGlyphOrder():
+            g = glyf[gname]
+            if g.numberOfContours > 0:
+                if hasattr(g, "program") and len(g.program.getBytecode()) != 0:
+                    bad_insn += 1
+                for fl in g.flags:
+                    if (fl & 0xC0) != 0:
+                        bad_flags += 1
+        if bad_insn == 0 and bad_flags == 0:
+            log_pass("Simple Glyph Flags & Zero-VM: instructionLength == 0 and (flag & 0xC0) == 0 across all contours")
+        else:
+            log_fail(f"Simple Glyph Flags & Zero-VM: {bad_insn} non-zero instruction glyphs, {bad_flags} unmasked 0xC0 flags")
+            failed_checks += 1
+
+        # J. OpenType Sanitizer (OTS) Security & Memory Safety
         total_checks += 1
         try:
             import ots
@@ -202,5 +242,61 @@ def validate():
         print(f"\n{GREEN}[SUCCESS] All {total_checks} pre-flight checks passed! 100% Google Fonts compliant.{RESET}\n")
         sys.exit(0)
 
+
+GUARD_CODEPOINTS = (
+    list(range(0x202A, 0x202F)) +  # BiDi embeddings/overrides
+    list(range(0x2066, 0x206A)) +  # BiDi isolates
+    [0x115F, 0x1160, 0x3164, 0xFFA0] +  # Hangul fillers
+    list(range(0x2061, 0x2065)) +  # Invisible math operators
+    list(range(0xE0100, 0xE01F0))  # Variation Selectors Supplement
+)
+
+
+def audit_pocketgull_binary(ttf_path: str, strict_flat_glyf: bool = False) -> None:
+    """Deterministic Blueprint v3.2.0 binary security gate for CI and OEM verification."""
+    font = TTFont(ttf_path)
+    cmap = font.getBestCmap()
+
+    # 1. Verify OS/2.fsType == 0x0000 and PUA Bit 57 (ulUnicodeRange2 bit 25)
+    assert font["OS/2"].fsType == 0, f"{ttf_path}: fsType must be 0x0000"
+    assert (font["OS/2"].ulUnicodeRange2 & (1 << 25)) != 0, f"{ttf_path}: PUA bit 57 unset"
+
+    # 2. Verify no fpgm or cvt bytecode tables exist (and no active prep program)
+    for vm_table in ("fpgm", "cvt "):
+        assert vm_table not in font, f"{ttf_path}: forbidden VM table '{vm_table}' present"
+    if strict_flat_glyf:
+        assert "prep" not in font, f"{ttf_path}: forbidden VM table 'prep' present"
+
+    # 3. Verify 2-byte word alignment in raw loca offsets
+    loca_offsets = list(font["loca"].locations)
+    for g_idx, offset in enumerate(loca_offsets):
+        assert (offset & 1) == 0, f"{ttf_path}: glyph #{g_idx} has odd loca offset {offset}"
+
+    # 4. Verify instructionLength == 0 and flag bits 6 & 7 cleared ((flag & 0xC0) == 0)
+    glyf = font["glyf"]
+    for glyph_name in font.getGlyphOrder():
+        g = glyf[glyph_name]
+        if strict_flat_glyf:
+            assert not g.isComposite(), f"{ttf_path}: composite glyph '{glyph_name}' must be decomposed"
+        if g.numberOfContours > 0:
+            if hasattr(g, "program"):
+                assert len(g.program.getBytecode()) == 0, f"{ttf_path}: non-zero bytecode in '{glyph_name}'"
+            for flag in g.flags:
+                assert (flag & 0xC0) == 0, f"{ttf_path}: bit 6 or 7 set in flag 0x{flag:02X} on '{glyph_name}'"
+
+    # 5. Verify spoof codepoints present in cmap map to a visible outline (numberOfContours > 0)
+    if strict_flat_glyf:
+        for cp in GUARD_CODEPOINTS:
+            assert cp in cmap, f"{ttf_path}: missing spoof guard U+{cp:04X} in cmap"
+            g_name = cmap[cp]
+            assert glyf[g_name].numberOfContours > 0, f"{ttf_path}: U+{cp:04X} ({g_name}) has no visible contours"
+
+
 if __name__ == "__main__":
-    validate()
+    if len(sys.argv) > 1:
+        for path in sys.argv[1:]:
+            audit_pocketgull_binary(path)
+            print(f"[PASS] {path}")
+    else:
+        validate()
+

@@ -148,6 +148,10 @@ class SfntTransformer {
     final tableDataMap = <String, Uint8List>{};
 
     for (final tag in tables.keys) {
+      if (tag == 'fpgm' || tag == 'cvt ') {
+        // Strip legacy TrueType Bytecode Virtual Machine subroutine/storage tables
+        continue;
+      }
       if (tableOverrides != null && tableOverrides.containsKey(tag)) {
         tableDataMap[tag] = tableOverrides[tag]!;
         continue;
@@ -159,10 +163,27 @@ class SfntTransformer {
         tableDataMap[tag] = newGlyfData;
       } else if (tag == 'loca') {
         tableDataMap[tag] = newLocaData;
+      } else if (tag == 'maxp') {
+        if (tableBytes.length >= 32) {
+          final maxpView = ByteData.sublistView(tableBytes);
+          maxpView.setUint16(18, 0, Endian.big); // maxStorage = 0
+          maxpView.setUint16(20, 0, Endian.big); // maxFunctionDefs = 0
+          maxpView.setUint16(22, 0, Endian.big); // maxInstructionDefs = 0
+          maxpView.setUint16(26, 0, Endian.big); // maxSizeOfInstructions = 0
+        }
+        tableDataMap[tag] = tableBytes;
       } else if (tag == 'head') {
         final headView = ByteData.sublistView(tableBytes);
         // Clear checkSumAdjustment for recalculation
         headView.setUint32(8, 0, Endian.big);
+        // Normalize head.created (20..27) and head.modified (28..35) for SLSA Level 3 reproducible builds
+        // 2026-01-01T00:00:00Z in OpenType 1904 epoch seconds = 3850070400 (0x00000000E57B9580)
+        if (tableBytes.length >= 36) {
+          headView.setUint32(20, 0, Endian.big);
+          headView.setUint32(24, 0xE57B9580, Endian.big);
+          headView.setUint32(28, 0, Endian.big);
+          headView.setUint32(32, 0xE57B9580, Endian.big);
+        }
         // Set indexToLocFormat: 0 = short, 1 = long
         headView.setInt16(50, needsLongLoca ? 1 : 0, Endian.big);
         if (overrideRevision != null && tableBytes.length >= 8) {
@@ -199,7 +220,7 @@ class SfntTransformer {
       }
     }
 
-    // 6. Optionally inject gasp table (Thomas Phinney Subpixel Antialiasing)
+    // 6. Optionally inject gasp table (DirectWrite / ClearType Symmetric Antialiasing)
     if (injectGasp && !tableDataMap.containsKey('gasp')) {
       final gaspBytes = Uint8List(8);
       final gaspView = ByteData.sublistView(gaspBytes);

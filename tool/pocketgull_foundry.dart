@@ -86,7 +86,7 @@ String findProjectRoot() {
 
 void runAudit() {
   print('\n======================================================================');
-  print('  POCKETGULL TYPEFOUNDRY: THOMAS PHINNEY FORENSIC AUDITOR (DART 3.11)');
+  print('  POCKETGULL TYPEFOUNDRY: FORENSIC SFNT & W3C OTS AUDITOR (DART 3.11)');
   print('======================================================================\n');
 
   final typefaceRoot = findTypefaceDir();
@@ -294,10 +294,23 @@ void runTekAudit() {
 }
 
 
-void runRealign() {
+void runRealign([String? targetPath]) {
   print('\n======================================================================');
   print('  POCKETGULL TYPEFOUNDRY: 2-BYTE WORD BOUNDARY ALIGNMENT (DART 3.11)');
   print('======================================================================\n');
+
+  if (targetPath != null) {
+    final ttf = File(targetPath);
+    if (!ttf.existsSync()) {
+      print('  [ERR] File not found: $targetPath');
+      exitCode = 1;
+      return;
+    }
+    stdout.write('  • Realigning & stripping legacy VM tables on ${ttf.uri.pathSegments.last} ... ');
+    SfntTransformer.transformFont(inputFile: ttf);
+    print('[OK 2-byte aligned, 0 bytecode VM]');
+    return;
+  }
 
   final root = findProjectRoot();
   final appDir = findAppDir();
@@ -1002,7 +1015,8 @@ Future<void> main(List<String> args) async {
       runPhinneyMentor(targetFont);
       break;
     case 'realign':
-      runRealign();
+      final targetPath = args.length > 1 ? args[1] : null;
+      runRealign(targetPath);
       break;
     case 'smoe':
       final targetFont = args.length > 1 ? args[1] : 'fonts/ttf/PocketGull-Bold.ttf';

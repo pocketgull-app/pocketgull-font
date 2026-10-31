@@ -4,21 +4,24 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 test('Google OSV-Scanner Lockfile Vulnerability Guard', async (t) => {
-  await t.test('requirements.lock only contains cryptographically hash-pinned packages', () => {
-    const lockPath = path.resolve('requirements.lock');
-    assert.ok(fs.existsSync(lockPath), 'requirements.lock must exist');
-    const content = fs.readFileSync(lockPath, 'utf8');
-    const lines = content.split('\n');
+  await t.test('requirements.lock and requirements-ci.txt only contain cryptographically hash-pinned packages', () => {
+    for (const file of ['requirements.lock', 'requirements-ci.txt']) {
+      const lockPath = path.resolve(file);
+      assert.ok(fs.existsSync(lockPath), `${file} must exist`);
+      const content = fs.readFileSync(lockPath, 'utf8');
+      const lines = content.split(/\r?\n/);
 
-    // Packages must be hash-pinned
-    const packageLines = lines.filter(l => /^[a-zA-Z0-9_\-]+==/.test(l.trim()));
-    assert.ok(packageLines.length > 0, 'requirements.lock must define pinned packages');
-    for (const pkg of packageLines) {
-      assert.ok(pkg.includes('=='), `Package ${pkg} must be pinned with exact == version`);
+      // Packages must be hash-pinned
+      const packageLines = lines.filter(l => /^[a-zA-Z0-9_.\-]+==/.test(l.trim()));
+      assert.ok(packageLines.length > 0, `${file} must define pinned packages`);
+      for (const pkg of packageLines) {
+        assert.ok(pkg.includes('=='), `Package ${pkg} in ${file} must be pinned with exact == version`);
+      }
+
+      // Must contain sha256 hashes and zero leaked Windows user paths
+      assert.ok(content.includes('--hash=sha256:'), `${file} must specify sha256 hashes`);
+      assert.ok(!content.includes('C:/Users/') && !content.includes('C:\\Users\\'), `${file} must not leak local host paths`);
     }
-
-    // Must contain sha256 hashes
-    assert.ok(content.includes('--hash=sha256:'), 'requirements.lock must specify sha256 hashes');
   });
 
   await t.test('pubspec.lock declares zero unvetted third-party packages', () => {

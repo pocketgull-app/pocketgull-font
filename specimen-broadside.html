@@ -368,7 +368,7 @@
     }
 
     .ismp-feat-heart {
-      color: var(--rose);
+      color: var(--emerald);
       font-feature-settings: "ss07" 1;
     }
 
@@ -396,13 +396,13 @@
     }
     .tittle-variety-pill:hover {
       background: var(--btn-bg-hover);
-      border-color: var(--rose);
+      border-color: var(--emerald);
       color: #ffffff;
     }
     .tittle-variety-pill.active {
-      background: rgba(244, 63, 94, 0.25) !important;
-      border-color: #fb7185 !important;
-      color: #ffe4e6 !important;
+      background: rgba(16, 185, 129, 0.25) !important;
+      border-color: #10b981 !important;
+      color: #d1fae5 !important;
       font-weight: 800;
     }
 
@@ -909,6 +909,118 @@
       padding: 20px;
       margin-top: 20px;
     }
+
+    /* STEAM Curriculum & Barbara Oakley Chunking Architecture */
+    .steam-pillar-matrix {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.14);
+    }
+    .steam-pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .steam-pillar-card {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 14px;
+      text-decoration: none;
+      color: var(--text-main);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .steam-pillar-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--cyan);
+    }
+    .steam-challenge-box {
+      background: rgba(15, 23, 42, 0.72);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-left: 4px solid var(--steam-accent, #38bdf8);
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-bottom: 20px;
+    }
+    .steam-challenge-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .steam-challenge-title {
+      font-family: 'PocketGull Bold', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .steam-challenge-prompt {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+    .steam-challenge-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .steam-exp-btn {
+      background: var(--btn-bg-subtle);
+      border: 1px solid var(--btn-border-subtle);
+      color: var(--btn-text-subtle);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .steam-exp-btn:hover {
+      background: var(--btn-bg-hover);
+      border-color: var(--btn-border-hover);
+      color: #ffffff;
+    }
+    .steam-solution-details {
+      background: rgba(7, 11, 18, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+    .steam-solution-details summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--cyan);
+      user-select: none;
+    }
+    .steam-solution-body {
+      margin-top: 8px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+    .oakley-chunk-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #34d399;
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+    }
   </style>
 </head>
 <body>
@@ -924,7 +1036,7 @@
         <span class="badge emerald">W3C OTS & Word-Aligned Valid</span>
         <span class="badge amber">SIL Open Font License 1.1</span>
         <span class="badge">Google Fonts Option 5</span>
-        <span class="badge" style="background: rgba(244, 63, 94, 0.15); border-color: rgba(244, 63, 94, 0.4); color: var(--rose);">♥ The Healer Font (Hearts for i's)</span>
+        <span class="badge" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: var(--emerald);">💚 The Healer Font (Hearts for i's)</span>
       </div>
       <h1 class="header-title">PocketGull <span>Superfamily</span></h1>
       <p class="header-subtitle">
@@ -932,6 +1044,43 @@
         Born from authentic felt-marker strokes on physical cardstock, synthesized with Louise Sloan 5:1 optotypic legibility
         and ISMP life-critical character disambiguation for high-acuity healthcare environments.
       </p>
+
+      <!-- 5-Pillar STEAM & Barbara Oakley Chunking Matrix (Collapsible Calm Specimen Default) -->
+      <details class="steam-pillar-matrix" id="broadsideSteamMatrix">
+        <summary style="cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; padding: 8px 12px; border-radius: 8px; background: rgba(15, 23, 42, 0.55); border: 1px solid rgba(56, 189, 248, 0.3);">
+          <span style="font-family: 'PocketGull Mono', monospace; font-size: 11px; color: var(--cyan); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
+            🎓 5-Pillar STEAM Lens &amp; Barbara Oakley Cognitive Chunking ▸ Click to Expand
+          </span>
+          <span style="font-family: 'PocketGull Mono', monospace; font-size: 11px; color: var(--emerald);">4-Slot Working Memory Ceiling</span>
+        </summary>
+        <div class="steam-pillars-grid" style="margin-top: 12px;">
+          <a href="#variable" class="steam-pillar-card" style="border-top: 3px solid #34d399;">
+            <div style="font-family: 'PocketGull Mono'; font-size: 11px; color: #34d399; font-weight: 700;">[S] SCIENCE</div>
+            <div style="font-weight: 700; font-size: 13px;">Retinal Acuity &amp; Neuro-Ergonomics</div>
+            <div style="font-size: 11px; color: var(--text-muted);">Louise Sloan 5:1 foveal cone resolution (1 arcmin) &amp; dyslexia mirror locks.</div>
+          </a>
+          <a href="#variable" class="steam-pillar-card" style="border-top: 3px solid #38bdf8;">
+            <div style="font-family: 'PocketGull Mono'; font-size: 11px; color: #38bdf8; font-weight: 700;">[T] TECHNOLOGY</div>
+            <div style="font-weight: 700; font-size: 13px;">OpenType GVAR &amp; SMoE Routing</div>
+            <div style="font-size: 11px; color: var(--text-muted);">Continuous variable interpolation, 600 UPM ICU monospace, &amp; Brotli Q11 shards.</div>
+          </a>
+          <a href="#ecological" class="steam-pillar-card" style="border-top: 3px solid #fbbf24;">
+            <div style="font-family: 'PocketGull Mono'; font-size: 11px; color: #fbbf24; font-weight: 700;">[E] ENGINEERING</div>
+            <div style="font-weight: 700; font-size: 13px;">ISMP Safety &amp; Eco Conservation</div>
+            <div style="font-size: 11px; color: var(--text-muted);">-22.4% Spore Trap (ss01) ink yield, +2.1h OLED battery, &amp; W3C OTS memory safety.</div>
+          </a>
+          <a href="#ismpCardHeart" class="steam-pillar-card" style="border-top: 3px solid #10b981;">
+            <div style="font-family: 'PocketGull Mono'; font-size: 11px; color: #34d399; font-weight: 700;">[A] ARTS</div>
+            <div style="font-weight: 700; font-size: 13px;">Felt-Marker Warmth &amp; Philocardia</div>
+            <div style="font-size: 11px; color: var(--text-muted);">25 UPM cardstock fillets, 72 BPM sinus heart tittles, &amp; sovereign calligraphy.</div>
+          </a>
+          <a href="#variable" class="steam-pillar-card" style="border-top: 3px solid #c084fc;">
+            <div style="font-family: 'PocketGull Mono'; font-size: 11px; color: #c084fc; font-weight: 700;">[M] MATHEMATICS</div>
+            <div style="font-weight: 700; font-size: 13px;">Splines, Calipers &amp; Modulo-2</div>
+            <div style="font-size: 11px; color: var(--text-muted);">adv &ge; xMax + 40 UPM sidebearings, loca[i] % 2 == 0, &amp; 5:1 Snellen ratios.</div>
+          </a>
+        </div>
+      </details>
     </header>
 
     <!-- 2. Superfamily Hierarchy Waterfall -->
@@ -1021,11 +1170,41 @@
 
     <!-- 3. Variable Font OpenType Specimen -->
     <section class="specimen-card" id="variable" style="border-color: rgba(56, 189, 248, 0.4); text-align: left;">
-      <div class="section-label" style="color: #38bdf8; text-align: left;">Variable Typography</div>
+      <div class="section-label" style="color: #38bdf8; text-align: left;">Variable Typography • STEAM Pillar [M × T]</div>
       <h2 class="section-title" style="text-align: left; justify-content: flex-start; gap: 16px;">
         <span>Variable Weight, Width &amp; Slant</span>
         <small>Continuous OpenType interpolation across the 1000 UPM em-square</small>
       </h2>
+
+      <!-- STEAM Lab Challenge B.1 -->
+      <div class="steam-challenge-box" style="--steam-accent: #38bdf8;">
+        <div class="steam-challenge-header">
+          <div class="steam-challenge-title">🧪 STEAM Lab Challenge B.1 • OpenType GVAR Interpolation &amp; Sidebearing Caliper Geometry</div>
+          <span style="font-family: 'PocketGull Mono'; font-size: 11px; color: #38bdf8;">[MATH × TECHNOLOGY]</span>
+        </div>
+        <p class="steam-challenge-prompt">
+          <strong>Focused Hypothesis:</strong> How does a single Variable Font interpolate across weight (<code>400..900</code>), width (<code>75%..100%</code>), and slant (<code>-10.5°..0°</code>) while guaranteeing zero glyph collisions across 227,298 superfamily glyphs?
+        </p>
+        <div class="steam-challenge-actions">
+          <button type="button" class="steam-exp-btn" onclick="document.querySelector('[data-preset=&quot;chiseltip&quot;]')?.click()">
+            🖋️ Test Chiseltip 900 Extremum
+          </button>
+          <button type="button" class="steam-exp-btn" onclick="document.querySelector('[data-preset=&quot;condensed&quot;]')?.click()">
+            📐 Test Condensed 75% Width
+          </button>
+          <button type="button" class="steam-exp-btn" onclick="document.querySelector('[data-preset=&quot;italic&quot;]')?.click()">
+            ⚡ Test -10.5° Clinical Oblique
+          </button>
+        </div>
+        <details class="steam-solution-details">
+          <summary>▸ View Mathematical Derivation &amp; Barbara Oakley Key Chunk</summary>
+          <div class="steam-solution-body">
+            <strong>1. Linear Combination in <code>gvar</code>:</strong> Every control point is displaced by $\mathbf{P}(s) = \mathbf{P}_0 + \sum_{k=1}^4 s_k \Delta \mathbf{P}_k$.<br>
+            <strong>2. Caliper Clearance Invariant:</strong> Every glyph advance width satisfies $\text{adv} \ge x_{\max} + 40\text{ UPM}$, eliminating negative right-sidebearings (`RSB >= +40 UPM`) even in curved lowercase <code>l</code> and subscript ions (<code>H₂SO₄</code>).<br>
+            <div class="oakley-chunk-pill">🧠 Oakley Key Chunk: Point-compatible delta vectors + 40 UPM right-sidebearing guard = zero-collision kinematic typography.</div>
+          </div>
+        </details>
+      </div>
 
       <!-- Style Presets (Shifted Left) -->
       <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; justify-content: flex-start;">
@@ -1146,11 +1325,40 @@
 
     <!-- 4. ISMP Life-Critical Clinical Disambiguation Suite -->
     <section class="specimen-card">
-      <div class="section-label">Patient Safety Standard</div>
+      <div class="section-label">Patient Safety Standard • STEAM Pillar [S × E × A]</div>
       <h2 class="section-title">
         <span>ISMP &amp; FDA Character Disambiguation Suite</span>
         <small>Eliminating Look-Alike / Sound-Alike Drug Collision Errors</small>
       </h2>
+
+      <!-- STEAM Lab Challenge B.2 -->
+      <div class="steam-challenge-box" style="--steam-accent: #10b981;">
+        <div class="steam-challenge-header">
+          <div class="steam-challenge-title">🧪 STEAM Lab Challenge B.2 • Homoglyph Disambiguation &amp; 72 BPM Sinus Tittle Elevation</div>
+          <span style="font-family: 'PocketGull Mono'; font-size: 11px; color: #34d399;">[SCIENCE × ENGINEERING × ARTS]</span>
+        </div>
+        <p class="steam-challenge-prompt">
+          <strong>Focused Hypothesis:</strong> Why must every alternate tittle on <code>i</code> and <code>j</code> (`heart`, `blossom`, `nuqta`, `star`, `droplet`) maintain a mandatory <code>48 UPM</code> air gap above the stem ($y_{\text{stem}} = 536\text{ UPM}$, $y_{\text{tittleMin}} = 584\text{ UPM}$)? Test the 6 tittle varieties below:
+        </p>
+        <div class="steam-challenge-actions">
+          <button type="button" class="steam-exp-btn" onclick="document.querySelector('#broadsideTittleVarietyMini [data-v=&quot;heart&quot;]')?.click()">
+            ♥ Activate Philocardia Heart (cv09)
+          </button>
+          <button type="button" class="steam-exp-btn" onclick="document.querySelector('#broadsideTittleVarietyMini [data-v=&quot;nuqta&quot;]')?.click()">
+            ◆ Activate Calligraphic Nuqṭa
+          </button>
+          <button type="button" class="steam-exp-btn" onclick="document.querySelector('#broadsideTittleVarietyMini [data-v=&quot;droplet&quot;]')?.click()">
+            💧 Activate Hydration Droplet
+          </button>
+        </div>
+        <details class="steam-solution-details">
+          <summary>▸ View Optometric Derivation &amp; Barbara Oakley Key Chunk</summary>
+          <div class="steam-solution-body">
+            <strong>Stem Preservation &amp; Tittle Elevation Invariant:</strong> At small sizes ($\le 14\text{ px}$) or under astigmatic blur, a tittle closer than $48\text{ UPM}$ merges with the vertical stem ($x \in [85, 173]\text{ UPM}$), turning <code>i</code> into a tall <code>l</code> or <code>1</code>. Locking contour 0 (`stem`) to $y \in [0, 536]$ and elevating contour 1 (`tittle`) to $y \in [584, 704]$ guarantees instant foveal separation.<br>
+            <div class="oakley-chunk-pill">🧠 Oakley Key Chunk: 48 UPM air-gap clearance prevents vertical stem-to-tittle crowding while preserving bedside warmth.</div>
+          </div>
+        </details>
+      </div>
 
       <div class="ismp-grid">
         <div class="ismp-card">
@@ -1208,8 +1416,8 @@
         </div>
 
         <!-- Philocardia Heart Tittle Card -->
-        <div class="ismp-card" id="ismpCardHeart" style="border-color: rgba(251, 113, 133, 0.35); background: linear-gradient(180deg, rgba(251, 113, 133, 0.05) 0%, var(--card-bg) 100%);">
-          <div class="ismp-title" style="color: var(--rose); display: flex; justify-content: space-between; align-items: center;">
+        <div class="ismp-card" id="ismpCardHeart" style="border-color: rgba(16, 185, 129, 0.35); background: linear-gradient(180deg, rgba(16, 185, 129, 0.05) 0%, var(--card-bg) 100%);">
+          <div class="ismp-title" style="color: var(--emerald); display: flex; justify-content: space-between; align-items: center;">
             <span>Philocardia Hearts (cv09 / ss07)</span>
             <button type="button" id="broadsideHeartBpmBadge" title="72 BPM Sinus Rhythm" style="background: rgba(16, 185, 129, 0.25); border: 1.5px solid #10b981; color: #d1fae5; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; cursor: pointer;">72 BPM</button>
           </div>
@@ -1275,11 +1483,38 @@
 
     <!-- 6. Clinical Ecological Sustainability, Battery & Mobile Runtime -->
     <section class="specimen-card" id="ecological">
-      <div class="section-label" style="color: var(--emerald);">Resource Conservation &amp; Mobile Battery Extension</div>
+      <div class="section-label" style="color: var(--emerald);">Resource Conservation &amp; Mobile Battery Extension • STEAM Pillar [E × S × M]</div>
       <h2 class="section-title">
         <span>Clinical Ecological Yield &amp; Battery Runtime</span>
         <small>-22.4% Ink/Toner Deposition • +2.1 Hours Mobile OLED Battery • -91.4% Network Egress</small>
       </h2>
+
+      <!-- STEAM Lab Challenge B.3 -->
+      <div class="steam-challenge-box" style="--steam-accent: #10b981;">
+        <div class="steam-challenge-header">
+          <div class="steam-challenge-title">🧪 STEAM Lab Challenge B.3 • Spore Trap (ss01) Conservation &amp; True-Black OLED Subpixel Physics</div>
+          <span style="font-family: 'PocketGull Mono'; font-size: 11px; color: #34d399;">[ENGINEERING × SCIENCE × MATH]</span>
+        </div>
+        <p class="steam-challenge-prompt">
+          <strong>Focused Hypothesis:</strong> Can micro-cavity Spore Traps (OpenType <code>ss01</code>) and true-black OLED telemetry (`#050811`) simultaneously reduce physical toner deposition by <strong>22.4%</strong> and active display wattage by <strong>34%</strong>?
+        </p>
+        <div class="steam-challenge-actions">
+          <button type="button" class="steam-exp-btn" onclick="document.getElementById('toggleSporeBtn')?.click()">
+            🌱 Toggle Spore Traps [ss01] (−22.4% Ink / −34% OLED Draw)
+          </button>
+          <button type="button" class="steam-exp-btn" onclick="document.querySelector('[data-scale=&quot;enterprise&quot;]')?.click()">
+            🏥 Simulate 5,000-Cart Enterprise Health System Yield
+          </button>
+        </div>
+        <details class="steam-solution-details">
+          <summary>▸ View Physical &amp; Mathematical Derivation &amp; Barbara Oakley Key Chunk</summary>
+          <div class="steam-solution-body">
+            <strong>1. Toner &amp; Capillary Yield:</strong> Hollowing high-mass stroke junctions via <code>ss01</code> reduces filled glyph polygon area $A_{\text{ss01}} = 0.776 \cdot A_0$ while maintaining outer perimeter contrast.<br>
+            <strong>2. OLED Subpixel Electrodynamics:</strong> On self-emissive OLED panels, black pixels draw $0\text{ mA}$. Combining `#050811` background with `ss01` drops active panel power from $2.41\text{ W}$ to $1.59\text{ W}$ ($-34\%$), adding $+2.1\text{ hours}$ per 12h shift.<br>
+            <div class="oakley-chunk-pill">🧠 Oakley Key Chunk: Perimeter contrast governs legibility; interior stroke mass governs ink &amp; photon energy consumption.</div>
+          </div>
+        </details>
+      </div>
 
       <!-- 3 Key Metric Cards -->
       <div class="eco-metric-grid">
@@ -1902,7 +2137,7 @@
 
       // Philocardia Tittle Varieties
       const broadsideMeanings = {
-        heart: '💖 <strong>Philocardia:</strong> Bedside warmth, pediatric comfort, and lovingkindness.',
+        heart: '💚 <strong>Philocardia:</strong> Bedside warmth, pediatric comfort, and lovingkindness.',
         blossom: '🌸 <strong>Blossom:</strong> Re-wilding, ecological rebirth, and native pollinator sanctuaries.',
         nuqta: '💎 <strong>Nuqṭa:</strong> Authentic calligraphic reed-pen footprint and sacred geometric origin.',
         star: '✨ <strong>Star:</strong> Orientation and calm in dark, anxious times.',

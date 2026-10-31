@@ -783,6 +783,80 @@
       padding: 1.25rem;
       margin-top: 1rem;
     }
+
+    /* STEAM & Barbara Oakley Chunking Styles */
+    .steam-pillar-matrix {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--card-border);
+      text-align: left;
+    }
+    .steam-pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+      gap: 0.65rem;
+      margin-top: 0.65rem;
+    }
+    .steam-pillar-card {
+      background: var(--surface-inner);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 0.7rem 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .steam-challenge-box {
+      background: var(--surface-inner);
+      border: 1px solid rgba(6, 182, 212, 0.35);
+      border-left: 4px solid var(--cyan);
+      border-radius: 8px;
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 1.1rem;
+      text-align: left;
+    }
+    .steam-exp-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 0.38rem 0.75rem;
+      border-radius: 6px;
+      font-family: var(--font-sans);
+      font-size: 0.76rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .steam-exp-btn:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+    .steam-solution-details {
+      margin-top: 0.55rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.78rem;
+    }
+    .steam-solution-details summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+    .oakley-chunk-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+      padding: 3px 9px;
+      border-radius: 5px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: var(--emerald);
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
   </style>
 </head>
 <body>
@@ -809,11 +883,48 @@
 
     <!-- Hero Header -->
     <div class="hero">
-      <div class="hero-badge">🕊️ Leave No One Behind • Multi-Script Accessibility</div>
+      <div class="hero-badge">🕊️ Leave No One Behind • Multi-Script Accessibility • STEAM &amp; Oakley Chunking</div>
       <h1>Global Sign &amp; <span>ASL Practice Studio</span></h1>
       <p>
         Real-time fingerspelling transcriber, two-handed BSL comparative engine, JSL Yubimoji, and clinical emergency hand signals. Built on the 1000 UPM PocketGull typefoundry grid with 25 UPM humanist felt-marker fillets.
       </p>
+
+      <!-- 5-Pillar STEAM & Barbara Oakley Chunking Matrix (Collapsible Calm Studio Default) -->
+      <details class="steam-pillar-matrix" id="aslSteamMatrix">
+        <summary style="cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; padding: 6px 10px; border-radius: 7px; background: rgba(15, 23, 42, 0.55); border: 1px solid rgba(56, 189, 248, 0.3);">
+          <span style="font-size: 0.75rem; font-weight: 800; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.06em;">
+            🎓 5-Pillar STEAM Sign Pedagogy &amp; Barbara Oakley Motor Chunking ▸ Click to Expand
+          </span>
+          <span style="font-size: 0.72rem; color: var(--emerald); font-weight: 700;">4-Slot Working Memory Ceiling</span>
+        </summary>
+        <div class="steam-pillars-grid" style="margin-top: 10px;">
+          <div class="steam-pillar-card" style="border-top: 3px solid var(--emerald);">
+            <div style="font-size: 0.7rem; font-weight: 800; color: var(--emerald);">[S] SCIENCE</div>
+            <div style="font-size: 0.8rem; font-weight: 700;">Phalangeal Biomechanics</div>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">5 Benedict (1921) hand morphologies &amp; Stokoe cheremic phonology.</div>
+          </div>
+          <div class="steam-pillar-card" style="border-top: 3px solid var(--cyan);">
+            <div style="font-size: 0.7rem; font-weight: 800; color: var(--cyan);">[T] TECHNOLOGY</div>
+            <div style="font-size: 0.8rem; font-weight: 700;">360° Turntable &amp; Unicode</div>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">Real-time SVG vector turntable &amp; Sutton SignWriting (U+1D800–U+1DAAF).</div>
+          </div>
+          <div class="steam-pillar-card" style="border-top: 3px solid var(--amber);">
+            <div style="font-size: 0.7rem; font-weight: 800; color: var(--amber);">[E] ENGINEERING</div>
+            <div style="font-size: 0.8rem; font-weight: 700;">ADA Title III &amp; ACA 1557</div>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">Negative Space Invariant #2: Never replaces certified Deaf interpreters.</div>
+          </div>
+          <div class="steam-pillar-card" style="border-top: 3px solid var(--rose);">
+            <div style="font-size: 0.7rem; font-weight: 800; color: var(--rose);">[A] ARTS</div>
+            <div style="font-size: 0.8rem; font-weight: 700;">25 UPM Felt-Marker Warmth</div>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">Expressive vs. Receptive visual perspective &amp; anatomical clarity.</div>
+          </div>
+          <div class="steam-pillar-card" style="border-top: 3px solid var(--purple);">
+            <div style="font-size: 0.7rem; font-weight: 800; color: var(--purple);">[M] MATHEMATICS</div>
+            <div style="font-size: 0.8rem; font-weight: 700;">Kinematic ROM &amp; WPM</div>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">Joint flexion angles (MCP/PIP/DIP) &amp; temporal cadence $\Delta t = \frac{60}{4.5 \cdot \text{WPM}}$.</div>
+          </div>
+        </div>
+      </details>
     </div>
 
     <!-- System Selector Tabs -->
@@ -853,6 +964,36 @@
           <div style="font-size: 0.8rem; color: var(--text-muted);" id="currentSystemDesc">
             One-handed manual alphabet (1000 UPM / 600 UPM pitch)
           </div>
+        </div>
+
+        <!-- STEAM Lab Challenge S.1 -->
+        <div class="steam-challenge-box" id="steamChallengeAsl1">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 6px;">
+            <strong style="font-size: 0.84rem; color: var(--text-main);">🧪 STEAM Lab Challenge S.1 • Cheremic Fist Disambiguation (A vs. S vs. T) &amp; Motor Chunking</strong>
+            <span style="font-size: 0.7rem; color: var(--cyan); font-weight: 700;">[SCIENCE × ARTS × MATH]</span>
+          </div>
+          <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 8px;">
+            <strong>Focused Hypothesis:</strong> Beginner signers frequently confuse the closed-fist letters <code>A</code>, <code>S</code>, and <code>T</code> because all four fingers flex to $\theta_{\text{MCP}} \approx 90^\circ$. How does thumb abduction/adduction disambiguate them, and how does Barbara Oakley’s motor chunking group letter sequences into single lexical envelopes?
+          </p>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+            <button type="button" class="steam-exp-btn" onclick="const inp=document.getElementById('transcribeInput'); if(inp){inp.value='A S T M N E'; inp.dispatchEvent(new Event('input'));}">
+              ✊ Compare Fist Cluster (A • S • T • M • N • E)
+            </button>
+            <button type="button" class="steam-exp-btn" onclick="document.getElementById('btnTogglePerspective')?.click()">
+              👁️ Toggle Receptive vs. Expressive Mirror
+            </button>
+            <button type="button" class="steam-exp-btn" onclick="const sel=document.getElementById('selectHandModel'); if(sel){sel.value=sel.value==='osseous'?'sloan':'osseous'; sel.dispatchEvent(new Event('change'));}">
+              🖐️ Toggle Osseous vs. Sloan 5:1 Morphology
+            </button>
+          </div>
+          <details class="steam-solution-details">
+            <summary>▸ View Biomechanical &amp; Mathematical Derivation &amp; Barbara Oakley Key Chunk</summary>
+            <div style="margin-top: 6px; color: var(--text-muted); line-height: 1.5;">
+              <strong>1. Thumb Vector Topology:</strong> In <code>A</code>, the thumb rests laterally along the radial index border ($\phi = 0^\circ$). In <code>S</code>, the thumb crosses anteriorly over the middle phalanges ($\phi = 90^\circ$ palmar adduction). In <code>T</code>, the thumb interposes between the index and middle proximal phalanges.<br>
+              <strong>2. Temporal Cadence Equation:</strong> At fingerspelling speed $W\text{ (WPM)}$ with $4.5\text{ letters/word}$, inter-letter transition time is $\Delta t = \frac{60,000}{4.5 \cdot W}\text{ ms}$ ($533\text{ ms}$ at $25\text{ WPM}$).<br>
+              <div class="oakley-chunk-pill">🧠 Oakley Key Chunk: Read whole syllabic co-articulation envelopes (e.g., "S-T-A-T") rather than decoding isolated static fingers.</div>
+            </div>
+          </details>
         </div>
 
         <!-- Controls: Perspective & Hand -->

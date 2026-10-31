@@ -21,21 +21,28 @@ class OsvAuditor {
     final queries = <Map<String, dynamic>>[];
     final packageMeta = <String>[];
 
-    // 1. Parse PyPI packages from requirements.lock
-    final reqLock = File('${projectRoot.path}${Platform.pathSeparator}requirements.lock');
-    if (reqLock.existsSync()) {
-      final lines = reqLock.readAsLinesSync();
-      final regex = RegExp(r'^([a-zA-Z0-9_\-]+)==([a-zA-Z0-9_\.\-]+)');
-      for (final line in lines) {
-        final match = regex.firstMatch(line.trim());
-        if (match != null) {
-          final name = match.group(1)!;
-          final version = match.group(2)!;
-          queries.add({
-            'package': {'name': name, 'ecosystem': 'PyPI'},
-            'version': version,
-          });
-          packageMeta.add('PyPI: $name@$version');
+    final seen = <String>{};
+
+    // 1. Parse PyPI packages from all hash-pinned Python lockfiles
+    for (final lockName in ['requirements.lock', 'requirements-ci.txt']) {
+      final reqLock = File('${projectRoot.path}${Platform.pathSeparator}$lockName');
+      if (reqLock.existsSync()) {
+        final lines = reqLock.readAsLinesSync();
+        final regex = RegExp(r'^([a-zA-Z0-9_\.\-]+)==([a-zA-Z0-9_\.\+\-]+)');
+        for (final line in lines) {
+          final match = regex.firstMatch(line.trim());
+          if (match != null) {
+            final name = match.group(1)!;
+            final version = match.group(2)!;
+            final key = 'PyPI:${name.toLowerCase()}@$version';
+            if (seen.add(key)) {
+              queries.add({
+                'package': {'name': name, 'ecosystem': 'PyPI'},
+                'version': version,
+              });
+              packageMeta.add('PyPI ($lockName): $name@$version');
+            }
+          }
         }
       }
     }
@@ -49,15 +56,18 @@ class OsvAuditor {
       for (final match in pkgRegex.allMatches(content)) {
         final name = match.group(1)!;
         final version = match.group(2)!;
-        queries.add({
-          'package': {'name': name, 'ecosystem': 'Pub'},
-          'version': version,
-        });
-        packageMeta.add('Pub: $name@$version');
+        final key = 'Pub:$name@$version';
+        if (seen.add(key)) {
+          queries.add({
+            'package': {'name': name, 'ecosystem': 'Pub'},
+            'version': version,
+          });
+          packageMeta.add('Pub: $name@$version');
+        }
       }
     }
 
-    // 3. Parse npm packages from package-lock.json (if present)
+    // 3. Parse npm packages from package-lock.json (including scoped @scope/pkg & nested modules)
     final npmLock = File('${projectRoot.path}${Platform.pathSeparator}package-lock.json');
     if (npmLock.existsSync()) {
       try {
@@ -66,14 +76,17 @@ class OsvAuditor {
         if (packages != null) {
           for (final entry in packages.entries) {
             if (entry.key.isEmpty) continue; // Root package
-            final pkgName = entry.key.replaceFirst(RegExp(r'^node_modules/'), '');
+            final pkgName = entry.key.replaceFirst(RegExp(r'^(.*node_modules/)'), '');
             final version = entry.value['version'] as String?;
-            if (version != null && !pkgName.contains('/')) {
-              queries.add({
-                'package': {'name': pkgName, 'ecosystem': 'npm'},
-                'version': version,
-              });
-              packageMeta.add('npm: $pkgName@$version');
+            if (version != null && pkgName.isNotEmpty) {
+              final key = 'npm:$pkgName@$version';
+              if (seen.add(key)) {
+                queries.add({
+                  'package': {'name': pkgName, 'ecosystem': 'npm'},
+                  'version': version,
+                });
+                packageMeta.add('npm: $pkgName@$version');
+              }
             }
           }
         }

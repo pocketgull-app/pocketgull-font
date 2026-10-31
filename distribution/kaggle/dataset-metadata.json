@@ -1,0 +1,66 @@
+{
+  "title": "PocketGull Clinical & Scientific Font Superfamily",
+  "subtitle": "Optotypically calibrated 1000 UPM vector fonts for EHRs, ICU telemetry & STEM",
+  "id": "philgear/pocketgull-clinical-font-superfamily",
+  "licenses": [
+    {
+      "name": "other"
+    }
+  ],
+  "description": "PocketGull is an open-source clinical sans-serif, display, mathematical, and telemetry monospace font superfamily (SIL Open Font License 1.1) engineered on a standardized 1000 UPM em-square. Grounded in Louise Sloan 5:1 optotypic visual acuity standards and Institute for Safe Medication Practices (ISMP) look-alike character disambiguation, it includes 32 TrueType (.ttf) and Brotli-compressed WebFont (.woff2) binaries, 256 ISO/TR 11548 tactile Braille cells, gapless 600 UPM ICU telemetry box-drawing and sub-cell ECG waveforms, OpenType MATH tables, Scotopic 650nm dark-sky red mode, and sovereign multi-script orthographies.",
+  "authors": [
+    {
+      "name": "Phil Gear",
+      "bio": "American graphic designer, computer scientist, and photographer in the Pacific Northwest; founder of GearArts and Lead Architect of PocketGull LLC (ORCID: 0009-0008-1372-5381)."
+    },
+    {
+      "name": "Emma Marichal",
+      "bio": "Typography contributor and open-source font engineering collaborator (https://github.com/emmamarichal)."
+    },
+    {
+      "name": "The PocketGull Project Authors",
+      "bio": "Open-source clinical typography, vision science, and sovereign Indigenous script contributors (https://font.pocketgull.app)."
+    }
+  ],
+  "keywords": [
+    "healthcare",
+    "medicine",
+    "public health",
+    "data visualization",
+    "computer science",
+    "linguistics",
+    "astronomy"
+  ],
+  "resources": [
+    {
+      "path": "fonts/ttf/PocketGull-Regular.ttf",
+      "description": "PocketGull Regular (Fineliner, wght 400): Proportional clinical sans-serif for EHR charts, patient discharge summaries, and scientific plots."
+    },
+    {
+      "path": "fonts/ttf/PocketGull-Bold.ttf",
+      "description": "PocketGull Bold (wght 700): High-acuity display titling, Bionic reading saccade anchors, and clinical trauma alarms."
+    },
+    {
+      "path": "fonts/ttf/PocketGullMono-Regular.ttf",
+      "description": "PocketGull Mono Regular (Fixed 600 UPM pitch): Gapless ICU telemetry box drawing (U+2500-U+257F), 80-column FITS headers, and sub-cell ECG waveforms."
+    },
+    {
+      "path": "fonts/ttf/PocketGull-Math.ttf",
+      "description": "PocketGull Math (68 UPM stem weight): ISO/IEC 14496-22 OpenType MATH font for Matplotlib, LaTeX, and Typst scientific typesetting."
+    },
+    {
+      "path": "fonts/woff2/PocketGull-VF.woff2",
+      "description": "PocketGull Variable Font (wght 100-900): Brotli Q11 compressed webfont with zero-CLS metric overrides."
+    },
+    {
+      "path": "fonts/sri-hashes.json",
+      "description": "Cryptographic SHA-256 and Subresource Integrity (SRI SHA-384) manifest for all 32 TrueType and WOFF2 font binaries."
+    }
+  ],
+  "temporalCoverage": {
+    "startDate": "2026-05-01",
+    "endDate": "2026-10-14"
+  },
+  "geospatialCoverage": "Global (World Scripts, ISO/TR 11548 Braille, UNDRIP Sovereign Indigenous Orthographies; Engineered in Pacific Northwest, USA)",
+  "doi": "10.5281/zenodo.22309379"
+}

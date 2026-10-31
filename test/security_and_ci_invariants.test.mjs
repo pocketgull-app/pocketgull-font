@@ -220,3 +220,27 @@ test('Kinetic Synesthetic Laboratory Invariant: Multi-Script Font Stacks, Intl.S
   assert.match(code, /data-scale="maqam"/, 'kinetic_laboratory.html must provide Maqam scale preset');
   assert.match(code, /data-timpreset="arabic"/, 'kinetic_laboratory.html must provide Arabic contraption preset');
 });
+
+test('Font Binary Security Scanner Invariant: rejects TrueType bytecode & HarfBuzz Wasm shaper VM tables (CVE-2026-113679 / CVE-2026-113680)', async () => {
+  const { inspectSfntBuffer } = await import('../scripts/scan-font-security.mjs');
+
+  // 1. Verify production PocketGull binary passes zero-VM & 2-byte loca alignment checks
+  const prodBuf = fs.readFileSync(path.join('fonts', 'ttf', 'PocketGullMono-Regular.ttf'));
+  const prodRes = inspectSfntBuffer(prodBuf, 'PocketGullMono-Regular.ttf');
+  assert.equal(prodRes.valid, true, 'Production TTF must pass SFNT security inspection');
+  assert.equal(prodRes.hasActiveBytecodeVm, false, 'Production TTF must contain zero active VM bytecode');
+  assert.equal(prodRes.hasWasmShaper, false, 'Production TTF must not embed a HarfBuzz Wasm shaper table');
+  assert.equal(prodRes.oddLocaOffsets, 0, 'Production TTF must have zero odd loca offsets');
+
+  // 2. Verify synthetic SFNT buffer with embedded 'Wasm' table is immediately flagged and rejected
+  const fakeWasmFont = Buffer.alloc(32, 0);
+  fakeWasmFont.writeUInt32BE(0x00010000, 0); // TrueType sfntVersion
+  fakeWasmFont.writeUInt16BE(1, 4);          // numTables = 1
+  fakeWasmFont.write('Wasm', 12, 'ascii');   // HarfBuzz WebAssembly shaper tag (0x5761736D)
+  fakeWasmFont.writeUInt32BE(28, 20);        // 4-byte aligned offset
+  fakeWasmFont.writeUInt32BE(4, 24);         // 4-byte payload length
+  const wasmRes = inspectSfntBuffer(fakeWasmFont, 'malicious-wasm.ttf');
+  assert.equal(wasmRes.hasWasmShaper, true, 'Scanner must detect embedded Wasm shaper table');
+  assert.equal(wasmRes.hasActiveBytecodeVm, true, 'Scanner must classify Wasm table as active in-font VM');
+  assert.equal(wasmRes.valid, false, 'Scanner must mark fonts containing Wasm shaper tables invalid');
+});

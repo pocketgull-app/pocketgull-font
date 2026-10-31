@@ -9,7 +9,7 @@
 [![W3C OTS Validated](https://img.shields.io/badge/W3C_OTS-100%25_Valid-emerald.svg?style=flat-square)](https://github.com/googlefonts/ots)
 [![WCAG 2.1 AAA](https://img.shields.io/badge/WCAG_2.1-AAA_100%25-emerald.svg?style=flat-square)](index.html)
 
-**[🌐 Live Specimen Broadside](https://font.pocketgull.app)** &nbsp;•&nbsp; **[💾 Download Fonts (.ZIP)](https://github.com/pocketgull-app/pocketgull-font/releases/download/v3.1.0/pocketgull-typeface-v3.1.0.zip)** &nbsp;•&nbsp; **[🤟 Sign Studio](asl_studio.html)** &nbsp;•&nbsp; **[🛠️ STEM Studio](stem_studio.html)** &nbsp;•&nbsp; **[🎼 Music Studio](music_studio.html)**
+**[🧭 3-Minute Starter Walkthrough](TUTORIAL.md)** &nbsp;•&nbsp; **[🌐 Live Specimen Broadside](https://font.pocketgull.app)** &nbsp;•&nbsp; **[💾 Download Fonts (.ZIP)](https://github.com/pocketgull-app/pocketgull-font/releases/download/v3.1.0/pocketgull-typeface-v3.1.0.zip)** &nbsp;•&nbsp; **[🤟 Sign Studio](asl_studio.html)** &nbsp;•&nbsp; **[🛠️ STEM Studio](stem_studio.html)** &nbsp;•&nbsp; **[🎼 Music Studio](music_studio.html)**
 
 <br/>
 
@@ -22,6 +22,8 @@
 </div>
 
 <br/>
+
+> **🧭 New to PocketGull?** Skip the wall of technical specs and start with the **[3-Minute Cognitive Walkthrough (`TUTORIAL.md`)](TUTORIAL.md)**—4 short levels covering how PocketGull reduces eye strain, prevents `1 / l / I` and `0 / O` reading errors, exposes hidden Unicode tricks (`[!]`), and helps you pick the single font file you need.
 
 **PocketGull** is an open-source clinical sans-serif, display, and telemetry monospace font superfamily designed by Phil Gear. Originating from felt-marker lettering created on physical cardstock, PocketGull synthesizes organic stroke warmth with Louise Sloan 5:1 optotypes and Institute for Safe Medication Practices (ISMP) character disambiguation for life-critical healthcare, scientific computing, and comfortable long-form reading.
 

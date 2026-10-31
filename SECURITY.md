@@ -8,7 +8,8 @@ We follow strict Semantic Versioning (`MAJOR.MINOR.PATCH`). Active production re
 
 | Version | Supported          | Status |
 | :--- | :---: | :--- |
-| **3.0.x** | :white_check_mark: | **Active Production Superfamily Release (Google Fonts Option 5 Standard)** |
+| **3.1.x** | :white_check_mark: | **Active Production Superfamily Release (Google Fonts Option 5 Standard)** |
+| 3.0.x | :white_check_mark: | Maintenance & LTS security updates |
 | 2.0.x | :white_check_mark: | Maintenance & LTS security updates |
 | 1.0.x | :x: | Deprecated / End-of-Life |
 
@@ -31,6 +32,7 @@ Please report vulnerabilities through our coordinated private disclosure channel
 * **Triage & Reproduction**: Within **3 business days**.
 * **Remediation & Patch Release**: Within **7 business days**, accompanied by a cryptographically signed GitHub Release with SHA-256 binary manifests.
 * **Google & Alphabet VRP Alignment**: For vulnerabilities affecting upstream Google Fonts infrastructure, Chromium OTS/HarfBuzz/FreeType, or Unicode BiDi spoofing (`CVE-2021-42574`), see our **[Unicode Security, PUA & Anti-Spoofing Specification](standards/UNICODE_SECURITY_AND_PUA_SPECIFICATION.md)** and the official **[Google and Alphabet Vulnerability Reward Program (VRP) Rules](https://bughunters.google.com/about/rules/google-friends/google-and-alphabet-vulnerability-reward-program-vrp-rules)**.
+* **Foundry & Hardware OEM Security Blueprint**: For fellow type designers and embedded/medical hardware manufacturers hardening `FreeType` firmware against legacy bytecode VM exploits (`instructionLength = 0`, `TT_CONFIG_OPTION_BYTECODE_INTERPRETER`), see our **[Foundry & Hardware OEM Security Blueprint](standards/FOUNDRY_AND_HARDWARE_OEM_GUIDE.md)**.
 
 ---
 

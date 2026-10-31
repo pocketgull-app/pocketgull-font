@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PocketGull Font & Unicode Leak Inspector</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --ok: #22c55e;
+      --warn: #f59e0b;
+      --danger: #ef4444;
+    }
+    body {
+      width: 390px;
+      margin: 0;
+      padding: 14px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'PocketGull', system-ui, -apple-system, sans-serif;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    h1 {
+      font-size: 15px;
+      margin: 0 0 4px 0;
+      color: var(--accent);
+    }
+    .subtitle {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .btn-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    button {
+      flex: 1;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid #334155;
+      background: #0284c7;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    button.secondary {
+      background: var(--card);
+      color: var(--text);
+    }
+    button:hover {
+      filter: brightness(1.1);
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid #334155;
+      border-radius: 6px;
+      padding: 10px;
+      margin-bottom: 8px;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .status-ok { background: rgba(34, 197, 94, 0.2); color: var(--ok); }
+    .status-warn { background: rgba(245, 158, 11, 0.2); color: var(--warn); }
+    .status-danger { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+    ul {
+      margin: 6px 0 0 0;
+      padding-left: 18px;
+      font-size: 12px;
+    }
+    li { margin-bottom: 4px; }
+    .footer {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>PocketGull Leak &amp; Font Inspector</h1>
+  <div class="subtitle">100% Local &bull; Zero Network Egress &bull; UTR #36 / CVE-2021-42574</div>
+
+  <div class="btn-row">
+    <button id="btnScanPage">Scan Active Tab</button>
+    <button id="btnRevealBadges" class="secondary">Reveal [!] Badges</button>
+  </div>
+
+  <div id="resultsContainer" class="card">
+    <div id="statusLine">Click <strong>Scan Active Tab</strong> to inspect this page or GitHub PR for hidden Unicode &amp; font leaks.</div>
+    <ul id="findingsList"></ul>
+  </div>
+
+  <div class="footer">
+    PocketGull v3.1.0 &bull; <span id="joinerNote">Preserves Persian ZWNJ &amp; Emoji ZWJ</span>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
