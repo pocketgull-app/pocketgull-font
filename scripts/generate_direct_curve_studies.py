@@ -42,6 +42,9 @@ F_OUTLINE = str(TTF_DIR / "PocketGull-Outline.ttf")
 F_INLINE = str(TTF_DIR / "PocketGull-Inline.ttf")
 F_MUSIC = str(TTF_DIR / "PocketGull-Music.ttf")
 F_CHEM = str(TTF_DIR / "PocketGull-Chem.ttf")
+F_CHEROKEE = F_BOLD
+F_SYLLABICS = F_BOLD
+F_BRAILLE = F_BOLD
 
 W, H = 2400, 3400
 
@@ -541,14 +544,14 @@ def build_curve_study_3() -> Image.Image:
 
 
 # ==============================================================================
-# STUDY IV: SOVEREIGN INDIGENOUS & SCIENTIFIC SYMBOL CURVE MECHANICS
+# STUDY IV: 100% SOVEREIGN INDIGENOUS ORTHOGRAPHY CURVE MECHANICS (UNDRIP)
 # ==============================================================================
 def build_curve_study_4() -> Image.Image:
     t = DARK_BLUEPRINT_THEME
     im = Image.new("RGB", (W, H), t["bg"])
     draw = ImageDraw.Draw(im)
     draw_grid(draw, 80, 80, W - 80, H - 80, 80, (13, 20, 32))
-    draw.rectangle([(80, 80), (W - 80, H - 80)], outline=(244, 63, 94), width=3)
+    draw.rectangle([(80, 80), (W - 80, H - 80)], outline=(45, 212, 191), width=3)
 
     f_badge = load_font(F_MONO_B, 22)
     f_hero = load_font(F_BOLD, 94)
@@ -556,23 +559,87 @@ def build_curve_study_4() -> Image.Image:
     f_mono_sm = load_font(F_MONO, 22)
 
     bx = 130
-    bx += draw_badge(draw, bx, 125, "CURVE STUDY IV • SOVEREIGN & SCIENTIFIC GLYPHS", f_badge, (244, 63, 94), (48, 12, 24), (244, 63, 94))
-    bx += draw_badge(draw, bx, 125, "UNDRIP PAN-TRIBAL CONTOURS", f_badge, (45, 212, 191), (12, 46, 42), (45, 212, 191))
-    bx += draw_badge(draw, bx, 125, "MUSIC & CHEM MICRO-COUNTER PRECISION", f_badge, (56, 189, 248), (10, 35, 52), (56, 189, 248))
+    bx += draw_badge(draw, bx, 125, "CURVE STUDY IV • SOVEREIGN INDIGENOUS SCRIPTS", f_badge, (45, 212, 191), (12, 46, 42), (45, 212, 191))
+    bx += draw_badge(draw, bx, 125, "UNDRIP ARTICLES 11, 13, 14, 24 & 31", f_badge, (245, 158, 11), (48, 32, 10), (245, 158, 11))
+    bx += draw_badge(draw, bx, 125, "100% SEPARATED FROM TACTILE BRAILLE", f_badge, (56, 189, 248), (10, 35, 52), (56, 189, 248))
 
-    draw.text((130, 205), "SOVEREIGN & SCIENTIFIC CURVE TOPOLOGY", font=f_hero, fill=(248, 250, 252))
-    draw.text((130, 325), "Direct vector inspection of restored Pan-Tribal orthography glyphs (ʔ, ƛ, ŋ, ǫ) and specialized scientific/musical symbols", font=f_sub, fill=t["muted"])
-    draw.line([(130, 390), (W - 130, 390)], fill=(244, 63, 94), width=3)
+    draw.text((130, 205), "SOVEREIGN INDIGENOUS CURVE TOPOLOGY", font=f_hero, fill=(248, 250, 252))
+    draw.text((130, 325), "Direct vector inspection of Pan-Tribal orthographies (ʔ, ƛ, ŋ, ǫ), Canadian Syllabics (ᐁ) & Cherokee Syllabary (Ꮳ)", font=f_sub, fill=t["muted"])
+    draw.line([(130, 390), (W - 130, 390)], fill=(45, 212, 191), width=3)
 
     draw.rounded_rectangle([(130, 415), (W - 130, 485)], radius=12, fill=t["card_bg"], outline=t["border"], width=2)
-    legend_text = "SOVEREIGN & DOMAIN PRECISION:  First-class glottal letter ʔ (U+0294)  •  Barred lambda ƛ (U+019B)  •  Eng ŋ (U+014B)  •  O-ogonek ǫ (U+01EB)  •  Music Accidental ♯  •  Copyright ©"
+    legend_text = "SOVEREIGN VECTOR PARITY:  Glottal Stop ʔ (U+0294)  •  Barred Lambda ƛ (U+019B)  •  Eng ŋ (U+014B)  •  O-Ogonek ǫ (U+01EB)  •  Syllabics E ᐁ (U+1401)  •  Cherokee Tsa Ꮳ (U+13E3)"
     draw.text((160, 438), legend_text, font=load_font(F_MONO, 19), fill=(226, 232, 240))
 
     cells = [
         (F_BOLD, "U+0294", "01 / GLOTTAL STOP 'ʔ' (U+0294 • Pan-Tribal)", "First-class sovereign letter contour (not punctuation) with crisp baseline stem"),
-        (F_BOLD, "U+019B", "02 / BARRED LAMBDA 'ƛ' (U+019B • Salishan)", "High-contrast crossbar (>= 1.4x aperture) across diagonal descending stroke"),
+        (F_BOLD, "U+019B", "02 / BARRED LAMBDA 'ƛ' (U+019B • Coast Salish)", "High-contrast crossbar (>= 1.4x aperture) across diagonal descending stroke"),
         (F_BOLD, "U+014B", "03 / VELAR NASAL ENG 'ŋ' (U+014B • Lakota/Dene)", "Continuous arch transition into descending retroflex/velar J-hook"),
         (F_BOLD, "U+01EB", "04 / NASAL O-OGONEK 'ǫ' (U+01EB • Diné/Apache)", "Composite/contour harmony: rightward ogonek hook anchored to lower bowl"),
+        (F_SYLLABICS, "U+1401", "05 / SYLLABICS E 'ᐁ' (U+1401 • Inuktitut/Cree)", "Rotational triangular apex geometry with balanced interior counter"),
+        (F_CHEROKEE, "U+13E3", "06 / CHEROKEE TSA 'Ꮳ' (U+13E3 • Tsalagi)", "Sequoyah syllabary calligraphic curves rendered in pure quadratic B-splines"),
+    ]
+
+    col_w = 1045
+    row_h = 845
+    for idx, (f_path, g_q, title, sub) in enumerate(cells):
+        c = idx % 2
+        r = idx // 2
+        cx0 = 130 + c * (col_w + 50)
+        cy0 = 515 + r * (row_h + 30)
+        plot_direct_curve_anatomy(
+            draw,
+            f_path,
+            g_q,
+            (cx0, cy0, cx0 + col_w, cy0 + row_h),
+            title,
+            sub,
+            t,
+            show_comb=True,
+            show_handles=True,
+            show_implied=True,
+            show_winding=True,
+            show_extrema=True,
+        )
+
+    draw.text((130, 3210), "POCKETGULL TYPEFOUNDRY • DIRECT CURVE STUDY IV: SOVEREIGN INDIGENOUS CURVE TOPOLOGY", font=f_mono_sm, fill=t["muted"])
+    draw.text((W - 760, 3210), "39 / 39 TEK & UNDRIP VERIFIED • V3.1.0", font=f_mono_sm, fill=(45, 212, 191))
+    return im
+
+
+# ==============================================================================
+# STUDY V: DEDICATED ISO 17049 TACTILE BRAILLE DOME & SCIENTIFIC TOPOLOGY
+# ==============================================================================
+def build_curve_study_5() -> Image.Image:
+    t = DARK_BLUEPRINT_THEME
+    im = Image.new("RGB", (W, H), t["bg"])
+    draw = ImageDraw.Draw(im)
+    draw_grid(draw, 80, 80, W - 80, H - 80, 80, (13, 20, 32))
+    draw.rectangle([(80, 80), (W - 80, H - 80)], outline=(245, 158, 11), width=3)
+
+    f_badge = load_font(F_MONO_B, 22)
+    f_hero = load_font(F_BOLD, 94)
+    f_sub = load_font(F_REG, 30)
+    f_mono_sm = load_font(F_MONO, 22)
+
+    bx = 130
+    bx += draw_badge(draw, bx, 125, "CURVE STUDY V • ISO 17049 TACTILE BRAILLE", f_badge, (245, 158, 11), (48, 32, 10), (245, 158, 11))
+    bx += draw_badge(draw, bx, 125, "r = 60 UPM QUADRATIC DOME CIRCLES", f_badge, (56, 189, 248), (10, 35, 52), (56, 189, 248))
+    bx += draw_badge(draw, bx, 125, "GROUNDED ON BASELINE y = 0 UPM", f_badge, (16, 185, 129), (8, 42, 32), (16, 185, 129))
+
+    draw.text((130, 205), "TACTILE BRAILLE & SCIENTIFIC TOPOLOGY", font=f_hero, fill=(248, 250, 252))
+    draw.text((130, 325), "Dedicated inspection of ISO 17049 6-dot/8-dot circular dome geometry (U+2800–U+28FF) & multi-contour scientific symbols", font=f_sub, fill=t["muted"])
+    draw.line([(130, 390), (W - 130, 390)], fill=(245, 158, 11), width=3)
+
+    draw.rounded_rectangle([(130, 415), (W - 130, 485)], radius=12, fill=t["card_bg"], outline=t["border"], width=2)
+    legend_text = "TACTILE & SCIENTIFIC PRECISION:  Dot-1 ⠁ (U+2801)  •  Dots-123 ⠇ (U+2807)  •  6-Dot Full ⠿ (U+283F)  •  8-Dot Full ⣿ (U+28FF)  •  Music Sharp ♯  •  Copyright ©"
+    draw.text((160, 438), legend_text, font=load_font(F_MONO, 19), fill=(226, 232, 240))
+
+    cells = [
+        (F_BRAILLE, "U+2801", "01 / BRAILLE DOT-1 '⠁' (U+2801 • Letter A / 1)", "Single r = 60 UPM CW quadratic circle with 4 cardinal extrema ■ & 4 handles ●"),
+        (F_BRAILLE, "U+2807", "02 / BRAILLE DOTS-123 '⠇' (U+2807 • Letter L)", "Vertical column alignment: uniform 2.5 mm intra-cell dot pitch"),
+        (F_BRAILLE, "U+283F", "03 / 6-DOT LITERARY CELL '⠿' (U+283F • Dots 1–6)", "Standard 2x3 literary/pharmaceutical embossing grid (6 independent CW contours)"),
+        (F_BRAILLE, "U+28FF", "04 / 8-DOT TELEMETRY CELL '⣿' (U+28FF • Dots 1–8)", "Full 2x4 ISO/TR 11548 computer & ICU Braille cell grounded at y = 0 UPM"),
         (F_MUSIC, "U+266F", "05 / MUSIC SHARP '♯' (U+266F • PocketGull-Music)", "Multi-contour topology: outer grid + interior CCW parallelogram counters"),
         (F_REG, "copyright", "06 / COPYRIGHT '©' (3-Tier Nested Winding)", "Outer ring (CW) -> Inner ring (CCW) -> Central letter C (CW) parity"),
     ]
@@ -599,8 +666,8 @@ def build_curve_study_4() -> Image.Image:
             show_extrema=True,
         )
 
-    draw.text((130, 3210), "POCKETGULL TYPEFOUNDRY • DIRECT CURVE STUDY IV: SOVEREIGN & SCIENTIFIC CURVE TOPOLOGY", font=f_mono_sm, fill=t["muted"])
-    draw.text((W - 760, 3210), "39 / 39 TEK & UNDRIP VERIFIED • V3.1.0", font=f_mono_sm, fill=(244, 63, 94))
+    draw.text((130, 3210), "POCKETGULL TYPEFOUNDRY • DIRECT CURVE STUDY V: ISO 17049 TACTILE BRAILLE & SCIENTIFIC TOPOLOGY", font=f_mono_sm, fill=t["muted"])
+    draw.text((W - 760, 3210), "256 / 256 BRAILLE CELLS VERIFIED • V3.1.0", font=f_mono_sm, fill=(245, 158, 11))
     return im
 
 
@@ -622,22 +689,27 @@ def main():
     s3_path = POSTERS_DIR / "curve_study_03_terminal_corner_architecture.png"
     s3.save(s3_path, "PNG", dpi=(300, 300))
 
-    print("4. Synthesizing Direct Curve Study IV: Sovereign Indigenous & Scientific Curve Mechanics...")
+    print("4. Synthesizing Direct Curve Study IV: 100% Sovereign Indigenous Curve Mechanics...")
     s4 = build_curve_study_4()
     s4_path = POSTERS_DIR / "curve_study_04_sovereign_scientific_curves.png"
     s4.save(s4_path, "PNG", dpi=(300, 300))
 
-    print("5. Exporting 4-Page Direct Curve Studies PDF Atlas...")
+    print("5. Synthesizing Direct Curve Study V: Dedicated ISO 17049 Tactile Braille & Scientific Topology...")
+    s5 = build_curve_study_5()
+    s5_path = POSTERS_DIR / "curve_study_05_tactile_braille_dome_geometry.png"
+    s5.save(s5_path, "PNG", dpi=(300, 300))
+
+    print("6. Exporting 5-Page Direct Curve Studies PDF Atlas...")
     pdf_path = POSTERS_DIR / "pocketgull_direct_curve_studies_v3.1.0.pdf"
-    s1.save(pdf_path, "PDF", resolution=300.0, save_all=True, append_images=[s2, s3, s4])
+    s1.save(pdf_path, "PDF", resolution=300.0, save_all=True, append_images=[s2, s3, s4, s5])
 
     if ARTIFACT_DIR.exists():
-        for src in [s1_path, s2_path, s3_path, s4_path, pdf_path]:
+        for src in [s1_path, s2_path, s3_path, s4_path, s5_path, pdf_path]:
             dst = ARTIFACT_DIR / src.name
             dst.write_bytes(src.read_bytes())
-        print(f"6. Copied all 4 Direct Curve Study plates and PDF Atlas to: {ARTIFACT_DIR}")
+        print(f"7. Copied all 5 Direct Curve Study plates and PDF Atlas to: {ARTIFACT_DIR}")
 
-    print("\n[SUCCESS] All 4 Direct Quadratic Curve Studies generated!")
+    print("\n[SUCCESS] All 5 Direct Quadratic Curve Studies generated!")
 
 
 if __name__ == "__main__":

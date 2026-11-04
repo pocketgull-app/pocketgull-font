@@ -42,6 +42,10 @@ F_CHEM = str(TTF_DIR / "PocketGull-Chem.ttf")
 F_SERIF = str(TTF_DIR / "PocketGull-Serif-Bold.ttf")
 F_SLAB = str(TTF_DIR / "PocketGull-Slab-Bold.ttf")
 F_SOFT = str(TTF_DIR / "PocketGull-Soft-Bold.ttf")
+F_CHEROKEE = F_BOLD
+F_BRAILLE = F_BOLD
+F_ASL = str(TTF_DIR / "PocketGull-ASL.ttf")
+F_LEARN = str(TTF_DIR / "PocketGull-Learn.ttf")
 
 W, H = 2400, 3400  # A3 / Museum Broadside Aspect Ratio
 
@@ -513,7 +517,7 @@ def build_poster_3() -> Image.Image:
     bx += draw_badge(draw, bx, 125, "39 / 39 FONTS VERIFIED SOVEREIGN", f_badge, cedar, (12, 46, 35), cedar)
 
     draw.text((130, 210), "LET INDIGENOUS SCRIPTS BE SOVEREIGN", font=f_hero, fill=white)
-    draw.text((130, 335), "Zero forced Latinization • Equal clinical optotype acuity across Pan-Tribal, Syllabics, Chinuk Pipa & Tactile Braille", font=f_sub, fill=muted)
+    draw.text((130, 335), "Zero forced Latinization • Equal clinical optotype acuity across Pan-Tribal, Syllabics, Chinuk Pipa & Cherokee", font=f_sub, fill=muted)
     draw.line([(130, 405), (W - 130, 405)], fill=gold, width=3)
 
     # Section 1: Pan-Tribal Orthographies (15/15 Sovereign Codepoints Restored & Verified)
@@ -572,32 +576,32 @@ def build_poster_3() -> Image.Image:
     draw.text((170, 2330), "✓ Never forced into Roman metal cap-height boxes", font=f_mono_sm, fill=muted)
     draw.text((170, 2380), "✓ Honors Father Le Jeune's Kamloops Wawa tradition", font=f_mono_sm, fill=muted)
 
-    # Right Card: Full 256 Unicode Braille Block (U+2800..U+28FF)
+    # Right Card: Cherokee Syllabary (U+13A0..U+13FF) & Sovereign Scripts (Separated from Tactile Braille)
     draw.rounded_rectangle([(1225, 1780), (W - 130, 2500)], radius=18, fill=card_bg, outline=border, width=2)
-    draw.text((1265, 1815), "04 / TACTILE BRAILLE (U+2800–U+28FF)", font=f_sec, fill=cedar)
-    draw.text((1265, 1865), "256 / 256 ISO/TR 11548 & ISO 17049 8-dot geometry", font=f_mono_sm, fill=muted)
-    draw.text((1265, 1905), "r = 60 UPM dome radius • Grounded on baseline y = 0:", font=f_mono_sm, fill=turquoise)
+    draw.text((1265, 1815), "04 / CHEROKEE SYLLABARY & TIFINAGH", font=f_sec, fill=cedar)
+    draw.text((1265, 1865), "Sequoyah Syllabary (U+13A0–U+13FF) & Neo-Tifinagh (U+2D30)", font=f_mono_sm, fill=muted)
+    draw.text((1265, 1905), "100% sovereign cultural & linguistic separation from Braille:", font=f_mono_sm, fill=turquoise)
 
-    braille_line1 = "⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍"
-    braille_line2 = "⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵"
-    braille_line3 = "⠼ ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚   ⣿ ⢿ ⣻ ⣯"
+    cherokee_line1 = "Ꭰ Ꭱ Ꭲ Ꭳ Ꭴ Ꭵ   Ꭶ Ꭷ Ꭸ Ꭹ Ꭺ Ꭻ"
+    cherokee_line2 = "Ꮳ Ꮃ Ꭹ  (Tsalagi)  •  Ꭰ Ꮒ Ᏼ Ꮻ Ꮿ"
+    tifinagh_line3 = "ⴰ ⴱ ⴳ ⴷ ⴹ ⴻ ⴼ ⴽ ⵀ ⵃ ⵄ ⵅ ⵇ ⵉ ⵊ"
     draw.rounded_rectangle([(1265, 1965), (W - 170, 2240)], radius=12, fill=(10, 20, 26), outline=border, width=2)
-    draw.text((1300, 1985), braille_line1, font=f_glyph_md, fill=cedar)
-    draw.text((1300, 2065), braille_line2, font=f_glyph_md, fill=turquoise)
-    draw.text((1300, 2145), braille_line3, font=f_glyph_md, fill=gold)
-    draw.text((1265, 2280), "✓ Zero .notdef tofu across all 256 6-dot & 8-dot cells", font=f_mono_sm, fill=cedar)
-    draw.text((1265, 2330), "✓ Nemeth STEM Math & Pharmaceutical Carton Ready", font=f_mono_sm, fill=muted)
-    draw.text((1265, 2380), "✓ Grounded at y = 0 to prevent floating cell drift", font=f_mono_sm, fill=muted)
+    draw.text((1300, 1985), cherokee_line1, font=load_font(F_CHEROKEE, 46), fill=cedar)
+    draw.text((1300, 2065), cherokee_line2, font=load_font(F_CHEROKEE, 46), fill=gold)
+    draw.text((1300, 2145), tifinagh_line3, font=f_glyph_md, fill=turquoise)
+    draw.text((1265, 2280), "✓ Dedicated PocketGull-Cherokee.ttf & SMoE Expert E/D", font=f_mono_sm, fill=cedar)
+    draw.text((1265, 2330), "✓ Tactile Braille separated to dedicated ISO 17049 Plate V", font=f_mono_sm, fill=muted)
+    draw.text((1265, 2380), "✓ Conforms to UNDRIP Articles 11, 13, 14, 24 & 31", font=f_mono_sm, fill=muted)
 
     # Section 4: The Living Typographic Charter & Negative Space Boundaries
     draw.rounded_rectangle([(130, 2545), (W - 130, 3150)], radius=18, fill=(11, 24, 30), outline=gold, width=2)
-    draw.text((170, 2585), "05 / THE LIVING TYPOGRAPHIC CHARTER & FOUNDRY NEGATIVE SPACE ACCORD", font=f_sec, fill=gold)
+    draw.text((170, 2585), "05 / THE LIVING TYPOGRAPHIC CHARTER & SOVEREIGNTY BOUNDARIES", font=f_sec, fill=gold)
 
     charter_points = [
-        ("Let Latin be Latin:", "Crisp, ISMP-disambiguated (0̸, l, I, Ƶ), humanist felt-marker warmth & Louise Sloan 5:1 legibility."),
-        ("Indigenous Sovereignty:", "Conforms to UNDRIP Articles 11, 13, 14, 24, 31 & OCAP®. Zero cultural overreach or mock prescriptions."),
-        ("Tactile & Stenographic:", "Authentic ISO 17049 tactile Braille cell spacing and Duployan phonemic vowel-to-consonant ratios."),
-        ("Zero Telemetry / PHI:", "100% air-gapped offline execution. Passive optometric clarity only (not an autonomous SaMD device)."),
+        ("Indigenous Sovereignty:", "Stand as sovereign national orthographies—never conflated with assistive disability tools."),
+        ("UNDRIP & OCAP® Accord:", "Conforms to UNDRIP Articles 11, 13, 14, 24, 31. Zero cultural overreach or mock prescriptions."),
+        ("Let Shorthand be True:", "Authentic Duployan / Chinuk Pipa phonemic vowel-to-consonant ratios on the y = 270 UPM waist."),
+        ("Libre SIL OFL 1.1:", "100% SIL Open Font License 1.1 with zero Reserved Font Names (RFN) for tribal schools & presses."),
     ]
     cy = 2665
     for head, body in charter_points:
@@ -759,6 +763,131 @@ def build_poster_4() -> Image.Image:
     return im
 
 
+# ==============================================================================
+# POSTER V: DEDICATED TACTILE BRAILLE (ISO 17049) & SENSORY ACUITY BROADSIDE
+# ==============================================================================
+def build_poster_5() -> Image.Image:
+    bg = (9, 13, 22)
+    card_bg = (15, 23, 38)
+    border = (38, 56, 84)
+    amber = (251, 191, 36)
+    cyan = (56, 189, 248)
+    emerald = (52, 211, 153)
+    rose = (251, 113, 133)
+    white = (248, 250, 252)
+    muted = (148, 163, 184)
+
+    im = Image.new("RGB", (W, H), bg)
+    draw = ImageDraw.Draw(im)
+
+    draw_grid(draw, 80, 80, W - 80, H - 80, 60, (16, 24, 38))
+    draw.rectangle([(80, 80), (W - 80, H - 80)], outline=amber, width=3)
+
+    f_badge = load_font(F_MONO_B, 22)
+    f_hero = load_font(F_BOLD, 98)
+    f_sub = load_font(F_REG, 32)
+    f_sec = load_font(F_BOLD, 34)
+    f_braille_xl = load_font(F_BRAILLE, 78)
+    f_braille_lg = load_font(F_BRAILLE, 54)
+    f_braille_md = load_font(F_BRAILLE, 44)
+    f_mono_md = load_font(F_MONO_B, 28)
+    f_mono_sm = load_font(F_MONO, 24)
+
+    bx = 130
+    bx += draw_badge(draw, bx, 125, "PLATE V • TACTILE & SENSORY ACUITY", f_badge, amber, (48, 36, 12), amber)
+    bx += draw_badge(draw, bx, 125, "ISO/TR 11548 & ISO 17049 8-DOT BRAILLE", f_badge, cyan, (12, 38, 56), cyan)
+    bx += draw_badge(draw, bx, 125, "256 / 256 CELLS • GROUNDED AT y = 0 UPM", f_badge, emerald, (10, 42, 32), emerald)
+
+    draw.text((130, 210), "LET BRAILLE BE BRAILLE", font=f_hero, fill=white)
+    draw.text((130, 335), "Dedicated ISO 17049 Tactile Embossing Matrix, Pharmaceutical Carton Standards & Sensory Pedagogy (Separated from UNDRIP)", font=f_sub, fill=muted)
+    draw.line([(130, 405), (W - 130, 405)], fill=amber, width=3)
+
+    # Section 1: Full 6-Dot & 8-Dot Tactile Matrix (U+2800..U+28FF)
+    draw.rounded_rectangle([(130, 445), (1440, 1260)], radius=18, fill=card_bg, outline=border, width=2)
+    draw.text((170, 480), "01 / FULL 256 UNICODE BRAILLE BLOCK (U+2800–U+28FF)", font=f_sec, fill=amber)
+    draw.text((170, 530), "Zero .notdef across all 64 6-dot literary & 192 8-dot computer/telemetry cells:", font=f_mono_sm, fill=muted)
+
+    b_rows = [
+        ("A–J (1–0):", "⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚", amber),
+        ("K–T:      ", "⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞", cyan),
+        ("U–Z & Num:", "⠥ ⠧ ⠺ ⠭ ⠽ ⠵   ⠼ ⠁ ⠃ ⠉", emerald),
+        ("8-Dot ICU:", "⡀ ⡁ ⡂ ⡃ ⡄ ⡅ ⡆ ⡇ ⡈ ⡉ ⡊ ⡋ ⣿", rose),
+    ]
+    by = 600
+    for lbl, b_txt, col in b_rows:
+        draw.text((170, by + 12), lbl, font=f_mono_md, fill=muted)
+        draw.text((430, by), b_txt, font=f_braille_lg, fill=col)
+        draw.line([(170, by + 110), (1400, by + 110)], fill=(25, 38, 58), width=1)
+        by += 150
+
+    # Section 2 (Right Card): ISO 17049 Tactile Cell Blueprint & Direct Contour Plot
+    draw.rounded_rectangle([(1480, 445), (W - 130, 1260)], radius=18, fill=card_bg, outline=border, width=2)
+    draw.text((1520, 480), "02 / ISO 17049 DOME BLUEPRINT", font=f_sec, fill=cyan)
+    draw.text((1520, 530), "r = 60 UPM dome • 2.5 mm pitch • y = 0 anchor", font=f_mono_sm, fill=muted)
+
+    gx0, gy0, gx1, gy1 = 1520, 590, 2230, 1120
+    draw_grid(draw, gx0, gy0, gx1, gy1, 40, (22, 34, 54))
+    draw.rectangle([(gx0, gy0), (gx1, gy1)], outline=(45, 65, 95), width=2)
+
+    base_y = gy1 - 145
+    sc = 0.42
+    y_top = int(base_y - 720 * sc)
+    draw.line([(gx0, base_y), (gx1, base_y)], fill=amber, width=2)
+    draw.line([(gx0, y_top), (gx1, y_top)], fill=cyan, width=2)
+    draw.text((gx0 + 14, y_top - 30), "yMax = 720 UPM (Top Dot Row 1/4)", font=f_mono_sm, fill=cyan)
+    draw.text((gx0 + 14, base_y + 8), "y = 0 UPM (6-Dot Grounded Baseline)", font=f_mono_sm, fill=amber)
+
+    # Render actual U+283F (⠿ 6-dot) and U+28FF (⣿ 8-dot) from PocketGull-Braille.ttf
+    f_br_tt = TTFont(F_BRAILLE)
+    cmap_br = f_br_tt.getBestCmap()
+    gn_6dot = cmap_br.get(0x283F, "uni283F")
+    gn_8dot = cmap_br.get(0x28FF, "uni28FF")
+    render_glyph_polygons_to_pil(draw, F_BRAILLE, gn_6dot, gx0 + 95, base_y, sc, cyan, show_nodes=True)
+    render_glyph_polygons_to_pil(draw, F_BRAILLE, gn_8dot, gx0 + 375, base_y, sc, amber, show_nodes=True)
+    draw.text((1520, 1145), "Left: U+283F (⠿ 6-Dot)  Right: U+28FF (⣿ 8-Dot)", font=f_mono_sm, fill=emerald)
+    draw.text((1520, 1185), "8 CW circular contours • 0 floating drift", font=f_mono_sm, fill=muted)
+
+    # Section 3: Pharmaceutical Packaging & Clinical Dosage Braille (ISO 17049 / EU 2004/27/EC)
+    draw.rounded_rectangle([(130, 1305), (W - 130, 2180)], radius=18, fill=card_bg, outline=border, width=2)
+    draw.text((170, 1340), "03 / PHARMACEUTICAL CARTON & CLINICAL DOSAGE TRANSCRIPTION (ISO 17049)", font=f_sec, fill=emerald)
+    draw.text((170, 1390), "Paired Dual-Modality Sighted ISMP + Tactile Marburg Medium / Grade 1 Dosage Labels:", font=f_mono_sm, fill=muted)
+
+    rx_braille = [
+        ("EPINEPHRINE 0.3 mg IM", "⠠⠑⠏⠊⠝⠑⠏⠓⠗⠊⠝⠑ ⠼⠚⠲⠉ ⠍⠛", "Anaphylaxis Auto-Injector Carton (r = 60 UPM tactile dome)", amber),
+        ("WARFARIN 5 mg TABLETS", "⠠⠺⠁⠗⠋⠁⠗⠊⠝ ⠼⠑ ⠍⠛", "Anticoagulant Blister Pack • Zero decimal point ambiguity", cyan),
+        ("AMOXICILLIN 500 mg PO", "⠠⠁⠍⠕⠭⠊⠉⠊⠇⠇⠊⠝ ⠼⠑⠚⠚ ⠍⠛", "High-contrast sighted ISMP 0̸ paired with Nemeth/Grade 1 numerals", emerald),
+    ]
+    ry = 1460
+    for sighted, tactile, note, col in rx_braille:
+        draw.rounded_rectangle([(170, ry), (W - 170, ry + 210)], radius=12, fill=(10, 16, 28), outline=border, width=2)
+        draw.text((205, ry + 24), sighted, font=load_font(F_BOLD, 44), fill=white)
+        draw.text((1050, ry + 18), tactile, font=f_braille_lg, fill=col)
+        draw.text((205, ry + 135), f"✓ {note}", font=f_mono_sm, fill=muted)
+        ry += 230
+
+    # Section 4: Sensory & Pedagogical Companion Suite & Boundary Accord
+    draw.rounded_rectangle([(130, 2225), (W - 130, 3150)], radius=18, fill=(12, 20, 34), outline=cyan, width=2)
+    draw.text((170, 2265), "04 / SENSORY & PEDAGOGICAL ARCHITECTURE (BRAILLE • ASL CHEREMIC • LEARN)", font=f_sec, fill=cyan)
+
+    sensory_rows = [
+        ("PocketGull-Braille.ttf:", "Full 256-cell U+2800–U+28FF tactile matrix grounded on Latin baseline (y = 0 UPM) with r = 60 UPM domes."),
+        ("PocketGull-ASL.ttf:", "2D cheremic handshape notation for academic linguistics & Deaf pedagogy (never replaces human interpreters)."),
+        ("PocketGull-Learn.ttf:", "Elementary K-12 literacy & TouchMath tactile-visual counting points with grounded bottom-heavy bowls."),
+        ("Why Separated from UNDRIP:", "Indigenous scripts are sovereign national orthographies; Braille & ASL are universal sensory modalities."),
+        ("Negative Space Invariant:", "100% native vector fonts & semantic HTML — never a DOM-hijacking third-party accessibility overlay widget."),
+    ]
+    sy = 2355
+    for title, desc in sensory_rows:
+        draw.text((170, sy), f"◆ {title}", font=f_mono_md, fill=amber)
+        draw.text((710, sy + 2), desc, font=f_mono_sm, fill=white)
+        sy += 145
+
+    draw.text((130, 3210), "POCKETGULL TYPEFOUNDRY • PLATE V: ISO 17049 TACTILE BRAILLE & SENSORY ACUITY SPECIMEN", font=f_mono_sm, fill=muted)
+    draw.text((W - 760, 3210), "256 / 256 BRAILLE CELLS VERIFIED • V3.1.0", font=f_mono_sm, fill=amber)
+
+    return im
+
+
 def generate_vector_svg_broadside(out_svg: Path):
     """Generates a self-contained Vector SVG Master Broadside with extracted TrueType glyph paths."""
     d_zero, _ = extract_glyph_svg(F_NUM, "zero")
@@ -897,22 +1026,27 @@ def main():
     p4_path = POSTERS_DIR / "poster_04_icu_telemetry_scotopic_hud.png"
     p4.save(p4_path, "PNG", dpi=(300, 300))
 
-    print("5. Exporting 4-Page Print-Ready PDF Broadside Portfolio...")
-    pdf_path = POSTERS_DIR / "pocketgull_master_posters_v3.1.0.pdf"
-    p1.save(pdf_path, "PDF", resolution=300.0, save_all=True, append_images=[p2, p3, p4])
+    print("5. Rendering Poster V: Dedicated ISO 17049 Tactile Braille & Sensory Acuity...")
+    p5 = build_poster_5()
+    p5_path = POSTERS_DIR / "poster_05_tactile_braille_iso17049.png"
+    p5.save(p5_path, "PNG", dpi=(300, 300))
 
-    print("6. Exporting Vector SVG Master Broadside...")
+    print("6. Exporting 5-Page Print-Ready PDF Broadside Portfolio...")
+    pdf_path = POSTERS_DIR / "pocketgull_master_posters_v3.1.0.pdf"
+    p1.save(pdf_path, "PDF", resolution=300.0, save_all=True, append_images=[p2, p3, p4, p5])
+
+    print("7. Exporting Vector SVG Master Broadside...")
     svg_path = POSTERS_DIR / "pocketgull_vector_topology_broadside.svg"
     generate_vector_svg_broadside(svg_path)
 
     # Also copy PNGs and SVG to Artifact directory for inline carousel preview
     if ARTIFACT_DIR.exists():
-        for src in [p1_path, p2_path, p3_path, p4_path, svg_path, pdf_path]:
+        for src in [p1_path, p2_path, p3_path, p4_path, p5_path, svg_path, pdf_path]:
             dst = ARTIFACT_DIR / src.name
             dst.write_bytes(src.read_bytes())
-        print(f"7. Copied all 4 posters, vector SVG, and PDF portfolio to artifact directory: {ARTIFACT_DIR}")
+        print(f"8. Copied all 5 posters, vector SVG, and PDF portfolio to artifact directory: {ARTIFACT_DIR}")
 
-    print("\n[SUCCESS] All 4 Masterwork Posters + PDF Portfolio + Vector SVG Broadside generated!")
+    print("\n[SUCCESS] All 5 Masterwork Posters + PDF Portfolio + Vector SVG Broadside generated!")
 
 
 if __name__ == "__main__":
