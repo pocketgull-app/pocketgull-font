@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PocketGull Font Superfamily — 4-Poster Masterwork Series & Print Broadside Gallery (Clinical Acuity, GearArts Tactile Cardstock, Sovereign Scripts, ICU Telemetry).">
+  <title>PocketGull Typefoundry — 4-Poster Masterwork Gallery &amp; Print Broadsides (v3.1.0)</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preload" href="fonts/woff2/PocketGull-VF.woff2?v=3.1.0" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/woff2/PocketGull-Bold.woff2?v=3.1.0" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/woff2/PocketGullMono-Regular.woff2?v=3.1.0" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="fonts.css?v=3.1.0">
+  <style>
+    :root {
+      --bg: #070b12;
+      --surface: #0d1522;
+      --surface-alt: #131f33;
+      --border: #1e293b;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --cyan: #06b6d4;
+      --emerald: #10b981;
+      --amber: #f59e0b;
+      --rose: #f43f5e;
+      --cardstock-bg: #f6f1e7;
+      --cardstock-card: #eee6d7;
+      --cardstock-ink: #18181b;
+      --cardstock-terra: #c2410c;
+      --cardstock-teal: #0f766e;
+      --scotopic-bg: #160406;
+      --scotopic-card: #24060a;
+      --scotopic-red: #ef4444;
+      --scotopic-dim: #991b1b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'PocketGull VF', 'PocketGull', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.5;
+      padding: 36px 24px 80px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .gallery-shell {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    /* Top Navigation & Download Bar */
+    .gallery-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 28px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .gallery-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .gallery-brand h1 {
+      font-family: 'PocketGull Bold', 'PocketGull VF', sans-serif;
+      font-size: 24px;
+      letter-spacing: -0.01em;
+    }
+
+    .gallery-brand p {
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .nav-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--surface-alt);
+      color: var(--text);
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+
+    .btn:hover {
+      border-color: var(--cyan);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: rgba(6, 182, 212, 0.14);
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    /* Poster Frame (A3 / Broadside Ratio) */
+    .poster-sheet {
+      border-radius: 20px;
+      padding: 48px;
+      border: 2px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+      page-break-after: always;
+      break-after: page;
+    }
+
+    .poster-meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill {
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .pill-cyan { background: rgba(6, 182, 212, 0.14); border: 1px solid var(--cyan); color: var(--cyan); }
+    .pill-emerald { background: rgba(16, 185, 129, 0.14); border: 1px solid var(--emerald); color: var(--emerald); }
+    .pill-amber { background: rgba(245, 158, 11, 0.14); border: 1px solid var(--amber); color: var(--amber); }
+    .pill-rose { background: rgba(244, 63, 94, 0.14); border: 1px solid var(--rose); color: var(--rose); }
+
+    .poster-hero h2 {
+      font-family: 'PocketGull Bold', 'PocketGull VF', sans-serif;
+      font-size: clamp(38px, 5vw, 68px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .poster-hero p {
+      font-size: 18px;
+      color: var(--muted);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 24px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .card-kicker {
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* Sloan Acuity Ladder */
+    .sloan-row {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    }
+
+    .sloan-label {
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 14px;
+      width: 72px;
+      flex-shrink: 0;
+    }
+
+    .sloan-letters {
+      font-family: 'PocketGull Bold', sans-serif;
+      letter-spacing: 0.12em;
+      line-height: 1.1;
+    }
+
+    /* ISMP Showcase Box */
+    .ismp-glyph-box {
+      height: 150px;
+      border-radius: 12px;
+      background: #080d16;
+      border: 1px solid #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'PocketGull Numerics', 'PocketGull Bold', sans-serif;
+      font-size: 96px;
+      font-feature-settings: "zero" 1, "cv05" 1, "ss02" 1, "cv11" 1;
+    }
+
+    /* Heart Tittle Showcase */
+    .heart-feature {
+      font-family: 'PocketGull', sans-serif;
+      font-feature-settings: "ss07" 1;
+    }
+
+    /* Poster II: Warm Cardstock Theme */
+    .poster-cardstock {
+      background-color: var(--cardstock-bg);
+      color: var(--cardstock-ink);
+      border-color: var(--cardstock-ink);
+    }
+
+    .poster-cardstock .poster-hero p {
+      color: #57534e;
+    }
+
+    .poster-cardstock .card {
+      background: var(--cardstock-card);
+      border-color: #d6cbb8;
+      color: var(--cardstock-ink);
+    }
+
+    /* Poster IV: Scotopic Section */
+    .scotopic-panel {
+      background: var(--scotopic-bg);
+      border: 2px solid var(--scotopic-red);
+      border-radius: 16px;
+      padding: 28px;
+      color: var(--scotopic-red);
+    }
+
+    .poster-footer {
+      margin-top: auto;
+      padding-top: 18px;
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      font-family: 'PocketGull Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 960px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .poster-sheet { padding: 28px; }
+    }
+
+    @media print {
+      body { background: #070b12; padding: 0; }
+      .gallery-nav { display: none; }
+      .poster-sheet {
+        box-shadow: none;
+        border-radius: 0;
+        min-height: 100vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="gallery-shell">
+    <!-- Top Bar -->
+    <header class="gallery-nav">
+      <div class="gallery-brand">
+        <h1>POCKETGULL TYPEFOUNDRY — 4-POSTER MASTERWORK SERIES</h1>
+        <p>Version 3.1.0 • 1000 UPM • 39 Styles • 100% W3C OTS &amp; Typographic Council Certified</p>
+      </div>
+      <div class="nav-actions">
+        <a class="btn btn-primary" href="documentation/posters/pocketgull_master_posters_v3.1.0.pdf" download>⬇ 4-Poster PDF (300 DPI)</a>
+        <a class="btn btn-primary" href="documentation/posters/pocketgull_direct_curve_studies_v3.1.0.pdf" download>⬇ 4-Plate Direct Curve Atlas PDF</a>
+        <a class="btn" href="documentation/posters/pocketgull_vector_topology_broadside.svg" target="_blank">📐 Vector SVG Broadside</a>
+        <a class="btn" href="specimen-broadside.html">🎛 Interactive 16-Axis Broadside</a>
+      </div>
+    </header>
+
+    <!-- =====================================================================
+         POSTER I: CLINICAL ACUITY, LOUISE SLOAN 5:1 & ISMP DISAMBIGUATION
+         ===================================================================== -->
+    <section class="poster-sheet" id="poster-1">
+      <div class="poster-meta-bar">
+        <div class="badge-row">
+          <span class="pill pill-cyan">PLATE I • CLINICAL ACUITY &amp; SAFETY</span>
+          <span class="pill pill-emerald">LOUISE SLOAN 5:1 OPTOTYPES (1959)</span>
+          <span class="pill pill-amber">ISMP ZERO-COLLISION STANDARD</span>
+        </div>
+        <a class="btn" href="documentation/posters/poster_01_clinical_acuity_sloan_ismp.png" target="_blank">🖼 High-Res PNG (2400×3400)</a>
+      </div>
+
+      <div class="poster-hero">
+        <h2>POCKETGULL CLINICAL ACUITY</h2>
+        <p>Engineered by Phil Gear • Louise Sloan 5×5 Grid Acuity, ISMP Medication Safety &amp; Pillar 9 Heart Tittle Telemetry</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-kicker" style="color: var(--cyan);">01 / Louise Sloan 10-Optotype LogMAR Acuity Ladder (+0.12em Bouma Spacing)</div>
+          <div class="sloan-row">
+            <span class="sloan-label" style="color: var(--amber);">20/100</span>
+            <span class="sloan-letters" style="font-size: 58px;">C D H K N</span>
+          </div>
+          <div class="sloan-row">
+            <span class="sloan-label" style="color: var(--emerald);">20/70</span>
+            <span class="sloan-letters" style="font-size: 42px;">O R S V Z</span>
+          </div>
+          <div class="sloan-row">
+            <span class="sloan-label" style="color: var(--cyan);">20/40</span>
+            <span class="sloan-letters" style="font-size: 30px;">C D H K N O R S V Z</span>
+          </div>
+          <div class="sloan-row" style="border-bottom: none;">
+            <span class="sloan-label" style="color: var(--muted);">20/20</span>
+            <span class="sloan-letters" style="font-size: 22px; color: var(--emerald);">C D H K N O R S V Z • 500 mg IV STAT</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-kicker" style="color: var(--rose);">02 / Pillar 9 Philocardia Tittle Invariant (ss07)</div>
+          <p style="font-size: 14px; color: var(--muted);">Bit-identical stem contour 0 (<code>x: 85–173, y: 0–536 UPM</code>) paired with a 48 UPM elevated air gap (<code>yMin: 584, yMax: 700 UPM</code>):</p>
+          <div style="background: #080d16; border: 1px solid #1e293b; border-radius: 12px; padding: 20px; text-align: center;">
+            <div class="heart-feature" style="font-size: 76px; font-weight: 700; color: var(--rose); line-height: 1.1;">i j • Philocardia</div>
+            <div style="font-family: 'PocketGull Mono', monospace; font-size: 13px; color: var(--cyan); margin-top: 8px;">font-feature-settings: "ss07" 1; /* 0 stem shift • 48 UPM air gap */</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-4">
+        <div class="card">
+          <div class="card-kicker" style="color: var(--cyan);">Slashed Zero (cv08)</div>
+          <div class="ismp-glyph-box" style="color: var(--cyan);">0</div>
+          <p style="font-size: 14px; color: var(--muted);"><strong>500 mg vs 50 mg:</strong> Diagonal interior slash prevents 10×–100× decimal and trailing-zero infusion overdoses.</p>
+        </div>
+        <div class="card">
+          <div class="card-kicker" style="color: var(--emerald);">Curved Foot l (cv05)</div>
+          <div class="ismp-glyph-box" style="color: var(--emerald);">l</div>
+          <p style="font-size: 14px; color: var(--muted);"><strong>1 vs l vs I:</strong> Outward baseline sweep disambiguates look-alike/sound-alike (LASA) medication names.</p>
+        </div>
+        <div class="card">
+          <div class="card-kicker" style="color: var(--amber);">Biserif Capital I (ss02)</div>
+          <div class="ismp-glyph-box" style="font-family: 'PocketGull Serif', serif; color: var(--amber);">I</div>
+          <p style="font-size: 14px; color: var(--muted);"><strong>IL-6 / IgA / IU:</strong> Top and baseline horizontal serifs eliminate International Unit (IU) ambiguity.</p>
+        </div>
+        <div class="card">
+          <div class="card-kicker" style="color: var(--rose);">Crossbar Capital Z (cv11)</div>
+          <div class="ismp-glyph-box" style="color: var(--rose);">Z</div>
+          <p style="font-size: 14px; color: var(--muted);"><strong>Zolpidem 5 mg:</strong> Central crossbar prevents Z-to-2 misreadings on low-DPI thermal wristbands.</p>
+        </div>
+      </div>
+
+      <div class="poster-footer">
+        <span>POCKETGULL TYPEFOUNDRY • PLATE I: LOUISE SLOAN 5:1 &amp; ISMP CLINICAL SAFETY</span>
+        <span>39 / 39 ELLEN LUPTON &amp; KAREN CHENG AUDITS PASSED</span>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         POSTER II: GEARARTS TACTILE CARDSTOCK & CHISELTIP ATELIER
+         ===================================================================== -->
+    <section class="poster-sheet poster-cardstock" id="poster-2">
+      <div class="poster-meta-bar">
+        <div class="badge-row">
+          <span class="pill" style="background: #fef3c7; border: 1px solid var(--cardstock-terra); color: var(--cardstock-terra);">PLATE II • GEARARTS PHYSICAL ATELIER</span>
+          <span class="pill" style="background: #ccfbf1; border: 1px solid var(--cardstock-teal); color: var(--cardstock-teal);">25 UPM FELT-MARKER RADII</span>
+        </div>
+        <a class="btn" style="background: #18181b; color: #f8fafc;" href="documentation/posters/poster_02_tactile_cardstock_atelier.png" target="_blank">🖼 High-Res PNG (2400×3400)</a>
+      </div>
+
+      <div class="poster-hero">
+        <h2 style="font-family: 'PocketGull Chiseltip', 'PocketGull Bold', sans-serif;">TACTILE FELT &amp; CARDSTOCK</h2>
+        <p>Originating from physical felt-tip marker lettering on heavy cardstock for GearArts — humanist stroke warmth with zero geometric sterility.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-kicker" style="color: var(--cardstock-teal);">01 / PocketGull Fineliner (wght 300 • 0.3mm Porous-Point Technical Nib)</div>
+        <div style="font-family: 'PocketGull Fineliner', 'PocketGull', sans-serif; font-weight: 300; font-size: 32px;">
+          Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz • 0123456789
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-kicker" style="color: var(--cardstock-ink);">02 / PocketGull Chiseltip (wght 900 • 45° Broad-Edge Calligraphic Felt Nib)</div>
+        <div style="font-family: 'PocketGull Chiseltip', 'PocketGull Bold', sans-serif; font-weight: 900; font-size: 38px;">
+          BROADSIDE DISPLAY AUTHORITY • &amp; ₹ € £ ¥ § © ® ™ • 0123456789
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-kicker" style="color: var(--cardstock-terra);">03 / PocketGull MarkerRaw &amp; Soft (63.7% Hand-Drawn Waist &amp; 25 UPM Pillowed Counters)</div>
+        <div style="font-family: 'PocketGull Soft', 'PocketGull Bold', sans-serif; font-weight: 700; font-size: 34px; color: var(--cardstock-terra);">
+          “Systems, Forces, Response — Warmth in the stroke; rigor in the byte.”
+        </div>
+      </div>
+
+      <div class="poster-footer" style="color: #57534e; border-top-color: #d6cbb8;">
+        <span>POCKETGULL TYPEFOUNDRY • PLATE II: GEARARTS CARDSTOCK &amp; FELT-MARKER ATELIER</span>
+        <span>DIETER RAMS LAW 3 &amp; LAW 6 VERIFIED</span>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         POSTER III: SOVEREIGN MULTI-SCRIPT & UNDRIP ACCORD SPECIMEN
+         ===================================================================== -->
+    <section class="poster-sheet" id="poster-3">
+      <div class="poster-meta-bar">
+        <div class="badge-row">
+          <span class="pill pill-emerald">PLATE III • SOVEREIGN MULTI-SCRIPT ACCORD</span>
+          <span class="pill pill-amber">UNDRIP ARTICLES 11, 13, 14, 24 &amp; 31</span>
+          <span class="pill pill-cyan">39 / 39 FONTS VERIFIED SOVEREIGN</span>
+        </div>
+        <a class="btn" href="documentation/posters/poster_03_sovereign_undrip_multiscript.png" target="_blank">🖼 High-Res PNG (2400×3400)</a>
+      </div>
+
+      <div class="poster-hero">
+        <h2>LET INDIGENOUS SCRIPTS BE SOVEREIGN</h2>
+        <p>Zero forced Latinization • Equal clinical optotype acuity across Pan-Tribal Orthographies, Canadian Syllabics, Chinuk Pipa &amp; Tactile Braille</p>
+      </div>
+
+      <div class="card">
+        <div class="card-kicker" style="color: var(--amber);">01 / Pan-Tribal Indigenous Orthographies (15 / 15 Sovereign Characters Verified)</div>
+        <div style="font-size: 46px; font-weight: 700; color: var(--cyan); letter-spacing: 0.08em;">
+          Ł ł ƛ ʔ ʼ ʻ ŋ ə ʷ ą ę į ǫ š ž
+        </div>
+        <div class="grid-4" style="margin-top: 8px;">
+          <div>
+            <strong style="color: var(--amber);">Diné Bizaad (Navajo):</strong>
+            <div style="font-size: 22px; margin-top: 4px;">Hózhǫ́ náhásdliiʼ • Łééchąąʼí</div>
+          </div>
+          <div>
+            <strong style="color: var(--cyan);">dxʷləšucid (Coast Salish):</strong>
+            <div style="font-size: 22px; margin-top: 4px;">čʼəxʷəlu • sqʷəbayʔ • ƛʼuxʷ</div>
+          </div>
+          <div>
+            <strong style="color: var(--emerald);">Lakȟótiyapi (Great Plains):</strong>
+            <div style="font-size: 22px; margin-top: 4px;">Mitákuye Oyásʼiŋ • Mní Wíčhoni</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-kicker" style="color: var(--cyan);">02 / Unified Canadian Aboriginal Syllabics (640 / 640 • U+1400–U+167F)</div>
+          <div style="font-size: 32px; color: var(--text); line-height: 1.4;">
+            ᐃᓄᒃᑎᑐᑦ (Inuktitut) • ᓀᐦᐃᔭᐍᐏᐣ (Nêhiyawêwin)<br>
+            <span style="color: var(--cyan);">ᐁ ᐃ ᐅ ᐊ  ᐯ ᐱ ᐳ ᐸ  ᑌ ᑎ ᑐ ᑕ  ᑫ ᑭ ᑯ ᑲ  ᒣ ᒥ ᒧ ᒪ</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-kicker" style="color: var(--emerald);">03 / Full 256 Tactile Braille (U+2800–U+28FF) &amp; Duployan (143 / 143)</div>
+          <div style="font-size: 28px; color: var(--emerald); line-height: 1.4;">
+            ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞<br>
+            <span style="color: var(--amber); font-size: 20px;">ISO/TR 11548 8-Dot Tactile Geometry • Grounded at y = 0 UPM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="poster-footer">
+        <span>POCKETGULL TYPEFOUNDRY • PLATE III: SOVEREIGN MULTI-SCRIPT &amp; UNDRIP ACCORD</span>
+        <span>OCAP® DATA SOVEREIGNTY • SIL OFL 1.1</span>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         POSTER IV: ICU 600 UPM TELEMETRY, OPENTYPE MATH & 650nm SCOTOPIC HUD
+         ===================================================================== -->
+    <section class="poster-sheet" id="poster-4">
+      <div class="poster-meta-bar">
+        <div class="badge-row">
+          <span class="pill pill-emerald">PLATE IV • ICU TELEMETRY &amp; SCIENTIFIC ENGINE</span>
+          <span class="pill pill-cyan">FIXED 600 UPM MONOSPACE PITCH</span>
+          <span class="pill pill-rose">650nm SCOTOPIC NIGHT-SHIFT</span>
+        </div>
+        <a class="btn" href="documentation/posters/poster_04_icu_telemetry_scotopic_hud.png" target="_blank">🖼 High-Res PNG (2400×3400)</a>
+      </div>
+
+      <div class="poster-hero">
+        <h2 style="font-family: 'PocketGull Mono', monospace;">POCKETGULL MONO &amp; TELEMETRY</h2>
+        <p>IEEE 11073 Vital Channels • Gapless Box Drawing (U+2500–U+257F) • OpenType MATH &amp; CHEM • 650nm Scotopic Mode</p>
+      </div>
+
+      <div class="card" style="font-family: 'PocketGull Mono', monospace;">
+        <div class="card-kicker" style="color: var(--emerald);">01 / IEEE 11073 ICU Bedside Telemetry Readout (isFixedPitch = 1 • 600 UPM)</div>
+        <div style="font-size: 22px; line-height: 1.6; color: var(--emerald); overflow-x: auto;">
+          ┌──────────────┬────────────────────┬──────────────────────┬────────────────────┐<br>
+          │ CHANNEL      │ VITAL READOUT      │ WAVEFORM / RHYTHM    │ CLINICAL STATUS    │<br>
+          ├──────────────┼────────────────────┼──────────────────────┼────────────────────┤<br>
+          │ ECG LEAD II  │ 068 bpm (ST +0.0)  │ ──╱╲──╱╲──╱╲──╱╲──   │ 0̸ ARRHYTHMIA       │<br>
+          │ SpO₂ PLETH   │ 099 % (FiO₂ 0.21)  │ ╭─╮ ╭─╮ ╭─╮ ╭─╮      │ NORMOCAPNIA        │<br>
+          │ RADIAL ABP   │ 118/076 (MAP 090)  │ ╱╲_╱╲_╱╲_╱╲_         │ PERFUSION OPTIMAL  │<br>
+          └──────────────┴────────────────────┴──────────────────────┴────────────────────┘
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-kicker" style="color: var(--cyan);">02 / OpenType Mathematics &amp; Stoichiometry</div>
+          <div style="font-family: 'PocketGull Math', 'PocketGull', sans-serif; font-size: 22px; color: var(--cyan);">
+            C_p(t) = [ D · k_a / (V_d · (k_a − k_e)) ] · ( e^(−k_e · t) − e^(−k_a · t) )
+          </div>
+          <div style="font-family: 'PocketGull Chem', 'PocketGull', sans-serif; font-size: 22px; color: var(--amber);">
+            pH = 6.10 + log₁₀( [HCO₃⁻] / [0.0307 · P_aCO₂] ) • C₆H₁₂O₆ + 6 O₂ → 6 CO₂ + 6 H₂O
+          </div>
+        </div>
+
+        <div class="scotopic-panel">
+          <div class="card-kicker" style="color: var(--scotopic-red);">03 / 650nm Scotopic Night-Vision Sanctuary</div>
+          <div style="font-family: 'PocketGull Bold', sans-serif; font-size: 28px; margin-top: 8px;">
+            NOREPINEPHRINE 0.08 mcg/kg/min IV • 0̸ ALARMS
+          </div>
+          <p style="font-family: 'PocketGull Mono', monospace; font-size: 13px; color: #fca5a5; margin-top: 8px;">
+            λ = 650–670 nm preserves retinal rod rhodopsin • wght 350 IRRD anti-halation compensation
+          </p>
+        </div>
+      </div>
+
+      <div class="poster-footer">
+        <span>POCKETGULL TYPEFOUNDRY • PLATE IV: 600 UPM TELEMETRY &amp; 650nm SCOTOPIC ENGINE</span>
+        <span>146 / 146 BINARIES W3C OTS VALID • 524 / 524 GOOGLE FONTS CHECKS PASSED</span>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         DIRECT QUADRATIC BÉZIER CURVE & TOPOLOGY ATLAS (4 PLATES)
+         ===================================================================== -->
+    <section class="poster-sheet" id="direct-curve-studies">
+      <div class="poster-meta-bar">
+        <div class="badge-row">
+          <span class="pill pill-cyan">CAD / BLUEPRINT SERIES • 4 PLATES</span>
+          <span class="pill pill-emerald">ON-CURVE ■ • OFF-CURVE ● • IMPLIED MIDPOINT ◆</span>
+          <span class="pill pill-rose">CURVATURE COMBS κ(t) &amp; CW/CCW WINDING</span>
+        </div>
+        <a class="btn btn-primary" href="documentation/posters/pocketgull_direct_curve_studies_v3.1.0.pdf" download>⬇ Download 4-Page Curve Atlas PDF</a>
+      </div>
+
+      <div class="poster-hero">
+        <h2>DIRECT QUADRATIC CURVE STUDIES</h2>
+        <p>24 Dissected Glyphs across 4 High-Resolution CAD Plates — Implied B-Spline Midpoints, Differential Curvature Combs &amp; Winding Topology</p>
+      </div>
+
+      <div class="grid-4">
+        <div class="card">
+          <div class="card-kicker" style="color: var(--cyan);">Curve Study I • B-Spline &amp; Combs</div>
+          <p style="font-size: 14px; color: var(--muted);"><code>O C S a e g</code> — TrueType implied midpoints <code>M = (P_i + P_{i+1})/2</code> and normal curvature combs <code>κ(t)</code>.</p>
+          <a class="btn" href="documentation/posters/curve_study_01_quadratic_bspline_combs.png" target="_blank">🖼 Open Curve Plate I (2400×3400)</a>
+        </div>
+        <div class="card">
+          <div class="card-kicker" style="color: var(--emerald);">Curve Study II • ISMP &amp; Pillar 9</div>
+          <p style="font-size: 14px; color: var(--muted);"><code>0̸ l I Ƶ i.heart j.heart</code> — CW/CCW contour winding direction and the 48 UPM Pillar 9 heart tittle air gap.</p>
+          <a class="btn" href="documentation/posters/curve_study_02_ismp_pillar9_winding.png" target="_blank">🖼 Open Curve Plate II (2400×3400)</a>
+        </div>
+        <div class="card">
+          <div class="card-kicker" style="color: var(--amber);">Curve Study III • Terminal &amp; Nib</div>
+          <p style="font-size: 14px; color: var(--muted);"><code>Soft R, Slab R, Chiseltip R, MarkerRaw R, Outline A, Inline A</code> — 25 UPM radii &amp; nested dual-contour ink traps.</p>
+          <a class="btn" href="documentation/posters/curve_study_03_terminal_corner_architecture.png" target="_blank">🖼 Open Curve Plate III (2400×3400)</a>
+        </div>
+        <div class="card">
+          <div class="card-kicker" style="color: var(--rose);">Curve Study IV • Sovereign &amp; Math</div>
+          <p style="font-size: 14px; color: var(--muted);"><code>ʔ ƛ ŋ ǫ ♯ ©</code> — Sovereign UNDRIP glottal/lateral contours, unpacked composite ogonek, and 3-contour concentric rings.</p>
+          <a class="btn" href="documentation/posters/curve_study_04_sovereign_scientific_curves.png" target="_blank">🖼 Open Curve Plate IV (2400×3400)</a>
+        </div>
+      </div>
+
+      <div class="poster-footer">
+        <span>POCKETGULL TYPEFOUNDRY • DIRECT QUADRATIC BÉZIER CURVE &amp; TOPOLOGY ATLAS</span>
+        <span>0 DUPLICATE NODES • BIT-7 MASKED (flag &amp; 0x3F) • 2-BYTE WORD ALIGNED</span>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

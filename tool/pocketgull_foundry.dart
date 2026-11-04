@@ -763,38 +763,17 @@ Future<void> runBuild() async {
     print('[OK]');
   }
 
-  // Step 2: Recompress WOFF2 using Python fontTools.ttLib.woff2
+  // Step 2: Recompress WOFF2 using Node bridge (WSL2 / Pure-Dart safe)
   print('\nStep 2: Recompressing WOFF2 webfonts (Brotli Q11)...');
-  final pythonCmd = resolvePythonCmd(root);
-
-  final pyScript = '''
-import os, sys
-from fontTools.ttLib.woff2 import compress
-
-root = r"$root"
-ttf_dir = os.path.join(root, "fonts", "ttf")
-woff2_dir = os.path.join(root, "fonts", "woff2")
-
-for stem in ["PocketGull-Bold", "PocketGull-BoldItalic", "PocketGull-Fineliner", "PocketGull-Italic", "PocketGull-Chiseltip", "PocketGull-MarkerRaw", "PocketGullMono-Regular", "PocketGullMono-Italic"]:
-    src = os.path.join(ttf_dir, stem + ".ttf")
-    dst = os.path.join(woff2_dir, stem + ".woff2")
-    if os.path.isfile(src):
-        compress(src, dst)
-        print("  • " + stem + ".woff2 (" + str(os.path.getsize(dst)) + " bytes)")
-
-root_ttf = os.path.join(root, "PocketGullMono-Regular.ttf")
-root_woff2 = os.path.join(root, "PocketGullMono-Regular.woff2")
-if os.path.isfile(root_ttf):
-    compress(root_ttf, root_woff2)
-    print("  • root PocketGullMono-Regular.woff2 (" + str(os.path.getsize(root_woff2)) + " bytes)")
-''';
-
-  final compRes = await Process.run(pythonCmd, ['-c', pyScript]);
-  stdout.write(compRes.stdout);
-  if (compRes.exitCode != 0) {
-    stderr.write(compRes.stderr);
-    exitCode = 1;
-    return;
+  final recompressScript = File('$root${Platform.pathSeparator}scripts${Platform.pathSeparator}run-recompress.mjs');
+  if (recompressScript.existsSync()) {
+    final compRes = await Process.run('node', [recompressScript.path]);
+    stdout.write(compRes.stdout);
+    if (compRes.exitCode != 0) {
+      stderr.write(compRes.stderr);
+      exitCode = 1;
+      return;
+    }
   }
 
   // Step 3: Run Thomas Phinney Forensic Table Audit
@@ -803,9 +782,9 @@ if os.path.isfile(root_ttf):
 
   // Step 4: Run Google Fonts Specification Pre-Flight
   print('Step 4: Google Fonts Specification Pre-Flight...');
-  final valScript = File('${root}${Platform.pathSeparator}sources${Platform.pathSeparator}validate_fonts.py');
+  final valScript = File('$root${Platform.pathSeparator}scripts${Platform.pathSeparator}run-font-validator.mjs');
   if (valScript.existsSync()) {
-    final valRes = await Process.run(pythonCmd, [valScript.path]);
+    final valRes = await Process.run('node', [valScript.path]);
     stdout.write(valRes.stdout);
     if (valRes.exitCode != 0) {
       stderr.write(valRes.stderr);

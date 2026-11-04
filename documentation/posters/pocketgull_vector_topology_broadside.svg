@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 2200" width="1600" height="2200">
+  <defs>
+    <style>
+      .bg { fill: #070b12; }
+      .card { fill: #0d1522; stroke: #1e293b; stroke-width: 2; rx: 16; }
+      .title { font-family: 'PocketGull Bold', 'Pocket Gull', sans-serif; font-weight: 700; fill: #f8fafc; }
+      .mono { font-family: 'PocketGull Mono', monospace; fill: #94a3b8; }
+      .cyan { fill: #06b6d4; }
+      .emerald { fill: #10b981; }
+      .amber { fill: #f59e0b; }
+      .rose { fill: #f43f5e; }
+    </style>
+  </defs>
+  <rect width="1600" height="2200" class="bg"/>
+  <rect x="50" y="50" width="1500" height="2100" fill="none" stroke="#1e293b" stroke-width="3"/>
+
+  <text x="100" y="130" class="mono cyan" font-size="20" font-weight="700">POCKETGULL TYPEFOUNDRY • VECTOR OUTLINES &amp; ANATOMICAL SPECIMEN (1000 UPM V3.1.0)</text>
+  <text x="100" y="210" class="title" font-size="68">PURE QUADRATIC TRUETYPE TOPOLOGY</text>
+  <text x="100" y="260" class="mono" font-size="22">Extracted directly from 2-byte word-aligned glyf tables (loca[i] % 2 == 0 • 0 duplicate nodes)</text>
+  <line x1="100" y1="295" x2="1500" y2="295" stroke="#06b6d4" stroke-width="2"/>
+
+  <!-- 6 Vector Glyph Inspection Plates -->
+  <g transform="translate(100, 340)">
+    <rect width="440" height="520" class="card"/>
+    <text x="30" y="45" class="mono cyan" font-size="20" font-weight="700">01 / SLASHED ZERO (cv08)</text>
+    <g transform="translate(80, 400) scale(0.38, -0.38)">
+      <path d="M535 357Q535 271 522 203Q508 135 478 88Q449 40 402 15Q354 -10 285 -10Q199 -10 144.0 34.0Q89 78 62 160Q36 242 36 357Q36 473 60.0 555.0Q84 637 139.0 681.0Q194 725 285 725Q371 725 426 682Q481 638 508 556Q535 473 535 357ZM186 357Q186 287 193 237L360 549Q353 565 344 576Q323 603 285.0 603.0Q247 603 226 576Q204 548 195 494Q186 439 186 357ZM221 147Q223 143 226 140Q247 112 285.0 112.0Q323 112 344 139Q366 166 376 220Q385 275 385 357Q385 406 382 446Z" fill="#06b6d4"/>
+    </g>
+    <text x="30" y="475" class="mono" font-size="18">ISMP Dosage Disambiguation (0̸ vs O)</text>
+  </g>
+
+  <g transform="translate(580, 340)">
+    <rect width="440" height="520" class="card"/>
+    <text x="30" y="45" class="mono emerald" font-size="20" font-weight="700">02 / CURVED FOOT l (cv05)</text>
+    <g transform="translate(135, 400) scale(0.38, -0.38)">
+      <path d="M73 115V760H224V115H397V0H148Q109 0 91.0 23.0Q73 46 73 115Z" fill="#10b981"/>
+    </g>
+    <text x="30" y="475" class="mono" font-size="18">Eliminates 1 / l / I Collisions</text>
+  </g>
+
+  <g transform="translate(1060, 340)">
+    <rect width="440" height="520" class="card"/>
+    <text x="30" y="45" class="mono rose" font-size="20" font-weight="700">03 / PHILOCARDIA i.heart (ss07)</text>
+    <g transform="translate(135, 400) scale(0.38, -0.38)">
+      <path d="M173 536H85V0H173ZM129 584Q192 603 197 642Q197 694 166 700Q140 700 129 656Q118 700 92 700Q61 694 61 642Q66 603 129 584Z" fill="#f43f5e"/>
+    </g>
+    <text x="30" y="475" class="mono" font-size="18">Pillar 9: 48 UPM Air Gap (y=584..700)</text>
+  </g>
+
+  <g transform="translate(100, 900)">
+    <rect width="440" height="520" class="card"/>
+    <text x="30" y="45" class="mono amber" font-size="20" font-weight="700">04 / BISERIF CAPITAL I (ss02)</text>
+    <g transform="translate(125, 400) scale(0.38, -0.38)">
+      <path d="M357 0V86L270 126V588L357 628V714H32V628L119 588V126L32 86V0Z" fill="#f59e0b"/>
+    </g>
+    <text x="30" y="475" class="mono" font-size="18">Biomarker Clarity (IL-6, IgA, IU)</text>
+  </g>
+
+  <g transform="translate(580, 900)">
+    <rect width="440" height="520" class="card"/>
+    <text x="30" y="45" class="mono cyan" font-size="20" font-weight="700">05 / CROSSBAR CAPITAL Z (cv11)</text>
+    <g transform="translate(80, 400) scale(0.38, -0.38)">
+      <path d="M555 0H24V98L174 313H109V401H235L366 589H33V714H546V616L396 401H470V313H335L204 125H555Z" fill="#38bdf8"/>
+    </g>
+    <text x="30" y="475" class="mono" font-size="18">Prevents Z-to-2 Wristband Errors</text>
+  </g>
+
+  <g transform="translate(1060, 900)">
+    <rect width="440" height="520" class="card"/>
+    <text x="30" y="45" class="mono emerald" font-size="20" font-weight="700">06 / GLOTTAL STOP ʔ (U+0294)</text>
+    <g transform="translate(95, 400) scale(0.38, -0.38)">
+      <path d="M218 765Q157 765 104 748Q51 731 4 703L59 593Q75 603 98 614Q122 626 150 634Q177 642 205 642Q236 642 258 630Q279 619 290 600Q300 580 300 553Q300 532 292 508Q283 483 262 458Q242 434 207 412Q172 389 119 371V0H273V304Q324 330 360 360Q395 389 416 422Q436 454 446 488Q455 523 455 559Q455 619 427 665Q399 711 346 738Q294 765 218 765Z" fill="#2dd4bf"/>
+    </g>
+    <text x="30" y="475" class="mono" font-size="18">UNDRIP First-Class Sovereign Letter</text>
+  </g>
+
+  <!-- Bottom Summary -->
+  <g transform="translate(100, 1470)">
+    <rect width="1400" height="600" class="card"/>
+    <text x="50" y="65" class="title" font-size="34">LOUISE SLOAN 5:1 OPTOTYPE &amp; MULTI-SCRIPT SUMMARY</text>
+    <text x="50" y="150" class="title cyan" font-size="64" letter-spacing="18">C D H K N O R S V Z</text>
+    <text x="50" y="245" class="title amber" font-size="48">500 mg IV STAT • 0̸ 1 l I Ƶ • i j (ss07)</text>
+    <text x="50" y="335" class="title emerald" font-size="44">Ł ł ƛ ʔ ʼ ʻ ŋ ə ʷ ą ę į ǫ  •  ᐃᓄᒃᑎᑐᑦ  •  ᓀᐦᐃᔭᐍᐏᐣ</text>
+    <text x="50" y="425" class="mono" font-size="36" fill="#f8fafc">⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ 🇿</text>
+    <text x="50" y="525" class="mono" font-size="22">FOUNDRY COUNCIL VERIFIED: 39/39 Lupton • 39/39 Cheng • 39/39 Phinney • 39/39 TEK/UNDRIP • 820/820 FoundrySpector</text>
+  </g>
+</svg>

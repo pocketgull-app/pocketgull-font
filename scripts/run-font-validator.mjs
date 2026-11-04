@@ -24,66 +24,50 @@ const typefaceDir = path.resolve(scriptDir, '..');
 
 console.log(`🔤 [Font Validator] Target: ${scriptPath}`);
 
-// Strategy 1: Test native Python with fontTools
-const pythonCmds = [
-  'C:\\Users\\philg\\anaconda3\\python.exe',
-  'python',
-  'py',
-];
+// Strategy 1: Run via persistent WSL2 Ubuntu runtime (avoids Windows Smart App Control blocks on host python.exe)
 let executed = false;
+try {
+  const wslScriptPath = scriptPath.replace(/^[a-zA-Z]:/, (m) => `/mnt/${m[0].toLowerCase()}`).replace(/\\/g, '/');
+  const wslWorkDir = typefaceDir.replace(/^[a-zA-Z]:/, (m) => `/mnt/${m[0].toLowerCase()}`).replace(/\\/g, '/');
 
-for (const py of pythonCmds) {
-  try {
-    const check = spawnSync(py, ['-c', 'import fontTools'], { stdio: 'ignore', shell: true });
+  const uvCandidates = [
+    '/home/philg/.local/bin/uv',
+    'uv',
+  ];
+
+  for (const uvBin of uvCandidates) {
+    const check = spawnSync('wsl', ['-d', 'Ubuntu', '--', uvBin, '--version'], { stdio: 'ignore' });
     if (check.status === 0) {
-      console.log(`[Font Validator] Running via native Python (${py})...`);
-      const result = spawnSync(py, [scriptPath], {
+      console.log(`[Font Validator] Running via WSL2 Ubuntu uv (${uvBin})...`);
+      const result = spawnSync('wsl', [
+        '-d',
+        'Ubuntu',
+        '--',
+        'bash',
+        '-c',
+        `cd "${wslWorkDir}" && ${uvBin} run --with fonttools python3 "${wslScriptPath}"`
+      ], {
         stdio: 'inherit',
-        cwd: typefaceDir,
-        shell: true,
       });
-      executed = true;
-      process.exit(result.status ?? 0);
-    }
-  } catch {}
-}
 
-// Strategy 2: Run via WSL with uv (cached fonttools)
-if (!executed) {
-  try {
-    const wslScriptPath = scriptPath.replace(/^[a-zA-Z]:/, (m) => `/mnt/${m[0].toLowerCase()}`).replace(/\\/g, '/');
-    const wslWorkDir = typefaceDir.replace(/^[a-zA-Z]:/, (m) => `/mnt/${m[0].toLowerCase()}`).replace(/\\/g, '/');
-
-    const uvCandidates = [
-      '/home/philg/.local/bin/uv',
-      'uv',
-    ];
-
-    for (const uvBin of uvCandidates) {
-      const check = spawnSync('wsl', ['--', uvBin, '--version'], { stdio: 'ignore' });
-      if (check.status === 0) {
-        console.log(`[Font Validator] Running via WSL uv (${uvBin})...`);
-        const result = spawnSync('wsl', [
-          '--',
-          'bash',
-          '-c',
-          `cd "${wslWorkDir}" && ${uvBin} run --with fonttools python3 "${wslScriptPath}"`
-        ], {
-          stdio: 'inherit',
-        });
-
-        if (result.status === 0) {
-          executed = true;
-          process.exit(0);
-        }
+      if (result.status === 0) {
+        executed = true;
+        process.exit(0);
+      } else {
+        process.exit(result.status ?? 1);
       }
     }
-  } catch (err) {
-    console.warn(`[Font Validator] WSL execution note: ${err.message}`);
   }
+} catch (err) {
+  console.warn(`[Font Validator] WSL2 Ubuntu execution note: ${err.message}`);
 }
 
+// Strategy 2: Fallback to Pure-Dart 3.11 Compliance Auditor
 if (!executed) {
-  console.warn('[Font Validator] Notice: Neither native Python fontTools nor WSL uv was reachable. Font validation deferred.');
-  process.exit(0);
+  console.log('[Font Validator] Falling back to Pure-Dart 3.11 Compliance Auditor...');
+  const dartRes = spawnSync('dart', ['run', 'tool/pocketgull_foundry.dart', 'compliance'], {
+    stdio: 'inherit',
+    cwd: typefaceDir,
+  });
+  process.exit(dartRes.status ?? 0);
 }

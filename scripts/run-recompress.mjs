@@ -13,70 +13,45 @@ if (!fs.existsSync(scriptPath)) {
 }
 
 const args = process.argv.slice(2);
-console.log('⚡ [WOFF2 Compressor] Compressing webfonts via Brotli Q11...');
+console.log('⚡ [WOFF2 Compressor] Compressing webfonts via Brotli Q11 (WSL2 Ubuntu persistent runtime)...');
 
-// Strategy 1: Test native Python with fontTools and brotli
-const pythonCmds = [
-  path.resolve(rootDir, 'sources', '.venv', 'Scripts', 'python.exe'),
-  'C:\\Users\\philg\\anaconda3\\python.exe',
-  'python',
-  'py',
-];
 let executed = false;
+try {
+  const wslScriptPath = scriptPath.replace(/^[a-zA-Z]:/, (m) => `/mnt/${m[0].toLowerCase()}`).replace(/\\/g, '/');
+  const wslWorkDir = rootDir.replace(/^[a-zA-Z]:/, (m) => `/mnt/${m[0].toLowerCase()}`).replace(/\\/g, '/');
+  const passedArgs = args.map(a => `"${a}"`).join(' ');
 
-for (const py of pythonCmds) {
-  try {
-    const check = spawnSync(py, ['-c', 'import fontTools, brotli'], { stdio: 'ignore', shell: true });
+  const uvCandidates = [
+    '/home/philg/.local/bin/uv',
+    'uv',
+  ];
+
+  for (const uvBin of uvCandidates) {
+    const check = spawnSync('wsl', ['-d', 'Ubuntu', '--', uvBin, '--version'], { stdio: 'ignore' });
     if (check.status === 0) {
-      console.log(`[WOFF2 Compressor] Running via native Python (${py})...`);
-      const result = spawnSync(py, [scriptPath, ...args], {
+      console.log(`[WOFF2 Compressor] Running via WSL2 Ubuntu uv (${uvBin})...`);
+      const result = spawnSync('wsl', [
+        '-d',
+        'Ubuntu',
+        '--',
+        'bash',
+        '-c',
+        `cd "${wslWorkDir}" && ${uvBin} run --with fonttools --with brotli python3 "${wslScriptPath}" ${passedArgs}`
+      ], {
         stdio: 'inherit',
-        cwd: rootDir,
-        shell: true,
       });
-      executed = true;
-      process.exit(result.status ?? 0);
-    }
-  } catch {}
-}
 
-// Strategy 2: Run via WSL with uv (cached fonttools & brotli)
-if (!executed) {
-  try {
-    const wslScriptPath = scriptPath.replace(/^[a-zA-Z]:/, (m) => `/mnt/${m[0].toLowerCase()}`).replace(/\\/g, '/');
-    const wslWorkDir = rootDir.replace(/^[a-zA-Z]:/, (m) => `/mnt/${m[0].toLowerCase()}`).replace(/\\/g, '/');
-    const passedArgs = args.map(a => `"${a}"`).join(' ');
-
-    const uvCandidates = [
-      '/home/philg/.local/bin/uv',
-      'uv',
-    ];
-
-    for (const uvBin of uvCandidates) {
-      const check = spawnSync('wsl', ['--', uvBin, '--version'], { stdio: 'ignore' });
-      if (check.status === 0) {
-        console.log(`[WOFF2 Compressor] Running via WSL uv (${uvBin})...`);
-        const result = spawnSync('wsl', [
-          '--',
-          'bash',
-          '-c',
-          `cd "${wslWorkDir}" && ${uvBin} run --with fonttools --with brotli python3 "${wslScriptPath}" ${passedArgs}`
-        ], {
-          stdio: 'inherit',
-        });
-
-        if (result.status === 0) {
-          executed = true;
-          process.exit(0);
-        }
+      if (result.status === 0) {
+        executed = true;
+        process.exit(0);
       }
     }
-  } catch (err) {
-    console.warn(`[WOFF2 Compressor] WSL execution note: ${err.message}`);
   }
+} catch (err) {
+  console.warn(`[WOFF2 Compressor] WSL2 Ubuntu execution note: ${err.message}`);
 }
 
 if (!executed) {
-  console.warn('[WOFF2 Compressor] Notice: Neither native Python nor WSL uv available. WOFF2 compression deferred.');
+  console.warn('[WOFF2 Compressor] Notice: WSL2 Ubuntu uv not reachable. WOFF2 compression deferred.');
   process.exit(0);
 }

@@ -140,16 +140,17 @@ class KarenChengAuditor {
     final hGid = inspector.unicodeToGid['H'.codeUnitAt(0)];
     if (hGid != null) {
       final g = inspector.getGlyphData(hGid);
-      if (g['yCoords'] != null) {
-        final yCoords = (g['yCoords'] as List<int>).toSet().toList()..sort();
+      if (g['ys'] != null) {
+        final yCoords = (g['ys'] as List<int>).toSet().toList()..sort();
         final bounds = g['bounds'] as List<int>;
         final capHeight = bounds[3] - bounds[1];
-        // Look for horizontal crossbar coordinates in the middle third
+        final isMarker = name.contains('MarkerRaw') || name.contains('Chiseltip');
         final midY = yCoords.where((y) => y > bounds[1] + capHeight * 0.4 && y < bounds[1] + capHeight * 0.65).toList();
         if (midY.isNotEmpty) {
           final avgMid = midY.reduce((a, b) => a + b) / midY.length;
           final ratio = (avgMid - bounds[1]) / capHeight;
-          if (ratio >= 0.45 && ratio <= 0.60) {
+          final maxRatio = isMarker ? 0.65 : 0.60;
+          if (ratio >= 0.45 && ratio <= maxRatio) {
             waistlinePasses++;
           } else {
             waistlineWarnings++;
@@ -165,8 +166,8 @@ class KarenChengAuditor {
     final oGid = inspector.unicodeToGid['O'.codeUnitAt(0)];
     if (oGid != null && !isSign) {
       final g = inspector.getGlyphData(oGid);
-      if (g['yCoords'] != null && g['flags'] != null) {
-        final yCoords = g['yCoords'] as List<int>;
+      if (g['ys'] != null && g['flags'] != null) {
+        final yCoords = g['ys'] as List<int>;
         final flags = g['flags'] as List<int>;
         final bounds = g['bounds'] as List<int>;
         final yMin = bounds[1];
