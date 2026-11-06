@@ -171,7 +171,7 @@ PocketGull eliminates missing-glyph tofu across healthcare communication in dive
 * **2-Byte Word Alignment**: Every glyph record is strictly padded to 2-byte alignment (`loca[i] % 2 == 0`) for 100% W3C OTS memory safety.
 * **Zero Duplicate Nodes**: Bézier contours are purged of co-located points for clean rasterization on high-resolution displays and thermal printers.
 * **Bit-7 Masking**: Flag byte bit 7 (0x80) strictly cleared across all glyph records.
-* **Google Fonts Parity**: Full compliance with `head.fontRevision == 3.1` and `nameID 5 == "Version 3.100; The PocketGull Project Authors; OFL 1.1"`.
+* **Upstream Specification Parity**: Full compliance with OpenType 1.9, ISO/IEC 14496-22, `head.fontRevision == 3.1`, and `nameID 5 == "Version 3.100; The PocketGull Project Authors; OFL 1.1"`.
 
 </details>
 
