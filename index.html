@@ -7535,11 +7535,11 @@
                     <span style="color: var(--text-muted);">&bull; AdvancedMarkerElement &bull; DEMO_MAP_ID</span>
                   </div>
                   <div style="display: flex; align-items: center; gap: 6px;">
-                    <input id="gmapsApiKeyInput" type="password" maxlength="120" placeholder="Enter Google Maps API Key (or Demo Key)..." aria-label="Google Maps API Key" style="font-family: 'PocketGull Mono', monospace; font-size: 11px; padding: 4px 8px; width: 230px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.35); background: #020617; color: #f8fafc;" />
+                    <input id="gmapsRuntimeTokenInput" type="text" autocomplete="off" spellcheck="false" maxlength="120" placeholder="Enter Google Maps Token (or Demo ID)..." aria-label="Google Maps Runtime Token" style="font-family: 'PocketGull Mono', monospace; font-size: 11px; padding: 4px 8px; width: 230px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.35); background: #020617; color: #f8fafc;" />
                     <button type="button" id="btnSaveGmapsKey" style="font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--cyan); background: rgba(6, 182, 212, 0.18); color: var(--cyan); cursor: pointer;">
                       🔑 Load Map
                     </button>
-                    <button type="button" id="btnClearGmapsKey" title="Clear saved API key from browser localStorage" style="font-size: 11px; padding: 4px 8px; border-radius: 4px; border: 1px solid var(--card-border); background: transparent; color: var(--text-muted); cursor: pointer;">
+                    <button type="button" id="btnClearGmapsKey" title="Clear active Google Maps token from volatile memory" style="font-size: 11px; padding: 4px 8px; border-radius: 4px; border: 1px solid var(--card-border); background: transparent; color: var(--text-muted); cursor: pointer;">
                       ✕
                     </button>
                   </div>
@@ -13978,7 +13978,7 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
         const mapContainer = document.getElementById('mapCanvasContainer');
         const gmapsContainer = document.getElementById('googleMapCanvasContainer');
         const gmapsCanvas = document.getElementById('googleMapCanvas');
-        const gmapsKeyInput = document.getElementById('gmapsApiKeyInput');
+        const gmapsTokenInput = document.getElementById('gmapsRuntimeTokenInput');
         const btnSaveGmapsKey = document.getElementById('btnSaveGmapsKey');
         const btnClearGmapsKey = document.getElementById('btnClearGmapsKey');
         const gmapsStatusBadge = document.getElementById('gmapsStatusBadge');
@@ -14046,23 +14046,25 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           return c.pop.split('•')[0].trim();
         }
 
-        const GMAPS_STORAGE_KEY = 'POCKETGULL_GMAPS_KEY';
+        // Volatile in-memory runtime token only (Zero persistent Web Storage per CodeQL CWE-312)
+        let volatileGmapsToken = '';
 
-        function getGmapsKey() {
+        function getGmapsRuntimeToken() {
           try {
+            if (volatileGmapsToken) return volatileGmapsToken;
             const params = new URLSearchParams(window.location.search);
-            const urlKey = params.get('gmapsKey');
-            if (urlKey && urlKey.trim()) {
-              localStorage.setItem(GMAPS_STORAGE_KEY, urlKey.trim());
-              return urlKey.trim();
+            const urlToken = (params.get('gmapsToken') || '').trim().replace(/[^A-Za-z0-9_\-]/g, '');
+            if (urlToken) {
+              volatileGmapsToken = urlToken;
+              return volatileGmapsToken;
             }
-            return (localStorage.getItem(GMAPS_STORAGE_KEY) || '').trim();
+            return '';
           } catch (_) {
             return '';
           }
         }
 
-        function bootstrapGoogleMapsLoader(apiKey) {
+        function bootstrapGoogleMapsLoader(loaderToken) {
           if (window.google && window.google.maps && typeof window.google.maps.importLibrary === 'function') {
             return;
           }
@@ -14085,7 +14087,7 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
               }));
             d[l] ? console.warn(p + " only loads once. Ignoring:", g) : (d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)));
           })({
-            key: apiKey,
+            key: loaderToken,
             v: "weekly"
           });
         }
@@ -14153,13 +14155,10 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
 
         async function initGoogleMapsLive() {
           if (!gmapsCanvas) return;
-          const apiKey = getGmapsKey();
-          if (gmapsKeyInput && apiKey && !gmapsKeyInput.value) {
-            gmapsKeyInput.value = apiKey;
-          }
-          if (!apiKey) {
+          const activeToken = getGmapsRuntimeToken();
+          if (!activeToken) {
             if (gmapsStatusBadge) {
-              gmapsStatusBadge.textContent = '🔑 Enter Google Maps API Key to activate live map';
+              gmapsStatusBadge.textContent = '🔑 Enter Google Maps Token to activate live map';
               gmapsStatusBadge.style.color = '#f59e0b';
             }
             return;
@@ -14170,7 +14169,7 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
               gmapsStatusBadge.textContent = '⏳ Loading Google Maps JS API...';
               gmapsStatusBadge.style.color = '#38bdf8';
             }
-            bootstrapGoogleMapsLoader(apiKey);
+            bootstrapGoogleMapsLoader(activeToken);
             const { Map } = await window.google.maps.importLibrary("maps");
             await window.google.maps.importLibrary("marker");
 
@@ -14196,7 +14195,7 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
             }
           } catch (err) {
             if (gmapsStatusBadge) {
-              gmapsStatusBadge.textContent = '⚠️ Google Maps failed to load (verify API key & CSP)';
+              gmapsStatusBadge.textContent = '⚠️ Google Maps failed to load (verify token & CSP)';
               gmapsStatusBadge.style.color = '#ef4444';
             }
             console.warn('Google Maps initialization warning:', err);
@@ -14205,11 +14204,9 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
 
         if (btnSaveGmapsKey) {
           btnSaveGmapsKey.addEventListener('click', () => {
-            const val = gmapsKeyInput ? gmapsKeyInput.value.trim().replace(/[^A-Za-z0-9_\-]/g, '') : '';
+            const val = gmapsTokenInput ? gmapsTokenInput.value.trim().replace(/[^A-Za-z0-9_\-]/g, '') : '';
             if (!val) return;
-            try {
-              localStorage.setItem(GMAPS_STORAGE_KEY, val);
-            } catch (_) {}
+            volatileGmapsToken = val;
             gmapsLoaderBootstrapped = false;
             gmapInstance = null;
             initGoogleMapsLive();
@@ -14218,12 +14215,10 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
 
         if (btnClearGmapsKey) {
           btnClearGmapsKey.addEventListener('click', () => {
-            try {
-              localStorage.removeItem(GMAPS_STORAGE_KEY);
-            } catch (_) {}
-            if (gmapsKeyInput) gmapsKeyInput.value = '';
+            volatileGmapsToken = '';
+            if (gmapsTokenInput) gmapsTokenInput.value = '';
             if (gmapsStatusBadge) {
-              gmapsStatusBadge.textContent = '🌐 Key cleared from localStorage';
+              gmapsStatusBadge.textContent = '🌐 Token cleared from volatile session memory';
               gmapsStatusBadge.style.color = '#94a3b8';
             }
           });

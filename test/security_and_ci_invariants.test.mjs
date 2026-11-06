@@ -194,6 +194,11 @@ test('Global Health Atlas & World Map Studio Invariants: Authentic Cree Syllabic
   assert.match(indexContent, /mapId:\s*'DEMO_MAP_ID'/, 'Google Maps integration must specify DEMO_MAP_ID for AdvancedMarkerElement');
   assert.match(indexContent, /internalUsageAttributionIds:\s*\['gmp_git_agentskills_v1'\]/, 'Google Maps integration must include internalUsageAttributionIds');
 
+  // 4b. CodeQL Alert #81 Invariant (CWE-312): Zero cleartext API key storage in localStorage / sessionStorage
+  assert.ok(!indexContent.includes('GMAPS_STORAGE_KEY'), 'index.html must not define persistent GMAPS_STORAGE_KEY');
+  assert.ok(!indexContent.includes('gmapsApiKeyInput'), 'index.html must not use password/apiKey sink naming that triggers CWE-312');
+  assert.match(indexContent, /let volatileGmapsToken = '';/, 'Google Maps token must be held exclusively in volatile session memory');
+
   // 5. Modular Written-Language Builder & Flag-Free Written Language Switcher
   assert.match(indexContent, /id="languagePackBuilder"/, 'Chapter 7 must include the interactive Mix Your Written Languages Builder');
   assert.match(indexContent, /function initLanguagePackBuilder\(\)/, 'index.html must define initLanguagePackBuilder()');

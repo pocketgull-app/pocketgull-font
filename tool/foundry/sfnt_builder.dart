@@ -30,7 +30,11 @@ class SfntBuilder {
   }
 
   /// Encodes a single glyph into word-aligned TrueType glyf bytes.
-  Uint8List _encodeSimpleGlyph(GlyphRecord glyph) {
+  static Uint8List encodeSimpleGlyph(GlyphRecord glyph) => _encodeSimpleGlyphStatic(glyph);
+
+  Uint8List _encodeSimpleGlyph(GlyphRecord glyph) => _encodeSimpleGlyphStatic(glyph);
+
+  static Uint8List _encodeSimpleGlyphStatic(GlyphRecord glyph) {
     if (glyph.contours.isEmpty || glyph.contours.every((c) => c.isEmpty)) {
       return Uint8List(0); // Empty glyph has 0 length
     }

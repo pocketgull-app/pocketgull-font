@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'models.dart';
+import 'sfnt_builder.dart';
 
 /// Pure Dart 3.11 SFNT / TrueType Binary Transformer.
 /// Replaces legacy Python fontTools scripts by:
@@ -18,6 +20,7 @@ class SfntTransformer {
     int? overrideRevision,
     String? overrideVendor,
     Map<String, Uint8List>? tableOverrides,
+    Map<int, GlyphRecord>? glyphOverrides,
     bool injectGasp = true,
   }) {
     final bytes = inputFile.readAsBytesSync();
@@ -27,6 +30,7 @@ class SfntTransformer {
       overrideRevision: overrideRevision,
       overrideVendor: overrideVendor,
       tableOverrides: tableOverrides,
+      glyphOverrides: glyphOverrides,
       injectGasp: injectGasp,
     );
     final target = outputFile ?? inputFile;
@@ -40,6 +44,7 @@ class SfntTransformer {
     int? overrideRevision,
     String? overrideVendor,
     Map<String, Uint8List>? tableOverrides,
+    Map<int, GlyphRecord>? glyphOverrides,
     bool injectGasp = true,
   }) {
     final data = ByteData.sublistView(inputBytes);
@@ -84,6 +89,13 @@ class SfntTransformer {
     final newOffsets = <int>[0];
 
     for (var gid = 0; gid < numGlyphs; gid++) {
+      if (glyphOverrides != null && glyphOverrides.containsKey(gid)) {
+        final customBytes = SfntBuilder.encodeSimpleGlyph(glyphOverrides[gid]!);
+        newGlyfBuilder.add(customBytes);
+        newOffsets.add(newGlyfBuilder.length);
+        continue;
+      }
+
       final start = origOffsets[gid];
       final end = origOffsets[gid + 1];
       final len = end - start;
@@ -163,9 +175,32 @@ class SfntTransformer {
         tableDataMap[tag] = newGlyfData;
       } else if (tag == 'loca') {
         tableDataMap[tag] = newLocaData;
+      } else if (tag == 'hmtx') {
+        if (glyphOverrides != null) {
+          final hmtxView = ByteData.sublistView(tableBytes);
+          for (final entry in glyphOverrides.entries) {
+            final gid = entry.key;
+            final rec = entry.value;
+            if (gid * 4 + 4 <= tableBytes.length) {
+              hmtxView.setUint16(gid * 4, rec.advanceWidth, Endian.big);
+              hmtxView.setInt16(gid * 4 + 2, rec.lsb, Endian.big);
+            }
+          }
+        }
+        tableDataMap[tag] = tableBytes;
       } else if (tag == 'maxp') {
         if (tableBytes.length >= 32) {
           final maxpView = ByteData.sublistView(tableBytes);
+          if (glyphOverrides != null) {
+            var maxPts = maxpView.getUint16(6, Endian.big);
+            var maxCnts = maxpView.getUint16(8, Endian.big);
+            for (final rec in glyphOverrides.values) {
+              if (rec.totalPoints > maxPts) maxPts = rec.totalPoints;
+              if (rec.contours.length > maxCnts) maxCnts = rec.contours.length;
+            }
+            maxpView.setUint16(6, maxPts, Endian.big);
+            maxpView.setUint16(8, maxCnts, Endian.big);
+          }
           maxpView.setUint16(18, 0, Endian.big); // maxStorage = 0
           maxpView.setUint16(20, 0, Endian.big); // maxFunctionDefs = 0
           maxpView.setUint16(22, 0, Endian.big); // maxInstructionDefs = 0

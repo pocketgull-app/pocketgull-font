@@ -21,6 +21,7 @@ import 'foundry/var_spector.dart';
 import 'foundry/subsetter_service.dart';
 import 'foundry/compliance_auditor.dart';
 import 'foundry/osv_auditor.dart';
+import 'foundry/master_superfamily_compiler.dart';
 
 const fontStems = [
   'PocketGull-Regular',
@@ -936,6 +937,25 @@ Future<void> main(List<String> args) async {
           : int.tryParse(Platform.environment['PORT'] ?? '') ?? 8080;
       final service = SubsetterService(projectRoot: Directory(findProjectRoot()), port: port);
       await service.start();
+      break;
+    case 'brand':
+    case 'wordmark':
+      print('\n======================================================================');
+      print('  POCKETGULL FOUNDRY: HAND-SCRAWLED MARKER BRAND WORDMARK INJECTION');
+      print('======================================================================\n');
+      final root = findProjectRoot();
+      final brandTargets = [
+        File('$root${Platform.pathSeparator}fonts${Platform.pathSeparator}ttf${Platform.pathSeparator}PocketGull-Chiseltip.ttf'),
+        File('$root${Platform.pathSeparator}fonts${Platform.pathSeparator}ttf${Platform.pathSeparator}PocketGull-MarkerRaw.ttf'),
+      ];
+      for (final f in brandTargets) {
+        if (f.existsSync()) {
+          stdout.write('  • Injecting authentic marker SVG paths into ${f.uri.pathSegments.last} ... ');
+          MasterSuperfamilyCompiler.injectHandScrawledBrandGlyphs(f, scaleFactor: 9.65);
+          final audit = ThomasPhinneyAuditor.audit(f);
+          print(audit.passed ? '[PASS] ${audit.message}' : '[FAIL] ${audit.message}');
+        }
+      }
       break;
     case 'varspector':
     case 'var':

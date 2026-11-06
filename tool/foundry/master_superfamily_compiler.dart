@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'models.dart';
 import 'sfnt_builder.dart';
+import 'sfnt_transformer.dart';
+import 'glyph_inspector.dart';
 import 'sloan_optotype.dart';
 import 'ismp_engine.dart';
 import 'braille_generator.dart';
@@ -9,7 +11,7 @@ import 'phinney_auditor.dart';
 
 /// Pure Dart 3.11 Master Superfamily Compiler.
 /// Replaces `compile_master_pocketgull_superfamily.py` with zero Python dependencies:
-/// 1. Compiles authentic master wordmark vector letters (P, o, c, k, e, t, g, u, l).
+/// 1. Compiles authentic master wordmark vector letters (P, o, c, k, e, t, G, g, u, l).
 /// 2. Integrates Caslon/Humanist letterform DNA and Greek/Cyrillic emergency medicine glyphs.
 /// 3. Injects Louise Sloan 5:1 optotypes and Herman Bouma anti-crowding tracking.
 /// 4. Injects ISMP & FDA life-critical disambiguation (slashed zero, curved l, serifed I, slashed Z).
@@ -26,9 +28,24 @@ class MasterSuperfamilyCompiler {
     'e': "M136.0613,68.2649l1.5035-3.9409,8.1078.8255c.2935,7.6111-5.4883,12.7852-12.696,12.7056-7.5673-.0836-13.1446-4.9327-13.6463-12.6783-1.0186-15.726-2.4648-32.0826,13.5502-33.0748,5.1399-.3185,8.8824,1.6939,10.8861,6.6122,1.8825,4.6207,2.1353,9.7262,1.8903,15.2683l-18.0748,2.8283,2.5795,10.9651c.1813.7708,1.7413,2.0033,2.5016,2.2416.9124.286,3.052-.8456,3.398-1.7524ZM137.2873,49.4212c-.393-2.7843-1.0426-7.0275-3.1103-9.4438-1.7172-2.0067-5.9162.1411-6.0865,2.4052l-.6413,8.5292,9.838-1.4906Z",
     't': "M167.8955,76.5618c-4.8555,2.5153-10.6732,2.8542-14.9286-.9607-1.6163-1.4489-2.6764-5.7241-2.6795-8.1789l-.0417-33.0461-5.5745-.0601-.2127-7.0223,6.0601-.3361.0269-8.9567,9.0089-3.0097-.3207,11.9859,6.6881-.4121.4348,7.4823-7.4199.3543.4237,31.562c.351,1.0938.9235,3.5135,1.8441,3.646s2.4841-.1871,4.4717-.5068c1.135,1.2079,1.9425,4.4914,2.2192,7.459Z",
     'G': "M196.1527,49.5175l-9.6026-.2105.0872-8.5363,15.8828-.2878c.6505-.0118,2.5194.4281,2.5219.9536l.0132,2.8092c.0504,10.7462-.2707,30.077-8.3798,32.9086-6.3173,2.2059-14.7639,2.1945-20.3556-2.2654-4.4845-3.5768-6.5955-10.3431-6.9251-15.9495-.7912-13.456-.6443-26.3988.9491-39.6623.738-6.1434,3.4314-12.0152,8.9481-15.0255,6.7244-3.6693,15.9115-2.634,21.4326,2.8673,3.0024,2.9916,3.503,8.197,3.7773,11.8503l-10.0943,1.569c-.4914-2.9384-.7341-5.1352-2.0439-7.4909-.9534-1.7148-4.8675-1.7553-6.9122-1.0087-1.7612.6431-3.5672,3.2099-4.0988,5.774-2.8583,13.7863-3.4015,32.7364-.032,46.0594.8582,3.3935,3.848,5.1082,6.7651,5.0968s6.5093-1.4308,6.8183-5.0051l1.2489-14.4465Z",
-    'g': "M22.5,49.5C21.8,40.1 20.2,30.5 13.5,28.2C6.8,25.9 1.2,31.2 0.5,39.5C-0.3,47.8 4.2,56.5 12.2,57.1C18.1,57.5 21.9,53.2 22.5,49.5ZM22.5,49.5L22.5,68.2C22.5,78.5 15.2,85.1 5.2,84.2C-0.8,83.6 -4.5,79.2 -5.2,74.5L-12.5,76.2C-11.2,84.5 -4.5,91.8 7.2,92.5C21.5,93.2 30.5,83.8 30.5,68.2L30.5,29.5L22.5,30.2L22.5,49.5Z",
+    'g': "M30.5,33.0L30.5,74.5C30.5,87.8 21.8,95.5 8.5,95.2C-1.5,95.0 -8.5,89.8 -10.2,82.0L-1.2,80.2C-0.2,84.8 3.5,87.5 8.5,87.5C16.8,87.5 21.5,82.2 21.5,73.5L21.5,69.8C18.2,73.8 13.2,76.0 7.5,75.8C-2.5,75.5 -8.8,66.2 -8.5,53.5C-8.2,40.2 -1.2,32.2 9.2,32.2C14.8,32.2 19.2,34.8 21.8,38.8L22.2,33.0L30.5,33.0ZM21.5,53.5C21.5,44.5 17.5,39.8 11.2,39.8C4.8,39.8 0.8,44.8 0.8,53.8C0.8,62.8 4.8,67.8 11.2,67.8C17.5,67.8 21.5,62.5 21.5,53.5Z",
     'u': "M209.1422,68.4496l-.6151-9.6405-.2755-25.0952,9.4489.0693c-.7423,10.5626-2.4638,33.1237,2.2059,35.6762.8902.4866,3.2203-.2328,4.0631-1.0389,2.0142-1.9265,1.6903-4.6469,1.6575-7.2096l-.345-26.9487c2.6953-1.1954,6.6895-1.4305,9.4194-.8004l-.2046,14.3924c-.1393,9.7997-1.8975,19.407,1.243,28.8777l-8.9625,1.6587-1.1408-3.7358c-3.034,2.8692-7.606,4.3866-11.7063,2.3124-2.7939-1.4134-4.5731-5.1476-4.7881-8.5176Z",
     'l': "M238.4993,77.9034l.0864-21.4524c.0511-12.6775.7401-25.0515-.1302-37.74l-.798-11.6338,10.2181-3.3643-.795,42.9925,1.329,31.4307-9.9104-.2327Z",
+  };
+
+  /// Tuned per-glyph sidebearings (lsb, rsb) in UPM units so the hand-scrawled
+  /// wordmark "PocketGull" has the authentic tight brush-marker rhythm.
+  static const Map<String, (int lsb, int rsb)> brandWordmarkSidebearings = {
+    'P': (24, 6),
+    'o': (16, 18),
+    'c': (18, 16),
+    'k': (20, 12),
+    'e': (16, 14),
+    't': (8, 10),
+    'G': (16, 20),
+    'g': (18, 20),
+    'u': (20, 18),
+    'l': (20, 22),
   };
 
   /// Compiles a single SVG path `d` string into a clean TrueType `GlyphRecord`.
@@ -36,9 +53,9 @@ class MasterSuperfamilyCompiler {
     int glyphIndex,
     String glyphName,
     String dPath, {
-    double scaleFactor = 10.12,
-    int lsb = 45,
-    int rsb = 45,
+    double scaleFactor = 9.65,
+    int lsb = 22,
+    int rsb = 22,
     int unicode = 0,
   }) {
     final tokens = _tokenizeSvgPath(dPath);
@@ -46,13 +63,18 @@ class MasterSuperfamilyCompiler {
       return token.length == 1 && RegExp(r'^[a-zA-Z]$').hasMatch(token);
     }
 
-    // First pass: compute minSvgX
+    // First pass: compute minSvgX & maxSvgX across all SVG commands
     double minSvgX = 999999;
     double maxSvgX = -999999;
     {
       int i = 0;
       double curX = 0;
+      double curY = 0;
+      double startX = 0;
+      double startY = 0;
+      double lastCp2X = 0;
       String currentCmd = '';
+      String prevCmd = '';
 
       while (i < tokens.length) {
         if (isCommand(tokens[i])) {
@@ -65,10 +87,28 @@ class MasterSuperfamilyCompiler {
         if (currentCmd == 'M' || currentCmd == 'm' || currentCmd == 'L' || currentCmd == 'l') {
           if (i + 1 >= tokens.length) break;
           final xVal = double.parse(tokens[i++]);
-          i++; // yVal
+          final yVal = double.parse(tokens[i++]);
           curX = (currentCmd == 'M' || currentCmd == 'L') ? xVal : curX + xVal;
+          curY = (currentCmd == 'M' || currentCmd == 'L') ? yVal : curY + yVal;
+          if (currentCmd == 'M' || currentCmd == 'm') {
+            startX = curX;
+            startY = curY;
+          }
           if (curX < minSvgX) minSvgX = curX;
           if (curX > maxSvgX) maxSvgX = curX;
+          lastCp2X = curX;
+        } else if (currentCmd == 'H' || currentCmd == 'h') {
+          if (i >= tokens.length) break;
+          final xVal = double.parse(tokens[i++]);
+          curX = currentCmd == 'H' ? xVal : curX + xVal;
+          if (curX < minSvgX) minSvgX = curX;
+          if (curX > maxSvgX) maxSvgX = curX;
+          lastCp2X = curX;
+        } else if (currentCmd == 'V' || currentCmd == 'v') {
+          if (i >= tokens.length) break;
+          final yVal = double.parse(tokens[i++]);
+          curY = currentCmd == 'V' ? yVal : curY + yVal;
+          lastCp2X = curX;
         } else if (currentCmd == 'C' || currentCmd == 'c') {
           if (i + 5 >= tokens.length) break;
           final x1 = double.parse(tokens[i++]);
@@ -76,10 +116,31 @@ class MasterSuperfamilyCompiler {
           final x2 = double.parse(tokens[i++]);
           i++; // y2
           final x = double.parse(tokens[i++]);
-          i++; // y
+          final y = double.parse(tokens[i++]);
           final cp1X = currentCmd == 'C' ? x1 : curX + x1;
           final cp2X = currentCmd == 'C' ? x2 : curX + x2;
           curX = currentCmd == 'C' ? x : curX + x;
+          curY = currentCmd == 'C' ? y : curY + y;
+          lastCp2X = cp2X;
+          if (cp1X < minSvgX) minSvgX = cp1X;
+          if (cp2X < minSvgX) minSvgX = cp2X;
+          if (curX < minSvgX) minSvgX = curX;
+          if (cp1X > maxSvgX) maxSvgX = cp1X;
+          if (cp2X > maxSvgX) maxSvgX = cp2X;
+          if (curX > maxSvgX) maxSvgX = curX;
+        } else if (currentCmd == 'S' || currentCmd == 's') {
+          if (i + 3 >= tokens.length) break;
+          final x2 = double.parse(tokens[i++]);
+          i++; // y2
+          final x = double.parse(tokens[i++]);
+          final y = double.parse(tokens[i++]);
+          final cp1X = (prevCmd == 'C' || prevCmd == 'c' || prevCmd == 'S' || prevCmd == 's')
+              ? (2 * curX - lastCp2X)
+              : curX;
+          final cp2X = currentCmd == 'S' ? x2 : curX + x2;
+          curX = currentCmd == 'S' ? x : curX + x;
+          curY = currentCmd == 'S' ? y : curY + y;
+          lastCp2X = cp2X;
           if (cp1X < minSvgX) minSvgX = cp1X;
           if (cp2X < minSvgX) minSvgX = cp2X;
           if (curX < minSvgX) minSvgX = curX;
@@ -87,12 +148,13 @@ class MasterSuperfamilyCompiler {
           if (cp2X > maxSvgX) maxSvgX = cp2X;
           if (curX > maxSvgX) maxSvgX = curX;
         } else if (currentCmd == 'Z' || currentCmd == 'z') {
-          if (i < tokens.length && !isCommand(tokens[i])) {
-            i++;
-          }
+          curX = startX;
+          curY = startY;
+          lastCp2X = curX;
         } else {
           i++;
         }
+        prevCmd = currentCmd;
       }
     }
 
@@ -106,7 +168,43 @@ class MasterSuperfamilyCompiler {
     double curY = 0;
     double startX = 0;
     double startY = 0;
+    double lastCp2X = 0;
+    double lastCp2Y = 0;
     String currentCmd = '';
+    String prevCmd = '';
+
+    void emitCubicAsQuadratics(double p0X, double p0Y, double cp1X, double cp1Y, double cp2X, double cp2Y, double p3X, double p3Y) {
+      // Exact De Casteljau subdivision at t = 0.5 into 2 quadratic Bézier segments
+      final q0X = (p0X + cp1X) * 0.5;
+      final q0Y = (p0Y + cp1Y) * 0.5;
+      final mX = (cp1X + cp2X) * 0.5;
+      final mY = (cp1Y + cp2Y) * 0.5;
+      final q1X = (cp2X + p3X) * 0.5;
+      final q1Y = (cp2Y + p3Y) * 0.5;
+
+      final r0X = (q0X + mX) * 0.5;
+      final r0Y = (q0Y + mY) * 0.5;
+      final r1X = (mX + q1X) * 0.5;
+      final r1Y = (mY + q1Y) * 0.5;
+
+      final midX = (r0X + r1X) * 0.5;
+      final midY = (r0Y + r1Y) * 0.5;
+
+      final t0X = (q0X + r0X) * 0.5;
+      final t0Y = (q0Y + r0Y) * 0.5;
+      final t1X = (r1X + q1X) * 0.5;
+      final t1Y = (r1Y + q1Y) * 0.5;
+
+      final p1 = _mapSvgPoint(t0X - minSvgX, t0Y, scaleFactor, lsb, false);
+      final pMid = _mapSvgPoint(midX - minSvgX, midY, scaleFactor, lsb, true);
+      final p2 = _mapSvgPoint(t1X - minSvgX, t1Y, scaleFactor, lsb, false);
+      final pEnd = _mapSvgPoint(p3X - minSvgX, p3Y, scaleFactor, lsb, true);
+
+      currentContour?.add(p1.x, p1.y, onCurve: p1.onCurve);
+      currentContour?.add(pMid.x, pMid.y, onCurve: pMid.onCurve);
+      currentContour?.add(p2.x, p2.y, onCurve: p2.onCurve);
+      currentContour?.add(pEnd.x, pEnd.y, onCurve: pEnd.onCurve);
+    }
 
     while (i < tokens.length) {
       if (isCommand(tokens[i])) {
@@ -128,6 +226,8 @@ class MasterSuperfamilyCompiler {
         curY = currentCmd == 'M' ? yVal : curY + yVal;
         startX = curX;
         startY = curY;
+        lastCp2X = curX;
+        lastCp2Y = curY;
         final pt = _mapSvgPoint(curX - minSvgX, curY, scaleFactor, lsb, true);
         currentContour.add(pt.x, pt.y, onCurve: pt.onCurve);
       } else if (currentCmd == 'L' || currentCmd == 'l') {
@@ -136,10 +236,30 @@ class MasterSuperfamilyCompiler {
         final yVal = double.parse(tokens[i++]);
         curX = currentCmd == 'L' ? xVal : curX + xVal;
         curY = currentCmd == 'L' ? yVal : curY + yVal;
+        lastCp2X = curX;
+        lastCp2Y = curY;
+        final pt = _mapSvgPoint(curX - minSvgX, curY, scaleFactor, lsb, true);
+        currentContour?.add(pt.x, pt.y, onCurve: pt.onCurve);
+      } else if (currentCmd == 'H' || currentCmd == 'h') {
+        if (i >= tokens.length) break;
+        final xVal = double.parse(tokens[i++]);
+        curX = currentCmd == 'H' ? xVal : curX + xVal;
+        lastCp2X = curX;
+        lastCp2Y = curY;
+        final pt = _mapSvgPoint(curX - minSvgX, curY, scaleFactor, lsb, true);
+        currentContour?.add(pt.x, pt.y, onCurve: pt.onCurve);
+      } else if (currentCmd == 'V' || currentCmd == 'v') {
+        if (i >= tokens.length) break;
+        final yVal = double.parse(tokens[i++]);
+        curY = currentCmd == 'V' ? yVal : curY + yVal;
+        lastCp2X = curX;
+        lastCp2Y = curY;
         final pt = _mapSvgPoint(curX - minSvgX, curY, scaleFactor, lsb, true);
         currentContour?.add(pt.x, pt.y, onCurve: pt.onCurve);
       } else if (currentCmd == 'C' || currentCmd == 'c') {
         if (i + 5 >= tokens.length) break;
+        final p0X = curX;
+        final p0Y = curY;
         final x1 = double.parse(tokens[i++]);
         final y1 = double.parse(tokens[i++]);
         final x2 = double.parse(tokens[i++]);
@@ -153,37 +273,67 @@ class MasterSuperfamilyCompiler {
         final cp2Y = currentCmd == 'C' ? y2 : curY + y2;
         curX = currentCmd == 'C' ? x : curX + x;
         curY = currentCmd == 'C' ? y : curY + y;
+        lastCp2X = cp2X;
+        lastCp2Y = cp2Y;
 
-        // Approximate cubic Bézier by 2 quadratic off-curve segments for TTF
-        final midX = (cp1X + 2 * cp2X + curX) / 4.0;
-        final midY = (cp1Y + 2 * cp2Y + curY) / 4.0;
+        emitCubicAsQuadratics(p0X, p0Y, cp1X, cp1Y, cp2X, cp2Y, curX, curY);
+      } else if (currentCmd == 'S' || currentCmd == 's') {
+        if (i + 3 >= tokens.length) break;
+        final p0X = curX;
+        final p0Y = curY;
+        final x2 = double.parse(tokens[i++]);
+        final y2 = double.parse(tokens[i++]);
+        final x = double.parse(tokens[i++]);
+        final y = double.parse(tokens[i++]);
 
-        final p1 = _mapSvgPoint(cp1X - minSvgX, cp1Y, scaleFactor, lsb, false);
-        final pMid = _mapSvgPoint(midX - minSvgX, midY, scaleFactor, lsb, true);
-        final p2 = _mapSvgPoint(cp2X - minSvgX, cp2Y, scaleFactor, lsb, false);
-        final pEnd = _mapSvgPoint(curX - minSvgX, curY, scaleFactor, lsb, true);
+        final cp1X = (prevCmd == 'C' || prevCmd == 'c' || prevCmd == 'S' || prevCmd == 's')
+            ? (2 * curX - lastCp2X)
+            : curX;
+        final cp1Y = (prevCmd == 'C' || prevCmd == 'c' || prevCmd == 'S' || prevCmd == 's')
+            ? (2 * curY - lastCp2Y)
+            : curY;
+        final cp2X = currentCmd == 'S' ? x2 : curX + x2;
+        final cp2Y = currentCmd == 'S' ? y2 : curY + y2;
+        curX = currentCmd == 'S' ? x : curX + x;
+        curY = currentCmd == 'S' ? y : curY + y;
+        lastCp2X = cp2X;
+        lastCp2Y = cp2Y;
 
-        currentContour?.add(p1.x, p1.y, onCurve: p1.onCurve);
-        currentContour?.add(pMid.x, pMid.y, onCurve: pMid.onCurve);
-        currentContour?.add(p2.x, p2.y, onCurve: p2.onCurve);
-        currentContour?.add(pEnd.x, pEnd.y, onCurve: pEnd.onCurve);
+        emitCubicAsQuadratics(p0X, p0Y, cp1X, cp1Y, cp2X, cp2Y, curX, curY);
       } else if (currentCmd == 'Z' || currentCmd == 'z') {
         curX = startX;
         curY = startY;
+        lastCp2X = curX;
+        lastCp2Y = curY;
         if (currentContour != null && currentContour.points.isNotEmpty) {
           contours.add(currentContour);
           currentContour = null;
         }
-        if (i < tokens.length && !isCommand(tokens[i])) {
-          i++;
-        }
       } else {
         i++;
       }
+      prevCmd = currentCmd;
     }
 
     if (currentContour != null && currentContour.points.isNotEmpty) {
       contours.add(currentContour);
+    }
+
+    // Enforce TrueType winding rule (Outer contour 0 = clockwise in Y-up; Inner counters >= 1 = counter-clockwise in Y-up)
+    for (int cIdx = 0; cIdx < contours.length; cIdx++) {
+      final pts = contours[cIdx].points;
+      if (pts.length < 3) continue;
+      int area2 = 0;
+      for (int pIdx = 0; pIdx < pts.length; pIdx++) {
+        final pA = pts[pIdx];
+        final pB = pts[(pIdx + 1) % pts.length];
+        area2 += (pA.x * pB.y) - (pB.x * pA.y);
+      }
+      final wantClockwise = (cIdx == 0);
+      final isClockwise = area2 < 0; // In Cartesian (Y-up), negative signed area = clockwise
+      if (wantClockwise != isClockwise) {
+        contours[cIdx] = GlyphContour(pts.reversed.toList());
+      }
     }
 
     // Compute bounding box
@@ -205,6 +355,40 @@ class MasterSuperfamilyCompiler {
       advanceWidth: advanceWidth,
       lsb: lsb,
       contours: contours,
+    );
+  }
+
+  /// Surgically injects the authentic hand-scrawled marker SVG wordmark glyphs
+  /// (P, o, c, k, e, t, G, g, u, l) into a target TrueType font binary while
+  /// preserving all 16 OpenType tables and 8,000+ fallback glyphs.
+  static void injectHandScrawledBrandGlyphs(File targetFont, {double scaleFactor = 9.65}) {
+    final inspector = GlyphInspector.fromFile(targetFont);
+    final overrides = <int, GlyphRecord>{};
+
+    for (final entry in masterWordmarkPaths.entries) {
+      final ch = entry.key;
+      final dPath = entry.value;
+      final code = ch.codeUnitAt(0);
+      final gid = inspector.unicodeToGid[code];
+      if (gid == null) continue;
+
+      final sb = brandWordmarkSidebearings[ch] ?? (20, 20);
+      final record = compileSvgPathToGlyph(
+        gid,
+        ch,
+        dPath,
+        scaleFactor: scaleFactor,
+        lsb: sb.$1,
+        rsb: sb.$2,
+        unicode: code,
+      );
+      overrides[gid] = record;
+    }
+
+    SfntTransformer.transformFont(
+      inputFile: targetFont,
+      glyphOverrides: overrides,
+      injectGasp: true,
     );
   }
 
