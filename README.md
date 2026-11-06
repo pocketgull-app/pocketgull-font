@@ -208,7 +208,7 @@ PocketGull eliminates missing-glyph tofu across healthcare communication in dive
 * **The Google Fonts Team & Fontbakery**: For championing the libre typography commons and automated OpenType quality assurance.
 * **Robin Williams, Ellen Lupton & Karen Cheng**: For seminal books in typographic education (*The Non-Designer's Type Book*, *The Mac is not a typewriter*), spatial hierarchy (*Thinking with Type*), and anatomical precision (*Designing Type*).
 * **Behdad Esfahbod, Khaled Hosny & Werner Lemberg**: For low-level text shaping (HarfBuzz), font rasterization (FreeType), and memory-safe sanitization (W3C OTS).
-* **The FontLab Engineering Team**: For pioneering multi-master variable font interpolation and `.vfj` vector interchange.
+* **The FontLab Engineering Team**: For pioneering continuous variable font interpolation and `.vfj` vector interchange.
 * **The Dart Programming Language Team** ([dart.dev](https://dart.dev)): For the soundly-typed, high-performance tooling engine powering our procedural vector synthesis and pre-flight validation.
 * **Randal L. Schwartz**: For decades of advocacy in reproducible software engineering and open-source pedagogy.
 * **Vision Science Pioneers**: Louise L. Sloan (5:1 optotypes), Herman Bouma (anti-crowding), and the Institute for Safe Medication Practices (ISMP).
