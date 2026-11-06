@@ -319,6 +319,27 @@ class MasterSuperfamilyCompiler {
       contours.add(currentContour);
     }
 
+    // Remove start/end duplicate points and consecutive duplicate points within contours
+    for (int cIdx = 0; cIdx < contours.length; cIdx++) {
+      final origPts = contours[cIdx].points;
+      if (origPts.isEmpty) continue;
+      final cleanPts = <GlyphPoint>[origPts.first];
+      for (int pIdx = 1; pIdx < origPts.length; pIdx++) {
+        final cur = origPts[pIdx];
+        final prev = cleanPts.last;
+        if (cur.x == prev.x && cur.y == prev.y) {
+          continue; // skip consecutive duplicate
+        }
+        cleanPts.add(cur);
+      }
+      if (cleanPts.length > 1 &&
+          cleanPts.first.x == cleanPts.last.x &&
+          cleanPts.first.y == cleanPts.last.y) {
+        cleanPts.removeLast(); // TrueType contours implicitly close; do not duplicate start at end
+      }
+      contours[cIdx] = GlyphContour(cleanPts);
+    }
+
     // Enforce TrueType winding rule (Outer contour 0 = clockwise in Y-up; Inner counters >= 1 = counter-clockwise in Y-up)
     for (int cIdx = 0; cIdx < contours.length; cIdx++) {
       final pts = contours[cIdx].points;
