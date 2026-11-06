@@ -35,8 +35,12 @@ While the core font binaries are available under the **SIL Open Font License 1.1
 
 ---
 
-## 📞 Commercial Inquiries & Enterprise Procurement
-For enterprise licensing, OEM audits, and custom foundry engineering:
+## 📞 Commercial Procurement & Payment Processing
+PocketGull Typefoundry transactions, enterprise SLAs, and OEM licenses are processed directly through the **PocketGull LLC** business infrastructure (Stripe Express & Google Cloud enterprise billing).
+
+- **Corporate Entity**: PocketGull LLC
+- **Payment Processing**: Stripe Express / PocketGull Checkout
+- **Online Checkout**: [https://pocketgull.com/checkout](https://pocketgull.com/checkout)
 - **Director of Foundry Engineering**: Phil Gear
-- **Email**: enterprise@pocketgull.app (or contact via https://font.pocketgull.app)
-- **Foundry Portal**: [https://font.pocketgull.app](https://font.pocketgull.app)
+- **Procurement & Purchase Orders**: enterprise@pocketgull.app (or contact via [https://font.pocketgull.app](https://font.pocketgull.app))
+- **Headquarters Portal**: [https://pocketgull.com](https://pocketgull.com) & [https://font.pocketgull.app](https://font.pocketgull.app)
