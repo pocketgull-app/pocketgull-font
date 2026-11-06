@@ -1904,9 +1904,9 @@ typing-extensions==4.16.0 \
     #   beautifulsoup4
     #   cattrs
     #   pygithub
-ufo2ft==3.9.1 \
-    --hash=sha256:b0f0aa40c69cfb15848917ed0527940d0b8693a82fcec173cc7deaae24e643ac \
-    --hash=sha256:e032dcc1b72e4d16e7d592282eb5ae0df008c542cfef3b03d4327c6db4981700
+ufo2ft==3.11.0 \
+    --hash=sha256:11543a02e121cae0d498e2358fbaf9ad03101ed53a600a9e0c196ec0e151dc41 \
+    --hash=sha256:2797f4128f29e04e3881593be5da3b99b003748b7c5c3d5321c94f08fc82dd4e
     # via
     #   fontbakery
     #   fontmake
