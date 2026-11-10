@@ -798,7 +798,8 @@ def process_font(ttf_path: Path, fs_bin: str) -> None:
     # Step 6: Normalize GDEF mark classes & zero-width marks
     normalize_gdef(tt)
 
-    # Step 7: Harmonize PANOSE bFamilyType = 2 and OS/2 WWS bit (bit 8 = 0x0100)
+    # Step 7: Harmonize PANOSE bFamilyType = 2, achVendID = PKGL, and OS/2 WWS bit (bit 8 = 0x0100)
+    tt["OS/2"].achVendID = "PKGL"
     tt["OS/2"].panose.bFamilyType = 2
     has_wws_names = any(r.nameID in (21, 22) for r in tt["name"].names)
     if not has_wws_names:

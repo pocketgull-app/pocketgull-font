@@ -20,6 +20,12 @@ exclude_files = [
     "PocketGull-Halftone.ttf",
 ]
 
+["opentype/vendor_id"]
+vendor_id = "PKGL"
+
+["universal/required_name_ids"]
+required_name_ids = [0, 1, 2, 3, 4, 5, 6, 8, 9, 11, 13, 14]
+
 [[overrides]]
 code = "contour-count"
 status = "INFO"
