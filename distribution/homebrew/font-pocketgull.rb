@@ -1,14 +1,14 @@
 cask "font-pocketgull" do
-  version "3.1.0"
-  sha256 "1da6d18845f19c162a92698e77d851ecbf11c89fe9193d70721427302cfed3b9"
+  version "3.1.1"
+  sha256 "0000000000000000000000000000000000000000000000000000000000000000"
 
   url "https://github.com/pocketgull-app/pocketgull-font/releases/download/v#{version}/pocketgull-typeface-v#{version}.zip"
   name "PocketGull"
   desc "Humanist sans-serif, display, slab, and telemetry monospace font superfamily"
   homepage "https://font.pocketgull.app/"
 
-  font "fonts/ttf/PocketGull-Algo.ttf"
   font "fonts/ttf/PocketGull-ASL.ttf"
+  font "fonts/ttf/PocketGull-Algo.ttf"
   font "fonts/ttf/PocketGull-Black.ttf"
   font "fonts/ttf/PocketGull-Bold.ttf"
   font "fonts/ttf/PocketGull-BoldItalic.ttf"
@@ -33,16 +33,17 @@ cask "font-pocketgull" do
   font "fonts/ttf/PocketGull-Regular.ttf"
   font "fonts/ttf/PocketGull-Serif-Bold.ttf"
   font "fonts/ttf/PocketGull-Serif-Regular.ttf"
+  font "fonts/ttf/PocketGull-Serif-VF.ttf"
+  font "fonts/ttf/PocketGull-Sign-VF.ttf"
   font "fonts/ttf/PocketGull-Sign.ttf"
   font "fonts/ttf/PocketGull-Slab-Bold.ttf"
   font "fonts/ttf/PocketGull-Slab-Regular.ttf"
   font "fonts/ttf/PocketGull-Soft-Bold.ttf"
   font "fonts/ttf/PocketGull-Soft-Regular.ttf"
-  font "fonts/ttf/PocketGull-Soft.ttf"
   font "fonts/ttf/PocketGull-VF.ttf"
   font "fonts/ttf/PocketGullMono-Bold.ttf"
   font "fonts/ttf/PocketGullMono-Italic.ttf"
   font "fonts/ttf/PocketGullMono-Regular.ttf"
 
-  # No zap stanza required
+  zap :not_required
 end

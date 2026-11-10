@@ -23,8 +23,8 @@ import hashlib
 import zipfile
 import shutil
 
-VERSION = "3.1.0"
-ZIP_NAME = f"pocketgull-font-v{VERSION}.zip"
+VERSION = "3.1.1"
+ZIP_NAME = f"pocketgull-typeface-v{VERSION}.zip"
 SUPER_NAME = f"PocketGull-v{VERSION}-Superfamily.zip"
 
 def get_sha256(filepath):

@@ -5,6 +5,17 @@ All notable changes to the **PocketGull Font Superfamily** will be documented in
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) (`v3.0.0`).
 
+## [3.1.1] - 2026-11-09
+
+### Fixed
+- **Variable Font `gvar` & `HVAR` Restoration (`PocketGull-VF`, `Serif-VF`, `Sign-VF`)**:
+  - Restored all 8,603 active 16-axis `gvar` variation tuples into `PocketGull-VF.ttf` and `PocketGull-VF.woff2`, synthesized `O(1)` `HVAR` advance-width variation stores, populated all 16 `STAT` `DesignAxisRecord`s, added `nameID 25`, assigned unique `postscriptNameID`s, and pruned phantom Slab/Serif `fvar` instances.
+  - Built live `wght` (`400..700`) `gvar` + `HVAR` tuples in `PocketGull-Serif-VF.ttf` and `PocketGullSerif[wght].ttf`, and restored live variations in `PocketGull-Sign-VF.ttf`.
+- **OpenType Naming, Contour Geometry & Visual Completeness**:
+  - Eliminated all CoreText / Font Book `nameID 1/4/6` collisions across `PocketGull-ASL`, `PocketGull-Soft`, `PocketGull-Serif-VF`, `PocketGull-Sign-VF`, and non-RIBBI subfamilies (`nameID 16/17` + RIBBI `nameID 1/2`), and standardized SIL OFL 1.1 metadata (`Version 3.101`).
+  - Completed all 62/62 true-serif ASCII glyphs in `PocketGull-Serif-Regular.ttf`, rebuilt 151 clogged accented Latin-1/Ext-A diacritics + combining marks in `PocketGull-Outline.ttf` from clean hollow contours, and mapped lowercase `a–z` in `ASL`/`Sign` cuts to fingerspelling handshapes.
+  - Normalized TrueType clockwise outer contour winding across static cuts, expanded `OS/2.usWinAscent`/`usWinDescent` to eliminate Windows vertical clipping, synchronized `OS/2.fsSelection` with `head.macStyle`, fixed `PocketGullMono-Italic` `caretSlope`, and aligned `scripts/package_release.py` and Homebrew Cask stanzas.
+
 ## [3.2.0] - 2026-09-27
 
 ### Added

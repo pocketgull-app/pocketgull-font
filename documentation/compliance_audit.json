@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-04T06:03:14.467057",
+  "timestamp": "2026-11-09T18:14:09.223537",
   "standards": [
     "ISO/IEC 14496-22 (OpenType)",
     "W3C OpenType Sanitizer (OTS)",
@@ -13,222 +13,6 @@
   "sloanAcuityCompliant": true,
   "allPillarsSatisfied": true,
   "audits": [
-    {
-      "font": "PocketGull-Algo.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 4741,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-ASL.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 4670,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Black.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 13429,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Bold.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 13514,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-BoldItalic.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 8103,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Chem.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 7980,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Chiseltip.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 13427,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-CondensedBold.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 10858,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Emoji.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 4692,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Fineliner.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 13460,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Genome.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 4713,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Halftone.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 8654,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
     {
       "font": "PocketGull-Inline.ttf",
       "format": "TTF",
@@ -266,6 +50,25 @@
       }
     },
     {
+      "font": "PocketGullMono-Bold.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 7089,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true,
+        "Monospace_Fixed_600_UPM": true
+      }
+    },
+    {
       "font": "PocketGull-Lab.ttf",
       "format": "TTF",
       "passed": true,
@@ -284,10 +87,10 @@
       }
     },
     {
-      "font": "PocketGull-Learn.ttf",
+      "font": "PocketGull-Fineliner.ttf",
       "format": "TTF",
       "passed": true,
-      "totalGlyphs": 7975,
+      "totalGlyphs": 13460,
       "oddLocaOffsets": 0,
       "badBit7Flags": 0,
       "bboxErrors": 0,
@@ -302,298 +105,10 @@
       }
     },
     {
-      "font": "PocketGull-MarkerRaw.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 10696,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Math.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 13585,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Micro.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 10696,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Music.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 7990,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Numerics.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 1510,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Outline.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 8654,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Press.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 7972,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Regular.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 13462,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Serif-Bold.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 13409,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Serif-Regular.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 13413,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Serif-VF.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 13407,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Sign-VF.ttf",
+      "font": "PocketGull-ASL.ttf",
       "format": "TTF",
       "passed": true,
       "totalGlyphs": 4670,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Sign.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 4670,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Slab-Bold.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 13403,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Slab-Regular.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 13402,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Soft-Bold.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 13403,
-      "oddLocaOffsets": 0,
-      "badBit7Flags": 0,
-      "bboxErrors": 0,
-      "pillars": {
-        "1000_UPM_EmSquare": true,
-        "Word_Alignment_loca": true,
-        "Bit7_Flag_Masking": true,
-        "Bounding_Box_Integrity": true,
-        "ISMP_Disambiguation": true,
-        "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true
-      }
-    },
-    {
-      "font": "PocketGull-Soft-Regular.ttf",
-      "format": "TTF",
-      "passed": true,
-      "totalGlyphs": 13402,
       "oddLocaOffsets": 0,
       "badBit7Flags": 0,
       "bboxErrors": 0,
@@ -626,10 +141,10 @@
       }
     },
     {
-      "font": "PocketGull-VF.ttf",
+      "font": "PocketGull-Math.ttf",
       "format": "TTF",
       "passed": true,
-      "totalGlyphs": 8104,
+      "totalGlyphs": 13585,
       "oddLocaOffsets": 0,
       "badBit7Flags": 0,
       "bboxErrors": 0,
@@ -644,10 +159,10 @@
       }
     },
     {
-      "font": "PocketGullMono-Bold.ttf",
+      "font": "PocketGull-Chem.ttf",
       "format": "TTF",
       "passed": true,
-      "totalGlyphs": 7089,
+      "totalGlyphs": 7980,
       "oddLocaOffsets": 0,
       "badBit7Flags": 0,
       "bboxErrors": 0,
@@ -658,8 +173,259 @@
         "Bounding_Box_Integrity": true,
         "ISMP_Disambiguation": true,
         "Full_Braille_Coverage": true,
-        "DirectWrite_GASP_Smoothing": true,
-        "Monospace_Fixed_600_UPM": true
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-Serif-Regular.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 13413,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-Emoji.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 4692,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-Slab-Bold.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 13403,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-Numerics.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 13514,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-Music.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 7990,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-Genome.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 4713,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-Regular.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 13462,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-Soft-Bold.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 13403,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGullSerif[wght].ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 13407,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-Black.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 13429,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-Sign-VF.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 4670,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-Serif-VF.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 13407,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-Micro.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 10696,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-Serif-Bold.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 13409,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
       }
     },
     {
@@ -701,10 +467,244 @@
       }
     },
     {
-      "font": "PocketGullSerif[wght].ttf",
+      "font": "PocketGull-Learn.ttf",
       "format": "TTF",
       "passed": true,
-      "totalGlyphs": 13407,
+      "totalGlyphs": 7975,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-Bold.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 13514,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-CondensedBold.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 10858,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-Sign.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 4670,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-Press.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 7972,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-Slab-Regular.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 13402,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-Halftone.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 8654,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-Chiseltip.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 13427,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-Outline.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 8654,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-MarkerRaw.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 10696,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-Algo.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 4741,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-BoldItalic.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 8103,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-Soft-Regular.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 13402,
+      "oddLocaOffsets": 0,
+      "badBit7Flags": 0,
+      "bboxErrors": 0,
+      "pillars": {
+        "1000_UPM_EmSquare": true,
+        "Word_Alignment_loca": true,
+        "Bit7_Flag_Masking": true,
+        "Bounding_Box_Integrity": true,
+        "ISMP_Disambiguation": true,
+        "Full_Braille_Coverage": true,
+        "DirectWrite_GASP_Smoothing": true
+      }
+    },
+    {
+      "font": "PocketGull-VF.ttf",
+      "format": "TTF",
+      "passed": true,
+      "totalGlyphs": 8104,
       "oddLocaOffsets": 0,
       "badBit7Flags": 0,
       "bboxErrors": 0,
@@ -725,19 +725,7 @@
       "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
     },
     {
-      "font": "PocketGull-Antigravity.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-ASL.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Black.woff2",
+      "font": "PocketGull-Math.woff2",
       "format": "WOFF2",
       "passed": true,
       "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
@@ -749,19 +737,7 @@
       "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
     },
     {
-      "font": "PocketGull-Bold.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-BoldItalic.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Chem.woff2",
+      "font": "PocketGull-MarkerRaw.woff2",
       "format": "WOFF2",
       "passed": true,
       "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
@@ -773,19 +749,193 @@
       "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
     },
     {
-      "font": "PocketGull-CondensedBold.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
       "font": "PocketGull-Emoji.woff2",
       "format": "WOFF2",
       "passed": true,
       "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
     },
     {
+      "font": "PocketGullMono-Bold.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Black.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-BoldItalic.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Sign-VF.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
       "font": "PocketGull-Fineliner-Core.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Chem.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Regular-Core.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Micro-Core.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Regular.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Italic.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Soft-Regular.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGullSerif[wght].woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Press.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Soft.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Outline.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Inline.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Soft-Bold.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Serif-Regular.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-ASL.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Bold.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Slab-Bold.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Halftone.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Lab.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Antigravity.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-VF.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Learn.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Micro.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Numerics.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGullMono-Italic.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Serif-Bold.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Sign.woff2",
       "format": "WOFF2",
       "passed": true,
       "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
@@ -803,169 +953,7 @@
       "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
     },
     {
-      "font": "PocketGull-Halftone.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Inline.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Italic.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Lab.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Learn.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-MarkerRaw.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Math.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Micro-Core.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Micro.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Music.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Numerics.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Outline.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Press.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Regular-Core.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Regular.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Serif-Bold.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Serif-Regular.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
       "font": "PocketGull-Serif-VF.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Sign-VF.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Sign.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Slab-Bold.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Slab-Regular.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Soft-Bold.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Soft-Regular.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-Soft.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGull-VF.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGullMono-Bold.woff2",
-      "format": "WOFF2",
-      "passed": true,
-      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
-    },
-    {
-      "font": "PocketGullMono-Italic.woff2",
       "format": "WOFF2",
       "passed": true,
       "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
@@ -977,7 +965,19 @@
       "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
     },
     {
-      "font": "PocketGullSerif[wght].woff2",
+      "font": "PocketGull-CondensedBold.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Slab-Regular.woff2",
+      "format": "WOFF2",
+      "passed": true,
+      "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
+    },
+    {
+      "font": "PocketGull-Music.woff2",
       "format": "WOFF2",
       "passed": true,
       "message": "W3C WOFF2 (Brotli compressed, magic wOF2 valid)"
