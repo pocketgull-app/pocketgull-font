@@ -151,6 +151,11 @@ jobs:
             idx=$((idx + 1))
           done
 
+          # ISO 15008 In-Car / Clinical Telemetry Display Acuity Gate
+          fontspector --profile iso15008 --skip-network \
+            --loglevel WARN --ghmarkdown fontspector-reports/99-iso15008-telemetry.md \
+            fonts/ttf/PocketGull-CondensedBold.ttf
+
           cat fontspector-reports/*.md > fontspector-report.md
 
       - name: Upload Fontspector Report Artifact

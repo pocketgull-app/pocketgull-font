@@ -9,7 +9,7 @@
 [![W3C OTS Validated](https://img.shields.io/badge/W3C_OTS-100%25_Valid-emerald.svg?style=flat-square)](https://github.com/googlefonts/ots)
 [![WCAG 2.1 AAA](https://img.shields.io/badge/WCAG_2.1-AAA_100%25-emerald.svg?style=flat-square)](index.html)
 
-**[🧭 3-Minute Starter Walkthrough](TUTORIAL.md)** &nbsp;•&nbsp; **[🌐 Live Specimen Broadside](https://font.pocketgull.app)** &nbsp;•&nbsp; **[💾 Download Fonts (.ZIP)](https://github.com/pocketgull-app/pocketgull-font/releases/download/v3.1.2/pocketgull-typeface-v3.1.2.zip)** &nbsp;•&nbsp; **[🤟 Sign Studio](asl_studio.html)** &nbsp;•&nbsp; **[🛠️ STEM Studio](stem_studio.html)** &nbsp;•&nbsp; **[🎼 Music Studio](music_studio.html)**
+**[🧭 3-Minute Starter Walkthrough](TUTORIAL.md)** &nbsp;•&nbsp; **[🌐 Live Specimen Broadside](https://font.pocketgull.app)** &nbsp;•&nbsp; **[💾 Download Fonts (.ZIP)](https://github.com/pocketgull-app/pocketgull-font/releases/download/v3.1.4/pocketgull-typeface-v3.1.4.zip)** &nbsp;•&nbsp; **[🤟 Sign Studio](asl_studio.html)** &nbsp;•&nbsp; **[🛠️ STEM Studio](stem_studio.html)** &nbsp;•&nbsp; **[🎼 Music Studio](music_studio.html)**
 
 <br/>
 
