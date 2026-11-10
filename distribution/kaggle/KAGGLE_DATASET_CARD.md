@@ -1,4 +1,4 @@
-# 🕊️ PocketGull Clinical, Mathematical & Telemetry Font Superfamily (`v3.1.0`)
+# 🕊️ PocketGull Clinical, Mathematical & Telemetry Font Superfamily (`v4.0.0`)
 
 **Subtitle** *(80 chars max for Kaggle)*:  
 `Optotypically calibrated 1000 UPM vector fonts for EHRs, ICU telemetry & STEM`
@@ -22,7 +22,7 @@
 | Field | Value | Rationale |
 | :--- | :--- | :--- |
 | **Temporal Coverage Start Date** | `2026-05-01` | Original `v1.0.0` cardstock vector digitization & CERN Zenodo archival release (`10.5281/zenodo.18879500`). |
-| **Temporal Coverage End Date** | `2026-10-14` | Current `v3.1.0` / `v3.2.0` production superfamily release (`10.5281/zenodo.22309379`). |
+| **Temporal Coverage End Date** | `2026-10-14` | Current `v4.0.0` / `v3.2.0` production superfamily release (`10.5281/zenodo.22309379`). |
 | **Geospatial Coverage** | `Global (Pacific Northwest, USA; Pan-Tribal North America; Arctic Inuktitut; Global Clinical & Astronomical Observatories)` | Or select **`Global` / `World`** (engineered in **Washington State / Pacific Northwest, USA**; covers 20+ world scripts including Salishan, Chinuk Pipa, Inuktitut Syllabics, Cherokee, Neo-Tifinagh, Ethiopic Ge'ez, Adlam, and Vai). |
 
 ---

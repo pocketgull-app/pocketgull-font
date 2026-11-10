@@ -322,7 +322,7 @@ test('Superfamily On-Device Labs Atlas & Directed Learning Engine Invariants', (
   const atlasRaw = fs.readFileSync(atlasPath, 'utf8');
   const atlas = JSON.parse(atlasRaw);
 
-  assert.equal(atlas.version, '3.1.0', 'Atlas version must match SSOT SemVer 3.1.0');
+  assert.equal(atlas.version, '4.0.0', 'Atlas version must match SSOT SemVer 4.0.0');
   assert.ok(Array.isArray(atlas.tracks) && atlas.tracks.length >= 7, 'Must declare at least 7 learning tracks');
   assert.ok(Array.isArray(atlas.labs) && atlas.labs.length >= 10, 'Must declare at least 10 directed learning labs');
 

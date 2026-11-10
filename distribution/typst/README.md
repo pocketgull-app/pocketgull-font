@@ -7,7 +7,7 @@
 Import the package in your `.typ` document:
 
 ```typst
-#import "@preview/pocketgull-math:3.1.0": *
+#import "@preview/pocketgull-math:4.0.0": *
 
 #show: pocketgull-math-rules.with(
   slashed-zero: true,

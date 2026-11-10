@@ -14,7 +14,7 @@ test('R Package: DESCRIPTION and theme_pocketgull.R integrity', () => {
 
   const descContent = fs.readFileSync(descPath, 'utf8');
   assert.match(descContent, /Package:\s*pocketgullr/, 'Package name must be pocketgullr');
-  assert.match(descContent, /Version:\s*3\.1\.0/, 'Version must match SemVer 3.1.0');
+  assert.match(descContent, /Version:\s*4\.0\.0/, 'Version must match SemVer 4.0.0');
   assert.match(descContent, /Imports:\s*[\r\n]+\s*ggplot2/, 'Must import ggplot2');
 
   const rThemeContent = fs.readFileSync(rThemePath, 'utf8');

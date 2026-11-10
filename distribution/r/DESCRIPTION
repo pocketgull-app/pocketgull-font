@@ -1,7 +1,7 @@
 Package: pocketgullr
 Type: Package
 Title: Clinical Typography & Sloan Optotype Themes for R Visualizations
-Version: 3.1.0
+Version: 4.0.0
 Authors@R: c(
     person("Phil", "Gear", email = "phil@geararts.com", role = c("aut", "cre")),
     person("The PocketGull Project Authors", role = "aut")

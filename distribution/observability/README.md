@@ -7,7 +7,7 @@ Eliminates horizontal number flutter during live streaming and ensures operators
 Add to your Grafana reverse-proxy stylesheet, Custom CSS plugin, or browser userscript:
 
 ```css
-@import url("https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css");
+@import url("https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@4.0.0/fonts.css");
 
 .panel-content, [role="gridcell"], .logs-row {
   font-family: 'PocketGull Mono', monospace !important;

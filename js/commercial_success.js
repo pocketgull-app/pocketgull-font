@@ -48,7 +48,7 @@ Issue Date           : ${new Date().toISOString()}
 Authorized Licensee  : ${licensee}
 Registered Email     : ${email}
 License Tier         : ${(tierLabels[tier.toLowerCase()] || tier).toUpperCase()}
-Superfamily Version  : 3.1.0 (38 Cuts + Variable VF Suite)
+Superfamily Version  : 4.0.0 (38 Cuts + Variable VF Suite)
 Foundry & Designer   : Phillip Gear / Geararts LLC (https://font.pocketgull.app)
 Governing Law        : State of Oregon, United States of America
 

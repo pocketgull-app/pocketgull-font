@@ -1,6 +1,6 @@
 name: "PocketGull"
 designer: "Phil Gear"
-license: "APACHE2"
+license: "OFL"
 category: "SANS_SERIF"
 date_added: "2026-08-04"
 fonts {

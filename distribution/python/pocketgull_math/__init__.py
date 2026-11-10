@@ -9,7 +9,7 @@ import os
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 
-__version__ = "3.1.0"
+__version__ = "4.0.0"
 
 _PACKAGE_DIR = os.path.dirname(os.path.abspath(__file__))
 _REPO_FONTS_DIR = os.path.abspath(os.path.join(_PACKAGE_DIR, "..", "..", "fonts", "ttf"))

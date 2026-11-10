@@ -1,7 +1,7 @@
 # Maintainer: Phil Gear <phil@geararts.com>
 # Contributor: The PocketGull Project Authors
 pkgname=ttf-pocketgull
-pkgver=3.1.0
+pkgver=4.0.0
 pkgrel=1
 pkgdesc="Clinical sans-serif and fixed 600 UPM telemetry monospace font superfamily (ISMP disambiguation, Louise Sloan 5:1 optotypes)"
 arch=('any')

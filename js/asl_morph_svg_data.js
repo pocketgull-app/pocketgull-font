@@ -1,5 +1,5 @@
 /**
- * PocketGull Z-Layered Anatomical Morphological ASL Vector Library (v3.1.4)
+ * PocketGull Z-Layered Anatomical Morphological ASL Vector Library (v4.0.0)
  * Synchronized 1:1 with PocketGull-ASL.ttf & PocketGull-Sign-VF.ttf (MRPH 0..500)
  */
 const ASL_MORPH_DATA = {

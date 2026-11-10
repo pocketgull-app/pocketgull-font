@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PocketGull Typography for Wikipedia & Wikimedia
 // @namespace    https://pocketgull.app/
-// @version      3.1.0
+// @version      4.0.0
 // @description  Brings Louise Sloan 5:1 optotypes, 540 UPM optical volume parity, ISMP clinical disambiguation, and multi-script vertical stabilization to Wikipedia.
 // @author       The PocketGull Project Authors
 // @match        *://*.wikipedia.org/*

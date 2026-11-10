@@ -4,12 +4,13 @@
 
 ### Optotypically Calibrated Clinical &amp; Telemetry Font Superfamily
 
-[![OFL 1.1 License](https://img.shields.io/badge/License-SIL_OFL_1.1-blue.svg?style=flat-square)](OFL.txt)
-[![SemVer 3.1.2](https://img.shields.io/badge/SemVer-3.1.2-blue.svg?style=flat-square)](CHANGELOG.md)
+[![Fonts: SIL OFL 1.1](https://img.shields.io/badge/Fonts-SIL_OFL_1.1-blue.svg?style=flat-square)](OFL.txt)
+[![Code: Apache 2.0](https://img.shields.io/badge/Code-Apache_2.0-teal.svg?style=flat-square)](LICENSE-APACHE-2.0.txt)
+[![SemVer 4.0.0](https://img.shields.io/badge/SemVer-4.0.0-blue.svg?style=flat-square)](CHANGELOG.md)
 [![W3C OTS Validated](https://img.shields.io/badge/W3C_OTS-100%25_Valid-emerald.svg?style=flat-square)](https://github.com/googlefonts/ots)
 [![WCAG 2.1 AAA](https://img.shields.io/badge/WCAG_2.1-AAA_100%25-emerald.svg?style=flat-square)](index.html)
 
-**[🧭 3-Minute Starter Walkthrough](TUTORIAL.md)** &nbsp;•&nbsp; **[🌐 Live Specimen Broadside](https://font.pocketgull.app)** &nbsp;•&nbsp; **[💾 Download Fonts (.ZIP)](https://github.com/pocketgull-app/pocketgull-font/releases/download/v3.1.4/pocketgull-typeface-v3.1.4.zip)** &nbsp;•&nbsp; **[🤟 Sign Studio](asl_studio.html)** &nbsp;•&nbsp; **[🛠️ STEM Studio](stem_studio.html)** &nbsp;•&nbsp; **[🎼 Music Studio](music_studio.html)**
+**[🧭 3-Minute Starter Walkthrough](TUTORIAL.md)** &nbsp;•&nbsp; **[🌐 Live Specimen Broadside](https://font.pocketgull.app)** &nbsp;•&nbsp; **[💾 Download Fonts (.ZIP)](https://github.com/pocketgull-app/pocketgull-font/releases/download/v4.0.0/pocketgull-typeface-v4.0.0.zip)** &nbsp;•&nbsp; **[🤟 Sign Studio](asl_studio.html)** &nbsp;•&nbsp; **[🛠️ STEM Studio](stem_studio.html)** &nbsp;•&nbsp; **[🎼 Music Studio](music_studio.html)**
 
 <br/>
 
@@ -55,7 +56,7 @@ PocketGull systematically eliminates look-alike character collisions identified 
 ### Public Edge CDN (jsDelivr)
 Add the global, high-performance webfont stylesheet directly to your `<head>`:
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@4.0.0/fonts.css">
 ```
 *(Or from the official specimen domain: `https://font.pocketgull.app/fonts.css`)*
 
@@ -96,7 +97,7 @@ Add the global, high-performance webfont stylesheet directly to your `<head>`:
 | **Windows (Winget)** | `winget install PocketGull.Typeface` | Native Windows font installation ([PR #441164](https://github.com/microsoft/winget-pkgs/pull/441164)) |
 | **Web (NPM)** | `npm install @fontsource/pocketgull` | Self-hosted zero-CLS webfonts ([Issue #168](https://github.com/fontsource/font-files/issues/168)) |
 | **Scientific (PyPI)** | `pip install pocketgull-math` | Matplotlib stylesheets &amp; telemetry |
-| **Typesetting (Typst)** | `#import "@preview/pocketgull-math:3.1.0": *` | Academic STEM paper typesetting |
+| **Typesetting (Typst)** | `#import "@preview/pocketgull-math:4.0.0": *` | Academic STEM paper typesetting |
 
 ---
 
@@ -219,7 +220,9 @@ See **[THANKS.md](THANKS.md)** for our full community and sovereign language kee
 
 ## 📜 License
 
-Distributed under the **[SIL Open Font License 1.1](OFL.txt)** with zero Reserved Font Name (RFN) restrictions.  
+* **Font Binaries & Glyph Sources (`.ttf`, `.woff2`, `.ufo`, `.glyphs`)**: Distributed under the **[SIL Open Font License 1.1](OFL.txt)** (`OFL-1.1`) with zero Reserved Font Name (RFN) restrictions.
+* **Foundry Tooling, Compilers & Web Studios (`.dart`, `.py`, `.js`, `.html`, `.css`)**: Distributed under the **[Apache License 2.0](LICENSE-APACHE-2.0.txt)** (`Apache-2.0`).
+
 Free for personal, academic, clinical, and commercial use.
 
 **Copyright (c) 2026 The PocketGull Project Authors** ([GitHub Repository](https://github.com/pocketgull-app/pocketgull-font)).  

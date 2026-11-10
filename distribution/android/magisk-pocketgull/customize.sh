@@ -6,7 +6,7 @@ LATESTARTSERVICE=false
 ui_print "****************************************"
 ui_print "*    PocketGull Font for Google Pixel  *"
 ui_print "*   ISMP Disambiguation & OLED Energy  *"
-ui_print "*           Version 3.1.0              *"
+ui_print "*           Version 4.0.0              *"
 ui_print "****************************************"
 
 set_permissions() {

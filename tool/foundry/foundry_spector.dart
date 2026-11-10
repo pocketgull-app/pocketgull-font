@@ -186,19 +186,19 @@ class FoundrySpector {
 
     // 3. Font Revision
     final roundedRev = (fontRevision * 10).round() / 10;
-    if (roundedRev == 3.0 || roundedRev == 3.1) {
+    if (roundedRev == 4.0 || roundedRev == 3.0 || roundedRev == 3.1) {
       checks.add(SpectorCheckResult(
         checkId: 'head_font_revision',
         description: 'head.fontRevision SemVer alignment',
         status: SpectorStatus.pass,
-        details: 'fontRevision is ${fontRevision.toStringAsFixed(3)} (SemVer 3.x aligned)',
+        details: 'fontRevision is ${fontRevision.toStringAsFixed(3)} (SemVer 4.0/3.x aligned)',
       ));
     } else {
       checks.add(SpectorCheckResult(
         checkId: 'head_font_revision',
         description: 'head.fontRevision SemVer alignment',
         status: SpectorStatus.fail,
-        details: 'fontRevision is $fontRevision (Expected 3.1 or 3.0)',
+        details: 'fontRevision is $fontRevision (Expected 4.0, 3.1, or 3.0)',
       ));
     }
 
@@ -274,9 +274,9 @@ class FoundrySpector {
       ));
     }
 
-    // 7. NameID 5 (Option 5 versioning: Apache 2.0 or OFL 1.1)
-    final validV5 = nameId5.startsWith('Version 3.') &&
-        (nameId5.contains('Apache') || nameId5.contains('The PocketGull Project Authors') || nameId5.length <= 15);
+    // 7. NameID 5 (Option 5 versioning: OFL 1.1 or Apache 2.0)
+    final validV5 = (nameId5.startsWith('Version 4.') || nameId5.startsWith('Version 3.')) &&
+        (nameId5.contains('OFL') || nameId5.contains('Apache') || nameId5.contains('The PocketGull Project Authors') || nameId5.length <= 15);
     if (validV5) {
       checks.add(SpectorCheckResult(
         checkId: 'name_version_option5',
@@ -293,13 +293,18 @@ class FoundrySpector {
       ));
     }
 
-    // 7b. NameID 13 & 14 (Apache 2.0 license description & URL)
+    // 7b. NameID 13 & 14 (SIL OFL 1.1 or Apache 2.0 license description & URL)
     final nameId13 = nameRecords[13] ?? '';
     final nameId14 = nameRecords[14] ?? '';
-    if (nameId13.contains('Apache') || nameId14.contains('apache.org')) {
+    if (nameId13.contains('Open Font License') ||
+        nameId13.contains('OFL') ||
+        nameId14.contains('openfontlicense.org') ||
+        nameId14.contains('sil.org') ||
+        nameId13.contains('Apache') ||
+        nameId14.contains('apache.org')) {
       checks.add(SpectorCheckResult(
-        checkId: 'name_apache_license',
-        description: 'nameID 13 & 14 Apache 2.0 license declaration',
+        checkId: 'name_font_license',
+        description: 'nameID 13 & 14 SIL OFL 1.1 license declaration',
         status: SpectorStatus.pass,
         details: 'License: "$nameId13" ($nameId14)',
       ));

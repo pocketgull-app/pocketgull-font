@@ -51,7 +51,7 @@ class SubsetterService {
       res.write(jsonEncode({
         'status': 'HEALTHY',
         'service': 'PocketGull Dynamic SMoE Subsetter',
-        'version': '3.1.0',
+        'version': '4.0.0',
         'costProfile': '\$0.00/mo Scale-to-Zero',
         'experts': SmoeScriptRegistry.experts.map((e) => e.tag).toList(),
       }));

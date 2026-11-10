@@ -51,6 +51,7 @@ jobs:
             fonts.css \
             pocketgull.css \
             OFL.txt \
+            LICENSE-APACHE-2.0.txt \
             CITATION.cff \
             .zenodo.json \
             README.md \

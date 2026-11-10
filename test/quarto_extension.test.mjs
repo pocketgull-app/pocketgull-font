@@ -10,7 +10,7 @@ test('Quarto Extension: manifest _extension.yml structure and formats', () => {
 
   // Verify extension metadata
   assert.match(yamlContent, /title:\s*PocketGull Math Academic Format/, 'Extension title must match');
-  assert.match(yamlContent, /version:\s*3\.1\.0/, 'Version must match SemVer 3.1.0');
+  assert.match(yamlContent, /version:\s*4\.0\.0/, 'Version must match SemVer 4.0.0');
   assert.match(yamlContent, /quarto-required:\s*">=1\.4\.0"/, 'Must require Quarto >= 1.4.0');
 
   // Verify format contributions

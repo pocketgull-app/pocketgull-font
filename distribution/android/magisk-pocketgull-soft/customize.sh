@@ -6,7 +6,7 @@ LATESTARTSERVICE=false
 ui_print "****************************************"
 ui_print "*  PocketGull Soft for Google Pixel    *"
 ui_print "*   Humanist Rounded Felt-Marker DNA   *"
-ui_print "*           Version 3.1.0              *"
+ui_print "*           Version 4.0.0              *"
 ui_print "****************************************"
 
 set_permissions() {

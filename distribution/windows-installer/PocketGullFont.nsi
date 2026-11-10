@@ -1,21 +1,21 @@
-; PocketGull Font Superfamily v3.1.0 — Open-Source NSIS Installer (zlib/libpng license)
+; PocketGull Font Superfamily v4.0.0 — Open-Source NSIS Installer (zlib/libpng license)
 !include "MUI2.nsh"
 !include "WinMessages.nsh"
 
 Name "PocketGull Font"
-OutFile "dist\PocketGull-Font-Setup-v3.1.0.exe"
+OutFile "dist\PocketGull-Font-Setup-v4.0.0.exe"
 Unicode True
 SetCompressor /SOLID lzma
 InstallDir "$PROGRAMFILES64\PocketGull Font"
 RequestExecutionLevel admin
-BrandingText "PocketGull Typeface v3.1.0 (SIL OFL-1.1)"
+BrandingText "PocketGull Typeface v4.0.0 (SIL OFL-1.1)"
 
-VIProductVersion "3.1.0.0"
+VIProductVersion "4.0.0.0"
 VIAddVersionKey "ProductName" "PocketGull Font"
 VIAddVersionKey "CompanyName" "The PocketGull Project Authors"
 VIAddVersionKey "FileDescription" "PocketGull Clinical & Scientific Typeface Installer"
-VIAddVersionKey "FileVersion" "3.1.0.0"
-VIAddVersionKey "ProductVersion" "3.1.0"
+VIAddVersionKey "FileVersion" "4.0.0.0"
+VIAddVersionKey "ProductVersion" "4.0.0"
 VIAddVersionKey "LegalCopyright" "Copyright (c) 2026 The PocketGull Project Authors (OFL-1.1)"
 
 !define MUI_ICON "assets\pocketgull.ico"
@@ -26,7 +26,7 @@ VIAddVersionKey "LegalCopyright" "Copyright (c) 2026 The PocketGull Project Auth
 !define MUI_HEADERIMAGE_BITMAP "assets\nsis-header.bmp"
 !define MUI_HEADERIMAGE_RIGHT
 
-!define MUI_WELCOMEPAGE_TITLE "PocketGull Typeface Superfamily (v3.1.0)"
+!define MUI_WELCOMEPAGE_TITLE "PocketGull Typeface Superfamily (v4.0.0)"
 !define MUI_WELCOMEPAGE_TEXT "This package installs 32 PocketGull TrueType fonts (Sans, Serif, Slab, Rounded, Fixed-Width Monospace, Mathematics, Sciences, Braille, and Sign Language) to your Windows Fonts folder.$\r$\n$\r$\nDesigned by Phil Gear (The PocketGull Project Authors) with explicit character disambiguation (0/O, 1/l/I, Z/2, b/d, p/q).$\r$\n$\r$\nLicense: SIL Open Font License 1.1 (OFL-1.1).$\r$\n$\r$\nClick Install to register the fonts on your system."
 !define MUI_PAGE_CUSTOMFUNCTION_SHOW WelcomeChangeNextToInstall
 !insertmacro MUI_PAGE_WELCOME
@@ -119,7 +119,7 @@ Section "Install" SecMain
 
   WriteUninstaller "$INSTDIR\Uninstall.exe"
   WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\PocketGull.Font" "DisplayName" "PocketGull Font"
-  WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\PocketGull.Font" "DisplayVersion" "3.1.0"
+  WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\PocketGull.Font" "DisplayVersion" "4.0.0"
   WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\PocketGull.Font" "Publisher" "The PocketGull Project Authors"
   WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\PocketGull.Font" "URLInfoAbout" "https://font.pocketgull.app"
   WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\PocketGull.Font" "DisplayIcon" "$INSTDIR\pocketgull.ico"

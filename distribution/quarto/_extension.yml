@@ -1,6 +1,6 @@
 title: PocketGull Math Academic Format
 author: The PocketGull Project Authors
-version: 3.1.0
+version: 4.0.0
 quarto-required: ">=1.4.0"
 contributes:
   formats:

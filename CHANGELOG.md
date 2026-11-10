@@ -3,7 +3,22 @@
 All notable changes to the **PocketGull Font Superfamily** will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) (`v3.0.0`).
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) (`v4.0.0`).
+
+## [4.0.0] - 2026-11-09
+
+### Added
+- **Native OpenType `liga` Ligatures & Superfamily `GPOS` Kerning**:
+  - Added `GSUB` LookupType 4 standard ligatures (`fi`, `fl`) across proportional superfamily cuts and injected GID-sorted `GPOS` `PairPos` kerning into `PocketGull-CondensedBold`, `PocketGull-Micro`, `PocketGull-MarkerRaw`, `PocketGull-Algo`, and `PocketGull-Genome`.
+- **Clinical-Safe Default `Il1` Disambiguation in Base `cmap`**:
+  - Upgraded base `U+006C` (`l`) across proportional humanist cuts and `PocketGull-VF.ttf` (with full 16-axis `gvar` continuity) to feature an unmistakable rightward curved clinical foot alongside bilateral serifed `U+0049` (`I`), eliminating `1 / l / I` ambiguity out of the box even without CSS `cv05`/`ss02`.
+- **ISO 15008 Telemetry Gate, `avar`, & `FeatureParams` (`v3.1.3`–`v4.0.0`)**:
+  - Unified all 39 cuts under no-space `'PocketGull'` naming, migrated CI to SHA-256-verified Rust `fontspector v1.9.0` (`0` `FAIL`s across `39/39` binaries + `5/5` `ISO 15008` telemetry pass), added `avar` & `ssXX`/`cvXX` UI labels, and synced 1:1 Z-layered SVGs across `asl_studio.html` & `sign_studio.html`.
+
+### Changed
+- **Canonical Dual-Licensing Clarity & Full SemVer `4.0.0` Synchronization**:
+  - Standardized all 39 font binaries (`nameID 13/14`, `OFL.txt`, `METADATA.pb`) on **SIL Open Font License 1.1 (`OFL-1.1`)** and repository tooling/studios on **Apache License 2.0 (`LICENSE-APACHE-2.0.txt`)**.
+  - Unified SemVer `4.0.0` (`head.fontRevision = 4.0`, `Version 4.000`) across all font binaries, Core WOFF2 subsets, R (`pocketgullr`), Quarto, Python (`pocketgull-math`), Typst, LaTeX, Homebrew, and web studios (`?v=4.0.0`).
 
 ## [3.1.2] - 2026-11-09
 

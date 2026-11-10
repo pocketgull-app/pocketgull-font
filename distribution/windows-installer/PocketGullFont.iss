@@ -1,14 +1,14 @@
-; PocketGull Font Superfamily v3.1.0 — Official Windows & WinGet Installer
+; PocketGull Font Superfamily v4.0.0 — Official Windows & WinGet Installer
 [Setup]
 AppId={{8D692F2F-D44B-451D-A62F-E95528567C5F}
 AppName=PocketGull Font
-AppVersion=3.1.0
-AppVerName=PocketGull Font 3.1.0
+AppVersion=4.0.0
+AppVerName=PocketGull Font 4.0.0
 AppPublisher=The PocketGull Project Authors
 AppPublisherURL=https://font.pocketgull.app
 AppSupportURL=https://github.com/pocketgull-app/pocketgull-font/issues
 AppUpdatesURL=https://github.com/pocketgull-app/pocketgull-font/releases
-VersionInfoVersion=3.1.0.0
+VersionInfoVersion=4.0.0.0
 VersionInfoCompany=The PocketGull Project Authors
 VersionInfoDescription=PocketGull Clinical & Scientific Typeface Installer
 VersionInfoCopyright=Copyright (c) 2026 The PocketGull Project Authors (OFL-1.1)
@@ -18,7 +18,7 @@ DisableProgramGroupPage=yes
 PrivilegesRequired=admin
 PrivilegesRequiredOverridesAllowed=dialog commandline
 OutputDir=dist
-OutputBaseFilename=PocketGull-Font-Setup-v3.1.0
+OutputBaseFilename=PocketGull-Font-Setup-v4.0.0
 Compression=lzma2/ultra64
 SolidCompression=yes
 WizardStyle=modern

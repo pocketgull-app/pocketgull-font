@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "name": "PocketGull Superfamily On-Device Labs Atlas & Directed Learning Engine",
-  "version": "3.1.0",
+  "version": "4.0.0",
   "description": "On-device sovereign knowledge index covering all interactive laboratories, optometric stages, and scientific instruments across the PocketGull typeface ecosystem.",
   "tracks": [
     {

@@ -119,17 +119,17 @@ def validate():
             log_fail(f"name ID 0 mismatch: '{name_records[0] if name_records else None}' != '{expected_copyright}'")
             failed_checks += 1
 
-        # E2. Version Alignment (SemVer 3.100 & Option 5)
+        # E2. Version Alignment (SemVer 4.000 / 3.x & Option 5)
         total_checks += 2
         rev = round(font["head"].fontRevision, 1)
-        if rev in (3.0, 3.1):
-            log_pass(f"head.fontRevision: {rev:.1f} (SemVer 3.x aligned)")
+        if rev in (3.0, 3.1, 4.0):
+            log_pass(f"head.fontRevision: {rev:.1f} (SemVer 4.0/3.x aligned)")
         else:
-            log_fail(f"head.fontRevision: {rev} (Expected 3.1 or 3.0)")
+            log_fail(f"head.fontRevision: {rev} (Expected 4.0, 3.1, or 3.0)")
             failed_checks += 1
 
         v5_records = [n.toUnicode() for n in font["name"].names if n.nameID == 5]
-        if v5_records and v5_records[0].startswith("Version 3."):
+        if v5_records and v5_records[0].startswith(("Version 4.", "Version 3.")):
             log_pass(f"name ID 5: matches '{v5_records[0]}'")
         else:
             log_fail(f"name ID 5 mismatch: '{v5_records[0] if v5_records else None}'")

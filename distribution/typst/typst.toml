@@ -1,6 +1,6 @@
 [package]
 name = "pocketgull-math"
-version = "3.1.0"
+version = "4.0.0"
 entrypoint = "lib.typ"
 authors = ["Phil Gear", "The PocketGull Project Authors"]
 license = "OFL-1.1"

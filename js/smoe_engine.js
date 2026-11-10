@@ -1406,7 +1406,7 @@
 
       window.POCKETGULL_CANARY = {
         active: isCanaryParam || isBetaOptedIn,
-        version: 'v3.1.0-canary',
+        version: 'v4.0.0',
         enableBetaLab: function(enable = true) {
           try {
             localStorage.setItem('pocketgull_canary_rollout', enable ? 'true' : 'false');

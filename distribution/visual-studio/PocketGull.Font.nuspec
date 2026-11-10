@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>PocketGull.Font</id>
-    <version>3.1.0</version>
+    <version>4.0.0</version>
     <title>PocketGull Font Superfamily</title>
     <authors>Phil Gear, The PocketGull Project Authors</authors>
     <owners>PocketGull</owners>
@@ -12,7 +12,7 @@
     <repository type="git" url="https://github.com/pocketgull-app/pocketgull-font" />
     <description>Open-source clinical sans-serif, display, and telemetry monospace font superfamily. Conforms to Louise Sloan 5:1 optotypes, ISMP medication safety disambiguation, and 600 UPM fixed-pitch monospace for C, C++, C#, WPF, WinUI 3, and Visual Studio IDE environments.</description>
     <summary>Clinical sans-serif and telemetry monospace font superfamily for Visual Studio, .NET, WPF, and WinUI 3.</summary>
-    <releaseNotes>Version 3.1.0: Full 88-key piano chromatic range, physical cardstock watercolor atelier, polyglot scientific source snippets, and classic systems CRT telemetry console.</releaseNotes>
+    <releaseNotes>Version 4.0.0: Full 88-key piano chromatic range, physical cardstock watercolor atelier, polyglot scientific source snippets, and classic systems CRT telemetry console.</releaseNotes>
     <copyright>Copyright (c) 2026 The PocketGull Project Authors</copyright>
     <tags>fonts font typography monospace visual-studio wpf winui xaml opentype truetype telemetry ismp-disambiguation csharp cpp</tags>
     <contentFiles>
