@@ -69,6 +69,74 @@ def transform_contour(pts, fls, cx, cy, scale_x, scale_y, angle_deg=0.0):
     return out, list(fls)
 
 
+def morph_salvaged_to_acuminate_leaf(pts, fls, base_x, base_y, length, width, angle_deg=0.0, bend=0.18, notched_tip=False):
+    """
+    Morphs a salvaged commit aabd99b0 contour (glyph01281 / glyph01031) into a true
+    botanical acuminate leaf (with a tapered petiole base at (base_x, base_y),
+    Golden-Ratio lamina swell at t=0.38, curved midrib bend, and pointed drip-tip apex),
+    preserving the exact TrueType on-curve/off-curve flag sequence.
+    """
+    xs = [p[0] for p in pts]
+    ys = [p[1] for p in pts]
+    ymin, ymax = min(ys), max(ys)
+    xmin, xmax = min(xs), max(xs)
+    w = max(1.0, xmax - xmin)
+    h = max(1.0, ymax - ymin)
+    xmid = 0.5 * (xmin + xmax)
+
+    rad = math.radians(angle_deg)
+    ca, sa = math.cos(rad), math.sin(rad)
+    out = []
+    for x, y in pts:
+        # u in [-1, 1] across width, t in [0, 1] from petiole base to leaf apex
+        u = (x - xmid) / (0.5 * w)
+        t = max(0.0, min(1.0, (y - ymin) / h))
+        # Botanical phyllotaxis envelope: swells at t ~ 0.35, tapers to sharp point at t = 1.0
+        if notched_tip:
+            # Cordate / wild-rose petal with gentle apical notch
+            env = (t ** 0.55) * ((1.0 - 0.55 * t) ** 0.9) * 1.45
+            t_eff = t - 0.10 * (t ** 3) * (1.0 - min(1.0, abs(u) * 1.8))
+        else:
+            env = 2.25 * (t ** 0.62) * ((1.0 - t) ** 1.25) + 0.06 * (1.0 - t)
+            t_eff = t
+
+        camber = bend * width * math.sin(t * math.pi)
+        local_x = u * (0.5 * width) * env + camber
+        local_y = t_eff * length
+
+        rx = local_x * ca - local_y * sa + base_x
+        ry = local_x * sa + local_y * ca + base_y
+        out.append((int(round(rx)), int(round(ry))))
+    return out, list(fls)
+
+
+def make_organic_vine_ribbon(spine_pts, half_widths, clockwise=True):
+    """
+    Constructs a smooth, organic tapering botanical vine stem contour along spine_pts
+    with local half_widths, avoiding rigid mechanical rectangles.
+    """
+    left_side = []
+    right_side = []
+    n = len(spine_pts)
+    for i in range(n):
+        x, y = spine_pts[i]
+        if i == 0:
+            dx, dy = spine_pts[1][0] - x, spine_pts[1][1] - y
+        elif i == n - 1:
+            dx, dy = x - spine_pts[i - 1][0], y - spine_pts[i - 1][1]
+        else:
+            dx, dy = spine_pts[i + 1][0] - spine_pts[i - 1][0], spine_pts[i + 1][1] - spine_pts[i - 1][1]
+        norm = max(1e-6, math.hypot(dx, dy))
+        nx, ny = -dy / norm, dx / norm
+        hw = half_widths[i]
+        left_side.append((int(round(x + nx * hw)), int(round(y + ny * hw))))
+        right_side.append((int(round(x - nx * hw)), int(round(y - ny * hw))))
+
+    pts = left_side + list(reversed(right_side))
+    fls = [1] * len(pts)
+    return ensure_winding(pts, fls, clockwise=clockwise)
+
+
 def make_rect_contour(x0, y0, x1, y1, clockwise=True):
     pts = [(int(x0), int(y0)), (int(x0), int(y1)), (int(x1), int(y1)), (int(x1), int(y0))]
     fls = [1, 1, 1, 1]
@@ -274,10 +342,16 @@ def set_Font_Names(tt, family_name, sub_name, ps_name, desc_suffix):
 
 def build_botanica(salvaged):
     """
-    PocketGull-Botanica v2 (Dieter Rams "Weniger, aber besser" + Salutogenic Negative Space):
-    - Single crisp 16-unit architectural frame (instead of busy double frames + cardinal dots)
-    - 2 balanced Golden-Ratio diagonal corner botanical leaves (bottom-left & top-right)
-      salvaged directly from commit aabd99b0 (glyph01281 + glyph01031 hollow vein).
+    PocketGull-Botanica v3 (Natural Phyllotaxis, Living Vine Arbor & Stem Venation):
+    - Replaces rigid mechanical square boxes with a living, rooted botanical vine arbor
+      (sinusoidal climbing stem + baseline root-runner) that sprouts 5 pointed, cambered
+      acuminate leaves (morphed from salvaged glyph01281 + glyph01031 hollow midrib veins).
+    - Integrates the letterform itself into the plant: carves an organic leaf-venation
+      channel inside the letter's main stem and sprouts a living phyllotaxis leaf shoot
+      directly from the letter's stroke.
+    - Transforms U+2766..U+2698 from radial oval wheels into 6 distinct natural botanical
+      specimens (Aldine Ivy Heart, Trailing Hedera Vine, Laurel Branch, Wild Briar Rose,
+      Blooming Waterlily, and Stemmed Herbarium Flower).
     """
     tt = TTFont(str(ROOT_DIR / "fonts" / "ttf" / "PocketGull-Serif-Bold.ttf"))
     cmap = tt.getBestCmap()
@@ -286,10 +360,70 @@ def build_botanica(salvaged):
 
     petal_pts, petal_fls = salvaged["petal_arch"]
     leaf_pts, leaf_fls = salvaged["leaf_drop"]
+    calyx_pts, calyx_fls = salvaged["calyx_cup"]
     seed_pts, seed_fls = salvaged["seed_oval"]
     dew_pts, dew_fls = salvaged["dew_ring"]
 
-    box_w = 880
+    # Pre-build the shared Living Botanical Vine Arbor contours for Drop-Caps
+    box_w = 900
+    arbor_contours = []
+
+    # 1A. Smooth sweeping cubic-Bezier botanical arch (zero 90-degree corners!)
+    # From rooted base (96, -28) curving outward to (52, 390), arching smoothly through (140, 748) to (745, 718)
+    climb_spine = []
+    climb_hw = []
+    p0 = (96.0, -28.0)
+    p1 = (24.0, 420.0)
+    p2 = (120.0, 775.0)
+    p3 = (755.0, 716.0)
+    for k in range(19):
+        t = k / 18.0
+        mt = 1.0 - t
+        vx = (mt**3)*p0[0] + 3*(mt**2)*t*p1[0] + 3*mt*(t**2)*p2[0] + (t**3)*p3[0]
+        vy = (mt**3)*p0[1] + 3*(mt**2)*t*p1[1] + 3*mt*(t**2)*p2[1] + (t**3)*p3[1]
+        climb_spine.append((vx, vy))
+        climb_hw.append(13.5 * (1.0 - 0.50 * t))
+    arbor_contours.append(make_organic_vine_ribbon(climb_spine, climb_hw, clockwise=True))
+
+    # 1B. Bottom root-runner vine along baseline from (96, -28) to (785, -12)
+    root_spine = []
+    root_hw = []
+    for k in range(13):
+        u = k / 12.0
+        rx = 96.0 + u * 689.0
+        ry = -28.0 - 18.0 * math.sin(u * math.pi) + (22.0 * (u ** 2.5))
+        root_spine.append((rx, ry))
+        root_hw.append(11.0 * (1.0 - 0.50 * u))
+    arbor_contours.append(make_organic_vine_ribbon(root_spine, root_hw, clockwise=True))
+
+    # 1C. Rooted basal calyx cup at (96, -22) (salvaged from glyph01107)
+    c_cal, f_cal = transform_contour(calyx_pts, calyx_fls, 96, -22, 44, 32, 38.0)
+    arbor_contours.append(ensure_winding(c_cal, f_cal, clockwise=True))
+
+    # 1D. Lush, full-sized pointed botanical leaves anchored DIRECTLY onto climb_spine & root_spine!
+    arbor_leaves = [
+        (climb_spine[2][0], climb_spine[2][1], 195, 94, 46.0, 0.22),     # Lower-left outward leaf
+        (climb_spine[5][0], climb_spine[5][1], 175, 84, -38.0, -0.20),   # Mid-left inward leaf
+        (climb_spine[8][0], climb_spine[8][1], 192, 92, 34.0, 0.22),     # Upper-left outward leaf
+        (climb_spine[12][0], climb_spine[12][1], 185, 88, 14.0, 0.20),   # Crown arch upward leaf
+        (climb_spine[15][0], climb_spine[15][1], 178, 86, -62.0, 0.22),  # Top-canopy trailing leaf
+        (root_spine[5][0], root_spine[5][1], 168, 82, -116.0, 0.20),     # Baseline runner lower leaf
+        (root_spine[9][0], root_spine[9][1], 174, 84, -52.0, -0.20),     # Baseline runner upper leaf
+    ]
+    for bx, by, l_len, l_wid, ang, bend in arbor_leaves:
+        p_l, f_l = morph_salvaged_to_acuminate_leaf(leaf_pts, leaf_fls, bx, by, l_len, l_wid, ang, bend=bend)
+        arbor_contours.append(ensure_winding(p_l, f_l, clockwise=True))
+        rad = math.radians(ang)
+        vx = bx - math.sin(rad) * (l_len * 0.14)
+        vy = by + math.cos(rad) * (l_len * 0.14)
+        p_v, f_v = morph_salvaged_to_acuminate_leaf(seed_pts, seed_fls, vx, vy, l_len * 0.64, l_wid * 0.34, ang, bend=bend)
+        arbor_contours.append(ensure_winding(p_v, f_v, clockwise=False))
+
+    # Terminal botanical buds anchored at exact spine endpoints climb_spine[-1] and root_spine[-1]
+    for (tx, ty), tang in [(climb_spine[-1], -74.0), (root_spine[-1], -42.0)]:
+        p_b, f_b = morph_salvaged_to_acuminate_leaf(petal_pts, petal_fls, tx, ty, 112, 56, tang, bend=0.16)
+        arbor_contours.append(ensure_winding(p_b, f_b, clockwise=True))
+
     for cp in list(range(0x0041, 0x005B)) + list(range(0x0030, 0x003A)):
         gn = cmap.get(cp)
         if not gn or gn not in glyf:
@@ -303,42 +437,57 @@ def build_botanica(salvaged):
         ys = [p[1] for p in coords]
         lx_mid = 0.5 * (min(xs) + max(xs))
         ly_mid = 0.5 * (min(ys) + max(ys))
+        # Position the solid woodcut letter harmoniously inside the open clearing of the sweeping vine arbor
         scaled_letter = [
-            (int(round((x - lx_mid) * 0.74 + box_w * 0.5)), int(round((y - ly_mid) * 0.74 + 350)))
+            (int(round((x - lx_mid) * 0.72 + 505)), int(round((y - ly_mid) * 0.72 + 332)))
             for x, y in coords
         ]
         g.coordinates = GlyphCoordinates(scaled_letter)
+        g.recalcBounds(glyf)
 
-        extra = []
-        # Single clean Braun/Rams architectural hairline frame (16-unit border)
-        extra.append(make_rect_contour(42, -44, box_w - 42, 744, clockwise=True))
-        extra.append(make_rect_contour(58, -28, box_w - 58, 728, clockwise=False))
+        extra = list(arbor_contours)
 
-        # 2 asymmetrical diagonal botanical leaves (bottom-left & top-right only -> 82% open breathing space)
-        asymmetric_corners = [
-            (116, 36, 135.0),
-            (box_w - 116, 664, -45.0),
-        ]
-        for cx, cy, ang in asymmetric_corners:
-            p_c, f_c = transform_contour(leaf_pts, leaf_fls, cx, cy, 38, 54, ang)
-            extra.append(ensure_winding(p_c, f_c, clockwise=True))
-            p_v, f_v = transform_contour(seed_pts, seed_fls, cx, cy, 15, 26, ang)
-            extra.append(ensure_winding(p_v, f_v, clockwise=False))
+        # Locate the letter's primary stem at mid-height to sprout a living phyllotaxis leaf shoot
+        pad = 20
+        w_b = max(1, g.xMax - g.xMin + 2 * pad)
+        h_b = max(1, g.yMax - g.yMin + 2 * pad)
+        img = Image.new("L", (w_b, h_b), 0)
+        draw = ImageDraw.Draw(img)
+        ends = list(g.endPtsOfContours)
+        s = 0
+        for e in ends:
+            c_pts = scaled_letter[s : e + 1]
+            s = e + 1
+            poly = [(x - g.xMin + pad, g.yMax - y + pad) for x, y in c_pts]
+            draw.polygon(poly, fill=(255 if signed_area(c_pts) < 0 else 0))
+
+        arr = np.array(img) > 128
+        mid_row = int(h_b * 0.48)
+        solid_xs = np.where(arr[mid_row, :])[0]
+        if len(solid_xs) > 0:
+            sprout_x = int(solid_xs[-1]) + g.xMin - pad - 10
+            sprout_y = g.yMax + pad - mid_row
+            p_sl, f_sl = morph_salvaged_to_acuminate_leaf(
+                leaf_pts, leaf_fls, sprout_x, sprout_y, 165, 80, -52.0, bend=-0.22
+            )
+            extra.append(ensure_winding(p_sl, f_sl, clockwise=True))
+            rad_s = math.radians(-52.0)
+            svx = sprout_x - math.sin(rad_s) * 20.0
+            svy = sprout_y + math.cos(rad_s) * 20.0
+            p_sv, f_sv = morph_salvaged_to_acuminate_leaf(
+                seed_pts, seed_fls, svx, svy, 104, 28, -52.0, bend=-0.22
+            )
+            extra.append(ensure_winding(p_sv, f_sv, clockwise=False))
 
         append_contours_to_glyph(g, extra, glyf)
         hmtx[gn] = (box_w, g.xMin)
 
-    # 2. Build Upcycled Botanical Fleurons in Unicode Dingbats / Miscellaneous Symbols
-    fleuron_specs = [
-        (0x2766, 6, 195, 110),  # ❦ FLORAL HEART (6-petal salvaged rosette)
-        (0x2767, 8, 210, 95),   # ❧ ROTATED FLORAL HEART BULLET (8-petal Tudor rose)
-        (0x2619, 4, 215, 125),  # ☙ REVERSED ROTATED FLORAL HEART (4-leaf clover cross)
-        (0x273F, 5, 200, 115),  # ✿ BLACK FLORETTE (5-petal cinquefoil)
-        (0x2740, 8, 205, 85),   # ❀ WHITE FLORETTE (8-petal hollow-veined blossom)
-        (0x2698, 6, 185, 100),  # ⚘ FLOWER (6-petal botanical specimen)
-    ]
+    # =========================================================================
+    # 2. Build 6 Authentic Botanical Specimens in Unicode Fleurons (U+2766..U+2698)
+    # =========================================================================
+    fleuron_cps = [0x2766, 0x2767, 0x2619, 0x273F, 0x2740, 0x2698]
     go = list(tt.getGlyphOrder())
-    for cp, n_petals, radius, p_len in fleuron_specs:
+    for cp in fleuron_cps:
         gn = cmap.get(cp)
         if not gn:
             gn = f"uni{cp:04X}"
@@ -350,21 +499,143 @@ def build_botanica(salvaged):
                     st.cmap[cp] = gn
 
         fl_contours = []
-        cx_f, cy_f = 420, 350
-        for k in range(n_petals):
-            ang = k * (360.0 / n_petals)
-            rad = math.radians(ang)
-            px = cx_f + math.cos(rad) * radius
-            py = cy_f + math.sin(rad) * radius
-            pts_p, fls_p = transform_contour(petal_pts, petal_fls, px, py, p_len * 0.55, p_len, ang - 90)
-            fl_contours.append(ensure_winding(pts_p, fls_p, clockwise=True))
-            pts_v, fls_v = transform_contour(seed_pts, seed_fls, px, py, p_len * 0.22, p_len * 0.48, ang - 90)
-            fl_contours.append(ensure_winding(pts_v, fls_v, clockwise=False))
 
-        c_out, f_out = transform_contour(dew_pts, dew_fls, cx_f, cy_f, 78, 78, 0)
-        c_in, f_in = transform_contour(dew_pts, dew_fls, cx_f, cy_f, 38, 38, 0)
-        fl_contours.append(ensure_winding(c_out, f_out, clockwise=True))
-        fl_contours.append(ensure_winding(c_in, f_in, clockwise=False))
+        if cp == 0x2766:
+            # ❦ ALDINE IVY HEART: Curving S-petiole stalk + broad cordate-acuminate ivy leaf with 3 branching veins
+            stalk = [(360 + 55 * math.sin(k / 8.0 * math.pi), 20 + k * 24) for k in range(9)]
+            fl_contours.append(make_organic_vine_ribbon(stalk, [11.0 - k * 0.5 for k in range(9)], clockwise=True))
+            p_main, f_main = morph_salvaged_to_acuminate_leaf(petal_pts, petal_fls, 415, 195, 490, 420, -6.0, bend=0.14)
+            fl_contours.append(ensure_winding(p_main, f_main, clockwise=True))
+            # Central midrib + 2 lateral veins (CCW hollow)
+            p_mv, f_mv = morph_salvaged_to_acuminate_leaf(seed_pts, seed_fls, 418, 235, 360, 44, -6.0, bend=0.14)
+            fl_contours.append(ensure_winding(p_mv, f_mv, clockwise=False))
+            for vx, vy, vang, vbend in [(415, 290, 34.0, 0.16), (425, 310, -44.0, -0.16)]:
+                p_lv, f_lv = morph_salvaged_to_acuminate_leaf(seed_pts, seed_fls, vx, vy, 165, 34, vang, bend=vbend)
+                fl_contours.append(ensure_winding(p_lv, f_lv, clockwise=False))
+
+        elif cp == 0x2767:
+            # ❧ TRAILING HEDERA VINE SPRIG: Horizontal undulating vine stem with 5 alternating pointed leaves
+            v_spine = [(85 + k * 56, 340 + 48 * math.sin(k / 12.0 * math.pi * 2.0)) for k in range(13)]
+            fl_contours.append(make_organic_vine_ribbon(v_spine, [11.5 - 0.5 * k for k in range(13)], clockwise=True))
+            sprig_leaves = [
+                (175, 378, 185, 92, -38.0, 0.20),
+                (295, 382, 175, 86, -138.0, -0.20),
+                (425, 336, 180, 88, -42.0, 0.20),
+                (555, 296, 165, 82, -135.0, -0.20),
+                (685, 326, 150, 74, -52.0, 0.18),
+            ]
+            for bx, by, ll, lw, ang, bnd in sprig_leaves:
+                pl, fl = morph_salvaged_to_acuminate_leaf(leaf_pts, leaf_fls, bx, by, ll, lw, ang, bend=bnd)
+                fl_contours.append(ensure_winding(pl, fl, clockwise=True))
+                rad = math.radians(ang)
+                pv, fv = morph_salvaged_to_acuminate_leaf(
+                    seed_pts, seed_fls, bx - math.sin(rad) * 24, by + math.cos(rad) * 24, ll * 0.62, lw * 0.32, ang, bend=bnd
+                )
+                fl_contours.append(ensure_winding(pv, fv, clockwise=False))
+
+        elif cp == 0x2619:
+            # ☙ BOTANICAL LAUREL / OLIVE BRANCH: Diagonal woody branch with 3 opposite pairs of lanceolate leaves & berries
+            b_spine = [(130 + k * 52, 80 + k * 48 + 26 * math.sin(k / 11.0 * math.pi)) for k in range(12)]
+            fl_contours.append(make_organic_vine_ribbon(b_spine, [13.0 - 0.65 * k for k in range(12)], clockwise=True))
+            laurel_leaves = [
+                (234, 194, 195, 84, 12.0, 0.16),
+                (260, 218, 195, 84, -98.0, -0.16),
+                (410, 366, 185, 80, 8.0, 0.16),
+                (436, 388, 185, 80, -102.0, -0.16),
+                (585, 518, 160, 72, 4.0, 0.14),
+                (610, 538, 160, 72, -104.0, -0.14),
+                (702, 608, 145, 66, -46.0, 0.12),
+            ]
+            for bx, by, ll, lw, ang, bnd in laurel_leaves:
+                pl, fl = morph_salvaged_to_acuminate_leaf(leaf_pts, leaf_fls, bx, by, ll, lw, ang, bend=bnd)
+                fl_contours.append(ensure_winding(pl, fl, clockwise=True))
+                rad = math.radians(ang)
+                pv, fv = morph_salvaged_to_acuminate_leaf(
+                    seed_pts, seed_fls, bx - math.sin(rad) * 22, by + math.cos(rad) * 22, ll * 0.60, lw * 0.30, ang, bend=bnd
+                )
+                fl_contours.append(ensure_winding(pv, fv, clockwise=False))
+
+        elif cp == 0x273F:
+            # ✿ WILD BRIAR ROSE (CINQUEFOIL): 5 broad notched cordate petals + 5 sharp outer calyx sepals + central stamen ring
+            cx_f, cy_f = 420, 350
+            for k in range(5):
+                ang = k * 72.0
+                rad = math.radians(ang)
+                # Pointed outer sepal tip between petals
+                s_ang = ang + 36.0
+                s_rad = math.radians(s_ang)
+                sx = cx_f - math.sin(s_rad) * 85
+                sy = cy_f + math.cos(s_rad) * 85
+                ps, fs = morph_salvaged_to_acuminate_leaf(leaf_pts, leaf_fls, sx, sy, 235, 76, s_ang, bend=0.08)
+                fl_contours.append(ensure_winding(ps, fs, clockwise=True))
+
+                # Broad notched rose petal
+                bx = cx_f - math.sin(rad) * 68
+                by = cy_f + math.cos(rad) * 68
+                pp, fp = morph_salvaged_to_acuminate_leaf(
+                    petal_pts, petal_fls, bx, by, 245, 195, ang, bend=0.0, notched_tip=True
+                )
+                fl_contours.append(ensure_winding(pp, fp, clockwise=True))
+                pv, fv = morph_salvaged_to_acuminate_leaf(
+                    seed_pts, seed_fls, bx - math.sin(rad) * 32, by + math.cos(rad) * 32, 145, 48, ang, bend=0.0
+                )
+                fl_contours.append(ensure_winding(pv, fv, clockwise=False))
+
+            c_out, f_out = transform_contour(dew_pts, dew_fls, cx_f, cy_f, 68, 68, 0)
+            c_in, f_in = transform_contour(dew_pts, dew_fls, cx_f, cy_f, 34, 34, 0)
+            fl_contours.append(ensure_winding(c_out, f_out, clockwise=True))
+            fl_contours.append(ensure_winding(c_in, f_in, clockwise=False))
+
+        elif cp == 0x2740:
+            # ❀ BLOOMING WATERLILY / LOTUS CROWN: Rooted calyx receptacle + 7 upright fanning acuminate lotus petals
+            cx_f, cy_f = 420, 145
+            c_cal, f_cal = transform_contour(calyx_pts, calyx_fls, cx_f, cy_f - 20, 140, 58, 0.0)
+            fl_contours.append(ensure_winding(c_cal, f_cal, clockwise=True))
+            lotus_specs = [
+                (-76.0, 290, 105, 0.18),
+                (-50.0, 355, 118, 0.14),
+                (-25.0, 415, 128, 0.08),
+                (0.0, 455, 138, 0.0),
+                (25.0, 415, 128, -0.08),
+                (50.0, 355, 118, -0.14),
+                (76.0, 290, 105, -0.18),
+            ]
+            for ang, ll, lw, bnd in lotus_specs:
+                rad = math.radians(ang)
+                bx = cx_f - math.sin(rad) * 28
+                by = cy_f + math.cos(rad) * 28
+                pl, fl = morph_salvaged_to_acuminate_leaf(petal_pts, petal_fls, bx, by, ll, lw, ang, bend=bnd)
+                fl_contours.append(ensure_winding(pl, fl, clockwise=True))
+                pv, fv = morph_salvaged_to_acuminate_leaf(
+                    seed_pts, seed_fls, bx - math.sin(rad) * 42, by + math.cos(rad) * 42, ll * 0.62, lw * 0.38, ang, bend=bnd
+                )
+                fl_contours.append(ensure_winding(pv, fv, clockwise=False))
+
+        elif cp == 0x2698:
+            # ⚘ HERBARIUM STEMMED FLOWER: Vertical stem + 2 arching basal leaves + calyx cup + 3-petal tulip blossom
+            s_spine = [(420 + 18 * math.sin(k / 10.0 * math.pi), 20 + k * 36) for k in range(11)]
+            fl_contours.append(make_organic_vine_ribbon(s_spine, [12.0 - 0.3 * k for k in range(11)], clockwise=True))
+            # 2 arching basal leaves
+            for ang, bnd in [(52.0, 0.24), (-52.0, -0.24)]:
+                pl, fl = morph_salvaged_to_acuminate_leaf(leaf_pts, leaf_fls, 420, 95, 290, 112, ang, bend=bnd)
+                fl_contours.append(ensure_winding(pl, fl, clockwise=True))
+                rad = math.radians(ang)
+                pv, fv = morph_salvaged_to_acuminate_leaf(
+                    seed_pts, seed_fls, 420 - math.sin(rad) * 34, 95 + math.cos(rad) * 34, 185, 38, ang, bend=bnd
+                )
+                fl_contours.append(ensure_winding(pv, fv, clockwise=False))
+            # Calyx cup at (420, 375)
+            cc, fc = transform_contour(calyx_pts, calyx_fls, 420, 375, 86, 48, 0.0)
+            fl_contours.append(ensure_winding(cc, fc, clockwise=True))
+            # 3-petal tulip crown
+            for ang, ll, lw, bnd in [(32.0, 265, 118, -0.18), (-32.0, 265, 118, 0.18), (0.0, 295, 134, 0.0)]:
+                pp, fp = morph_salvaged_to_acuminate_leaf(petal_pts, petal_fls, 420, 375, ll, lw, ang, bend=bnd)
+                fl_contours.append(ensure_winding(pp, fp, clockwise=True))
+                rad = math.radians(ang)
+                pv, fv = morph_salvaged_to_acuminate_leaf(
+                    seed_pts, seed_fls, 420 - math.sin(rad) * 38, 375 + math.cos(rad) * 38, ll * 0.58, lw * 0.34, ang, bend=bnd
+                )
+                fl_contours.append(ensure_winding(pv, fv, clockwise=False))
 
         g_fl = Glyph()
         g_fl.numberOfContours = 0
@@ -374,13 +645,13 @@ def build_botanica(salvaged):
 
     tt.setGlyphOrder(go)
     tt["maxp"].numGlyphs = len(go)
-    subset_to_circular_core(tt, extra_cps=[s[0] for s in fleuron_specs])
+    subset_to_circular_core(tt, extra_cps=fleuron_cps)
     set_Font_Names(
         tt,
         "PocketGull Botanica",
         "Regular",
         "PocketGullBotanica-Regular",
-        "Upcycled Architectural Initials & Botanical Fleurons (Dieter Rams & Wrigley Circular Edition)",
+        "Upcycled Botanical Drop-Caps & Natural Herbarium Specimens (v3 Phyllotaxis Edition)",
     )
     UPCYCLED_DIR.mkdir(parents=True, exist_ok=True)
     out_ttf = UPCYCLED_DIR / "PocketGull-Botanica.ttf"
@@ -539,55 +810,55 @@ def render_specimen_plate(botanica_ttf: Path, kintsugi_ttf: Path, black_ttf: Pat
     )
 
     # =========================================================================
-    # PANEL 1: POCKETGULL BOTANICA v2 (ARCHITECTURAL INITIALS & FLEURONS)
+    # PANEL 1: POCKETGULL BOTANICA v3 (LIVING VINE ARBOR & HERBARIUM SPECIMENS)
     # =========================================================================
     draw.rectangle([40, 150, W - 40, 735], fill=(247, 243, 232), outline=(180, 142, 76), width=3)
     draw.rectangle([52, 162, W - 52, 723], outline=(212, 185, 130), width=1)
 
     draw.text(
         (76, 178),
-        "1. POCKETGULL BOTANICA v2 — ARCHITECTURAL RESTRAINT & SALVAGED BOTANICAL FLEURONS",
+        "1. POCKETGULL BOTANICA v3 — LIVING VINE ARBOR DROP-CAPS & HERBARIUM SPECIMENS",
         font=f_sec,
-        fill=(113, 63, 18),
+        fill=(22, 101, 52),
     )
     draw.text(
         (76, 212),
-        "Dieter Rams v2 Refinement: Single 16-unit architectural frame + 2 asymmetric Golden-Ratio leaves (glyph01281 & glyph01031) -> 82% open breathing space.",
+        "Organic Phyllotaxis: Rooted climbing vine arbor + pointed acuminate leaves (glyph01281) + living stem venation & leaf shoots growing from the letter!",
         font=f_mono_sm,
         fill=(120, 113, 108),
     )
 
-    draw.text((78, 252), "P", font=f_bot_lg, fill=(153, 27, 27))
+    draw.text((78, 252), "P", font=f_bot_lg, fill=(22, 101, 52))
     ms_lines = [
-        "OCKETGULL BOTANICA v2 pairs Dieter Rams's structural",
-        "clarity with circular industrial ecology: the busy",
-        "double-frame and cardinal dots are stripped away,",
-        "leaving one crisp architectural rule and two diagonal",
-        "botanical leaves salvaged from commit aabd99b0.",
-        "Every letter breathes inside generous negative space.",
+        "OCKETGULL BOTANICA v3 replaces rigid geometric boxes",
+        "with a living botanical vine arbor: a rooted stem",
+        "climbs the left margin, sprouting pointed acuminate",
+        "leaves, while the letter's own trunk carries hollow",
+        "leaf venation and sprouts a living phyllotaxis shoot.",
+        "Every curve is morphed from salvaged commit aabd99b0.",
     ]
     for i, line in enumerate(ms_lines):
-        x_off = 240 if i < 5 else 78
+        x_off = 248 if i < 5 else 78
         draw.text((x_off, 256 + i * 34), line, font=f_body, fill=(41, 37, 36))
 
     initials = ["A", "B", "C", "G", "M", "Q", "S", "W"]
     for idx, ch in enumerate(initials):
         ix = 78 + idx * 132
         iy = 492
-        color = (153, 27, 27) if idx % 2 == 0 else (21, 94, 117)
+        color = (22, 101, 52) if idx % 2 == 0 else (153, 27, 27)
         draw.text((ix, iy), ch, font=f_bot_md, fill=color)
         draw.text((ix + 34, iy + 132), f"U+00{ord(ch):02X}", font=f_mono_sm, fill=(120, 113, 108))
 
     draw.rectangle([1160, 248, W - 72, 702], fill=(239, 233, 216), outline=(180, 142, 76), width=2)
-    draw.text((1186, 264), "UPCYCLED UNICODE FLEURONS (U+2766..U+2698)", font=f_mono_md, fill=(113, 63, 18))
+    draw.text((1186, 264), "UPCYCLED HERBARIUM SPECIMENS (U+2766..U+2698)", font=f_mono_md, fill=(22, 101, 52))
 
     fleurons = [
-        ("\u2766", "U+2766 Floral Heart", "6x glyph01281"),
-        ("\u2767", "U+2767 Tudor Rose", "8x glyph01281"),
-        ("\u2619", "U+2619 Clover Cross", "4x glyph01281"),
-        ("\u273F", "U+273F Cinquefoil", "5x glyph01281"),
-        ("\u2740", "U+2740 White Florette", "8x glyph01031"),
-        ("\u2698", "U+2698 Botanica", "6x glyph00930"),
+        ("\u2766", "U+2766 Aldine Ivy Leaf", "Cordate + 3 veins"),
+        ("\u2767", "U+2767 Hedera Vine Sprig", "5 pinnate leaves"),
+        ("\u2619", "U+2619 Laurel Branch", "Opposite foliage"),
+        ("\u273F", "U+273F Wild Briar Rose", "Petals & sepals"),
+        ("\u2740", "U+2740 Waterlily Crown", "7 lotus petals"),
+        ("\u2698", "U+2698 Stemmed Tulip", "Basal leaves & cup"),
     ]
     for idx, (sym, label, src_id) in enumerate(fleurons):
         col = idx % 3
