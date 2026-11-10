@@ -40,6 +40,18 @@ jobs:
       - name: Install Python Dependencies (Cryptographically Hash-Pinned)
         run: python -m pip install --require-hashes -r requirements-ci.txt
 
+      - name: Install Fontspector v1.9.0 (SHA-256 Verified Rust QA Binary)
+        run: |
+          set -euo pipefail
+          curl -sSfL "https://github.com/fonttools/fontspector/releases/download/fontspector-v1.9.0/fontspector-1.9.0-x86_64-unknown-linux-gnu.tar.gz" -o /tmp/fontspector.tar.gz
+          echo "0d4a7fbc577f7f99a084dec2a7acc13f64f923cbe44c0e3c5e3d76469786b8e2  /tmp/fontspector.tar.gz" | sha256sum -c -
+          mkdir -p /tmp/fontspector-bin
+          tar -xzf /tmp/fontspector.tar.gz -C /tmp/fontspector-bin
+          FS_BIN=$(find /tmp/fontspector-bin -name fontspector -type f | head -n 1)
+          chmod +x "$FS_BIN"
+          sudo mv "$FS_BIN" /usr/local/bin/fontspector
+          fontspector --version
+
       - name: Install Node Dependencies
         run: |
           npm ci
@@ -60,25 +72,90 @@ jobs:
       - name: 5. Run PocketGull Pre-Flight Validator
         run: python sources/validate_fonts.py
 
-      - name: 6. Run Fontbakery (OpenType & Universal Profile)
-        continue-on-error: true
+      - name: 6. Run Fontspector v1.9.0 Per-Subfamily Blocking Gate
         run: |
-          fontbakery check-universal \
-            --loglevel WARN \
-            --ghmarkdown fontbakery-report.md \
+          set -euo pipefail
+          mkdir -p fontspector-reports
+
+          fontspector --profile universal --configuration fontspector.toml --skip-network \
+            --loglevel WARN --ghmarkdown fontspector-reports/01-sans.md \
             fonts/ttf/PocketGull-Regular.ttf \
             fonts/ttf/PocketGull-Bold.ttf \
             fonts/ttf/PocketGull-Italic.ttf \
             fonts/ttf/PocketGull-BoldItalic.ttf \
-            fonts/ttf/PocketGull-VF.ttf \
-            fonts/ttf/PocketGull-Serif-Regular.ttf \
-            fonts/ttf/PocketGull-Serif-Bold.ttf \
-            fonts/ttf/PocketGull-ASL.ttf \
-            fonts/ttf/PocketGullMono-Regular.ttf
+            fonts/ttf/PocketGull-Fineliner.ttf \
+            fonts/ttf/PocketGull-Black.ttf \
+            fonts/ttf/PocketGull-Chiseltip.ttf \
+            fonts/ttf/PocketGull-CondensedBold.ttf \
+            fonts/ttf/PocketGull-MarkerRaw.ttf \
+            fonts/ttf/PocketGull-Micro.ttf
 
-      - name: Upload Fontbakery Report Artifact
+          fontspector --profile universal --configuration fontspector.toml --skip-network \
+            --loglevel WARN --ghmarkdown fontspector-reports/02-mono.md \
+            fonts/ttf/PocketGullMono-Regular.ttf \
+            fonts/ttf/PocketGullMono-Bold.ttf \
+            fonts/ttf/PocketGullMono-Italic.ttf
+
+          fontspector --profile universal --configuration fontspector.toml --skip-network \
+            --loglevel WARN --ghmarkdown fontspector-reports/03-serif.md \
+            fonts/ttf/PocketGull-Serif-Regular.ttf \
+            fonts/ttf/PocketGull-Serif-Bold.ttf
+
+          fontspector --profile universal --configuration fontspector.toml --skip-network \
+            --loglevel WARN --ghmarkdown fontspector-reports/04-slab.md \
+            fonts/ttf/PocketGull-Slab-Regular.ttf \
+            fonts/ttf/PocketGull-Slab-Bold.ttf
+
+          fontspector --profile universal --configuration fontspector.toml --skip-network \
+            --loglevel WARN --ghmarkdown fontspector-reports/05-soft.md \
+            fonts/ttf/PocketGull-Soft-Regular.ttf \
+            fonts/ttf/PocketGull-Soft-Bold.ttf
+
+          fontspector --profile universal --configuration fontspector.toml --skip-network \
+            --loglevel WARN --ghmarkdown fontspector-reports/06-vf.md \
+            fonts/ttf/PocketGull-VF.ttf
+
+          fontspector --profile universal --configuration fontspector.toml --skip-network \
+            --loglevel WARN --ghmarkdown fontspector-reports/07-serif-vf.md \
+            fonts/ttf/PocketGull-Serif-VF.ttf
+
+          fontspector --profile universal --configuration fontspector.toml --skip-network \
+            --loglevel WARN --ghmarkdown fontspector-reports/08-asl-sign.md \
+            fonts/ttf/PocketGull-ASL.ttf
+
+          fontspector --profile universal --configuration fontspector.toml --skip-network \
+            --loglevel WARN --ghmarkdown fontspector-reports/09-sign-vf.md \
+            fonts/ttf/PocketGull-Sign-VF.ttf
+
+          idx=10
+          for standalone in \
+            PocketGull-Algo.ttf \
+            PocketGull-Chem.ttf \
+            PocketGull-Emoji.ttf \
+            PocketGull-Genome.ttf \
+            PocketGull-Halftone.ttf \
+            PocketGull-Inline.ttf \
+            PocketGull-Lab.ttf \
+            PocketGull-Learn.ttf \
+            PocketGull-Math.ttf \
+            PocketGull-Music.ttf \
+            PocketGull-Numerics.ttf \
+            PocketGull-Outline.ttf \
+            PocketGull-Press.ttf \
+            PocketGull-Sign.ttf \
+            PocketGull-Soft.ttf \
+            "PocketGullSerif[wght].ttf"; do
+            fontspector --profile universal --configuration fontspector.toml --skip-network \
+              --loglevel WARN --ghmarkdown "fontspector-reports/${idx}-${standalone%.ttf}.md" \
+              "fonts/ttf/${standalone}"
+            idx=$((idx + 1))
+          done
+
+          cat fontspector-reports/*.md > fontspector-report.md
+
+      - name: Upload Fontspector Report Artifact
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: fontbakery-qa-report
-          path: fontbakery-report.md
+          name: fontspector-qa-report
+          path: fontspector-report.md

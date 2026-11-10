@@ -31,7 +31,7 @@
       // Active font audit telemetry state
       let fontStats = {
         name: 'PocketGull-Regular.ttf',
-        family: 'Pocket Gull',
+        family: 'PocketGull',
         subfamily: 'Regular',
         upm: 1000,
         glyphs: 6344,

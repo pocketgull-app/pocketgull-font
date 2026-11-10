@@ -1,4 +1,4 @@
-﻿/* PocketGull Specimen - Modular Stylesheet */
+/* PocketGull Specimen - Modular Stylesheet */
 
 /* --- Inspector & UI Controls --- */
 
@@ -4061,19 +4061,19 @@
     .monograph-article {
       max-width: 860px;
       margin: 0 auto;
-      font-family: 'Pocket Gull', 'PocketGull', var(--font-sans);
+      font-family: 'PocketGull', 'Pocket Gull', var(--font-sans);
       font-size: var(--monograph-font-size, 1.02rem);
       line-height: 1.75;
       color: var(--text-primary);
     }
 
     .monograph-article.font-bold {
-      font-family: 'Pocket Gull', 'PocketGull Bold', sans-serif;
+      font-family: 'PocketGull', 'Pocket Gull', 'PocketGull Bold', sans-serif;
       font-weight: 700;
     }
 
     .monograph-article.font-mono {
-      font-family: 'Pocket Gull Mono', monospace;
+      font-family: 'PocketGull Mono', 'Pocket Gull Mono', monospace;
       font-weight: 400;
     }
 
@@ -4147,7 +4147,7 @@
     }
 
     .monograph-inline-code {
-      font-family: 'Pocket Gull Mono', monospace;
+      font-family: 'PocketGull Mono', 'Pocket Gull Mono', monospace;
       font-size: 0.85em;
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
@@ -4163,7 +4163,7 @@
       padding: 1rem 1.25rem;
       margin: 1.25rem 0;
       overflow-x: auto;
-      font-family: 'Pocket Gull Mono', monospace;
+      font-family: 'PocketGull Mono', 'Pocket Gull Mono', monospace;
       font-size: 0.9rem;
       color: #38bdf8;
       text-align: center;

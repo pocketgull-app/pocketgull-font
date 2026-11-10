@@ -1,0 +1,18 @@
+# PocketGull Typefoundry — Fontspector 1.9.0 QA Configuration
+# ===========================================================
+# Enforces OpenType & Universal quality checks across every PocketGull subfamily
+# while honoring intentional PocketGull architectural & security invariants.
+
+exclude_checks = [
+    # PocketGull enforces a strict Zero-VM TrueType security posture (CVE-2026-113679/113680):
+    # fpgm, cvt , and prep bytecode programs are stripped by design.
+    "smart_dropout",
+]
+
+[file_size]
+# PocketGull-VF.ttf carries a 16-axis continuous clinical gvar table (8,600+ glyphs);
+# PocketGull-Halftone.ttf carries 45-degree halftone screen geometry across Latin/Cyrillic/Greek/Braille.
+exclude_files = [
+    "PocketGull-VF.ttf",
+    "PocketGull-Halftone.ttf",
+]

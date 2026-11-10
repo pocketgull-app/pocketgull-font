@@ -48,15 +48,13 @@ def compile_sign_variable_font():
     glyf = font["glyf"]
     name_table = font["name"]
 
-    ver = "Version 3.102; The PocketGull Project Authors; OFL 1.1"
+    ver = "Version 3.103; The PocketGull Project Authors; OFL 1.1"
     set_win_name(name_table, 1, "PocketGull Sign VF")
     set_win_name(name_table, 2, "Regular")
-    set_win_name(name_table, 3, "3.102;PGUL;PocketGull-SignVF")
+    set_win_name(name_table, 3, "3.103;PGUL;PocketGull-SignVF")
     set_win_name(name_table, 4, "PocketGull Sign VF")
     set_win_name(name_table, 5, ver)
     set_win_name(name_table, 6, "PocketGull-SignVF")
-    set_win_name(name_table, 16, "PocketGull Sign VF")
-    set_win_name(name_table, 17, "Regular")
     set_win_name(name_table, 25, "PocketGullSignVF")
 
     fvar = font["fvar"] = newTable("fvar")
@@ -79,13 +77,14 @@ def compile_sign_variable_font():
         fvar.axes.append(ax)
 
     instances_def = [
-        ("Sloan 5:1 Standard", "PocketGullSignVF-SloanStandard", {"MRPH": 0.0, "wght": 400.0, "opsz": 36.0, "AZIM": 0.0}, 301, 321),
-        ("Alimentive Plump", "PocketGullSignVF-Alimentive", {"MRPH": 100.0, "wght": 500.0, "opsz": 36.0, "AZIM": 0.0}, 302, 322),
-        ("Thoracic Conical", "PocketGullSignVF-Thoracic", {"MRPH": 200.0, "wght": 400.0, "opsz": 36.0, "AZIM": 0.0}, 303, 323),
-        ("Muscular Square", "PocketGullSignVF-Muscular", {"MRPH": 300.0, "wght": 600.0, "opsz": 36.0, "AZIM": 0.0}, 304, 324),
-        ("Osseous Knotty", "PocketGullSignVF-Osseous", {"MRPH": 400.0, "wght": 450.0, "opsz": 36.0, "AZIM": 0.0}, 305, 325),
-        ("Cerebral Delicate", "PocketGullSignVF-Cerebral", {"MRPH": 500.0, "wght": 400.0, "opsz": 36.0, "AZIM": 0.0}, 306, 326),
-        ("Signer Expressive", "PocketGullSignVF-Expressive", {"MRPH": 0.0, "wght": 400.0, "opsz": 36.0, "AZIM": 180.0}, 307, 327),
+        ("Regular", "PocketGull-SignVF", {"MRPH": 0.0, "wght": 400.0, "opsz": 36.0, "AZIM": 0.0}, 2, 320),
+        ("Sloan", "PocketGullSignVF-Sloan", {"MRPH": 0.0, "wght": 400.0, "opsz": 18.0, "AZIM": 0.0}, 301, 321),
+        ("Alimentive", "PocketGullSignVF-Alimentive", {"MRPH": 100.0, "wght": 500.0, "opsz": 36.0, "AZIM": 0.0}, 302, 322),
+        ("Thoracic", "PocketGullSignVF-Thoracic", {"MRPH": 200.0, "wght": 400.0, "opsz": 36.0, "AZIM": 0.0}, 303, 323),
+        ("Muscular", "PocketGullSignVF-Muscular", {"MRPH": 300.0, "wght": 600.0, "opsz": 36.0, "AZIM": 0.0}, 304, 324),
+        ("Osseous", "PocketGullSignVF-Osseous", {"MRPH": 400.0, "wght": 450.0, "opsz": 36.0, "AZIM": 0.0}, 305, 325),
+        ("Cerebral", "PocketGullSignVF-Cerebral", {"MRPH": 500.0, "wght": 400.0, "opsz": 36.0, "AZIM": 0.0}, 306, 326),
+        ("Expressive", "PocketGullSignVF-Expressive", {"MRPH": 0.0, "wght": 400.0, "opsz": 36.0, "AZIM": 180.0}, 307, 327),
     ]
     for inst_name, ps_name, coords, nid, ps_nid in instances_def:
         inst = NamedInstance()
