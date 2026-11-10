@@ -226,25 +226,30 @@ def append_contours_to_glyph(g, new_contours, glyf):
 
 def subset_to_circular_core(tt, extra_cps=()):
     """
-    Enforces Wrigley Scope 3 Digital Dematerialization: subsets the upcycled cut
-    to the lean v4.0.0 core character set of PocketGull-Regular.ttf (+ upcycled fleurons),
-    reducing TTF payload from ~2.8 MB to ~315 KB (-88.7% digital network egress).
+    Enforces Wrigley Scope 3 Digital Dematerialization & Zero-WARN Fontspector Hygiene:
+    prunes all unreachable glyphs via Unicode closure, preserves post v2.0 & .notdef,
+    and recalculates OS/2.xAvgCharWidth.
     """
-    reg = TTFont(str(ROOT_DIR / "fonts" / "ttf" / "PocketGull-Regular.ttf"))
-    core_cps = set(reg.getBestCmap().keys()) | set(extra_cps)
-    reg.close()
-
+    unicodes = list(set(tt.getBestCmap().keys()) | set(extra_cps))
     opts = Options()
     opts.layout_features = ["*"]
+    opts.glyph_names = True
     opts.name_IDs = ["*"]
-    opts.name_legacy = True
-    opts.name_languages = ["*"]
+    opts.name_legacy = False
+    opts.name_languages = [0x0409]
+    opts.notdef_glyph = True
     opts.notdef_outline = True
     opts.recalc_bounds = True
+    opts.recalc_average_width = True
     opts.recalc_timestamp = False
+    opts.passthrough_tables = True
     subsetter = Subsetter(options=opts)
-    subsetter.populate(unicodes=list(core_cps))
+    subsetter.populate(unicodes=unicodes)
     subsetter.subset(tt)
+    tt["post"].formatType = 2.0
+    tt["post"].extraNames = []
+    tt["post"].mapping = {}
+    tt["OS/2"].recalcAvgCharWidth(tt)
 
 
 def set_Font_Names(tt, family_name, sub_name, ps_name, desc_suffix):
