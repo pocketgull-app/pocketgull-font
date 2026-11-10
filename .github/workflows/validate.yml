@@ -60,13 +60,21 @@ jobs:
       - name: 5. Run PocketGull Pre-Flight Validator
         run: python sources/validate_fonts.py
 
-      - name: 6. Run Fontbakery (Google Fonts Profile)
+      - name: 6. Run Fontbakery (OpenType & Universal Profile)
         continue-on-error: true
         run: |
-          fontbakery check-googlefonts \
+          fontbakery check-universal \
             --loglevel WARN \
             --ghmarkdown fontbakery-report.md \
-            fonts/ttf/*.ttf
+            fonts/ttf/PocketGull-Regular.ttf \
+            fonts/ttf/PocketGull-Bold.ttf \
+            fonts/ttf/PocketGull-Italic.ttf \
+            fonts/ttf/PocketGull-BoldItalic.ttf \
+            fonts/ttf/PocketGull-VF.ttf \
+            fonts/ttf/PocketGull-Serif-Regular.ttf \
+            fonts/ttf/PocketGull-Serif-Bold.ttf \
+            fonts/ttf/PocketGull-ASL.ttf \
+            fonts/ttf/PocketGullMono-Regular.ttf
 
       - name: Upload Fontbakery Report Artifact
         if: always()

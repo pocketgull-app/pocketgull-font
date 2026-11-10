@@ -5,11 +5,11 @@
 ### Optotypically Calibrated Clinical &amp; Telemetry Font Superfamily
 
 [![OFL 1.1 License](https://img.shields.io/badge/License-SIL_OFL_1.1-blue.svg?style=flat-square)](OFL.txt)
-[![SemVer 3.1.1](https://img.shields.io/badge/SemVer-3.1.1-blue.svg?style=flat-square)](CHANGELOG.md)
+[![SemVer 3.1.2](https://img.shields.io/badge/SemVer-3.1.2-blue.svg?style=flat-square)](CHANGELOG.md)
 [![W3C OTS Validated](https://img.shields.io/badge/W3C_OTS-100%25_Valid-emerald.svg?style=flat-square)](https://github.com/googlefonts/ots)
 [![WCAG 2.1 AAA](https://img.shields.io/badge/WCAG_2.1-AAA_100%25-emerald.svg?style=flat-square)](index.html)
 
-**[🧭 3-Minute Starter Walkthrough](TUTORIAL.md)** &nbsp;•&nbsp; **[🌐 Live Specimen Broadside](https://font.pocketgull.app)** &nbsp;•&nbsp; **[💾 Download Fonts (.ZIP)](https://github.com/pocketgull-app/pocketgull-font/releases/download/v3.1.1/pocketgull-typeface-v3.1.1.zip)** &nbsp;•&nbsp; **[🤟 Sign Studio](asl_studio.html)** &nbsp;•&nbsp; **[🛠️ STEM Studio](stem_studio.html)** &nbsp;•&nbsp; **[🎼 Music Studio](music_studio.html)**
+**[🧭 3-Minute Starter Walkthrough](TUTORIAL.md)** &nbsp;•&nbsp; **[🌐 Live Specimen Broadside](https://font.pocketgull.app)** &nbsp;•&nbsp; **[💾 Download Fonts (.ZIP)](https://github.com/pocketgull-app/pocketgull-font/releases/download/v3.1.2/pocketgull-typeface-v3.1.2.zip)** &nbsp;•&nbsp; **[🤟 Sign Studio](asl_studio.html)** &nbsp;•&nbsp; **[🛠️ STEM Studio](stem_studio.html)** &nbsp;•&nbsp; **[🎼 Music Studio](music_studio.html)**
 
 <br/>
 

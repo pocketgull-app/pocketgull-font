@@ -23,7 +23,7 @@ import hashlib
 import zipfile
 import shutil
 
-VERSION = "3.1.1"
+VERSION = "3.1.2"
 ZIP_NAME = f"pocketgull-typeface-v{VERSION}.zip"
 SUPER_NAME = f"PocketGull-v{VERSION}-Superfamily.zip"
 

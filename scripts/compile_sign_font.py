@@ -1,37 +1,18 @@
 #!/usr/bin/env python3
 """
-PocketGull Typefoundry — Volumetric Anatomical Sign & Hand Signal Font Compiler
-=================================================================================
-Compiles 'PocketGull-Sign.ttf', 'PocketGull-Sign.woff2', and 'PocketGull-ASL' aliases.
-World's First Humanist Clinical, Emergency & Telemetry Sign Language Font.
-
-Design Standards Enforced:
-1. Volumetric Anatomical Shaping & Tracing:
-   - 3-segment phalanx waisting (narrowed shafts, expanded knuckle condyles).
-   - Fleshy thenar muscular tear-drop base and hypothenar ulnar curves.
-   - Parabolic pulp fingertips with articulated nail plates and cuticle folds.
-   - Transverse metacarpal arch (peaks at middle finger apex).
-2. Louise Sloan 5:1 Optotype Acuity:
-   - Recognizable hand postures and finger knuckles at small optical sizes (16-24px).
-   - Generous counter-spaces (24-40 UPM) between adjacent extended digits.
-   - Distinct, unambiguous thumb positions (A, S, T, M, N, L, 3, 6, 7, 8, 9).
-3. Phil Gear Felt-Marker DNA:
-   - 25 UPM corner fillets on all knuckle junctions and fingertip terminals.
-4. Invariant Quality Pillars:
-   - Fixed 600 UPM pitch for seamless ICU telemetry / terminal alignment.
-   - TrueType 2-byte word alignment (loca[i] % 2 == 0).
-   - Bit-7 point flag masking (flag & 0x3F).
-   - 0 duplicate nodes; 100% W3C OTS memory safety.
+PocketGull Typefoundry — Z-Layered Anatomical ASL & Sign Language Font Compiler
+===============================================================================
+Compiles 'PocketGull-Sign.ttf', 'PocketGull-Sign.woff2', 'PocketGull-ASL.ttf', and 'PocketGull-ASL.woff2'.
 """
 
-import os
-import sys
 import math
-import shutil
+import sys
 from pathlib import Path
-from fontTools.ttLib import TTFont
+
+import numpy as np
+from skimage.measure import approximate_polygon, find_contours
 from fontTools.pens.ttGlyphPen import TTGlyphPen
-from fontTools.ttLib.woff2 import compress
+from fontTools.ttLib import TTFont
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 TTF_DIR = ROOT_DIR / "fonts" / "ttf"
@@ -39,606 +20,734 @@ WOFF2_DIR = ROOT_DIR / "fonts" / "woff2"
 
 SRC_MONO = TTF_DIR / "PocketGullMono-Regular.ttf"
 OUT_SIGN_TTF = TTF_DIR / "PocketGull-Sign.ttf"
-OUT_SIGN_WOFF2 = WOFF2_DIR / "PocketGull-Sign.woff2"
 OUT_ASL_TTF = TTF_DIR / "PocketGull-ASL.ttf"
-OUT_ASL_WOFF2 = WOFF2_DIR / "PocketGull-ASL.woff2"
 
 ADVANCE = 600  # Strict 600 UPM monospace grid
 
 # -----------------------------------------------------------------------------
-# VOLUMETRIC ANATOMICAL SHAPING PRIMITIVES (TrueType Quadratic Béziers)
+# ANALYTIC 2D SIGNED DISTANCE FIELD (SDF) & Z-OCCLUSION ENGINE
 # -----------------------------------------------------------------------------
+X_MIN, X_MAX = 0.0, 600.0
+Y_MIN, Y_MAX = -60.0, 860.0
+SCALE = 1.5
 
-def sculpt_directed_finger(pen, x0, y0, x1, y1, w=44, has_nail=True, nail_h=24, is_thumb=False, clockwise=True):
-    """
-    Sculpts a living human digit along ANY 2D trajectory (x0, y0) -> (x1, y1)
-    with authentic 3-segment phalanx waisting (fingers) or 2-segment waisting (thumb):
-    - Shaft waisting at inter-condylar zones (0.80x - 0.86x width).
-    - Articular joint condyle bulges at MCP, PIP, and DIP (1.08x - 1.15x width).
-    - Smooth parabolic distal pulp curvature at apex.
-    - Articulated dorsal nail plate cutout with cuticle curve.
-    """
-    dx = x1 - x0
-    dy = y1 - y0
-    L = math.hypot(dx, dy)
-    if L < 30:
-        L = 30
-        dx = 0
-        dy = 30
-    ux = dx / L
-    uy = dy / L
-    # Normal pointing to the left (counter-clockwise 90 deg)
-    nx = -uy
-    ny = ux
+GRID_W = int((X_MAX - X_MIN) * SCALE)
+GRID_H = int((Y_MAX - Y_MIN) * SCALE)
+_xs = np.linspace(X_MIN, X_MAX, GRID_W, dtype=np.float32)
+_ys = np.linspace(Y_MIN, Y_MAX, GRID_H, dtype=np.float32)
+GX, GY = np.meshgrid(_xs, _ys)
 
-    if is_thumb:
-        # 2-phalanx thumb anatomy (trapezium saddle -> proximal -> distal)
-        milestones = [
-            (0.00, 0.54), # Saddle base
-            (0.35, 0.44), # Proximal shaft waist
-            (0.62, 0.56), # IP condyle expansion
-            (0.88, 0.50), # Distal pulp bulb
-            (1.00, 0.35), # Terminal apex shoulder
-        ]
-    else:
-        # 3-phalanx finger anatomy (MCP -> Proximal -> PIP -> Intermediate -> DIP -> Distal)
-        milestones = [
-            (0.00, 0.50), # MCP knuckle base
-            (0.28, 0.42), # Proximal phalanx waist
-            (0.50, 0.54), # PIP joint condyle
-            (0.70, 0.40), # Intermediate phalanx waist
-            (0.85, 0.48), # DIP joint condyle
-            (1.00, 0.35), # Distal pulp shoulder
-        ]
 
-    # Calculate left side points
-    left_pts = []
-    for t, f in milestones:
-        px = int(round(x0 + t * dx + f * w * nx))
-        py = int(round(y0 + t * dy + f * w * ny))
-        left_pts.append((px, py))
+def smin(a, b, k=16.0):
+    if k <= 0.0:
+        return np.minimum(a, b)
+    h = np.maximum(k - np.abs(a - b), 0.0) / k
+    return np.minimum(a, b) - h * h * k * 0.25
 
-    # Calculate right side points
-    right_pts = []
-    for t, f in milestones:
-        px = int(round(x0 + t * dx - f * w * nx))
-        py = int(round(y0 + t * dy - f * w * ny))
-        right_pts.append((px, py))
 
-    # Draw outer contour (clockwise)
-    pen.moveTo(left_pts[0])
-    # Trace left side from base to tip
-    for i in range(len(milestones) - 1):
-        t0, f0 = milestones[i]
-        t1, f1 = milestones[i+1]
-        t_mid = (t0 + t1) / 2.0
-        f_mid = (f0 + f1) / 2.0
-        cpx = int(round(x0 + t_mid * dx + f_mid * w * nx))
-        cpy = int(round(y0 + t_mid * dy + f_mid * w * ny))
-        pen.qCurveTo((cpx, cpy), left_pts[i+1])
+def sd_capsule(px, py, x0, y0, x1, y1, r0, r1=None):
+    if r1 is None:
+        r1 = r0
+    vx = float(x1 - x0)
+    vy = float(y1 - y0)
+    l2 = vx * vx + vy * vy
+    if l2 < 1e-4:
+        return np.hypot(px - x0, py - y0) - r0
+    wx = px - float(x0)
+    wy = py - float(y0)
+    t = np.clip((wx * vx + wy * vy) / l2, 0.0, 1.0)
+    dx = wx - vx * t
+    dy = wy - vy * t
+    r = r0 + (r1 - r0) * t
+    return np.hypot(dx, dy) - r
 
-    # Distal pulp dome across apex
-    apex_x = int(round(x1 + 0.35 * w * ux))
-    apex_y = int(round(y1 + 0.35 * w * uy))
-    pen.qCurveTo((apex_x, apex_y), right_pts[-1])
 
-    # Trace right side from tip back to base
-    for i in range(len(milestones) - 1, 0, -1):
-        t1, f1 = milestones[i]
-        t0, f0 = milestones[i-1]
-        t_mid = (t0 + t1) / 2.0
-        f_mid = (f0 + f1) / 2.0
-        cpx = int(round(x0 + t_mid * dx - f_mid * w * nx))
-        cpy = int(round(y0 + t_mid * dy - f_mid * w * ny))
-        pen.qCurveTo((cpx, cpy), right_pts[i-1])
+def sd_chain(pts, radii, k=8.0):
+    d = sd_capsule(GX, GY, pts[0][0], pts[0][1], pts[1][0], pts[1][1], radii[0], radii[1])
+    for i in range(1, len(pts) - 1):
+        seg = sd_capsule(GX, GY, pts[i][0], pts[i][1], pts[i + 1][0], pts[i + 1][1], radii[i], radii[i + 1])
+        d = smin(d, seg, k=k)
+    return d
 
-    # Base closure
-    pen.lineTo(left_pts[0])
-    pen.closePath()
 
-    # Articulated dorsal nail plate (counter-clockwise cutout)
-    if has_nail and L >= 70:
-        nh = min(nail_h, int(L * 0.22))
-        nw = int(w * 0.55)
-        t_top = 1.0 - 6.0 / L
-        t_bot = t_top - nh / L
-        cx_top = x0 + t_top * dx
-        cy_top = y0 + t_top * dy
-        cx_bot = x0 + t_bot * dx
-        cy_bot = y0 + t_bot * dy
-        
-        hnw = nw / 2.0
-        n_bl = (int(round(cx_bot + hnw * nx)), int(round(cy_bot + hnw * ny)))
-        n_tl = (int(round(cx_top + hnw * nx)), int(round(cy_top + hnw * ny)))
-        n_tr = (int(round(cx_top - hnw * nx)), int(round(cy_top - hnw * ny)))
-        n_br = (int(round(cx_bot - hnw * nx)), int(round(cy_bot - hnw * ny)))
-        n_tip = (int(round(cx_top + 4.0 * ux)), int(round(cy_top + 4.0 * uy)))
+def sd_box_round(cx, cy, hx, hy, r):
+    qx = np.abs(GX - float(cx)) - (float(hx) - float(r))
+    qy = np.abs(GY - float(cy)) - (float(hy) - float(r))
+    out = np.hypot(np.maximum(qx, 0.0), np.maximum(qy, 0.0))
+    inn = np.minimum(np.maximum(qx, qy), 0.0)
+    return out + inn - float(r)
 
-        pen.moveTo(n_bl)
-        pen.lineTo(n_tl)
-        pen.qCurveTo(n_tip, n_tr)
-        pen.lineTo(n_br)
-        pen.closePath()
 
-def sculpt_curled_knuckle_tier(pen, cx, base_y, top_y, w=44, clockwise=True):
-    """
-    Sculpts an anatomical curled phalanx tier for fists (A, S, T, M, N, E).
-    Rounded knuckle dome with lateral tapering and dorsal flexor crease arc.
-    """
-    hw = w // 2
-    h = top_y - base_y
-    if clockwise:
-        pen.moveTo((cx - hw + 4, base_y))
-        pen.lineTo((cx - hw, base_y + int(h * 0.4)))
-        pen.qCurveTo((cx - hw, top_y), (cx, top_y))
-        pen.qCurveTo((cx + hw, top_y), (cx + hw, base_y + int(h * 0.4)))
-        pen.lineTo((cx + hw - 4, base_y))
-        pen.closePath()
-        # Horizontal flexor crease cutout
-        cy = base_y + int(h * 0.55)
-        cw = int(w * 0.6)
-        pen.moveTo((cx - cw//2, cy))
-        pen.qCurveTo((cx, cy + 3), (cx + cw//2, cy))
-        pen.qCurveTo((cx, cy - 3), (cx - cw//2, cy))
-        pen.closePath()
+def sd_palm_upright(cx=310, y_bot=65, y_top=380, w_bot=160, w_top=235, wrist=True):
+    y_mid = 0.5 * (y_bot + y_top)
+    d1 = sd_capsule(GX, GY, cx - w_top * 0.34, y_top - 42, cx + w_top * 0.34, y_top - 48, 58, 52)
+    d2 = sd_capsule(GX, GY, cx - w_top * 0.32, y_mid + 15, cx - w_bot * 0.25, y_bot + 42, 60, 50)
+    d3 = sd_capsule(GX, GY, cx + w_top * 0.32, y_mid + 10, cx + w_bot * 0.25, y_bot + 42, 56, 48)
+    d4 = sd_capsule(GX, GY, cx, y_top - 45, cx, y_bot + 45, 80, 68)
+    d = smin(smin(d1, d2, 26.0), smin(d3, d4, 26.0), 28.0)
+    if wrist:
+        dw = sd_box_round(cx, y_bot + 6, w_bot * 0.45, 34, 18)
+        d = smin(d, dw, 20.0)
+    return d
 
-def sculpt_anatomical_palm(pen, x_l=185, x_r=415, y_wrist=90, y_mcp=370, thumb_side="left"):
-    """
-    Sculpts living human palm with organic thenar eminence (ball of thumb)
-    and hypothenar ulnar curve.
-    """
-    # Radial wrist to thenar bulge
-    pen.moveTo((240, y_wrist))
-    # Convex thenar muscular belly sweeping out to x=135
-    pen.qCurveTo((135, 180), (135, 270))
-    # Curves into index MCP base
-    pen.qCurveTo((145, 340), (x_l, y_mcp))
-    
-    # Transverse metacarpal arch (peaks at middle finger apex x=300)
-    pen.qCurveTo((250, y_mcp + 25), (300, y_mcp + 30))
-    pen.qCurveTo((350, y_mcp + 25), (x_r, y_mcp - 15))
-    
-    # Hypothenar muscle sweep along ulnar border
-    pen.qCurveTo((x_r + 20, 270), (x_r + 15, 190))
-    # Curves into ulnar wrist
-    pen.qCurveTo((x_r, y_wrist + 20), (360, y_wrist))
-    # Concave wrist crease
-    pen.qCurveTo((300, y_wrist + 15), (240, y_wrist))
-    pen.closePath()
 
-def draw_circle(pen, cx, cy, r, clockwise=True):
-    """Draws circle via 4 quadratic segments."""
-    k = r * 0.5857864376
-    if clockwise:
-        pen.moveTo((cx, cy + r))
-        pen.qCurveTo((cx + k, cy + r), (cx + r, cy + k))
-        pen.qCurveTo((cx + r, cy - k), (cx + k, cy - r))
-        pen.qCurveTo((cx - k, cy - r), (cx - r, cy - k))
-        pen.qCurveTo((cx - r, cy + k), (cx - k, cy + r))
-        pen.closePath()
-    else:
-        pen.moveTo((cx, cy + r))
-        pen.qCurveTo((cx - k, cy + r), (cx - r, cy + k))
-        pen.qCurveTo((cx - r, cy - k), (cx - k, cy - r))
-        pen.qCurveTo((cx + k, cy - r), (cx + r, cy - k))
-        pen.qCurveTo((cx + r, cy + k), (cx + k, cy + r))
-        pen.closePath()
+class ZCanvas:
+    def __init__(self, stroke_w=24.0):
+        self.stroke_w = stroke_w
+        self.ink = np.zeros((GRID_H, GRID_W), dtype=np.float32)
 
-# -----------------------------------------------------------------------------
-# VOLUMETRIC ASL MANUAL ALPHABET (A - Z)
-# -----------------------------------------------------------------------------
+    def add_layer(self, d, stroke_w=None):
+        sw = self.stroke_w if stroke_w is None else stroke_w
+        hw = sw * 0.5
+        aa = 1.0 / SCALE
+        bg_keep = np.clip((d - hw) / aa + 0.5, 0.0, 1.0)
+        fg_stroke = np.clip((hw - np.abs(d)) / aa + 0.5, 0.0, 1.0)
+        self.ink = np.maximum(self.ink * bg_keep, fg_stroke)
 
-def build_asl_A(pen):
-    """ASL 'A': Fist with thumb resting straight upright alongside index finger."""
-    sculpt_anatomical_palm(pen, x_l=210, x_r=430, y_wrist=90, y_mcp=370)
-    # 4 Curled knuckle domes
-    for x in [245, 300, 355, 410]:
-        sculpt_curled_knuckle_tier(pen, x, 360, 480, w=44)
-    # Upright anatomical thumb on left with generous Louise Sloan 5:1 clearance
-    sculpt_directed_finger(pen, 160, 190, 155, 520, w=50, is_thumb=True)
+    def add_crease(self, pts, stroke_w=17.0, clip_inside=None):
+        radii = [0.0] * len(pts)
+        d = sd_chain(pts, radii, k=2.0)
+        hw = stroke_w * 0.5
+        aa = 1.0 / SCALE
+        fg = np.clip((hw - d) / aa + 0.5, 0.0, 1.0)
+        if clip_inside is not None:
+            mask = np.clip((-clip_inside - 18.0) / aa + 0.5, 0.0, 1.0)
+            fg = fg * mask
+        self.ink = np.maximum(self.ink, fg)
 
-def build_asl_B(pen):
-    """ASL 'B': Open flat hand, 4 upright fingers touching with Sloan 5:1 gaps, thumb folded."""
-    sculpt_anatomical_palm(pen, x_l=175, x_r=420, y_wrist=90, y_mcp=360)
-    # 4 sculpted upright fingers
-    sculpt_directed_finger(pen, 190, 350, 190, 770, w=40)
-    sculpt_directed_finger(pen, 250, 360, 250, 810, w=42) # Middle apex
-    sculpt_directed_finger(pen, 310, 355, 310, 775, w=40)
-    sculpt_directed_finger(pen, 370, 340, 370, 720, w=38)
-    # Thumb folded across lower palm
-    sculpt_directed_finger(pen, 140, 240, 330, 240, w=46, is_thumb=True)
+    def add_arrow_head(self, tip_x, tip_y, dir_dx, dir_dy, length=52.0, wing=34.0, stroke_w=19.0):
+        norm = math.hypot(dir_dx, dir_dy) or 1.0
+        ux, uy = dir_dx / norm, dir_dy / norm
+        nx, ny = -uy, ux
+        bx = tip_x - ux * length
+        by = tip_y - uy * length
+        p_left = (bx + nx * wing, by + ny * wing)
+        p_right = (bx - nx * wing, by - ny * wing)
+        self.add_crease([p_left, (tip_x, tip_y), p_right], stroke_w=stroke_w)
 
-def build_asl_C(pen):
-    """ASL 'C': All fingers curved in a smooth volumetric arch facing right."""
-    # Palm base & wrist
-    pen.moveTo((240, 100))
-    pen.qCurveTo((150, 200), (150, 450))
-    pen.qCurveTo((150, 680), (320, 680))
-    pen.qCurveTo((430, 680), (430, 560))
-    pen.lineTo((370, 560))
-    pen.qCurveTo((370, 620), (300, 620))
-    pen.qCurveTo((220, 620), (220, 450))
-    pen.qCurveTo((220, 280), (300, 280))
-    pen.qCurveTo((370, 280), (370, 340))
-    pen.lineTo((430, 340))
-    pen.qCurveTo((430, 220), (320, 220))
-    pen.qCurveTo((260, 220), (240, 100))
-    pen.closePath()
+    def to_tt_glyph(self, glyf_table):
+        padded = np.pad(self.ink, 2, mode="constant", constant_values=0.0)
+        raw_contours = find_contours(padded, level=0.5)
 
-def build_asl_D(pen):
-    """ASL 'D': Index pointing straight up; other 3 fingers and thumb touch in a loop."""
-    sculpt_anatomical_palm(pen, x_l=190, x_r=415, y_wrist=90, y_mcp=360)
-    # Tall index finger
-    sculpt_directed_finger(pen, 245, 350, 245, 805, w=46)
-    # Circular loop with middle/ring/pinky & thumb
-    draw_circle(pen, 335, 410, 52, clockwise=True)
-    draw_circle(pen, 335, 410, 22, clockwise=False)
+        pen = TTGlyphPen(glyf_table)
+        for rc in raw_contours:
+            ys = Y_MIN + (rc[:, 0] - 2.0) / SCALE
+            xs = X_MIN + (rc[:, 1] - 2.0) / SCALE
+            pts = np.column_stack([xs, ys])
 
-def build_asl_E(pen):
-    """ASL 'E': All 4 fingers curled down, fingertips resting on tucked thumb shelf."""
-    sculpt_anatomical_palm(pen, x_l=185, x_r=420, y_wrist=90, y_mcp=340)
-    for x in [225, 275, 325, 375]:
-        sculpt_curled_knuckle_tier(pen, x, 340, 490, w=42)
-    # Horizontal thumb shelf underneath
-    sculpt_directed_finger(pen, 160, 300, 400, 300, w=44, is_thumb=True)
+            x_arr, y_arr = pts[:, 0], pts[:, 1]
+            area = 0.5 * float(np.sum(x_arr * np.roll(y_arr, -1) - np.roll(x_arr, -1) * y_arr))
+            if abs(area) < 160.0:
+                continue
 
-def build_asl_F(pen):
-    """ASL 'F': Index and thumb form an 'O' ring; middle, ring, pinky spread upright."""
-    sculpt_anatomical_palm(pen, x_l=210, x_r=430, y_wrist=90, y_mcp=360)
-    # 3 upright spread fingers
-    sculpt_directed_finger(pen, 290, 350, 285, 810, w=42)
-    sculpt_directed_finger(pen, 350, 345, 355, 775, w=40)
-    sculpt_directed_finger(pen, 410, 335, 425, 720, w=38)
-    # 'O' ring on left
-    draw_circle(pen, 205, 420, 50, clockwise=True)
-    draw_circle(pen, 205, 420, 22, clockwise=False)
+            simp = approximate_polygon(pts, tolerance=2.5)
+            if len(simp) > 1 and np.hypot(*(simp[0] - simp[-1])) < 3.5:
+                simp = simp[:-1]
+            cleaned = []
+            for p in simp:
+                if not cleaned or math.hypot(p[0] - cleaned[-1][0], p[1] - cleaned[-1][1]) >= 4.5:
+                    cleaned.append((float(p[0]), float(p[1])))
+            if len(cleaned) > 1 and math.hypot(cleaned[0][0] - cleaned[-1][0], cleaned[0][1] - cleaned[-1][1]) < 4.5:
+                cleaned.pop()
+            if len(cleaned) < 4:
+                continue
 
-def build_asl_G(pen):
-    """ASL 'G': Index finger pointing horizontally right, thumb parallel above it."""
-    # Palm body in lateral profile
-    sculpt_anatomical_palm(pen, x_l=175, x_r=330, y_wrist=90, y_mcp=460)
-    # Horizontal index finger pointing right
-    sculpt_directed_finger(pen, 250, 400, 485, 400, w=44)
-    # Horizontal thumb parallel above it
-    sculpt_directed_finger(pen, 240, 465, 440, 465, w=46, is_thumb=True)
-    # Curled fingers below
-    sculpt_curled_knuckle_tier(pen, 260, 330, 380, w=38)
+            cx_a = [p[0] for p in cleaned]
+            cy_a = [p[1] for p in cleaned]
+            s_area = 0.5 * sum(
+                cx_a[i] * cy_a[(i + 1) % len(cleaned)] - cx_a[(i + 1) % len(cleaned)] * cy_a[i]
+                for i in range(len(cleaned))
+            )
+            mx = 0.5 * (cleaned[0][0] + cleaned[1][0])
+            my = 0.5 * (cleaned[0][1] + cleaned[1][1])
+            edx = cleaned[1][0] - cleaned[0][0]
+            edy = cleaned[1][1] - cleaned[0][1]
+            elen = math.hypot(edx, edy) or 1.0
+            sign_in = 1.0 if s_area > 0 else -1.0
+            tx = mx + sign_in * (-edy / elen) * 3.0
+            ty = my + sign_in * (edx / elen) * 3.0
+            ix = int(np.clip(round((tx - X_MIN) * SCALE), 0, GRID_W - 1))
+            iy = int(np.clip(round((ty - Y_MIN) * SCALE), 0, GRID_H - 1))
+            is_outer_ink = self.ink[iy, ix] >= 0.5
 
-def build_asl_H(pen):
-    """ASL 'H': Index and middle fingers extended horizontally together."""
-    sculpt_anatomical_palm(pen, x_l=175, x_r=320, y_wrist=90, y_mcp=460)
-    # Twin horizontal fingers
-    sculpt_directed_finger(pen, 240, 435, 490, 435, w=42)
-    sculpt_directed_finger(pen, 240, 375, 490, 375, w=42)
-    # Folded thumb across
-    sculpt_directed_finger(pen, 170, 320, 260, 320, w=42, is_thumb=True)
+            if (s_area < 0) != bool(is_outer_ink):
+                cleaned.reverse()
 
-def build_asl_I(pen):
-    """ASL 'I': Pinky finger extended straight up, other fingers in fist with thumb across."""
-    sculpt_anatomical_palm(pen, x_l=180, x_r=370, y_wrist=90, y_mcp=360)
-    for x in [220, 270, 320]:
-        sculpt_curled_knuckle_tier(pen, x, 350, 470, w=42)
-    # Thumb folded across front
-    sculpt_directed_finger(pen, 160, 270, 345, 270, w=44, is_thumb=True)
-    # Tall pinky on far right
-    sculpt_directed_finger(pen, 405, 330, 415, 785, w=40)
+            n = len(cleaned)
+            q_pts = [(int(round(px)), int(round(py))) for px, py in cleaned]
+            m_pts = [
+                (int(round(0.5 * (q_pts[i][0] + q_pts[(i + 1) % n][0]))),
+                 int(round(0.5 * (q_pts[i][1] + q_pts[(i + 1) % n][1]))))
+                for i in range(n)
+            ]
 
-def build_asl_J(pen):
-    """ASL 'J': Pinky extended tracing a sweeping J-hook trajectory."""
-    build_asl_I(pen)
-    # J-hook trajectory indicator
-    draw_circle(pen, 420, 750, 24, clockwise=True)
+            pen.moveTo(m_pts[0])
+            cur_on = m_pts[0]
+            for i in range(1, n + 1):
+                ctrl = q_pts[i % n]
+                nxt_on = m_pts[i % n]
+                if nxt_on == cur_on:
+                    continue
+                if ctrl == cur_on or ctrl == nxt_on:
+                    pen.lineTo(nxt_on)
+                else:
+                    pen.qCurveTo(ctrl, nxt_on)
+                cur_on = nxt_on
+            pen.closePath()
 
-def build_asl_K(pen):
-    """ASL 'K': Index upright, middle tilted forward/right, thumb nestled between them."""
-    sculpt_anatomical_palm(pen, x_l=185, x_r=415, y_wrist=90, y_mcp=360)
-    # Index finger vertical
-    sculpt_directed_finger(pen, 245, 350, 245, 805, w=44)
-    # Middle finger tilted forward/right (15 deg angle)
-    sculpt_directed_finger(pen, 280, 350, 345, 735, w=44)
-    # Thumb upright nestled in crook touching middle PIP joint
-    sculpt_directed_finger(pen, 265, 260, 290, 520, w=46, is_thumb=True)
-    # Ring & pinky curled
-    sculpt_curled_knuckle_tier(pen, 370, 330, 440, w=38)
-    sculpt_curled_knuckle_tier(pen, 415, 320, 420, w=36)
+        return pen.glyph()
 
-def build_asl_L(pen):
-    """ASL 'L': Index upright, thumb pointing horizontally left at 90° angle."""
-    sculpt_anatomical_palm(pen, x_l=210, x_r=420, y_wrist=90, y_mcp=360)
-    # Tall index
-    sculpt_directed_finger(pen, 250, 350, 250, 805, w=46)
-    # 90-degree horizontal thumb pointing left
-    sculpt_directed_finger(pen, 240, 260, 80, 260, w=48, is_thumb=True)
-    # Curled fingers
-    for x in [310, 360, 410]:
-        sculpt_curled_knuckle_tier(pen, x, 340, 450, w=40)
 
-def build_asl_M(pen):
-    """ASL 'M': 3 fingers draped over thumb; thumb tip peeking under ring finger."""
-    sculpt_anatomical_palm(pen, x_l=185, x_r=425, y_wrist=90, y_mcp=360)
-    for x in [225, 280, 335]:
-        sculpt_curled_knuckle_tier(pen, x, 350, 485, w=46)
-    sculpt_curled_knuckle_tier(pen, 390, 340, 450, w=38)
-    # Thumb tip peeking out under the 3rd (ring) finger
-    draw_circle(pen, 335, 320, 20, clockwise=True)
+def curled_finger_sdf(x, y_knuckle=485, y_tip=305, r_top=29, r_tip=26):
+    return sd_capsule(GX, GY, x, y_knuckle, x, y_tip, r_top, r_tip)
 
-def build_asl_N(pen):
-    """ASL 'N': 2 fingers draped over thumb; thumb tip peeking under middle finger."""
-    sculpt_anatomical_palm(pen, x_l=185, x_r=425, y_wrist=90, y_mcp=360)
-    for x in [230, 290]:
-        sculpt_curled_knuckle_tier(pen, x, 350, 485, w=48)
-    for x in [350, 400]:
-        sculpt_curled_knuckle_tier(pen, x, 340, 450, w=38)
-    # Thumb tip peeking out under the 2nd (middle) finger
-    draw_circle(pen, 290, 320, 20, clockwise=True)
 
-def build_asl_O(pen):
-    """ASL 'O': All fingertips curled forward to touch thumb tip in an O-shape."""
-    draw_circle(pen, 300, 450, 110, clockwise=True)
-    draw_circle(pen, 300, 450, 54, clockwise=False)
-    # Wrist base
-    sculpt_anatomical_palm(pen, x_l=210, x_r=390, y_wrist=90, y_mcp=340)
+def upright_finger_sdf(x0, y0, x1, y1, r_base=28, r_tip=23):
+    xm, ym = 0.5 * (x0 + x1), 0.5 * (y0 + y1)
+    return sd_chain([(x0, y0), (xm, ym), (x1, y1)], [r_base, (r_base + r_tip) * 0.51, r_tip], k=6.0)
 
-def build_asl_P(pen):
-    """ASL 'P': Like 'K' pointing downward."""
-    sculpt_anatomical_palm(pen, x_l=185, x_r=415, y_wrist=550, y_mcp=350)
-    # Index pointing straight down
-    sculpt_directed_finger(pen, 245, 360, 245, 100, w=44)
-    # Middle tilted down/right
-    sculpt_directed_finger(pen, 285, 360, 345, 160, w=44)
-    # Thumb nestled between them
-    sculpt_directed_finger(pen, 270, 420, 295, 260, w=46, is_thumb=True)
 
-def build_asl_Q(pen):
-    """ASL 'Q': Like 'G' pointing downward."""
-    sculpt_anatomical_palm(pen, x_l=175, x_r=330, y_wrist=550, y_mcp=350)
-    # Index pointing down
-    sculpt_directed_finger(pen, 270, 360, 270, 105, w=44)
-    # Thumb parallel beside it
-    sculpt_directed_finger(pen, 215, 360, 215, 160, w=46, is_thumb=True)
+def add_palm_creases(cv, d_palm, cx=310, y_base=210):
+    cv.add_crease([(cx - 55, y_base + 75), (cx - 10, y_base + 45), (cx + 35, y_base - 15)], stroke_w=15.0, clip_inside=d_palm)
 
-def build_asl_R(pen):
-    """ASL 'R': Index and middle fingers crossed."""
-    sculpt_anatomical_palm(pen, x_l=185, x_r=415, y_wrist=90, y_mcp=360)
-    # Crossed fingers: index under, middle crossing over
-    sculpt_directed_finger(pen, 250, 350, 310, 800, w=44)
-    sculpt_directed_finger(pen, 295, 350, 235, 800, w=44)
-    # Thumb folded across ring & pinky
-    sculpt_directed_finger(pen, 160, 270, 355, 270, w=42, is_thumb=True)
-    sculpt_curled_knuckle_tier(pen, 365, 330, 440, w=38)
-    sculpt_curled_knuckle_tier(pen, 410, 320, 420, w=36)
-
-def build_asl_S(pen):
-    """ASL 'S': Fist with thumb folded horizontally across all 4 fingers."""
-    sculpt_anatomical_palm(pen, x_l=185, x_r=425, y_wrist=90, y_mcp=360)
-    for x in [220, 275, 330, 385]:
-        sculpt_curled_knuckle_tier(pen, x, 340, 480, w=44)
-    # BOLD HORIZONTAL THUMB WRAPPED ACROSS FRONT
-    sculpt_directed_finger(pen, 135, 320, 440, 320, w=54, is_thumb=True)
-
-def build_asl_T(pen):
-    """ASL 'T': Fist with thumb poked up between index and middle fingers."""
-    sculpt_anatomical_palm(pen, x_l=185, x_r=425, y_wrist=90, y_mcp=360)
-    for x in [220, 275, 330, 385]:
-        sculpt_curled_knuckle_tier(pen, x, 340, 470, w=44)
-    # Thumb tip protruding between index and middle knuckles
-    draw_circle(pen, 248, 485, 26, clockwise=True)
-
-def build_asl_U(pen):
-    """ASL 'U': Index and middle fingers extended straight up, tight together."""
-    sculpt_anatomical_palm(pen, x_l=185, x_r=415, y_wrist=90, y_mcp=360)
-    # Twin fingers held tightly together (18 UPM gap)
-    sculpt_directed_finger(pen, 265, 350, 265, 805, w=44)
-    sculpt_directed_finger(pen, 315, 350, 315, 805, w=44)
-    sculpt_directed_finger(pen, 160, 270, 355, 270, w=42, is_thumb=True)
-    sculpt_curled_knuckle_tier(pen, 370, 330, 440, w=38)
-    sculpt_curled_knuckle_tier(pen, 415, 320, 420, w=36)
-
-def build_asl_V(pen):
-    """ASL 'V': Index and middle fingers spread in a distinct 'V' shape."""
-    sculpt_anatomical_palm(pen, x_l=185, x_r=415, y_wrist=90, y_mcp=360)
-    # V spread fingers (angled -10 deg and +10 deg)
-    sculpt_directed_finger(pen, 270, 350, 210, 795, w=44)
-    sculpt_directed_finger(pen, 290, 350, 350, 795, w=44)
-    sculpt_directed_finger(pen, 160, 270, 355, 270, w=42, is_thumb=True)
-    sculpt_curled_knuckle_tier(pen, 370, 330, 440, w=38)
-    sculpt_curled_knuckle_tier(pen, 415, 320, 420, w=36)
-
-def build_asl_W(pen):
-    """ASL 'W': Index, middle, and ring fingers spread upright."""
-    sculpt_anatomical_palm(pen, x_l=185, x_r=425, y_wrist=90, y_mcp=360)
-    # 3 fingers splayed in W fan
-    sculpt_directed_finger(pen, 260, 350, 200, 785, w=42)
-    sculpt_directed_finger(pen, 290, 350, 290, 810, w=42)
-    sculpt_directed_finger(pen, 320, 350, 380, 785, w=42)
-    # Thumb folded over pinky
-    draw_circle(pen, 340, 270, 28, clockwise=True)
-
-def build_asl_X(pen):
-    """ASL 'X': Index finger crooked/hooked at middle knuckle."""
-    sculpt_anatomical_palm(pen, x_l=185, x_r=415, y_wrist=90, y_mcp=360)
-    # Organic hooked index finger
-    pen.moveTo((220, 350))
-    pen.lineTo((220, 580))
-    pen.qCurveTo((220, 680), (280, 680))
-    pen.qCurveTo((340, 680), (340, 580))
-    pen.lineTo((340, 500))
-    pen.qCurveTo((340, 470), (310, 470))
-    pen.qCurveTo((280, 470), (280, 500))
-    pen.lineTo((280, 560))
-    pen.qCurveTo((280, 610), (260, 610))
-    pen.qCurveTo((250, 610), (250, 560))
-    pen.lineTo((250, 350))
-    pen.closePath()
-    for x in [305, 355, 405]:
-        sculpt_curled_knuckle_tier(pen, x, 340, 450, w=40)
-    # Thumb folded across
-    sculpt_directed_finger(pen, 160, 270, 330, 270, w=42, is_thumb=True)
-
-def build_asl_Y(pen):
-    """ASL 'Y': Thumb and pinky extended wide; 3 middle fingers folded (Shaka)."""
-    sculpt_anatomical_palm(pen, x_l=210, x_r=390, y_wrist=90, y_mcp=360)
-    # Thumb angled left (-35 deg)
-    sculpt_directed_finger(pen, 190, 260, 95, 520, w=48, is_thumb=True)
-    # Pinky angled right (+35 deg)
-    sculpt_directed_finger(pen, 370, 320, 465, 600, w=42)
-    # 3 middle fingers curled in fist
-    for x in [250, 300, 350]:
-        sculpt_curled_knuckle_tier(pen, x, 350, 460, w=42)
-
-def build_asl_Z(pen):
-    """ASL 'Z': Index finger tracing 'Z' trajectory in space."""
-    sculpt_anatomical_palm(pen, x_l=185, x_r=415, y_wrist=90, y_mcp=360)
-    sculpt_directed_finger(pen, 245, 350, 255, 800, w=46)
-    for x in [305, 355, 405]:
-        sculpt_curled_knuckle_tier(pen, x, 340, 450, w=40)
-    # Z kinematic trajectory indicator
-    draw_circle(pen, 400, 650, 20, clockwise=True)
 
 # -----------------------------------------------------------------------------
-# NUMERALS (0 - 9)
+# REFINED 36 CANONICAL ASL HANDSHAPES (A–Z, 0–9)
 # -----------------------------------------------------------------------------
+def draw_A(cv):
+    """A: Fist with 4 tightly curled fingers and bold upright thumb rising proudly on radial left."""
+    d_palm = sd_palm_upright(cx=340, y_bot=65, y_top=375, w_bot=160, w_top=230)
+    # Fuse proud radial thumb mound + upright thumb on left rising to y=575 (well above 480 knuckles!)
+    d_thumb = sd_chain([(215, 175), (162, 315), (168, 565)], [42, 35, 28], k=16.0)
+    cv.add_layer(smin(d_palm, d_thumb, 22.0))
+    # 4 compact curled fingers side-by-side at y=475..285
+    for fx, yk, yt in [(248, 470, 285), (308, 482, 285), (368, 474, 290), (426, 456, 300)]:
+        cv.add_layer(curled_finger_sdf(fx, yk, yt, r_top=28, r_tip=25))
 
-def build_asl_0(pen): build_asl_O(pen)
 
-def build_asl_1(pen):
-    """Numeral 1: Index upright, other 3 fingers and thumb curled."""
-    sculpt_anatomical_palm(pen, x_l=185, x_r=415, y_wrist=90, y_mcp=360)
-    sculpt_directed_finger(pen, 250, 350, 250, 805, w=46)
-    for x in [305, 355, 405]:
-        sculpt_curled_knuckle_tier(pen, x, 340, 450, w=40)
-    sculpt_directed_finger(pen, 160, 270, 355, 270, w=42, is_thumb=True)
+def draw_B(cv):
+    """B: Open flat hand, 4 straight upright fingers adducted together, thumb folded across palm."""
+    d_palm = sd_palm_upright(cx=315, y_bot=65, y_top=400, w_bot=155, w_top=230)
+    cv.add_layer(d_palm)
+    for fx, yt, rb, rt in [(216, 745, 28, 24), (276, 795, 29, 25), (336, 760, 28, 24), (394, 685, 26, 22)]:
+        cv.add_layer(upright_finger_sdf(fx, 385, fx, yt, rb, rt))
+    d_thumb = sd_chain([(188, 225), (255, 295), (355, 315)], [36, 30, 25], k=14.0)
+    cv.add_layer(d_thumb)
 
-def build_asl_2(pen):
-    """Numeral 2: Index and middle upright, thumb across other 2."""
-    build_asl_V(pen)
 
-def build_asl_3(pen):
-    """Numeral 3: Thumb, index, and middle extended."""
-    sculpt_anatomical_palm(pen, x_l=210, x_r=415, y_wrist=90, y_mcp=360)
-    sculpt_directed_finger(pen, 180, 220, 115, 520, w=48, is_thumb=True)
-    sculpt_directed_finger(pen, 245, 350, 235, 800, w=44)
-    sculpt_directed_finger(pen, 315, 350, 325, 800, w=44)
-    sculpt_curled_knuckle_tier(pen, 370, 330, 440, w=38)
-    sculpt_curled_knuckle_tier(pen, 415, 320, 420, w=36)
+def draw_C(cv):
+    """C: Smooth 3/4 lateral hand curving into an open C-arch facing right."""
+    d_wrist = sd_box_round(215, 95, 68, 42, 20)
+    d_arch = sd_chain(
+        [(205, 130), (150, 285), (160, 500), (245, 660), (380, 680), (460, 605)],
+        [46, 44, 44, 40, 34, 26],
+        k=18.0,
+    )
+    d_thumb = sd_chain(
+        [(215, 155), (280, 225), (385, 250), (450, 305)],
+        [42, 35, 30, 25],
+        k=16.0,
+    )
+    d_back_finger = sd_chain([(240, 675), (370, 718), (445, 655)], [26, 24, 20], k=12.0)
+    cv.add_layer(d_back_finger)
+    cv.add_layer(smin(d_wrist, smin(d_arch, d_thumb, 24.0), 22.0))
 
-def build_asl_4(pen):
-    """Numeral 4: 4 fingers upright, thumb folded in palm."""
-    build_asl_B(pen)
 
-def build_asl_5(pen):
-    """Numeral 5: All 5 digits splayed open wide."""
-    sculpt_anatomical_palm(pen, x_l=210, x_r=415, y_wrist=90, y_mcp=360)
-    sculpt_directed_finger(pen, 180, 220, 105, 530, w=48, is_thumb=True)
-    sculpt_directed_finger(pen, 245, 350, 205, 780, w=40)
-    sculpt_directed_finger(pen, 285, 360, 285, 810, w=42)
-    sculpt_directed_finger(pen, 325, 355, 365, 780, w=40)
-    sculpt_directed_finger(pen, 365, 340, 435, 720, w=38)
+def draw_D(cv):
+    """D: Tall upright index finger + generous round open circular loop formed by middle finger & thumb."""
+    d_palm = sd_palm_upright(cx=275, y_bot=65, y_top=365, w_bot=150, w_top=200)
+    d_idx = upright_finger_sdf(202, 355, 202, 800, 30, 25)
+    cv.add_layer(smin(d_palm, d_idx, 18.0))
+    # Back curled ring/pinky arc behind loop
+    cv.add_layer(sd_chain([(315, 485), (415, 535), (455, 445)], [24, 23, 21], k=12.0))
+    # Generous round D-loop (center ~340, 395, radius ~85 -> huge unmistakable circular hole!)
+    d_mid = sd_chain([(265, 445), (355, 515), (438, 455), (428, 350)], [27, 26, 25, 23], k=14.0)
+    d_thm = sd_chain([(215, 215), (305, 265), (412, 328)], [35, 29, 24], k=14.0)
+    cv.add_layer(smin(d_mid, d_thm, 8.0))
 
-def build_asl_6(pen):
-    """Numeral 6: Thumb touching pinky tip, other 3 extended."""
-    sculpt_anatomical_palm(pen, x_l=185, x_r=415, y_wrist=90, y_mcp=360)
-    sculpt_directed_finger(pen, 225, 350, 225, 780, w=40)
-    sculpt_directed_finger(pen, 290, 360, 290, 810, w=42)
-    sculpt_directed_finger(pen, 355, 350, 355, 780, w=40)
-    draw_circle(pen, 400, 340, 24, clockwise=True)
 
-def build_asl_7(pen):
-    """Numeral 7: Thumb touching ring tip, other 3 extended."""
-    sculpt_anatomical_palm(pen, x_l=185, x_r=415, y_wrist=90, y_mcp=360)
-    sculpt_directed_finger(pen, 225, 350, 225, 780, w=40)
-    sculpt_directed_finger(pen, 290, 360, 290, 810, w=42)
-    draw_circle(pen, 355, 340, 24, clockwise=True)
-    sculpt_directed_finger(pen, 415, 340, 415, 720, w=38)
+def draw_E(cv):
+    """E: 4 bent fingers perched cleanly above a horizontal tucked thumb with visible palmar gap."""
+    d_palm = sd_palm_upright(cx=310, y_bot=65, y_top=410, w_bot=160, w_top=235)
+    cv.add_layer(d_palm)
+    # Horizontal folded thumb lower across palm (y=245..265)
+    d_thm = sd_chain([(185, 215), (275, 258), (405, 262)], [36, 30, 25], k=14.0)
+    cv.add_layer(d_thm)
+    # 4 short curled fingers higher up (y=535 down to y=355 -> crisp white gap/touch above thumb!)
+    for fx, yk in [(216, 530), (278, 545), (340, 536), (400, 515)]:
+        cv.add_layer(curled_finger_sdf(fx, yk, 355, r_top=28, r_tip=25))
 
-def build_asl_8(pen):
-    """Numeral 8: Thumb touching middle tip, other 3 extended."""
-    sculpt_anatomical_palm(pen, x_l=185, x_r=415, y_wrist=90, y_mcp=360)
-    sculpt_directed_finger(pen, 225, 350, 225, 780, w=40)
-    draw_circle(pen, 290, 350, 24, clockwise=True)
-    sculpt_directed_finger(pen, 355, 350, 355, 780, w=40)
-    sculpt_directed_finger(pen, 415, 340, 415, 720, w=38)
 
-def build_asl_9(pen):
-    """Numeral 9: Thumb touching index tip, other 3 extended."""
-    build_asl_F(pen)
+def draw_F(cv):
+    """F: Index & thumb pinch a round front O-ring on left; middle, ring, pinky fan tall on right."""
+    d_palm = sd_palm_upright(cx=315, y_bot=65, y_top=385, w_bot=155, w_top=225)
+    f_mid = upright_finger_sdf(295, 380, 290, 795, 28, 24)
+    f_rng = upright_finger_sdf(348, 375, 372, 765, 27, 23)
+    f_pnk = upright_finger_sdf(398, 355, 448, 695, 25, 21)
+    cv.add_layer(d_palm)
+    cv.add_layer(f_pnk)
+    cv.add_layer(f_rng)
+    cv.add_layer(f_mid)
+    d_idx = sd_chain([(240, 395), (172, 515), (138, 430), (192, 358)], [27, 25, 24, 22], k=10.0)
+    d_thm = sd_chain([(215, 215), (155, 290), (190, 352)], [35, 29, 23], k=12.0)
+    cv.add_layer(d_idx)
+    cv.add_layer(d_thm)
+
+
+def draw_G(cv):
+    """G: Horizontal hand pointing right — index at top, parallel thumb below with generous open channel."""
+    d_wrist = sd_box_round(105, 395, 42, 74, 18)
+    d_hand = sd_capsule(GX, GY, 145, 405, 255, 425, 84, 78)
+    d_idx = upright_finger_sdf(245, 505, 530, 505, 29, 24)
+    cv.add_layer(smin(d_wrist, smin(d_hand, d_idx, 20.0), 18.0))
+    # Curled middle/ring/pinky tucked cleanly at bottom-left
+    for cy_k in [315, 260]:
+        cv.add_layer(sd_capsule(GX, GY, 215, cy_k, 290, cy_k, 23, 21))
+    # Parallel horizontal thumb at y=365 -> crisp 85-UPM open G channel between thumb (365) and index (505)!
+    d_thm = sd_chain([(175, 330), (265, 365), (470, 365)], [35, 29, 24], k=14.0)
+    cv.add_layer(d_thm)
+
+
+def draw_H(cv):
+    """H: Horizontal hand — index & middle extended right side-by-side together."""
+    d_wrist = sd_box_round(105, 380, 42, 74, 18)
+    d_hand = sd_capsule(GX, GY, 145, 395, 255, 415, 82, 76)
+    cv.add_layer(smin(d_wrist, d_hand, 18.0))
+    for cy_k in [320, 268]:
+        cv.add_layer(sd_capsule(GX, GY, 230, cy_k, 305, cy_k, 23, 21))
+    cv.add_layer(upright_finger_sdf(245, 488, 525, 488, 28, 23))
+    cv.add_layer(upright_finger_sdf(245, 430, 535, 430, 28, 24))
+    d_thm = sd_chain([(175, 305), (255, 355), (335, 365)], [34, 28, 23], k=12.0)
+    cv.add_layer(d_thm)
+
+
+def draw_I(cv, shift_x=0, shift_y=0, scale=1.0):
+    """I: Pinky extended straight up on ulnar right; 3 curled fingers + thumb across front."""
+    def sx(v): return int(round(300 + (v - 300) * scale + shift_x))
+    def sy(v): return int(round(400 + (v - 400) * scale + shift_y))
+    def sr(r): return r * scale
+
+    d_palm = sd_palm_upright(cx=sx(295), y_bot=sy(65), y_top=sy(375), w_bot=sr(150), w_top=sr(220))
+    d_pnk = upright_finger_sdf(sx(392), sy(355), sx(398), sy(765), sr(26), sr(22))
+    cv.add_layer(smin(d_palm, d_pnk, sr(18.0)))
+    for fx, yk in [(210, 475), (270, 490), (330, 480)]:
+        cv.add_layer(curled_finger_sdf(sx(fx), sy(yk), sy(305), r_top=sr(28), r_tip=sr(25)))
+    d_thm = sd_chain(
+        [(sx(182), sy(235)), (sx(255), sy(295)), (sx(350), sy(315))],
+        [sr(35), sr(29), sr(24)],
+        k=sr(12.0),
+    )
+    cv.add_layer(d_thm)
+
+
+def draw_J(cv):
+    """J: Compact 'I' handshape + bold unobstructed J-swoop trajectory arrow in clean white space!"""
+    draw_I(cv, shift_x=-68, shift_y=115, scale=0.82)
+    # Clean sweeping J-curve descending on the right in open air and hooking left beneath the wrist with generous gap!
+    j_pts = [(498, 635), (498, 235), (465, 98), (355, 52), (235, 88), (195, 165)]
+    cv.add_crease(j_pts, stroke_w=20.0)
+    cv.add_arrow_head(195, 165, -35, 75, length=46.0, wing=30.0, stroke_w=19.0)
+
+
+def draw_K(cv):
+    """K: Index straight up, middle angled up-right, thumb upright between them."""
+    d_palm = sd_palm_upright(cx=310, y_bot=65, y_top=380, w_bot=155, w_top=225)
+    d_idx = upright_finger_sdf(228, 375, 222, 795, 29, 24)
+    d_mid = upright_finger_sdf(288, 375, 365, 765, 29, 24)
+    cv.add_layer(d_palm)
+    cv.add_layer(d_idx)
+    cv.add_layer(d_mid)
+    for fx, yk in [(355, 455), (412, 435)]:
+        cv.add_layer(curled_finger_sdf(fx, yk, 295, r_top=27, r_tip=24))
+    d_thm = sd_chain([(205, 215), (255, 345), (295, 505)], [36, 30, 24], k=12.0)
+    cv.add_layer(d_thm)
+
+
+def draw_L(cv):
+    """L: Index straight up, thumb extended 90 degrees horizontally left, 3 fingers curled."""
+    d_palm = sd_palm_upright(cx=335, y_bot=65, y_top=380, w_bot=150, w_top=215)
+    d_idx = upright_finger_sdf(255, 375, 255, 795, 30, 25)
+    d_thm = sd_chain([(255, 245), (175, 265), (78, 280)], [38, 32, 26], k=14.0)
+    cv.add_layer(smin(smin(d_palm, d_idx, 18.0), d_thm, 22.0))
+    for fx, yk in [(318, 470), (375, 460), (430, 440)]:
+        cv.add_layer(curled_finger_sdf(fx, yk, 295, r_top=27, r_tip=24))
+
+
+def draw_M(cv):
+    """M: 3 long fingers draped OVER thumb; thumb tip boldly poking out between 3rd (ring) & pinky!"""
+    d_palm = sd_palm_upright(cx=310, y_bot=65, y_top=385, w_bot=160, w_top=235)
+    cv.add_layer(d_palm)
+    # Pinky curled shorter on far right (x=442) leaving clear window for thumb tip at x=382!
+    cv.add_layer(curled_finger_sdf(442, 445, 315, r_top=25, r_tip=22))
+    # Thumb tucked underneath and poking its rounded tip UP-RIGHT at (384, 415)!
+    d_thm = sd_chain([(182, 240), (285, 335), (384, 420)], [36, 30, 27], k=12.0)
+    cv.add_layer(d_thm)
+    # 3 long draped fingers (index, middle, ring) clearly crossing OVER the thumb!
+    for fx, yk, yt in [(198, 515, 265), (256, 528, 260), (314, 515, 270)]:
+        cv.add_layer(curled_finger_sdf(fx, yk, yt, r_top=27, r_tip=24))
+
+
+def draw_N(cv):
+    """N: 2 long fingers draped OVER thumb; thumb tip boldly poking out between 2nd (middle) & 3rd (ring)!"""
+    d_palm = sd_palm_upright(cx=310, y_bot=65, y_top=385, w_bot=160, w_top=235)
+    cv.add_layer(d_palm)
+    # Ring & pinky curled shorter on right (x=384, x=438) leaving clear window for thumb at x=322!
+    cv.add_layer(curled_finger_sdf(384, 455, 310, r_top=26, r_tip=23))
+    cv.add_layer(curled_finger_sdf(438, 435, 315, r_top=25, r_tip=22))
+    # Thumb tucked under 2 fingers and poking its rounded tip UP at (322, 430)!
+    d_thm = sd_chain([(182, 240), (265, 335), (322, 435)], [36, 30, 27], k=12.0)
+    cv.add_layer(d_thm)
+    # 2 long draped fingers (index, middle) crossing OVER the thumb!
+    for fx, yk, yt in [(198, 515, 265), (256, 528, 262)]:
+        cv.add_layer(curled_finger_sdf(fx, yk, yt, r_top=28, r_tip=24))
+
+
+def draw_O(cv):
+    """O: Smooth unified side-profile hand forming a generous clean O-aperture (zero wrist seam!)."""
+    d_wrist = sd_box_round(235, 85, 68, 38, 18)
+    # Subtle stacked background finger arc along upper dorsum for unmistakable hand anatomy
+    d_back = sd_chain([(215, 595), (335, 668), (432, 565)], [25, 24, 21], k=12.0)
+    cv.add_layer(d_back)
+    # Unified top finger arch + bottom thumb arch meeting cleanly at (440, 400) around open oval hole!
+    d_top = sd_chain(
+        [(205, 120), (158, 295), (178, 510), (275, 620), (405, 575), (442, 435)],
+        [45, 42, 40, 34, 29, 24],
+        k=16.0,
+    )
+    d_bot = sd_chain(
+        [(245, 120), (315, 210), (408, 265), (442, 385)],
+        [42, 34, 29, 24],
+        k=16.0,
+    )
+    cv.add_layer(smin(d_wrist, smin(d_top, d_bot, 10.0), 22.0))
+
+
+def draw_P(cv):
+    """P: Full-bodied downward K — wrist/palm at upper-right, index pointing left-down, middle down, thumb between."""
+    d_wrist = sd_box_round(445, 715, 68, 44, 20)
+    d_hand = sd_capsule(GX, GY, 415, 665, 315, 535, 84, 78)
+    # Curled ring & pinky tucked under palm on right
+    cv.add_layer(sd_capsule(GX, GY, 385, 455, 445, 395, 27, 24))
+    cv.add_layer(sd_capsule(GX, GY, 420, 500, 470, 445, 26, 23))
+    # Middle finger pointing boldly down
+    d_mid = upright_finger_sdf(320, 505, 285, 135, 30, 25)
+    cv.add_layer(d_mid)
+    # Thumb nestled clearly between index & middle!
+    d_thm = sd_chain([(375, 515), (295, 410), (235, 335)], [36, 30, 25], k=12.0)
+    cv.add_layer(d_thm)
+    # Index finger pointing forward-left above thumb
+    d_idx = upright_finger_sdf(295, 565, 75, 465, 30, 25)
+    cv.add_layer(smin(smin(d_wrist, d_hand, 22.0), d_idx, 18.0))
+
+
+def draw_Q(cv):
+    """Q: Full-bodied downward G — arched hand at top, index and thumb pointing straight down parallel with open gap."""
+    d_wrist = sd_box_round(375, 720, 72, 44, 20)
+    d_hand = sd_capsule(GX, GY, 345, 665, 285, 525, 86, 78)
+    for cx_k, cy_k in [(365, 470), (402, 510)]:
+        cv.add_layer(sd_capsule(GX, GY, cx_k, cy_k, cx_k + 48, cy_k - 48, 26, 23))
+    # Index pointing straight down on left (x=205)
+    d_idx = upright_finger_sdf(220, 535, 200, 140, 30, 25)
+    cv.add_layer(smin(smin(d_wrist, d_hand, 22.0), d_idx, 18.0))
+    # Thumb pointing down parallel on right (x=335 -> crisp 80-UPM open Q channel!)
+    d_thm = sd_chain([(350, 515), (340, 385), (332, 205)], [36, 30, 25], k=14.0)
+    cv.add_layer(d_thm)
+
+
+def draw_R(cv):
+    """R: Index & middle extended upright and CROSSED in Z-depth."""
+    d_palm = sd_palm_upright(cx=310, y_bot=65, y_top=380, w_bot=155, w_top=225)
+    cv.add_layer(d_palm)
+    d_mid = sd_chain([(305, 375), (278, 565), (232, 785)], [28, 26, 23], k=12.0)
+    cv.add_layer(d_mid)
+    d_idx = sd_chain([(240, 375), (272, 565), (310, 795)], [28, 26, 24], k=12.0)
+    cv.add_layer(d_idx)
+    for fx, yk in [(360, 455), (415, 435)]:
+        cv.add_layer(curled_finger_sdf(fx, yk, 295, r_top=26, r_tip=23))
+    d_thm = sd_chain([(188, 235), (265, 295), (355, 315)], [35, 29, 24], k=12.0)
+    cv.add_layer(d_thm)
+
+
+def draw_S(cv):
+    """S: Closed fist with thumb wrapped BOLDLY ACROSS THE FRONT of the 4 curled fingers."""
+    d_palm = sd_palm_upright(cx=310, y_bot=65, y_top=380, w_bot=160, w_top=235)
+    cv.add_layer(d_palm)
+    for fx, yk, yt in [(216, 495, 290), (278, 510, 290), (340, 500, 295), (398, 480, 305)]:
+        cv.add_layer(curled_finger_sdf(fx, yk, yt, r_top=28, r_tip=25))
+    d_thm = sd_chain([(175, 250), (248, 350), (378, 372)], [38, 32, 27], k=14.0)
+    cv.add_layer(d_thm)
+
+
+def draw_T(cv):
+    """T: Fist with thumb poking BOLDLY UP BETWEEN 1st (index) and 2nd (middle) curled fingers!"""
+    d_palm = sd_palm_upright(cx=315, y_bot=65, y_top=380, w_bot=160, w_top=235)
+    cv.add_layer(d_palm)
+    # Middle, ring, pinky curled on right starting at x=312
+    for fx, yk, yt in [(312, 485, 295), (370, 475, 300), (425, 455, 310)]:
+        cv.add_layer(curled_finger_sdf(fx, yk, yt, r_top=27, r_tip=24))
+    # Thumb rising between index (192) & middle (312) and protruding cleanly up to y=555!
+    d_thm = sd_chain([(188, 240), (245, 365), (254, 555)], [36, 31, 28], k=12.0)
+    cv.add_layer(d_thm)
+    # Index curled snugly on left of thumb (x=194)
+    cv.add_layer(curled_finger_sdf(194, 480, 285, r_top=28, r_tip=25))
+
+
+def draw_U(cv):
+    d_palm = sd_palm_upright(cx=310, y_bot=65, y_top=380, w_bot=155, w_top=225)
+    cv.add_layer(d_palm)
+    cv.add_layer(upright_finger_sdf(238, 375, 238, 785, 28, 24))
+    cv.add_layer(upright_finger_sdf(296, 375, 296, 800, 28, 24))
+    for fx, yk in [(356, 455), (412, 435)]:
+        cv.add_layer(curled_finger_sdf(fx, yk, 295, r_top=26, r_tip=23))
+    d_thm = sd_chain([(188, 235), (265, 295), (355, 315)], [35, 29, 24], k=12.0)
+    cv.add_layer(d_thm)
+
+
+def draw_V(cv):
+    d_palm = sd_palm_upright(cx=310, y_bot=65, y_top=380, w_bot=155, w_top=225)
+    cv.add_layer(d_palm)
+    cv.add_layer(upright_finger_sdf(238, 375, 178, 785, 28, 24))
+    cv.add_layer(upright_finger_sdf(298, 375, 358, 790, 28, 24))
+    for fx, yk in [(360, 455), (415, 435)]:
+        cv.add_layer(curled_finger_sdf(fx, yk, 295, r_top=26, r_tip=23))
+    d_thm = sd_chain([(188, 235), (265, 295), (355, 315)], [35, 29, 24], k=12.0)
+    cv.add_layer(d_thm)
+
+
+def draw_W(cv):
+    d_palm = sd_palm_upright(cx=310, y_bot=65, y_top=380, w_bot=155, w_top=230)
+    cv.add_layer(d_palm)
+    cv.add_layer(upright_finger_sdf(228, 375, 162, 775, 27, 23))
+    cv.add_layer(upright_finger_sdf(292, 380, 292, 800, 28, 24))
+    cv.add_layer(upright_finger_sdf(355, 375, 420, 775, 27, 23))
+    cv.add_layer(curled_finger_sdf(415, 440, 295, r_top=25, r_tip=22))
+    d_thm = sd_chain([(190, 225), (285, 290), (395, 315)], [35, 28, 23], k=12.0)
+    cv.add_layer(d_thm)
+
+
+def draw_X(cv):
+    d_palm = sd_palm_upright(cx=310, y_bot=65, y_top=375, w_bot=155, w_top=225)
+    d_hook = sd_chain([(225, 375), (222, 595), (298, 655), (338, 545)], [29, 27, 25, 22], k=10.0)
+    cv.add_layer(smin(d_palm, d_hook, 16.0))
+    for fx, yk in [(295, 460), (352, 450), (408, 430)]:
+        cv.add_layer(curled_finger_sdf(fx, yk, 295, r_top=26, r_tip=23))
+    d_thm = sd_chain([(188, 235), (265, 295), (345, 315)], [35, 29, 24], k=12.0)
+    cv.add_layer(d_thm)
+
+
+def draw_Y(cv):
+    d_palm = sd_palm_upright(cx=305, y_bot=65, y_top=375, w_bot=150, w_top=215)
+    d_thm = sd_chain([(215, 235), (145, 345), (82, 495)], [37, 31, 25], k=14.0)
+    d_pnk = upright_finger_sdf(395, 355, 495, 655, 26, 21)
+    cv.add_layer(smin(smin(d_palm, d_thm, 20.0), d_pnk, 18.0))
+    for fx, yk in [(232, 475), (292, 488), (350, 475)]:
+        cv.add_layer(curled_finger_sdf(fx, yk, 295, r_top=27, r_tip=24))
+
+
+def draw_Z(cv):
+    d_palm = sd_palm_upright(cx=275, y_bot=55, y_top=335, w_bot=140, w_top=200)
+    d_idx = upright_finger_sdf(210, 325, 210, 650, 27, 22)
+    cv.add_layer(smin(d_palm, d_idx, 16.0))
+    for fx, yk in [(268, 410), (320, 400), (370, 382)]:
+        cv.add_layer(curled_finger_sdf(fx, yk, 260, r_top=24, r_tip=21))
+    d_thm = sd_chain([(168, 205), (235, 260), (315, 275)], [32, 27, 22], k=12.0)
+    cv.add_layer(d_thm)
+    z_pts = [(275, 790), (475, 790), (295, 605), (495, 605)]
+    cv.add_crease(z_pts, stroke_w=19.0)
+    cv.add_arrow_head(495, 605, 1.0, 0.0, length=42.0, wing=28.0, stroke_w=18.0)
+
+
+def draw_0(cv): draw_O(cv)
+
+
+def draw_1(cv):
+    d_palm = sd_palm_upright(cx=315, y_bot=65, y_top=380, w_bot=155, w_top=220)
+    d_idx = upright_finger_sdf(235, 375, 235, 795, 30, 25)
+    cv.add_layer(smin(d_palm, d_idx, 18.0))
+    for fx, yk in [(298, 465), (355, 455), (410, 435)]:
+        cv.add_layer(curled_finger_sdf(fx, yk, 295, r_top=26, r_tip=23))
+    d_thm = sd_chain([(190, 235), (265, 295), (355, 315)], [35, 29, 24], k=12.0)
+    cv.add_layer(d_thm)
+
+
+def draw_2(cv): draw_V(cv)
+
+
+def draw_3(cv):
+    d_palm = sd_palm_upright(cx=320, y_bot=65, y_top=380, w_bot=155, w_top=220)
+    d_thm = sd_chain([(220, 235), (150, 355), (92, 520)], [37, 31, 25], k=14.0)
+    cv.add_layer(smin(d_palm, d_thm, 20.0))
+    cv.add_layer(upright_finger_sdf(248, 375, 228, 785, 28, 24))
+    cv.add_layer(upright_finger_sdf(312, 375, 332, 795, 28, 24))
+    for fx, yk in [(372, 455), (425, 435)]:
+        cv.add_layer(curled_finger_sdf(fx, yk, 295, r_top=26, r_tip=23))
+
+
+def draw_4(cv):
+    d_palm = sd_palm_upright(cx=310, y_bot=65, y_top=390, w_bot=155, w_top=230)
+    cv.add_layer(d_palm)
+    for x0, y0, x1, y1, rb, rt in [
+        (215, 380, 148, 755, 27, 23),
+        (275, 385, 255, 798, 28, 24),
+        (335, 385, 362, 770, 27, 23),
+        (392, 368, 458, 690, 25, 21),
+    ]:
+        cv.add_layer(upright_finger_sdf(x0, y0, x1, y1, rb, rt))
+    d_thm = sd_chain([(188, 225), (265, 295), (365, 315)], [36, 30, 25], k=14.0)
+    cv.add_layer(d_thm)
+
+
+def draw_5(cv):
+    d_palm = sd_palm_upright(cx=325, y_bot=65, y_top=390, w_bot=155, w_top=225)
+    d_thm = sd_chain([(225, 235), (145, 345), (78, 495)], [37, 31, 25], k=14.0)
+    cv.add_layer(smin(d_palm, d_thm, 20.0))
+    for x0, y0, x1, y1, rb, rt in [
+        (232, 380, 182, 760, 27, 23),
+        (288, 385, 278, 800, 28, 24),
+        (345, 382, 378, 770, 27, 23),
+        (398, 365, 472, 690, 25, 21),
+    ]:
+        cv.add_layer(upright_finger_sdf(x0, y0, x1, y1, rb, rt))
+    add_palm_creases(cv, d_palm, cx=325, y_base=210)
+
+
+def draw_6(cv):
+    d_palm = sd_palm_upright(cx=305, y_bot=65, y_top=385, w_bot=155, w_top=230)
+    cv.add_layer(d_palm)
+    cv.add_layer(upright_finger_sdf(208, 375, 168, 765, 27, 23))
+    cv.add_layer(upright_finger_sdf(268, 380, 268, 800, 28, 24))
+    cv.add_layer(upright_finger_sdf(328, 375, 365, 765, 27, 23))
+    d_pnk = sd_chain([(402, 365), (425, 435), (362, 325)], [25, 23, 21], k=10.0)
+    d_thm = sd_chain([(188, 225), (265, 275), (345, 312)], [35, 28, 23], k=12.0)
+    cv.add_layer(d_pnk)
+    cv.add_layer(d_thm)
+
+
+def draw_7(cv):
+    d_palm = sd_palm_upright(cx=305, y_bot=65, y_top=385, w_bot=155, w_top=230)
+    cv.add_layer(d_palm)
+    cv.add_layer(upright_finger_sdf(208, 375, 168, 765, 27, 23))
+    cv.add_layer(upright_finger_sdf(268, 380, 262, 800, 28, 24))
+    cv.add_layer(upright_finger_sdf(402, 365, 455, 705, 25, 21))
+    d_rng = sd_chain([(338, 380), (355, 455), (322, 325)], [26, 24, 22], k=10.0)
+    d_thm = sd_chain([(188, 225), (252, 275), (312, 312)], [35, 28, 23], k=12.0)
+    cv.add_layer(d_rng)
+    cv.add_layer(d_thm)
+
+
+def draw_8(cv):
+    d_palm = sd_palm_upright(cx=305, y_bot=65, y_top=385, w_bot=155, w_top=230)
+    cv.add_layer(d_palm)
+    cv.add_layer(upright_finger_sdf(208, 375, 165, 765, 27, 23))
+    cv.add_layer(upright_finger_sdf(342, 375, 372, 765, 27, 23))
+    cv.add_layer(upright_finger_sdf(402, 365, 458, 700, 25, 21))
+    d_mid = sd_chain([(276, 385), (282, 465), (278, 325)], [27, 25, 22], k=10.0)
+    d_thm = sd_chain([(188, 225), (235, 275), (274, 312)], [35, 28, 23], k=12.0)
+    cv.add_layer(d_mid)
+    cv.add_layer(d_thm)
+
+
+def draw_9(cv): draw_F(cv)
+
 
 BUILDERS = {
-    'A': build_asl_A, 'B': build_asl_B, 'C': build_asl_C, 'D': build_asl_D,
-    'E': build_asl_E, 'F': build_asl_F, 'G': build_asl_G, 'H': build_asl_H,
-    'I': build_asl_I, 'J': build_asl_J, 'K': build_asl_K, 'L': build_asl_L,
-    'M': build_asl_M, 'N': build_asl_N, 'O': build_asl_O, 'P': build_asl_P,
-    'Q': build_asl_Q, 'R': build_asl_R, 'S': build_asl_S, 'T': build_asl_T,
-    'U': build_asl_U, 'V': build_asl_V, 'W': build_asl_W, 'X': build_asl_X,
-    'Y': build_asl_Y, 'Z': build_asl_Z,
-    '0': build_asl_0, '1': build_asl_1, '2': build_asl_2, '3': build_asl_3,
-    '4': build_asl_4, '5': build_asl_5, '6': build_asl_6, '7': build_asl_7,
-    '8': build_asl_8, '9': build_asl_9,
+    "A": draw_A, "B": draw_B, "C": draw_C, "D": draw_D,
+    "E": draw_E, "F": draw_F, "G": draw_G, "H": draw_H,
+    "I": draw_I, "J": draw_J, "K": draw_K, "L": draw_L,
+    "M": draw_M, "N": draw_N, "O": draw_O, "P": draw_P,
+    "Q": draw_Q, "R": draw_R, "S": draw_S, "T": draw_T,
+    "U": draw_U, "V": draw_V, "W": draw_W, "X": draw_X,
+    "Y": draw_Y, "Z": draw_Z,
+    "0": draw_0, "1": draw_1, "2": draw_2, "3": draw_3,
+    "4": draw_4, "5": draw_5, "6": draw_6, "7": draw_7,
+    "8": draw_8, "9": draw_9,
 }
 
+
+def set_clean_names(name_table, fam, sub, full, ps, version_str):
+    records = {
+        0: "Copyright 2026 The PocketGull Project Authors (https://github.com/pocketgull-app/pocketgull-font)",
+        1: fam,
+        2: sub,
+        3: f"3.102;PGUL;{ps}",
+        4: full,
+        5: version_str,
+        6: ps,
+        13: "This Font Software is licensed under the SIL Open Font License, Version 1.1.",
+        14: "https://openfontlicense.org",
+    }
+    for nid, val in records.items():
+        name_table.setName(val, nid, 3, 1, 0x0409)
+        name_table.names = [
+            r for r in name_table.names
+            if not (r.nameID == nid and (r.platformID != 3 or r.platEncID != 1 or r.langID != 0x0409))
+        ]
+
+
 def compile_volumetric_font():
-    print("=== POCKETGULL VOLUMETRIC ANATOMICAL SIGN FONT COMPILER ===")
-    
+    print("=== POCKETGULL Z-LAYERED ANATOMICAL ASL & SIGN FONT COMPILER ===")
     if not SRC_MONO.is_file():
         print(f"[ERROR] Required base font missing: {SRC_MONO}")
         sys.exit(1)
 
-    print(f"1. Loading base monospace telemetry font from {SRC_MONO.name}...")
     font = TTFont(str(SRC_MONO))
-    glyf = font['glyf']
-    hmtx = font['hmtx']
+    glyf = font["glyf"]
+    hmtx = font["hmtx"].metrics
     cmap = font.getBestCmap()
     glyph_order = font.getGlyphOrder()
 
-    print("2. Sculpting living volumetric TrueType Bézier glyphs (A-Z, 0-9)...")
     for char, builder in BUILDERS.items():
-        pen = TTGlyphPen(glyf)
-        builder(pen)
-        glyph = pen.glyph()
-        
-        gname = char
+        cv = ZCanvas(stroke_w=24.0)
+        builder(cv)
+        glyph = cv.to_tt_glyph(glyf)
+        glyph.recalcBounds(glyf)
+
+        cp = ord(char)
+        gname = cmap.get(cp, char)
         if gname not in glyf:
-            # Map by codepoint or create
-            cp = ord(char)
-            if cp in cmap:
-                gname = cmap[cp]
-            else:
-                gname = f"uni{cp:04X}"
-                if gname not in glyph_order:
-                    glyph_order.append(gname)
-                    font.setGlyphOrder(glyph_order)
-
+            gname = f"uni{cp:04X}"
+            if gname not in glyph_order:
+                glyph_order.append(gname)
+                font.setGlyphOrder(glyph_order)
         glyf[gname] = glyph
-        hmtx[gname] = (ADVANCE, 20) # 600 UPM fixed pitch, 20 UPM left side bearing
+        hmtx[gname] = (ADVANCE, glyph.xMin if glyph.numberOfContours > 0 else 20)
 
-    # 3. Align 2-byte word boundaries & mask bit-7
-    print("3. Enforcing 2-byte word alignment and bit-7 point flag masking...")
-    for gname in font.getGlyphOrder():
-        g = glyf[gname]
-        if hasattr(g, 'flags'):
-            g.flags = [flag & 0x3F for flag in g.flags]
+    for sub in font["cmap"].tables:
+        if sub.isUnicode():
+            for lo, hi in zip("abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
+                if ord(hi) in sub.cmap:
+                    sub.cmap[ord(lo)] = sub.cmap[ord(hi)]
 
-    # 4. Update font naming table
-    name_table = font['name']
-    name_table.setName('PocketGull Sign', 1, 3, 1, 0x409)
-    name_table.setName('PocketGull Sign', 4, 3, 1, 0x409)
-    name_table.setName('PocketGull-Sign', 6, 3, 1, 0x409)
+    xmin_all, ymin_all, xmax_all, ymax_all = 32767, 32767, -32768, -32768
+    for gn in font.getGlyphOrder():
+        g = glyf[gn]
+        g.recalcBounds(glyf)
+        if g.numberOfContours > 0:
+            g.flags = bytearray([fl & 0x3F for fl in g.flags])
+            xmin_all = min(xmin_all, g.xMin)
+            ymin_all = min(ymin_all, g.yMin)
+            xmax_all = max(xmax_all, g.xMax)
+            ymax_all = max(ymax_all, g.yMax)
 
-    # 5. Save TTF
-    print(f"4. Saving compiled TrueType font to {OUT_SIGN_TTF}...")
+    head = font["head"]
+    os2 = font["OS/2"]
+    head.xMin, head.yMin, head.xMax, head.yMax = xmin_all, ymin_all, xmax_all, ymax_all
+    head.fontRevision = 3.102
+    os2.usWinAscent = max(os2.usWinAscent, max(0, ymax_all))
+    os2.usWinDescent = max(os2.usWinDescent, max(0, -ymin_all))
+    os2.fsType = 0
+    os2.ulUnicodeRange2 |= (1 << 25)
+    os2.fsSelection |= (1 << 7)
+
+    ver = "Version 3.102; The PocketGull Project Authors; OFL 1.1"
+    set_clean_names(font["name"], "PocketGull Sign", "Regular", "PocketGull Sign", "PocketGull-Sign", ver)
     font.save(str(OUT_SIGN_TTF))
-    shutil.copy(str(OUT_SIGN_TTF), str(OUT_ASL_TTF))
 
-    # 6. Compress WOFF2
-    print(f"5. Compressing WOFF2 binaries via Brotli Quality 11...")
-    compress(str(OUT_SIGN_TTF), str(OUT_SIGN_WOFF2))
-    compress(str(OUT_ASL_TTF), str(OUT_ASL_WOFF2))
+    set_clean_names(font["name"], "PocketGull ASL", "Regular", "PocketGull ASL", "PocketGull-ASL", ver)
+    font.save(str(OUT_ASL_TTF))
+    font.close()
+    print("Compiled refined PocketGull-Sign.ttf & PocketGull-ASL.ttf!")
 
-    ttf_size = OUT_SIGN_TTF.stat().st_size
-    woff2_size = OUT_SIGN_WOFF2.stat().st_size
-    print(f"  [+] PocketGull-Sign.ttf:   {ttf_size / 1024:.1f} KB")
-    print(f"  [+] PocketGull-Sign.woff2: {woff2_size / 1024:.1f} KB")
-    print("=== VOLUMETRIC SIGN FONT COMPILATION COMPLETE ===")
 
 if __name__ == "__main__":
     compile_volumetric_font()

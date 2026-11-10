@@ -5,6 +5,22 @@ All notable changes to the **PocketGull Font Superfamily** will be documented in
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) (`v3.0.0`).
 
+## [3.1.2] - 2026-11-09
+
+### Added
+- **Z-Layered Anatomical ASL & Sign Language Engine (`PocketGull-ASL`, `Sign`, `Sign-VF`)**:
+  - Redrew all 36 manual alphabet and numeral handshapes (`A–Z`, `0–9`) via a 2D Z-buffered Signed Distance Field + $C^1$ quadratic B-spline vectorizer with open white palmar counters, crisp foreground thumb/phalanx occlusion (`A, E, M, N, S, T`, `B` vs `4`, `6–9`), connected ulnar pinky (`I`), and unobstructed `J`/`Z` trajectory arrows.
+- **Native OpenType `tnum` & `cv09` Layout Features**:
+  - Injected native `tnum` (600 UPM / 460 UPM tabular numerals including `zero.slash.tnum`) and `cv09` (Philocardia heart-tittle `i` & `j`) `SingleSubst` lookups into `GSUB` across all superfamily cuts (with full `gvar`/`HVAR` synchronization on variable fonts).
+
+### Fixed
+- **Complete 62/62 Bold Serifs & `Serif-VF` Interpolation**:
+  - Emboldened the remaining 37 ASCII glyphs in `PocketGull-Serif-Bold.ttf` via anisotropic outward normal offset, unlocking full 62/62 continuous `wght` (`400..700`) interpolation in `PocketGull-Serif-VF.ttf`.
+- **Display-Scoped `PocketGull-Halftone.ttf` Optimization**:
+  - Replaced 6,177 non-display exotic fallback halftone meshes with clean solid `PocketGull-Bold` outlines, cutting `PocketGull-Halftone.ttf` size by ~78% while preserving 100% of display halftone dots across Latin, Cyrillic, Greek, Numerals, Symbols, and Tactile Braille.
+- **CI Fontbakery Profile Fix**:
+  - Updated `.github/workflows/validate.yml` to run `fontbakery check-universal` cleanly without crashing on optional `shaperglot` imports.
+
 ## [3.1.1] - 2026-11-09
 
 ### Fixed
