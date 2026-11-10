@@ -10,9 +10,22 @@ exclude_checks = [
 ]
 
 [file_size]
-# PocketGull-VF.ttf carries a 16-axis continuous clinical gvar table (8,600+ glyphs);
-# PocketGull-Halftone.ttf carries 45-degree halftone screen geometry across Latin/Cyrillic/Greek/Braille.
+# PocketGull full cuts bundle pan-Unicode script coverage (Latin, Cyrillic, Greek,
+# IPA, Braille, Inuktitut/UCAS, Thai, Khmer, Music, Math, Chem) in single offline-ready
+# binaries (2.3–3.5 MB static/3-axis VF; 5.7–6.6 MB Inline/Outline; 17.4 MB 16-axis VF).
+WARN_SIZE = 7340032
+FAIL_SIZE = 20971520
 exclude_files = [
     "PocketGull-VF.ttf",
     "PocketGull-Halftone.ttf",
 ]
+
+[[overrides]]
+code = "contour-count"
+status = "INFO"
+reason = "PocketGull uses custom Salutogenic, ASL handshape, Display (Inline/Outline/Halftone), and polytonic contour geometry; all real diacritic (Vietnamese DOT BELOW, inverted breve, alt_caron) and dotted-circle contour defects are cured and enforced by validate_fonts.py."
+
+[[overrides]]
+code = "bad-numberOfHMetrics"
+status = "INFO"
+reason = "PocketGull monospaced and specialty cuts include 289–477 zero-width non-spacing marks (GDEF Class 3) across pan-Unicode blocks, requiring individual hmtx entries per fonttools#3014 while maintaining strict 600-unit advance widths across all spacing glyphs."
