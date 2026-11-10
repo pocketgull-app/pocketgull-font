@@ -1,6 +1,6 @@
 cask "font-pocketgull" do
   version "4.0.0"
-  sha256 "b30e8202229b01e2b8a5e8e32ab9b474099f6090a883cb3e01f0373989b0479f"
+  sha256 "7dca99bde7259a41f7ecf1cadb811ebb9d6e69af357b13fcf889354691be1aab"
 
   url "https://github.com/pocketgull-app/pocketgull-font/releases/download/v#{version}/pocketgull-typeface-v#{version}.zip"
   name "PocketGull"
