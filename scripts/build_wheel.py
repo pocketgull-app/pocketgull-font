@@ -15,12 +15,21 @@ import shutil
 DIST_DIR = os.path.join("distribution", "python", "dist")
 SRC_DIR = os.path.join("distribution", "python", "pocketgull_math")
 PKG_NAME = "pocketgull_math"
-VERSION = "3.1.0"
+VERSION = "4.0.0"
 WHEEL_TAG = "py3-none-any"
 WHEEL_NAME = f"{PKG_NAME}-{VERSION}-{WHEEL_TAG}.whl"
 SDIST_NAME = f"{PKG_NAME}-{VERSION}.tar.gz"
 
 os.makedirs(DIST_DIR, exist_ok=True)
+for old_f in os.listdir(DIST_DIR):
+    if old_f.endswith((".whl", ".tar.gz")):
+        os.remove(os.path.join(DIST_DIR, old_f))
+for f_ttf in ("PocketGull-Math.ttf", "PocketGullMono-Regular.ttf"):
+    src_ttf = os.path.join("fonts", "ttf", f_ttf)
+    dst_ttf = os.path.join(SRC_DIR, "fonts", f_ttf)
+    if os.path.exists(src_ttf):
+        os.makedirs(os.path.dirname(dst_ttf), exist_ok=True)
+        shutil.copy2(src_ttf, dst_ttf)
 
 def b64_digest(data):
     digest = hashlib.sha256(data).digest()

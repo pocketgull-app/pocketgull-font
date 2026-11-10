@@ -54,16 +54,27 @@ theme_pocketgull <- function(base_size = 11, base_family = "PocketGull", mode = 
 #' @export
 use_pocketgull <- function() {
   if (requireNamespace("showtext", quietly = TRUE) && requireNamespace("sysfonts", quietly = TRUE)) {
-    font_dir <- system.file("fonts", package = "pocketgullr")
+    font_dir <- system.file("fonts", package = "pocketgull")
+    if (font_dir == "") {
+      font_dir <- system.file("fonts", package = "pocketgullr")
+    }
     if (font_dir != "" && dir.exists(font_dir)) {
-      reg <- file.path(font_dir, "PocketGull-Fineliner.ttf")
+      reg <- file.path(font_dir, "PocketGull-Regular.ttf")
+      if (!file.exists(reg)) reg <- file.path(font_dir, "PocketGull-Fineliner.ttf")
       bold <- file.path(font_dir, "PocketGull-Bold.ttf")
       mono <- file.path(font_dir, "PocketGullMono-Regular.ttf")
       sysfonts::font_add("PocketGull", regular = reg, bold = bold)
       sysfonts::font_add("PocketGull Mono", regular = mono)
     } else {
-      # Fallback to local system fonts if package fonts dir is empty
-      sysfonts::font_add_google("Atkinson Hyperlegible", "PocketGull")
+      user_fonts <- path.expand("~/Library/Fonts")
+      if (file.exists(file.path(user_fonts, "PocketGull-Regular.ttf"))) {
+        sysfonts::font_add(
+          "PocketGull",
+          regular = file.path(user_fonts, "PocketGull-Regular.ttf"),
+          bold = file.path(user_fonts, "PocketGull-Bold.ttf")
+        )
+        sysfonts::font_add("PocketGull Mono", regular = file.path(user_fonts, "PocketGullMono-Regular.ttf"))
+      }
     }
     showtext::showtext_auto()
     message("PocketGull typography registered for R graphics devices.")

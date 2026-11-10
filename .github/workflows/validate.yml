@@ -1,4 +1,4 @@
-name: Google Fonts Quality Assurance & SWE Test Suite
+name: PocketGull Superfamily QA (Fontspector v1.9.0) & SWE Test Suite
 
 on:
   push:
