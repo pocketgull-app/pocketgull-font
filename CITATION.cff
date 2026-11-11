@@ -13,9 +13,6 @@ authors:
     given-names: "Phil"
     orcid: "https://orcid.org/0009-0008-1372-5381"
     affiliation: "PocketGull LLC"
-  - family-names: "Marichal"
-    given-names: "Emma"
-    website: "https://github.com/emmamarichal"
   - name: "The PocketGull Project Authors"
 identifiers:
   - type: url
@@ -94,13 +91,10 @@ preferred-citation:
       given-names: "Phil"
       orcid: "https://orcid.org/0009-0008-1372-5381"
       affiliation: "PocketGull LLC"
-    - family-names: "Marichal"
-      given-names: "Emma"
-      website: "https://github.com/emmamarichal"
     - name: "The PocketGull Project Authors"
   year: 2026
-  month: 9
-  version: "3.1.0"
+  month: 11
+  version: "4.0.0"
   doi: "10.5281/zenodo.22309379"
   url: "https://font.pocketgull.app"
   repository-code: "https://github.com/pocketgull-app/pocketgull-font"

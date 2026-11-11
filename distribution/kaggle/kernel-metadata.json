@@ -9,7 +9,7 @@
   "enable_tpu": "false",
   "enable_internet": "false",
   "dataset_sources": [
-    "philgear/pocketgull-font/8"
+    "philgear/pocketgull-font"
   ],
   "competition_sources": [],
   "kernel_sources": [],

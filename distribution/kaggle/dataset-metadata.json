@@ -1,21 +1,17 @@
 {
   "title": "PocketGull Clinical & Scientific Font Superfamily",
   "subtitle": "Optotypically calibrated 1000 UPM vector fonts for EHRs, ICU telemetry & STEM",
-  "id": "philgear/pocketgull-clinical-font-superfamily",
+  "id": "philgear/pocketgull-font",
   "licenses": [
     {
       "name": "other"
     }
   ],
-  "description": "PocketGull is an open-source clinical sans-serif, display, mathematical, and telemetry monospace font superfamily (SIL Open Font License 1.1) engineered on a standardized 1000 UPM em-square. Grounded in Louise Sloan 5:1 optotypic visual acuity standards and Institute for Safe Medication Practices (ISMP) look-alike character disambiguation, it includes 32 TrueType (.ttf) and Brotli-compressed WebFont (.woff2) binaries, 256 ISO/TR 11548 tactile Braille cells, gapless 600 UPM ICU telemetry box-drawing and sub-cell ECG waveforms, OpenType MATH tables, Scotopic 650nm dark-sky red mode, and sovereign multi-script orthographies.",
+  "description": "PocketGull (v4.0.0) is an open-source clinical sans-serif, serif, slab, mathematical, upcycled display, and telemetry monospace font superfamily (SIL Open Font License 1.1) engineered on a standardized 1000 UPM em-square. Grounded in Louise Sloan 5:1 optotypic visual acuity standards, ISO 15008 automotive/telemetry ergonomics, and Institute for Safe Medication Practices (ISMP) look-alike character disambiguation (default base-cmap curved clinical l and bilateral serifed I, slashed zero, slashed Z), it includes 41 TrueType (.ttf) and Brotli Q11 WebFont (.woff2) binaries (39 core cuts + 2 circular-economy upcycled display cuts: Botanica v3 living herbarium & Kintsugi v2 -45.8% eco-ink), 16-axis Variable Font (PocketGull-VF), Z-layered anatomical ASL/Sign handshapes, 256 ISO/TR 11548 tactile Braille cells, gapless 600 UPM ICU telemetry box-drawing and sub-cell ECG waveforms, OpenType MATH tables, Scotopic 650nm dark-sky red mode, and UNDRIP sovereign multi-script orthographies.",
   "authors": [
     {
       "name": "Phil Gear",
       "bio": "American graphic designer, computer scientist, and photographer in the Pacific Northwest; founder of GearArts and Lead Architect of PocketGull LLC (ORCID: 0009-0008-1372-5381)."
-    },
-    {
-      "name": "Emma Marichal",
-      "bio": "Typography contributor and open-source font engineering collaborator (https://github.com/emmamarichal)."
     },
     {
       "name": "The PocketGull Project Authors",
@@ -33,8 +29,41 @@
   ],
   "resources": [
     {
+      "path": "fonts/pocketgull_v4_sfnt_telemetry.csv",
+      "description": "Tabular OpenType SFNT binary telemetry audit for all 41 v4.0.0 TrueType fonts (UPM, glyph counts, weight classes, 2-byte OTS loca alignment, zero fpgm VM verification, and SHA-256 digests).",
+      "schema": {
+        "fields": [
+          { "name": "file_name", "description": "Canonical TrueType (.ttf) binary filename", "type": "string" },
+          { "name": "relative_path", "description": "Repository-relative path to the font binary", "type": "string" },
+          { "name": "family_name", "description": "OpenType Typographic Family Name (nameID 16 / nameID 1)", "type": "string" },
+          { "name": "subfamily_name", "description": "OpenType Subfamily Style Name (nameID 17 / nameID 2)", "type": "string" },
+          { "name": "full_name", "description": "Full human-readable font name (nameID 4)", "type": "string" },
+          { "name": "postscript_name", "description": "PostScript identifier (nameID 6)", "type": "string" },
+          { "name": "font_revision", "description": "head.fontRevision fixed-point SemVer float (4.0)", "type": "number" },
+          { "name": "upm", "description": "Units Per Em grid resolution (locked to ISO/IEC 14496-22 1000 UPM)", "type": "integer" },
+          { "name": "glyph_count", "description": "Total encoded glyph records in maxp.numGlyphs", "type": "integer" },
+          { "name": "weight_class", "description": "OS/2.usWeightClass (400 Regular to 900 Black)", "type": "integer" },
+          { "name": "is_monospace", "description": "Fixed 600 UPM pitch invariant (post.isFixedPitch & panose.bProportion == 9)", "type": "boolean" },
+          { "name": "is_variable", "description": "Contains OpenType gvar/fvar/HVAR continuous variation tables", "type": "boolean" },
+          { "name": "has_opentype_math", "description": "Contains ISO/IEC 14496-22 OpenType MATH layout table", "type": "boolean" },
+          { "name": "has_gsub", "description": "Contains OpenType GSUB glyph substitution lookups (liga, tnum, zero, cvXX, ssXX)", "type": "boolean" },
+          { "name": "has_gpos", "description": "Contains OpenType GPOS kerning and mark-to-base anchor positioning", "type": "boolean" },
+          { "name": "use_typo_metrics", "description": "OS/2.fsSelection bit 7 (USE_TYPO_METRICS) enabled for cross-OS zero-CLS parity", "type": "boolean" },
+          { "name": "ots_2byte_aligned", "description": "100% W3C OpenType Sanitizer 2-byte word alignment (loca[i] % 2 == 0)", "type": "boolean" },
+          { "name": "odd_loca_offsets", "description": "Count of unaligned odd glyph offsets in loca (strictly 0)", "type": "integer" },
+          { "name": "fpgm_vm_bytes", "description": "Executable TrueType bytecode bytes in fpgm + cvt (strictly 0 for Zero-VM memory safety)", "type": "integer" },
+          { "name": "size_kb", "description": "Uncompressed binary size in kilobytes", "type": "number" },
+          { "name": "sha256", "description": "Cryptographic SHA-256 hex digest of the binary", "type": "string" }
+        ]
+      }
+    },
+    {
       "path": "fonts/ttf/PocketGull-Regular.ttf",
-      "description": "PocketGull Regular (Fineliner, wght 400): Proportional clinical sans-serif for EHR charts, patient discharge summaries, and scientific plots."
+      "description": "PocketGull Regular (wght 400): Proportional clinical sans-serif with out-of-the-box base-cmap Il1 disambiguation and native fi/fl ligatures."
+    },
+    {
+      "path": "fonts/ttf/PocketGull-Fineliner.ttf",
+      "description": "PocketGull Fineliner (wght 400): Warm 25 UPM felt-marker corner geometry for EHR clinical charts, discharge summaries, and Matplotlib/ggplot2 labels."
     },
     {
       "path": "fonts/ttf/PocketGull-Bold.ttf",
@@ -46,20 +75,36 @@
     },
     {
       "path": "fonts/ttf/PocketGull-Math.ttf",
-      "description": "PocketGull Math (68 UPM stem weight): ISO/IEC 14496-22 OpenType MATH font for Matplotlib, LaTeX, and Typst scientific typesetting."
+      "description": "PocketGull Math (9,870 glyphs, 68 UPM stem weight): ISO/IEC 14496-22 OpenType MATH font for Matplotlib, LaTeX CTAN, and Typst scientific typesetting."
+    },
+    {
+      "path": "fonts/ttf/PocketGull-ASL.ttf",
+      "description": "PocketGull ASL (6,821 glyphs): Z-layered 2D Signed Distance Field anatomical manual alphabet and numeral handshapes (A-Z, 0-9) for academic Deaf pedagogy."
+    },
+    {
+      "path": "fonts/ttf/PocketGull-VF.ttf",
+      "description": "PocketGull Variable Font (8,687 glyphs): Full 16-axis gvar + HVAR continuous variable TrueType desktop/server font."
     },
     {
       "path": "fonts/woff2/PocketGull-VF.woff2",
-      "description": "PocketGull Variable Font (wght 100-900): Brotli Q11 compressed webfont with zero-CLS metric overrides."
+      "description": "PocketGull Variable WebFont (wght 100-900): Brotli Q11 compressed webfont with zero-CLS metric overrides."
+    },
+    {
+      "path": "distribution/upcycled/PocketGull-Botanica.ttf",
+      "description": "PocketGull Botanica v3 (9,724 glyphs): Upcycled illuminated initials, living Bezier vine arbors, acuminate phyllotaxis leaves, and 6 herbarium specimens."
+    },
+    {
+      "path": "distribution/upcycled/PocketGull-Kintsugi.ttf",
+      "description": "PocketGull Kintsugi v2 (8,176 glyphs): Avian trabecular biomimicry display cut achieving -45.8% eco-ink conservation."
     },
     {
       "path": "fonts/sri-hashes.json",
-      "description": "Cryptographic SHA-256 and Subresource Integrity (SRI SHA-384) manifest for all 32 TrueType and WOFF2 font binaries."
+      "description": "Cryptographic SHA-256 and Subresource Integrity (SRI SHA-384) manifest for all production TrueType and WOFF2 font binaries."
     }
   ],
   "temporalCoverage": {
     "startDate": "2026-05-01",
-    "endDate": "2026-10-14"
+    "endDate": "2026-11-11"
   },
   "geospatialCoverage": "Global (World Scripts, ISO/TR 11548 Braille, UNDRIP Sovereign Indigenous Orthographies; Engineered in Pacific Northwest, USA)",
   "doi": "10.5281/zenodo.22309379"

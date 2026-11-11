@@ -27,6 +27,7 @@ def extract_release_ttfs() -> list[tuple[str, str]]:
         shutil.rmtree(STAGE_TTF_DIR)
     STAGE_TTF_DIR.mkdir(parents=True, exist_ok=True)
     ttf_dir = ROOT / "fonts" / "ttf"
+    upcycled_dir = ROOT / "distribution" / "upcycled"
     font_entries: list[tuple[str, str]] = []
     seen_full_names: set[str] = set()
 
@@ -37,7 +38,11 @@ def extract_release_ttfs() -> list[tuple[str, str]]:
         "PocketGull-Sign-VF.ttf",
     }
 
-    for src_path in sorted(ttf_dir.glob("*.ttf")):
+    candidate_paths = sorted(ttf_dir.glob("*.ttf"))
+    if upcycled_dir.exists():
+        candidate_paths.extend(sorted(upcycled_dir.glob("*.ttf")))
+
+    for src_path in candidate_paths:
         filename = src_path.name
         if filename in skip_files:
             continue
@@ -184,7 +189,7 @@ def render_brand_assets() -> None:
         radius=6,
         fill=(15, 118, 110),
     )
-    draw.text((56, H - 57), "v3.1.0 OFL", font=font_mono, fill=(250, 248, 242))
+    draw.text((56, H - 57), "v4.0.0 OFL", font=font_mono, fill=(250, 248, 242))
     draw.text((158, H - 56), "font.pocketgull.app", font=font_mono_sm, fill=(148, 163, 184))
 
     banner_bmp = ASSETS_DIR / "wizard-banner.bmp"
@@ -239,7 +244,7 @@ def render_brand_assets() -> None:
         hpy += 23
 
     hdraw.rounded_rectangle([38, HH - 50, 142, HH - 22], radius=6, fill=(15, 118, 110))
-    hdraw.text((50, HH - 43), "v3.1.0 OFL", font=font_mono, fill=(250, 248, 242))
+    hdraw.text((50, HH - 43), "v4.0.0 OFL", font=font_mono, fill=(250, 248, 242))
     hdraw.text((152, HH - 42), "font.pocketgull.app", font=font_mono_sm, fill=(148, 163, 184))
 
     # Right Column: Specimen Card Box
@@ -275,7 +280,7 @@ def render_brand_assets() -> None:
     font_nh = ImageFont.truetype(f_bold_path, 13)
     font_nh_sub = ImageFont.truetype(f_mono_path, 9)
     nh_draw.text((56, 15), "POCKETGULL", font=font_nh, fill=(250, 248, 242))
-    nh_draw.text((56, 33), "v3.1.0 OFL", font=font_nh_sub, fill=(20, 184, 166))
+    nh_draw.text((56, 33), "v4.0.0 OFL", font=font_nh_sub, fill=(20, 184, 166))
     nsis_hdr.save(ASSETS_DIR / "nsis-header.bmp", format="BMP")
 
 
@@ -285,7 +290,7 @@ def write_specimen_rtf(font_count: int) -> None:
         r"{\rtf1\ansi\deff0"
         r"{\fonttbl{\f0\fswiss\fcharset0 Segoe UI;}{\f1\fmodern\fcharset0 Consolas;}}"
         r"{\colortbl;\red15\green118\blue110;\red24\green24\blue27;\red180\green83\blue9;}"
-        r"\viewkind4\uc1\pard\cf1\b\f0\fs24 PocketGull Typeface Superfamily (v3.1.0)\par"
+        r"\viewkind4\uc1\pard\cf1\b\f0\fs24 PocketGull Typeface Superfamily (v4.0.0)\par"
         r"\cf2\b0\fs18 Sans, Serif, Slab, Monospace, and Technical Fonts\par"
         r"\pard\sa120\sl276\slmult1\cf2\fs18\par"
         r"Designed by \b Phil Gear\b0  (\i The PocketGull Project Authors\i0 ). PocketGull is an open-source typeface "
@@ -307,17 +312,17 @@ def write_specimen_rtf(font_count: int) -> None:
 def write_inno_script(font_entries: list[tuple[str, str]]) -> Path:
     """Generate the Inno Setup 6 script (.iss)."""
     lines = [
-        "; PocketGull Font Superfamily v3.1.0 — Official Windows & WinGet Installer",
+        "; PocketGull Font Superfamily v4.0.0 — Official Windows & WinGet Installer",
         "[Setup]",
         "AppId={{8D692F2F-D44B-451D-A62F-E95528567C5F}",
         "AppName=PocketGull Font",
-        "AppVersion=3.1.0",
-        "AppVerName=PocketGull Font 3.1.0",
+        "AppVersion=4.0.0",
+        "AppVerName=PocketGull Font 4.0.0",
         "AppPublisher=The PocketGull Project Authors",
         "AppPublisherURL=https://font.pocketgull.app",
         "AppSupportURL=https://github.com/pocketgull-app/pocketgull-font/issues",
         "AppUpdatesURL=https://github.com/pocketgull-app/pocketgull-font/releases",
-        "VersionInfoVersion=3.1.0.0",
+        "VersionInfoVersion=4.0.0.0",
         "VersionInfoCompany=The PocketGull Project Authors",
         "VersionInfoDescription=PocketGull Clinical & Scientific Typeface Installer",
         "VersionInfoCopyright=Copyright (c) 2026 The PocketGull Project Authors (OFL-1.1)",
@@ -327,7 +332,7 @@ def write_inno_script(font_entries: list[tuple[str, str]]) -> Path:
         "PrivilegesRequired=admin",
         "PrivilegesRequiredOverridesAllowed=dialog commandline",
         "OutputDir=dist",
-        "OutputBaseFilename=PocketGull-Font-Setup-v3.1.0",
+        "OutputBaseFilename=PocketGull-Font-Setup-v4.0.0",
         "Compression=lzma2/ultra64",
         "SolidCompression=yes",
         "WizardStyle=modern",
@@ -367,24 +372,24 @@ def write_nsis_script(font_entries: list[tuple[str, str]]) -> Path:
     count = len(font_entries)
 
     lines = [
-        "; PocketGull Font Superfamily v3.1.0 — Open-Source NSIS Installer (zlib/libpng license)",
+        "; PocketGull Font Superfamily v4.0.0 — Open-Source NSIS Installer (zlib/libpng license)",
         '!include "MUI2.nsh"',
         '!include "WinMessages.nsh"',
         "",
         'Name "PocketGull Font"',
-        'OutFile "dist\\PocketGull-Font-Setup-v3.1.0.exe"',
+        'OutFile "dist\\PocketGull-Font-Setup-v4.0.0.exe"',
         "Unicode True",
         "SetCompressor /SOLID lzma",
         'InstallDir "$PROGRAMFILES64\\PocketGull Font"',
         "RequestExecutionLevel admin",
-        "BrandingText \"PocketGull Typeface v3.1.0 (SIL OFL-1.1)\"",
+        "BrandingText \"PocketGull Typeface v4.0.0 (SIL OFL-1.1)\"",
         "",
-        'VIProductVersion "3.1.0.0"',
+        'VIProductVersion "4.0.0.0"',
         'VIAddVersionKey "ProductName" "PocketGull Font"',
         'VIAddVersionKey "CompanyName" "The PocketGull Project Authors"',
         'VIAddVersionKey "FileDescription" "PocketGull Clinical & Scientific Typeface Installer"',
-        'VIAddVersionKey "FileVersion" "3.1.0.0"',
-        'VIAddVersionKey "ProductVersion" "3.1.0"',
+        'VIAddVersionKey "FileVersion" "4.0.0.0"',
+        'VIAddVersionKey "ProductVersion" "4.0.0"',
         'VIAddVersionKey "LegalCopyright" "Copyright (c) 2026 The PocketGull Project Authors (OFL-1.1)"',
         "",
         '!define MUI_ICON "assets\\pocketgull.ico"',
@@ -395,7 +400,7 @@ def write_nsis_script(font_entries: list[tuple[str, str]]) -> Path:
         '!define MUI_HEADERIMAGE_BITMAP "assets\\nsis-header.bmp"',
         "!define MUI_HEADERIMAGE_RIGHT",
         "",
-        '!define MUI_WELCOMEPAGE_TITLE "PocketGull Typeface Superfamily (v3.1.0)"',
+        '!define MUI_WELCOMEPAGE_TITLE "PocketGull Typeface Superfamily (v4.0.0)"',
         (
             f'!define MUI_WELCOMEPAGE_TEXT "This package installs {count} PocketGull TrueType fonts '
             "(Sans, Serif, Slab, Rounded, Fixed-Width Monospace, Mathematics, Sciences, Braille, and Sign Language) "
@@ -441,7 +446,7 @@ def write_nsis_script(font_entries: list[tuple[str, str]]) -> Path:
         "",
         '  WriteUninstaller "$INSTDIR\\Uninstall.exe"',
         '  WriteRegStr HKLM "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\PocketGull.Font" "DisplayName" "PocketGull Font"',
-        '  WriteRegStr HKLM "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\PocketGull.Font" "DisplayVersion" "3.1.0"',
+        '  WriteRegStr HKLM "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\PocketGull.Font" "DisplayVersion" "4.0.0"',
         '  WriteRegStr HKLM "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\PocketGull.Font" "Publisher" "The PocketGull Project Authors"',
         '  WriteRegStr HKLM "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\PocketGull.Font" "URLInfoAbout" "https://font.pocketgull.app"',
         '  WriteRegStr HKLM "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\PocketGull.Font" "DisplayIcon" "$INSTDIR\\pocketgull.ico"',
