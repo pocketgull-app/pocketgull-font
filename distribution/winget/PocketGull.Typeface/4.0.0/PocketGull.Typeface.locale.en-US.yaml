@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.defaultLocale.1.12.0.schema.json
+PackageIdentifier: PocketGull.Typeface
+PackageVersion: 4.0.0
+PackageLocale: en-US
+Publisher: The PocketGull Project Authors
+PublisherUrl: https://github.com/pocketgull-app
+PublisherSupportUrl: https://github.com/pocketgull-app/pocketgull-font/issues
+PackageName: PocketGull Typeface
+PackageUrl: https://font.pocketgull.app
+License: OFL-1.1
+LicenseUrl: https://raw.githubusercontent.com/pocketgull-app/pocketgull-font/main/OFL.txt
+ShortDescription: Optotypically calibrated clinical sans-serif, serif, slab, math, and 600 UPM telemetry font superfamily.
+Description: |-
+  PocketGull (v4.0.0) is an open-source clinical sans-serif, serif, slab, mathematical, and telemetry
+  monospace font superfamily designed by Phil Gear. Originating from felt-marker lettering created on
+  cardstock, PocketGull combines humanist warmth with Louise Sloan 5:1 optotypic legibility, ISO 15008
+  telemetry ergonomics, 256 tactile Braille domes, and out-of-the-box ISMP character disambiguation
+  (curved clinical l, bilateral serifed I, slashed zero, slashed Z).
+Moniker: pocketgull
+Tags:
+  - font
+  - typeface
+  - typography
+  - monospace
+  - clinical
+  - braille
+  - math
+  - chemistry
+  - genomics
+  - music
+ReleaseDate: 2026-11-10
+ManifestType: defaultLocale
+ManifestVersion: 1.12.0

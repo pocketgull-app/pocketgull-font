@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.installer.1.12.0.schema.json
+PackageIdentifier: PocketGull.Typeface
+PackageVersion: 4.0.0
+Installers:
+  - Architecture: neutral
+    InstallerType: zip
+    InstallerUrl: https://github.com/pocketgull-app/pocketgull-font/releases/download/v4.0.0/pocketgull-typeface-v4.0.0.zip
+    InstallerSha256: C7BB00B64C64FFA5A79DA866C1CCDBB52DAC0BBFC28F8001C039941723C3ECA5
+    NestedInstallerType: font
+    NestedInstallerFiles:
+      - RelativeFilePath: fonts/ttf/PocketGull-ASL.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Algo.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Black.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Bold.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-BoldItalic.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Chem.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Chiseltip.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-CondensedBold.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Emoji.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Fineliner.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Genome.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Halftone.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Inline.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Italic.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Lab.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Learn.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-MarkerRaw.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Math.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Micro.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Music.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Numerics.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Outline.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Press.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Regular.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Serif-Bold.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Serif-Regular.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Serif-VF.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Sign.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Slab-Bold.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Slab-Regular.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Soft-Bold.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Soft-Regular.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-VF.ttf
+      - RelativeFilePath: fonts/ttf/PocketGullMono-Bold.ttf
+      - RelativeFilePath: fonts/ttf/PocketGullMono-Italic.ttf
+      - RelativeFilePath: fonts/ttf/PocketGullMono-Regular.ttf
+ManifestType: installer
+ManifestVersion: 1.12.0
