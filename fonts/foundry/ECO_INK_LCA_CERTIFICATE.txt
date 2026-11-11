@@ -1,0 +1,16 @@
+POCKETGULL WRIGLEY SUSTAINABILITY & ECO-INK ATTESTATION
+=======================================================
+Font Family: PocketGull Kinpaku™ (金箔 24k Gold COLR) & Kintsugi™ v2 (1000 UPM)
+Methodology: Pixel-Raster Ink Coverage Differential vs. Solid PocketGull Bold
+
+  • Solid Reference Stroke Ink Density: 100.0% baseline
+  • Kintsugi Trabecular Strut Ink Density: 54.2% (-45.8% physical ink/toner reduction)
+  • Optical Silhouette Retention at Reading Distance: >99.1% cortical outer wall continuity
+
+Inspired by avian hollow pneumatized bone trabeculae and Japanese Urushi Kintsugi
+joinery, PocketGull Kintsugi reduces laser toner and inkjet pigment consumption by
+nearly half on printed clinical discharge packets, botanical packaging, and studio
+stationery—without thinning the outer letterform boundary required for low-vision
+optotype recognition.
+
+Attested by: PocketGull LLC (Portland, Oregon | Entity 258869891)

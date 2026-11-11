@@ -1,7 +1,7 @@
 /// Pure Dart SFNT Color-Font Synthesizer for PocketGull Artisan Studio Packs:
-/// 1. PocketGull-KintsugiGold.ttf: Layers solid PocketGull-Black (Layer 0: Urushi Gold Seam)
+/// 1. PocketGull-Kinpaku.ttf (金箔 — 24k Gold Leaf): Layers solid PocketGull-Black (Layer 0: Kinpaku Gold Seam)
 ///    beneath hollow PocketGull-Kintsugi (Layer 1: Ceramic Body) via OpenType COLR v0 + CPAL!
-///    Every hollow trabecular channel shines with authentic 24k Kintsugi gold lacquer.
+///    Every hollow trabecular channel shines with authentic 24k Kinpaku gold leaf on urushi lacquer.
 /// 2. PocketGull-BotanicaColor.ttf: Dual-palette botanical emerald & vermilion rubrication.
 /// 3. Exports standalone SVG Herbarium Vector Pack (U+2766..U+2698) for Figma/Illustrator.
 
@@ -268,10 +268,15 @@ Uint8List assembleSfnt(Map<String, Uint8List> tableMap) {
   return fullBytes;
 }
 
-/// Builds PocketGull-KintsugiGold.ttf:
+/// Builds PocketGull-Kinpaku.ttf (or legacy alias):
 /// Appends solid underlay glyphs from PocketGull-Black for ASCII & Latin-1 display characters,
-/// then wires OpenType COLR v0 + 4-Palette CPAL so Layer 0 = 24k Gold Lacquer Seam and Layer 1 = Ceramic Body!
-Uint8List buildKintsugiGoldColorFont(RawSfntFont kintsugi, RawSfntFont solidBlack) {
+/// then wires OpenType COLR v0 + 4-Palette CPAL so Layer 0 = 24k Kinpaku Gold Seam and Layer 1 = Ceramic Body!
+Uint8List buildKinpakuColorFont(
+  RawSfntFont kintsugi,
+  RawSfntFont solidBlack, {
+  String familyName = 'PocketGull Kinpaku',
+  String postScriptName = 'PocketGullKinpaku-Regular',
+}) {
   final kinCmap = kintsugi.readCmapFormat4Or12();
   final blkCmap = solidBlack.readCmapFormat4Or12();
 
@@ -401,14 +406,14 @@ Uint8List buildKintsugiGoldColorFont(RawSfntFont kintsugi, RawSfntFont solidBlac
   outTables['glyf'] = glyfBuilder.takeBytes();
   outTables['post'] = post;
   outTables['name'] = buildNameTable(
-    familyName: 'PocketGull Kintsugi Gold',
+    familyName: familyName,
     subFamilyName: 'Regular',
-    postScriptName: 'PocketGullKintsugiGold-Regular',
+    postScriptName: postScriptName,
   );
   outTables['CPAL'] = cpal.data;
   outTables['COLR'] = colr.data;
 
-  print('  [COLR] Synthesized ${colrGlyphs.length} 24k Gold-Seam Kintsugi glyphs ($origNumGlyphs -> $nextGid total glyphs, origHMetrics=$origNumHMetrics)');
+  print('  [COLR] Synthesized ${colrGlyphs.length} 24k Kinpaku Gold-Seam glyphs [$familyName] ($origNumGlyphs -> $nextGid total glyphs, origHMetrics=$origNumHMetrics)');
   return assembleSfnt(outTables);
 }
 
@@ -570,11 +575,29 @@ void main() {
 
   final proDir = Directory('../pocketgull-com/public/fonts/foundry');
   proDir.createSync(recursive: true);
+  final localFoundryDir = Directory('fonts/foundry');
+  localFoundryDir.createSync(recursive: true);
 
-  // 1. Build COLR Gold-Seam Kintsugi Font
-  final kintsugiGoldBytes = buildKintsugiGoldColorFont(kintsugi, solidBlack);
-  final outGoldPath = '${proDir.path}/PocketGull-KintsugiGold.ttf';
-  File(outGoldPath).writeAsBytesSync(kintsugiGoldBytes);
+  // 1. Build Primary PocketGull-Kinpaku.ttf (金箔 24k Gold COLR) + Legacy Alias PocketGull-KintsugiGold.ttf
+  final kinpakuBytes = buildKinpakuColorFont(
+    kintsugi,
+    solidBlack,
+    familyName: 'PocketGull Kinpaku',
+    postScriptName: 'PocketGullKinpaku-Regular',
+  );
+  final kintsugiGoldAliasBytes = buildKinpakuColorFont(
+    kintsugi,
+    solidBlack,
+    familyName: 'PocketGull Kintsugi Gold',
+    postScriptName: 'PocketGullKintsugiGold-Regular',
+  );
+
+  final outKinpakuPath = '${proDir.path}/PocketGull-Kinpaku.ttf';
+  final outGoldAliasPath = '${proDir.path}/PocketGull-KintsugiGold.ttf';
+  File(outKinpakuPath).writeAsBytesSync(kinpakuBytes);
+  File(outGoldAliasPath).writeAsBytesSync(kintsugiGoldAliasBytes);
+  File('${localFoundryDir.path}/PocketGull-Kinpaku.ttf').writeAsBytesSync(kinpakuBytes);
+  File('${localFoundryDir.path}/PocketGull-KintsugiGold.ttf').writeAsBytesSync(kintsugiGoldAliasBytes);
 
   // Copy Botanica & Kintsugi WOFF2 + TTF for instant live type-tester & Pro ZIP packaging
   File('distribution/upcycled/PocketGull-Botanica.woff2')
@@ -586,13 +609,15 @@ void main() {
   File('distribution/upcycled/PocketGull-Kintsugi.ttf')
       .copySync('${proDir.path}/PocketGull-Kintsugi.ttf');
 
-  // 2. Audit newly compiled KintsugiGold binary with ThomasPhinneyAuditor!
-  final auditReport = ThomasPhinneyAuditor.audit(File(outGoldPath));
-  if (!auditReport.passed) {
-    stderr.writeln('FATAL: Phinney audit failed on KintsugiGold: ${auditReport.message}');
-    exit(1);
+  // 2. Audit newly compiled Kinpaku & KintsugiGold binaries with ThomasPhinneyAuditor!
+  for (final p in [outKinpakuPath, outGoldAliasPath]) {
+    final auditReport = ThomasPhinneyAuditor.audit(File(p));
+    if (!auditReport.passed) {
+      stderr.writeln('FATAL: Phinney audit failed on $p: ${auditReport.message}');
+      exit(1);
+    }
+    print('  [OTS] ${p.split('/').last} passed 100% Phinney W3C OTS Audit (${auditReport.message}, ${(File(p).lengthSync() / 1024).toStringAsFixed(1)} KB)');
   }
-  print('  [OTS] PocketGull-KintsugiGold.ttf passed 100% Phinney W3C OTS Audit (${auditReport.message}, ${(kintsugiGoldBytes.length / 1024).toStringAsFixed(1)} KB)');
 
   // 3. Export standalone SVG Herbarium Vector Kit
   exportHerbariumSvgKit(botanica, Directory('${proDir.path}/herbarium-svg'));

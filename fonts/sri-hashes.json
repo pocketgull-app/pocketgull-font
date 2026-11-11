@@ -25,9 +25,9 @@
     "sri": "sha384-7fiyCmri++P102aBp1wree6X7rwyhI26BvNZVuWXgaXXfcIeUTDPEPR7cv9vHz8Z"
   },
   "fonts/ttf/PocketGull-Botanica.ttf": {
-    "size": 2965204,
-    "sha256": "136fad0cd684fa80acafe5ceb3fddb10749db6029213fa4039ed1b03d3c2f04d",
-    "sri": "sha384-kjaKmxpKuL5aSAmv7hDQ4YbTUbFIvYcMIV5bmlTWRnnfGnGIGqyK+E/uCbZ3cMak"
+    "size": 2963236,
+    "sha256": "b342eb183c645ea687e071e861e05883bbe3a09063d6ed69036f5cce4bf14acf",
+    "sri": "sha384-lpw7xpFhFSGLu6T2lKKR4urzcbMqnB7Iiwmp18A9d5wu1l2Od4TGtvfW+k60KhFE"
   },
   "fonts/ttf/PocketGull-Chem.ttf": {
     "size": 2726660,
@@ -240,9 +240,9 @@
     "sri": "sha384-qb8YKOM3L6M/43P85DZpZiZvhN15FajjebeN+Hu9wmS3lwjWdGwNPeKz4VIdqJy+"
   },
   "fonts/woff2/PocketGull-Botanica.woff2": {
-    "size": 825864,
-    "sha256": "84cd1fbc07636a55e410ae5693f4d08aaccfd004a3ec7256a46f56e2fdea6586",
-    "sri": "sha384-u47DqoI5QjVA147ySzRlVpPi4JbIB05GkaSHHb+3MM+0omCavggBSfIkcFfCy/vD"
+    "size": 825012,
+    "sha256": "efc4bc2ffa29b143517418bf0abf0604f0660e4c589bf4f4c42299c3c6f40872",
+    "sri": "sha384-b1TYOe2TwTQhsq3izwH+sJG5JM/48wwhSQdmiviCDtPm2jCCj91IsWwvZA7E9s/+"
   },
   "fonts/woff2/PocketGull-Chem.woff2": {
     "size": 808784,

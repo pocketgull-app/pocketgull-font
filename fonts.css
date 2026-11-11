@@ -2521,7 +2521,7 @@ body.eco-dark-canopy {
   filter: grayscale(100%) contrast(1.15);
 }
 
-/* Artisan Foundry Collector Editions: Botanica v3 & Kintsugi 24k Gold COLR */
+/* Artisan Foundry Collector Editions: Botanica v3 & Kinpaku (金箔) 24k Gold COLR */
 @font-face {
   font-family: 'PocketGull Botanica';
   src: url('fonts/woff2/PocketGull-Botanica.woff2?v=4.0.0') format('woff2'),
@@ -2541,11 +2541,36 @@ body.eco-dark-canopy {
 }
 
 @font-face {
+  font-family: 'PocketGull Kinpaku';
+  src: url('fonts/foundry/PocketGull-Kinpaku.ttf?v=4.0.0') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'PocketGull Kintsugi Gold';
   src: url('fonts/foundry/PocketGull-KintsugiGold.ttf?v=4.0.0') format('truetype');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
+}
+
+@font-palette-values --kinpaku-obsidian {
+  font-family: 'PocketGull Kinpaku';
+  base-palette: 0;
+}
+@font-palette-values --kinpaku-washi {
+  font-family: 'PocketGull Kinpaku';
+  base-palette: 1;
+}
+@font-palette-values --kinpaku-aizome {
+  font-family: 'PocketGull Kinpaku';
+  base-palette: 2;
+}
+@font-palette-values --kinpaku-vermilion {
+  font-family: 'PocketGull Kinpaku';
+  base-palette: 3;
 }
 
 @font-palette-values --kintsugi-obsidian {

@@ -1,0 +1,70 @@
+POCKETGULL ARTISAN TYPEFOUNDRY — COMMERCIAL STUDIO & PATRON LICENSE AGREEMENT
+=============================================================================
+Licensor: PocketGull LLC (Oregon Registry: 258869891 | Portland, OR, USA)
+Typeface Designer: Phillip Gear
+Version: 4.0.0 (2026)
+
+THANK YOU FOR SUSTAINING OPEN-SOURCE CLINICAL & INDIGENOUS TYPOGRAPHY!
+100% of net proceeds from PocketGull Artisan Pro Packs directly fund the ongoing
+engineering, optometric validation, and free SIL Open Font License 1.1 stewarding
+of the 39-font PocketGull Clinical, Braille, Mathematical, and UNDRIP Sovereign
+Indigenous Typeface Superfamily (https://font.pocketgull.app).
+
+1. INCLUDED COMMERCIAL PRO PACK ASSETS
+--------------------------------------
+Depending on the tier listed on your Stripe Receipt / Cryptographic Attestation Seal:
+  • PocketGull-Botanica.ttf & .woff2 — Illuminated Herbarium Initials (v3)
+  • PocketGull-Kintsugi.ttf & .woff2 — Trabecular -45.8% Eco-Ink Display (v2)
+  • PocketGull-Kinpaku.ttf — Flagship OpenType COLR/CPAL 4-Palette 24k Kinpaku Gold Leaf
+    Color Font (plus legacy alias PocketGull-KintsugiGold.ttf):
+      - Palette 0 (--kinpaku-obsidian):  Kuro-Urushi Obsidian & 24k Kinpaku Gold
+      - Palette 1 (--kinpaku-washi):     Kyoto Washi Ink & 24k Kinpaku Gold
+      - Palette 2 (--kinpaku-aizome):    Aizome Indigo & Gin-tsugi Silver
+      - Palette 3 (--kinpaku-vermilion): Shu-Urushi Vermilion & Imperial Gold
+  • herbarium-svg/ (01..06.svg) — 6 Standalone Botanical Vector Fleuron Plates
+
+2. PERPETUAL COMMERCIAL GRANT OF RIGHTS
+---------------------------------------
+Upon payment, PocketGull LLC grants you a non-exclusive, worldwide, perpetual,
+royalty-free license to install and use the licensed Pro Pack assets according
+to your tier:
+
+  • Botanica Pro Pack ($29) / Kinpaku 24k Gold Pro Pack ($29):
+    Up to 3 workstations, unlimited web pageviews (@font-face), unlimited print
+    runs, packaging, book publishing, merchandise, and 1 commercial mobile/desktop app.
+
+  • Artisan Duo & Patron Pass ($49):
+    Up to 10 workstations, unlimited web pageviews, unlimited print/packaging/video,
+    up to 10 commercial apps/games, and Foundry Patron recognition.
+
+  • Unlimited Agency License ($199):
+    Unlimited workstations within your organization, unlimited web/broadcast/print/app
+    deployments, client project handoff for commissioned brand deliverables, and full
+    intellectual property provenance indemnification up to the license fee paid.
+
+3. BASE OPEN-CORE NOTICE
+------------------------
+The monochrome base outlines of PocketGull Botanica and PocketGull Kintsugi remain
+available under the SIL Open Font License 1.1. The PocketGull-Kinpaku.ttf
+multi-palette COLR/CPAL color font, standalone Herbarium SVG vector plates, and
+commercial PocketGull LLC warranty/indemnification certificate are proprietary
+additions governed by this Commercial Studio License; please do not redistribute
+the raw Pro Pack archive on public torrent or free-font piracy mirrors.
+
+4. CSS QUICK-START FOR KINPAKU (金箔) 24K GOLD (COLR/CPAL)
+----------------------------------------------------------
+  @font-face {
+    font-family: 'PocketGull Kinpaku';
+    src: url('PocketGull-Kinpaku.ttf') format('truetype');
+    font-display: swap;
+  }
+  @font-palette-values --kinpaku-washi {
+    font-family: 'PocketGull Kinpaku';
+    base-palette: 1; /* 0=Obsidian, 1=Washi, 2=Aizome Silver, 3=Vermilion */
+  }
+  .headline {
+    font-family: 'PocketGull Kinpaku', sans-serif;
+    font-palette: --kinpaku-washi;
+  }
+
+Questions or custom foundry requests: leads@pocketgull.app | https://pocketgull.com/foundry
