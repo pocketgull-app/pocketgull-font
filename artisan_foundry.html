@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PocketGull Artisan Foundry Studio: Interactive specimen &amp; licensing for PocketGull Botanica v3 (Herbarium Initials) and PocketGull Kintsugi 24k Gold COLR/CPAL (-45.8% Eco-Ink).">
+  <title>PocketGull™ Artisan Foundry · Botanica v3 &amp; Kintsugi 24k Gold</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="fonts.css?v=4.0.0">
+  <style>
+    :root {
+      --bg: #070b12;
+      --surface: #0f172a;
+      --border: #1e293b;
+      --parchment: #f8f5ec;
+      --parchment-ink: #1c1917;
+      --gold: #f59e0b;
+      --gold-bright: #fbbf24;
+      --emerald: #10b981;
+      --botanica-green: #14532d;
+      --rubric: #991b1b;
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --sans-stack: 'PocketGull', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --mono-stack: 'PocketGull Mono', ui-monospace, Menlo, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--sans-stack);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    a { color: inherit; }
+
+    header.topbar {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: #38bdf8;
+    }
+    .pill {
+      font-family: var(--mono-stack);
+      font-size: 0.75rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #6ee7b7;
+    }
+
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    .hero {
+      padding: 2.75rem 0 2rem;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3.35rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.14;
+      margin-bottom: 1rem;
+    }
+    .hero p.lead {
+      max-width: 800px;
+      margin: 0 auto 1.5rem;
+      font-size: 1.1rem;
+      color: var(--muted);
+    }
+    .mission-banner {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem 1.15rem;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 0.75rem;
+      padding: 0.7rem 1.25rem;
+      font-size: 0.86rem;
+      color: #fde68a;
+    }
+
+    .showcase-grid {
+      margin: 1.75rem 0 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+    @media (min-width: 960px) {
+      .showcase-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .specimen-card {
+      border-radius: 1rem;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.25rem;
+    }
+    .specimen-botanica {
+      background: var(--parchment);
+      color: var(--parchment-ink);
+      border: 2px solid #b49256;
+    }
+    .specimen-kintsugi {
+      background: #0f172a;
+      color: var(--text);
+      border: 2px solid rgba(245, 158, 11, 0.6);
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .eyebrow {
+      font-family: var(--mono-stack);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .botanica-stage {
+      font-family: 'PocketGull Botanica', Georgia, serif;
+      font-size: clamp(2.6rem, 4.8vw, 4rem);
+      line-height: 1.15;
+      color: var(--botanica-green);
+      padding: 0.75rem 0;
+      outline: none;
+      border-bottom: 1px dashed rgba(20, 83, 45, 0.35);
+    }
+    .fleuron-strip {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.5rem;
+      text-align: center;
+      background: #efe9d8;
+      border: 1px solid #d6c7a9;
+      border-radius: 0.65rem;
+      padding: 0.75rem 0.5rem;
+    }
+    .fleuron-glyph {
+      font-family: 'PocketGull Botanica', serif;
+      font-size: 2.15rem;
+      line-height: 1.1;
+      color: var(--botanica-green);
+    }
+    .fleuron-glyph.rubric { color: var(--rubric); }
+    .fleuron-code {
+      font-family: var(--mono-stack);
+      font-size: 0.68rem;
+      color: #44403c;
+      margin-top: 0.2rem;
+    }
+
+    .kintsugi-stage {
+      font-family: 'PocketGull Kintsugi Gold', 'PocketGull Kintsugi', sans-serif;
+      font-palette: --kintsugi-obsidian;
+      font-size: clamp(2.5rem, 4.5vw, 3.7rem);
+      line-height: 1.18;
+      padding: 0.75rem 0;
+      outline: none;
+      border-bottom: 1px dashed rgba(245, 158, 11, 0.4);
+    }
+    .palette-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .pal-btn {
+      font-family: var(--mono-stack);
+      font-size: 0.72rem;
+      padding: 0.38rem 0.65rem;
+      border-radius: 0.45rem;
+      border: 1px solid #334155;
+      background: #070b12;
+      color: #f8fafc;
+      cursor: pointer;
+    }
+    .pal-btn.active {
+      border-color: var(--gold-bright);
+      color: var(--gold-bright);
+      background: #1e293b;
+    }
+
+    .open-core-strip {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border);
+      border-radius: 0.85rem;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .dl-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .dl-pill {
+      font-family: var(--mono-stack);
+      font-size: 0.76rem;
+      text-decoration: none;
+      padding: 0.45rem 0.8rem;
+      border-radius: 0.45rem;
+      background: #131d2e;
+      border: 1px solid #334155;
+      color: #f8fafc;
+    }
+    .dl-pill:hover { border-color: #38bdf8; }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    @media (min-width: 980px) {
+      .pricing-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .tier {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .tier.featured {
+      border: 2px solid var(--gold);
+      box-shadow: 0 12px 32px rgba(245, 158, 11, 0.14);
+    }
+    .tier-badge {
+      display: inline-block;
+      font-family: var(--mono-stack);
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      border-radius: 0.35rem;
+      background: rgba(56, 189, 248, 0.16);
+      color: #7dd3fc;
+      margin-bottom: 0.75rem;
+    }
+    .tier.featured .tier-badge {
+      background: rgba(245, 158, 11, 0.22);
+      color: var(--gold-bright);
+    }
+    .price {
+      font-size: 2.3rem;
+      font-weight: 800;
+      margin: 0.35rem 0 0.2rem;
+    }
+    .price span {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--muted);
+    }
+    .feat-list {
+      list-style: none;
+      margin: 1rem 0 1.5rem;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+    .feat-list li {
+      margin-bottom: 0.55rem;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+    .feat-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--emerald);
+      font-weight: 800;
+    }
+    .btn-stripe {
+      display: block;
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+      padding: 0.82rem 1rem;
+      border-radius: 0.6rem;
+      background: #f8fafc;
+      color: #070b12;
+    }
+    .tier.featured .btn-stripe {
+      background: var(--gold-bright);
+      color: #111827;
+    }
+    .btn-secondary {
+      display: block;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.55rem;
+      text-decoration: underline;
+    }
+    footer.foundry-footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a href="index.html" class="brand">
+      <span>🕊️</span>
+      <span>&larr; PocketGull™ Master Specimen</span>
+    </a>
+    <div style="display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+      <a href="https://pocketgull.com/foundry" style="font-size:0.85rem; color:#fde68a; text-decoration:none; font-weight:700;">pocketgull.com/foundry &nearr;</a>
+      <span class="pill">100% Sustains Free Clinical &amp; Indigenous Fonts</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Artisan Craft That Sustains<br>Open-Source Clinical Typography</h1>
+      <p class="lead">
+        All 39 clinical, Braille, mathematical, and sovereign Indigenous fonts remain <strong>100% free forever</strong> under SIL OFL 1.1.
+        Try our circular-economy artisan editions—<strong>Botanica™ v3</strong> and <strong>Kintsugi™ 24k Gold COLR</strong>—live below, download the base OFL cuts free, or license the Commercial Studio Pro Pack via Stripe to fund the main project.
+      </p>
+      <div class="mission-banner">
+        <span>🌿 Rooted Golden-Ratio Vine Arbors</span>
+        <span>&bull;</span>
+        <span>✨ Native OpenType COLR/CPAL 24k Gold Seams</span>
+        <span>&bull;</span>
+        <span>🖨️ -45.8% Verified Physical Toner Savings</span>
+        <span>&bull;</span>
+        <span>💳 Instant Stripe Checkout</span>
+      </div>
+    </section>
+
+    <section class="showcase-grid" aria-label="Interactive Botanica and Kintsugi Type Testers">
+      <!-- Botanica Card -->
+      <article class="specimen-card specimen-botanica">
+        <div>
+          <div class="eyebrow" style="color:#14532d;">1. PocketGull Botanica™ v3 &bull; Living Herbarium Initials</div>
+          <div id="botanicaTester" class="botanica-stage" contenteditable="true" role="textbox" aria-multiline="false" spellcheck="false" aria-label="Type live in PocketGull Botanica">FLORA &amp; GULL</div>
+          <p style="font-size:0.86rem; color:#44403c; margin-top:0.65rem;">
+            Click above to type live! Every capital letter sprouts a rooted climbing Bézier vine arbor with Golden-Ratio acuminate phyllotaxis leaves and hollow midrib venation.
+          </p>
+        </div>
+
+        <div>
+          <div style="font-family:var(--mono-stack); font-size:0.72rem; font-weight:700; color:#78350f; margin-bottom:0.4rem;">
+            INCLUDED HERBARIUM FLEURONS (U+2766..U+2698):
+          </div>
+          <div class="fleuron-strip">
+            <div><div class="fleuron-glyph">&#x2766;</div><div class="fleuron-code">U+2766 Ivy</div></div>
+            <div><div class="fleuron-glyph rubric">&#x2767;</div><div class="fleuron-code">U+2767 Vine</div></div>
+            <div><div class="fleuron-glyph">&#x2619;</div><div class="fleuron-code">U+2619 Laurel</div></div>
+            <div><div class="fleuron-glyph rubric">&#x273F;</div><div class="fleuron-code">U+273F Rose</div></div>
+            <div><div class="fleuron-glyph">&#x2740;</div><div class="fleuron-code">U+2740 Lotus</div></div>
+            <div><div class="fleuron-glyph rubric">&#x2698;</div><div class="fleuron-code">U+2698 Tulip</div></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Kintsugi Gold Card -->
+      <article class="specimen-card specimen-kintsugi">
+        <div>
+          <div class="eyebrow" style="color:#fbbf24;">2. PocketGull Kintsugi™ Gold &bull; COLR/CPAL + -45.8% Eco-Ink</div>
+          <div id="kintsugiTester" class="kintsugi-stage" contenteditable="true" role="textbox" aria-multiline="false" spellcheck="false" aria-label="Type live in PocketGull Kintsugi 24k Gold">KINTSUGI 2026</div>
+          <p class="kintsugi-desc" style="font-size:0.86rem; color:#cbd5e1; margin-top:0.65rem;">
+            Click above to type live! Engineered via avian trabecular bone biomimicry: a calm cortical outer wall braced by diagonal struts filled with native <strong>OpenType COLR v0 24k Urushi Gold</strong>—or print monochrome to save <strong>45.8% physical ink/toner</strong>.
+          </p>
+        </div>
+
+        <div>
+          <div class="kintsugi-pal-title" style="font-family:var(--mono-stack); font-size:0.72rem; font-weight:700; color:#fde68a; margin-bottom:0.45rem;">
+            SWITCH BUILT-IN CPAL LACQUER PALETTE:
+          </div>
+          <div class="palette-bar">
+            <button type="button" class="pal-btn active" aria-pressed="true" data-palette="--kintsugi-obsidian" data-bg="#0f172a">0: Kuro-Urushi 24k Gold</button>
+            <button type="button" class="pal-btn" aria-pressed="false" data-palette="--kintsugi-washi" data-bg="#f5f0e1">1: Kyoto Washi &amp; Gold</button>
+            <button type="button" class="pal-btn" aria-pressed="false" data-palette="--kintsugi-aizome" data-bg="#eff6ff">2: Aizome Gin-tsugi Silver</button>
+            <button type="button" class="pal-btn" aria-pressed="false" data-palette="--kintsugi-vermilion" data-bg="#fef2f2">3: Vermilion &amp; Gold</button>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Open Core Monochrome Downloads -->
+    <section class="open-core-strip" aria-label="Open-Core Monochrome SIL OFL Downloads">
+      <div>
+        <div style="font-weight:700; font-size:0.98rem;">Open-Core Monochrome Cuts (SIL OFL 1.1 &bull; Free Forever)</div>
+        <div style="font-size:0.84rem; color:var(--muted);">Grab the standard single-color Botanica v3 &amp; Kintsugi v2 fonts right here, or upgrade below for the 4-Palette 24k Gold COLR font, standalone Herbarium SVGs &amp; Commercial Warranty.</div>
+      </div>
+      <div class="dl-pill-row">
+        <a href="fonts/woff2/PocketGull-Botanica.woff2?v=4.0.0" download class="dl-pill">⬇ Botanica .WOFF2</a>
+        <a href="fonts/ttf/PocketGull-Botanica.ttf?v=4.0.0" download class="dl-pill">⬇ Botanica .TTF</a>
+        <a href="fonts/woff2/PocketGull-Kintsugi.woff2?v=4.0.0" download class="dl-pill">⬇ Kintsugi .WOFF2</a>
+        <a href="fonts/ttf/PocketGull-Kintsugi.ttf?v=4.0.0" download class="dl-pill">⬇ Kintsugi .TTF</a>
+      </div>
+    </section>
+
+    <!-- Commercial Pro Pack Tiers via Stripe -->
+    <section id="pro-packs" aria-label="Commercial Pro Pack Licensing via Stripe">
+      <div style="text-align:center; max-width:700px; margin:0 auto;">
+        <h2 style="font-size:1.85rem; font-weight:800;">Commercial Studio Pro Packs &amp; Patronage</h2>
+        <p style="color:var(--muted); font-size:0.95rem; margin-top:0.35rem;">
+          One-time perpetual commercial license via Stripe Checkout (Card, Apple Pay, Google Pay). Zero recurring fees; instant `.zip` download &amp; cryptographic EULA seal on `pocketgull.com`.
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="tier">
+          <div>
+            <span class="tier-badge">Herbarium Edition</span>
+            <h3 style="font-size:1.15rem; font-weight:700;">Botanica™ v3 Pro Pack</h3>
+            <div class="price">$29 <span>USD one-time</span></div>
+            <ul class="feat-list">
+              <li>Botanica Desktop (<code>.ttf</code>) &amp; Web (<code>.woff2</code>)</li>
+              <li>6 Standalone Herbarium SVG Vector Plates (<code>01..06.svg</code>)</li>
+              <li>3 Workstations + Unlimited Web Views</li>
+              <li>Perpetual Commercial EULA Certificate</li>
+            </ul>
+          </div>
+          <div>
+            <a class="btn-stripe" href="https://pocketgull.app/api/billing/checkout?tier=botanica_pro&amp;successUrl=https%3A%2F%2Fpocketgull.com%2Fcheckout%3Ftier%3Dbotanica_pro%26paid%3D1%26session_id%3D%7BCHECKOUT_SESSION_ID%7D&amp;cancelUrl=https%3A%2F%2Ffont.pocketgull.app%2Fartisan_foundry.html%23pro-packs">Buy via Stripe &mdash; $29 &rarr;</a>
+            <a class="btn-secondary" href="https://pocketgull.com/checkout?tier=botanica_pro">Or Checkout on pocketgull.com</a>
+          </div>
+        </div>
+
+        <div class="tier">
+          <div>
+            <span class="tier-badge">24k COLR + Eco-Ink</span>
+            <h3 style="font-size:1.15rem; font-weight:700;">Kintsugi™ Gold Pro Pack</h3>
+            <div class="price">$29 <span>USD one-time</span></div>
+            <ul class="feat-list">
+              <li><strong>Pro Pack</strong> <code>PocketGull-KintsugiGold.ttf</code> (4-Palette COLR Color Font)</li>
+              <li>Monochrome Kintsugi v2 (<code>.ttf</code> &amp; <code>.woff2</code>)</li>
+              <li>Wrigley LCA <code>-45.8%</code> Eco-Ink Print Certificate</li>
+              <li>3 Workstations + Unlimited Web Views</li>
+            </ul>
+          </div>
+          <div>
+            <a class="btn-stripe" href="https://pocketgull.app/api/billing/checkout?tier=kintsugi_pro&amp;successUrl=https%3A%2F%2Fpocketgull.com%2Fcheckout%3Ftier%3Dkintsugi_pro%26paid%3D1%26session_id%3D%7BCHECKOUT_SESSION_ID%7D&amp;cancelUrl=https%3A%2F%2Ffont.pocketgull.app%2Fartisan_foundry.html%23pro-packs">Buy via Stripe &mdash; $29 &rarr;</a>
+            <a class="btn-secondary" href="https://pocketgull.com/checkout?tier=kintsugi_pro">Or Checkout on pocketgull.com</a>
+          </div>
+        </div>
+
+        <div class="tier featured">
+          <div>
+            <span class="tier-badge">★ Best Seller &bull; Save $9</span>
+            <h3 style="font-size:1.15rem; font-weight:800;">Artisan Duo™ &amp; Patron Pass</h3>
+            <div class="price">$49 <span>USD one-time</span></div>
+            <ul class="feat-list">
+              <li><strong>Complete Suite:</strong> Botanica v3 + Kintsugi v2 + Kintsugi 24k Gold COLR</li>
+              <li>All 6 Standalone Herbarium SVG Vector Plates</li>
+              <li>Expanded Studio Rights: <strong>10 Workstations &amp; 10 Apps</strong></li>
+              <li>Foundry Patron Recognition funding free clinical &amp; tribal fonts</li>
+            </ul>
+          </div>
+          <div>
+            <a class="btn-stripe" href="https://pocketgull.app/api/billing/checkout?tier=artisan_duo_patron&amp;successUrl=https%3A%2F%2Fpocketgull.com%2Fcheckout%3Ftier%3Dartisan_duo_patron%26paid%3D1%26session_id%3D%7BCHECKOUT_SESSION_ID%7D&amp;cancelUrl=https%3A%2F%2Ffont.pocketgull.app%2Fartisan_foundry.html%23pro-packs">Support &amp; Download Duo &mdash; $49 &rarr;</a>
+            <a class="btn-secondary" href="https://pocketgull.com/checkout?tier=artisan_duo_patron">Or Checkout on pocketgull.com</a>
+          </div>
+        </div>
+
+        <div class="tier">
+          <div>
+            <span class="tier-badge">Enterprise &amp; Print</span>
+            <h3 style="font-size:1.15rem; font-weight:700;">Unlimited Agency License</h3>
+            <div class="price">$199 <span>USD one-time</span></div>
+            <ul class="feat-list">
+              <li>Unlimited Workstations, Web Traffic &amp; App/Game Embedding</li>
+              <li>Full Botanica v3 + Kintsugi 24k Gold COLR + SVG Kit</li>
+              <li>Full Legal IP Warranty &amp; Indemnification Certificate</li>
+              <li>Direct Foundry Priority Support with Phil Gear</li>
+            </ul>
+          </div>
+          <div>
+            <a class="btn-stripe" href="https://pocketgull.app/api/billing/checkout?tier=foundry_agency&amp;successUrl=https%3A%2F%2Fpocketgull.com%2Fcheckout%3Ftier%3Dfoundry_agency%26paid%3D1%26session_id%3D%7BCHECKOUT_SESSION_ID%7D&amp;cancelUrl=https%3A%2F%2Ffont.pocketgull.app%2Fartisan_foundry.html%23pro-packs">License Agency Suite &mdash; $199 &rarr;</a>
+            <a class="btn-secondary" href="https://pocketgull.com/checkout?tier=foundry_agency">Or Checkout on pocketgull.com</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foundry-footer">
+    PocketGull LLC (Oregon Registry: 258869891) &bull; Engineered by Phil Gear &bull;
+    <a href="index.html">Master Specimen</a> &bull;
+    <a href="OFL.txt">SIL OFL 1.1</a> &bull;
+    <a href="https://pocketgull.com/foundry">pocketgull.com/foundry</a>
+  </footer>
+
+  <script src="js/artisan_foundry.js"></script>
+</body>
+</html>

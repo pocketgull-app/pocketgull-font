@@ -2521,6 +2521,50 @@ body.eco-dark-canopy {
   filter: grayscale(100%) contrast(1.15);
 }
 
+/* Artisan Foundry Collector Editions: Botanica v3 & Kintsugi 24k Gold COLR */
+@font-face {
+  font-family: 'PocketGull Botanica';
+  src: url('fonts/woff2/PocketGull-Botanica.woff2?v=4.0.0') format('woff2'),
+       url('fonts/ttf/PocketGull-Botanica.ttf?v=4.0.0') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PocketGull Kintsugi';
+  src: url('fonts/woff2/PocketGull-Kintsugi.woff2?v=4.0.0') format('woff2'),
+       url('fonts/ttf/PocketGull-Kintsugi.ttf?v=4.0.0') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PocketGull Kintsugi Gold';
+  src: url('fonts/foundry/PocketGull-KintsugiGold.ttf?v=4.0.0') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-palette-values --kintsugi-obsidian {
+  font-family: 'PocketGull Kintsugi Gold';
+  base-palette: 0;
+}
+@font-palette-values --kintsugi-washi {
+  font-family: 'PocketGull Kintsugi Gold';
+  base-palette: 1;
+}
+@font-palette-values --kintsugi-aizome {
+  font-family: 'PocketGull Kintsugi Gold';
+  base-palette: 2;
+}
+@font-palette-values --kintsugi-vermilion {
+  font-family: 'PocketGull Kintsugi Gold';
+  base-palette: 3;
+}
+
 /* Global Anti-Aliasing, Text-Rendering & Subpixel Smoothing Invariants */
 :root, html, body {
   -webkit-font-smoothing: antialiased;
