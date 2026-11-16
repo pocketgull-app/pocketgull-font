@@ -383,6 +383,63 @@
 
     </div>
 
+    <!-- Phanvas Genre Narrative Arc Generator & Beat Composer -->
+    <section class="cc-arc-card" id="ccNarrativeArcSection" aria-label="Phanvas Genre Narrative Arc Generator">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h2 style="font-size: 1.25rem; font-weight: 700; margin: 0 0 0.25rem 0; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+            <span>🎭 Phanvas Genre Narrative Arc Generator</span>
+            <span class="cc-brand-badge" id="ccArcStructureBadge" style="background: rgba(56, 189, 248, 0.14); color: var(--cc-accent-sky);">4-ACT NOIR TURN + ECHO</span>
+          </h2>
+          <p style="color: var(--cc-text-muted); font-size: 0.86rem; margin: 0;">
+            Synthesize a 5-beat genre story curve where dramatic tension drives PocketGull VF prosody (<code>wght</code>, <code>slnt</code>, <code>APTR</code>), Lead II cardiac pacing, and WebVTT export.
+          </p>
+        </div>
+        <div class="cc-pill-row">
+          <button type="button" class="cc-playback-btn" id="stageNarrativeArcBtn" style="background: rgba(6, 182, 212, 0.2); border-color: var(--cc-accent-cyan); color: var(--cc-accent-sky);">
+            ▶ Stage &amp; Play Arc on Monitor
+          </button>
+        </div>
+      </div>
+
+      <div class="cc-arc-controls-bar">
+        <div class="cc-control-group">
+          <label class="cc-control-label">
+            <span>Storytelling Genre Template</span>
+            <span class="cc-val-readout" id="activeArcGenreLabel">Noir Mystery</span>
+          </label>
+          <div class="cc-pill-row" id="arcGenrePills">
+            <button type="button" class="cc-pill-btn active" data-arc-genre="noir_mystery">🕵️ Noir Mystery</button>
+            <button type="button" class="cc-pill-btn" data-arc-genre="scifi_telemetry">🛸 Hard Sci-Fi</button>
+            <button type="button" class="cc-pill-btn" data-arc-genre="clinical_documentary">🩺 Medical Doc</button>
+            <button type="button" class="cc-pill-btn" data-arc-genre="folktale_awen">🌿 Highland Folktale</button>
+            <button type="button" class="cc-pill-btn" data-arc-genre="thriller_pulse">⚡ Psych Thriller</button>
+          </div>
+        </div>
+
+        <div class="cc-control-group">
+          <label class="cc-control-label" for="arcSeedInput">
+            <span>Story Premise / Anchor Motif</span>
+            <span class="cc-val-readout">OFFLINE SYNTHESIS</span>
+          </label>
+          <div class="cc-arc-seed-row">
+            <input type="text" id="arcSeedInput" class="cc-arc-seed-input" maxlength="48" placeholder="e.g., the harbor ledger, Relay Station 09...">
+            <button type="button" class="cc-playback-btn" id="generateArcBtn">↻ Synthesize</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cc-arc-canvas-wrap">
+        <div class="cc-control-label" style="font-size: 0.72rem;">
+          <span>Interactive Phanvas Tension Spline (Click Any Beat Node to Cue)</span>
+          <span class="cc-val-readout" id="ccArcPeakReadout">Peak Tension 92% · 64–138 BPM</span>
+        </div>
+        <svg class="cc-arc-svg" id="ccArcSvg" viewBox="0 0 800 175" role="img" aria-label="Genre Narrative Tension Curve"></svg>
+      </div>
+
+      <div class="cc-arc-beats-grid" id="ccArcBeatsList" role="list" aria-label="Generated Narrative Arc Beats"></div>
+    </section>
+
     <!-- Full-Width A/B Blink Comparator Card -->
     <section class="cc-ab-card" aria-label="A/B Typography Comparator">
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
@@ -904,10 +961,30 @@ class ClosedCaptionStudio {
     this.cardiacPacing = 'philocardia-pacing-72';
     this.cardiacPacingId = 'pace_72';
     this.safeAreaVisible = false;
+    this.activeCustomScene = null;
   }
 
-  getScene(id = this.currentSceneId) {
-    return BROADCAST_SCENES[id] || BROADCAST_SCENES.trauma_bay;
+  getScene(id) {
+    if (this.activeCustomScene && (!id || id === 'narrative_arc')) {
+      return this.activeCustomScene;
+    }
+    const targetId = id || this.currentSceneId;
+    return BROADCAST_SCENES[targetId] || BROADCAST_SCENES.trauma_bay;
+  }
+
+  setCustomScene(sceneObj) {
+    if (sceneObj && Array.isArray(sceneObj.cues) && sceneObj.cues.length > 0) {
+      this.activeCustomScene = sceneObj;
+      this.currentSceneId = 'narrative_arc';
+      this.currentCueIndex = 0;
+      this.rollupBuffer = [];
+      return this.activeCustomScene;
+    }
+    return null;
+  }
+
+  clearCustomScene() {
+    this.activeCustomScene = null;
   }
 
   getCurrentCue() {
@@ -929,6 +1006,7 @@ class ClosedCaptionStudio {
 
   setScene(id) {
     if (BROADCAST_SCENES[id]) {
+      this.activeCustomScene = null;
       this.currentSceneId = id;
       this.currentCueIndex = 0;
       this.rollupBuffer = [];
@@ -1041,6 +1119,21 @@ class ClosedCaptionStudio {
     }
     if (this.currentEmotion === 'relief') {
       return { bpm: 64, morphology: 'sinus', color: '#10b981', label: 'VAGAL RELIEF · 64 BPM SINUS', spo2: 99 };
+    }
+    if (!manualPacingOverride && this.activeCustomScene && this.currentSceneId === 'narrative_arc') {
+      const cue = this.getCurrentCue();
+      if (cue && typeof cue.bpm === 'number') {
+        const morph = cue.morphology || (cue.bpm >= 135 ? 'vtach' : cue.bpm >= 100 ? 'adenosine' : 'sinus');
+        const color = cue.bpm >= 135 ? '#ef4444' : cue.bpm >= 100 ? '#f59e0b' : '#10b981';
+        const spo2 = cue.bpm >= 135 ? 93 : cue.bpm >= 100 ? 96 : 99;
+        return {
+          bpm: cue.bpm,
+          morphology: morph,
+          color,
+          label: `${(cue.beatName || 'STORY BEAT').toUpperCase()} · ${cue.bpm} BPM`,
+          spo2
+        };
+      }
     }
     if (manualPacingOverride || this.currentSceneId !== 'trauma_bay') {
       if (this.cardiacPacingId === 'stillness') {
@@ -1184,6 +1277,141 @@ function renderPhilocardiaNodes(container, rawText, pacingClass = 'philocardia-p
   }
 }
 
+const NARRATIVE_ARC_GENRES = {
+  noir_mystery: {
+    id: 'noir_mystery',
+    name: 'Noir Mystery',
+    badge: 'KISHŌTENKETSU · SCOTOPIC NOIR',
+    structure: '4-Act Noir Turn + Echo',
+    defaultSeed: 'the harbor ledger',
+    defaultBlend: 'noir_shadow',
+    sceneClass: 'cc-scene-noir',
+    accent: '#38bdf8',
+    beats: [
+      { act: 'I · Hook', beatName: 'Rain & Ledger', speaker: 'NARRATOR (V.O.)', prosody: 'narrator', weight: 320, slant: -7.5, aptr: 60, tension: 24, bpm: 66, morphology: 'sinus', template: 'Midnight mist settles over {{SEED}} while dock lamps flicker on.' },
+      { act: 'II · Shift', beatName: 'Whispered Alibi', speaker: 'DETECTIVE', prosody: 'whisper', weight: 240, slant: -6, aptr: 70, tension: 48, bpm: 78, morphology: 'sinus', template: 'Check timecode 02:14 — someone rewrote {{SEED}} before dawn.' },
+      { act: 'III · Turn', beatName: 'Submerged Proof', speaker: 'AMBIENCE', prosody: 'soundfx', weight: 520, slant: 0, aptr: 80, tension: 76, bpm: 106, morphology: 'adenosine', icon: '🌧️', template: '[♪ sodium shutter snaps over {{SEED}}: 106 BPM pulse ♪]' },
+      { act: 'IV · Confrontation', beatName: 'The Missing Page', speaker: 'ELENA', prosody: 'urgent', weight: 760, slant: 0, aptr: 90, tension: 92, bpm: 138, morphology: 'vtach', template: 'Leave {{SEED}} in the vault — the harbor pilot already knows!' },
+      { act: 'V · Echo', beatName: 'Dawn Resolve', speaker: 'NARRATOR (V.O.)', prosody: 'whisper', weight: 300, slant: -6.5, aptr: 65, tension: 30, bpm: 64, morphology: 'sinus', template: 'Morning fog clears over {{SEED}}; only the inked margin remains.' }
+    ]
+  },
+  scifi_telemetry: {
+    id: 'scifi_telemetry',
+    name: 'Hard Sci-Fi Telemetry',
+    badge: 'FREYTAG PYRAMID · ORBITAL',
+    structure: '5-Beat Telemetry Escalation',
+    defaultSeed: 'Relay Station 09',
+    defaultBlend: 'clinical_teal',
+    sceneClass: 'cc-scene-aptn',
+    accent: '#22d3ee',
+    beats: [
+      { act: 'I · Exposition', beatName: 'Nominal Orbit', speaker: 'FLIGHT DECK', prosody: 'dialogue', weight: 400, slant: 0, aptr: 55, tension: 18, bpm: 64, morphology: 'sinus', template: '{{SEED}} telemetry locked at 0.02 Hz drift; hull pressure nominal.' },
+      { act: 'II · Rising', beatName: 'Phase Anomaly', speaker: 'SENSOR ARRAY', prosody: 'soundfx', weight: 540, slant: 0, aptr: 75, tension: 54, bpm: 98, morphology: 'adenosine', icon: '📡', template: '[♪ sub-band Doppler chime detected around {{SEED}} ♪]' },
+      { act: 'III · Climax', beatName: 'Containment Breach', speaker: 'COMMANDER', prosody: 'shout', weight: 880, slant: 0, aptr: 95, tension: 96, bpm: 162, morphology: 'vtach', template: 'VENT BUS B AT {{SEED}} NOW! OVERRIDE THRUST TO 104 kN!' },
+      { act: 'IV · Falling', beatName: 'Manual Trim', speaker: 'ENGINEER', prosody: 'urgent', weight: 660, slant: 0, aptr: 85, tension: 62, bpm: 108, morphology: 'adenosine', template: '{{SEED}} gimbal stabilized at 0.4 deg; coolant flow recovering.' },
+      { act: 'V · Denouement', beatName: 'Signal Silence', speaker: 'FLIGHT DECK', prosody: 'whisper', weight: 280, slant: -5, aptr: 60, tension: 22, bpm: 62, morphology: 'sinus', template: 'Horizon beacon at {{SEED}} steady. Crew breathing rate normal.' }
+    ]
+  },
+  clinical_documentary: {
+    id: 'clinical_documentary',
+    name: 'Field & Medical Doc',
+    badge: 'BRAIDED CASE ARC · ISMP',
+    structure: '5-Stage Clinical Vignette',
+    defaultSeed: 'Ward B · 12-Lead Monitor',
+    defaultBlend: 'clinical_teal',
+    sceneClass: 'cc-scene-trauma',
+    accent: '#10b981',
+    beats: [
+      { act: 'I · Baseline', beatName: 'Field Arrival', speaker: 'CLINICIAN', prosody: 'dialogue', weight: 400, slant: 0, aptr: 55, tension: 25, bpm: 74, morphology: 'sinus', template: 'Morning handoff at {{SEED}}: baseline SpO2 98%, clear airways.' },
+      { act: 'II · Complication', beatName: 'Rhythm Drift', speaker: 'TELEMETRY', prosody: 'soundfx', weight: 560, slant: 0, aptr: 75, tension: 60, bpm: 112, morphology: 'adenosine', icon: '🩺', template: '[♪ atrial premature alarm triggered on {{SEED}} ♪]' },
+      { act: 'III · Intervention', beatName: 'ISMP Order', speaker: 'ATTENDING', prosody: 'urgent', weight: 760, slant: 0, aptr: 90, tension: 90, bpm: 158, morphology: 'vtach', template: 'Verify 1.0 mg vial at {{SEED}} — administer 0.5 mL slow IV push!' },
+      { act: 'IV · Turn', beatName: 'Rate Conversion', speaker: 'NURSE', prosody: 'dialogue', weight: 450, slant: 0, aptr: 70, tension: 52, bpm: 92, morphology: 'adenosine', template: '{{SEED}} trace widening cleanly; patient reporting ease of breath.' },
+      { act: 'V · Resolution', beatName: 'Vagal Coherence', speaker: 'CLINICIAN', prosody: 'whisper', weight: 300, slant: -4, aptr: 60, tension: 18, bpm: 64, morphology: 'sinus', template: 'Normal sinus rhythm restored on {{SEED}} at 64 BPM.' }
+    ]
+  },
+  folktale_awen: {
+    id: 'folktale_awen',
+    name: 'Folktale / Highland Ballad',
+    badge: 'AWEN GROVE · HERO CIRCLE',
+    structure: '5-Step Threshold Circle',
+    defaultSeed: 'the moss clock tower',
+    defaultBlend: 'hearth_amber',
+    sceneClass: 'cc-scene-noir',
+    accent: '#f59e0b',
+    beats: [
+      { act: 'I · Hearth', beatName: 'Ordinary Grove', speaker: 'CHRONICLER', prosody: 'narrator', weight: 360, slant: -6, aptr: 55, tension: 20, bpm: 62, morphology: 'sinus', template: 'Long before roads crossed the ridge, mist kept {{SEED}} hidden.' },
+      { act: 'II · Threshold', beatName: 'Runic Summons', speaker: 'TRAVELLER', prosody: 'whisper', weight: 260, slant: -7, aptr: 65, tension: 45, bpm: 74, morphology: 'sinus', template: 'Listen — silver chimes are rising beneath the roots of {{SEED}}.' },
+      { act: 'III · Ordeal', beatName: 'Tempest & Trial', speaker: 'GROVE WIND', prosody: 'urgent', weight: 740, slant: 0, aptr: 85, tension: 86, bpm: 132, morphology: 'adenosine', icon: '🌿', template: 'Speak your true vow at {{SEED}} before the solstice tide turns!' },
+      { act: 'IV · Boon', beatName: 'Candlelight Pact', speaker: 'TRAVELLER', prosody: 'dialogue', weight: 420, slant: 0, aptr: 65, tension: 42, bpm: 72, morphology: 'sinus', template: 'The brass pendulum of {{SEED}} steadies beside an open lantern.' },
+      { act: 'V · Return', beatName: 'Stillness at Dusk', speaker: 'CHRONICLER', prosody: 'whisper', weight: 310, slant: -5, aptr: 60, tension: 16, bpm: 58, morphology: 'sinus', template: 'We carry warmth back down the trail, remembering {{SEED}}.' }
+    ]
+  },
+  thriller_pulse: {
+    id: 'thriller_pulse',
+    name: 'Psychological Thriller',
+    badge: 'SAWTOOTH ESCALATION · LIVE',
+    structure: '5-Beat Sawtooth Pulse',
+    defaultSeed: 'Platform 04',
+    defaultBlend: 'noir_shadow',
+    sceneClass: 'cc-scene-eas',
+    accent: '#f43f5e',
+    beats: [
+      { act: 'I · False Calm', beatName: 'Quiet Concourse', speaker: 'COMMUTER', prosody: 'dialogue', weight: 380, slant: 0, aptr: 55, tension: 30, bpm: 72, morphology: 'sinus', template: 'Only three passengers remain on {{SEED}} after the 23:40 express.' },
+      { act: 'II · Uncanny', beatName: 'Footstep Echo', speaker: 'SFX', prosody: 'soundfx', weight: 500, slant: 0, aptr: 75, tension: 66, bpm: 110, morphology: 'adenosine', icon: '⚡', template: '[♪ fluorescent ballast buzzes above {{SEED}} as a radio clicks ♪]' },
+      { act: 'III · Drop', beatName: 'False Relief', speaker: 'DISPATCH', prosody: 'whisper', weight: 250, slant: -7, aptr: 70, tension: 40, bpm: 80, morphology: 'sinus', template: 'All clear on {{SEED}}... wait, why is the stairwell camera dark?' },
+      { act: 'IV · Fracture', beatName: 'Peak Pursuit', speaker: 'VOICE (OFF)', prosody: 'shout', weight: 900, slant: 0, aptr: 95, tension: 98, bpm: 170, morphology: 'vtach', template: 'DO NOT OPEN THE SERVICE DOOR ON {{SEED}} — RUN!' },
+      { act: 'V · Aftershock', beatName: 'Cold Daylight', speaker: 'INSPECTOR', prosody: 'dialogue', weight: 420, slant: -3, aptr: 65, tension: 52, bpm: 84, morphology: 'sinus', template: 'Tape ends at 00:07 on {{SEED}}. Lock the archive before briefing.' }
+    ]
+  }
+};
+
+class NarrativeArcGenerator {
+  static getGenres() {
+    return Object.values(NARRATIVE_ARC_GENRES);
+  }
+
+  static generateArc(genreId = 'noir_mystery', rawSeed = '') {
+    const genre = NARRATIVE_ARC_GENRES[genreId] || NARRATIVE_ARC_GENRES.noir_mystery;
+    const cleanedSeed = (rawSeed || '').replace(/[\r\n<>]+/g, ' ').trim().slice(0, 48);
+    const seed = cleanedSeed || genre.defaultSeed;
+    const measurer = new ClosedCaptionStudio();
+
+    const cues = genre.beats.map((b) => {
+      const text = b.template.replace(/\{\{SEED\}\}/g, seed);
+      const autoWidth = measurer.calculateLineFit(text, 37);
+      return {
+        act: b.act,
+        beatName: b.beatName,
+        tension: b.tension,
+        bpm: b.bpm,
+        morphology: b.morphology,
+        speaker: b.speaker,
+        text,
+        prosody: b.prosody,
+        weight: b.weight,
+        width: autoWidth,
+        slant: b.slant,
+        aptr: b.aptr,
+        icon: b.icon
+      };
+    });
+
+    return {
+      id: 'narrative_arc',
+      genreId: genre.id,
+      genreName: genre.name,
+      title: `🎭 ${genre.name}: ${seed}`,
+      badge: genre.badge,
+      structure: genre.structure,
+      defaultBlend: genre.defaultBlend,
+      sceneClass: genre.sceneClass,
+      accent: genre.accent,
+      seed,
+      cues
+    };
+  }
+}
+
 // Global browser initializer
 if (typeof window !== 'undefined') {
   window.PocketGullCC = {
@@ -1194,6 +1422,8 @@ if (typeof window !== 'undefined') {
     SPATIAL_DIRECTIONS,
     TITTLE_VARIETIES,
     CARDIAC_PACING_PRESETS,
+    NARRATIVE_ARC_GENRES,
+    NarrativeArcGenerator,
     renderPhilocardiaNodes,
     ClosedCaptionStudio
   };
@@ -1395,7 +1625,7 @@ if (typeof window !== 'undefined') {
         textLineEl.style.letterSpacing = '0.015em';
       }
       if (autoProsody) {
-        applyFontSettings(cue.weight, cue.width, cue.slant, 50);
+        applyFontSettings(cue.weight, cue.width, cue.slant, cue.aptr || 50);
       }
 
       if (signalReadoutEl) {
@@ -1494,6 +1724,9 @@ if (typeof window !== 'undefined') {
         cue.slant || 0,
         aptrSlider.value
       );
+      if (typeof syncNarrativeBeatHighlight === 'function') {
+        syncNarrativeBeatHighlight();
+      }
     }
 
     // Scene Switcher
@@ -1511,7 +1744,7 @@ if (typeof window !== 'undefined') {
       activeSceneLabel.textContent = scene.title.replace(/^[^\s]+\s*/, '');
 
       // Show/hide Trauma ICU telemetry canvas & vitals bar
-      const showTraumaHud = sceneId === 'trauma_bay';
+      const showTraumaHud = sceneId === 'trauma_bay' || sceneId === 'narrative_arc';
       if (ecgCanvas) ecgCanvas.style.display = showTraumaHud ? 'block' : 'none';
       if (vitalsBar) vitalsBar.style.display = showTraumaHud ? 'flex' : 'none';
 
@@ -2013,7 +2246,240 @@ if (typeof window !== 'undefined') {
       });
     }
 
-    // Initial Render
+    // Phanvas Genre Narrative Arc Generator Wiring (100% Client-Side Safe DOM)
+    const arcSeedInput = document.getElementById('arcSeedInput');
+    const generateArcBtn = document.getElementById('generateArcBtn');
+    const stageNarrativeArcBtn = document.getElementById('stageNarrativeArcBtn');
+    const activeArcGenreLabel = document.getElementById('activeArcGenreLabel');
+    const ccArcStructureBadge = document.getElementById('ccArcStructureBadge');
+    const ccArcPeakReadout = document.getElementById('ccArcPeakReadout');
+    const ccArcSvg = document.getElementById('ccArcSvg');
+    const ccArcBeatsList = document.getElementById('ccArcBeatsList');
+
+    let selectedArcGenreId = 'noir_mystery';
+    let currentGeneratedArc = NarrativeArcGenerator.generateArc(selectedArcGenreId, '');
+
+    function syncNarrativeBeatHighlight() {
+      const isArcActive = studio.currentSceneId === 'narrative_arc' && Boolean(studio.activeCustomScene);
+      if (ccArcBeatsList) {
+        ccArcBeatsList.querySelectorAll('.cc-arc-beat-card').forEach((card, idx) => {
+          card.classList.toggle('active', isArcActive && idx === studio.currentCueIndex);
+        });
+      }
+      if (ccArcSvg) {
+        ccArcSvg.querySelectorAll('[data-arc-node]').forEach((node) => {
+          const idx = Number(node.getAttribute('data-arc-node'));
+          const active = isArcActive && idx === studio.currentCueIndex;
+          node.setAttribute('r', active ? '9' : '6');
+          node.setAttribute('stroke-width', active ? '3' : '2');
+        });
+      }
+    }
+
+    function activateNarrativeBeat(beatIndex = 0, autoPlay = false) {
+      if (!currentGeneratedArc) return;
+      document.querySelectorAll('[data-scene]').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('[data-emotion]').forEach(b => b.classList.remove('active'));
+      activeEmotionLabel.textContent = 'None (Default)';
+      studio.currentEmotion = null;
+      manualPacingOverride = false;
+
+      studio.setCustomScene(currentGeneratedArc);
+      studio.currentCueIndex = Math.max(0, Math.min(currentGeneratedArc.cues.length - 1, beatIndex));
+      sceneBg.className = `cc-scene-layer ${currentGeneratedArc.sceneClass}`;
+      activeSceneLabel.textContent = currentGeneratedArc.title;
+
+      if (ecgCanvas) ecgCanvas.style.display = 'block';
+      if (vitalsBar) vitalsBar.style.display = 'flex';
+      renderCue();
+      if (ecgMonitor) {
+        requestAnimationFrame(() => ecgMonitor.resize());
+      }
+      if (autoPlay && !isPlaying) {
+        startPlayback();
+      }
+    }
+
+    function renderNarrativeArcStudio(arc) {
+      if (!arc) return;
+      if (activeArcGenreLabel) activeArcGenreLabel.textContent = arc.genreName;
+      if (ccArcStructureBadge) ccArcStructureBadge.textContent = arc.structure.toUpperCase();
+
+      const bpms = arc.cues.map(c => c.bpm);
+      const tensions = arc.cues.map(c => c.tension);
+      const peakT = Math.max(...tensions);
+      const minBpm = Math.min(...bpms);
+      const maxBpm = Math.max(...bpms);
+      if (ccArcPeakReadout) {
+        ccArcPeakReadout.textContent = `Peak Tension ${peakT}% · ${minBpm}–${maxBpm} BPM`;
+      }
+
+      if (ccArcSvg) {
+        const svgNs = 'http://www.w3.org/2000/svg';
+        ccArcSvg.replaceChildren();
+        const width = 800;
+        const height = 175;
+        const padX = 56;
+        const padTop = 26;
+        const padBot = 34;
+        const plotW = width - padX * 2;
+        const plotH = height - padTop - padBot;
+
+        [25, 50, 75].forEach((pct) => {
+          const y = padTop + plotH * (1 - pct / 100);
+          const line = document.createElementNS(svgNs, 'line');
+          line.setAttribute('x1', String(padX));
+          line.setAttribute('x2', String(width - padX));
+          line.setAttribute('y1', y.toFixed(1));
+          line.setAttribute('y2', y.toFixed(1));
+          line.setAttribute('stroke', 'rgba(148, 163, 184, 0.16)');
+          line.setAttribute('stroke-dasharray', '4 4');
+          ccArcSvg.appendChild(line);
+        });
+
+        const pts = arc.cues.map((c, idx) => ({
+          x: padX + (plotW * idx) / Math.max(1, arc.cues.length - 1),
+          y: padTop + plotH * (1 - c.tension / 100),
+          cue: c,
+          idx
+        }));
+
+        let d = `M ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
+        for (let i = 0; i < pts.length - 1; i++) {
+          const p0 = pts[i];
+          const p1 = pts[i + 1];
+          const cx = ((p0.x + p1.x) / 2).toFixed(1);
+          d += ` C ${cx} ${p0.y.toFixed(1)}, ${cx} ${p1.y.toFixed(1)}, ${p1.x.toFixed(1)} ${p1.y.toFixed(1)}`;
+        }
+
+        const areaD = `${d} L ${pts[pts.length - 1].x.toFixed(1)} ${(padTop + plotH).toFixed(1)} L ${pts[0].x.toFixed(1)} ${(padTop + plotH).toFixed(1)} Z`;
+        const area = document.createElementNS(svgNs, 'path');
+        area.setAttribute('d', areaD);
+        area.setAttribute('fill', arc.accent || '#38bdf8');
+        area.setAttribute('fill-opacity', '0.12');
+        ccArcSvg.appendChild(area);
+
+        const curve = document.createElementNS(svgNs, 'path');
+        curve.setAttribute('d', d);
+        curve.setAttribute('fill', 'none');
+        curve.setAttribute('stroke', arc.accent || '#38bdf8');
+        curve.setAttribute('stroke-width', '3');
+        curve.setAttribute('stroke-linecap', 'round');
+        ccArcSvg.appendChild(curve);
+
+        pts.forEach((p) => {
+          const g = document.createElementNS(svgNs, 'g');
+          g.style.cursor = 'pointer';
+          g.addEventListener('click', () => activateNarrativeBeat(p.idx, false));
+
+          const circle = document.createElementNS(svgNs, 'circle');
+          circle.setAttribute('cx', p.x.toFixed(1));
+          circle.setAttribute('cy', p.y.toFixed(1));
+          circle.setAttribute('r', '6');
+          circle.setAttribute('fill', '#030712');
+          circle.setAttribute('stroke', arc.accent || '#38bdf8');
+          circle.setAttribute('stroke-width', '2');
+          circle.setAttribute('data-arc-node', String(p.idx));
+          g.appendChild(circle);
+
+          const labelTop = document.createElementNS(svgNs, 'text');
+          labelTop.setAttribute('x', p.x.toFixed(1));
+          labelTop.setAttribute('y', Math.max(13, p.y - 11).toFixed(1));
+          labelTop.setAttribute('text-anchor', 'middle');
+          labelTop.setAttribute('fill', '#e2e8f0');
+          labelTop.setAttribute('font-size', '11');
+          labelTop.setAttribute('font-family', 'PocketGull Mono, monospace');
+          labelTop.textContent = `${p.cue.tension}% · ${p.cue.bpm}bpm`;
+          g.appendChild(labelTop);
+
+          const labelBot = document.createElementNS(svgNs, 'text');
+          labelBot.setAttribute('x', p.x.toFixed(1));
+          labelBot.setAttribute('y', String(height - 10));
+          labelBot.setAttribute('text-anchor', 'middle');
+          labelBot.setAttribute('fill', '#94a3b8');
+          labelBot.setAttribute('font-size', '11');
+          labelBot.setAttribute('font-family', 'PocketGull Mono, monospace');
+          labelBot.textContent = p.cue.act;
+          g.appendChild(labelBot);
+
+          ccArcSvg.appendChild(g);
+        });
+      }
+
+      if (ccArcBeatsList) {
+        ccArcBeatsList.replaceChildren();
+        arc.cues.forEach((cue, idx) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'cc-arc-beat-card';
+          btn.setAttribute('role', 'listitem');
+          btn.addEventListener('click', () => activateNarrativeBeat(idx, false));
+
+          const head = document.createElement('div');
+          head.className = 'cc-arc-beat-head';
+          const actSpan = document.createElement('span');
+          actSpan.textContent = cue.act;
+          const tensionSpan = document.createElement('span');
+          tensionSpan.textContent = `${cue.bpm} BPM`;
+          head.appendChild(actSpan);
+          head.appendChild(tensionSpan);
+
+          const textDiv = document.createElement('div');
+          textDiv.className = 'cc-arc-beat-text';
+          textDiv.textContent = cue.text;
+
+          const metaDiv = document.createElement('div');
+          metaDiv.className = 'cc-arc-beat-meta';
+          metaDiv.textContent = `${cue.speaker} · wght ${cue.weight} · APTR ${cue.aptr}`;
+
+          btn.appendChild(head);
+          btn.appendChild(textDiv);
+          btn.appendChild(metaDiv);
+          ccArcBeatsList.appendChild(btn);
+        });
+      }
+
+      syncNarrativeBeatHighlight();
+    }
+
+    function synthesizeCurrentArc(stageToMonitor = false, autoPlay = false) {
+      const seed = arcSeedInput ? arcSeedInput.value : '';
+      currentGeneratedArc = NarrativeArcGenerator.generateArc(selectedArcGenreId, seed);
+      renderNarrativeArcStudio(currentGeneratedArc);
+      if (stageToMonitor) {
+        activateNarrativeBeat(0, autoPlay);
+      }
+    }
+
+    document.querySelectorAll('[data-arc-genre]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-arc-genre]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedArcGenreId = btn.dataset.arcGenre;
+        const stayStaged = studio.currentSceneId === 'narrative_arc';
+        synthesizeCurrentArc(stayStaged, false);
+      });
+    });
+
+    if (generateArcBtn) {
+      generateArcBtn.addEventListener('click', () => synthesizeCurrentArc(true, false));
+    }
+
+    if (stageNarrativeArcBtn) {
+      stageNarrativeArcBtn.addEventListener('click', () => synthesizeCurrentArc(true, true));
+    }
+
+    if (arcSeedInput) {
+      arcSeedInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          synthesizeCurrentArc(true, false);
+        }
+      });
+    }
+
+    // Initial Narrative Arc preview + Initial Broadcast Monitor Render
+    renderNarrativeArcStudio(currentGeneratedArc);
     switchScene('trauma_bay');
 
   </script>

@@ -328,4 +328,40 @@ test('Broadcast Teletext P888, Cue-Reactive Cardiac State, Reading Metrics & Web
   assert.ok(vtt.includes('"cv08" 1'), 'Must declare ISMP slashed-zero OpenType feature in ::cue');
 });
 
+test('Phanvas Genre Narrative Arc Generator: 5-Beat Genre Synthesis, Tension BPM & WebVTT Staging', async () => {
+  const {
+    NARRATIVE_ARC_GENRES,
+    NarrativeArcGenerator,
+    ClosedCaptionStudio
+  } = await import('../js/closed_caption_studio.js');
+
+  const expectedGenres = ['noir_mystery', 'scifi_telemetry', 'clinical_documentary', 'folktale_awen', 'thriller_pulse'];
+  assert.deepEqual(Object.keys(NARRATIVE_ARC_GENRES).sort(), expectedGenres.sort(), 'Must define all 5 narrative genres');
+
+  const arc = NarrativeArcGenerator.generateArc('scifi_telemetry', 'Signalman Mira <script>');
+  assert.equal(arc.id, 'narrative_arc');
+  assert.equal(arc.cues.length, 5, 'Generated narrative arc must produce 5 timecoded beats');
+  assert.ok(!arc.seed.includes('<script>'), 'Must strip angle brackets from story premise seed');
+  assert.ok(arc.cues[2].bpm >= 140, 'Climax beat must elevate telemetry BPM');
+  assert.ok(arc.cues.every(c => c.width >= 75 && c.width <= 100), 'All story beats must enforce 75..100% CPL width');
+
+  const studio = new ClosedCaptionStudio();
+  studio.setCustomScene(arc);
+  assert.equal(studio.getScene().cues.length, 5);
+  assert.equal(studio.resolveCueCardiacState().bpm, 64, 'Beat 0 Exposition BPM must map into cardiac monitor');
+
+  studio.nextCue();
+  studio.nextCue(); // Climax
+  assert.equal(studio.resolveCueCardiacState().morphology, 'vtach', 'Climax beat must drive high-acuity morphology');
+
+  const arcVtt = studio.generateWebVtt();
+  assert.ok(arcVtt.includes('Signalman Mira'), 'Staged narrative arc seed must export into WebVTT tracks');
+
+  // Verify HTML wiring uses zero innerHTML and contains Genre Narrative Arc controls
+  const ccHtml = fs.readFileSync(path.join(ROOT_DIR, 'closed_caption_studio.html'), 'utf8');
+  assert.ok(!ccHtml.includes('.innerHTML ='), 'closed_caption_studio.html must remain free of .innerHTML assignments');
+  assert.ok(ccHtml.includes('id="ccNarrativeArcSection"'), 'HTML must expose Phanvas Genre Narrative Arc section');
+  assert.ok(ccHtml.includes('id="ccArcSvg"'), 'HTML must expose interactive SVG tension spline');
+});
+
 

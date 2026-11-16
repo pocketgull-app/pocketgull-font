@@ -391,10 +391,30 @@ export class ClosedCaptionStudio {
     this.cardiacPacing = 'philocardia-pacing-72';
     this.cardiacPacingId = 'pace_72';
     this.safeAreaVisible = false;
+    this.activeCustomScene = null;
   }
 
-  getScene(id = this.currentSceneId) {
-    return BROADCAST_SCENES[id] || BROADCAST_SCENES.trauma_bay;
+  getScene(id) {
+    if (this.activeCustomScene && (!id || id === 'narrative_arc')) {
+      return this.activeCustomScene;
+    }
+    const targetId = id || this.currentSceneId;
+    return BROADCAST_SCENES[targetId] || BROADCAST_SCENES.trauma_bay;
+  }
+
+  setCustomScene(sceneObj) {
+    if (sceneObj && Array.isArray(sceneObj.cues) && sceneObj.cues.length > 0) {
+      this.activeCustomScene = sceneObj;
+      this.currentSceneId = 'narrative_arc';
+      this.currentCueIndex = 0;
+      this.rollupBuffer = [];
+      return this.activeCustomScene;
+    }
+    return null;
+  }
+
+  clearCustomScene() {
+    this.activeCustomScene = null;
   }
 
   getCurrentCue() {
@@ -416,6 +436,7 @@ export class ClosedCaptionStudio {
 
   setScene(id) {
     if (BROADCAST_SCENES[id]) {
+      this.activeCustomScene = null;
       this.currentSceneId = id;
       this.currentCueIndex = 0;
       this.rollupBuffer = [];
@@ -528,6 +549,21 @@ export class ClosedCaptionStudio {
     }
     if (this.currentEmotion === 'relief') {
       return { bpm: 64, morphology: 'sinus', color: '#10b981', label: 'VAGAL RELIEF · 64 BPM SINUS', spo2: 99 };
+    }
+    if (!manualPacingOverride && this.activeCustomScene && this.currentSceneId === 'narrative_arc') {
+      const cue = this.getCurrentCue();
+      if (cue && typeof cue.bpm === 'number') {
+        const morph = cue.morphology || (cue.bpm >= 135 ? 'vtach' : cue.bpm >= 100 ? 'adenosine' : 'sinus');
+        const color = cue.bpm >= 135 ? '#ef4444' : cue.bpm >= 100 ? '#f59e0b' : '#10b981';
+        const spo2 = cue.bpm >= 135 ? 93 : cue.bpm >= 100 ? 96 : 99;
+        return {
+          bpm: cue.bpm,
+          morphology: morph,
+          color,
+          label: `${(cue.beatName || 'STORY BEAT').toUpperCase()} · ${cue.bpm} BPM`,
+          spo2
+        };
+      }
     }
     if (manualPacingOverride || this.currentSceneId !== 'trauma_bay') {
       if (this.cardiacPacingId === 'stillness') {
@@ -672,6 +708,450 @@ export function renderPhilocardiaNodes(container, rawText, pacingClass = 'philoc
   }
 }
 
+export const NARRATIVE_ARC_GENRES = {
+  noir_mystery: {
+    id: 'noir_mystery',
+    name: 'Noir Mystery',
+    badge: 'KISHŌTENKETSU · SCOTOPIC NOIR',
+    structure: '4-Act Noir Turn + Echo',
+    defaultSeed: 'the harbor ledger',
+    defaultBlend: 'noir_shadow',
+    sceneClass: 'cc-scene-noir',
+    accent: '#38bdf8',
+    beats: [
+      {
+        act: 'I · Hook',
+        beatName: 'Rain & Ledger',
+        speaker: 'NARRATOR (V.O.)',
+        prosody: 'narrator',
+        weight: 320,
+        slant: -7.5,
+        aptr: 60,
+        tension: 24,
+        bpm: 66,
+        morphology: 'sinus',
+        template: 'Midnight mist settles over {{SEED}} while dock lamps flicker on.'
+      },
+      {
+        act: 'II · Shift',
+        beatName: 'Whispered Alibi',
+        speaker: 'DETECTIVE',
+        prosody: 'whisper',
+        weight: 240,
+        slant: -6,
+        aptr: 70,
+        tension: 48,
+        bpm: 78,
+        morphology: 'sinus',
+        template: 'Check timecode 02:14 — someone rewrote {{SEED}} before dawn.'
+      },
+      {
+        act: 'III · Turn',
+        beatName: 'Submerged Proof',
+        speaker: 'AMBIENCE',
+        prosody: 'soundfx',
+        weight: 520,
+        slant: 0,
+        aptr: 80,
+        tension: 76,
+        bpm: 106,
+        morphology: 'adenosine',
+        icon: '🌧️',
+        template: '[♪ sodium shutter snaps over {{SEED}}: 106 BPM pulse ♪]'
+      },
+      {
+        act: 'IV · Confrontation',
+        beatName: 'The Missing Page',
+        speaker: 'ELENA',
+        prosody: 'urgent',
+        weight: 760,
+        slant: 0,
+        aptr: 90,
+        tension: 92,
+        bpm: 138,
+        morphology: 'vtach',
+        template: 'Leave {{SEED}} in the vault — the harbor pilot already knows!'
+      },
+      {
+        act: 'V · Echo',
+        beatName: 'Dawn Resolve',
+        speaker: 'NARRATOR (V.O.)',
+        prosody: 'whisper',
+        weight: 300,
+        slant: -6.5,
+        aptr: 65,
+        tension: 30,
+        bpm: 64,
+        morphology: 'sinus',
+        template: 'Morning fog clears over {{SEED}}; only the inked margin remains.'
+      }
+    ]
+  },
+
+  scifi_telemetry: {
+    id: 'scifi_telemetry',
+    name: 'Hard Sci-Fi Telemetry',
+    badge: 'FREYTAG PYRAMID · ORBITAL',
+    structure: '5-Beat Telemetry Escalation',
+    defaultSeed: 'Relay Station 09',
+    defaultBlend: 'clinical_teal',
+    sceneClass: 'cc-scene-aptn',
+    accent: '#22d3ee',
+    beats: [
+      {
+        act: 'I · Exposition',
+        beatName: 'Nominal Orbit',
+        speaker: 'FLIGHT DECK',
+        prosody: 'dialogue',
+        weight: 400,
+        slant: 0,
+        aptr: 55,
+        tension: 18,
+        bpm: 64,
+        morphology: 'sinus',
+        template: '{{SEED}} telemetry locked at 0.02 Hz drift; hull pressure nominal.'
+      },
+      {
+        act: 'II · Rising',
+        beatName: 'Phase Anomaly',
+        speaker: 'SENSOR ARRAY',
+        prosody: 'soundfx',
+        weight: 540,
+        slant: 0,
+        aptr: 75,
+        tension: 54,
+        bpm: 98,
+        morphology: 'adenosine',
+        icon: '📡',
+        template: '[♪ sub-band Doppler chime detected around {{SEED}} ♪]'
+      },
+      {
+        act: 'III · Climax',
+        beatName: 'Containment Breach',
+        speaker: 'COMMANDER',
+        prosody: 'shout',
+        weight: 880,
+        slant: 0,
+        aptr: 95,
+        tension: 96,
+        bpm: 162,
+        morphology: 'vtach',
+        template: 'VENT BUS B AT {{SEED}} NOW! OVERRIDE THRUST TO 104 kN!'
+      },
+      {
+        act: 'IV · Falling',
+        beatName: 'Manual Trim',
+        speaker: 'ENGINEER',
+        prosody: 'urgent',
+        weight: 660,
+        slant: 0,
+        aptr: 85,
+        tension: 62,
+        bpm: 108,
+        morphology: 'adenosine',
+        template: '{{SEED}} gimbal stabilized at 0.4 deg; coolant flow recovering.'
+      },
+      {
+        act: 'V · Denouement',
+        beatName: 'Signal Silence',
+        speaker: 'FLIGHT DECK',
+        prosody: 'whisper',
+        weight: 280,
+        slant: -5,
+        aptr: 60,
+        tension: 22,
+        bpm: 62,
+        morphology: 'sinus',
+        template: 'Horizon beacon at {{SEED}} steady. Crew breathing rate normal.'
+      }
+    ]
+  },
+
+  clinical_documentary: {
+    id: 'clinical_documentary',
+    name: 'Field & Medical Doc',
+    badge: 'BRAIDED CASE ARC · ISMP',
+    structure: '5-Stage Clinical Vignette',
+    defaultSeed: 'Ward B · 12-Lead Monitor',
+    defaultBlend: 'clinical_teal',
+    sceneClass: 'cc-scene-trauma',
+    accent: '#10b981',
+    beats: [
+      {
+        act: 'I · Baseline',
+        beatName: 'Field Arrival',
+        speaker: 'CLINICIAN',
+        prosody: 'dialogue',
+        weight: 400,
+        slant: 0,
+        aptr: 55,
+        tension: 25,
+        bpm: 74,
+        morphology: 'sinus',
+        template: 'Morning handoff at {{SEED}}: baseline SpO2 98%, clear airways.'
+      },
+      {
+        act: 'II · Complication',
+        beatName: 'Rhythm Drift',
+        speaker: 'TELEMETRY',
+        prosody: 'soundfx',
+        weight: 560,
+        slant: 0,
+        aptr: 75,
+        tension: 60,
+        bpm: 112,
+        morphology: 'adenosine',
+        icon: '🩺',
+        template: '[♪ atrial premature alarm triggered on {{SEED}} ♪]'
+      },
+      {
+        act: 'III · Intervention',
+        beatName: 'ISMP Order',
+        speaker: 'ATTENDING',
+        prosody: 'urgent',
+        weight: 760,
+        slant: 0,
+        aptr: 90,
+        tension: 90,
+        bpm: 158,
+        morphology: 'vtach',
+        template: 'Verify 1.0 mg vial at {{SEED}} — administer 0.5 mL slow IV push!'
+      },
+      {
+        act: 'IV · Turn',
+        beatName: 'Rate Conversion',
+        speaker: 'NURSE',
+        prosody: 'dialogue',
+        weight: 450,
+        slant: 0,
+        aptr: 70,
+        tension: 52,
+        bpm: 92,
+        morphology: 'adenosine',
+        template: '{{SEED}} trace widening cleanly; patient reporting ease of breath.'
+      },
+      {
+        act: 'V · Resolution',
+        beatName: 'Vagal Coherence',
+        speaker: 'CLINICIAN',
+        prosody: 'whisper',
+        weight: 300,
+        slant: -4,
+        aptr: 60,
+        tension: 18,
+        bpm: 64,
+        morphology: 'sinus',
+        template: 'Normal sinus rhythm restored on {{SEED}} at 64 BPM.'
+      }
+    ]
+  },
+
+  folktale_awen: {
+    id: 'folktale_awen',
+    name: 'Folktale / Highland Ballad',
+    badge: 'AWEN GROVE · HERO CIRCLE',
+    structure: '5-Step Threshold Circle',
+    defaultSeed: 'the moss clock tower',
+    defaultBlend: 'hearth_amber',
+    sceneClass: 'cc-scene-noir',
+    accent: '#f59e0b',
+    beats: [
+      {
+        act: 'I · Hearth',
+        beatName: 'Ordinary Grove',
+        speaker: 'CHRONICLER',
+        prosody: 'narrator',
+        weight: 360,
+        slant: -6,
+        aptr: 55,
+        tension: 20,
+        bpm: 62,
+        morphology: 'sinus',
+        template: 'Long before roads crossed the ridge, mist kept {{SEED}} hidden.'
+      },
+      {
+        act: 'II · Threshold',
+        beatName: 'Runic Summons',
+        speaker: 'TRAVELLER',
+        prosody: 'whisper',
+        weight: 260,
+        slant: -7,
+        aptr: 65,
+        tension: 45,
+        bpm: 74,
+        morphology: 'sinus',
+        template: 'Listen — silver chimes are rising beneath the roots of {{SEED}}.'
+      },
+      {
+        act: 'III · Ordeal',
+        beatName: 'Tempest & Trial',
+        speaker: 'GROVE WIND',
+        prosody: 'urgent',
+        weight: 740,
+        slant: 0,
+        aptr: 85,
+        tension: 86,
+        bpm: 132,
+        morphology: 'adenosine',
+        icon: '🌿',
+        template: 'Speak your true vow at {{SEED}} before the solstice tide turns!'
+      },
+      {
+        act: 'IV · Boon',
+        beatName: 'Candlelight Pact',
+        speaker: 'TRAVELLER',
+        prosody: 'dialogue',
+        weight: 420,
+        slant: 0,
+        aptr: 65,
+        tension: 42,
+        bpm: 72,
+        morphology: 'sinus',
+        template: 'The brass pendulum of {{SEED}} steadies beside an open lantern.'
+      },
+      {
+        act: 'V · Return',
+        beatName: 'Stillness at Dusk',
+        speaker: 'CHRONICLER',
+        prosody: 'whisper',
+        weight: 310,
+        slant: -5,
+        aptr: 60,
+        tension: 16,
+        bpm: 58,
+        morphology: 'sinus',
+        template: 'We carry warmth back down the trail, remembering {{SEED}}.'
+      }
+    ]
+  },
+
+  thriller_pulse: {
+    id: 'thriller_pulse',
+    name: 'Psychological Thriller',
+    badge: 'SAWTOOTH ESCALATION · LIVE',
+    structure: '5-Beat Sawtooth Pulse',
+    defaultSeed: 'Platform 04',
+    defaultBlend: 'noir_shadow',
+    sceneClass: 'cc-scene-eas',
+    accent: '#f43f5e',
+    beats: [
+      {
+        act: 'I · False Calm',
+        beatName: 'Quiet Concourse',
+        speaker: 'COMMUTER',
+        prosody: 'dialogue',
+        weight: 380,
+        slant: 0,
+        aptr: 55,
+        tension: 30,
+        bpm: 72,
+        morphology: 'sinus',
+        template: 'Only three passengers remain on {{SEED}} after the 23:40 express.'
+      },
+      {
+        act: 'II · Uncanny',
+        beatName: 'Footstep Echo',
+        speaker: 'SFX',
+        prosody: 'soundfx',
+        weight: 500,
+        slant: 0,
+        aptr: 75,
+        tension: 66,
+        bpm: 110,
+        morphology: 'adenosine',
+        icon: '⚡',
+        template: '[♪ fluorescent ballast buzzes above {{SEED}} as a radio clicks ♪]'
+      },
+      {
+        act: 'III · Drop',
+        beatName: 'False Relief',
+        speaker: 'DISPATCH',
+        prosody: 'whisper',
+        weight: 250,
+        slant: -7,
+        aptr: 70,
+        tension: 40,
+        bpm: 80,
+        morphology: 'sinus',
+        template: 'All clear on {{SEED}}... wait, why is the stairwell camera dark?'
+      },
+      {
+        act: 'IV · Fracture',
+        beatName: 'Peak Pursuit',
+        speaker: 'VOICE (OFF)',
+        prosody: 'shout',
+        weight: 900,
+        slant: 0,
+        aptr: 95,
+        tension: 98,
+        bpm: 170,
+        morphology: 'vtach',
+        template: 'DO NOT OPEN THE SERVICE DOOR ON {{SEED}} — RUN!'
+      },
+      {
+        act: 'V · Aftershock',
+        beatName: 'Cold Daylight',
+        speaker: 'INSPECTOR',
+        prosody: 'dialogue',
+        weight: 420,
+        slant: -3,
+        aptr: 65,
+        tension: 52,
+        bpm: 84,
+        morphology: 'sinus',
+        template: 'Tape ends at 00:07 on {{SEED}}. Lock the archive before briefing.'
+      }
+    ]
+  }
+};
+
+export class NarrativeArcGenerator {
+  static getGenres() {
+    return Object.values(NARRATIVE_ARC_GENRES);
+  }
+
+  static generateArc(genreId = 'noir_mystery', rawSeed = '') {
+    const genre = NARRATIVE_ARC_GENRES[genreId] || NARRATIVE_ARC_GENRES.noir_mystery;
+    const cleanedSeed = (rawSeed || '').replace(/[\r\n<>]+/g, ' ').trim().slice(0, 48);
+    const seed = cleanedSeed || genre.defaultSeed;
+    const measurer = new ClosedCaptionStudio();
+
+    const cues = genre.beats.map((b) => {
+      const text = b.template.replace(/\{\{SEED\}\}/g, seed);
+      const autoWidth = measurer.calculateLineFit(text, 37);
+      return {
+        act: b.act,
+        beatName: b.beatName,
+        tension: b.tension,
+        bpm: b.bpm,
+        morphology: b.morphology,
+        speaker: b.speaker,
+        text,
+        prosody: b.prosody,
+        weight: b.weight,
+        width: autoWidth,
+        slant: b.slant,
+        aptr: b.aptr,
+        icon: b.icon
+      };
+    });
+
+    return {
+      id: 'narrative_arc',
+      genreId: genre.id,
+      genreName: genre.name,
+      title: `🎭 ${genre.name}: ${seed}`,
+      badge: genre.badge,
+      structure: genre.structure,
+      defaultBlend: genre.defaultBlend,
+      sceneClass: genre.sceneClass,
+      accent: genre.accent,
+      seed,
+      cues
+    };
+  }
+}
+
 // Global browser initializer
 if (typeof window !== 'undefined') {
   window.PocketGullCC = {
@@ -683,6 +1163,8 @@ if (typeof window !== 'undefined') {
     TITTLE_VARIETIES,
     CARDIAC_PACING_PRESETS,
     TELETEXT_SPEAKER_PALETTE,
+    NARRATIVE_ARC_GENRES,
+    NarrativeArcGenerator,
     getTeletextSpeakerStyle,
     renderPhilocardiaNodes,
     ClosedCaptionStudio
