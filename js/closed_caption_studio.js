@@ -253,8 +253,51 @@ export function buildVariationString(axes = {}) {
   const boum = clamp01(axes.boum, 0.1);
   const thrm = clamp01(axes.thrm, 0);
   const grav = clamp01(axes.grav, 0.1);
-  return `'wght' ${w}, 'wdth' ${wd}, 'slnt' ${sl}, 'opsz' ${opsz}, 'APTR' ${aptr}, 'SOFT' ${soft}, 'HLNG' ${hlng}, 'BOUM' ${boum}, 'THRM' ${thrm}, 'GRAV' ${grav}`;
+  const chis = Number.isFinite(Number(axes.chis)) ? Math.max(0, Math.min(45, Math.round(Number(axes.chis)))) : 0;
+  return `'wght' ${w}, 'wdth' ${wd}, 'slnt' ${sl}, 'opsz' ${opsz}, 'APTR' ${aptr}, 'SOFT' ${soft}, 'HLNG' ${hlng}, 'BOUM' ${boum}, 'THRM' ${thrm}, 'GRAV' ${grav}, 'CHIS' ${chis}`;
 }
+
+export const NAMED_VF_VARIATIONS = {
+  soft_light: { id: 'soft_light', name: 'Soft Light', badge: 'SOFT 1.0 · wght 300', weight: 300, width: 99, slant: -4.0, opsz: 18, aptr: 0.45, soft: 1.0, hlng: 0.65, boum: 0.40, thrm: 0.0, grav: 0.15, chis: 0, tracking: '0.03em' },
+  soft_regular: { id: 'soft_regular', name: 'Soft Regular', badge: 'SOFT 1.0 · wght 400', weight: 400, width: 100, slant: 0, opsz: 20, aptr: 0.60, soft: 1.0, hlng: 0.75, boum: 0.50, thrm: 0.0, grav: 0.20, chis: 0, tracking: '0.02em' },
+  soft_bold: { id: 'soft_bold', name: 'Soft Bold', badge: 'SOFT 1.0 · wght 700', weight: 700, width: 98, slant: 0, opsz: 28, aptr: 0.75, soft: 1.0, hlng: 0.55, boum: 0.35, thrm: 0.0, grav: 0.25, chis: 0, tracking: '0.005em' },
+  soft_black: { id: 'soft_black', name: 'Soft Black', badge: 'SOFT 1.0 · wght 900', weight: 900, width: 95, slant: 0, opsz: 42, aptr: 0.85, soft: 1.0, hlng: 0.40, boum: 0.25, thrm: 0.0, grav: 0.25, chis: 0, tracking: '-0.01em' },
+  healing_calm: { id: 'healing_calm', name: 'Healing Calm', badge: 'HLNG 1.0 · APTR 0.80', weight: 500, width: 100, slant: 0, opsz: 24, aptr: 0.80, soft: 0.60, hlng: 1.0, boum: 0.60, thrm: 0.0, grav: 0.25, chis: 0, tracking: '0.02em' },
+  recovery_72bpm: { id: 'recovery_72bpm', name: 'Recovery 72bpm', badge: 'HLNG 1.0 · BOUM 0.50', weight: 400, width: 100, slant: 0, opsz: 22, aptr: 0.65, soft: 0.75, hlng: 1.0, boum: 0.50, thrm: 0.0, grav: 0.30, chis: 0, tracking: '0.02em' },
+  chiseltip_45: { id: 'chiseltip_45', name: 'Chiseltip 45°', badge: 'CHIS 45° · wght 900', weight: 900, width: 96, slant: 0, opsz: 48, aptr: 0.60, soft: 0.0, hlng: 0.0, boum: 0.15, thrm: 0.0, grav: 0.10, chis: 45, tracking: '-0.01em' },
+  dyslexia_gravity: { id: 'dyslexia_gravity', name: 'Dyslexia Gravity', badge: 'GRAV 1.0 · BOUM 0.80', weight: 550, width: 100, slant: 0, opsz: 24, aptr: 0.85, soft: 0.35, hlng: 0.40, boum: 0.80, thrm: 0.0, grav: 1.0, chis: 0, tracking: '0.035em' }
+};
+
+export const CAPTION_FONT_VOICES = {
+  vf_humanist: {
+    id: 'vf_humanist',
+    name: 'PocketGull VF (16-Axis)',
+    cssFamily: '"PocketGull VF", "PocketGull", sans-serif',
+    defaultAxes: { soft: 0.25, hlng: 0.20, chis: 0 },
+    desc: 'Continuous clinical humanist variable master'
+  },
+  soft_rounded: {
+    id: 'soft_rounded',
+    name: 'PocketGull Soft (Felt Cushion)',
+    cssFamily: '"PocketGull VF", "PocketGull Soft", sans-serif',
+    defaultAxes: { soft: 1.0, hlng: 0.75, boum: 0.50, chis: 0 },
+    desc: 'Full 1.0 rounded felt terminals for gentle warmth & comfort'
+  },
+  serif_literary: {
+    id: 'serif_literary',
+    name: 'PocketGull Serif VF (Editorial)',
+    cssFamily: '"PocketGull Serif VF", "PocketGull Serif", Georgia, serif',
+    defaultAxes: { soft: 0.15, hlng: 0.30, chis: 0 },
+    desc: 'Literary & period drama companion voiceover face'
+  },
+  chiseltip_placard: {
+    id: 'chiseltip_placard',
+    name: 'PocketGull Chiseltip (Placard)',
+    cssFamily: '"PocketGull Chiseltip", "PocketGull VF", sans-serif',
+    defaultAxes: { weight: 900, soft: 0.0, hlng: 0.0, chis: 45 },
+    desc: '45° calligraphic black felt marker for titles & stark alarms'
+  }
+};
 
 export const PROSODY_PRESETS = {
   whisper: { weight: 240, slant: -7, aptr: 0.35, soft: 0.8, hlng: 0.6, boum: 0.3, thrm: 0, grav: 0.1, opsz: 18, letterSpacing: '0.04em', label: 'Whisper / Quiet (240)' },
@@ -444,6 +487,16 @@ export class ClosedCaptionStudio {
     this.includeDeconstructionNotes = false;
     this.deconstructionStance = 'negotiate';
     this.activeThinkerLens = 'postman';
+    this.fontVoice = 'vf_humanist';
+  }
+
+  setFontVoice(voiceId) {
+    if (CAPTION_FONT_VOICES[voiceId]) {
+      this.fontVoice = voiceId;
+      return CAPTION_FONT_VOICES[voiceId];
+    }
+    this.fontVoice = 'vf_humanist';
+    return CAPTION_FONT_VOICES.vf_humanist;
   }
 
   setIncludeDeconstructionNotes(enabled) {
@@ -663,13 +716,14 @@ export class ClosedCaptionStudio {
 
   generateWebVtt(customText = '') {
     const scene = this.getScene();
+    const voiceSpec = CAPTION_FONT_VOICES[this.fontVoice] || CAPTION_FONT_VOICES.vf_humanist;
     const lines = [
       'WEBVTT - PocketGull Variable Prosody & ISMP Clinical Broadcast Track',
-      `NOTE Scene: ${scene.title} | Protocol: ${this.mode.toUpperCase()} | License: SIL OFL 1.1`,
+      `NOTE Scene: ${scene.title} | Protocol: ${this.mode.toUpperCase()} | Voice: ${voiceSpec.name} | License: SIL OFL 1.1`,
       '',
       'STYLE',
       '::cue {',
-      '  font-family: "PocketGull VF", "PocketGull", sans-serif;',
+      `  font-family: ${voiceSpec.cssFamily};`,
       '  font-feature-settings: "zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1;',
       '  font-variant-numeric: slashed-zero;',
       '}',
@@ -1409,6 +1463,7 @@ export function inferCueAffect(text = '', parenthetical = '', speaker = '') {
 
   let emotionId = 'dialogue';
   let prosody = 'dialogue';
+  let instanceId = 'default';
   let base = {
     weight: 400,
     width: 100,
@@ -1420,16 +1475,32 @@ export function inferCueAffect(text = '', parenthetical = '', speaker = '') {
     boum: 0.15,
     thrm: 0.0,
     grav: 0.10,
+    chis: 0,
     letterSpacing: '0.015em',
     tension: 32,
     bpm: 72,
     morphology: 'sinus'
   };
 
-  if (hasBracketFx && !isPanic) {
+  if (/\b(chisel|chiseltip|placard|monument|epigraph|title card)\b/.test(cleanDir)) {
+    emotionId = 'panic';
+    prosody = 'shout';
+    instanceId = 'chiseltip_45';
+    base = { ...NAMED_VF_VARIATIONS.chiseltip_45, letterSpacing: NAMED_VF_VARIATIONS.chiseltip_45.tracking, tension: 86, bpm: 122, morphology: 'adenosine' };
+  } else if (/\b(pediatric|reassuring|firm comfort|soft bold)\b/.test(cleanDir)) {
+    emotionId = 'relief';
+    prosody = 'urgent';
+    instanceId = 'soft_bold';
+    base = { ...NAMED_VF_VARIATIONS.soft_bold, letterSpacing: NAMED_VF_VARIATIONS.soft_bold.tracking, tension: 28, bpm: 68, morphology: 'sinus' };
+  } else if (/\b(gravity|grounded|anchor|dyslexia)\b/.test(cleanDir)) {
+    emotionId = 'dialogue';
+    prosody = 'dialogue';
+    instanceId = 'dyslexia_gravity';
+    base = { ...NAMED_VF_VARIATIONS.dyslexia_gravity, letterSpacing: NAMED_VF_VARIATIONS.dyslexia_gravity.tracking, tension: 30, bpm: 72, morphology: 'sinus' };
+  } else if (hasBracketFx && !isPanic) {
     emotionId = 'soundfx';
     prosody = 'soundfx';
-    base = { ...PROSODY_PRESETS.soundfx, width: 100, tension: 58, bpm: 98, morphology: 'adenosine' };
+    base = { ...PROSODY_PRESETS.soundfx, width: 100, chis: 0, tension: 58, bpm: 98, morphology: 'adenosine' };
   } else if (isPanic && !isRelief) {
     emotionId = 'panic';
     prosody = isMostlyCaps ? 'shout' : 'urgent';
@@ -1445,6 +1516,7 @@ export function inferCueAffect(text = '', parenthetical = '', speaker = '') {
       boum: tok.boum,
       thrm: tok.thrm,
       grav: tok.grav,
+      chis: 0,
       letterSpacing: tok.tracking,
       tension: isMostlyCaps ? 94 : 80,
       bpm: isMostlyCaps ? 162 : 134,
@@ -1465,6 +1537,7 @@ export function inferCueAffect(text = '', parenthetical = '', speaker = '') {
       boum: tok.boum,
       thrm: tok.thrm,
       grav: tok.grav,
+      chis: 0,
       letterSpacing: tok.tracking,
       tension: 38,
       bpm: 64,
@@ -1473,6 +1546,7 @@ export function inferCueAffect(text = '', parenthetical = '', speaker = '') {
   } else if (isRelief) {
     emotionId = 'relief';
     prosody = 'dialogue';
+    instanceId = /\b(soft|gentle|soothing)\b/.test(cleanDir) ? 'soft_regular' : 'recovery_72bpm';
     const tok = EMOTION_TOKENS.relief;
     base = {
       weight: tok.weight,
@@ -1480,11 +1554,12 @@ export function inferCueAffect(text = '', parenthetical = '', speaker = '') {
       slant: tok.slant,
       opsz: tok.opsz,
       aptr: tok.aptr,
-      soft: tok.soft,
+      soft: instanceId === 'soft_regular' ? 1.0 : tok.soft,
       hlng: tok.hlng,
       boum: tok.boum,
       thrm: tok.thrm,
       grav: tok.grav,
+      chis: 0,
       letterSpacing: tok.tracking,
       tension: 20,
       bpm: 62,
@@ -1493,18 +1568,20 @@ export function inferCueAffect(text = '', parenthetical = '', speaker = '') {
   } else if (isIntimate) {
     emotionId = 'intimate';
     prosody = 'whisper';
+    instanceId = /\b(soft|tender|fragile|grief)\b/.test(cleanDir) ? 'soft_light' : 'default';
     const tok = EMOTION_TOKENS.intimate;
     base = {
-      weight: tok.weight,
+      weight: instanceId === 'soft_light' ? 300 : tok.weight,
       width: tok.width,
       slant: tok.slant,
       opsz: tok.opsz,
       aptr: tok.aptr,
-      soft: tok.soft,
+      soft: instanceId === 'soft_light' ? 1.0 : tok.soft,
       hlng: tok.hlng,
       boum: tok.boum,
       thrm: tok.thrm,
       grav: tok.grav,
+      chis: 0,
       letterSpacing: tok.tracking,
       tension: 44,
       bpm: 66,
@@ -1514,6 +1591,7 @@ export function inferCueAffect(text = '', parenthetical = '', speaker = '') {
 
   return {
     emotion: emotionId,
+    instance: instanceId,
     prosody,
     weight: clamp(Math.round(base.weight), 100, 900),
     width: clamp(Math.round(base.width), 75, 100),
@@ -1525,6 +1603,7 @@ export function inferCueAffect(text = '', parenthetical = '', speaker = '') {
     boum: clamp01(base.boum),
     thrm: clamp01(base.thrm),
     grav: clamp01(base.grav),
+    chis: clamp(Math.round(base.chis || 0), 0, 45),
     letterSpacing: base.letterSpacing || '0.015em',
     tension: clamp(Math.round(base.tension), 5, 100),
     bpm: clamp(Math.round(base.bpm), 48, 185),
@@ -1642,6 +1721,7 @@ export function parseScreenplayScript(rawScript = '', options = {}) {
       parenthetical: entry.direction,
       text: entry.text,
       emotion: affect.emotion,
+      instance: affect.instance,
       prosody: affect.prosody,
       weight: affect.weight,
       width,
@@ -1653,6 +1733,7 @@ export function parseScreenplayScript(rawScript = '', options = {}) {
       boum: affect.boum,
       thrm: affect.thrm,
       grav: affect.grav,
+      chis: affect.chis,
       letterSpacing: affect.letterSpacing,
       tension: affect.tension,
       bpm: affect.bpm,
@@ -1712,21 +1793,28 @@ export function applyRefinedAffectToScene(scene, refinedArray = []) {
       updatedEmotions.add(cue.emotion);
       return cue;
     }
+    const instKey = typeof patch.instance === 'string' ? patch.instance.trim() : '';
+    const instPreset = NAMED_VF_VARIATIONS[instKey] || null;
     const emo = validEmotions.has(patch.emotion) ? patch.emotion : cue.emotion;
     updatedEmotions.add(emo);
-    const sl = Number(clamp(patch.slant, -10.5, 0, cue.slant).toFixed(1));
+    const sl = Number(clamp(patch.slant, -10.5, 0, instPreset ? instPreset.slant : cue.slant).toFixed(1));
     const tension = Math.round(clamp(patch.tension, 5, 100, cue.tension));
     const bpm = Math.round(clamp(patch.bpm, 48, 185, tension >= 80 ? 156 : tension >= 55 ? 104 : 68));
     return {
       ...cue,
       emotion: emo,
+      instance: instPreset ? instPreset.id : (cue.instance || 'default'),
+      beatName: instPreset ? instPreset.name : cue.beatName,
       prosody: emo === 'intimate' ? 'whisper' : emo === 'panic' ? 'urgent' : emo === 'awe' ? 'narrator' : cue.prosody,
-      weight: Math.round(clamp(patch.weight, 100, 900, cue.weight)),
+      weight: Math.round(clamp(patch.weight, 100, 900, instPreset ? instPreset.weight : cue.weight)),
+      width: Math.round(clamp(patch.width, 75, 100, instPreset ? instPreset.width : cue.width)),
       slant: sl,
-      aptr: clamp01(patch.aptr, cue.aptr),
-      soft: clamp01(patch.soft, cue.soft),
-      hlng: clamp01(patch.hlng, cue.hlng),
-      boum: clamp01(patch.boum, cue.boum),
+      aptr: clamp01(patch.aptr, instPreset ? instPreset.aptr : cue.aptr),
+      soft: clamp01(patch.soft, instPreset ? instPreset.soft : cue.soft),
+      hlng: clamp01(patch.hlng, instPreset ? instPreset.hlng : cue.hlng),
+      boum: clamp01(patch.boum, instPreset ? instPreset.boum : cue.boum),
+      grav: clamp01(patch.grav, instPreset ? instPreset.grav : (cue.grav || 0.1)),
+      chis: Math.round(clamp(patch.chis, 0, 45, instPreset ? instPreset.chis : (cue.chis || 0))),
       tension,
       bpm,
       morphology: bpm >= 135 ? 'vtach' : bpm >= 100 ? 'adenosine' : 'sinus',
@@ -1764,8 +1852,10 @@ export async function refineScriptWithLocalModel(scene, config = {}) {
   }));
 
   const systemPrompt =
-    'Return ONLY valid JSON with key "beats": an array of objects {index, emotion, weight, slant, soft, hlng, boum, aptr, tension, bpm}. ' +
-    'emotion in ["intimate","panic","relief","awe","dialogue"]. weight 100..900, slant -10.5..0, soft/hlng/boum/aptr 0.0..1.0, tension 5..100, bpm 54..175.';
+    'Return ONLY valid JSON with key "beats": an array of objects {index, emotion, instance, weight, width, slant, soft, hlng, boum, aptr, grav, chis, tension, bpm}. ' +
+    'emotion in ["intimate","panic","relief","awe","dialogue"]. ' +
+    'instance in ["soft_light","soft_regular","soft_bold","soft_black","healing_calm","recovery_72bpm","chiseltip_45","dyslexia_gravity","default"]. ' +
+    'weight 100..900, width 75..100, slant -10.5..0, soft/hlng/boum/aptr/grav 0.0..1.0, chis 0..45, tension 5..100, bpm 54..175.';
   const isOllamaNative = endpoint.includes('/api/chat');
   const body = isOllamaNative
     ? {
@@ -1826,6 +1916,8 @@ if (typeof window !== 'undefined') {
   window.PocketGullCC = {
     normalizeAptr,
     buildVariationString,
+    NAMED_VF_VARIATIONS,
+    CAPTION_FONT_VOICES,
     SCREENPLAY_SAMPLE_PRESETS,
     inferCueAffect,
     parseScreenplayScript,

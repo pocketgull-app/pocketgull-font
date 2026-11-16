@@ -551,6 +551,50 @@ test('Hugging Face Gemma Prosody Kit: Model Card, QLoRA Trainer, Modelfile & SFT
   assert.ok(b0.weight >= 100 && b0.weight <= 900);
   assert.ok(b0.aptr >= 0 && b0.aptr <= 1);
   assert.ok(b0.soft >= 0 && b0.soft <= 1);
+  assert.ok(typeof b0.instance === 'string' && b0.instance.length > 0, 'SFT records must label named variation instance');
+  assert.ok(b0.chis >= 0 && b0.chis <= 45, 'SFT records must bound CHIS angle to 0..45');
+  assert.ok(b0.grav >= 0 && b0.grav <= 1, 'SFT records must bound GRAV to 0..1');
+});
+
+test('Soft & Named Variations + Companion Superfamily Script Voices', async () => {
+  const {
+    NAMED_VF_VARIATIONS,
+    CAPTION_FONT_VOICES,
+    buildVariationString,
+    inferCueAffect,
+    ClosedCaptionStudio
+  } = await import('../js/closed_caption_studio.js');
+
+  for (const key of ['soft_light', 'soft_regular', 'soft_bold', 'soft_black', 'healing_calm', 'recovery_72bpm', 'chiseltip_45', 'dyslexia_gravity']) {
+    assert.ok(NAMED_VF_VARIATIONS[key], `Must define named fvar variation ${key}`);
+  }
+  assert.equal(NAMED_VF_VARIATIONS.soft_black.soft, 1.0);
+  assert.equal(NAMED_VF_VARIATIONS.soft_black.weight, 900);
+  assert.equal(NAMED_VF_VARIATIONS.chiseltip_45.chis, 45);
+
+  const chiselStr = buildVariationString(NAMED_VF_VARIATIONS.chiseltip_45);
+  assert.ok(chiselStr.includes("'CHIS' 45"), 'buildVariationString must emit CHIS nib angle axis');
+
+  const pedAffect = inferCueAffect('You were brave today.', 'pediatric comfort, warm reassurance', 'NURSE');
+  assert.equal(pedAffect.instance, 'soft_bold', 'Pediatric warm reassurance should target soft_bold variation');
+  assert.equal(pedAffect.soft, 1.0);
+
+  const chiselAffect = inferCueAffect('CHAPTER IV · WINTER WATCH', 'chiseled placard epigraph', 'TITLE');
+  assert.equal(chiselAffect.instance, 'chiseltip_45');
+  assert.equal(chiselAffect.chis, 45);
+
+  const studio = new ClosedCaptionStudio();
+  assert.equal(Object.keys(CAPTION_FONT_VOICES).length, 4, 'Must define all 4 Superfamily script voices');
+  const serifVoice = studio.setFontVoice('serif_literary');
+  assert.ok(serifVoice.cssFamily.includes('PocketGull Serif VF'));
+  const vttSerif = studio.generateWebVtt();
+  assert.ok(vttSerif.includes('PocketGull Serif VF'), 'WebVTT export must use selected companion script voice');
+
+  const ccHtml = fs.readFileSync(path.join(ROOT_DIR, 'closed_caption_studio.html'), 'utf8');
+  assert.ok(ccHtml.includes('id="gravSlider"'), 'HTML must expose GRAV slider');
+  assert.ok(ccHtml.includes('id="chisSlider"'), 'HTML must expose CHIS slider');
+  assert.ok(ccHtml.includes('id="ccVariationPills"'), 'HTML must expose Named fvar Variation pills');
+  assert.ok(ccHtml.includes('id="ccFontVoicePills"'), 'HTML must expose Companion Superfamily Voice pills');
 });
 
 

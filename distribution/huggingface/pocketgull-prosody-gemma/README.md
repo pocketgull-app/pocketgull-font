@@ -32,12 +32,16 @@ Given a JSON list of dialogue beats (`speaker`, `direction`, `text`), the model 
     {
       "index": 0,
       "emotion": "intimate",
-      "weight": 240,
-      "slant": -6.5,
-      "soft": 0.85,
-      "hlng": 0.70,
-      "boum": 0.45,
-      "aptr": 0.35,
+      "instance": "soft_light",
+      "weight": 300,
+      "width": 99,
+      "slant": -4.0,
+      "soft": 1.0,
+      "hlng": 0.65,
+      "boum": 0.40,
+      "aptr": 0.45,
+      "grav": 0.15,
+      "chis": 0,
       "tension": 44,
       "bpm": 66
     }
@@ -45,15 +49,19 @@ Given a JSON list of dialogue beats (`speaker`, `direction`, `text`), the model 
 }
 ```
 
-### Axis Bounds (`PocketGull-VF.ttf`)
-| Axis | Bounds | Role in Emotion |
+### Axis & Variation Bounds (`PocketGull-VF.ttf`)
+| Axis | Bounds | Role in Emotion & Variation |
 | :--- | :--- | :--- |
-| `weight` (`wght`) | `100 .. 900` | Whisper delicacy (`240`) to Trauma/Alert urgency (`850+`) |
+| `instance` | Named `fvar` | `soft_light`, `soft_regular`, `soft_bold`, `soft_black`, `healing_calm`, `recovery_72bpm`, `chiseltip_45`, `dyslexia_gravity`, `default` |
+| `weight` (`wght`) | `100 .. 900` | Whisper delicacy (`240`) / Soft Light (`300`) to Alert (`850`) / Chiseltip (`900`) |
+| `width` (`wdth`) | `75 .. 100` | Line-fitting compression under urgent alarms |
 | `slant` (`slnt`) | `-10.5 .. 0` | Confessional / internal oblique (`-6.5`) |
-| `SOFT` | `0.0 .. 1.0` | Felt-marker rounded terminals (`0.85+` soothing vs. `0.0` sharp alert) |
-| `HLNG` | `0.0 .. 1.0` | Warm humanist healing curvature (`1.0` Vagal Relief) |
+| `SOFT` | `0.0 .. 1.0` | Felt-marker rounded terminals (`1.0` across all Soft family weights vs. `0.0` crisp alert) |
+| `HLNG` | `0.0 .. 1.0` | Warm humanist healing curvature (`1.0` Healing Calm / Vagal Relief) |
 | `BOUM` | `0.0 .. 1.0` | Open Bouma letterform body expansion (`0.90` Cosmic Awe) |
 | `APTR` | `0.0 .. 1.0` | Louise Sloan counter aperture anti-bloom (`0.35` intimate .. `1.0` wide) |
+| `GRAV` | `0.0 .. 1.0` | Heavy baseline gravity anchor (`1.0` Dyslexia Gravity) |
+| `CHIS` | `0 .. 45` | Broad 45° chisel-tip nib angle (`45` dramatic placards & chapter titles) |
 
 ## Negative Space & Privacy Boundaries
 - Runs **100% locally** (`127.0.0.1` via Ollama or llama.cpp) so unpublished screenplays and clinical simulation scripts never egress to external APIs.
