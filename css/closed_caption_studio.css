@@ -1076,3 +1076,110 @@ body.cc-studio-body {
   font-size: 0.67rem;
   color: var(--cc-text-muted);
 }
+
+/* PHL 197 Manufacturing Reality Deconstruction & Framing Comparator */
+.cc-decon-card {
+  grid-column: 1 / -1;
+  background: var(--cc-surface);
+  border: 1px solid var(--cc-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.cc-framing-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 820px) {
+  .cc-framing-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cc-framing-pane {
+  border-radius: 10px;
+  padding: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.cc-framing-infotainment {
+  background: linear-gradient(155deg, rgba(127, 29, 29, 0.36), rgba(9, 9, 11, 0.96));
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  box-shadow: 0 8px 24px rgba(185, 28, 28, 0.18);
+}
+
+.cc-framing-clinical {
+  background: linear-gradient(155deg, rgba(6, 78, 59, 0.25), rgba(3, 7, 18, 0.96));
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.12);
+}
+
+.cc-framing-sample-infotainment {
+  font-family: var(--cc-font-sans);
+  font-size: 1.22rem;
+  line-height: 1.25;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  font-weight: 890;
+  font-stretch: 84%;
+  font-variation-settings: 'wght' 890, 'wdth' 84, 'slnt' 0, 'APTR' 95;
+  color: #fef2f2;
+  background: rgba(185, 28, 28, 0.88);
+  padding: 0.75rem 0.9rem;
+  border-left: 4px solid #fde047;
+  border-radius: 4px;
+}
+
+.cc-framing-sample-clinical {
+  font-family: var(--cc-font-sans);
+  font-size: 1.22rem;
+  line-height: 1.45;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-variation-settings: 'wght' 400, 'wdth' 100, 'slnt' 0, 'APTR' 70;
+  font-feature-settings: "zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1;
+  font-variant-numeric: slashed-zero;
+  color: #f8fafc;
+  background: rgba(15, 23, 42, 0.85);
+  padding: 0.75rem 0.9rem;
+  border-left: 4px solid #10b981;
+  border-radius: 4px;
+}
+
+.cc-decon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.85rem;
+}
+
+.cc-decon-cell {
+  background: #030712;
+  border: 1px solid var(--cc-border);
+  border-radius: 8px;
+  padding: 0.8rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.cc-decon-cell-title {
+  font-family: var(--cc-font-mono);
+  font-size: 0.7rem;
+  color: var(--cc-accent-amber);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+
+.cc-decon-cell-body {
+  font-size: 0.84rem;
+  color: var(--cc-text);
+  line-height: 1.42;
+}

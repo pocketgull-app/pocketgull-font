@@ -440,6 +440,100 @@
       <div class="cc-arc-beats-grid" id="ccArcBeatsList" role="list" aria-label="Generated Narrative Arc Beats"></div>
     </section>
 
+    <!-- PHL 197: Manufacturing Reality Deconstruction & Infotainment vs Clinical Framing -->
+    <section class="cc-decon-card" id="ccPhl197Section" aria-label="Manufacturing Reality Deconstruction Lens">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h2 style="font-size: 1.22rem; font-weight: 700; margin: 0 0 0.25rem 0; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+            <span>🔍 Manufacturing Reality (PHL 197): Deconstruction &amp; Framing Proof</span>
+            <span class="cc-brand-badge" id="ccDeconFrameBadge" style="background: rgba(245, 158, 11, 0.14); color: var(--cc-accent-amber); border-color: rgba(245, 158, 11, 0.35);">DELIBERATIVE BASELINE</span>
+          </h2>
+          <p style="color: var(--cc-text-muted); font-size: 0.85rem; margin: 0;">
+            Compare how identical prose shifts authority under an <strong>Infotainment Chyron</strong> vs. <strong>Clinical Truth</strong>, then interrogate the cue via the PHL 197 7-lens rubric (<em>"How do I know?"</em>).
+          </p>
+        </div>
+        <div class="cc-pill-row">
+          <button type="button" class="cc-playback-btn" id="toggleDeconVttBtn" aria-pressed="false">
+            📝 WebVTT NOTE Rubric: OFF
+          </button>
+        </div>
+      </div>
+
+      <!-- Infotainment vs Clinical Truth A/B Framing Split -->
+      <div class="cc-framing-split">
+        <div class="cc-framing-pane cc-framing-infotainment">
+          <div class="cc-ab-header">
+            <span style="color: #fca5a5;">Infotainment Chyron (Urgency Frame)</span>
+            <span style="color: #fde047;">wght 890 · wdth 84% · ALL-CAPS</span>
+          </div>
+          <div class="cc-framing-sample-infotainment" id="ccInfotainmentSample">Patient in severe ventricular tachycardia. Pulse is thready.</div>
+          <div style="font-family: var(--cc-font-mono); font-size: 0.72rem; color: #fecaca;">
+            Postman / Baudrillard Frame: Visual compression + alarm red nudge visceral reaction before source check.
+          </div>
+        </div>
+
+        <div class="cc-framing-pane cc-framing-clinical">
+          <div class="cc-ab-header">
+            <span style="color: #6ee7b7;">Clinical / Dialogical Truth Frame</span>
+            <span style="color: #38bdf8;">wght 400 · wdth 100% · ISMP 0̸ / l / I</span>
+          </div>
+          <div class="cc-framing-sample-clinical" id="ccClinicalTruthSample">Patient in severe ventricular tachycardia. Pulse is thready.</div>
+          <div style="font-family: var(--cc-font-mono); font-size: 0.72rem; color: #a7f3d0;">
+            Gleick SNR Frame: Optical apertures + disambiguated numerals preserve working memory to ask "How do I know?"
+          </div>
+        </div>
+      </div>
+
+      <!-- Stance & Syllabus Thinker Controls -->
+      <div class="cc-arc-controls-bar" style="align-items: center;">
+        <div class="cc-control-group">
+          <label class="cc-control-label">
+            <span>Personal Perception Stance (PHL 197)</span>
+            <span class="cc-val-readout" id="activeStanceLabel">Negotiate</span>
+          </label>
+          <div class="cc-pill-row" id="stancePills">
+            <button type="button" class="cc-pill-btn" data-stance="assent">✓ Assent</button>
+            <button type="button" class="cc-pill-btn active" data-stance="negotiate">⚖️ Negotiate</button>
+            <button type="button" class="cc-pill-btn" data-stance="resist">✋ Resist</button>
+          </div>
+        </div>
+
+        <div class="cc-control-group">
+          <label class="cc-control-label">
+            <span>Philosophical Lens</span>
+            <span class="cc-val-readout" id="activeThinkerLabel">Neil Postman</span>
+          </label>
+          <div class="cc-pill-row" id="thinkerPills">
+            <button type="button" class="cc-pill-btn active" data-thinker="postman">📺 Postman</button>
+            <button type="button" class="cc-pill-btn" data-thinker="mcluhan">🪩 McLuhan</button>
+            <button type="button" class="cc-pill-btn" data-thinker="gleick">📡 Gleick</button>
+            <button type="button" class="cc-pill-btn" data-thinker="baudrillard">🪞 Baudrillard</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4-Slot Deconstruction Matrix -->
+      <div class="cc-decon-grid" id="ccDeconMatrix">
+        <div class="cc-decon-cell">
+          <div class="cc-decon-cell-title">1. Source &amp; Intent</div>
+          <div class="cc-decon-cell-body" id="deconSourceVal">—</div>
+        </div>
+        <div class="cc-decon-cell">
+          <div class="cc-decon-cell-title">2. Product &amp; Conventions</div>
+          <div class="cc-decon-cell-body" id="deconProductVal">—</div>
+        </div>
+        <div class="cc-decon-cell">
+          <div class="cc-decon-cell-title">3. Audience &amp; Stance</div>
+          <div class="cc-decon-cell-body" id="deconAudienceVal">—</div>
+        </div>
+        <div class="cc-decon-cell">
+          <div class="cc-decon-cell-title">4. "How Do I Know?" &amp; Lens</div>
+          <div class="cc-decon-cell-body" id="deconVerifyVal">—</div>
+          <div class="cc-decon-cell-body" id="deconThinkerNote" style="color: var(--cc-accent-sky); font-size: 0.76rem; margin-top: 4px;">—</div>
+        </div>
+      </div>
+    </section>
+
     <!-- Full-Width A/B Blink Comparator Card -->
     <section class="cc-ab-card" aria-label="A/B Typography Comparator">
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
@@ -962,6 +1056,28 @@ class ClosedCaptionStudio {
     this.cardiacPacingId = 'pace_72';
     this.safeAreaVisible = false;
     this.activeCustomScene = null;
+    this.includeDeconstructionNotes = false;
+    this.deconstructionStance = 'negotiate';
+    this.activeThinkerLens = 'postman';
+  }
+
+  setIncludeDeconstructionNotes(enabled) {
+    this.includeDeconstructionNotes = Boolean(enabled);
+    return this.includeDeconstructionNotes;
+  }
+
+  setDeconstructionStance(stance) {
+    if (['assent', 'resist', 'negotiate'].includes(stance)) {
+      this.deconstructionStance = stance;
+    }
+    return this.deconstructionStance;
+  }
+
+  setThinkerLens(thinkerId) {
+    if (PHL197_THINKER_LENSES[thinkerId]) {
+      this.activeThinkerLens = thinkerId;
+    }
+    return PHL197_THINKER_LENSES[this.activeThinkerLens];
   }
 
   getScene(id) {
@@ -1190,11 +1306,21 @@ class ClosedCaptionStudio {
       ? [{ speaker: 'CUSTOM', text: customText.trim(), prosody: 'dialogue', weight: 400, width: this.calculateLineFit(customText.trim(), 37), slant: 0 }]
       : scene.cues;
 
+    if (this.includeDeconstructionNotes) {
+      const thinker = PHL197_THINKER_LENSES[this.activeThinkerLens] || PHL197_THINKER_LENSES.postman;
+      lines.push(`NOTE [PHL-197 DECONSTRUCTION] Lens: ${thinker.name} | Stance: ${this.deconstructionStance.toUpperCase()} | Prompt: "How do I know?"`);
+      lines.push('');
+    }
+
     const stepSec = 3.4 / (this.speedMultiplier || 1.0);
     cues.forEach((c, idx) => {
       const t0 = idx * stepSec;
       const t1 = (idx + 1) * stepSec - 0.12;
       const cls = c.prosody && ['whisper', 'urgent', 'shout'].includes(c.prosody) ? `.${c.prosody}` : '';
+      if (this.includeDeconstructionNotes) {
+        const decon = evaluateDeconstructionLens(c, scene, this.deconstructionStance, this.activeThinkerLens);
+        lines.push(`NOTE [PHL-197 Cue ${idx + 1}] Frame=${decon.framingMode} | How do I know? ${decon.howDoIKnow}`);
+      }
       lines.push(`${idx + 1}`);
       lines.push(`${formatTs(t0)} --> ${formatTs(Math.max(t0 + 0.5, t1))} line:85% align:${this.currentSpatialDirection}`);
       lines.push(`<v${cls} ${c.speaker}>${c.text}</v>`);
@@ -1412,6 +1538,79 @@ class NarrativeArcGenerator {
   }
 }
 
+const PHL197_STANCES = {
+  assent: { id: 'assent', label: 'Assent (Accept Claim)', desc: 'Provisional agreement after checking evidence and framing.' },
+  negotiate: { id: 'negotiate', label: 'Negotiate (Separate Tone vs. Claim)', desc: 'Accept verifiable facts while stripping typographic or emotional spin.' },
+  resist: { id: 'resist', label: 'Resist (Reject Manufactured Frame)', desc: 'Challenge the implicit urgency, ideology, or unverified source authority.' }
+};
+
+const PHL197_THINKER_LENSES = {
+  postman: {
+    id: 'postman',
+    name: 'Neil Postman · Amusing Ourselves to Death',
+    thesis: 'Electronic broadcast turns complex inquiry into emotional entertainment.',
+    question: 'Does this typography invite slow verification, or demand immediate visceral arousal?'
+  },
+  mcluhan: {
+    id: 'mcluhan',
+    name: 'Marshall McLuhan · The Medium is the Massage',
+    thesis: 'The medium alters sensory ratios before the audience evaluates content.',
+    question: 'What assumptions about authority or urgency are baked into the font weight and scrim?'
+  },
+  gleick: {
+    id: 'gleick',
+    name: 'James Gleick · The Information',
+    thesis: 'Channel capacity and symbol disambiguation decide whether truth survives noise.',
+    question: 'Are digits and lookalikes (0/O, 1/l/I, Z/2) legible without distortion under stress?'
+  },
+  baudrillard: {
+    id: 'baudrillard',
+    name: 'Jean Baudrillard · Hyperreality',
+    thesis: 'Simulations and aesthetic codes can feel more real than underlying reality.',
+    question: 'Are the story beats or chyron alarms pointing to reality, or manufacturing an artificial crisis?'
+  }
+};
+
+function evaluateDeconstructionLens(cue, scene, stance = 'negotiate', thinkerId = 'postman') {
+  const activeCue = cue || { speaker: 'UNKNOWN', text: '', prosody: 'dialogue', weight: 400, width: 100, slant: 0, aptr: 50 };
+  const activeScene = scene || BROADCAST_SCENES.trauma_bay;
+  const w = Number(activeCue.weight || 400);
+  const wd = Number(activeCue.width || 100);
+  const sl = Number(activeCue.slant || 0);
+  const text = activeCue.text || '';
+  const hasAllCaps = text.length > 6 && text === text.toUpperCase() && /[A-Z]/.test(text);
+  const hasDosageOrNumber = /\d+(?:\.\d+)?\s*(?:mg|ml|bpm|hz|kn|km\/h|%|am|pm)/i.test(text);
+
+  let framingMode = 'Deliberative Baseline';
+  let conventionStatus = 'Balanced documentary convention — neutral stroke weight leaves cognitive room.';
+  if (w >= 700 || hasAllCaps || activeCue.prosody === 'shout') {
+    framingMode = 'High-Arousal Chyron / Alarm';
+    conventionStatus = 'Broadcast urgency convention: condensed/heavy strokes compress time and nudge compliance.';
+  } else if (activeCue.prosody === 'soundfx') {
+    framingMode = 'Acoustic Priming Event';
+    conventionStatus = 'Non-speech FX bracket primes emotional expectation ahead of spoken facts.';
+  } else if (activeCue.prosody === 'whisper' || sl < -3) {
+    framingMode = 'Intimate Affective Hook';
+    conventionStatus = 'Oblique light-weight cue narrows distance, creating conspiratorial or somatic intimacy.';
+  }
+
+  const thinker = PHL197_THINKER_LENSES[thinkerId] || PHL197_THINKER_LENSES.postman;
+  const stanceInfo = PHL197_STANCES[stance] || PHL197_STANCES.negotiate;
+
+  const howDoIKnow = hasDosageOrNumber
+    ? `Verify quantified telemetry (${text.match(/\d+(?:\.\d+)?\s*(?:mg|ml|bpm|hz|kn|km\/h|%|am|pm)/i)[0]}) independently of speaker ${activeCue.speaker}; check ISMP glyphs cleanly.`
+    : `Separate ${activeCue.speaker}'s prosody (wght ${w}) from verifiable primary evidence: what source proves "${text.slice(0, 56)}"?`;
+
+  return {
+    framingMode,
+    sourceSummary: `Speaker "${activeCue.speaker}" inside "${activeScene.title || activeScene.id}". Ask: Who benefits if I react before checking?`,
+    productSummary: `wght ${w} · wdth ${wd}% · slnt ${sl} · APTR ${activeCue.aptr || 50} — ${conventionStatus}`,
+    audienceSummary: `Stance: ${stanceInfo.label}. ${hasAllCaps ? 'All-caps casts viewer as passive responder.' : 'Mixed-case allows selective verification.'}`,
+    thinkerNote: `${thinker.name}: ${thinker.question}`,
+    howDoIKnow
+  };
+}
+
 // Global browser initializer
 if (typeof window !== 'undefined') {
   window.PocketGullCC = {
@@ -1424,6 +1623,9 @@ if (typeof window !== 'undefined') {
     CARDIAC_PACING_PRESETS,
     NARRATIVE_ARC_GENRES,
     NarrativeArcGenerator,
+    PHL197_STANCES,
+    PHL197_THINKER_LENSES,
+    evaluateDeconstructionLens,
     renderPhilocardiaNodes,
     ClosedCaptionStudio
   };
@@ -1577,6 +1779,9 @@ if (typeof window !== 'undefined') {
       }
       if (spo2ReadoutEl) {
         spo2ReadoutEl.textContent = `SpO2 ${cardiac.spo2}% · PLETH`;
+      }
+      if (typeof updateDeconstructionPanel === 'function') {
+        updateDeconstructionPanel(activeText, w, wd, sl, ap);
       }
     }
 
@@ -2477,6 +2682,92 @@ if (typeof window !== 'undefined') {
         }
       });
     }
+
+    // PHL 197 Manufacturing Reality Deconstruction & Infotainment vs Clinical Framing Wiring
+    const toggleDeconVttBtn = document.getElementById('toggleDeconVttBtn');
+    const ccDeconFrameBadge = document.getElementById('ccDeconFrameBadge');
+    const ccInfotainmentSample = document.getElementById('ccInfotainmentSample');
+    const ccClinicalTruthSample = document.getElementById('ccClinicalTruthSample');
+    const activeStanceLabel = document.getElementById('activeStanceLabel');
+    const activeThinkerLabel = document.getElementById('activeThinkerLabel');
+    const deconSourceVal = document.getElementById('deconSourceVal');
+    const deconProductVal = document.getElementById('deconProductVal');
+    const deconAudienceVal = document.getElementById('deconAudienceVal');
+    const deconVerifyVal = document.getElementById('deconVerifyVal');
+    const deconThinkerNote = document.getElementById('deconThinkerNote');
+
+    function updateDeconstructionPanel(activeText, w, wd, sl, ap) {
+      const cue = studio.getCurrentCue();
+      const scene = studio.getScene();
+      const text = (activeText || (cue ? cue.text : '')).trim();
+      const evalCue = {
+        speaker: customInput && customInput.value.trim() ? 'USER INPUT' : (cue ? cue.speaker : 'SPEAKER'),
+        text,
+        prosody: cue ? cue.prosody : 'dialogue',
+        weight: w,
+        width: wd,
+        slant: sl,
+        aptr: ap
+      };
+      const decon = evaluateDeconstructionLens(evalCue, scene, studio.deconstructionStance, studio.activeThinkerLens);
+
+      if (ccDeconFrameBadge) ccDeconFrameBadge.textContent = decon.framingMode.toUpperCase();
+      if (ccInfotainmentSample) ccInfotainmentSample.textContent = text;
+      if (ccClinicalTruthSample) ccClinicalTruthSample.textContent = text;
+      if (deconSourceVal) deconSourceVal.textContent = decon.sourceSummary;
+      if (deconProductVal) deconProductVal.textContent = decon.productSummary;
+      if (deconAudienceVal) deconAudienceVal.textContent = decon.audienceSummary;
+      if (deconVerifyVal) deconVerifyVal.textContent = decon.howDoIKnow;
+      if (deconThinkerNote) deconThinkerNote.textContent = decon.thinkerNote;
+    }
+
+    if (toggleDeconVttBtn) {
+      toggleDeconVttBtn.addEventListener('click', () => {
+        const next = studio.setIncludeDeconstructionNotes(!studio.includeDeconstructionNotes);
+        toggleDeconVttBtn.textContent = `📝 WebVTT NOTE Rubric: ${next ? 'ON' : 'OFF'}`;
+        toggleDeconVttBtn.classList.toggle('active', next);
+        toggleDeconVttBtn.setAttribute('aria-pressed', String(next));
+        updateTelemetryAndVtt(
+          customInput && customInput.value.trim() ? customInput.value.trim() : studio.getCurrentCue().text,
+          weightSlider.value,
+          widthSlider.value,
+          studio.getCurrentCue().slant || 0,
+          aptrSlider.value
+        );
+      });
+    }
+
+    document.querySelectorAll('[data-stance]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-stance]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const stance = studio.setDeconstructionStance(btn.dataset.stance);
+        if (activeStanceLabel) activeStanceLabel.textContent = stance.charAt(0).toUpperCase() + stance.slice(1);
+        updateTelemetryAndVtt(
+          customInput && customInput.value.trim() ? customInput.value.trim() : studio.getCurrentCue().text,
+          weightSlider.value,
+          widthSlider.value,
+          studio.getCurrentCue().slant || 0,
+          aptrSlider.value
+        );
+      });
+    });
+
+    document.querySelectorAll('[data-thinker]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-thinker]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const lens = studio.setThinkerLens(btn.dataset.thinker);
+        if (activeThinkerLabel) activeThinkerLabel.textContent = lens.name.split(' · ')[0];
+        updateTelemetryAndVtt(
+          customInput && customInput.value.trim() ? customInput.value.trim() : studio.getCurrentCue().text,
+          weightSlider.value,
+          widthSlider.value,
+          studio.getCurrentCue().slant || 0,
+          aptrSlider.value
+        );
+      });
+    });
 
     // Initial Narrative Arc preview + Initial Broadcast Monitor Render
     renderNarrativeArcStudio(currentGeneratedArc);

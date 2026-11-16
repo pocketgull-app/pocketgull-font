@@ -364,4 +364,42 @@ test('Phanvas Genre Narrative Arc Generator: 5-Beat Genre Synthesis, Tension BPM
   assert.ok(ccHtml.includes('id="ccArcSvg"'), 'HTML must expose interactive SVG tension spline');
 });
 
+test('PHL 197 Manufacturing Reality Deconstruction Lens, Infotainment A/B & WebVTT NOTE Rubric', async () => {
+  const {
+    PHL197_STANCES,
+    PHL197_THINKER_LENSES,
+    evaluateDeconstructionLens,
+    ClosedCaptionStudio
+  } = await import('../js/closed_caption_studio.js');
+
+  assert.deepEqual(Object.keys(PHL197_STANCES).sort(), ['assent', 'negotiate', 'resist']);
+  assert.deepEqual(Object.keys(PHL197_THINKER_LENSES).sort(), ['baudrillard', 'gleick', 'mcluhan', 'postman']);
+
+  const alarmRes = evaluateDeconstructionLens(
+    { speaker: 'DR. ARIS', text: 'Administer Adenosine 6.0 mg IV immediately!', prosody: 'urgent', weight: 780, width: 92, slant: 0, aptr: 85 },
+    { id: 'trauma_bay', title: 'Trauma Bay' },
+    'resist',
+    'gleick'
+  );
+  assert.equal(alarmRes.framingMode, 'High-Arousal Chyron / Alarm');
+  assert.ok(alarmRes.howDoIKnow.includes('6.0 mg'), 'Deconstruction lens must isolate quantified clinical claim for verification');
+  assert.ok(alarmRes.thinkerNote.includes('Gleick'), 'Must cite selected syllabus thinker');
+
+  const studio = new ClosedCaptionStudio();
+  assert.equal(studio.generateWebVtt().includes('NOTE [PHL-197 DECONSTRUCTION]'), false, 'WebVTT NOTE rubric must be opt-in');
+
+  studio.setDeconstructionStance('resist');
+  studio.setThinkerLens('baudrillard');
+  studio.setIncludeDeconstructionNotes(true);
+  const annotatedVtt = studio.generateWebVtt();
+  assert.ok(annotatedVtt.includes('NOTE [PHL-197 DECONSTRUCTION]'), 'Enabled rubric must add PHL-197 header NOTE');
+  assert.ok(annotatedVtt.includes('NOTE [PHL-197 Cue 1]'), 'Enabled rubric must add per-cue How-Do-I-Know NOTE');
+  assert.ok(annotatedVtt.includes('Stance: RESIST'), 'WebVTT NOTE must record active PHL 197 stance');
+
+  const ccHtml = fs.readFileSync(path.join(ROOT_DIR, 'closed_caption_studio.html'), 'utf8');
+  assert.ok(ccHtml.includes('id="ccPhl197Section"'), 'HTML must declare PHL 197 Deconstruction section');
+  assert.ok(ccHtml.includes('id="ccInfotainmentSample"'), 'HTML must declare Infotainment framing comparator');
+  assert.ok(ccHtml.includes('id="ccClinicalTruthSample"'), 'HTML must declare Clinical Truth framing comparator');
+});
+
 

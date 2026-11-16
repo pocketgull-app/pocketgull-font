@@ -392,6 +392,28 @@ export class ClosedCaptionStudio {
     this.cardiacPacingId = 'pace_72';
     this.safeAreaVisible = false;
     this.activeCustomScene = null;
+    this.includeDeconstructionNotes = false;
+    this.deconstructionStance = 'negotiate';
+    this.activeThinkerLens = 'postman';
+  }
+
+  setIncludeDeconstructionNotes(enabled) {
+    this.includeDeconstructionNotes = Boolean(enabled);
+    return this.includeDeconstructionNotes;
+  }
+
+  setDeconstructionStance(stance) {
+    if (['assent', 'resist', 'negotiate'].includes(stance)) {
+      this.deconstructionStance = stance;
+    }
+    return this.deconstructionStance;
+  }
+
+  setThinkerLens(thinkerId) {
+    if (PHL197_THINKER_LENSES[thinkerId]) {
+      this.activeThinkerLens = thinkerId;
+    }
+    return PHL197_THINKER_LENSES[this.activeThinkerLens];
   }
 
   getScene(id) {
@@ -621,11 +643,21 @@ export class ClosedCaptionStudio {
       ? [{ speaker: 'CUSTOM', text: customText.trim(), prosody: 'dialogue', weight: 400, width: this.calculateLineFit(customText.trim(), 37), slant: 0 }]
       : scene.cues;
 
+    if (this.includeDeconstructionNotes) {
+      const thinker = PHL197_THINKER_LENSES[this.activeThinkerLens] || PHL197_THINKER_LENSES.postman;
+      lines.push(`NOTE [PHL-197 DECONSTRUCTION] Lens: ${thinker.name} | Stance: ${this.deconstructionStance.toUpperCase()} | Prompt: "How do I know?"`);
+      lines.push('');
+    }
+
     const stepSec = 3.4 / (this.speedMultiplier || 1.0);
     cues.forEach((c, idx) => {
       const t0 = idx * stepSec;
       const t1 = (idx + 1) * stepSec - 0.12;
       const cls = c.prosody && ['whisper', 'urgent', 'shout'].includes(c.prosody) ? `.${c.prosody}` : '';
+      if (this.includeDeconstructionNotes) {
+        const decon = evaluateDeconstructionLens(c, scene, this.deconstructionStance, this.activeThinkerLens);
+        lines.push(`NOTE [PHL-197 Cue ${idx + 1}] Frame=${decon.framingMode} | How do I know? ${decon.howDoIKnow}`);
+      }
       lines.push(`${idx + 1}`);
       lines.push(`${formatTs(t0)} --> ${formatTs(Math.max(t0 + 0.5, t1))} line:85% align:${this.currentSpatialDirection}`);
       lines.push(`<v${cls} ${c.speaker}>${c.text}</v>`);
@@ -1152,6 +1184,79 @@ export class NarrativeArcGenerator {
   }
 }
 
+export const PHL197_STANCES = {
+  assent: { id: 'assent', label: 'Assent (Accept Claim)', desc: 'Provisional agreement after checking evidence and framing.' },
+  negotiate: { id: 'negotiate', label: 'Negotiate (Separate Tone vs. Claim)', desc: 'Accept verifiable facts while stripping typographic or emotional spin.' },
+  resist: { id: 'resist', label: 'Resist (Reject Manufactured Frame)', desc: 'Challenge the implicit urgency, ideology, or unverified source authority.' }
+};
+
+export const PHL197_THINKER_LENSES = {
+  postman: {
+    id: 'postman',
+    name: 'Neil Postman · Amusing Ourselves to Death',
+    thesis: 'Electronic broadcast turns complex inquiry into emotional entertainment.',
+    question: 'Does this typography invite slow verification, or demand immediate visceral arousal?'
+  },
+  mcluhan: {
+    id: 'mcluhan',
+    name: 'Marshall McLuhan · The Medium is the Massage',
+    thesis: 'The medium alters sensory ratios before the audience evaluates content.',
+    question: 'What assumptions about authority or urgency are baked into the font weight and scrim?'
+  },
+  gleick: {
+    id: 'gleick',
+    name: 'James Gleick · The Information',
+    thesis: 'Channel capacity and symbol disambiguation decide whether truth survives noise.',
+    question: 'Are digits and lookalikes (0/O, 1/l/I, Z/2) legible without distortion under stress?'
+  },
+  baudrillard: {
+    id: 'baudrillard',
+    name: 'Jean Baudrillard · Hyperreality',
+    thesis: 'Simulations and aesthetic codes can feel more real than underlying reality.',
+    question: 'Are the story beats or chyron alarms pointing to reality, or manufacturing an artificial crisis?'
+  }
+};
+
+export function evaluateDeconstructionLens(cue, scene, stance = 'negotiate', thinkerId = 'postman') {
+  const activeCue = cue || { speaker: 'UNKNOWN', text: '', prosody: 'dialogue', weight: 400, width: 100, slant: 0, aptr: 50 };
+  const activeScene = scene || BROADCAST_SCENES.trauma_bay;
+  const w = Number(activeCue.weight || 400);
+  const wd = Number(activeCue.width || 100);
+  const sl = Number(activeCue.slant || 0);
+  const text = activeCue.text || '';
+  const hasAllCaps = text.length > 6 && text === text.toUpperCase() && /[A-Z]/.test(text);
+  const hasDosageOrNumber = /\d+(?:\.\d+)?\s*(?:mg|ml|bpm|hz|kn|km\/h|%|am|pm)/i.test(text);
+
+  let framingMode = 'Deliberative Baseline';
+  let conventionStatus = 'Balanced documentary convention — neutral stroke weight leaves cognitive room.';
+  if (w >= 700 || hasAllCaps || activeCue.prosody === 'shout') {
+    framingMode = 'High-Arousal Chyron / Alarm';
+    conventionStatus = 'Broadcast urgency convention: condensed/heavy strokes compress time and nudge compliance.';
+  } else if (activeCue.prosody === 'soundfx') {
+    framingMode = 'Acoustic Priming Event';
+    conventionStatus = 'Non-speech FX bracket primes emotional expectation ahead of spoken facts.';
+  } else if (activeCue.prosody === 'whisper' || sl < -3) {
+    framingMode = 'Intimate Affective Hook';
+    conventionStatus = 'Oblique light-weight cue narrows distance, creating conspiratorial or somatic intimacy.';
+  }
+
+  const thinker = PHL197_THINKER_LENSES[thinkerId] || PHL197_THINKER_LENSES.postman;
+  const stanceInfo = PHL197_STANCES[stance] || PHL197_STANCES.negotiate;
+
+  const howDoIKnow = hasDosageOrNumber
+    ? `Verify quantified telemetry (${text.match(/\d+(?:\.\d+)?\s*(?:mg|ml|bpm|hz|kn|km\/h|%|am|pm)/i)[0]}) independently of speaker ${activeCue.speaker}; check ISMP glyphs cleanly.`
+    : `Separate ${activeCue.speaker}'s prosody (wght ${w}) from verifiable primary evidence: what source proves "${text.slice(0, 56)}"?`;
+
+  return {
+    framingMode,
+    sourceSummary: `Speaker "${activeCue.speaker}" inside "${activeScene.title || activeScene.id}". Ask: Who benefits if I react before checking?`,
+    productSummary: `wght ${w} · wdth ${wd}% · slnt ${sl} · APTR ${activeCue.aptr || 50} — ${conventionStatus}`,
+    audienceSummary: `Stance: ${stanceInfo.label}. ${hasAllCaps ? 'All-caps casts viewer as passive responder.' : 'Mixed-case allows selective verification.'}`,
+    thinkerNote: `${thinker.name}: ${thinker.question}`,
+    howDoIKnow
+  };
+}
+
 // Global browser initializer
 if (typeof window !== 'undefined') {
   window.PocketGullCC = {
@@ -1165,6 +1270,9 @@ if (typeof window !== 'undefined') {
     TELETEXT_SPEAKER_PALETTE,
     NARRATIVE_ARC_GENRES,
     NarrativeArcGenerator,
+    PHL197_STANCES,
+    PHL197_THINKER_LENSES,
+    evaluateDeconstructionLens,
     getTeletextSpeakerStyle,
     renderPhilocardiaNodes,
     ClosedCaptionStudio
