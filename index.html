@@ -11,6 +11,7 @@
   <link rel="preload" href="fonts/woff2/PocketGull-Bold-Core.woff2?v=4.0.0" as="font" type="font/woff2" crossorigin>
   <!-- Primary Webfont Stylesheet (Zero-CSP-Violation Direct Load) -->
   <link rel="stylesheet" href="fonts.css?v=4.0.0">
+  <script src="js/sinus_telemetry_engine.js?v=4.0.0" defer></script>
   <style>
     /* Critical Above-the-Fold Optotypes (Zero-Render-Blocking Initial Paint) */
     @font-face {
@@ -5614,9 +5615,7 @@
             <span class="hud-cardiac-dot"></span> <span>AUTONOMIC SINUS RHYTHM (72 BPM) • CUSHIONED APEX FILLET</span>
           </span>
           <div class="hud-ecg-canvas-wrap">
-            <svg viewBox="0 0 500 40" width="100%" height="28" preserveAspectRatio="none">
-              <path class="hud-ecg-path" d="M 0 20 L 80 20 L 90 20 L 95 14 L 100 28 L 105 2 L 112 36 L 118 18 L 125 22 L 135 20 L 220 20 L 230 20 L 235 14 L 240 28 L 245 2 L 252 36 L 258 18 L 265 22 L 275 20 L 360 20 L 370 20 L 375 14 L 380 28 L 385 2 L 392 36 L 398 18 L 405 22 L 415 20 L 500 20" fill="none" stroke="var(--emerald)" stroke-width="2"/>
-            </svg>
+            <canvas id="hudCardiacCanvas" role="img" aria-label="Autonomic 72 BPM Sinus Rhythm Phosphor Sweep" style="width: 100%; height: 34px; display: block; border-radius: 4px;"></canvas>
           </div>
         </div>
       </div>
@@ -5654,6 +5653,15 @@
             </div>
           </div>
         </div>
+        <div style="flex: 1 1 100%; padding-top: 10px; border-top: 1px solid rgba(16, 185, 129, 0.18);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; font-family: 'PocketGull Mono', monospace; font-size: 11px;">
+            <span style="color: var(--emerald); font-weight: 700; display: flex; align-items: center; gap: 6px;">
+              <span class="hud-cardiac-dot"></span> AUTONOMIC SINUS RHYTHM • CUSHIONED P-Q-R-S-T PHOSPHOR SWEEP
+            </span>
+            <span id="healerSinusReadout" style="color: var(--text-muted);">LIVE LEAD II · 72 BPM SINUS · 25 mm/s</span>
+          </div>
+          <canvas id="healerSinusCanvas" role="img" aria-label="Live Autonomic Sinus Rhythm P-Q-R-S-T Oscilloscope" style="width: 100%; height: 42px; display: block; border-radius: 6px; background: rgba(5, 8, 14, 0.55);"></canvas>
+        </div>
       </div>
     </section>
 
@@ -5675,8 +5683,8 @@
 │ [PULSE OX]      99%      (PLETH PI 4.8%)  │ [RESPIRATORY]     16 br/min     (ETCO2: 38 mmHg)  │
 │ [TEMPERATURE]   36.8 °C  (NORMOTHERMIC)   │ [CONSCIOUSNESS]   GCS 15        (E4 V5 M6)        │
 ├───────────────────────────────────────────────────────────────────────────────────────────────┤
-│ [ECG-LEAD II]   _/\_   _/\_   _/\_   _/\_   _/\_   _/\_   _/\_   _/\_   _/\_   _/\_           │
-│ [PLETH WAVE]    ▅▇█▇▅  ▅▇█▇▅  ▅▇█▇▅  ▅▇█▇▅  ▅▇█▇▅  ▅▇█▇▅  ▅▇█▇▅  ▅▇█▇▅  ▅▇█▇▅  ▅▇█▇▅          │
+│ [ECG-LEAD II]   <span id="icuLeadTrack" style="color: #10b981;">▃▃▄▃▃▇▂▃▃▃▃▄▃▃▇▂▃▃▃▃▄▃▃▇▂▃▃▃▃▄▃▃▇▂▃▃▃▃▄▃▃▇▂▃▃▃▃▄▃▃▇▂▃▃▃▃▄▃▃▇█   ▃▃▄▃▃▇▂▃▃▃▃▄▃</span> │
+│ [PLETH WAVE]    <span id="icuPlethTrack" style="color: #38bdf8;">▁▃▆█▅▄▂▁▁▃▆█▅▄▂▁▁▃▆█▅▄▂▁▁▃▆█▅▄▂▁▁▃▆█▅▄▂▁▁▃▆█▅▄▂▁▁▃▆█▅▄▂▁▁▃▆██   ▁▃▆█▅▄▂▁▁▃▆█▅</span> │
 ├───────────────────────────────────────────────────────────────────────────────────────────────┤
 │ ACTIVE RX: R Cefazolin 2 g IV Q8H • ø 18G Cannula Right Antecubital • ALLERGY: PENICILLIN     │
 │ POWERLINE:  icu-station  main  bed-04  tty1 (PocketGull Mono 600 UPM pitch)               │

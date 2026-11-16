@@ -389,6 +389,8 @@ export class ClosedCaptionStudio {
     this.philocardiaEnabled = false;
     this.tittleVariety = 'dot';
     this.cardiacPacing = 'philocardia-pacing-72';
+    this.cardiacPacingId = 'pace_72';
+    this.safeAreaVisible = false;
   }
 
   getScene(id = this.currentSceneId) {
@@ -425,7 +427,7 @@ export class ClosedCaptionStudio {
   }
 
   setMode(mode) {
-    if (['pop-on', 'roll-up', 'paint-on'].includes(mode)) {
+    if (['pop-on', 'roll-up', 'paint-on', 'teletext'].includes(mode)) {
       this.mode = mode;
       this.rollupBuffer = [];
     }
@@ -491,9 +493,12 @@ export class ClosedCaptionStudio {
 
   setCardiacPacing(pacingId) {
     if (CARDIAC_PACING_PRESETS[pacingId]) {
+      this.cardiacPacingId = pacingId;
       this.cardiacPacing = CARDIAC_PACING_PRESETS[pacingId].cssClass;
       return CARDIAC_PACING_PRESETS[pacingId];
     }
+    this.cardiacPacingId = 'pace_72';
+    this.cardiacPacing = CARDIAC_PACING_PRESETS.pace_72.cssClass;
     return CARDIAC_PACING_PRESETS.pace_72;
   }
 
@@ -504,6 +509,114 @@ export class ClosedCaptionStudio {
     const widthPercent = Math.max(75, Math.min(100, Math.round(ratio * 100)));
     return widthPercent;
   }
+
+  evaluateReadingMetrics(text, baseDurationSec = 3.4) {
+    const clean = (text || '').trim();
+    const effectiveSec = Math.max(0.5, baseDurationSec / (this.speedMultiplier || 1.0));
+    const charCount = clean.length;
+    const wordCount = clean ? clean.split(/\s+/).length : 0;
+    const cps = Number((charCount / effectiveSec).toFixed(1));
+    const wpm = Math.round((wordCount / effectiveSec) * 60);
+    const recommendedWidth = this.calculateLineFit(clean, 37);
+    const tier = cps <= 17 ? 'optimal' : cps <= 20 ? 'elevated' : 'exceeds';
+    return { charCount, wordCount, cps, wpm, recommendedWidth, tier, durationSec: Number(effectiveSec.toFixed(2)) };
+  }
+
+  resolveCueCardiacState(manualPacingOverride = false) {
+    if (this.currentEmotion === 'panic') {
+      return { bpm: 164, morphology: 'vtach', color: '#ef4444', label: 'SYMPATHETIC SURGE · 164 BPM', spo2: 93 };
+    }
+    if (this.currentEmotion === 'relief') {
+      return { bpm: 64, morphology: 'sinus', color: '#10b981', label: 'VAGAL RELIEF · 64 BPM SINUS', spo2: 99 };
+    }
+    if (manualPacingOverride || this.currentSceneId !== 'trauma_bay') {
+      if (this.cardiacPacingId === 'stillness') {
+        return { bpm: 0, morphology: 'stillness', color: '#64748b', label: 'STILLNESS · STATIC TRACE', spo2: 99 };
+      }
+      if (this.cardiacPacingId === 'pace_breath') {
+        return { bpm: 58, morphology: 'sinus', color: '#38bdf8', label: '4-7-8 BREATH RSA · 58 BPM', spo2: 99 };
+      }
+      if (this.cardiacPacingId === 'pace_60') {
+        return { bpm: 60, morphology: 'sinus', color: '#10b981', label: 'VAGAL COHERENCE · 60 BPM', spo2: 99 };
+      }
+      if (this.currentSceneId !== 'trauma_bay') {
+        return { bpm: 72, morphology: 'sinus', color: '#10b981', label: 'AUTONOMIC SINUS · 72 BPM', spo2: 99 };
+      }
+    }
+
+    // Cue-reactive physiological progression across Trauma Resuscitation
+    if (this.currentCueIndex <= 1) {
+      return { bpm: 178, morphology: 'vtach', color: '#ef4444', label: 'VTACH · 178 BPM CRITICAL', spo2: 91 };
+    }
+    if (this.currentCueIndex <= 3) {
+      return { bpm: 108, morphology: 'adenosine', color: '#f59e0b', label: 'ADENOSINE CONVERTING · 108 BPM', spo2: 95 };
+    }
+    return { bpm: 74, morphology: 'sinus', color: '#10b981', label: 'NORMAL SINUS RESTORED · 74 BPM', spo2: 99 };
+  }
+
+  generateWebVtt(customText = '') {
+    const scene = this.getScene();
+    const lines = [
+      'WEBVTT - PocketGull Variable Prosody & ISMP Clinical Broadcast Track',
+      `NOTE Scene: ${scene.title} | Protocol: ${this.mode.toUpperCase()} | License: SIL OFL 1.1`,
+      '',
+      'STYLE',
+      '::cue {',
+      '  font-family: "PocketGull VF", "PocketGull", sans-serif;',
+      '  font-feature-settings: "zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1;',
+      '  font-variant-numeric: slashed-zero;',
+      '}',
+      '::cue(.whisper) { font-variation-settings: "wght" 240, "slnt" -7, "APTR" 65; }',
+      '::cue(.urgent)  { font-variation-settings: "wght" 700, "wdth" 94, "APTR" 85; }',
+      '::cue(.shout)   { font-variation-settings: "wght" 900, "wdth" 86, "APTR" 95; }',
+      ''
+    ];
+
+    const pad2 = (n) => String(n).padStart(2, '0');
+    const formatTs = (sec) => {
+      const whole = Math.floor(sec);
+      const ms = String(Math.round((sec - whole) * 1000)).padStart(3, '0');
+      const m = Math.floor(whole / 60);
+      const s = whole % 60;
+      return `00:${pad2(m)}:${pad2(s)}.${ms}`;
+    };
+
+    const cues = customText && customText.trim().length > 0
+      ? [{ speaker: 'CUSTOM', text: customText.trim(), prosody: 'dialogue', weight: 400, width: this.calculateLineFit(customText.trim(), 37), slant: 0 }]
+      : scene.cues;
+
+    const stepSec = 3.4 / (this.speedMultiplier || 1.0);
+    cues.forEach((c, idx) => {
+      const t0 = idx * stepSec;
+      const t1 = (idx + 1) * stepSec - 0.12;
+      const cls = c.prosody && ['whisper', 'urgent', 'shout'].includes(c.prosody) ? `.${c.prosody}` : '';
+      lines.push(`${idx + 1}`);
+      lines.push(`${formatTs(t0)} --> ${formatTs(Math.max(t0 + 0.5, t1))} line:85% align:${this.currentSpatialDirection}`);
+      lines.push(`<v${cls} ${c.speaker}>${c.text}</v>`);
+      lines.push('');
+    });
+
+    return lines.join('\n');
+  }
+}
+
+export const TELETEXT_SPEAKER_PALETTE = {
+  primary: '#fde047',   // WST Yellow (Lead Speaker)
+  secondary: '#22d3ee', // WST Cyan (Second Speaker)
+  soundfx: '#4ade80',   // WST Green (Non-Speech Audio / Environment)
+  alert: '#ffffff'      // WST White-on-Red (Emergency Civil / Code Blue)
+};
+
+export function getTeletextSpeakerStyle(speaker, prosody, index = 0) {
+  if (prosody === 'soundfx') {
+    return { fg: TELETEXT_SPEAKER_PALETTE.soundfx, bg: '#000000', tag: 'SFX' };
+  }
+  if (prosody === 'shout') {
+    return { fg: TELETEXT_SPEAKER_PALETTE.alert, bg: '#b91c1c', tag: 'ALT' };
+  }
+  const hash = (speaker || '').split('').reduce((acc, ch) => acc + ch.charCodeAt(0), index);
+  const fg = hash % 2 === 0 ? TELETEXT_SPEAKER_PALETTE.primary : TELETEXT_SPEAKER_PALETTE.secondary;
+  return { fg, bg: '#000000', tag: 'CC1' };
 }
 
 export const TITTLE_VARIETIES = {
@@ -569,6 +682,8 @@ if (typeof window !== 'undefined') {
     SPATIAL_DIRECTIONS,
     TITTLE_VARIETIES,
     CARDIAC_PACING_PRESETS,
+    TELETEXT_SPEAKER_PALETTE,
+    getTeletextSpeakerStyle,
     renderPhilocardiaNodes,
     ClosedCaptionStudio
   };

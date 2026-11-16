@@ -257,3 +257,75 @@ test('Philocardia Heart Tittles & Cardiac Pacing Invariants: Grounding & Pacing 
   assert.ok(cssContent.includes('.cc-caption-box.cc-philocardia-active'), 'CSS must declare .cc-caption-box.cc-philocardia-active');
 });
 
+test('Physiological Sinus Rhythm & Phosphor-Sweep Telemetry: Zero Phase-Wrap Jump & 600 UPM Column Lock', async () => {
+  await import('../js/sinus_telemetry_engine.js');
+  const engine = globalThis.PocketGullSinusEngine;
+  assert.ok(engine, 'PocketGullSinusEngine must attach to globalThis');
+
+  // 1. Periodic boundary continuity (eliminates wrap-around jump defect)
+  const vStart = engine.evaluateCardiacLeadII(0.0, 'sinus', 0);
+  const vEnd = engine.evaluateCardiacLeadII(0.9999, 'sinus', 0);
+  assert.ok(Math.abs(vStart - vEnd) < 0.005, 'Sinus Lead II must be continuous across phase wrap 1.0 -> 0.0');
+
+  // 2. Cushioned R-wave peak & S-wave nadir anatomy
+  const rPeak = engine.evaluateCardiacLeadII(0.35, 'sinus', 0);
+  const sNadir = engine.evaluateCardiacLeadII(0.39, 'sinus', 0);
+  assert.ok(rPeak > 0.85, `R-wave peak (${rPeak}) must exceed +0.85 normalized mV`);
+  assert.ok(sNadir < -0.15, `S-wave nadir (${sNadir}) must dip below -0.15 normalized mV`);
+
+  // 3. Fixed-width PocketGull Mono sub-cell waveform column lock
+  for (const cursor of [0, 19, 42, 76]) {
+    const leadLine = engine.generateMonospaceWaveString(77, cursor, 72, 'sinus', 4.6);
+    const plethLine = engine.generateMonospaceWaveString(77, cursor, 72, 'pleth', 4.6);
+    assert.equal(leadLine.length, 77, 'ECG monospace string must maintain exact 77-column width');
+    assert.equal(plethLine.length, 77, 'Pleth monospace string must maintain exact 77-column width');
+  }
+
+  // 4. Discontinuous stroke-dasharray hack must be absent from closed_caption_studio.html & index.html #hudCardiacStrip
+  const ccHtml = fs.readFileSync(path.join(ROOT_DIR, 'closed_caption_studio.html'), 'utf8');
+  assert.ok(!ccHtml.includes('id="ccEcgSvg"'), 'Discontinuous ccEcgSvg stroke-dasharray element must be replaced');
+  assert.ok(ccHtml.includes('id="ccEcgCanvas"'), 'Phosphor-sweep ccEcgCanvas must be present');
+});
+
+test('Broadcast Teletext P888, Cue-Reactive Cardiac State, Reading Metrics & WebVTT Exporter', async () => {
+  const { ClosedCaptionStudio, getTeletextSpeakerStyle } = await import('../js/closed_caption_studio.js');
+  const studio = new ClosedCaptionStudio();
+
+  // 1. Cue-reactive physiological conversion across Trauma Bay (VTach -> Adenosine -> 74 BPM Sinus)
+  studio.setScene('trauma_bay');
+  assert.equal(studio.resolveCueCardiacState().morphology, 'vtach');
+  assert.equal(studio.resolveCueCardiacState().bpm, 178);
+
+  studio.nextCue(); // Cue 1
+  studio.nextCue(); // Cue 2 (Adenosine)
+  assert.equal(studio.resolveCueCardiacState().morphology, 'adenosine');
+  assert.equal(studio.resolveCueCardiacState().bpm, 108);
+
+  studio.nextCue(); // Cue 3
+  studio.nextCue(); // Cue 4 (Sinus restored at 74 BPM)
+  assert.equal(studio.resolveCueCardiacState().morphology, 'sinus');
+  assert.equal(studio.resolveCueCardiacState().bpm, 74);
+
+  // 2. WST Page 888 Broadcast Teletext delivery protocol
+  studio.setMode('teletext');
+  assert.equal(studio.mode, 'teletext');
+  const sfxStyle = getTeletextSpeakerStyle('MONITOR', 'soundfx', 1);
+  assert.equal(sfxStyle.fg, '#4ade80', 'Sound FX must map to WST Teletext green');
+  const shoutStyle = getTeletextSpeakerStyle('INSTRUCTION', 'shout', 2);
+  assert.equal(shoutStyle.bg, '#b91c1c', 'Emergency shouts must map to WST red alert background');
+
+  // 3. FCC / BBC Saccadic Reading-Speed Metrics
+  const calmMetrics = studio.evaluateReadingMetrics('Pulse is stable at 72 bpm.', 3.4);
+  assert.equal(calmMetrics.tier, 'optimal');
+  const rapidMetrics = studio.evaluateReadingMetrics('DEFIBRILLATOR CHARGED TO 200 JOULES! ADMINISTER EPINEPHRINE 1.0 MG IV STAT IMMEDIATELY!', 3.4);
+  assert.equal(rapidMetrics.tier, 'exceeds');
+  assert.ok(rapidMetrics.recommendedWidth < 100);
+
+  // 4. Live W3C WebVTT + Variable ::cue Generator
+  const vtt = studio.generateWebVtt();
+  assert.ok(vtt.startsWith('WEBVTT'), 'Must start with canonical WEBVTT header');
+  assert.ok(vtt.includes('::cue(.whisper)'), 'Must include variable ::cue(.whisper) prosody rule');
+  assert.ok(vtt.includes('"cv08" 1'), 'Must declare ISMP slashed-zero OpenType feature in ::cue');
+});
+
+

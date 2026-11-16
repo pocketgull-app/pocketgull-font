@@ -62,7 +62,11 @@
               <span id="ccSyncLabel" style="font-size: 0.72rem; color: #10b981;">VF SYNC</span>
             </div>
             <div id="ccTimecode" style="letter-spacing: 0.08em;">TC 00:14:28:16</div>
-            <div id="ccSignalReadout">1080p60 · CEA-708 · CC1</div>
+            <div class="cc-bezel-controls">
+              <span id="ccSignalReadout">1080p60 · CEA-708 · CC1</span>
+              <button type="button" class="cc-bezel-btn" id="toggleSafeAreaBtn" aria-pressed="false" title="Toggle SMPTE RP 2046-2 90% Action-Safe and 80% Title-Safe Reticle">⊞ Safe Area</button>
+              <button type="button" class="cc-bezel-btn" id="toggleCardiacAudioBtn" aria-pressed="false" title="Toggle Gentle Low-Frequency S1/S2 Harmonic Stethoscope Pulse">🔇 S1·S2 Audio</button>
+            </div>
           </div>
 
           <!-- 16:9 Screen Display -->
@@ -70,13 +74,52 @@
             
             <!-- Dynamic Background Layer -->
             <div class="cc-scene-layer cc-scene-trauma" id="ccSceneBg">
-              <!-- ECG Pulse Canvas for Trauma Scene -->
-              <svg class="cc-trauma-ecg-canvas" id="ccEcgSvg" viewBox="0 0 600 120" preserveAspectRatio="none">
-                <path d="M 0 60 L 120 60 L 130 30 L 140 90 L 150 15 L 160 105 L 170 60 L 260 60 L 270 30 L 280 90 L 290 15 L 300 105 L 310 60 L 420 60 L 430 30 L 440 90 L 450 15 L 460 105 L 470 60 L 600 60"
-                      fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="600" stroke-dashoffset="0">
-                  <animate attributeName="stroke-dashoffset" from="600" to="0" dur="2.4s" repeatCount="indefinite" />
-                </path>
-              </svg>
+              <!-- Live ICU Vital Readout & Phosphor-Sweep Cardiac Monitor -->
+              <div class="cc-trauma-vitals-bar" id="ccVitalsBar">
+                <span class="cc-vital-pill">
+                  <span id="ccCardiacDot" style="width: 7px; height: 7px; border-radius: 50%; background: #ef4444; display: inline-block;"></span>
+                  <span id="ccRhythmState" style="color: #ef4444;">VTACH · 178 BPM CRITICAL</span>
+                </span>
+                <span id="ccLeadSpec" style="color: #94a3b8;">LEAD II · 25 mm/s · CUSHIONED P-Q-R-S-T</span>
+                <span id="ccSpo2Readout" style="color: #38bdf8; font-weight: 700;">SpO2 91% · PLETH</span>
+              </div>
+              <canvas class="cc-trauma-ecg-canvas" id="ccEcgCanvas" role="img" aria-label="Live Physiological Cardiac Lead II Phosphor-Sweep Monitor"></canvas>
+            </div>
+
+            <!-- SMPTE RP 2046-2 Action-Safe (90%) & Title-Safe (80%) Broadcast Reticle -->
+            <div class="cc-safe-reticle" id="ccSafeReticle" aria-hidden="true">
+              <div class="cc-safe-action">
+                <span class="cc-safe-label" style="color: #38bdf8;">SMPTE 90% ACTION SAFE</span>
+              </div>
+              <div class="cc-safe-title">
+                <span class="cc-safe-label" style="color: #f59e0b;">SMPTE 80% TITLE &amp; CAPTION SAFE</span>
+              </div>
+            </div>
+
+            <!-- Authentic WST / EBU Page 888 Broadcast Teletext 40x24 Overlay -->
+            <div class="cc-teletext-frame" id="ccTeletextContainer" aria-label="Broadcast Teletext Page 888">
+              <div>
+                <div class="cc-teletext-header">
+                  <span style="color: #fde047;">P888</span>
+                  <span>POCKETGULL CEEFAX 888 · SUBTITLES</span>
+                  <span id="ccTeletextClock" style="color: #22d3ee;">10:00:00</span>
+                </div>
+                <div class="cc-teletext-mosaic">
+                  <span style="color: #94a3b8;">600 UPM SUB-CELL SINUS:</span>
+                  <span id="ccTeletextWave">▃▃▄▃▃▇▂▃▃▃▃▄▃▃▇▂▃▃▃▃▄▃▃▇█   ▃▃▄▃</span>
+                </div>
+              </div>
+
+              <div class="cc-teletext-stage" id="ccTeletextStage">
+                <div class="cc-teletext-band" id="ccTeletextBand">[CC1] Patient in severe ventricular tachycardia.</div>
+              </div>
+
+              <div class="cc-teletext-fastext" role="group" aria-label="Fastext Scene Shortcuts">
+                <button type="button" class="cc-fastext-key cc-fastext-red" data-fastext-scene="trauma_bay">■ Trauma 801</button>
+                <button type="button" class="cc-fastext-key cc-fastext-green" data-fastext-scene="blizzard_glare">■ Glare 802</button>
+                <button type="button" class="cc-fastext-key cc-fastext-yellow" data-fastext-scene="midnight_noir">■ Noir 803</button>
+                <button type="button" class="cc-fastext-key cc-fastext-cyan" data-fastext-scene="sovereign_aptn">■ APTN 804</button>
+              </div>
             </div>
 
             <!-- Subtitle Safe Area & Display Zone -->
@@ -118,6 +161,22 @@
             </div>
           </div>
 
+          <!-- Live Broadcast Reading-Speed (FCC / BBC CPS) & VF Telemetry Bar -->
+          <div class="cc-metrics-strip" aria-label="Live Broadcast Caption Telemetry">
+            <div class="cc-metric-chip">
+              <span class="cc-metric-chip-label">Saccadic Reading Speed (BBC ≤ 17 CPS)</span>
+              <span class="cc-metric-chip-val" id="ccCpsReadout" style="color: #10b981;">17.1 CPS · 141 WPM (OPTIMAL)</span>
+            </div>
+            <div class="cc-metric-chip">
+              <span class="cc-metric-chip-label">Line-Fit Envelope (37 CPL Standard)</span>
+              <span class="cc-metric-chip-val" id="ccCplReadout">58 chars · Auto wdth 100%</span>
+            </div>
+            <div class="cc-metric-chip">
+              <span class="cc-metric-chip-label">Active OpenType VF Coordinates</span>
+              <span class="cc-metric-chip-val" id="ccVfVectorReadout" style="color: var(--cc-accent-sky);">wght 400 · wdth 100 · slnt 0 · APTR 50</span>
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -149,6 +208,7 @@
             <button type="button" class="cc-pill-btn active" data-mode="pop-on">● Pop-On (Netflix)</button>
             <button type="button" class="cc-pill-btn" data-mode="roll-up">📜 Roll-Up (Steno 600 UPM)</button>
             <button type="button" class="cc-pill-btn" data-mode="paint-on">⌨️ Paint-On (Dictation)</button>
+            <button type="button" class="cc-pill-btn" data-mode="teletext">📺 Teletext P888 (WST 40×24)</button>
           </div>
         </div>
 
@@ -390,6 +450,25 @@
       </div>
     </section>
 
+    <!-- Live W3C WebVTT + Variable Prosody ::cue Stream Inspector & Exporter -->
+    <section class="cc-vtt-card" aria-label="Live WebVTT and Variable CSS Cue Exporter">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h2 style="font-size: 1.18rem; font-weight: 700; margin: 0 0 0.25rem 0;">
+            📡 Live W3C WebVTT + Variable <code>::cue</code> Broadcast Stream
+          </h2>
+          <p style="color: var(--cc-text-muted); font-size: 0.86rem; margin: 0;">
+            Standards-compliant WebVTT output encoding voice prosody (<code>wght</code>, <code>wdth</code>, <code>slnt</code>, <code>APTR</code>) and ISMP clinical disambiguation directly inside streaming subtitle tracks.
+          </p>
+        </div>
+        <div class="cc-pill-row">
+          <button type="button" class="cc-playback-btn" id="copyVttBtn">📋 Copy WebVTT</button>
+          <button type="button" class="cc-playback-btn" id="downloadVttBtn" style="background: rgba(16, 185, 129, 0.16); border-color: rgba(16, 185, 129, 0.4); color: #10b981;">💾 Download .VTT</button>
+        </div>
+      </div>
+      <pre class="cc-vtt-pre" id="ccVttPreview" aria-live="polite"></pre>
+    </section>
+
     <!-- Typographic Invariants & Standard Documentation -->
     <footer class="cc-footer-notes">
       <div class="cc-footer-col">
@@ -426,6 +505,9 @@
     </footer>
 
   </main>
+
+  <!-- Physiological Sinus Rhythm & Phosphor-Sweep Telemetry Engine -->
+  <script src="js/sinus_telemetry_engine.js?v=4.0.0"></script>
 
   <!-- Interactive Studio Script -->
   <script>
@@ -820,6 +902,8 @@ class ClosedCaptionStudio {
     this.philocardiaEnabled = false;
     this.tittleVariety = 'dot';
     this.cardiacPacing = 'philocardia-pacing-72';
+    this.cardiacPacingId = 'pace_72';
+    this.safeAreaVisible = false;
   }
 
   getScene(id = this.currentSceneId) {
@@ -856,7 +940,7 @@ class ClosedCaptionStudio {
   }
 
   setMode(mode) {
-    if (['pop-on', 'roll-up', 'paint-on'].includes(mode)) {
+    if (['pop-on', 'roll-up', 'paint-on', 'teletext'].includes(mode)) {
       this.mode = mode;
       this.rollupBuffer = [];
     }
@@ -922,9 +1006,12 @@ class ClosedCaptionStudio {
 
   setCardiacPacing(pacingId) {
     if (CARDIAC_PACING_PRESETS[pacingId]) {
+      this.cardiacPacingId = pacingId;
       this.cardiacPacing = CARDIAC_PACING_PRESETS[pacingId].cssClass;
       return CARDIAC_PACING_PRESETS[pacingId];
     }
+    this.cardiacPacingId = 'pace_72';
+    this.cardiacPacing = CARDIAC_PACING_PRESETS.pace_72.cssClass;
     return CARDIAC_PACING_PRESETS.pace_72;
   }
 
@@ -935,6 +1022,113 @@ class ClosedCaptionStudio {
     const widthPercent = Math.max(75, Math.min(100, Math.round(ratio * 100)));
     return widthPercent;
   }
+
+  evaluateReadingMetrics(text, baseDurationSec = 3.4) {
+    const clean = (text || '').trim();
+    const effectiveSec = Math.max(0.5, baseDurationSec / (this.speedMultiplier || 1.0));
+    const charCount = clean.length;
+    const wordCount = clean ? clean.split(/\s+/).length : 0;
+    const cps = Number((charCount / effectiveSec).toFixed(1));
+    const wpm = Math.round((wordCount / effectiveSec) * 60);
+    const recommendedWidth = this.calculateLineFit(clean, 37);
+    const tier = cps <= 17 ? 'optimal' : cps <= 20 ? 'elevated' : 'exceeds';
+    return { charCount, wordCount, cps, wpm, recommendedWidth, tier, durationSec: Number(effectiveSec.toFixed(2)) };
+  }
+
+  resolveCueCardiacState(manualPacingOverride = false) {
+    if (this.currentEmotion === 'panic') {
+      return { bpm: 164, morphology: 'vtach', color: '#ef4444', label: 'SYMPATHETIC SURGE · 164 BPM', spo2: 93 };
+    }
+    if (this.currentEmotion === 'relief') {
+      return { bpm: 64, morphology: 'sinus', color: '#10b981', label: 'VAGAL RELIEF · 64 BPM SINUS', spo2: 99 };
+    }
+    if (manualPacingOverride || this.currentSceneId !== 'trauma_bay') {
+      if (this.cardiacPacingId === 'stillness') {
+        return { bpm: 0, morphology: 'stillness', color: '#64748b', label: 'STILLNESS · STATIC TRACE', spo2: 99 };
+      }
+      if (this.cardiacPacingId === 'pace_breath') {
+        return { bpm: 58, morphology: 'sinus', color: '#38bdf8', label: '4-7-8 BREATH RSA · 58 BPM', spo2: 99 };
+      }
+      if (this.cardiacPacingId === 'pace_60') {
+        return { bpm: 60, morphology: 'sinus', color: '#10b981', label: 'VAGAL COHERENCE · 60 BPM', spo2: 99 };
+      }
+      if (this.currentSceneId !== 'trauma_bay') {
+        return { bpm: 72, morphology: 'sinus', color: '#10b981', label: 'AUTONOMIC SINUS · 72 BPM', spo2: 99 };
+      }
+    }
+
+    if (this.currentCueIndex <= 1) {
+      return { bpm: 178, morphology: 'vtach', color: '#ef4444', label: 'VTACH · 178 BPM CRITICAL', spo2: 91 };
+    }
+    if (this.currentCueIndex <= 3) {
+      return { bpm: 108, morphology: 'adenosine', color: '#f59e0b', label: 'ADENOSINE CONVERTING · 108 BPM', spo2: 95 };
+    }
+    return { bpm: 74, morphology: 'sinus', color: '#10b981', label: 'NORMAL SINUS RESTORED · 74 BPM', spo2: 99 };
+  }
+
+  generateWebVtt(customText = '') {
+    const scene = this.getScene();
+    const lines = [
+      'WEBVTT - PocketGull Variable Prosody & ISMP Clinical Broadcast Track',
+      `NOTE Scene: ${scene.title} | Protocol: ${this.mode.toUpperCase()} | License: SIL OFL 1.1`,
+      '',
+      'STYLE',
+      '::cue {',
+      '  font-family: "PocketGull VF", "PocketGull", sans-serif;',
+      '  font-feature-settings: "zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1;',
+      '  font-variant-numeric: slashed-zero;',
+      '}',
+      '::cue(.whisper) { font-variation-settings: "wght" 240, "slnt" -7, "APTR" 65; }',
+      '::cue(.urgent)  { font-variation-settings: "wght" 700, "wdth" 94, "APTR" 85; }',
+      '::cue(.shout)   { font-variation-settings: "wght" 900, "wdth" 86, "APTR" 95; }',
+      ''
+    ];
+
+    const pad2 = (n) => String(n).padStart(2, '0');
+    const formatTs = (sec) => {
+      const whole = Math.floor(sec);
+      const ms = String(Math.round((sec - whole) * 1000)).padStart(3, '0');
+      const m = Math.floor(whole / 60);
+      const s = whole % 60;
+      return `00:${pad2(m)}:${pad2(s)}.${ms}`;
+    };
+
+    const cues = customText && customText.trim().length > 0
+      ? [{ speaker: 'CUSTOM', text: customText.trim(), prosody: 'dialogue', weight: 400, width: this.calculateLineFit(customText.trim(), 37), slant: 0 }]
+      : scene.cues;
+
+    const stepSec = 3.4 / (this.speedMultiplier || 1.0);
+    cues.forEach((c, idx) => {
+      const t0 = idx * stepSec;
+      const t1 = (idx + 1) * stepSec - 0.12;
+      const cls = c.prosody && ['whisper', 'urgent', 'shout'].includes(c.prosody) ? `.${c.prosody}` : '';
+      lines.push(`${idx + 1}`);
+      lines.push(`${formatTs(t0)} --> ${formatTs(Math.max(t0 + 0.5, t1))} line:85% align:${this.currentSpatialDirection}`);
+      lines.push(`<v${cls} ${c.speaker}>${c.text}</v>`);
+      lines.push('');
+    });
+
+    return lines.join('\n');
+  }
+}
+
+const TELETEXT_SPEAKER_PALETTE = {
+  primary: '#fde047',
+  secondary: '#22d3ee',
+  soundfx: '#4ade80',
+  alert: '#ffffff'
+};
+
+function getTeletextSpeakerStyle(speaker, prosody, index = 0) {
+  if (prosody === 'soundfx') {
+    return { fg: TELETEXT_SPEAKER_PALETTE.soundfx, bg: '#000000', tag: 'SFX' };
+  }
+  if (prosody === 'shout') {
+    return { fg: TELETEXT_SPEAKER_PALETTE.alert, bg: '#b91c1c', tag: 'ALT' };
+  }
+  const hash = (speaker || '').split('').reduce((acc, ch) => acc + ch.charCodeAt(0), index);
+  const fg = hash % 2 === 0 ? TELETEXT_SPEAKER_PALETTE.primary : TELETEXT_SPEAKER_PALETTE.secondary;
+  return { fg, bg: '#000000', tag: 'CC1' };
 }
 
 const TITTLE_VARIETIES = {
@@ -1011,6 +1205,7 @@ if (typeof window !== 'undefined') {
     let autoProsody = true;
     let isPlaying = false;
     let playInterval = null;
+    let manualPacingOverride = false;
 
     // DOM Elements
     const screen = document.getElementById('ccScreen');
@@ -1020,6 +1215,25 @@ if (typeof window !== 'undefined') {
     const soundCueEl = document.getElementById('ccSoundCue');
     const captionBox = document.getElementById('ccCaptionBox');
     const rollupContainer = document.getElementById('ccRollupContainer');
+    const teletextContainer = document.getElementById('ccTeletextContainer');
+    const teletextBand = document.getElementById('ccTeletextBand');
+    const teletextClock = document.getElementById('ccTeletextClock');
+    const teletextWave = document.getElementById('ccTeletextWave');
+    const safeReticle = document.getElementById('ccSafeReticle');
+    const toggleSafeAreaBtn = document.getElementById('toggleSafeAreaBtn');
+    const toggleCardiacAudioBtn = document.getElementById('toggleCardiacAudioBtn');
+    const vitalsBar = document.getElementById('ccVitalsBar');
+    const rhythmStateEl = document.getElementById('ccRhythmState');
+    const cardiacDotEl = document.getElementById('ccCardiacDot');
+    const spo2ReadoutEl = document.getElementById('ccSpo2Readout');
+    const ecgCanvas = document.getElementById('ccEcgCanvas');
+    const cpsReadoutEl = document.getElementById('ccCpsReadout');
+    const cplReadoutEl = document.getElementById('ccCplReadout');
+    const vfVectorReadoutEl = document.getElementById('ccVfVectorReadout');
+    const vttPreviewEl = document.getElementById('ccVttPreview');
+    const copyVttBtn = document.getElementById('copyVttBtn');
+    const downloadVttBtn = document.getElementById('downloadVttBtn');
+    const signalReadoutEl = document.getElementById('ccSignalReadout');
     const cueCounter = document.getElementById('cueCounter');
     const timecodeEl = document.getElementById('ccTimecode');
     const weightSlider = document.getElementById('weightSlider');
@@ -1049,8 +1263,26 @@ if (typeof window !== 'undefined') {
     const varietyReadout = document.getElementById('varietyReadout');
     const pacingReadout = document.getElementById('pacingReadout');
 
-    // Timecode simulation clock
+    // Initialize Physiological Phosphor-Sweep Monitor & Gentle Harmonic Audio
+    const sinusEngine = window.PocketGullSinusEngine || null;
+    const cardiacAudio = sinusEngine ? new sinusEngine.HarmonicCardiacAudio() : null;
+    const ecgMonitor = (sinusEngine && ecgCanvas)
+      ? new sinusEngine.PhosphorEcgMonitor(ecgCanvas, {
+          bpm: 178,
+          morphology: 'vtach',
+          color: '#ef4444',
+          showGrid: true,
+          lineWidth: 2.4,
+          sweepSeconds: 3.4,
+          onBeat: (bpm, morph) => {
+            if (cardiacAudio) cardiacAudio.triggerLubDub(bpm, morph);
+          }
+        })
+      : null;
+
+    // Timecode & Teletext Sub-Cell Sinus Clock
     let frameCount = 0;
+    let teletextWaveCol = 20;
     setInterval(() => {
       frameCount++;
       const frames = frameCount % 60;
@@ -1060,7 +1292,63 @@ if (typeof window !== 'undefined') {
       const hours = 0;
       const pad = (n) => String(n).padStart(2, '0');
       timecodeEl.textContent = `TC ${pad(hours)}:${pad(minutes)}:${pad(seconds)}:${pad(frames)}`;
+
+      if (frameCount % 3 === 0) {
+        if (teletextClock) {
+          teletextClock.textContent = `${pad(10)}:${pad(minutes)}:${pad(seconds)}`;
+        }
+        if (teletextWave && sinusEngine && studio.mode === 'teletext') {
+          const cardiac = studio.resolveCueCardiacState(manualPacingOverride);
+          teletextWaveCol = (teletextWaveCol + 1) % 30;
+          teletextWave.textContent = sinusEngine.generateMonospaceWaveString(
+            30,
+            teletextWaveCol,
+            cardiac.bpm || 72,
+            cardiac.morphology,
+            3.6
+          );
+          teletextWave.style.color = cardiac.color;
+        }
+      }
     }, 1000 / 30);
+
+    function updateTelemetryAndVtt(activeText, w, wd, sl, ap) {
+      const metrics = studio.evaluateReadingMetrics(activeText, 3.4);
+      if (cpsReadoutEl) {
+        const statusStr = metrics.tier === 'optimal' ? 'OPTIMAL' : metrics.tier === 'elevated' ? 'FAST' : 'EXCEEDS 20 CPS';
+        cpsReadoutEl.textContent = `${metrics.cps} CPS · ${metrics.wpm} WPM (${statusStr})`;
+        cpsReadoutEl.style.color = metrics.tier === 'optimal' ? '#10b981' : metrics.tier === 'elevated' ? '#f59e0b' : '#f43f5e';
+      }
+      if (cplReadoutEl) {
+        cplReadoutEl.textContent = `${metrics.charCount} chars · Auto wdth ${metrics.recommendedWidth}%`;
+      }
+      if (vfVectorReadoutEl) {
+        vfVectorReadoutEl.textContent = `wght ${w} · wdth ${wd} · slnt ${sl} · APTR ${ap}`;
+      }
+      if (vttPreviewEl) {
+        vttPreviewEl.textContent = studio.generateWebVtt(customInput ? customInput.value : '');
+      }
+
+      const cardiac = studio.resolveCueCardiacState(manualPacingOverride);
+      if (ecgMonitor) {
+        ecgMonitor.setConfig({
+          bpm: cardiac.bpm,
+          morphology: cardiac.morphology,
+          color: cardiac.color,
+          paused: cardiac.bpm === 0
+        });
+      }
+      if (rhythmStateEl) {
+        rhythmStateEl.textContent = cardiac.label;
+        rhythmStateEl.style.color = cardiac.color;
+      }
+      if (cardiacDotEl) {
+        cardiacDotEl.style.background = cardiac.color;
+      }
+      if (spo2ReadoutEl) {
+        spo2ReadoutEl.textContent = `SpO2 ${cardiac.spo2}% · PLETH`;
+      }
+    }
 
     // Apply Variable Font Settings to Main Caption
     function applyFontSettings(weight, width, slant, aptr) {
@@ -1089,6 +1377,10 @@ if (typeof window !== 'undefined') {
       samplePocketgull.style.fontVariationSettings = `'wght' ${w}, 'wdth' ${wd}, 'slnt' ${sl}, 'APTR' ${ap}`;
       samplePocketgull.style.fontFeatureSettings = '"zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1';
       samplePocketgull.style.fontVariantNumeric = 'slashed-zero';
+
+      if (vfVectorReadoutEl) {
+        vfVectorReadoutEl.textContent = `wght ${w} · wdth ${wd} · slnt ${sl} · APTR ${ap}`;
+      }
     }
 
     // Render Current Caption Cue
@@ -1106,9 +1398,16 @@ if (typeof window !== 'undefined') {
         applyFontSettings(cue.weight, cue.width, cue.slant, 50);
       }
 
+      if (signalReadoutEl) {
+        signalReadoutEl.textContent = studio.mode === 'teletext'
+          ? '576i50 · WST P888 · 40×24'
+          : '1080p60 · CEA-708 · CC1';
+      }
+
       if (studio.mode === 'pop-on') {
         captionBox.style.display = 'block';
         rollupContainer.style.display = 'none';
+        if (teletextContainer) teletextContainer.style.display = 'none';
 
         speakerEl.textContent = cue.speaker;
 
@@ -1134,20 +1433,18 @@ if (typeof window !== 'undefined') {
           textLineEl.style.color = '#ffffff';
         }
 
-        // A/B test fallback sample update
         sampleFallback.textContent = cue.text;
 
       } else if (studio.mode === 'roll-up') {
         captionBox.style.display = 'none';
         rollupContainer.style.display = 'flex';
+        if (teletextContainer) teletextContainer.style.display = 'none';
 
-        // Add line to buffer
         studio.rollupBuffer.push(`${cue.speaker}: ${cue.text}`);
         if (studio.rollupBuffer.length > 3) {
           studio.rollupBuffer.shift();
         }
 
-        // Render lines safely via DOM
         rollupContainer.replaceChildren();
         for (const lineText of studio.rollupBuffer) {
           const lineDiv = document.createElement('div');
@@ -1159,11 +1456,11 @@ if (typeof window !== 'undefined') {
       } else if (studio.mode === 'paint-on') {
         captionBox.style.display = 'block';
         rollupContainer.style.display = 'none';
+        if (teletextContainer) teletextContainer.style.display = 'none';
         speakerEl.textContent = cue.speaker;
         textLineEl.textContent = '';
         soundCueEl.style.display = 'none';
 
-        // Smooth typewriter effect
         let charIdx = 0;
         const fullText = cue.text;
         clearInterval(studio.typewriterTimer);
@@ -1175,7 +1472,28 @@ if (typeof window !== 'undefined') {
             clearInterval(studio.typewriterTimer);
           }
         }, 28 / studio.speedMultiplier);
+
+      } else if (studio.mode === 'teletext') {
+        captionBox.style.display = 'none';
+        rollupContainer.style.display = 'none';
+        if (teletextContainer) teletextContainer.style.display = 'flex';
+        if (teletextBand) {
+          const style = getTeletextSpeakerStyle(cue.speaker, cue.prosody, studio.currentCueIndex);
+          teletextBand.style.color = style.fg;
+          teletextBand.style.background = style.bg;
+          teletextBand.textContent = `[${cue.speaker}] ${cue.text}`;
+        }
+        samplePocketgull.textContent = cue.text;
+        sampleFallback.textContent = cue.text;
       }
+
+      updateTelemetryAndVtt(
+        cue.text,
+        weightSlider.value,
+        widthSlider.value,
+        cue.slant || 0,
+        aptrSlider.value
+      );
     }
 
     // Scene Switcher
@@ -1184,6 +1502,7 @@ if (typeof window !== 'undefined') {
       document.querySelectorAll('[data-emotion]').forEach(b => b.classList.remove('active'));
       activeEmotionLabel.textContent = 'None (Default)';
       studio.currentEmotion = null;
+      manualPacingOverride = false;
       studio.setScene(sceneId);
       const scene = studio.getScene();
       
@@ -1191,13 +1510,15 @@ if (typeof window !== 'undefined') {
       sceneBg.className = `cc-scene-layer ${scene.sceneClass}`;
       activeSceneLabel.textContent = scene.title.replace(/^[^\s]+\s*/, '');
 
-      // Show/hide ECG canvas
-      const ecg = document.getElementById('ccEcgSvg');
-      if (ecg) {
-        ecg.style.display = sceneId === 'trauma_bay' ? 'block' : 'none';
-      }
+      // Show/hide Trauma ICU telemetry canvas & vitals bar
+      const showTraumaHud = sceneId === 'trauma_bay';
+      if (ecgCanvas) ecgCanvas.style.display = showTraumaHud ? 'block' : 'none';
+      if (vitalsBar) vitalsBar.style.display = showTraumaHud ? 'flex' : 'none';
 
       renderCue();
+      if (ecgMonitor && showTraumaHud) {
+        requestAnimationFrame(() => ecgMonitor.resize());
+      }
     }
 
     // Playback loop
@@ -1375,6 +1696,10 @@ if (typeof window !== 'undefined') {
             samplePocketgull.textContent = token.sampleText;
             sampleFallback.textContent = token.sampleText;
           }
+          if (studio.mode === 'teletext' && teletextBand && token.sampleText) {
+            teletextBand.textContent = `[${token.id.toUpperCase()}] ${token.sampleText}`;
+          }
+          updateTelemetryAndVtt(token.sampleText || studio.getCurrentCue().text, token.weight, token.width, token.slant, token.aptr);
         }
       });
     });
@@ -1464,8 +1789,12 @@ if (typeof window !== 'undefined') {
       btn.addEventListener('click', () => {
         document.querySelectorAll('[data-pacing]').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+        manualPacingOverride = true;
         const pacing = studio.setCardiacPacing(btn.dataset.pacing);
         pacingReadout.textContent = pacing.name;
+        if (ecgCanvas) ecgCanvas.style.display = 'block';
+        if (vitalsBar) vitalsBar.style.display = 'flex';
+        if (ecgMonitor) requestAnimationFrame(() => ecgMonitor.resize());
         renderCue();
       });
     });
@@ -1555,6 +1884,12 @@ if (typeof window !== 'undefined') {
         widthSlider.value = autoWidth;
         widthVal.textContent = `${autoWidth}%`;
         applyFontSettings(weightSlider.value, autoWidth, 0, aptrSlider.value);
+        if (studio.mode === 'teletext' && teletextBand) {
+          teletextBand.style.color = '#fde047';
+          teletextBand.style.background = '#000000';
+          teletextBand.textContent = `[CUSTOM] ${customInput.value}`;
+        }
+        updateTelemetryAndVtt(customInput.value, weightSlider.value, autoWidth, 0, aptrSlider.value);
       } else {
         renderCue();
       }
@@ -1618,6 +1953,65 @@ if (typeof window !== 'undefined') {
         sampleFallback.textContent = text;
       });
     });
+
+    // SMPTE RP 2046-2 Safe-Area Reticle Toggle
+    if (toggleSafeAreaBtn && safeReticle) {
+      toggleSafeAreaBtn.addEventListener('click', () => {
+        studio.safeAreaVisible = !studio.safeAreaVisible;
+        safeReticle.classList.toggle('visible', studio.safeAreaVisible);
+        toggleSafeAreaBtn.classList.toggle('active', studio.safeAreaVisible);
+        toggleSafeAreaBtn.setAttribute('aria-pressed', String(studio.safeAreaVisible));
+      });
+    }
+
+    // Gentle S1/S2 Harmonic Stethoscope Audio Toggle (Strictly Opt-In)
+    if (toggleCardiacAudioBtn && cardiacAudio) {
+      toggleCardiacAudioBtn.addEventListener('click', () => {
+        const active = cardiacAudio.toggle();
+        toggleCardiacAudioBtn.classList.toggle('active', active);
+        toggleCardiacAudioBtn.setAttribute('aria-pressed', String(active));
+        toggleCardiacAudioBtn.textContent = active ? '🔊 S1·S2 Audio' : '🔇 S1·S2 Audio';
+      });
+    }
+
+    // Teletext Page 888 Fastext Scene Shortcuts
+    document.querySelectorAll('[data-fastext-scene]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetScene = btn.getAttribute('data-fastext-scene');
+        document.querySelectorAll('[data-scene]').forEach(b => {
+          b.classList.toggle('active', b.dataset.scene === targetScene);
+        });
+        switchScene(targetScene);
+      });
+    });
+
+    // Live WebVTT Copy & Download Handlers (100% Client-Side Offline)
+    if (copyVttBtn) {
+      copyVttBtn.addEventListener('click', () => {
+        const vtt = studio.generateWebVtt(customInput ? customInput.value : '');
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(vtt).then(() => {
+            copyVttBtn.textContent = '✓ Copied WebVTT!';
+            setTimeout(() => { copyVttBtn.textContent = '📋 Copy WebVTT'; }, 2000);
+          });
+        }
+      });
+    }
+
+    if (downloadVttBtn) {
+      downloadVttBtn.addEventListener('click', () => {
+        const vtt = studio.generateWebVtt(customInput ? customInput.value : '');
+        const blob = new Blob([vtt], { type: 'text/vtt;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `pocketgull-${studio.currentSceneId}.vtt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      });
+    }
 
     // Initial Render
     switchScene('trauma_bay');

@@ -40,7 +40,7 @@
           },
           {
             "key": "Content-Security-Policy",
-            "value": "default-src 'self'; script-src 'self' 'sha256-ULPN4HruT8vjHphTixK2casCTJ+GQt0c7I5nXtjooWU=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.paypal.com https://maps.googleapis.com https://*.googleapis.com https://*.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https:; worker-src 'self' blob:; frame-src 'self' https://www.paypal.com https://*.paypal.com https://*.google.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self';"
+            "value": "default-src 'self'; script-src 'self' 'sha256-ULPN4HruT8vjHphTixK2casCTJ+GQt0c7I5nXtjooWU=' 'sha256-E0Au/lAq/HndgLuUKXtkLe9PSbDMRZVQS7BByxi3RoU=' 'sha256-Lx9JGAwUuJlxr7nKLBdzqfCJurvIuieViumi3DFzT48=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.paypal.com https://maps.googleapis.com https://*.googleapis.com https://*.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https:; worker-src 'self' blob:; frame-src 'self' https://www.paypal.com https://*.paypal.com https://*.google.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self';"
           }
         ]
       },
