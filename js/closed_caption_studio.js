@@ -1754,8 +1754,8 @@ export async function refineScriptWithLocalModel(scene, config = {}) {
     return { ok: false, reason: 'No cues to refine.', scene };
   }
 
-  const timeoutMs = Math.max(1000, Math.min(20000, Number(config.timeoutMs || 6500)));
-  const model = String(config.model || 'llama3.2:3b').trim();
+  const timeoutMs = Math.max(1000, Math.min(30000, Number(config.timeoutMs || 15000)));
+  const model = String(config.model || 'pocketgull-prosody-gemma').trim();
   const payloadSummary = scene.cues.map((c, index) => ({
     index,
     speaker: c.speaker,

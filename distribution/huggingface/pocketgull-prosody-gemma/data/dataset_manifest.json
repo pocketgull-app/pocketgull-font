@@ -1,0 +1,21 @@
+{
+  "name": "pocketgull-prosody-gemma-dataset",
+  "baseModel": "google/gemma-3-1b-it",
+  "ollamaBaseModel": "gemma3:1b",
+  "version": "4.0.0",
+  "totalExamples": 165,
+  "trainCount": 141,
+  "evalCount": 24,
+  "axesSchema": [
+    "emotion",
+    "weight",
+    "slant",
+    "soft",
+    "hlng",
+    "boum",
+    "aptr",
+    "tension",
+    "bpm"
+  ],
+  "negativeSpaceCompliance": "Zero PHI; non-diagnostic assistive screenplay & caption keyframing only."
+}

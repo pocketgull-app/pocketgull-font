@@ -514,7 +514,43 @@ test('Screenplay & Script Table Read Importer: Fountain/SRT Parsing, Affect Keyf
   assert.ok(ccHtml.includes('id="ccScreenplayImporterSection"'), 'HTML must expose Screenplay Importer section');
   assert.ok(ccHtml.includes('id="ccScriptInput"'), 'HTML must expose script textarea');
   assert.ok(ccHtml.includes('id="parseScriptBtn"'), 'HTML must expose Parse & Stage Table Read button');
+  assert.ok(ccHtml.includes('pocketgull-prosody-gemma'), 'HTML must default local LLM selector to pocketgull-prosody-gemma');
   assert.ok(!ccHtml.includes('.innerHTML ='), 'HTML must keep zero .innerHTML assignments');
+});
+
+test('Hugging Face Gemma Prosody Kit: Model Card, QLoRA Trainer, Modelfile & SFT JSONL Schema', () => {
+  const hfDir = path.join(ROOT_DIR, 'distribution', 'huggingface', 'pocketgull-prosody-gemma');
+  const readmePath = path.join(hfDir, 'README.md');
+  const trainerPath = path.join(hfDir, 'train_qlora_gemma.py');
+  const modelfilePath = path.join(hfDir, 'Modelfile');
+  const trainPath = path.join(hfDir, 'data', 'train.jsonl');
+  const evalPath = path.join(hfDir, 'data', 'eval.jsonl');
+  const manifestPath = path.join(hfDir, 'data', 'dataset_manifest.json');
+
+  for (const p of [readmePath, trainerPath, modelfilePath, trainPath, evalPath, manifestPath]) {
+    assert.ok(fs.existsSync(p), `Missing Gemma Hugging Face asset: ${path.basename(p)}`);
+  }
+
+  const readme = fs.readFileSync(readmePath, 'utf8');
+  const trainer = fs.readFileSync(trainerPath, 'utf8');
+  const modelfile = fs.readFileSync(modelfilePath, 'utf8');
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+
+  assert.ok(readme.includes('base_model: google/gemma-3-1b-it'), 'HF Model Card must declare google/gemma-3-1b-it');
+  assert.ok(trainer.includes('google/gemma-3-1b-it'), 'QLoRA trainer must target google/gemma-3-1b-it');
+  assert.ok(modelfile.includes('FROM gemma3:1b'), 'Ollama Modelfile must default to gemma3:1b');
+  assert.ok(manifest.trainCount >= 100 && manifest.evalCount >= 15, 'Dataset must contain >= 100 train and >= 15 eval records');
+
+  const lines = fs.readFileSync(trainPath, 'utf8').trim().split('\n');
+  assert.equal(lines.length, manifest.trainCount, 'train.jsonl line count must match dataset_manifest.json');
+  const sample = JSON.parse(lines[0]);
+  assert.equal(sample.messages.length, 3, 'Each SFT record must carry system, user, and assistant turns');
+  const parsedOut = JSON.parse(sample.messages[2].content);
+  assert.ok(Array.isArray(parsedOut.beats) && parsedOut.beats.length >= 1);
+  const b0 = parsedOut.beats[0];
+  assert.ok(b0.weight >= 100 && b0.weight <= 900);
+  assert.ok(b0.aptr >= 0 && b0.aptr <= 1);
+  assert.ok(b0.soft >= 0 && b0.soft <= 1);
 });
 
 

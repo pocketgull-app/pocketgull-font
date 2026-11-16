@@ -509,7 +509,7 @@
 
           <div id="ccLocalLlmConfig" style="display: none; flex-direction: column; gap: 0.4rem;">
             <input type="url" id="ccLocalLlmEndpoint" class="cc-arc-seed-input" value="http://127.0.0.1:11434/api/chat" placeholder="http://127.0.0.1:11434/api/chat or :8000/api/v1/chat/completions">
-            <input type="text" id="ccLocalLlmModel" class="cc-arc-seed-input" value="llama3.2:3b" placeholder="Local model id (e.g., llama3.2:3b)">
+            <input type="text" id="ccLocalLlmModel" class="cc-arc-seed-input" value="pocketgull-prosody-gemma" placeholder="Local Gemma model (e.g., pocketgull-prosody-gemma, gemma3:1b)">
           </div>
 
           <div class="cc-script-diag-row" aria-label="Writer Pacing & Acuity Diagnostics">
@@ -2202,8 +2202,8 @@ async function refineScriptWithLocalModel(scene, config = {}) {
     return { ok: false, reason: 'No cues to refine.', scene };
   }
 
-  const timeoutMs = Math.max(1000, Math.min(20000, Number(config.timeoutMs || 6500)));
-  const model = String(config.model || 'llama3.2:3b').trim();
+  const timeoutMs = Math.max(1000, Math.min(30000, Number(config.timeoutMs || 15000)));
+  const model = String(config.model || 'pocketgull-prosody-gemma').trim();
   const payloadSummary = scene.cues.map((c, index) => ({
     index,
     speaker: c.speaker,
@@ -3633,8 +3633,8 @@ if (typeof window !== 'undefined') {
       if (selectedScriptEngine === 'local_llm') {
         if (scriptStatusMessage) scriptStatusMessage.textContent = 'Querying 127.0.0.1 local model for structured affect keyframes...';
         const endpoint = ccLocalLlmEndpoint ? ccLocalLlmEndpoint.value : 'http://127.0.0.1:11434/api/chat';
-        const model = ccLocalLlmModel ? ccLocalLlmModel.value : 'llama3.2:3b';
-        const res = await refineScriptWithLocalModel(parsedScene, { endpoint, model, timeoutMs: 6500 });
+        const model = ccLocalLlmModel ? ccLocalLlmModel.value : 'pocketgull-prosody-gemma';
+        const res = await refineScriptWithLocalModel(parsedScene, { endpoint, model, timeoutMs: 15000 });
         parsedScene = res.scene;
         statusMsg = res.reason;
       }
