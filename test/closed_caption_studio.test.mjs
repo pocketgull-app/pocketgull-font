@@ -451,4 +451,70 @@ test('Emotional Letterform Fine-Tuning: Normalized 0..1 APTR, Multi-Axis gvar Mo
   assert.ok(!ccCss.includes("'APTR' 95"), 'CSS keyframes/samples must not clamp APTR above 1.0');
 });
 
+test('Screenplay & Script Table Read Importer: Fountain/SRT Parsing, Affect Keyframing & Local 127.0.0.1 Guard', async () => {
+  const {
+    SCREENPLAY_SAMPLE_PRESETS,
+    parseScreenplayScript,
+    isLoopbackEndpoint,
+    refineScriptWithLocalModel
+  } = await import('../js/closed_caption_studio.js');
+
+  // 1. Fountain multi-beat ER Handoff preset yields 4 distinct emotional states
+  const erScene = parseScreenplayScript(SCREENPLAY_SAMPLE_PRESETS.er_handoff.script);
+  assert.equal(erScene.cues.length, 4, 'ER Handoff Fountain sample must parse 4 beats');
+  assert.equal(erScene.cues[0].speaker, 'NURSE ELENA');
+  assert.equal(erScene.cues[0].emotion, 'intimate', 'Parenthetical (whispers) must infer intimate');
+  assert.equal(erScene.cues[1].emotion, 'panic', 'Uppercase urgent direction must infer panic');
+  assert.equal(erScene.cues[2].emotion, 'relief', 'Relieved exhale beat must infer relief');
+  assert.equal(erScene.cues[3].emotion, 'awe', 'Quiet awe direction must infer awe');
+  assert.equal(erScene.stats.emotionVariety, 4, 'ER Handoff sample must report all 4 emotional affects');
+
+  // 2. Inline dialogue + SRT timestamps + XSS bracket stripping
+  const srtInline = `1\n00:00:01,000 --> 00:00:04,000\nELENA: (whispers) Hide the <script>file.</script>\n\n2\n00:00:05,000 --> 00:00:08,000\nPILOT: (panicked) CLEAR THE DECK NOW!`;
+  const srtScene = parseScreenplayScript(srtInline);
+  assert.equal(srtScene.cues.length, 2, 'Must parse 2 beats and skip SRT indices/timestamps');
+  assert.equal(srtScene.cues[0].speaker, 'ELENA');
+  assert.ok(!srtScene.cues[0].text.includes('<script>'), 'Must sanitize angle brackets from imported scripts');
+  assert.equal(srtScene.cues[1].emotion, 'panic');
+
+  // 3. Strict 127.0.0.1 / localhost egress guard & mock local LLM refinement
+  assert.equal(isLoopbackEndpoint('http://127.0.0.1:11434/api/chat'), true);
+  assert.equal(isLoopbackEndpoint('http://localhost:8000/api/v1/chat/completions'), true);
+  assert.equal(isLoopbackEndpoint('https://api.example.com/v1/chat'), false, 'Non-loopback URLs must be rejected');
+
+  const blocked = await refineScriptWithLocalModel(erScene, { endpoint: 'https://api.example.com/v1/chat' });
+  assert.equal(blocked.ok, false, 'Refinement must refuse remote endpoints');
+
+  const refined = await refineScriptWithLocalModel(erScene, {
+    endpoint: 'http://127.0.0.1:11434/api/chat',
+    model: 'llama3.2:3b',
+    fetchImpl: async () => ({
+      ok: true,
+      status: 200,
+      json: async () => ({
+        message: {
+          content: JSON.stringify({
+            beats: [
+              { index: 0, emotion: 'intimate', weight: 220, slant: -7.5, soft: 0.92, hlng: 0.85, boum: 0.5, aptr: 0.4, tension: 35, bpm: 64 },
+              { index: 1, emotion: 'panic', weight: 999, slant: 3, soft: 0, hlng: 0, boum: 0, aptr: 1.5, tension: 95, bpm: 170 }
+            ]
+          })
+        }
+      })
+    })
+  });
+  assert.equal(refined.ok, true, 'Valid loopback JSON must refine cues');
+  assert.equal(refined.scene.cues[0].weight, 220);
+  assert.equal(refined.scene.cues[0].soft, 0.92);
+  assert.equal(refined.scene.cues[1].weight, 900, 'Out-of-bounds weight must clamp at 900');
+  assert.equal(refined.scene.cues[1].slant, 0, 'Positive slant must clamp at 0');
+  assert.equal(refined.scene.cues[1].aptr, 1, 'Out-of-bounds APTR must clamp at 1.0');
+
+  const ccHtml = fs.readFileSync(path.join(ROOT_DIR, 'closed_caption_studio.html'), 'utf8');
+  assert.ok(ccHtml.includes('id="ccScreenplayImporterSection"'), 'HTML must expose Screenplay Importer section');
+  assert.ok(ccHtml.includes('id="ccScriptInput"'), 'HTML must expose script textarea');
+  assert.ok(ccHtml.includes('id="parseScriptBtn"'), 'HTML must expose Parse & Stage Table Read button');
+  assert.ok(!ccHtml.includes('.innerHTML ='), 'HTML must keep zero .innerHTML assignments');
+});
+
 

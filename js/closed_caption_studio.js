@@ -1314,11 +1314,524 @@ export function evaluateDeconstructionLens(cue, scene, stance = 'negotiate', thi
   };
 }
 
+export const SCREENPLAY_SAMPLE_PRESETS = {
+  er_handoff: {
+    id: 'er_handoff',
+    title: 'ER Night Shift Handoff',
+    script: `INT. TRAUMA BAY 2 - NIGHT
+
+NURSE ELENA
+(whispers, checking chart)
+Did anyone else see the 02:14 potassium entry? Look closely at the handwriting.
+
+DR. ARIS
+(urgent, sharp)
+CHARGED TO 200 JOULES! CLEAR THE BED NOW!
+
+NURSE ELENA
+(exhales softly, relieved)
+Normal sinus rhythm restored. Breathe slow; pulse steady at 68 bpm.
+
+RESIDENT
+(in quiet awe)
+Look at the snow falling outside the skylight. Not a sound on the street.`
+  },
+  noir_confession: {
+    id: 'noir_confession',
+    title: 'Harbor Noir Confession',
+    script: `EXT. FOGGY PIER - 03:00 AM
+
+DETECTIVE MARA (V.O.)
+(softly, confessional)
+I kept the torn ledger page inside my coat for seven winters.
+
+HARBOR PILOT
+(tightly, panicked)
+STOP! Do NOT open that locker before the cutter clears the buoy!
+
+DETECTIVE MARA
+(warmly, exhaling)
+It is over now. You can set the lantern down and rest.`
+  },
+  orbital_log: {
+    id: 'orbital_log',
+    title: 'Orbital Telemetry Log',
+    script: `INT. RELAY STATION 09 - CUPOLA
+
+FLIGHT CAPTAIN
+(calmly)
+Hull pressure nominal at 101.3 kPa. Starboard array aligned.
+
+SENSOR ARRAY
+(alarming)
+[♪ hull micrometeorite warning klaxon — delta-v critical! ♪]
+
+ENGINEER
+(breathless, urgent)
+SEAL BULKHEAD 4! Manual gimbal override engaged!
+
+FLIGHT CAPTAIN
+(wondrous, quiet)
+Look below... the aurora is wrapping the entire terminator in emerald.`
+  }
+};
+
+export function inferCueAffect(text = '', parenthetical = '', speaker = '') {
+  const cleanText = String(text || '');
+  const cleanDir = String(parenthetical || '').toLowerCase();
+  const cleanSpeaker = String(speaker || '').toUpperCase();
+  const lower = `${cleanDir} ${cleanText.toLowerCase()}`;
+
+  const letterCount = (cleanText.match(/[A-Za-z]/g) || []).length;
+  const upperCount = (cleanText.match(/[A-Z]/g) || []).length;
+  const isMostlyCaps = letterCount >= 6 && (upperCount / letterCount) >= 0.72;
+  const hasExclaim = cleanText.includes('!');
+  const hasBracketFx = /^\[.*\]$/.test(cleanText.trim()) || cleanText.includes('♪');
+
+  const clamp01 = (n) => Number(Math.max(0, Math.min(1, n)).toFixed(2));
+  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+
+  const isPanic =
+    isMostlyCaps ||
+    /\b(panic|panicked|urgent|urgently|shout|shouting|yell|scream|sharp|tightly|alarm|alarming|warning|clear|stat|run|stop|now|emergency|critical|breach|charged)\b/.test(lower) ||
+    hasExclaim;
+
+  const isIntimate =
+    /\b(whisper|whispers|whispering|softly|quietly|confess|confessional|secret|intimate|murmur|hush|tender|low voice|v\.o\.|breathless)\b/.test(lower) ||
+    cleanSpeaker.includes('V.O.') ||
+    cleanText.includes('...');
+
+  const isRelief =
+    /\b(relief|relieved|exhale|exhales|exhaling|calm|calmly|restored|steady|breathe|warm|warmly|gentle|safe|settle|nominal|home|rest)\b/.test(lower);
+
+  const isAwe =
+    /\b(awe|wonder|wondrous|reverence|horizon|aurora|stars|cosmos|ocean|skylight|snow|emerald|infinite|vast)\b/.test(lower);
+
+  let emotionId = 'dialogue';
+  let prosody = 'dialogue';
+  let base = {
+    weight: 400,
+    width: 100,
+    slant: 0,
+    opsz: 20,
+    aptr: 0.55,
+    soft: 0.25,
+    hlng: 0.20,
+    boum: 0.15,
+    thrm: 0.0,
+    grav: 0.10,
+    letterSpacing: '0.015em',
+    tension: 32,
+    bpm: 72,
+    morphology: 'sinus'
+  };
+
+  if (hasBracketFx && !isPanic) {
+    emotionId = 'soundfx';
+    prosody = 'soundfx';
+    base = { ...PROSODY_PRESETS.soundfx, width: 100, tension: 58, bpm: 98, morphology: 'adenosine' };
+  } else if (isPanic && !isRelief) {
+    emotionId = 'panic';
+    prosody = isMostlyCaps ? 'shout' : 'urgent';
+    const tok = EMOTION_TOKENS.panic;
+    base = {
+      weight: tok.weight,
+      width: tok.width,
+      slant: tok.slant,
+      opsz: tok.opsz,
+      aptr: tok.aptr,
+      soft: tok.soft,
+      hlng: tok.hlng,
+      boum: tok.boum,
+      thrm: tok.thrm,
+      grav: tok.grav,
+      letterSpacing: tok.tracking,
+      tension: isMostlyCaps ? 94 : 80,
+      bpm: isMostlyCaps ? 162 : 134,
+      morphology: 'vtach'
+    };
+  } else if (isAwe) {
+    emotionId = 'awe';
+    prosody = 'narrator';
+    const tok = EMOTION_TOKENS.awe;
+    base = {
+      weight: tok.weight,
+      width: tok.width,
+      slant: tok.slant,
+      opsz: tok.opsz,
+      aptr: tok.aptr,
+      soft: tok.soft,
+      hlng: tok.hlng,
+      boum: tok.boum,
+      thrm: tok.thrm,
+      grav: tok.grav,
+      letterSpacing: tok.tracking,
+      tension: 38,
+      bpm: 64,
+      morphology: 'sinus'
+    };
+  } else if (isRelief) {
+    emotionId = 'relief';
+    prosody = 'dialogue';
+    const tok = EMOTION_TOKENS.relief;
+    base = {
+      weight: tok.weight,
+      width: tok.width,
+      slant: tok.slant,
+      opsz: tok.opsz,
+      aptr: tok.aptr,
+      soft: tok.soft,
+      hlng: tok.hlng,
+      boum: tok.boum,
+      thrm: tok.thrm,
+      grav: tok.grav,
+      letterSpacing: tok.tracking,
+      tension: 20,
+      bpm: 62,
+      morphology: 'sinus'
+    };
+  } else if (isIntimate) {
+    emotionId = 'intimate';
+    prosody = 'whisper';
+    const tok = EMOTION_TOKENS.intimate;
+    base = {
+      weight: tok.weight,
+      width: tok.width,
+      slant: tok.slant,
+      opsz: tok.opsz,
+      aptr: tok.aptr,
+      soft: tok.soft,
+      hlng: tok.hlng,
+      boum: tok.boum,
+      thrm: tok.thrm,
+      grav: tok.grav,
+      letterSpacing: tok.tracking,
+      tension: 44,
+      bpm: 66,
+      morphology: 'sinus'
+    };
+  }
+
+  return {
+    emotion: emotionId,
+    prosody,
+    weight: clamp(Math.round(base.weight), 100, 900),
+    width: clamp(Math.round(base.width), 75, 100),
+    slant: Number(clamp(base.slant, -10.5, 0).toFixed(1)),
+    opsz: clamp(Math.round(base.opsz), 6, 72),
+    aptr: normalizeAptr(base.aptr),
+    soft: clamp01(base.soft),
+    hlng: clamp01(base.hlng),
+    boum: clamp01(base.boum),
+    thrm: clamp01(base.thrm),
+    grav: clamp01(base.grav),
+    letterSpacing: base.letterSpacing || '0.015em',
+    tension: clamp(Math.round(base.tension), 5, 100),
+    bpm: clamp(Math.round(base.bpm), 48, 185),
+    morphology: base.morphology
+  };
+}
+
+export function parseScreenplayScript(rawScript = '', options = {}) {
+  const cleanAngle = (s) => String(s || '').replace(/[<>]/g, '');
+  const lines = String(rawScript || '').replace(/\r\n/g, '\n').split('\n');
+  const measurer = new ClosedCaptionStudio();
+  const maxBeats = Math.min(32, Math.max(1, Number(options.maxBeats || 24)));
+
+  const parsedEntries = [];
+  let sceneHeading = cleanAngle(options.title || 'Screenplay Table Read');
+  let currentSpeaker = '';
+  let currentDirection = '';
+  let textBuffer = [];
+
+  const flushBeat = () => {
+    const joined = cleanAngle(textBuffer.join(' ')).replace(/\s+/g, ' ').trim();
+    textBuffer = [];
+    if (!joined) return;
+    parsedEntries.push({
+      speaker: cleanAngle(currentSpeaker || 'SPEAKER').trim() || 'SPEAKER',
+      direction: cleanAngle(currentDirection).trim(),
+      text: joined
+    });
+    currentDirection = '';
+  };
+
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+    if (!line) {
+      flushBeat();
+      continue;
+    }
+    // Skip SRT index digits and timestamp lines cleanly
+    if (/^\d+$/.test(line) || /^\d{2}:\d{2}:\d{2}[,.]\d{3}\s*--?>/.test(line)) {
+      continue;
+    }
+    // Scene heading (INT. / EXT.)
+    if (/^(?:INT\.|EXT\.|INT\/EXT\.|EST\.)/i.test(line)) {
+      flushBeat();
+      sceneHeading = cleanAngle(line).slice(0, 64);
+      currentSpeaker = '';
+      continue;
+    }
+    // Parenthetical stage direction: (whispers)
+    if (line.startsWith('(') && line.endsWith(')') && line.length <= 80) {
+      currentDirection = line.slice(1, -1).trim();
+      continue;
+    }
+    // Inline script form: SPEAKER: (dir) dialogue text (must have whitespace after colon and <= 4 words in speaker name)
+    const colonIdx = line.indexOf(':');
+    if (colonIdx > 0 && colonIdx <= 28 && /\s/.test(line[colonIdx + 1] || '')) {
+      const candidateSpeaker = line.slice(0, colonIdx).trim();
+      const speakerWords = candidateSpeaker.split(/\s+/);
+      if (
+        speakerWords.length <= 4 &&
+        textBuffer.length === 0 &&
+        /^[A-Za-z0-9 .()\-_']+$/.test(candidateSpeaker) &&
+        !/^\d/.test(candidateSpeaker) &&
+        candidateSpeaker === candidateSpeaker.toUpperCase()
+      ) {
+        flushBeat();
+        currentSpeaker = candidateSpeaker.toUpperCase();
+        let rest = line.slice(colonIdx + 1).trim();
+        if (rest.startsWith('(')) {
+          const closeIdx = rest.indexOf(')');
+          if (closeIdx > 1 && closeIdx < 60) {
+            currentDirection = rest.slice(1, closeIdx).trim();
+            rest = rest.slice(closeIdx + 1).trim();
+          }
+        }
+        if (rest) textBuffer.push(rest);
+        continue;
+      }
+    }
+    // Fountain Character Cue line (ALL-CAPS short header without trailing sentence period)
+    const isUpperCue =
+      line.length >= 2 &&
+      line.length <= 36 &&
+      line === line.toUpperCase() &&
+      /[A-Z]/.test(line) &&
+      !/[.!?]$/.test(line) &&
+      textBuffer.length === 0;
+    if (isUpperCue) {
+      flushBeat();
+      currentSpeaker = line;
+      continue;
+    }
+    textBuffer.push(line);
+  }
+  flushBeat();
+
+  const effectiveEntries = parsedEntries.length > 0
+    ? parsedEntries.slice(0, maxBeats)
+    : [{ speaker: 'WRITER', direction: '', text: 'Paste dialogue or Fountain lines to audition emotional letterforms.' }];
+
+  let cpsWarnings = 0;
+  const distinctEmotions = new Set();
+
+  const cues = effectiveEntries.map((entry, idx) => {
+    const affect = inferCueAffect(entry.text, entry.direction, entry.speaker);
+    const autoWidth = measurer.calculateLineFit(entry.text, 37);
+    const width = Math.min(affect.width, autoWidth);
+    const evalMetrics = measurer.evaluateReadingMetrics(entry.text, 3.4);
+    if (evalMetrics.tier === 'exceeds') cpsWarnings++;
+    distinctEmotions.add(affect.emotion);
+    return {
+      act: `Beat ${idx + 1}`,
+      beatName: entry.direction ? entry.direction.slice(0, 22) : affect.emotion.toUpperCase(),
+      speaker: entry.speaker,
+      parenthetical: entry.direction,
+      text: entry.text,
+      emotion: affect.emotion,
+      prosody: affect.prosody,
+      weight: affect.weight,
+      width,
+      slant: affect.slant,
+      opsz: affect.opsz,
+      aptr: affect.aptr,
+      soft: affect.soft,
+      hlng: affect.hlng,
+      boum: affect.boum,
+      thrm: affect.thrm,
+      grav: affect.grav,
+      letterSpacing: affect.letterSpacing,
+      tension: affect.tension,
+      bpm: affect.bpm,
+      morphology: affect.morphology,
+      sourceMode: 'heuristic'
+    };
+  });
+
+  const flatCount = cues.filter(c => c.emotion === 'dialogue').length;
+  return {
+    id: 'narrative_arc',
+    genreId: 'screenplay_import',
+    genreName: 'Screenplay Table Read',
+    title: `🎬 ${sceneHeading}`,
+    badge: 'OFFLINE SCRIPT PARSER · SIL OFL 1.1',
+    structure: `${cues.length} Dialogue Beats · 10-Axis VF Delivery`,
+    defaultBlend: 'clinical_teal',
+    sceneClass: 'cc-scene-noir',
+    accent: '#38bdf8',
+    stats: {
+      beatCount: cues.length,
+      emotionVariety: distinctEmotions.size,
+      flatBeats: flatCount,
+      cpsWarnings
+    },
+    cues
+  };
+}
+
+export function isLoopbackEndpoint(urlString = '') {
+  try {
+    const parsed = new URL(String(urlString || '').trim());
+    const host = parsed.hostname.toLowerCase();
+    return (parsed.protocol === 'http:' || parsed.protocol === 'https:') &&
+      (host === '127.0.0.1' || host === 'localhost' || host === '[::1]');
+  } catch {
+    return false;
+  }
+}
+
+export function applyRefinedAffectToScene(scene, refinedArray = []) {
+  if (!scene || !Array.isArray(scene.cues) || !Array.isArray(refinedArray)) return scene;
+  const clamp01 = (n, fallback) => {
+    const num = Number(n);
+    return Number.isFinite(num) ? Number(Math.max(0, Math.min(1, num)).toFixed(2)) : fallback;
+  };
+  const clamp = (n, min, max, fallback) => {
+    const num = Number(n);
+    return Number.isFinite(num) ? Math.max(min, Math.min(max, num)) : fallback;
+  };
+  const validEmotions = new Set(['intimate', 'panic', 'relief', 'awe', 'dialogue', 'soundfx']);
+
+  const updatedEmotions = new Set();
+  const nextCues = scene.cues.map((cue, idx) => {
+    const patch = refinedArray.find(r => Number(r && r.index) === idx) || refinedArray[idx];
+    if (!patch || typeof patch !== 'object') {
+      updatedEmotions.add(cue.emotion);
+      return cue;
+    }
+    const emo = validEmotions.has(patch.emotion) ? patch.emotion : cue.emotion;
+    updatedEmotions.add(emo);
+    const sl = Number(clamp(patch.slant, -10.5, 0, cue.slant).toFixed(1));
+    const tension = Math.round(clamp(patch.tension, 5, 100, cue.tension));
+    const bpm = Math.round(clamp(patch.bpm, 48, 185, tension >= 80 ? 156 : tension >= 55 ? 104 : 68));
+    return {
+      ...cue,
+      emotion: emo,
+      prosody: emo === 'intimate' ? 'whisper' : emo === 'panic' ? 'urgent' : emo === 'awe' ? 'narrator' : cue.prosody,
+      weight: Math.round(clamp(patch.weight, 100, 900, cue.weight)),
+      slant: sl,
+      aptr: clamp01(patch.aptr, cue.aptr),
+      soft: clamp01(patch.soft, cue.soft),
+      hlng: clamp01(patch.hlng, cue.hlng),
+      boum: clamp01(patch.boum, cue.boum),
+      tension,
+      bpm,
+      morphology: bpm >= 135 ? 'vtach' : bpm >= 100 ? 'adenosine' : 'sinus',
+      sourceMode: 'local_llm'
+    };
+  });
+
+  return {
+    ...scene,
+    badge: 'LOCAL 127.0.0.1 LLM TAGGED · ZERO EGRESS',
+    stats: {
+      ...scene.stats,
+      emotionVariety: updatedEmotions.size
+    },
+    cues: nextCues
+  };
+}
+
+export async function refineScriptWithLocalModel(scene, config = {}) {
+  const endpoint = String(config.endpoint || 'http://127.0.0.1:11434/api/chat').trim();
+  if (!isLoopbackEndpoint(endpoint)) {
+    return { ok: false, reason: 'Blocked non-loopback endpoint (must be 127.0.0.1 or localhost).', scene };
+  }
+  if (!scene || !Array.isArray(scene.cues) || scene.cues.length === 0) {
+    return { ok: false, reason: 'No cues to refine.', scene };
+  }
+
+  const timeoutMs = Math.max(1000, Math.min(20000, Number(config.timeoutMs || 6500)));
+  const model = String(config.model || 'llama3.2:3b').trim();
+  const payloadSummary = scene.cues.map((c, index) => ({
+    index,
+    speaker: c.speaker,
+    direction: c.parenthetical || '',
+    text: c.text
+  }));
+
+  const systemPrompt =
+    'Return ONLY valid JSON with key "beats": an array of objects {index, emotion, weight, slant, soft, hlng, boum, aptr, tension, bpm}. ' +
+    'emotion in ["intimate","panic","relief","awe","dialogue"]. weight 100..900, slant -10.5..0, soft/hlng/boum/aptr 0.0..1.0, tension 5..100, bpm 54..175.';
+  const isOllamaNative = endpoint.includes('/api/chat');
+  const body = isOllamaNative
+    ? {
+        model,
+        stream: false,
+        format: 'json',
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: JSON.stringify({ beats: payloadSummary }) }
+        ]
+      }
+    : {
+        model,
+        temperature: 0.2,
+        response_format: { type: 'json_object' },
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: JSON.stringify({ beats: payloadSummary }) }
+        ]
+      };
+
+  const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+  const timer = controller ? setTimeout(() => controller.abort(), timeoutMs) : null;
+  try {
+    const fetchImpl = config.fetchImpl || globalThis.fetch;
+    const res = await fetchImpl(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+      signal: controller ? controller.signal : undefined
+    });
+    if (!res || !res.ok) {
+      return { ok: false, reason: `Local endpoint returned HTTP ${res ? res.status : 'error'} — using offline parser.`, scene };
+    }
+    const json = await res.json();
+    const rawContent = isOllamaNative
+      ? (json && json.message && json.message.content)
+      : (json && json.choices && json.choices[0] && json.choices[0].message && json.choices[0].message.content);
+    const parsedJson = typeof rawContent === 'string' ? JSON.parse(rawContent) : rawContent;
+    const beats = Array.isArray(parsedJson) ? parsedJson : (parsedJson && Array.isArray(parsedJson.beats) ? parsedJson.beats : null);
+    if (!beats || beats.length === 0) {
+      return { ok: false, reason: 'Local model response lacked "beats" JSON array — using offline parser.', scene };
+    }
+    return {
+      ok: true,
+      reason: `Refined ${beats.length} beats privately via ${model} on 127.0.0.1.`,
+      scene: applyRefinedAffectToScene(scene, beats)
+    };
+  } catch (err) {
+    return { ok: false, reason: `Offline heuristic active (${err && err.name === 'AbortError' ? 'local timeout' : 'no 127.0.0.1 LLM detected'}).`, scene };
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
+
 // Global browser initializer
 if (typeof window !== 'undefined') {
   window.PocketGullCC = {
     normalizeAptr,
     buildVariationString,
+    SCREENPLAY_SAMPLE_PRESETS,
+    inferCueAffect,
+    parseScreenplayScript,
+    isLoopbackEndpoint,
+    applyRefinedAffectToScene,
+    refineScriptWithLocalModel,
     BROADCAST_SCENES,
     PROSODY_PRESETS,
     EMOTION_TOKENS,
