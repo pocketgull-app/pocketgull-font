@@ -173,7 +173,7 @@
             </div>
             <div class="cc-metric-chip">
               <span class="cc-metric-chip-label">Active OpenType VF Coordinates</span>
-              <span class="cc-metric-chip-val" id="ccVfVectorReadout" style="color: var(--cc-accent-sky);">wght 400 · wdth 100 · slnt 0 · APTR 50</span>
+              <span class="cc-metric-chip-val" id="ccVfVectorReadout" style="color: var(--cc-accent-sky);">wght 400 · wdth 100 · APTR 0.50 · SOFT 0.25 · HLNG 0.20</span>
             </div>
           </div>
 
@@ -247,10 +247,35 @@
           <!-- Aperture Slider -->
           <div style="margin-top: 6px;">
             <div class="cc-control-label">
-              <span>Aperture Axis (<code>APTR</code> • Anti-Bloom)</span>
-              <span class="cc-val-readout" id="aptrVal">50</span>
+              <span>Aperture Axis (<code>APTR</code> • Anti-Bloom 0–1)</span>
+              <span class="cc-val-readout" id="aptrVal">0.50</span>
             </div>
-            <input type="range" class="cc-slider" id="aptrSlider" min="0" max="100" step="5" value="50">
+            <input type="range" class="cc-slider" id="aptrSlider" min="0" max="1" step="0.05" value="0.50">
+          </div>
+
+          <!-- Emotional Shape Sliders (SOFT, HLNG, BOUM) -->
+          <div style="margin-top: 6px;">
+            <div class="cc-control-label">
+              <span>Softness (<code>SOFT</code> • Felt Cushion)</span>
+              <span class="cc-val-readout" id="softVal">0.25</span>
+            </div>
+            <input type="range" class="cc-slider" id="softSlider" min="0" max="1" step="0.05" value="0.25">
+          </div>
+
+          <div style="margin-top: 6px;">
+            <div class="cc-control-label">
+              <span>Healing Curve (<code>HLNG</code> • Warm Breath)</span>
+              <span class="cc-val-readout" id="hlngVal">0.20</span>
+            </div>
+            <input type="range" class="cc-slider" id="hlngSlider" min="0" max="1" step="0.05" value="0.20">
+          </div>
+
+          <div style="margin-top: 6px;">
+            <div class="cc-control-label">
+              <span>Bouma Swell (<code>BOUM</code> • Open Body)</span>
+              <span class="cc-val-readout" id="boumVal">0.10</span>
+            </div>
+            <input type="range" class="cc-slider" id="boumSlider" min="0" max="1" step="0.05" value="0.10">
           </div>
         </div>
 
@@ -286,6 +311,8 @@
               🎵 Trigger Acoustic Weight Bloom (Attack ➔ Decay)
             </button>
           </div>
+          <!-- Live Emotional Letterform Morph Comparison Strip -->
+          <div class="cc-emotion-morph-grid" id="ccEmotionMorphGrid" aria-label="Live Emotional Letterform Morph Comparison"></div>
         </div>
 
         <!-- Atmospheric Scene Blending & Ambient Bleed -->
@@ -895,24 +922,55 @@ const BROADCAST_SCENES = {
   }
 };
 
+function normalizeAptr(value, fallback = 0.5) {
+  const num = Number(value);
+  if (!Number.isFinite(num)) return fallback;
+  const scaled = num > 1 ? num / 100 : num;
+  return Number(Math.max(0, Math.min(1, scaled)).toFixed(2));
+}
+
+function buildVariationString(axes = {}) {
+  const w = Number.isFinite(Number(axes.weight)) ? Number(axes.weight) : 400;
+  const wd = Number.isFinite(Number(axes.width)) ? Number(axes.width) : 100;
+  const sl = Number.isFinite(Number(axes.slant)) ? Number(axes.slant) : 0;
+  const opsz = Math.max(6, Math.min(72, Number.isFinite(Number(axes.opsz)) ? Number(axes.opsz) : 20));
+  const aptr = normalizeAptr(axes.aptr !== undefined ? axes.aptr : 0.5);
+  const clamp01 = (v, def = 0) => {
+    const n = Number(v);
+    return Number.isFinite(n) ? Number(Math.max(0, Math.min(1, n)).toFixed(2)) : def;
+  };
+  const soft = clamp01(axes.soft, 0.25);
+  const hlng = clamp01(axes.hlng, 0.2);
+  const boum = clamp01(axes.boum, 0.1);
+  const thrm = clamp01(axes.thrm, 0);
+  const grav = clamp01(axes.grav, 0.1);
+  return `'wght' ${w}, 'wdth' ${wd}, 'slnt' ${sl}, 'opsz' ${opsz}, 'APTR' ${aptr}, 'SOFT' ${soft}, 'HLNG' ${hlng}, 'BOUM' ${boum}, 'THRM' ${thrm}, 'GRAV' ${grav}`;
+}
+
 const PROSODY_PRESETS = {
-  whisper: { weight: 240, slant: -7, letterSpacing: '0.04em', label: 'Whisper / Quiet (240)' },
-  dialogue: { weight: 400, slant: 0, letterSpacing: '0em', label: 'Conversational (400)' },
-  narrator: { weight: 360, slant: -8, letterSpacing: '0.02em', label: 'Voiceover (360)' },
-  urgent: { weight: 700, slant: 0, letterSpacing: '-0.01em', label: 'Urgent Alert (700)' },
-  shout: { weight: 900, slant: 0, letterSpacing: '-0.02em', label: 'Shout / Siren (900)' },
-  soundfx: { weight: 500, slant: 0, letterSpacing: '0.02em', label: 'Non-Speech FX (500)' }
+  whisper: { weight: 240, slant: -7, aptr: 0.35, soft: 0.8, hlng: 0.6, boum: 0.3, thrm: 0, grav: 0.1, opsz: 18, letterSpacing: '0.04em', label: 'Whisper / Quiet (240)' },
+  dialogue: { weight: 400, slant: 0, aptr: 0.55, soft: 0.25, hlng: 0.2, boum: 0.1, thrm: 0, grav: 0.1, opsz: 20, letterSpacing: '0em', label: 'Conversational (400)' },
+  narrator: { weight: 360, slant: -8, aptr: 0.5, soft: 0.4, hlng: 0.45, boum: 0.2, thrm: 0, grav: 0.1, opsz: 22, letterSpacing: '0.02em', label: 'Voiceover (360)' },
+  urgent: { weight: 700, slant: 0, aptr: 0.9, soft: 0, hlng: 0, boum: 0, thrm: 0.35, grav: 0.2, opsz: 36, letterSpacing: '-0.01em', label: 'Urgent Alert (700)' },
+  shout: { weight: 900, slant: 0, aptr: 1.0, soft: 0, hlng: 0, boum: 0, thrm: 0.65, grav: 0.3, opsz: 48, letterSpacing: '-0.02em', label: 'Shout / Siren (900)' },
+  soundfx: { weight: 500, slant: 0, aptr: 0.65, soft: 0.35, hlng: 0.3, boum: 0.25, thrm: 0, grav: 0.1, opsz: 24, letterSpacing: '0.02em', label: 'Non-Speech FX (500)' }
 };
 
 const EMOTION_TOKENS = {
   intimate: {
     id: 'intimate',
     name: 'Intimate / Whisper',
-    weight: 230,
+    weight: 240,
     width: 98,
     slant: -6.5,
+    opsz: 18,
     tracking: '0.04em',
-    aptr: 65,
+    aptr: 0.35,
+    soft: 0.85,
+    hlng: 0.70,
+    boum: 0.45,
+    thrm: 0.0,
+    grav: 0.15,
     scrimHue: '210, 30%, 10%',
     scrimAlpha: 0.78,
     aura: '0 0 16px rgba(56, 189, 248, 0.15)',
@@ -922,11 +980,17 @@ const EMOTION_TOKENS = {
   panic: {
     id: 'panic',
     name: 'Trauma / Acute Panic',
-    weight: 820,
-    width: 88,
+    weight: 850,
+    width: 86,
     slant: 0,
-    tracking: '-0.01em',
-    aptr: 95,
+    opsz: 48,
+    tracking: '-0.015em',
+    aptr: 1.00,
+    soft: 0.00,
+    hlng: 0.00,
+    boum: 0.00,
+    thrm: 0.65,
+    grav: 0.30,
     scrimHue: '0, 45%, 8%',
     scrimAlpha: 0.88,
     aura: '0 0 20px rgba(239, 68, 68, 0.35)',
@@ -936,11 +1000,17 @@ const EMOTION_TOKENS = {
   relief: {
     id: 'relief',
     name: 'Vagal Relief / Grounding',
-    weight: 390,
+    weight: 410,
     width: 100,
     slant: 0,
+    opsz: 24,
     tracking: '0.02em',
-    aptr: 70,
+    aptr: 0.70,
+    soft: 0.90,
+    hlng: 1.00,
+    boum: 0.60,
+    thrm: 0.00,
+    grav: 0.40,
     scrimHue: '160, 30%, 8%',
     scrimAlpha: 0.80,
     aura: '0 0 16px rgba(16, 185, 129, 0.2)',
@@ -953,8 +1023,14 @@ const EMOTION_TOKENS = {
     weight: 280,
     width: 100,
     slant: 0,
+    opsz: 56,
     tracking: '0.08em',
-    aptr: 80,
+    aptr: 0.85,
+    soft: 0.45,
+    hlng: 0.85,
+    boum: 0.90,
+    thrm: 0.00,
+    grav: 0.00,
     scrimHue: '260, 35%, 8%',
     scrimAlpha: 0.75,
     aura: '0 0 24px rgba(168, 85, 247, 0.28)',
@@ -1287,9 +1363,9 @@ class ClosedCaptionStudio {
       '  font-feature-settings: "zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1;',
       '  font-variant-numeric: slashed-zero;',
       '}',
-      '::cue(.whisper) { font-variation-settings: "wght" 240, "slnt" -7, "APTR" 65; }',
-      '::cue(.urgent)  { font-variation-settings: "wght" 700, "wdth" 94, "APTR" 85; }',
-      '::cue(.shout)   { font-variation-settings: "wght" 900, "wdth" 86, "APTR" 95; }',
+      '::cue(.whisper) { font-variation-settings: "wght" 240, "slnt" -7, "APTR" 0.35, "SOFT" 0.80, "HLNG" 0.60, "BOUM" 0.30; }',
+      '::cue(.urgent)  { font-variation-settings: "wght" 700, "wdth" 94, "APTR" 0.90, "SOFT" 0.00, "HLNG" 0.00, "THRM" 0.35; }',
+      '::cue(.shout)   { font-variation-settings: "wght" 900, "wdth" 86, "APTR" 1.00, "SOFT" 0.00, "HLNG" 0.00, "THRM" 0.65; }',
       ''
     ];
 
@@ -1505,6 +1581,7 @@ class NarrativeArcGenerator {
     const cues = genre.beats.map((b) => {
       const text = b.template.replace(/\{\{SEED\}\}/g, seed);
       const autoWidth = measurer.calculateLineFit(text, 37);
+      const preset = PROSODY_PRESETS[b.prosody] || PROSODY_PRESETS.dialogue;
       return {
         act: b.act,
         beatName: b.beatName,
@@ -1517,7 +1594,13 @@ class NarrativeArcGenerator {
         weight: b.weight,
         width: autoWidth,
         slant: b.slant,
-        aptr: b.aptr,
+        aptr: normalizeAptr(b.aptr !== undefined ? b.aptr : preset.aptr),
+        soft: b.soft !== undefined ? b.soft : preset.soft,
+        hlng: b.hlng !== undefined ? b.hlng : preset.hlng,
+        boum: b.boum !== undefined ? b.boum : preset.boum,
+        thrm: b.thrm !== undefined ? b.thrm : preset.thrm,
+        grav: b.grav !== undefined ? b.grav : preset.grav,
+        opsz: b.opsz !== undefined ? b.opsz : preset.opsz,
         icon: b.icon
       };
     });
@@ -1572,11 +1655,12 @@ const PHL197_THINKER_LENSES = {
 };
 
 function evaluateDeconstructionLens(cue, scene, stance = 'negotiate', thinkerId = 'postman') {
-  const activeCue = cue || { speaker: 'UNKNOWN', text: '', prosody: 'dialogue', weight: 400, width: 100, slant: 0, aptr: 50 };
+  const activeCue = cue || { speaker: 'UNKNOWN', text: '', prosody: 'dialogue', weight: 400, width: 100, slant: 0, aptr: 0.5 };
   const activeScene = scene || BROADCAST_SCENES.trauma_bay;
   const w = Number(activeCue.weight || 400);
   const wd = Number(activeCue.width || 100);
   const sl = Number(activeCue.slant || 0);
+  const ap = normalizeAptr(activeCue.aptr !== undefined ? activeCue.aptr : 0.5);
   const text = activeCue.text || '';
   const hasAllCaps = text.length > 6 && text === text.toUpperCase() && /[A-Z]/.test(text);
   const hasDosageOrNumber = /\d+(?:\.\d+)?\s*(?:mg|ml|bpm|hz|kn|km\/h|%|am|pm)/i.test(text);
@@ -1604,7 +1688,7 @@ function evaluateDeconstructionLens(cue, scene, stance = 'negotiate', thinkerId 
   return {
     framingMode,
     sourceSummary: `Speaker "${activeCue.speaker}" inside "${activeScene.title || activeScene.id}". Ask: Who benefits if I react before checking?`,
-    productSummary: `wght ${w} · wdth ${wd}% · slnt ${sl} · APTR ${activeCue.aptr || 50} — ${conventionStatus}`,
+    productSummary: `wght ${w} · wdth ${wd}% · slnt ${sl} · APTR ${ap.toFixed(2)} — ${conventionStatus}`,
     audienceSummary: `Stance: ${stanceInfo.label}. ${hasAllCaps ? 'All-caps casts viewer as passive responder.' : 'Mixed-case allows selective verification.'}`,
     thinkerNote: `${thinker.name}: ${thinker.question}`,
     howDoIKnow
@@ -1674,6 +1758,25 @@ if (typeof window !== 'undefined') {
     const widthVal = document.getElementById('widthVal');
     const aptrSlider = document.getElementById('aptrSlider');
     const aptrVal = document.getElementById('aptrVal');
+    const softSlider = document.getElementById('softSlider');
+    const softVal = document.getElementById('softVal');
+    const hlngSlider = document.getElementById('hlngSlider');
+    const hlngVal = document.getElementById('hlngVal');
+    const boumSlider = document.getElementById('boumSlider');
+    const boumVal = document.getElementById('boumVal');
+    const emotionMorphGrid = document.getElementById('ccEmotionMorphGrid');
+    let activeFontAxes = {
+      weight: 400,
+      width: 100,
+      slant: 0,
+      opsz: 20,
+      aptr: 0.5,
+      soft: 0.25,
+      hlng: 0.2,
+      boum: 0.1,
+      thrm: 0,
+      grav: 0.1
+    };
     const playPauseBtn = document.getElementById('playPauseBtn');
     const customInput = document.getElementById('customTextInput');
     const charCount = document.getElementById('charCount');
@@ -1755,7 +1858,7 @@ if (typeof window !== 'undefined') {
         cplReadoutEl.textContent = `${metrics.charCount} chars · Auto wdth ${metrics.recommendedWidth}%`;
       }
       if (vfVectorReadoutEl) {
-        vfVectorReadoutEl.textContent = `wght ${w} · wdth ${wd} · slnt ${sl} · APTR ${ap}`;
+        vfVectorReadoutEl.textContent = `wght ${w} · wdth ${wd} · slnt ${sl} · APTR ${normalizeAptr(ap).toFixed(2)} · SOFT ${activeFontAxes.soft.toFixed(2)} · HLNG ${activeFontAxes.hlng.toFixed(2)} · BOUM ${activeFontAxes.boum.toFixed(2)}`;
       }
       if (vttPreviewEl) {
         vttPreviewEl.textContent = studio.generateWebVtt(customInput ? customInput.value : '');
@@ -1785,36 +1888,113 @@ if (typeof window !== 'undefined') {
       }
     }
 
-    // Apply Variable Font Settings to Main Caption
-    function applyFontSettings(weight, width, slant, aptr) {
-      const w = weight || weightSlider.value;
-      const wd = width || widthSlider.value;
-      const sl = slant !== undefined ? slant : 0;
-      const ap = aptr !== undefined ? aptr : aptrSlider.value;
+    function renderCaptionTextNodes(el, text) {
+      if (!el) return;
+      if (studio.philocardiaEnabled || studio.tittleVariety !== 'dot') {
+        renderPhilocardiaNodes(el, text, studio.cardiacPacing, studio.tittleVariety);
+      } else {
+        el.textContent = text;
+        el.removeAttribute('data-tittle-variety');
+      }
+    }
 
-      textLineEl.style.fontWeight = w;
-      textLineEl.style.fontStretch = `${wd}%`;
-      textLineEl.style.fontStyle = sl < 0 ? `oblique ${sl}deg` : 'normal';
-      textLineEl.style.fontVariationSettings = `'wght' ${w}, 'wdth' ${wd}, 'slnt' ${sl}, 'APTR' ${ap}`;
-      textLineEl.style.fontFeatureSettings = '"zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1';
-      textLineEl.style.fontVariantNumeric = 'slashed-zero';
+    function applyVariationStylesToElement(el, axes) {
+      if (!el) return;
+      el.style.fontWeight = axes.weight;
+      el.style.fontStretch = `${axes.width}%`;
+      el.style.fontStyle = axes.slant < 0 ? `oblique ${axes.slant}deg` : 'normal';
+      el.style.fontVariationSettings = buildVariationString(axes);
+      el.style.fontFeatureSettings = '"zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1';
+      el.style.fontVariantNumeric = 'slashed-zero';
+    }
+
+    function renderEmotionMorphStrip(previewText) {
+      if (!emotionMorphGrid) return;
+      const sampleBase = (previewText || '').trim() || 'Pulse steady at 72 bpm. Oxygen 98%.';
+      emotionMorphGrid.replaceChildren();
+      Object.values(EMOTION_TOKENS).forEach((token) => {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'cc-emotion-morph-card';
+        card.dataset.emotionMorph = token.id;
+        if (studio.currentEmotion === token.id) {
+          card.classList.add('active');
+        }
+
+        const meta = document.createElement('div');
+        meta.className = 'cc-emotion-morph-meta';
+        const title = document.createElement('span');
+        title.textContent = token.name;
+        const vec = document.createElement('span');
+        vec.textContent = `S:${token.soft.toFixed(1)} H:${token.hlng.toFixed(1)} B:${token.boum.toFixed(1)}`;
+        meta.appendChild(title);
+        meta.appendChild(vec);
+
+        const sample = document.createElement('div');
+        sample.className = 'cc-emotion-morph-sample';
+        sample.style.fontVariationSettings = buildVariationString(token);
+        sample.style.fontWeight = token.weight;
+        sample.style.fontStretch = `${token.width}%`;
+        sample.style.fontStyle = token.slant < 0 ? `oblique ${token.slant}deg` : 'normal';
+        sample.style.letterSpacing = token.tracking;
+        sample.textContent = sampleBase;
+
+        card.appendChild(meta);
+        card.appendChild(sample);
+        card.addEventListener('click', () => {
+          const emoBtn = document.querySelector(`[data-emotion="${token.id}"]`);
+          if (emoBtn) emoBtn.click();
+        });
+        emotionMorphGrid.appendChild(card);
+      });
+    }
+
+    // Apply Variable Font Settings to Main Caption, A/B Preview, and Roll-Up Lines
+    function applyFontSettings(weight, width, slant, aptr, extras = {}) {
+      const w = Number(weight !== undefined ? weight : weightSlider.value);
+      const wd = Number(width !== undefined ? width : widthSlider.value);
+      const sl = Number(slant !== undefined ? slant : activeFontAxes.slant);
+      const ap = normalizeAptr(aptr !== undefined ? aptr : aptrSlider.value);
+      const soft = Number(extras.soft !== undefined ? extras.soft : (softSlider ? softSlider.value : activeFontAxes.soft));
+      const hlng = Number(extras.hlng !== undefined ? extras.hlng : (hlngSlider ? hlngSlider.value : activeFontAxes.hlng));
+      const boum = Number(extras.boum !== undefined ? extras.boum : (boumSlider ? boumSlider.value : activeFontAxes.boum));
+      const thrm = Number(extras.thrm !== undefined ? extras.thrm : activeFontAxes.thrm);
+      const grav = Number(extras.grav !== undefined ? extras.grav : activeFontAxes.grav);
+      const opsz = Number(extras.opsz !== undefined ? extras.opsz : activeFontAxes.opsz);
+
+      activeFontAxes = { weight: w, width: wd, slant: sl, opsz, aptr: ap, soft, hlng, boum, thrm, grav };
+
+      applyVariationStylesToElement(textLineEl, activeFontAxes);
+      applyVariationStylesToElement(samplePocketgull, activeFontAxes);
+      rollupContainer.querySelectorAll('.cc-rollup-line').forEach((lineEl) => {
+        lineEl.classList.add('cc-rollup-expressive');
+        applyVariationStylesToElement(lineEl, activeFontAxes);
+        if (textLineEl.style.letterSpacing) {
+          lineEl.style.letterSpacing = textLineEl.style.letterSpacing;
+        }
+      });
 
       weightSlider.value = w;
       weightVal.textContent = w;
       widthSlider.value = wd;
       widthVal.textContent = `${wd}%`;
       aptrSlider.value = ap;
-      aptrVal.textContent = ap;
-
-      // Update A/B PocketGull sample
-      samplePocketgull.style.fontWeight = w;
-      samplePocketgull.style.fontStretch = `${wd}%`;
-      samplePocketgull.style.fontVariationSettings = `'wght' ${w}, 'wdth' ${wd}, 'slnt' ${sl}, 'APTR' ${ap}`;
-      samplePocketgull.style.fontFeatureSettings = '"zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1';
-      samplePocketgull.style.fontVariantNumeric = 'slashed-zero';
+      aptrVal.textContent = ap.toFixed(2);
+      if (softSlider && softVal) {
+        softSlider.value = soft;
+        softVal.textContent = soft.toFixed(2);
+      }
+      if (hlngSlider && hlngVal) {
+        hlngSlider.value = hlng;
+        hlngVal.textContent = hlng.toFixed(2);
+      }
+      if (boumSlider && boumVal) {
+        boumSlider.value = boum;
+        boumVal.textContent = boum.toFixed(2);
+      }
 
       if (vfVectorReadoutEl) {
-        vfVectorReadoutEl.textContent = `wght ${w} · wdth ${wd} · slnt ${sl} · APTR ${ap}`;
+        vfVectorReadoutEl.textContent = `wght ${w} · wdth ${wd} · APTR ${ap.toFixed(2)} · SOFT ${soft.toFixed(2)} · HLNG ${hlng.toFixed(2)} · BOUM ${boum.toFixed(2)}`;
       }
     }
 
@@ -1823,14 +2003,39 @@ if (typeof window !== 'undefined') {
       const cue = studio.getCurrentCue();
       const scene = studio.getScene();
       const totalCues = scene.cues.length;
+      const activeEmotionToken = studio.currentEmotion ? EMOTION_TOKENS[studio.currentEmotion] : null;
+      const prosodyPreset = PROSODY_PRESETS[cue.prosody] || PROSODY_PRESETS.dialogue;
 
       cueCounter.textContent = `Cue ${studio.currentCueIndex + 1} of ${totalCues}`;
 
-      if (!studio.currentEmotion) {
-        textLineEl.style.letterSpacing = '0.015em';
-      }
-      if (autoProsody) {
-        applyFontSettings(cue.weight, cue.width, cue.slant, cue.aptr || 50);
+      if (activeEmotionToken) {
+        textLineEl.style.letterSpacing = activeEmotionToken.tracking;
+        captionBox.style.boxShadow = activeEmotionToken.aura;
+        applyFontSettings(
+          activeEmotionToken.weight,
+          Math.min(activeEmotionToken.width, studio.calculateLineFit(cue.text, 37)),
+          activeEmotionToken.slant,
+          activeEmotionToken.aptr,
+          activeEmotionToken
+        );
+      } else {
+        textLineEl.style.letterSpacing = prosodyPreset.letterSpacing || '0.015em';
+        if (autoProsody) {
+          applyFontSettings(
+            cue.weight,
+            cue.width,
+            cue.slant,
+            cue.aptr !== undefined ? cue.aptr : prosodyPreset.aptr,
+            {
+              soft: cue.soft !== undefined ? cue.soft : prosodyPreset.soft,
+              hlng: cue.hlng !== undefined ? cue.hlng : prosodyPreset.hlng,
+              boum: cue.boum !== undefined ? cue.boum : prosodyPreset.boum,
+              thrm: cue.thrm !== undefined ? cue.thrm : prosodyPreset.thrm,
+              grav: cue.grav !== undefined ? cue.grav : prosodyPreset.grav,
+              opsz: cue.opsz !== undefined ? cue.opsz : prosodyPreset.opsz
+            }
+          );
+        }
       }
 
       if (signalReadoutEl) {
@@ -1849,15 +2054,11 @@ if (typeof window !== 'undefined') {
         // Render with Philocardia hearts if active
         if (studio.philocardiaEnabled || studio.tittleVariety !== 'dot') {
           captionBox.classList.add('cc-philocardia-active');
-          renderPhilocardiaNodes(textLineEl, cue.text, studio.cardiacPacing, studio.tittleVariety);
-          renderPhilocardiaNodes(samplePocketgull, cue.text, studio.cardiacPacing, studio.tittleVariety);
         } else {
           captionBox.classList.remove('cc-philocardia-active');
-          textLineEl.textContent = cue.text;
-          textLineEl.removeAttribute('data-tittle-variety');
-          samplePocketgull.textContent = cue.text;
-          samplePocketgull.removeAttribute('data-tittle-variety');
         }
+        renderCaptionTextNodes(textLineEl, cue.text);
+        renderCaptionTextNodes(samplePocketgull, cue.text);
 
         if (cue.prosody === 'soundfx') {
           soundCueEl.style.display = 'flex';
@@ -1883,8 +2084,10 @@ if (typeof window !== 'undefined') {
         rollupContainer.replaceChildren();
         for (const lineText of studio.rollupBuffer) {
           const lineDiv = document.createElement('div');
-          lineDiv.className = 'cc-rollup-line';
-          lineDiv.textContent = lineText;
+          lineDiv.className = 'cc-rollup-line cc-rollup-expressive';
+          renderCaptionTextNodes(lineDiv, lineText);
+          applyVariationStylesToElement(lineDiv, activeFontAxes);
+          lineDiv.style.letterSpacing = textLineEl.style.letterSpacing || '0.015em';
           rollupContainer.appendChild(lineDiv);
         }
 
@@ -1895,14 +2098,15 @@ if (typeof window !== 'undefined') {
         speakerEl.textContent = cue.speaker;
         textLineEl.textContent = '';
         soundCueEl.style.display = 'none';
+        captionBox.classList.toggle('cc-philocardia-active', studio.philocardiaEnabled || studio.tittleVariety !== 'dot');
 
         let charIdx = 0;
         const fullText = cue.text;
         clearInterval(studio.typewriterTimer);
         studio.typewriterTimer = setInterval(() => {
           if (charIdx < fullText.length) {
-            textLineEl.textContent += fullText[charIdx];
             charIdx++;
+            renderCaptionTextNodes(textLineEl, fullText.slice(0, charIdx));
           } else {
             clearInterval(studio.typewriterTimer);
           }
@@ -1918,16 +2122,17 @@ if (typeof window !== 'undefined') {
           teletextBand.style.background = style.bg;
           teletextBand.textContent = `[${cue.speaker}] ${cue.text}`;
         }
-        samplePocketgull.textContent = cue.text;
+        renderCaptionTextNodes(samplePocketgull, cue.text);
         sampleFallback.textContent = cue.text;
       }
 
+      renderEmotionMorphStrip(cue.text);
       updateTelemetryAndVtt(
         cue.text,
-        weightSlider.value,
-        widthSlider.value,
-        cue.slant || 0,
-        aptrSlider.value
+        activeFontAxes.weight,
+        activeFontAxes.width,
+        activeFontAxes.slant,
+        activeFontAxes.aptr
       );
       if (typeof syncNarrativeBeatHighlight === 'function') {
         syncNarrativeBeatHighlight();
@@ -2035,6 +2240,12 @@ if (typeof window !== 'undefined') {
       autoProsody = !autoProsody;
       toggleAutoProsodyBtn.textContent = `Auto Prosody: ${autoProsody ? 'ON' : 'OFF'}`;
       toggleAutoProsodyBtn.classList.toggle('active', autoProsody);
+      if (autoProsody) {
+        studio.setEmotion(null);
+        document.querySelectorAll('[data-emotion]').forEach(b => b.classList.remove('active'));
+        activeEmotionLabel.textContent = 'None (Default)';
+        captionBox.style.boxShadow = '';
+      }
       document.getElementById('prosodyStatusLabel').textContent = autoProsody ? 'AUTO (DYNAMIC)' : 'MANUAL OVERRIDE';
       if (autoProsody) renderCue();
     });
@@ -2043,32 +2254,49 @@ if (typeof window !== 'undefined') {
     document.querySelectorAll('[data-prosody]').forEach(btn => {
       btn.addEventListener('click', () => {
         autoProsody = false;
+        studio.setEmotion(null);
+        document.querySelectorAll('[data-emotion]').forEach(b => b.classList.remove('active'));
+        activeEmotionLabel.textContent = 'None (Default)';
         toggleAutoProsodyBtn.textContent = 'Auto Prosody: OFF';
         toggleAutoProsodyBtn.classList.remove('active');
         document.getElementById('prosodyStatusLabel').textContent = 'MANUAL OVERRIDE';
 
         const p = PROSODY_PRESETS[btn.dataset.prosody];
         if (p) {
-          applyFontSettings(p.weight, 100, p.slant, 50);
+          textLineEl.style.letterSpacing = p.letterSpacing || '0.015em';
+          applyFontSettings(p.weight, 100, p.slant, p.aptr, p);
         }
       });
     });
 
-    // Sliders
-    weightSlider.addEventListener('input', () => {
-      autoProsody = false;
-      toggleAutoProsodyBtn.textContent = 'Auto Prosody: OFF';
-      toggleAutoProsodyBtn.classList.remove('active');
-      applyFontSettings(weightSlider.value, widthSlider.value, 0, aptrSlider.value);
-    });
+    // Sliders (preserve active slant and emotional morphology axes)
+    const onManualAxisInput = (disableAuto = false) => {
+      if (disableAuto) {
+        autoProsody = false;
+        toggleAutoProsodyBtn.textContent = 'Auto Prosody: OFF';
+        toggleAutoProsodyBtn.classList.remove('active');
+      }
+      applyFontSettings(
+        weightSlider.value,
+        widthSlider.value,
+        activeFontAxes.slant,
+        aptrSlider.value,
+        {
+          soft: softSlider ? softSlider.value : activeFontAxes.soft,
+          hlng: hlngSlider ? hlngSlider.value : activeFontAxes.hlng,
+          boum: boumSlider ? boumSlider.value : activeFontAxes.boum
+        }
+      );
+      const activeText = customInput && customInput.value.trim() ? customInput.value.trim() : studio.getCurrentCue().text;
+      updateTelemetryAndVtt(activeText, activeFontAxes.weight, activeFontAxes.width, activeFontAxes.slant, activeFontAxes.aptr);
+    };
 
-    widthSlider.addEventListener('input', () => {
-      applyFontSettings(weightSlider.value, widthSlider.value, 0, aptrSlider.value);
-    });
-
-    aptrSlider.addEventListener('input', () => {
-      applyFontSettings(weightSlider.value, widthSlider.value, 0, aptrSlider.value);
-    });
+    weightSlider.addEventListener('input', () => onManualAxisInput(true));
+    widthSlider.addEventListener('input', () => onManualAxisInput(false));
+    aptrSlider.addEventListener('input', () => onManualAxisInput(false));
+    if (softSlider) softSlider.addEventListener('input', () => onManualAxisInput(false));
+    if (hlngSlider) hlngSlider.addEventListener('input', () => onManualAxisInput(false));
+    if (boumSlider) boumSlider.addEventListener('input', () => onManualAxisInput(false));
 
     // Scrim buttons
     document.querySelectorAll('[data-scrim]').forEach(btn => {
@@ -2105,9 +2333,11 @@ if (typeof window !== 'undefined') {
         document.querySelectorAll('[data-emotion]').forEach(b => b.classList.remove('active'));
 
         if (isActive) {
+          studio.setEmotion(null);
           activeEmotionLabel.textContent = 'None (Default)';
           captionBox.style.boxShadow = '';
-          textLineEl.style.letterSpacing = '0';
+          textLineEl.style.letterSpacing = '0.015em';
+          document.getElementById('prosodyStatusLabel').textContent = autoProsody ? 'AUTO (DYNAMIC)' : 'MANUAL OVERRIDE';
           renderCue();
           return;
         }
@@ -2121,23 +2351,34 @@ if (typeof window !== 'undefined') {
           toggleAutoProsodyBtn.classList.remove('active');
           document.getElementById('prosodyStatusLabel').textContent = `EMOTION: ${token.id.toUpperCase()}`;
 
-          // Apply emotion token font metrics
-          applyFontSettings(token.weight, token.width, token.slant, token.aptr);
+          // Apply all emotional letterform axes + tracking + aura
           textLineEl.style.letterSpacing = token.tracking;
-
-          // Apply emotional aura
           captionBox.style.boxShadow = token.aura;
+          applyFontSettings(token.weight, token.width, token.slant, token.aptr, token);
 
-          // If current mode is pop-on, update text with characteristic emotion sample
-          if (studio.mode === 'pop-on' && token.sampleText) {
-            textLineEl.textContent = token.sampleText;
-            samplePocketgull.textContent = token.sampleText;
-            sampleFallback.textContent = token.sampleText;
+          const targetText = (customInput && customInput.value.trim())
+            ? customInput.value.trim()
+            : (token.sampleText || studio.getCurrentCue().text);
+
+          if (studio.mode === 'pop-on' || studio.mode === 'paint-on') {
+            renderCaptionTextNodes(textLineEl, targetText);
+            renderCaptionTextNodes(samplePocketgull, targetText);
+            sampleFallback.textContent = targetText;
+          } else if (studio.mode === 'roll-up') {
+            rollupContainer.querySelectorAll('.cc-rollup-line').forEach((lineEl) => {
+              lineEl.classList.add('cc-rollup-expressive');
+              applyVariationStylesToElement(lineEl, activeFontAxes);
+              lineEl.style.letterSpacing = token.tracking;
+            });
+            renderCaptionTextNodes(samplePocketgull, targetText);
+            sampleFallback.textContent = targetText;
+          } else if (studio.mode === 'teletext' && teletextBand) {
+            teletextBand.textContent = `[${token.id.toUpperCase()}] ${targetText}`;
+            renderCaptionTextNodes(samplePocketgull, targetText);
+            sampleFallback.textContent = targetText;
           }
-          if (studio.mode === 'teletext' && teletextBand && token.sampleText) {
-            teletextBand.textContent = `[${token.id.toUpperCase()}] ${token.sampleText}`;
-          }
-          updateTelemetryAndVtt(token.sampleText || studio.getCurrentCue().text, token.weight, token.width, token.slant, token.aptr);
+          renderEmotionMorphStrip(targetText);
+          updateTelemetryAndVtt(targetText, token.weight, token.width, token.slant, token.aptr);
         }
       });
     });
@@ -2317,17 +2558,18 @@ if (typeof window !== 'undefined') {
         }
         sampleFallback.textContent = customInput.value;
 
-        // Auto-calculate line-fit width
+        // Auto-calculate line-fit width while keeping active emotional slant/axes intact
         const autoWidth = studio.calculateLineFit(customInput.value, 37);
         widthSlider.value = autoWidth;
         widthVal.textContent = `${autoWidth}%`;
-        applyFontSettings(weightSlider.value, autoWidth, 0, aptrSlider.value);
+        applyFontSettings(weightSlider.value, autoWidth, activeFontAxes.slant, aptrSlider.value);
         if (studio.mode === 'teletext' && teletextBand) {
           teletextBand.style.color = '#fde047';
           teletextBand.style.background = '#000000';
           teletextBand.textContent = `[CUSTOM] ${customInput.value}`;
         }
-        updateTelemetryAndVtt(customInput.value, weightSlider.value, autoWidth, 0, aptrSlider.value);
+        renderEmotionMorphStrip(customInput.value);
+        updateTelemetryAndVtt(customInput.value, activeFontAxes.weight, autoWidth, activeFontAxes.slant, activeFontAxes.aptr);
       } else {
         renderCue();
       }
@@ -2729,10 +2971,10 @@ if (typeof window !== 'undefined') {
         toggleDeconVttBtn.setAttribute('aria-pressed', String(next));
         updateTelemetryAndVtt(
           customInput && customInput.value.trim() ? customInput.value.trim() : studio.getCurrentCue().text,
-          weightSlider.value,
-          widthSlider.value,
-          studio.getCurrentCue().slant || 0,
-          aptrSlider.value
+          activeFontAxes.weight,
+          activeFontAxes.width,
+          activeFontAxes.slant,
+          activeFontAxes.aptr
         );
       });
     }
@@ -2745,10 +2987,10 @@ if (typeof window !== 'undefined') {
         if (activeStanceLabel) activeStanceLabel.textContent = stance.charAt(0).toUpperCase() + stance.slice(1);
         updateTelemetryAndVtt(
           customInput && customInput.value.trim() ? customInput.value.trim() : studio.getCurrentCue().text,
-          weightSlider.value,
-          widthSlider.value,
-          studio.getCurrentCue().slant || 0,
-          aptrSlider.value
+          activeFontAxes.weight,
+          activeFontAxes.width,
+          activeFontAxes.slant,
+          activeFontAxes.aptr
         );
       });
     });
@@ -2761,10 +3003,10 @@ if (typeof window !== 'undefined') {
         if (activeThinkerLabel) activeThinkerLabel.textContent = lens.name.split(' · ')[0];
         updateTelemetryAndVtt(
           customInput && customInput.value.trim() ? customInput.value.trim() : studio.getCurrentCue().text,
-          weightSlider.value,
-          widthSlider.value,
-          studio.getCurrentCue().slant || 0,
-          aptrSlider.value
+          activeFontAxes.weight,
+          activeFontAxes.width,
+          activeFontAxes.slant,
+          activeFontAxes.aptr
         );
       });
     });

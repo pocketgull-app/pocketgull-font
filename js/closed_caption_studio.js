@@ -231,24 +231,55 @@ export const BROADCAST_SCENES = {
   }
 };
 
+export function normalizeAptr(value, fallback = 0.5) {
+  const num = Number(value);
+  if (!Number.isFinite(num)) return fallback;
+  const scaled = num > 1 ? num / 100 : num;
+  return Number(Math.max(0, Math.min(1, scaled)).toFixed(2));
+}
+
+export function buildVariationString(axes = {}) {
+  const w = Number.isFinite(Number(axes.weight)) ? Number(axes.weight) : 400;
+  const wd = Number.isFinite(Number(axes.width)) ? Number(axes.width) : 100;
+  const sl = Number.isFinite(Number(axes.slant)) ? Number(axes.slant) : 0;
+  const opsz = Math.max(6, Math.min(72, Number.isFinite(Number(axes.opsz)) ? Number(axes.opsz) : 20));
+  const aptr = normalizeAptr(axes.aptr !== undefined ? axes.aptr : 0.5);
+  const clamp01 = (v, def = 0) => {
+    const n = Number(v);
+    return Number.isFinite(n) ? Number(Math.max(0, Math.min(1, n)).toFixed(2)) : def;
+  };
+  const soft = clamp01(axes.soft, 0.25);
+  const hlng = clamp01(axes.hlng, 0.2);
+  const boum = clamp01(axes.boum, 0.1);
+  const thrm = clamp01(axes.thrm, 0);
+  const grav = clamp01(axes.grav, 0.1);
+  return `'wght' ${w}, 'wdth' ${wd}, 'slnt' ${sl}, 'opsz' ${opsz}, 'APTR' ${aptr}, 'SOFT' ${soft}, 'HLNG' ${hlng}, 'BOUM' ${boum}, 'THRM' ${thrm}, 'GRAV' ${grav}`;
+}
+
 export const PROSODY_PRESETS = {
-  whisper: { weight: 240, slant: -7, letterSpacing: '0.04em', label: 'Whisper / Quiet (240)' },
-  dialogue: { weight: 400, slant: 0, letterSpacing: '0em', label: 'Conversational (400)' },
-  narrator: { weight: 360, slant: -8, letterSpacing: '0.02em', label: 'Voiceover (360)' },
-  urgent: { weight: 700, slant: 0, letterSpacing: '-0.01em', label: 'Urgent Alert (700)' },
-  shout: { weight: 900, slant: 0, letterSpacing: '-0.02em', label: 'Shout / Siren (900)' },
-  soundfx: { weight: 500, slant: 0, letterSpacing: '0.02em', label: 'Non-Speech FX (500)' }
+  whisper: { weight: 240, slant: -7, aptr: 0.35, soft: 0.8, hlng: 0.6, boum: 0.3, thrm: 0, grav: 0.1, opsz: 18, letterSpacing: '0.04em', label: 'Whisper / Quiet (240)' },
+  dialogue: { weight: 400, slant: 0, aptr: 0.55, soft: 0.25, hlng: 0.2, boum: 0.1, thrm: 0, grav: 0.1, opsz: 20, letterSpacing: '0em', label: 'Conversational (400)' },
+  narrator: { weight: 360, slant: -8, aptr: 0.5, soft: 0.4, hlng: 0.45, boum: 0.2, thrm: 0, grav: 0.1, opsz: 22, letterSpacing: '0.02em', label: 'Voiceover (360)' },
+  urgent: { weight: 700, slant: 0, aptr: 0.9, soft: 0, hlng: 0, boum: 0, thrm: 0.35, grav: 0.2, opsz: 36, letterSpacing: '-0.01em', label: 'Urgent Alert (700)' },
+  shout: { weight: 900, slant: 0, aptr: 1.0, soft: 0, hlng: 0, boum: 0, thrm: 0.65, grav: 0.3, opsz: 48, letterSpacing: '-0.02em', label: 'Shout / Siren (900)' },
+  soundfx: { weight: 500, slant: 0, aptr: 0.65, soft: 0.35, hlng: 0.3, boum: 0.25, thrm: 0, grav: 0.1, opsz: 24, letterSpacing: '0.02em', label: 'Non-Speech FX (500)' }
 };
 
 export const EMOTION_TOKENS = {
   intimate: {
     id: 'intimate',
     name: 'Intimate / Whisper',
-    weight: 230,
+    weight: 240,
     width: 98,
     slant: -6.5,
+    opsz: 18,
     tracking: '0.04em',
-    aptr: 65,
+    aptr: 0.35,
+    soft: 0.85,
+    hlng: 0.70,
+    boum: 0.45,
+    thrm: 0.0,
+    grav: 0.15,
     scrimHue: '210, 30%, 10%',
     scrimAlpha: 0.78,
     aura: '0 0 16px rgba(56, 189, 248, 0.15)',
@@ -258,11 +289,17 @@ export const EMOTION_TOKENS = {
   panic: {
     id: 'panic',
     name: 'Trauma / Acute Panic',
-    weight: 820,
-    width: 88,
+    weight: 850,
+    width: 86,
     slant: 0,
-    tracking: '-0.01em',
-    aptr: 95,
+    opsz: 48,
+    tracking: '-0.015em',
+    aptr: 1.00,
+    soft: 0.00,
+    hlng: 0.00,
+    boum: 0.00,
+    thrm: 0.65,
+    grav: 0.30,
     scrimHue: '0, 45%, 8%',
     scrimAlpha: 0.88,
     aura: '0 0 20px rgba(239, 68, 68, 0.35)',
@@ -272,11 +309,17 @@ export const EMOTION_TOKENS = {
   relief: {
     id: 'relief',
     name: 'Vagal Relief / Grounding',
-    weight: 390,
+    weight: 410,
     width: 100,
     slant: 0,
+    opsz: 24,
     tracking: '0.02em',
-    aptr: 70,
+    aptr: 0.70,
+    soft: 0.90,
+    hlng: 1.00,
+    boum: 0.60,
+    thrm: 0.00,
+    grav: 0.40,
     scrimHue: '160, 30%, 8%',
     scrimAlpha: 0.80,
     aura: '0 0 16px rgba(16, 185, 129, 0.2)',
@@ -289,8 +332,14 @@ export const EMOTION_TOKENS = {
     weight: 280,
     width: 100,
     slant: 0,
+    opsz: 56,
     tracking: '0.08em',
-    aptr: 80,
+    aptr: 0.85,
+    soft: 0.45,
+    hlng: 0.85,
+    boum: 0.90,
+    thrm: 0.00,
+    grav: 0.00,
     scrimHue: '260, 35%, 8%',
     scrimAlpha: 0.75,
     aura: '0 0 24px rgba(168, 85, 247, 0.28)',
@@ -624,9 +673,9 @@ export class ClosedCaptionStudio {
       '  font-feature-settings: "zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1;',
       '  font-variant-numeric: slashed-zero;',
       '}',
-      '::cue(.whisper) { font-variation-settings: "wght" 240, "slnt" -7, "APTR" 65; }',
-      '::cue(.urgent)  { font-variation-settings: "wght" 700, "wdth" 94, "APTR" 85; }',
-      '::cue(.shout)   { font-variation-settings: "wght" 900, "wdth" 86, "APTR" 95; }',
+      '::cue(.whisper) { font-variation-settings: "wght" 240, "slnt" -7, "APTR" 0.35, "SOFT" 0.80, "HLNG" 0.60, "BOUM" 0.30; }',
+      '::cue(.urgent)  { font-variation-settings: "wght" 700, "wdth" 94, "APTR" 0.90, "SOFT" 0.00, "HLNG" 0.00, "THRM" 0.35; }',
+      '::cue(.shout)   { font-variation-settings: "wght" 900, "wdth" 86, "APTR" 1.00, "SOFT" 0.00, "HLNG" 0.00, "THRM" 0.65; }',
       ''
     ];
 
@@ -1151,6 +1200,7 @@ export class NarrativeArcGenerator {
     const cues = genre.beats.map((b) => {
       const text = b.template.replace(/\{\{SEED\}\}/g, seed);
       const autoWidth = measurer.calculateLineFit(text, 37);
+      const preset = PROSODY_PRESETS[b.prosody] || PROSODY_PRESETS.dialogue;
       return {
         act: b.act,
         beatName: b.beatName,
@@ -1163,7 +1213,13 @@ export class NarrativeArcGenerator {
         weight: b.weight,
         width: autoWidth,
         slant: b.slant,
-        aptr: b.aptr,
+        aptr: normalizeAptr(b.aptr !== undefined ? b.aptr : preset.aptr),
+        soft: b.soft !== undefined ? b.soft : preset.soft,
+        hlng: b.hlng !== undefined ? b.hlng : preset.hlng,
+        boum: b.boum !== undefined ? b.boum : preset.boum,
+        thrm: b.thrm !== undefined ? b.thrm : preset.thrm,
+        grav: b.grav !== undefined ? b.grav : preset.grav,
+        opsz: b.opsz !== undefined ? b.opsz : preset.opsz,
         icon: b.icon
       };
     });
@@ -1218,11 +1274,12 @@ export const PHL197_THINKER_LENSES = {
 };
 
 export function evaluateDeconstructionLens(cue, scene, stance = 'negotiate', thinkerId = 'postman') {
-  const activeCue = cue || { speaker: 'UNKNOWN', text: '', prosody: 'dialogue', weight: 400, width: 100, slant: 0, aptr: 50 };
+  const activeCue = cue || { speaker: 'UNKNOWN', text: '', prosody: 'dialogue', weight: 400, width: 100, slant: 0, aptr: 0.5 };
   const activeScene = scene || BROADCAST_SCENES.trauma_bay;
   const w = Number(activeCue.weight || 400);
   const wd = Number(activeCue.width || 100);
   const sl = Number(activeCue.slant || 0);
+  const ap = normalizeAptr(activeCue.aptr !== undefined ? activeCue.aptr : 0.5);
   const text = activeCue.text || '';
   const hasAllCaps = text.length > 6 && text === text.toUpperCase() && /[A-Z]/.test(text);
   const hasDosageOrNumber = /\d+(?:\.\d+)?\s*(?:mg|ml|bpm|hz|kn|km\/h|%|am|pm)/i.test(text);
@@ -1250,7 +1307,7 @@ export function evaluateDeconstructionLens(cue, scene, stance = 'negotiate', thi
   return {
     framingMode,
     sourceSummary: `Speaker "${activeCue.speaker}" inside "${activeScene.title || activeScene.id}". Ask: Who benefits if I react before checking?`,
-    productSummary: `wght ${w} · wdth ${wd}% · slnt ${sl} · APTR ${activeCue.aptr || 50} — ${conventionStatus}`,
+    productSummary: `wght ${w} · wdth ${wd}% · slnt ${sl} · APTR ${ap.toFixed(2)} — ${conventionStatus}`,
     audienceSummary: `Stance: ${stanceInfo.label}. ${hasAllCaps ? 'All-caps casts viewer as passive responder.' : 'Mixed-case allows selective verification.'}`,
     thinkerNote: `${thinker.name}: ${thinker.question}`,
     howDoIKnow
@@ -1260,6 +1317,8 @@ export function evaluateDeconstructionLens(cue, scene, stance = 'negotiate', thi
 // Global browser initializer
 if (typeof window !== 'undefined') {
   window.PocketGullCC = {
+    normalizeAptr,
+    buildVariationString,
     BROADCAST_SCENES,
     PROSODY_PRESETS,
     EMOTION_TOKENS,

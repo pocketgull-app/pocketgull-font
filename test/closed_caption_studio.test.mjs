@@ -402,4 +402,53 @@ test('PHL 197 Manufacturing Reality Deconstruction Lens, Infotainment A/B & WebV
   assert.ok(ccHtml.includes('id="ccClinicalTruthSample"'), 'HTML must declare Clinical Truth framing comparator');
 });
 
+test('Emotional Letterform Fine-Tuning: Normalized 0..1 APTR, Multi-Axis gvar Morphology & Smooth Transitions', async () => {
+  const {
+    EMOTION_TOKENS,
+    PROSODY_PRESETS,
+    normalizeAptr,
+    buildVariationString
+  } = await import('../js/closed_caption_studio.js');
+
+  assert.equal(normalizeAptr(65), 0.65, 'Legacy 0..100 integer APTR must normalize to 0.65');
+  assert.equal(normalizeAptr(0.35), 0.35, '0..1 APTR values must remain unchanged');
+  assert.equal(normalizeAptr(1.8), 0.02, 'Out-of-range >1 inputs normalize cleanly within [0,1]');
+
+  for (const [id, token] of Object.entries(EMOTION_TOKENS)) {
+    assert.ok(token.aptr >= 0 && token.aptr <= 1, `Emotion ${id} aptr (${token.aptr}) must fit VF fvar 0..1`);
+    assert.ok(token.soft >= 0 && token.soft <= 1, `Emotion ${id} soft must fit VF fvar 0..1`);
+    assert.ok(token.hlng >= 0 && token.hlng <= 1, `Emotion ${id} hlng must fit VF fvar 0..1`);
+    assert.ok(token.boum >= 0 && token.boum <= 1, `Emotion ${id} boum must fit VF fvar 0..1`);
+    assert.ok(token.opsz >= 6 && token.opsz <= 72, `Emotion ${id} opsz must fit VF fvar 6..72`);
+  }
+
+  const intimate = EMOTION_TOKENS.intimate;
+  const panic = EMOTION_TOKENS.panic;
+  const relief = EMOTION_TOKENS.relief;
+  const awe = EMOTION_TOKENS.awe;
+  assert.ok(intimate.soft > panic.soft, 'Intimate whisper state must soften terminals more than panic');
+  assert.ok(relief.hlng > panic.hlng, 'Vagal relief state must elevate healing curve above panic');
+  assert.ok(awe.boum > panic.boum, 'Cosmic awe state must elevate bouma swell above panic');
+  assert.ok(PROSODY_PRESETS.whisper.aptr >= 0 && PROSODY_PRESETS.whisper.aptr <= 1);
+
+  const varStr = buildVariationString(EMOTION_TOKENS.relief);
+  assert.ok(varStr.includes("'SOFT' 0.9"), 'Variation string must drive SOFT axis');
+  assert.ok(varStr.includes("'HLNG' 1"), 'Variation string must drive HLNG axis');
+  assert.ok(varStr.includes("'BOUM' 0.6"), 'Variation string must drive BOUM axis');
+  assert.ok(varStr.includes("'APTR' 0.7"), 'Variation string must drive normalized APTR axis');
+
+  const ccHtml = fs.readFileSync(path.join(ROOT_DIR, 'closed_caption_studio.html'), 'utf8');
+  const ccCss = fs.readFileSync(path.join(ROOT_DIR, 'css', 'closed_caption_studio.css'), 'utf8');
+
+  assert.ok(ccHtml.includes('id="aptrSlider" min="0" max="1"'), 'APTR slider must span 0..1 matching PocketGull-VF fvar');
+  assert.ok(ccHtml.includes('id="softSlider"'), 'HTML must expose SOFT emotional slider');
+  assert.ok(ccHtml.includes('id="hlngSlider"'), 'HTML must expose HLNG emotional slider');
+  assert.ok(ccHtml.includes('id="boumSlider"'), 'HTML must expose BOUM emotional slider');
+  assert.ok(ccHtml.includes('id="ccEmotionMorphGrid"'), 'HTML must expose Emotion Morph Comparison Strip');
+  assert.ok(ccHtml.includes('studio.setEmotion(null)'), 'Toggling emotion off must reset studio.currentEmotion');
+  assert.ok(!ccHtml.includes('.innerHTML ='), 'HTML must preserve zero .innerHTML assignments');
+  assert.ok(ccCss.includes('font-variation-settings 0.36s'), 'Caption line must smoothly transition font-variation-settings');
+  assert.ok(!ccCss.includes("'APTR' 95"), 'CSS keyframes/samples must not clamp APTR above 1.0');
+});
+
 

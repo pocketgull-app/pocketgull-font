@@ -621,9 +621,12 @@ body.cc-studio-body {
   letter-spacing: 0.015em;
   --tittle-top-i: 18%;
   --tittle-top-j: 18%;
-  transition: font-weight 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-              font-stretch 0.2s ease,
-              font-style 0.2s ease;
+  transition: font-variation-settings 0.36s cubic-bezier(0.16, 1, 0.3, 1),
+              letter-spacing 0.36s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.25s ease,
+              font-weight 0.36s cubic-bezier(0.16, 1, 0.3, 1),
+              font-stretch 0.36s ease,
+              font-style 0.36s ease;
   word-wrap: break-word;
 }
 
@@ -659,6 +662,12 @@ body.cc-studio-body {
   border-left: 3px solid var(--cc-accent-cyan);
   font-feature-settings: "zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1;
   font-variant-numeric: slashed-zero;
+  transition: font-variation-settings 0.36s cubic-bezier(0.16, 1, 0.3, 1),
+              letter-spacing 0.36s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cc-rollup-line.cc-rollup-expressive {
+  font-family: var(--cc-font-sans);
 }
 
 /* Optometric Blur & Distance Overlays (Monitor Viewport) */
@@ -699,24 +708,24 @@ body.cc-studio-body {
 
 @keyframes cc-bloom-attack {
   0% {
-    font-variation-settings: 'wght' 320, 'wdth' 100, 'slnt' 0, 'APTR' 50;
+    font-variation-settings: 'wght' 320, 'wdth' 100, 'slnt' 0, 'opsz' 24, 'APTR' 0.35, 'SOFT' 0.65, 'HLNG' 0.55, 'BOUM' 0.25, 'THRM' 0, 'GRAV' 0.1;
     letter-spacing: -0.01em;
   }
   18% {
     /* Peak Decibel Attack */
-    font-variation-settings: 'wght' 850, 'wdth' 92, 'slnt' 0, 'APTR' 95;
+    font-variation-settings: 'wght' 850, 'wdth' 92, 'slnt' 0, 'opsz' 48, 'APTR' 1.0, 'SOFT' 0, 'HLNG' 0, 'BOUM' 0, 'THRM' 0.65, 'GRAV' 0.3;
     letter-spacing: -0.02em;
     text-shadow: 0 0 14px rgba(255, 255, 255, 0.6);
   }
   55% {
     /* Acoustic Sustain */
-    font-variation-settings: 'wght' 620, 'wdth' 96, 'slnt' 0, 'APTR' 75;
-    letter-spacing: 0;
+    font-variation-settings: 'wght' 620, 'wdth' 96, 'slnt' 0, 'opsz' 32, 'APTR' 0.75, 'SOFT' 0.35, 'HLNG' 0.4, 'BOUM' 0.3, 'THRM' 0.2, 'GRAV' 0.15;
+    letter-spacing: 0.005em;
   }
   100% {
-    /* Gentle Decay into Baseline Resting Cadence */
-    font-variation-settings: 'wght' 400, 'wdth' 100, 'slnt' 0, 'APTR' 50;
-    letter-spacing: 0;
+    /* Gentle Decay into Resting Warmth */
+    font-variation-settings: 'wght' 400, 'wdth' 100, 'slnt' 0, 'opsz' 18, 'APTR' 0.5, 'SOFT' 0.4, 'HLNG' 0.45, 'BOUM' 0.25, 'THRM' 0, 'GRAV' 0.1;
+    letter-spacing: 0.015em;
     text-shadow: none;
   }
 }
@@ -1129,7 +1138,7 @@ body.cc-studio-body {
   letter-spacing: -0.02em;
   font-weight: 890;
   font-stretch: 84%;
-  font-variation-settings: 'wght' 890, 'wdth' 84, 'slnt' 0, 'APTR' 95;
+  font-variation-settings: 'wght' 890, 'wdth' 84, 'slnt' 0, 'opsz' 48, 'APTR' 1.0, 'SOFT' 0, 'HLNG' 0, 'BOUM' 0, 'THRM' 0.65;
   color: #fef2f2;
   background: rgba(185, 28, 28, 0.88);
   padding: 0.75rem 0.9rem;
@@ -1143,7 +1152,7 @@ body.cc-studio-body {
   line-height: 1.45;
   font-weight: 400;
   font-stretch: 100%;
-  font-variation-settings: 'wght' 400, 'wdth' 100, 'slnt' 0, 'APTR' 70;
+  font-variation-settings: 'wght' 400, 'wdth' 100, 'slnt' 0, 'opsz' 20, 'APTR' 0.75, 'SOFT' 0.45, 'HLNG' 0.55, 'BOUM' 0.25, 'THRM' 0;
   font-feature-settings: "zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1;
   font-variant-numeric: slashed-zero;
   color: #f8fafc;
@@ -1182,4 +1191,53 @@ body.cc-studio-body {
   font-size: 0.84rem;
   color: var(--cc-text);
   line-height: 1.42;
+}
+
+/* Live Emotion Letterform Morph Matrix */
+.cc-emotion-morph-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.65rem;
+}
+
+.cc-emotion-morph-card {
+  background: rgba(2, 6, 23, 0.72);
+  border: 1px solid var(--cc-border);
+  border-radius: 8px;
+  padding: 0.55rem 0.65rem;
+  cursor: pointer;
+  text-align: left;
+  color: var(--cc-text);
+  transition: border-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.cc-emotion-morph-card:hover {
+  border-color: rgba(56, 189, 248, 0.5);
+  transform: translateY(-1px);
+}
+
+.cc-emotion-morph-card.active {
+  border-color: #38bdf8;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.18);
+}
+
+.cc-emotion-morph-meta {
+  font-family: var(--cc-font-mono);
+  font-size: 0.66rem;
+  color: var(--cc-muted);
+  display: flex;
+  justify-content: space-between;
+  gap: 0.35rem;
+  margin-bottom: 0.28rem;
+}
+
+.cc-emotion-morph-sample {
+  font-family: var(--cc-font-sans);
+  font-size: 0.94rem;
+  line-height: 1.32;
+  color: #f8fafc;
+  font-feature-settings: "zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1;
+  font-variant-numeric: slashed-zero;
+  word-break: break-word;
 }
