@@ -265,7 +265,9 @@ class SfntBuilder {
       'hhea': hheaData,
       'hmtx': hmtxData,
       'loca': locaTableData,
+      'gasp': _buildGaspTable(),
       'maxp': maxpData,
+      'name': _buildNameTable(),
       'post': postTableData,
     };
 
@@ -409,6 +411,54 @@ class SfntBuilder {
     final bytes = Uint8List(32);
     final view = ByteData.sublistView(bytes);
     view.setUint32(0, 0x00030000, Endian.big); // Version 3.0 (no glyph names)
+    return bytes;
+  }
+  Uint8List _buildNameTable() {
+    final records = <(int, String)>[
+      (0, 'Copyright 2026 GearArts (Phil Gear). OFL 1.1.'),
+      (1, familyName),
+      (2, subFamilyName),
+      (3, '$familyName-$subFamilyName'),
+      (4, '$familyName $subFamilyName'),
+      (5, 'Version 1.000; GearArts 2k26; OFL 1.1'),
+      (6, '${familyName.replaceAll(' ', '')}-${subFamilyName.replaceAll(' ', '')}'),
+    ];
+    final count = records.length;
+    final stringOffset = 6 + count * 12;
+    final strPool = BytesBuilder();
+    final header = ByteData(stringOffset);
+    header.setUint16(0, 0, Endian.big);
+    header.setUint16(2, count, Endian.big);
+    header.setUint16(4, stringOffset, Endian.big);
+    for (var i = 0; i < count; i++) {
+      final (nameId, val) = records[i];
+      final utf16 = Uint8List(val.length * 2);
+      final v = ByteData.sublistView(utf16);
+      for (var c = 0; c < val.length; c++) {
+        v.setUint16(c * 2, val.codeUnitAt(c), Endian.big);
+      }
+      final recOff = 6 + i * 12;
+      header.setUint16(recOff + 0, 3, Endian.big);
+      header.setUint16(recOff + 2, 1, Endian.big);
+      header.setUint16(recOff + 4, 0x0409, Endian.big);
+      header.setUint16(recOff + 6, nameId, Endian.big);
+      header.setUint16(recOff + 8, utf16.length, Endian.big);
+      header.setUint16(recOff + 10, strPool.length, Endian.big);
+      strPool.add(utf16);
+    }
+    final out = BytesBuilder();
+    out.add(header.buffer.asUint8List());
+    out.add(strPool.takeBytes());
+    return out.takeBytes();
+  }
+
+  Uint8List _buildGaspTable() {
+    final bytes = Uint8List(8);
+    final view = ByteData.sublistView(bytes);
+    view.setUint16(0, 1, Endian.big);
+    view.setUint16(2, 1, Endian.big);
+    view.setUint16(4, 0xFFFF, Endian.big);
+    view.setUint16(6, 0x000A, Endian.big);
     return bytes;
   }
 }

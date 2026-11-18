@@ -22,6 +22,7 @@ import 'foundry/subsetter_service.dart';
 import 'foundry/compliance_auditor.dart';
 import 'foundry/osv_auditor.dart';
 import 'foundry/master_superfamily_compiler.dart';
+import 'foundry/font_scaffolder.dart';
 
 const fontStems = [
   'PocketGull-Regular',
@@ -692,7 +693,7 @@ void runRepair() {
   final typefaceRoot = Directory('${Directory(root).parent.path}${Platform.pathSeparator}pocketgull-typeface');
   print('\n=== POCKETGULL FONT SURGEON (PURE DART 3.11) ===\n');
 
-  for (final stem in ['PocketGull-Bold', 'PocketGull-Fineliner', 'PocketGull-Chiseltip', 'PocketGull-MarkerRaw']) {
+  for (final stem in ['PocketGull-MarkerRaw']) {
     final ttfFile = File('${typefaceRoot.path}${Platform.pathSeparator}fonts${Platform.pathSeparator}ttf${Platform.pathSeparator}$stem.ttf');
     if (!ttfFile.existsSync()) continue;
     final tempOut = File('${typefaceRoot.path}${Platform.pathSeparator}${stem}_repaired.ttf');
@@ -945,7 +946,6 @@ Future<void> main(List<String> args) async {
       print('======================================================================\n');
       final root = findProjectRoot();
       final brandTargets = [
-        File('$root${Platform.pathSeparator}fonts${Platform.pathSeparator}ttf${Platform.pathSeparator}PocketGull-Chiseltip.ttf'),
         File('$root${Platform.pathSeparator}fonts${Platform.pathSeparator}ttf${Platform.pathSeparator}PocketGull-MarkerRaw.ttf'),
       ];
       for (final f in brandTargets) {
@@ -1003,6 +1003,17 @@ Future<void> main(List<String> args) async {
     case 'tek':
     case 'undrip':
       runTekAudit();
+      break;
+    case 'init':
+    case 'scaffold':
+    case 'create':
+      final name = args.length > 1 ? args[1] : 'NewFont';
+      final cat = args.length > 2 ? args[2] : 'SANS_SERIF';
+      await FontScaffolder.scaffold(
+        projectName: name,
+        projectRoot: findProjectRoot(),
+        category: cat,
+      );
       break;
     case 'audit':
       runAudit();

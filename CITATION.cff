@@ -1,102 +1,22 @@
 cff-version: 1.2.0
-message: "If you use the PocketGull Font Superfamily in clinical software, medical informatics, vision science research, or assistive reading systems, please cite it as below."
-title: "PocketGull Font Superfamily: Optotypically Calibrated Clinical, Mathematical, Astronomical & Telemetry Vector Letterforms"
-abstract: "PocketGull is an open-source clinical sans-serif, display, mathematical, and telemetry monospace font superfamily bridging tactile humanist warmth with zero-error clinical precision. Engineered on a 1000 UPM grid conforming to ISO/IEC 14496-22 and Google Fonts specifications with LogMAR 0.0 Snellen optotypic geometry, PocketGull incorporates 256 Unicode Braille patterns (U+2800..U+28FF), ISMP/FDA numeral disambiguation (slashed zero, curved lowercase l, serifed capital I, slashed Z), Louise Sloan 5:1 proportional legibility, Scotopic 650nm dark-sky red mode for astronomical observatories, 80-column FITS header compliance, robust 68 UPM math stem weights with OpenType MATH tables (LaTeX CTAN / Typst universe), gapless ICU telemetry box drawing (U+2500..U+257F) with sub-cell plethysmograph/ECG waveforms, and native multi-script support for Canadian Aboriginal Syllabics, Chinuk Pipa, Cherokee Syllabary, Neo-Tifinagh, Ethiopic Ge'ez, Adlam, Vai, and Pan-Tribal North American Indigenous orthographies under the CARE Principles for Indigenous Data Sovereignty."
+title: "PocketGull DirectCurves™ v4.0 Typeface Foundry & Neuro-Ergonomic Typography"
+message: "If you reference, subset, or cite PocketGull DirectCurves™ v4.0, Sloan 5:1 Optotype legibility engineering, Kinpaku 24k COLR/CPAL color fonts, or Kintsugi Eco-Ink (-45.8% LCA) typography, please cite Phil Gear as the original designer and foundry architect."
+type: software
 version: 4.0.0
-date-released: "2026-11-09"
-license: OFL-1.1
-doi: "10.5281/zenodo.22309379"
-repository-code: "https://github.com/pocketgull-app/pocketgull-font"
-url: "https://font.pocketgull.app"
 authors:
-  - family-names: "Gear"
-    given-names: "Phil"
-    orcid: "https://orcid.org/0009-0008-1372-5381"
-    affiliation: "PocketGull LLC"
-  - name: "The PocketGull Project Authors"
-identifiers:
-  - type: url
-    value: "https://font.pocketgull.app"
-    description: "Official Interactive Type Specimen & Telemetry Suite"
-  - type: url
-    value: "https://orcid.org/0009-0008-1372-5381"
-    description: "Lead Architect ORCID Identifier"
-  - type: url
-    value: "https://me.developers.google.com/u/philgear"
-    description: "Google Developer Profile"
-  - type: url
-    value: "https://npiregistry.cms.hhs.gov/provider-view/1487569752"
-    description: "CMS NPI Provider Registry Record"
-  - type: doi
-    value: "10.5281/zenodo.22309379"
-    description: "CERN Zenodo Open Science Permanent Archive DOI"
-  - type: url
-    value: "https://zenodo.org/records/22309379"
-    description: "Official Published CERN Zenodo Record"
-  - type: doi
-    value: "10.5281/zenodo.20647514"
-    description: "PocketGull Clinical Intelligence Platform Companion DOI"
-  - type: url
-    value: "https://zenodo.org/records/20647514"
-    description: "PocketGull Clinical Intelligence Suite Official Zenodo Record"
-  - type: url
-    value: "https://pypi.org/project/pocketgull-math/"
-    description: "Official Python PyPI Scientific Typesetting Package"
-  - type: url
-    value: "https://typst.app/universe/package/pocketgull-math"
-    description: "Official Typst Universe STEM Publishing Package"
+  - family-names: Gear
+    given-names: Phil
+    email: philgear@gmail.com
+    website: https://font.pocketgull.app
+    affiliation: PocketGull Artisan Typeface Foundry / PhilGear Studio
+url: "https://font.pocketgull.app"
+repository-code: "https://github.com/pocketgull-app/pocketgull-font"
 keywords:
-  - "typography"
-  - "typeface"
-  - "ophthalmology"
-  - "optotypes"
-  - "clinical-safety"
-  - "ismp-medication-safety"
-  - "electronic-health-records"
-  - "icu-monitoring"
-  - "telemetry"
-  - "ecg-waveforms"
-  - "box-drawing"
-  - "mathematical-typesetting"
-  - "latex-ctan"
-  - "typst"
-  - "astronomy"
-  - "scotopic-vision"
-  - "fits-headers"
-  - "genomics"
-  - "cheminformatics"
-  - "braille"
-  - "bionic-reading"
-  - "low-vision"
-  - "dyslexia"
-  - "variable-fonts"
-  - "google-fonts"
-  - "open-font-license"
-  - "wcag-aaa"
-  - "care-principles"
-  - "indigenous-data-sovereignty"
-  - "canadian-aboriginal-syllabics"
-  - "chinuk-pipa"
-  - "cherokee-syllabary"
-  - "neo-tifinagh"
-  - "ethiopic-geez"
-  - "adlam"
-  - "vai"
-  - "w3c-ots"
-preferred-citation:
-  type: software
-  title: "PocketGull Font Superfamily: Optotypically Calibrated Clinical, Mathematical, Astronomical & Telemetry Vector Letterforms"
-  authors:
-    - family-names: "Gear"
-      given-names: "Phil"
-      orcid: "https://orcid.org/0009-0008-1372-5381"
-      affiliation: "PocketGull LLC"
-    - name: "The PocketGull Project Authors"
-  year: 2026
-  month: 11
-  version: "4.0.0"
-  doi: "10.5281/zenodo.22309379"
-  url: "https://font.pocketgull.app"
-  repository-code: "https://github.com/pocketgull-app/pocketgull-font"
-  license: "OFL-1.1"
-  notes: "Released under the SIL Open Font License 1.1 for medical informatics, clinical safety, STEM mathematics, observational astronomy, and low-vision accessibility under CARE Indigenous Data Sovereignty."
+  - "PocketGull Typeface"
+  - "DirectCurves"
+  - "Neuro-Ergonomic Typography"
+  - "Sloan Optotype"
+  - "Kinpaku COLR"
+  - "Kintsugi Eco-Ink"
+license: "OFL-1.1"
+date-released: "2026-11-17"
