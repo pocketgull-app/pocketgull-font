@@ -9,149 +9,120 @@
   const TIERS = {
     solo: {
       id: 'solo',
+      sku: 'PG-SOLO-49',
       name: 'Solo Designer / Indie Practitioner',
       price: '49.00',
       seats: '1 User (Up to 3 Workstations)',
       apps: '2 Applications',
+      stripeUrl: 'https://buy.stripe.com/cNibJ21eqcw5dntguL33W02',
+      stripeLabel: '💳 Checkout via Stripe — $49.00',
       description: 'Ideal for freelance designers, solo app developers, and independent creators.'
     },
     studio: {
       id: 'studio',
+      sku: 'PG-STUDIO-149',
       name: 'Studio / Agency',
       price: '149.00',
       seats: 'Up to 10 Workstations',
       apps: '10 Applications & Client SaaS',
+      stripeUrl: 'https://buy.stripe.com/7sY3cw3my53Ddnt4M333W03',
+      stripeLabel: '💳 License Agency Suite via Stripe',
       description: 'Full commercial rights across client campaigns, publishing, and digital studios.'
     },
     enterprise: {
       id: 'enterprise',
+      sku: 'PG-ENTERPRISE-499',
       name: 'Enterprise / Health System & EHR',
       price: '499.00',
       seats: 'Unlimited Enterprise-wide Users',
       apps: 'Unlimited EHR, Medical Devices & Telemetry',
+      stripeUrl: 'mailto:licensing@pocketgull.app?subject=PocketGull%20Enterprise%20Health%20System%20License%20(%24499)',
+      stripeLabel: '🏥 Request Enterprise Stripe Link / PO ($499)',
       description: 'Complete legal indemnification, bedside monitor rights, and hospital hardware firmware embedding.'
     }
   };
 
-  let currentTier = 'studio'; // Default to studio
+  let currentTier = 'studio';
 
-  document.addEventListener('DOMContentLoaded', () => {
-    initTierSelector();
-    initPayPalButtons();
-  });
+  function sanitizeLicensee(raw) {
+    return String(raw || '').replace(/[^\w\s.,&'-]/g, '').trim().slice(0, 120);
+  }
 
-  function initTierSelector() {
-    const tierCards = document.querySelectorAll('.tier-card');
+  function buildPayPalDirectUrl(tier, licenseeName) {
+    const url = new URL('https://www.paypal.com/cgi-bin/webscr');
+    url.searchParams.set('cmd', '_xclick');
+    url.searchParams.set('business', 'philgear@gmail.com');
+    const suffix = licenseeName ? ` (${licenseeName})` : '';
+    url.searchParams.set('item_name', `PocketGull Commercial License - ${tier.name}${suffix}`);
+    url.searchParams.set('item_number', tier.sku);
+    url.searchParams.set('amount', tier.price);
+    url.searchParams.set('currency_code', 'USD');
+    url.searchParams.set('no_shipping', '1');
+    return url.toString();
+  }
+
+  function updateCheckoutControls() {
+    const info = TIERS[currentTier] || TIERS.studio;
     const priceDisplay = document.getElementById('selected-price-display');
     const tierNameDisplay = document.getElementById('selected-tier-name');
     const licenseSummary = document.getElementById('selected-license-summary');
+    const stripeBtn = document.getElementById('direct-stripe-btn');
+    const paypalBtn = document.getElementById('direct-paypal-btn');
+    const licenseeInput = document.getElementById('licensee-name-input');
+    const licensee = sanitizeLicensee(licenseeInput ? licenseeInput.value : '');
 
-    tierCards.forEach(card => {
-      card.addEventListener('click', () => {
-        const tierKey = card.getAttribute('data-tier');
-        if (!TIERS[tierKey]) return;
+    if (priceDisplay) priceDisplay.textContent = `$${info.price}`;
+    if (tierNameDisplay) tierNameDisplay.textContent = info.name;
+    if (licenseSummary) licenseSummary.textContent = `${info.seats} • ${info.apps}`;
 
-        tierCards.forEach(c => {
-          c.classList.remove('active');
-          c.setAttribute('aria-selected', 'false');
-        });
+    if (stripeBtn) {
+      stripeBtn.setAttribute('href', info.stripeUrl);
+      stripeBtn.textContent = info.stripeLabel;
+    }
 
-        card.classList.add('active');
-        card.setAttribute('aria-selected', 'true');
-        currentTier = tierKey;
+    if (paypalBtn) {
+      paypalBtn.setAttribute('href', buildPayPalDirectUrl(info, licensee));
+      paypalBtn.textContent = `Pay $${info.price} via PayPal Direct →`;
+    }
+  }
 
-        const info = TIERS[tierKey];
-        if (priceDisplay) priceDisplay.textContent = `$${info.price}`;
-        if (tierNameDisplay) tierNameDisplay.textContent = info.name;
-        if (licenseSummary) licenseSummary.textContent = `${info.seats} • ${info.apps}`;
+  function selectTier(tierKey) {
+    if (!TIERS[tierKey]) return;
+    currentTier = tierKey;
+    const tierCards = document.querySelectorAll('.tier-card');
+    tierCards.forEach(function (c) {
+      const active = c.getAttribute('data-tier') === tierKey;
+      c.classList.toggle('active', active);
+      c.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    updateCheckoutControls();
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const params = new URLSearchParams(window.location.search);
+    const requestedTier = params.get('tier');
+    if (requestedTier && TIERS[requestedTier]) {
+      currentTier = requestedTier;
+    }
+
+    const tierCards = document.querySelectorAll('.tier-card');
+    tierCards.forEach(function (card) {
+      card.addEventListener('click', function () {
+        selectTier(card.getAttribute('data-tier'));
+      });
+      card.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Enter' || ev.key === ' ') {
+          ev.preventDefault();
+          selectTier(card.getAttribute('data-tier'));
+        }
       });
     });
-  }
 
-  function initPayPalButtons() {
-    const container = document.getElementById('paypal-button-container');
-    const fallbackBox = document.getElementById('paypal-fallback-container');
-
-    // Check if PayPal SDK loaded
-    if (typeof window.paypal === 'undefined' || !window.paypal.Buttons) {
-      if (fallbackBox) fallbackBox.style.display = 'block';
-      if (container) container.innerHTML = '<p class="status-note">PayPal SDK offline or blocked. You can checkout directly via secure hosted link below.</p>';
-      return;
+    const licenseeInput = document.getElementById('licensee-name-input');
+    if (licenseeInput) {
+      licenseeInput.addEventListener('input', updateCheckoutControls);
     }
 
-    try {
-      window.paypal.Buttons({
-        style: {
-          layout: 'vertical',
-          color: 'gold',
-          shape: 'rect',
-          label: 'pay',
-          height: 48
-        },
-        createOrder: function (data, actions) {
-          const tier = TIERS[currentTier];
-          const licenseeInput = document.getElementById('licensee-name-input');
-          const licenseeName = (licenseeInput && licenseeInput.value.trim()) || 'Commercial Licensee';
-
-          return actions.order.create({
-            intent: 'CAPTURE',
-            purchase_units: [{
-              description: `PocketGull Commercial Font Superfamily — ${tier.name}`,
-              custom_id: JSON.stringify({ tier: tier.id, licensee: licenseeName }),
-              amount: {
-                currency_code: 'USD',
-                value: tier.price
-              }
-            }],
-            application_context: {
-              brand_name: 'PocketGull Typefoundry',
-              user_action: 'PAY_NOW'
-            }
-          });
-        },
-        onApprove: function (data, actions) {
-          const statusBox = document.getElementById('checkout-status-msg');
-          if (statusBox) {
-            statusBox.style.display = 'block';
-            statusBox.textContent = '⏳ Authorizing payment and generating your digital license...';
-          }
-
-          return actions.order.capture().then(function (details) {
-            const licenseeInput = document.getElementById('licensee-name-input');
-            const licenseeName = (licenseeInput && licenseeInput.value.trim()) || details.payer.name?.given_name || 'Commercial Licensee';
-            const email = details.payer.email_address || '';
-
-            // Redirect to success page with verified query details
-            const orderId = details.id || data.orderID;
-            const successUrl = new URL('/commercial-success.html', window.location.origin);
-            successUrl.searchParams.set('orderId', orderId);
-            successUrl.searchParams.set('tier', currentTier);
-            successUrl.searchParams.set('licensee', licenseeName);
-            successUrl.searchParams.set('email', email);
-
-            window.location.href = successUrl.toString();
-          }).catch(function (err) {
-            console.error('PayPal Capture Error:', err);
-            if (statusBox) {
-              statusBox.style.display = 'block';
-              statusBox.className = 'status-box error';
-              statusBox.textContent = `Payment capture error: ${err.message || 'Please try again.'}`;
-            }
-          });
-        },
-        onError: function (err) {
-          console.error('PayPal Button Error:', err);
-          const statusBox = document.getElementById('checkout-status-msg');
-          if (statusBox) {
-            statusBox.style.display = 'block';
-            statusBox.className = 'status-box error';
-            statusBox.textContent = 'PayPal encountered an error. Please refresh or use the alternate link.';
-          }
-        }
-      }).render('#paypal-button-container');
-    } catch (e) {
-      console.warn('Could not initialize PayPal buttons:', e);
-      if (fallbackBox) fallbackBox.style.display = 'block';
-    }
-  }
+    selectTier(currentTier);
+  });
 })();

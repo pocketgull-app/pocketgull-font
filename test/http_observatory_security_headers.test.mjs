@@ -106,3 +106,47 @@ test('Performance Invariant: _headers and firebase.json enforce efficient cache 
   );
 });
 
+test('Storefront SEO & Discoverability Invariant: Product JSON-LD, OpenGraph, Storefront CTAs, and Sitemap parity', () => {
+  const indexHtml = fs.readFileSync(path.join('index.html'), 'utf8');
+  const artisanHtml = fs.readFileSync(path.join('artisan_foundry.html'), 'utf8');
+  const commercialHtml = fs.readFileSync(path.join('commercial.html'), 'utf8');
+  const sitemapXml = fs.readFileSync(path.join('sitemap.xml'), 'utf8');
+  const llmsTxt = fs.readFileSync(path.join('llms.txt'), 'utf8');
+
+  // 1. Direct storefront links surfaced on index.html
+  assert.match(indexHtml, /href="artisan_foundry\.html"/, 'index.html must link directly to artisan_foundry.html');
+  assert.match(indexHtml, /href="commercial\.html"/, 'index.html must link directly to commercial.html');
+  assert.match(indexHtml, /class="btn-nav-shop"/, 'index.html header must display top-level Pro Packs button');
+
+  // 2. Valid JSON-LD Schema.org Product / SoftwareApplication structured data
+  for (const [name, html] of [
+    ['index.html', indexHtml],
+    ['artisan_foundry.html', artisanHtml],
+    ['commercial.html', commercialHtml]
+  ]) {
+    const ldStart = html.indexOf('<script type="application/ld+json">');
+    assert.ok(ldStart !== -1, `${name} must embed JSON-LD structured data`);
+    const bodyStart = ldStart + '<script type="application/ld+json">'.length;
+    const ldEnd = html.indexOf('</script>', bodyStart);
+    assert.ok(ldEnd > bodyStart, `${name} JSON-LD tag must close cleanly`);
+    const parsed = JSON.parse(html.slice(bodyStart, ldEnd));
+    assert.equal(parsed['@context'], 'https://schema.org', `${name} JSON-LD must declare https://schema.org`);
+    assert.ok(parsed.offers, `${name} JSON-LD must declare product offers`);
+  }
+
+  // 3. Zero broken PayPal sandbox SDK ('client-id=sb') in production commercial.html
+  assert.doesNotMatch(
+    commercialHtml,
+    /client-id=sb/,
+    'commercial.html must NOT load sandbox PayPal SDK (client-id=sb) in production'
+  );
+
+  // 4. Sitemap & llms.txt catalog parity
+  assert.match(sitemapXml, /artisan_foundry\.html/, 'sitemap.xml must index artisan_foundry.html');
+  assert.match(sitemapXml, /commercial\.html/, 'sitemap.xml must index commercial.html');
+  assert.match(llmsTxt, /PG-BOTANICA-29/, 'llms.txt must index Botanica SKU');
+  assert.match(llmsTxt, /PG-KINPAKU-29/, 'llms.txt must index Kinpaku SKU');
+  assert.match(llmsTxt, /PG-ENTERPRISE-499/, 'llms.txt must index Enterprise SKU');
+});
+
+

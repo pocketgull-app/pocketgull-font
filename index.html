@@ -31,6 +31,52 @@
   <link rel="preload" href="fonts/woff2/PocketGull-Bold-Core.woff2?v=4.0.0" as="font" type="font/woff2" crossorigin>
   <!-- Primary Webfont Stylesheet (Zero-CSP-Violation Direct Load) -->
   <link rel="stylesheet" href="fonts.css?v=4.0.0">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PocketGull Font Superfamily",
+    "operatingSystem": "Windows, macOS, Linux, Web, iOS, Android",
+    "applicationCategory": "DesignApplication",
+    "description": "Open-source clinical sans-serif, humanist display, and 600 UPM telemetry monospace font superfamily with Louise Sloan 5:1 optotypes, ISMP disambiguation, Botanica v3 Herbarium Initials, and Kinpaku 24k Gold COLR.",
+    "url": "https://font.pocketgull.app/",
+    "image": "https://font.pocketgull.app/documentation/images/social_github_preview.png",
+    "sameAs": [
+      "https://github.com/pocketgull-app/pocketgull-font",
+      "https://doi.org/10.5281/zenodo.22309379"
+    ],
+    "brand": {
+      "@type": "Brand",
+      "name": "PocketGull Typefoundry"
+    },
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Open-Source Clinical & Indigenous Edition (SIL OFL 1.1)",
+        "price": "0.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://font.pocketgull.app/#download"
+      },
+      {
+        "@type": "Offer",
+        "name": "Botanica v3 & Kinpaku 24k Gold Artisan Pro Packs",
+        "price": "29.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://font.pocketgull.app/artisan_foundry.html"
+      },
+      {
+        "@type": "Offer",
+        "name": "Commercial Agency, Hospital EHR & Hardware Suite",
+        "price": "149.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://font.pocketgull.app/commercial.html"
+      }
+    ]
+  }
+  </script>
   <script src="js/sinus_telemetry_engine.js?v=4.0.0" defer></script>
   <style>
     /* Critical Above-the-Fold Optotypes (Zero-Render-Blocking Initial Paint) */
@@ -1343,6 +1389,35 @@
     .btn-nav-dl:hover {
       transform: translateY(-1px);
       box-shadow: 0 4px 12px rgba(6, 182, 212, 0.4);
+    }
+
+    .btn-nav-shop {
+      background: rgba(245, 158, 11, 0.14);
+      border: 1px solid rgba(245, 158, 11, 0.55);
+      color: #fde68a !important;
+      font-family: 'PocketGull Bold', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .btn-nav-shop:hover {
+      transform: translateY(-1px);
+      border-color: #fbbf24;
+      background: rgba(245, 158, 11, 0.24);
+    }
+
+    [data-theme="washi"] .btn-nav-shop,
+    [data-theme="light"] .btn-nav-shop {
+      background: #fef3c7;
+      border-color: #b45309;
+      color: #78350f !important;
     }
 
     /* Standard Action Buttons */
@@ -4880,7 +4955,8 @@
           <a href="#docDrillPanel" onclick="openDocDrill('Louise Sloan 5:1 Optotype Invariant', 'OPHTHALMOLOGY')">🔬 Evidence Focus • Doc Drill</a>
           <a href="a11y_studio.html">♿ A11y &amp; Neuro-Ergonomic Lab</a>
           <a href="philocardia_tactile_lab.html">💖 Philocardia Tactile Lab</a>
-          <a href="artisan_foundry.html" style="color: #fbbf24; font-weight: 700;">🌿 Artisan Foundry (Botanica &amp; Kinpaku 24k Gold)</a>
+          <a href="artisan_foundry.html" style="color: #fbbf24; font-weight: 700;">🌿 Artisan Foundry Shop ($29–$199 Stripe)</a>
+          <a href="commercial.html" style="color: #38bdf8; font-weight: 700;">🏥 Commercial &amp; Enterprise Suite ($49–$499)</a>
           <a href="chromatic_pattern_lab.html">🎨 Chromatic Pattern &amp; Shaper Lab</a>
           <a href="asl_studio.html">🤟 Global Sign &amp; ASL Studio</a>
           <a href="music_studio.html">🎼 Music Studio (WebAudio)</a>
@@ -4904,6 +4980,9 @@
       <button type="button" class="theme-toggle-btn" id="themeToggleBtn" title="Switch Theme (Dark, Washi Rice Paper, Light)">
         <span id="themeIcon">◐</span> <span id="themeLabel">Dark</span>
       </button>
+      <a href="artisan_foundry.html" class="btn-nav-shop" title="Artisan Pro Packs ($29+) &amp; Commercial Licensing">
+        <span>✨</span> <span>Pro Packs</span>
+      </a>
       <a href="#download" class="btn-nav-dl">
         <span id="navDlLabel">Download Fonts</span>
       </a>
@@ -8570,6 +8649,26 @@
         </a>
       </div>
 
+      <!-- Free SIL OFL vs. Commercial Pro Packs & Enterprise Storefront Comparison Strip -->
+      <div style="margin: 18px 0 24px; padding: 18px 20px; border-radius: 12px; background: linear-gradient(135deg, rgba(245, 158, 11, 0.09) 0%, rgba(56, 189, 248, 0.09) 100%); border: 1px solid rgba(245, 158, 11, 0.4); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
+        <div style="max-width: 680px;">
+          <div style="font-family: 'PocketGull Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--amber); margin-bottom: 4px;">
+            ✨ Commercial Pro Packs &amp; Enterprise Indemnification Storefront
+          </div>
+          <div style="font-size: 14px; color: var(--text-main); line-height: 1.55;">
+            All 39 open-core clinical, Braille &amp; Indigenous fonts above are <strong>free forever (SIL OFL 1.1)</strong>. Need the <strong>4-Palette Kinpaku™ 24k Gold COLR</strong> font, <strong>6 Standalone Herbarium SVG Plates</strong>, or <strong>Hospital EHR / Hardware IP Warranty</strong>? License directly via Stripe &mdash; 100% sustains the open project.
+          </div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+          <a href="artisan_foundry.html" style="display: inline-flex; align-items: center; gap: 6px; padding: 9px 15px; border-radius: 8px; background: #fbbf24; color: #090d16; font-family: 'PocketGull Bold', sans-serif; font-size: 13px; font-weight: 800; text-decoration: none;">
+            🌿 Artisan Pro Packs ($29–$199) &rarr;
+          </a>
+          <a href="commercial.html" style="display: inline-flex; align-items: center; gap: 6px; padding: 9px 15px; border-radius: 8px; background: var(--surface-inner); border: 1px solid var(--sky-accent); color: var(--sky-accent); font-family: 'PocketGull Bold', sans-serif; font-size: 13px; font-weight: 700; text-decoration: none;">
+            🏥 Clinical &amp; Enterprise Suite ($49–$499) &rarr;
+          </a>
+        </div>
+      </div>
+
       <!-- CLI Quick Install Commands -->
       <div class="cli-grid">
         <div class="cli-card">
@@ -8822,8 +8921,9 @@
           <a href="https://github.com/pocketgull-app/pocketgull-font" target="_blank" rel="noopener">GitHub Repository</a>
           <a href="OFL.txt" target="_blank">License (SIL OFL 1.1)</a>
           <a href="CHANGELOG.md" target="_blank">Changelog</a>
-          <a href="ENTERPRISE.md" target="_blank" style="color: #06b6d4; font-weight: 700;">Enterprise &amp; OEM</a>
-          <a href="artisan_foundry.html" style="color: #fbbf24; font-weight: 700;">Botanica &amp; Kinpaku Gold</a>
+          <a href="commercial.html" style="color: #38bdf8; font-weight: 700;">Commercial &amp; Enterprise Store</a>
+          <a href="ENTERPRISE.md" target="_blank">Enterprise OEM Spec</a>
+          <a href="artisan_foundry.html" style="color: #fbbf24; font-weight: 700;">Artisan Pro Packs ($29+)</a>
           <a href="specimen-broadside.html">Broadside Proof</a>
           <a href="#docDrillPanel" onclick="openDocDrill('Louise Sloan 5:1 Optotype Invariant', 'OPHTHALMOLOGY')">Doc Drill</a>
         </div>

@@ -4,10 +4,77 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="License the PocketGull Commercial Superfamily (38 Cuts + Variable Font). Clinical optotype acuity, ISMP character disambiguation, and 600 UPM fixed telemetry.">
-  <title>PocketGull™ · Commercial License & Storefront</title>
+  <meta name="keywords" content="PocketGull commercial license, enterprise hospital font, EHR typography license, medical device firmware font, ISMP disambiguation font, Louise Sloan 5:1 optotype, Phil Gear">
+  <meta name="author" content="Phil Gear">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <link rel="canonical" href="https://font.pocketgull.app/commercial.html">
+  <meta property="og:type" content="product">
+  <meta property="og:site_name" content="PocketGull Typefoundry">
+  <meta property="og:title" content="PocketGull™ · Commercial &amp; Enterprise License Storefront ($49–$499)">
+  <meta property="og:description" content="Perpetual commercial, agency, EHR, and medical device firmware licensing for the 38-cut PocketGull Clinical &amp; Telemetry Font Superfamily.">
+  <meta property="og:url" content="https://font.pocketgull.app/commercial.html">
+  <meta property="og:image" content="https://font.pocketgull.app/documentation/images/social_github_preview.png">
+  <meta property="og:image:alt" content="PocketGull Commercial &amp; Enterprise Typeface Storefront">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PocketGull™ · Commercial &amp; Enterprise License Storefront ($49–$499)">
+  <meta name="twitter:description" content="Perpetual commercial, studio, and hospital EHR licensing with Louise Sloan 5:1 optotype &amp; ISMP indemnification.">
+  <meta name="twitter:image" content="https://font.pocketgull.app/documentation/images/social_github_preview.png">
+  <title>PocketGull™ · Commercial License &amp; Storefront</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="fonts.css?v=4.0.0">
   <link rel="stylesheet" href="pocketgull.css?v=4.0.0">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "PocketGull Commercial & Enterprise Font Superfamily Suite",
+    "description": "38-cut clinical, telemetry monospace, and 2-axis variable font superfamily with ISMP character disambiguation, Louise Sloan 5:1 optotype ratio, and legal IP indemnification.",
+    "image": "https://font.pocketgull.app/documentation/images/social_github_preview.png",
+    "url": "https://font.pocketgull.app/commercial.html",
+    "sku": "PG-COMMERCIAL-V4",
+    "brand": {
+      "@type": "Brand",
+      "name": "PocketGull Typefoundry"
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "lowPrice": "49.00",
+      "highPrice": "499.00",
+      "priceCurrency": "USD",
+      "offerCount": "3",
+      "availability": "https://schema.org/InStock",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Solo Designer / Indie Commercial License",
+          "sku": "PG-SOLO-49",
+          "price": "49.00",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://font.pocketgull.app/commercial.html?tier=solo"
+        },
+        {
+          "@type": "Offer",
+          "name": "Studio / Agency Commercial License",
+          "sku": "PG-STUDIO-149",
+          "price": "149.00",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://font.pocketgull.app/commercial.html?tier=studio"
+        },
+        {
+          "@type": "Offer",
+          "name": "Enterprise / Health System & EHR License",
+          "sku": "PG-ENTERPRISE-499",
+          "price": "499.00",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://font.pocketgull.app/commercial.html?tier=enterprise"
+        }
+      ]
+    }
+  }
+  </script>
   <style>
     :root {
       --bg-dark: #060912;
@@ -324,15 +391,67 @@
       text-align: center;
     }
 
-    .legal-note a {
-      color: var(--sky-accent);
-      text-decoration: underline;
-    }
-  </style>
+      .legal-note a {
+        color: var(--sky-accent);
+        text-decoration: underline;
+      }
 
-  <!-- Load official PayPal JavaScript SDK (Client ID configured for production / sandbox) -->
-  <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD&components=buttons&enable-funding=venmo,card"></script>
-</head>
+      .direct-checkout-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .btn-stripe-primary {
+        display: block;
+        width: 100%;
+        text-align: center;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 0.98rem;
+        padding: 0.9rem 1.2rem;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #2dd4bf, #0284c7);
+        color: #020617;
+        transition: filter 0.15s ease, transform 0.15s ease;
+      }
+
+      .btn-stripe-primary:hover {
+        filter: brightness(1.08);
+        transform: translateY(-1px);
+      }
+
+      .btn-paypal-direct {
+        display: block;
+        width: 100%;
+        text-align: center;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.9rem;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        background: #0070ba;
+        color: #ffffff;
+        transition: filter 0.15s ease;
+      }
+
+      .btn-paypal-direct:hover {
+        filter: brightness(1.1);
+      }
+
+      .btn-invoice-link {
+        display: block;
+        width: 100%;
+        text-align: center;
+        text-decoration: none;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        padding: 0.5rem;
+        border-radius: 6px;
+        border: 1px solid var(--border-subtle);
+      }
+    </style>
+  </head>
 <body>
 
   <header class="store-header">
@@ -342,13 +461,13 @@
       </a>
       <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
         <span class="nav-tag">Foundry Release v4.0.0</span>
-        <a href="https://pocketgull.com/foundry" class="nav-tag" style="border-color:var(--gold-accent); color:var(--gold-accent); text-decoration:none; font-weight:700;">✨ Botanica v3 &amp; Kinpaku 24k Gold (Stripe) &rarr;</a>
+        <a href="artisan_foundry.html" class="nav-tag" style="border-color:var(--gold-accent); color:var(--gold-accent); text-decoration:none; font-weight:700;">✨ Botanica v3 &amp; Kinpaku 24k Gold ($29–$199) &rarr;</a>
       </div>
     </nav>
 
     <div style="max-width:860px; margin:0 auto 1.75rem; padding:0.9rem 1.25rem; border-radius:10px; background:rgba(245, 158, 11, 0.12); border:1px solid rgba(245, 158, 11, 0.4); color:#fde68a; font-size:0.92rem;">
-      🌿 <strong>New Collector Editions on pocketgull.com:</strong> License <strong>PocketGull Botanica™ v3</strong> (Herbarium Initials + 6 SVG Plates) &amp; <strong>PocketGull Kinpaku™ (金箔) 24k Gold COLR</strong> via Stripe Checkout &mdash; 100% sustains the free open-source clinical project.
-      <a href="https://pocketgull.com/foundry" style="color:#fbbf24; font-weight:700; margin-left:0.4rem;">Explore Artisan Foundry &rarr;</a>
+      🌿 <strong>Looking for Artisan Collector Editions?</strong> License <strong>PocketGull Botanica™ v3</strong> (Herbarium Initials + 6 SVG Plates) &amp; <strong>PocketGull Kinpaku™ (金箔) 24k Gold COLR</strong> starting at $29 via Stripe Checkout &mdash; 100% sustains the free open-source clinical project.
+      <a href="artisan_foundry.html" style="color:#fbbf24; font-weight:700; margin-left:0.4rem;">Open Artisan Foundry &rarr;</a>
     </div>
 
     <h1 class="store-title">PocketGull™ Commercial Suite</h1>
@@ -463,18 +582,23 @@
         </span>
       </div>
 
-      <!-- PayPal Smart Button Mount Point -->
-      <div class="paypal-wrapper">
-        <div id="paypal-button-container"></div>
-        <div id="checkout-status-msg" class="status-box"></div>
+      <!-- Direct Production Checkout Links (Zero Sandbox Blocking) -->
+      <div class="direct-checkout-stack">
+        <a id="direct-stripe-btn" class="btn-stripe-primary" href="https://buy.stripe.com/7sY3cw3my53Ddnt4M333W03" rel="noopener noreferrer">
+          💳 Checkout via Stripe (Card / Apple Pay)
+        </a>
+        <a id="direct-paypal-btn" class="btn-paypal-direct" href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&amp;business=philgear%40gmail.com&amp;item_name=PocketGull+Commercial+Studio+Agency+License&amp;item_number=PG-STUDIO-149&amp;amount=149.00&amp;currency_code=USD&amp;no_shipping=1" target="_blank" rel="noopener noreferrer">
+          Pay $149.00 via PayPal Direct &rarr;
+        </a>
+        <a id="direct-invoice-btn" class="btn-invoice-link" href="mailto:licensing@pocketgull.app?subject=PocketGull%20Commercial%20Procurement%20Invoice">
+          📄 Request Hospital / Enterprise PO Invoice
+        </a>
       </div>
 
-      <!-- Fallback container for blocked scripts -->
-      <div id="paypal-fallback-container" class="fallback-box">
-        <p>Direct PayPal checkout link:</p>
-        <a href="https://paypal.me/philgear" class="fallback-btn" target="_blank" rel="noopener noreferrer">
-          Pay via PayPal.Me & Request License
-        </a>
+      <!-- Optional PayPal Smart Button Mount Point -->
+      <div class="paypal-wrapper" id="paypal-sdk-wrapper" style="display:none;">
+        <div id="paypal-button-container"></div>
+        <div id="checkout-status-msg" class="status-box"></div>
       </div>
 
       <p class="legal-note">

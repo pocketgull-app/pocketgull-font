@@ -10,7 +10,7 @@
 [![W3C OTS Validated](https://img.shields.io/badge/W3C_OTS-100%25_Valid-emerald.svg?style=flat-square)](https://github.com/googlefonts/ots)
 [![WCAG 2.1 AAA](https://img.shields.io/badge/WCAG_2.1-AAA_100%25-emerald.svg?style=flat-square)](index.html)
 
-**[🧭 3-Minute Walkthrough](TUTORIAL.md)** &nbsp;•&nbsp; **[🌐 Live Specimen](https://font.pocketgull.app)** &nbsp;•&nbsp; **[💾 Download v4.0.0 (.ZIP)](https://github.com/pocketgull-app/pocketgull-font/releases/download/v4.0.0/pocketgull-typeface-v4.0.0.zip)** &nbsp;•&nbsp; **[💓 Philocardia Lab](philocardia_tactile_lab.html)** &nbsp;•&nbsp; **[🤟 Sign Studio](asl_studio.html)** &nbsp;•&nbsp; **[🛠️ STEM Studio](stem_studio.html)** &nbsp;•&nbsp; **[🎼 Music Studio](music_studio.html)** &nbsp;•&nbsp; **[📺 Caption &amp; Sinus Studio](closed_caption_studio.html)** &nbsp;•&nbsp; **[🌿 Artisan Foundry](artisan_foundry.html)**
+**[🧭 3-Minute Walkthrough](TUTORIAL.md)** &nbsp;•&nbsp; **[🌐 Live Specimen](https://font.pocketgull.app)** &nbsp;•&nbsp; **[💾 Download v4.0.0 (.ZIP)](https://github.com/pocketgull-app/pocketgull-font/releases/download/v4.0.0/pocketgull-typeface-v4.0.0.zip)** &nbsp;•&nbsp; **[🌿 Artisan Pro Packs ($29–$199)](https://font.pocketgull.app/artisan_foundry.html)** &nbsp;•&nbsp; **[🏥 Commercial &amp; Enterprise Store ($49–$499)](https://font.pocketgull.app/commercial.html)** &nbsp;•&nbsp; **[💓 Philocardia Lab](philocardia_tactile_lab.html)** &nbsp;•&nbsp; **[🤟 Sign Studio](asl_studio.html)** &nbsp;•&nbsp; **[🛠️ STEM Studio](stem_studio.html)** &nbsp;•&nbsp; **[🎼 Music Studio](music_studio.html)** &nbsp;•&nbsp; **[📺 Caption &amp; Sinus Studio](closed_caption_studio.html)**
 
 <br/>
 
@@ -229,6 +229,11 @@ See **[THANKS.md](THANKS.md)** for our full community and sovereign language kee
 * **Foundry Tooling, Compilers & Web Studios (`.dart`, `.py`, `.js`, `.html`, `.css`)**: Distributed under the **[Apache License 2.0](LICENSE-APACHE-2.0.txt)** (`Apache-2.0`).
 
 Free for personal, academic, clinical, and commercial use.
+
+### ✨ Commercial Studio Pro Packs &amp; Enterprise Indemnification
+While all 39 open-core clinical, Braille, and Indigenous fonts remain 100% free forever under SIL OFL 1.1, studios and health systems can sustain the project and unlock exclusive assets via our direct storefronts:
+* **[🌿 Artisan Foundry Pro Packs ($29–$199 via Stripe)](https://font.pocketgull.app/artisan_foundry.html)**: Includes the 4-Palette **PocketGull Kinpaku™ (金箔) 24k Gold COLR** font, **Botanica™ v3** Living Herbarium Initials, 6 standalone SVG vector plates, and the Wrigley `-45.8%` Eco-Ink Print Certificate.
+* **[🏥 Commercial &amp; Hospital Enterprise Suite ($49–$499)](https://font.pocketgull.app/commercial.html)**: Perpetual Studio, Agency, EHR, and medical device hardware firmware licenses with counter-signed legal IP indemnification.
 
 **Copyright (c) 2026 The PocketGull Project Authors** ([GitHub Repository](https://github.com/pocketgull-app/pocketgull-font)).  
 *Crafted with care. Engineered for clarity. 🕊️*
