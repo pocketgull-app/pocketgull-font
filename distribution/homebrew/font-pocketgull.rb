@@ -1,6 +1,6 @@
 cask "font-pocketgull" do
   version "4.0.0"
-  sha256 "7dca99bde7259a41f7ecf1cadb811ebb9d6e69af357b13fcf889354691be1aab"
+  sha256 "c7bb00b64c64ffa5a79da866c1ccdbb52dac0bbfc28f8001c039941723c3eca5"
 
   url "https://github.com/pocketgull-app/pocketgull-font/releases/download/v#{version}/pocketgull-typeface-v#{version}.zip"
   name "PocketGull"
@@ -40,10 +40,12 @@ cask "font-pocketgull" do
   font "fonts/ttf/PocketGull-Slab-Regular.ttf"
   font "fonts/ttf/PocketGull-Soft-Bold.ttf"
   font "fonts/ttf/PocketGull-Soft-Regular.ttf"
+  font "fonts/ttf/PocketGull-Soft.ttf"
   font "fonts/ttf/PocketGull-VF.ttf"
   font "fonts/ttf/PocketGullMono-Bold.ttf"
   font "fonts/ttf/PocketGullMono-Italic.ttf"
   font "fonts/ttf/PocketGullMono-Regular.ttf"
+  font "fonts/ttf/PocketGullSerif[wght].ttf"
 
   zap :not_required
 end

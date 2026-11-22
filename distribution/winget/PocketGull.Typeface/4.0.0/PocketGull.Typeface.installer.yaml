@@ -35,14 +35,17 @@ Installers:
       - RelativeFilePath: fonts/ttf/PocketGull-Serif-Bold.ttf
       - RelativeFilePath: fonts/ttf/PocketGull-Serif-Regular.ttf
       - RelativeFilePath: fonts/ttf/PocketGull-Serif-VF.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Sign-VF.ttf
       - RelativeFilePath: fonts/ttf/PocketGull-Sign.ttf
       - RelativeFilePath: fonts/ttf/PocketGull-Slab-Bold.ttf
       - RelativeFilePath: fonts/ttf/PocketGull-Slab-Regular.ttf
       - RelativeFilePath: fonts/ttf/PocketGull-Soft-Bold.ttf
       - RelativeFilePath: fonts/ttf/PocketGull-Soft-Regular.ttf
+      - RelativeFilePath: fonts/ttf/PocketGull-Soft.ttf
       - RelativeFilePath: fonts/ttf/PocketGull-VF.ttf
       - RelativeFilePath: fonts/ttf/PocketGullMono-Bold.ttf
       - RelativeFilePath: fonts/ttf/PocketGullMono-Italic.ttf
       - RelativeFilePath: fonts/ttf/PocketGullMono-Regular.ttf
+      - RelativeFilePath: fonts/ttf/PocketGullSerif[wght].ttf
 ManifestType: installer
 ManifestVersion: 1.12.0
