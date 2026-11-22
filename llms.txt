@@ -15,6 +15,6 @@ All 39 open-core clinical, Braille, math, and Indigenous fonts are free forever 
 
 ### 2. Clinical, Agency & Hospital Enterprise Storefront (https://font.pocketgull.app/commercial.html)
 - **Solo Designer / Indie ($49 USD, SKU: PG-SOLO-49)**: 1 User (up to 3 Workstations), 2 Commercial Apps, Perpetual Commercial EULA — https://font.pocketgull.app/commercial.html?tier=solo
-- **Studio / Agency ($149 USD, SKU: PG-STUDIO-149)**: Up to 10 Workstations, 10 Commercial Apps/SaaS, Full 38-Cut + 2-Axis Variable Font Suite — https://font.pocketgull.app/commercial.html?tier=studio
+- **Studio / Agency ($149 USD, SKU: PG-STUDIO-149)**: Up to 10 Workstations, 10 Commercial Apps/SaaS, Full 41-Cut + 16-Axis Variable Font Suite — https://font.pocketgull.app/commercial.html?tier=studio
 - **Enterprise / Health System & EHR ($499 USD, SKU: PG-ENTERPRISE-499)**: Unlimited Enterprise-Wide Installation, Hospital EHR & Medical Device Firmware Embedding, Full Legal IP & Louise Sloan 5:1 Acuity Indemnification — https://font.pocketgull.app/commercial.html?tier=enterprise
 - **Support Open Clinical & Indigenous Typography (PayPal Donate)**: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=philgear%40gmail.com&item_name=Support+PocketGull+Open+Clinical+%26+Indigenous+Typography&currency_code=USD

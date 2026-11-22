@@ -102,7 +102,7 @@ Add the global, high-performance webfont stylesheet directly to your `<head>`:
 
 | Platform | Command | Notes |
 | :--- | :--- | :--- |
-| **macOS (Homebrew Tap)** | `brew install --cask pocketgull-app/tap/font-pocketgull` | Complete 32-style TrueType superfamily |
+| **macOS (Homebrew Tap)** | `brew install --cask pocketgull-app/tap/font-pocketgull` | 37-style TrueType superfamily cask |
 | **Windows (Winget)** | `winget install PocketGull.Typeface` | Native Windows font installation ([PR #441164](https://github.com/microsoft/winget-pkgs/pull/441164)) |
 | **Web (NPM)** | `npm install @fontsource/pocketgull` | Self-hosted zero-CLS webfonts ([Issue #168](https://github.com/fontsource/font-files/issues/168)) |
 | **Scientific (PyPI)** | `pip install pocketgull-math` | Matplotlib stylesheets &amp; telemetry |
@@ -126,24 +126,24 @@ Add the global, high-performance webfont stylesheet directly to your `<head>`:
 </details>
 
 <details>
-<summary><strong>🗂️ v4.0.0 No-Tofu Superfamily Architecture (41 Cuts · 345,000+ Glyphs — Click to expand)</strong></summary>
+<summary><strong>🗂️ v4.0.0 No-Tofu Superfamily Architecture (41 Cuts · 342,631 Glyphs — Click to expand)</strong></summary>
 <br/>
 
-PocketGull `v4.0.0` is engineered on a standardized `1000 UPM` em-square across **41 full production font cuts** (`8,190–9,870` reachable glyphs per proportional/math master; `0` `fontspector` unreachable-glyph warnings):
+PocketGull `v4.0.0` is engineered on a standardized `1000 UPM` em-square across **41 full production font cuts** in `fonts/ttf/` (`5,818–9,870` glyphs per cut; `342,631` total glyphs across the 41 OFL binaries, or `351,271` including the commercial `PocketGull-Kinpaku.ttf` COLR cut; `0` `fontspector` unreachable-glyph warnings):
 
 | Subfamily | PostScript Name | Weight / Style | Glyphs | Primary Use Case |
 | :--- | :--- | :---: | ---: | :--- |
-| **PocketGull Regular &amp; Bold** | `PocketGull-Regular` / `-Bold` | 400–900 + Italics | `8,190` | Primary clinical EHR UI, patient discharge, Bionic anchors |
+| **PocketGull Regular &amp; Bold** | `PocketGull-Regular` / `-Bold` | 400–900 + Italics | `7,918–8,190` | Primary clinical EHR UI, patient discharge, Bionic anchors |
 | **PocketGull VF (16-Axis)** | `PocketGull-VF` | 100–900 Variable | `8,687` | Continuous 16-axis optical, acuity &amp; somatic tuning |
-| **PocketGull Fineliner &amp; Chiseltip** | `PocketGull-Fineliner` / `-Chiseltip` | 400 / 900 | `8,188` | Cardstock felt-marker warmth &amp; high-contrast wayfinding |
-| **PocketGull Serif &amp; Serif VF** | `PocketGull-Serif-Regular` / `-VF` | 400–700 + VF | `9,722` | Long-form academic journals, pharmacopoeia, hospital signage |
+| **PocketGull Fineliner &amp; Chiseltip** | `PocketGull-Fineliner` / `-Chiseltip` | 400 / 900 | `8,188` / `8,176` | Cardstock felt-marker warmth &amp; high-contrast wayfinding |
+| **PocketGull Serif &amp; Serif VF** | `PocketGull-Serif-Regular` / `-VF` | 400–700 + VF | `9,718–9,722` | Long-form academic journals, pharmacopoeia, hospital signage |
 | **PocketGull Slab &amp; Soft** | `PocketGull-Slab-*` / `-Soft-*` | 400 / 700 | `9,718` | Humanist slab editorial &amp; cushioned pediatric/sensory UI |
-| **PocketGull Mono** | `PocketGullMono-Regular` / `-Bold` | Fixed `600 UPM` | `8,251` | ICU telemetry vitals, FITS headers, gapless box drawing |
+| **PocketGull Mono** | `PocketGullMono-Regular` / `-Bold` / `-Italic` | Fixed `600 UPM` | `6,678–8,251` | ICU telemetry vitals, FITS headers, gapless box drawing |
 | **PocketGull Math** | `PocketGull-Math` | `68 UPM` stem | `9,870` | LaTeX / Typst / Matplotlib, full ISO/IEC 14496-22 `MATH` table |
-| **PocketGull ASL &amp; Sign VF** | `PocketGull-ASL` / `-Sign-VF` | Static + VF | `6,821` | Z-layered anatomical fingerspelling &amp; trajectory arrows |
-| **PocketGull Learn, Lab &amp; Press** | `PocketGull-Learn` / `-Lab` / `-Press` | 400 | `8,557` | K-12 TouchMath, pathology BSL/RCF SOPs, CAD GD&amp;T |
-| **PocketGull Chem, Music &amp; Algo** | `PocketGull-Chem` / `-Music` / `-Algo` | 400 | `8,596` | Stoichiometry, musical notation, AST/DAG trees &amp; Genome |
-| **PocketGull Chromatic &amp; Artisan** | `-Outline` / `-Inline` / `-Halftone` / `-Botanica` / `-Kintsugi` | Display / `COLR` | `9,724` | Chromatic registration, living herbarium &amp; 24k Gold `COLR` |
+| **PocketGull ASL &amp; Sign VF** | `PocketGull-ASL` / `-Sign-VF` | Static + 4-Axis VF | `6,821` | Z-layered anatomical fingerspelling &amp; trajectory arrows |
+| **PocketGull Learn, Lab &amp; Press** | `PocketGull-Learn` / `-Lab` / `-Press` | 400 | `8,543–8,557` | K-12 TouchMath, pathology BSL/RCF SOPs, CAD GD&amp;T |
+| **PocketGull Chem, Music &amp; Algo** | `PocketGull-Chem` / `-Music` / `-Algo` | 400 | `5,864–8,596` | Stoichiometry, musical notation, AST/DAG trees &amp; Genome |
+| **PocketGull Chromatic &amp; Artisan** | `-Outline` / `-Inline` / `-Halftone` / `-Botanica` / `-Kintsugi` | Display (OFL) | `8,176–9,724` | Chromatic registration, living herbarium &amp; `-45.8%` Eco-Ink (`24k Gold COLR` in commercial `PocketGull-Kinpaku.ttf`, `8,640` glyphs) |
 
 </details>
 
@@ -151,13 +151,13 @@ PocketGull `v4.0.0` is engineered on a standardized `1000 UPM` em-square across 
 <summary><strong>🌐 Universal No-Tofu World Scripts &amp; Multi-Script Case Studies (Click to expand)</strong></summary>
 <br/>
 
-PocketGull eliminates missing-glyph tofu across **27+ global and Indigenous healthcare writing systems**:
-* **Latin, Cyrillic &amp; Greek**: 3,350+ characters, Vietnamese stacked diacritics, Salishan combining marks (`GPOS` Mark/MKMK), ICU telemetry.
-* **Tactile Braille**: Full 256-cell ISO/TR 11548 8-dot matrix (`U+2800`–`U+28FF`).
-* **RTL, Semitic &amp; Ancient Clinical**: Arabic, Persian (Farsi), Hebrew, Syriac, Thaana, plus 1,234 Sumero-Akkadian Cuneiform medical codex signs (`U+12000`–`U+12543`).
-* **South &amp; Southeast Asian**: Devanagari, Bengali, Tamil, Telugu, Gurmukhi, Gujarati, Oriya, Kannada, Malayalam, Sinhala, Thai, Lao, Khmer, Burmese, Tibetan.
-* **East Asian (CJK)**: Top 3,500 Hanzi, Radicals, Kana, Hangul featural blocks.
-* **Indigenous &amp; African Sovereign Scripts**: Canadian Syllabics (Inuktitut), Duployan (Chinuk Pipa), Neo-Tifinagh, Cherokee, Osage (`U+104B0`–`U+104FF`), Ethiopic, Adlam, Vai, N'Ko, Bassa Vah.
+PocketGull provides native vector coverage across **27+ global and Indigenous healthcare writing systems**, paired with transparent zero-CLS specialist routing where dedicated shaping engines are required (see [`RESPONSIBLE_TYPOGRAPHY.md`](RESPONSIBLE_TYPOGRAPHY.md)):
+* **Latin, Cyrillic &amp; Greek**: Extended Latin (`536` CPs), Cyrillic (`256`), Greek (`121`), Vietnamese stacked diacritics, Salishan combining marks (`GPOS` Mark/MKMK), and ICU telemetry.
+* **Tactile Braille**: Full 256-cell ISO/TR 11548 8-dot matrix (`U+2800`–`U+28FF`) across all 41 cuts.
+* **RTL, Semitic &amp; Ancient Clinical**: Native Hebrew (`88` CPs) and `1,234` Sumero-Akkadian Cuneiform medical codex signs (`U+12000`–`U+12543`) in core masters; Arabic (`256`), Syriac (`77`), and Thaana (`50`) in extended cuts, with connected Arabic Naskh routed via zero-CLS metric-matched Noto Sans Arabic (`fonts.css` Expert I).
+* **South &amp; Southeast Asian**: Devanagari, Bengali, Tamil, Telugu, Gurmukhi, Gujarati, Oriya, Kannada, Malayalam, Sinhala, Thai, Lao, Khmer, Burmese (Myanmar), Tibetan.
+* **East Asian (CJK)**: Transparent zero-CLS metric-matched routing (`fonts.css` Expert J) to Google Noto Sans CJK rather than unverified synthetic Hanzi/Kana glyphs.
+* **Indigenous &amp; African Sovereign Scripts**: Canadian Syllabics / Inuktitut (`640`), Duployan / Chinuk Pipa (`143`), Neo-Tifinagh (`59`), Cherokee (`92`), Ethiopic / Geʻez (`358`), Adlam (`88`), Vai (`300`).
 
 **Case Studies**:
 - Case Study 01: [`CASE_STUDY_01_INUKTITUT_SYLLABICS.md`](documentation/case_studies/CASE_STUDY_01_INUKTITUT_SYLLABICS.md) (Arctic Telehealth)

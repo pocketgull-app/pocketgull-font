@@ -57,8 +57,8 @@ SUMMARY OF PERMITTED USE & COMMERCIAL WARRANTY:
    worldwide, non-exclusive license to utilize PocketGull under the purchased tier.
 2. Clinical Disambiguation: Adheres to ISMP (Institute for Safe Medication Practices)
    and Louise Sloan 5:1 optotype legibility standards.
-3. Open Source Coexistence: Incorporates full proprietary 38-cut suite (Telemetry,
-   Math, Chem, Genome, ASL, Slab, Soft, Halftone, and 2-Axis Variable builds).
+3. Open Source Coexistence: Incorporates full 41-cut suite (Telemetry,
+   Math, Chem, Genome, ASL, Slab, Soft, Halftone, and 16-Axis Variable builds).
 
 Counter-signed: Phillip Gear, Type Designer & Foundry Director
 ================================================================================

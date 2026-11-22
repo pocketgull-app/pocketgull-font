@@ -913,13 +913,25 @@
    ========================================================================= */
 @font-face {
   font-family: 'PocketGull Arabic';
-  src: local('Noto Sans Arabic'), local('Segoe UI'), local('Tahoma');
-  font-weight: 400 700;
+  src: url('fonts/woff2/companions/PocketGull-Arabic-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans Arabic'), local('Segoe UI'), local('Tahoma');
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
   unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF,
                  U+200C-200F, U+2010-2027, U+202A-202E,
                  U+2060-206F, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+@font-face {
+  font-family: 'PocketGull';
+  src: url('fonts/woff2/companions/PocketGull-Arabic-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans Arabic');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF,
+                 U+FB50-FDFF, U+FE70-FEFF;
 }
 
 /* Expert J: Hebrew & Aramaic — Intentional Multi-Script SMoE Routing
@@ -933,8 +945,9 @@
    ========================================================================= */
 @font-face {
   font-family: 'PocketGull Hebrew';
-  src: local('Noto Sans Hebrew'), local('David Libre'), local('Segoe UI'), local('Arial Hebrew');
-  font-weight: 400 700;
+  src: url('fonts/woff2/companions/PocketGull-Hebrew-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans Hebrew'), local('David Libre'), local('Segoe UI'), local('Arial Hebrew');
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
   unicode-range: U+0590-05FF, U+FB1D-FB4F;
@@ -944,28 +957,63 @@
   size-adjust: 100%;
 }
 
-/* Expert K: Indic Core & South Asian — Zero-CLS Shirorekha Harmonization
-   =========================================================================
-   Indic scripts (Devanagari, Bengali, Tamil, Telugu, Gurmukhi, Gujarati,
-   Odia, Kannada, Malayalam) require complex conjunct ligatures and headline
-   balance. Routes directly to metric-matched Noto Sans Indic family.
-   ========================================================================= */
 @font-face {
-  font-family: 'PocketGull Indic';
-  src: local('Noto Sans Devanagari'), local('Noto Sans Tamil'), local('Noto Sans Telugu'),
-       local('Noto Sans Bengali'), local('Noto Sans Gurmukhi'), local('Noto Sans Gujarati'),
-       local('Noto Sans Kannada'), local('Noto Sans Malayalam'), local('Nirmala UI');
+  font-family: 'PocketGull';
+  src: url('fonts/woff2/companions/PocketGull-Hebrew-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans Hebrew');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0590-05FF, U+FB1D-FB4F;
+}
+
+@font-face {
+  font-family: 'PocketGull';
+  src: url('fonts/woff2/companions/PocketGull-Syriac-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans Syriac');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
-  unicode-range: U+0900-097F, U+0980-09FF, U+0A00-0A7F, U+0A80-0AFF,
-                 U+0B00-0B7F, U+0B80-0BFF, U+0C00-0C7F, U+0C80-0CFF,
-                 U+0D00-0D7F;
-  ascent-override: 96%;
-  descent-override: 24%;
-  line-gap-override: 10%;
-  size-adjust: 100%;
+  unicode-range: U+0700-074F;
 }
+
+@font-face {
+  font-family: 'PocketGull';
+  src: url('fonts/woff2/companions/PocketGull-Thaana-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans Thaana');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0780-07BF;
+}
+
+/* Expert K: Indic Core & South Asian (10 Self-Hosted OFL 1.1 Variable Companions)
+   =========================================================================
+   Indic scripts (Devanagari, Bengali, Gurmukhi, Gujarati, Oriya, Tamil,
+   Telugu, Kannada, Malayalam, Sinhala) are served directly from self-hosted
+   OFL 1.1 variable WOFF2 companions via unicode-range (0 bytes until used,
+   0 system-font dependency offline).
+   ========================================================================= */
+@font-face { font-family: 'PocketGull Indic'; src: url('fonts/woff2/companions/PocketGull-Devanagari-Companion.woff2?v=4.0.0') format('woff2'), local('Noto Sans Devanagari'); font-weight: 100 900; font-display: swap; unicode-range: U+0900-097F, U+A8E0-A8FF; }
+@font-face { font-family: 'PocketGull Indic'; src: url('fonts/woff2/companions/PocketGull-Bengali-Companion.woff2?v=4.0.0') format('woff2'), local('Noto Sans Bengali'); font-weight: 100 900; font-display: swap; unicode-range: U+0980-09FF; }
+@font-face { font-family: 'PocketGull Indic'; src: url('fonts/woff2/companions/PocketGull-Gurmukhi-Companion.woff2?v=4.0.0') format('woff2'), local('Noto Sans Gurmukhi'); font-weight: 100 900; font-display: swap; unicode-range: U+0A00-0A7F; }
+@font-face { font-family: 'PocketGull Indic'; src: url('fonts/woff2/companions/PocketGull-Gujarati-Companion.woff2?v=4.0.0') format('woff2'), local('Noto Sans Gujarati'); font-weight: 100 900; font-display: swap; unicode-range: U+0A80-0AFF; }
+@font-face { font-family: 'PocketGull Indic'; src: url('fonts/woff2/companions/PocketGull-Oriya-Companion.woff2?v=4.0.0') format('woff2'), local('Noto Sans Oriya'); font-weight: 100 900; font-display: swap; unicode-range: U+0B00-0B7F; }
+@font-face { font-family: 'PocketGull Indic'; src: url('fonts/woff2/companions/PocketGull-Tamil-Companion.woff2?v=4.0.0') format('woff2'), local('Noto Sans Tamil'); font-weight: 100 900; font-display: swap; unicode-range: U+0B80-0BFF; }
+@font-face { font-family: 'PocketGull Indic'; src: url('fonts/woff2/companions/PocketGull-Telugu-Companion.woff2?v=4.0.0') format('woff2'), local('Noto Sans Telugu'); font-weight: 100 900; font-display: swap; unicode-range: U+0C00-0C7F; }
+@font-face { font-family: 'PocketGull Indic'; src: url('fonts/woff2/companions/PocketGull-Kannada-Companion.woff2?v=4.0.0') format('woff2'), local('Noto Sans Kannada'); font-weight: 100 900; font-display: swap; unicode-range: U+0C80-0CFF; }
+@font-face { font-family: 'PocketGull Indic'; src: url('fonts/woff2/companions/PocketGull-Malayalam-Companion.woff2?v=4.0.0') format('woff2'), local('Noto Sans Malayalam'); font-weight: 100 900; font-display: swap; unicode-range: U+0D00-0D7F; }
+@font-face { font-family: 'PocketGull Indic'; src: url('fonts/woff2/companions/PocketGull-Sinhala-Companion.woff2?v=4.0.0') format('woff2'), local('Noto Sans Sinhala'); font-weight: 100 900; font-display: swap; unicode-range: U+0D80-0DFF; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Devanagari-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+0900-097F, U+A8E0-A8FF; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Bengali-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+0980-09FF; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Gurmukhi-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+0A00-0A7F; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Gujarati-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+0A80-0AFF; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Oriya-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+0B00-0B7F; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Tamil-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+0B80-0BFF; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Telugu-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+0C00-0C7F; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Kannada-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+0C80-0CFF; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Malayalam-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+0D00-0D7F; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Sinhala-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+0D80-0DFF; }
 
 /* Expert L: CJK Unified Ideographs & Kana — Explicit System Fallback
    =========================================================================
@@ -981,9 +1029,10 @@
    ========================================================================= */
 @font-face {
   font-family: 'PocketGull CJK Fallback';
-  src: local('Noto Sans CJK SC'), local('Noto Sans JP'), local('Yu Gothic'),
+  src: url('fonts/woff2/companions/PocketGull-CJK-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans CJK SC'), local('Noto Sans JP'), local('Yu Gothic'),
        local('Hiragino Sans'), local('Microsoft YaHei');
-  font-weight: 400 700;
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
   unicode-range: U+2E80-2EFF, U+2F00-2FDF, U+3000-303F, U+3040-309F,
@@ -992,6 +1041,17 @@
                  U+A490-A4CF, U+AC00-D7FF, U+F900-FAFF, U+FE30-FE4F,
                  U+FF00-FFEF, U+1B000-1B0FF, U+1F004-1F004,
                  U+20000-2A6DF, U+2A700-2CEAF;
+}
+
+@font-face {
+  font-family: 'PocketGull';
+  src: url('fonts/woff2/companions/PocketGull-CJK-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans CJK SC'), local('Noto Sans JP');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+3000-30FF, U+31F0-31FF, U+3400-4DBF, U+4E00-9FFF,
+                 U+AC00-D7FF, U+FF00-FF60;
 }
 
 /* Expert K: Southeast Asian (Thai, Lao, Khmer, Burmese, Tibetan) — Zero-CLS Metric Harmonized Fallback
@@ -1005,17 +1065,16 @@
    with zero Cumulative Layout Shift (CLS = 0.000) while native GPOS anchors
    are engineered for v4.0.
    ========================================================================= */
-@font-face {
-  font-family: 'PocketGull SE Asian';
-  src: local('Leelawadee UI'), local('Noto Sans Thai'), local('DokChampa'),
-       local('Noto Sans Lao'), local('Khmer UI'), local('Noto Sans Khmer'),
-       local('Myanmar Text'), local('Noto Sans Myanmar'),
-       local('Microsoft Himalaya'), local('Noto Sans Tibetan');
-  font-weight: 400 900;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0E00-0E7F, U+0E80-0EFF, U+0F00-0FFF, U+1000-109F, U+1780-17FF;
-}
+@font-face { font-family: 'PocketGull SE Asian'; src: url('fonts/woff2/companions/PocketGull-Thai-Companion.woff2?v=4.0.0') format('woff2'), local('Noto Sans Thai'); font-weight: 100 900; font-display: swap; unicode-range: U+0E00-0E7F; }
+@font-face { font-family: 'PocketGull SE Asian'; src: url('fonts/woff2/companions/PocketGull-Lao-Companion.woff2?v=4.0.0') format('woff2'), local('Noto Sans Lao'); font-weight: 100 900; font-display: swap; unicode-range: U+0E80-0EFF; }
+@font-face { font-family: 'PocketGull SE Asian'; src: url('fonts/woff2/companions/PocketGull-Tibetan-Companion.woff2?v=4.0.0') format('woff2'), local('Noto Serif Tibetan'); font-weight: 100 900; font-display: swap; unicode-range: U+0F00-0FFF; }
+@font-face { font-family: 'PocketGull SE Asian'; src: url('fonts/woff2/companions/PocketGull-Myanmar-Companion.woff2?v=4.0.0') format('woff2'), local('Noto Sans Myanmar'); font-weight: 100 900; font-display: swap; unicode-range: U+1000-109F, U+AA60-AA7F; }
+@font-face { font-family: 'PocketGull SE Asian'; src: url('fonts/woff2/companions/PocketGull-Khmer-Companion.woff2?v=4.0.0') format('woff2'), local('Noto Sans Khmer'); font-weight: 100 900; font-display: swap; unicode-range: U+1780-17FF, U+19E0-19FF; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Thai-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+0E00-0E7F; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Lao-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+0E80-0EFF; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Tibetan-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+0F00-0FFF; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Myanmar-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+1000-109F, U+AA60-AA7F; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Khmer-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+1780-17FF, U+19E0-19FF; }
 
 /* Expert M: Traditional Mongolian & Manchu Script — Zero-CLS 1.18x Optical Scaling
    =========================================================================
@@ -1029,7 +1088,8 @@
    ========================================================================= */
 @font-face {
   font-family: 'PocketGull Mongolian';
-  src: local('Noto Sans Mongolian'), local('Mongolian Baiti'),
+  src: url('fonts/woff2/companions/PocketGull-Mongolian-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans Mongolian'), local('Mongolian Baiti'),
        local('Menk Qagan Tig'), local('Oyun Qagan Tig'),
        local('Mongolian Universal White');
   font-weight: 400 700;
@@ -1044,7 +1104,8 @@
 
 @font-face {
   font-family: 'PocketGull';
-  src: local('Noto Sans Mongolian'), local('Mongolian Baiti'),
+  src: url('fonts/woff2/companions/PocketGull-Mongolian-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans Mongolian'), local('Mongolian Baiti'),
        local('Menk Qagan Tig'), local('Oyun Qagan Tig'),
        local('Mongolian Universal White');
   font-weight: 400 700;
@@ -1065,7 +1126,8 @@
    ========================================================================= */
 @font-face {
   font-family: 'PocketGull NKo';
-  src: local('Noto Sans NKo'), local('Ebrima');
+  src: url('fonts/woff2/companions/PocketGull-NKo-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans NKo'), local('Ebrima');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -1078,7 +1140,8 @@
 
 @font-face {
   font-family: 'PocketGull';
-  src: local('Noto Sans NKo'), local('Ebrima');
+  src: url('fonts/woff2/companions/PocketGull-NKo-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans NKo'), local('Ebrima');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -1089,14 +1152,15 @@
   size-adjust: 104%;
 }
 
-/* Expert O: Osage Sovereign Alphabet — Siouan Revitalization
+/* Expert O: Osage Sovereign Alphabet — Siouan Revitalization (Self-Hosted OFL 1.1)
    =========================================================================
    Osage (U+104B0–U+104FB) standardized in Unicode 9.0 by Osage Nation elders.
-   Ensures zero-tofu rendering across Osage Nation health and cultural portals.
+   Served from self-hosted OFL 1.1 WOFF2 companion for 100% offline zero-tofu.
    ========================================================================= */
 @font-face {
   font-family: 'PocketGull Osage';
-  src: local('Noto Sans Osage'), local('Segoe UI Historic'), local('Gadugi');
+  src: url('fonts/woff2/companions/PocketGull-Osage-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans Osage'), local('Segoe UI Historic'), local('Gadugi');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -1109,7 +1173,8 @@
 
 @font-face {
   font-family: 'PocketGull';
-  src: local('Noto Sans Osage'), local('Segoe UI Historic'), local('Gadugi');
+  src: url('fonts/woff2/companions/PocketGull-Osage-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans Osage'), local('Segoe UI Historic'), local('Gadugi');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -1118,6 +1183,27 @@
   descent-override: 24%;
   line-gap-override: 0%;
   size-adjust: 100%;
+}
+
+/* Expert O2: Bassa Vah — West African Sovereign Script (Self-Hosted OFL 1.1) */
+@font-face {
+  font-family: 'PocketGull Bassa Vah';
+  src: url('fonts/woff2/companions/PocketGull-BassaVah-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans Bassa Vah');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+16AD0-16AFF;
+}
+
+@font-face {
+  font-family: 'PocketGull';
+  src: url('fonts/woff2/companions/PocketGull-BassaVah-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans Bassa Vah');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+16AD0-16AFF;
 }
 
 /* Expert P: Ogham — Ancient Celtic Vertical Tree Alphabet
@@ -1127,7 +1213,8 @@
    ========================================================================= */
 @font-face {
   font-family: 'PocketGull Ogham';
-  src: local('Noto Sans Ogham'), local('BabelStone Ogham'), local('Segoe UI Historic');
+  src: url('fonts/woff2/companions/PocketGull-Ogham-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans Ogham'), local('BabelStone Ogham'), local('Segoe UI Historic');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -1140,7 +1227,8 @@
 
 @font-face {
   font-family: 'PocketGull';
-  src: local('Noto Sans Ogham'), local('BabelStone Ogham'), local('Segoe UI Historic');
+  src: url('fonts/woff2/companions/PocketGull-Ogham-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans Ogham'), local('BabelStone Ogham'), local('Segoe UI Historic');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -1158,7 +1246,8 @@
    ========================================================================= */
 @font-face {
   font-family: 'PocketGull Old Turkic';
-  src: local('Noto Sans Old Turkic'), local('Segoe UI Historic');
+  src: url('fonts/woff2/companions/PocketGull-OldTurkic-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans Old Turkic'), local('Segoe UI Historic');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -1171,7 +1260,8 @@
 
 @font-face {
   font-family: 'PocketGull';
-  src: local('Noto Sans Old Turkic'), local('Segoe UI Historic');
+  src: url('fonts/woff2/companions/PocketGull-OldTurkic-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans Old Turkic'), local('Segoe UI Historic');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -1182,15 +1272,57 @@
   size-adjust: 100%;
 }
 
-/* Expert R: Sutton SignWriting — Visual-Spatial Deaf Communication
+/* Expert Q2: Egyptian Hieroglyphs — Edwin Smith & Ebers Medical Papyri (Self-Hosted OFL 1.1) */
+@font-face {
+  font-family: 'PocketGull Egyptian Hieroglyphs';
+  src: url('fonts/woff2/companions/PocketGull-EgyptianHieroglyphs-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans Egyptian Hieroglyphs'), local('Segoe UI Historic');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+13000-1345F;
+}
+
+@font-face {
+  font-family: 'PocketGull';
+  src: url('fonts/woff2/companions/PocketGull-EgyptianHieroglyphs-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans Egyptian Hieroglyphs'), local('Segoe UI Historic');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+13000-1345F;
+}
+
+/* Expert Q3: Anatolian / Luwian Hieroglyphs (Self-Hosted OFL 1.1) */
+@font-face {
+  font-family: 'PocketGull Anatolian Hieroglyphs';
+  src: url('fonts/woff2/companions/PocketGull-AnatolianHieroglyphs-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans Anatolian Hieroglyphs'), local('Segoe UI Historic');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+14400-1467F;
+}
+
+@font-face {
+  font-family: 'PocketGull';
+  src: url('fonts/woff2/companions/PocketGull-AnatolianHieroglyphs-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans Anatolian Hieroglyphs'), local('Segoe UI Historic');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+14400-1467F;
+}
+
+/* Expert R: Sutton SignWriting — Visual-Spatial Deaf Communication (Self-Hosted OFL 1.1)
    =========================================================================
    SignWriting (U+1D800–U+1DAAF) 2D spatial arrangement symbols for ASL, BSL,
-   and international sign languages. Modular edge delivery for deaf literacy.
+   and international sign languages. 100% air-gapped self-hosted WOFF2.
    ========================================================================= */
 @font-face {
   font-family: 'PocketGull SignWriting';
-  src: local('Noto Sans SignWriting'), local('SignWriting 2010'),
-       url('https://cdn.jsdelivr.net/fontsource/fonts/noto-sans-signwriting@latest/signwriting-400-normal.woff2') format('woff2');
+  src: url('fonts/woff2/companions/PocketGull-SignWriting-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans SignWriting'), local('SignWriting 2010');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -1203,8 +1335,8 @@
 
 @font-face {
   font-family: 'PocketGull';
-  src: local('Noto Sans SignWriting'), local('SignWriting 2010'),
-       url('https://cdn.jsdelivr.net/fontsource/fonts/noto-sans-signwriting@latest/signwriting-400-normal.woff2') format('woff2');
+  src: url('fonts/woff2/companions/PocketGull-SignWriting-Companion.woff2?v=4.0.0') format('woff2'),
+       local('Noto Sans SignWriting'), local('SignWriting 2010');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -1214,6 +1346,32 @@
   line-gap-override: 0%;
   size-adjust: 100%;
 }
+
+/* Expert R2: Universal Self-Hosted OFL 1.1 Zero-Fallback Suite (National, Regional, Indigenous & Historic) */
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Armenian-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+0530-058F, U+FB13-FB17; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Georgian-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+10A0-10FF, U+1C90-1CBF, U+2D00-2D2F; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Korean-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+AC00-D7AF; }
+@font-face { font-family: 'PocketGull CJK Fallback'; src: url('fonts/woff2/companions/PocketGull-Korean-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+AC00-D7AF; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Javanese-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+A980-A9DF; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Balinese-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+1B00-1B7F; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Sundanese-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+1B80-1BBF, U+1CC0-1CCF; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Tagalog-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 400 700; font-display: swap; unicode-range: U+1700-171F; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-OlChiki-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+1C50-1C7F; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-MeeteiMayek-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+ABC0-ABFF, U+AAE0-AAFF; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Chakma-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 400 700; font-display: swap; unicode-range: U+11100-1114F; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-HanifiRohingya-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+10D00-10D3F; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Yi-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 400 700; font-display: swap; unicode-range: U+A000-A4CF; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Lisu-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+A4D0-A4FF; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Miao-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 400 700; font-display: swap; unicode-range: U+16F00-16F9F; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Bamum-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+A6A0-A6FF; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Osmanya-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 400 700; font-display: swap; unicode-range: U+10480-104AF; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Coptic-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 400 700; font-display: swap; unicode-range: U+2C80-2CFF, U+03E2-03EF; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Runic-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 400 700; font-display: swap; unicode-range: U+16A0-16FF; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Phoenician-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 400 700; font-display: swap; unicode-range: U+10900-1091F; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-LinearB-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 400 700; font-display: swap; unicode-range: U+10000-100FA; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Gothic-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 400 700; font-display: swap; unicode-range: U+10330-1034F; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Glagolitic-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 400 700; font-display: swap; unicode-range: U+2C00-2C5F; }
+@font-face { font-family: 'PocketGull'; src: url('fonts/woff2/companions/PocketGull-Deseret-Companion.woff2?v=4.0.0') format('woff2'); font-weight: 400 700; font-display: swap; unicode-range: U+10400-1044F; }
 
 /* Expert S: Sub-Cell ICU ECG & Arrhythmia Telemetry (Cardiology PUA)
    =========================================================================
