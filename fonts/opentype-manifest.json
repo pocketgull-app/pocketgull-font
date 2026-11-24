@@ -1,0 +1,2377 @@
+{
+  "schemaVersion": "1.0.0",
+  "semver": "4.0.0",
+  "foundry": "PocketGull Typefoundry",
+  "license": {
+    "fonts": "OFL-1.1",
+    "toolingAndCss": "Apache-2.0"
+  },
+  "primaryVariableFont": {
+    "file": "fonts/ttf/PocketGull-VF.ttf",
+    "woff2": "fonts/woff2/PocketGull-VF.woff2",
+    "familyName": "PocketGull VF",
+    "subfamilyName": "Regular",
+    "versionString": "Version 4.000; The PocketGull Project Authors; OFL 1.1",
+    "fontRevision": 4.0,
+    "unitsPerEm": 1000,
+    "numGlyphs": 8726,
+    "mappedCodepoints": 8717,
+    "sfntTables": [
+      "GDEF",
+      "GPOS",
+      "GSUB",
+      "HVAR",
+      "OS/2",
+      "STAT",
+      "avar",
+      "cmap",
+      "fvar",
+      "gasp",
+      "glyf",
+      "gvar",
+      "head",
+      "hhea",
+      "hmtx",
+      "loca",
+      "maxp",
+      "name",
+      "post"
+    ],
+    "wordAligned2Byte": true,
+    "oddLocaOffsets": 0,
+    "axes": [
+      {
+        "index": 0,
+        "tag": "wght",
+        "nameId": 301,
+        "name": "Weight",
+        "min": 100.0,
+        "default": 400.0,
+        "max": 900.0,
+        "hidden": false,
+        "hvarAffectsAdvanceWidth": true,
+        "zeroReflowContourOnly": false,
+        "cssCustomProperty": "--pg-wght",
+        "cssSnippet": "'wght' var(--pg-wght, 400.0)"
+      },
+      {
+        "index": 1,
+        "tag": "wdth",
+        "nameId": 302,
+        "name": "Width",
+        "min": 75.0,
+        "default": 100.0,
+        "max": 100.0,
+        "hidden": false,
+        "hvarAffectsAdvanceWidth": true,
+        "zeroReflowContourOnly": false,
+        "cssCustomProperty": "--pg-wdth",
+        "cssSnippet": "'wdth' var(--pg-wdth, 100.0)"
+      },
+      {
+        "index": 2,
+        "tag": "slnt",
+        "nameId": 303,
+        "name": "Slant",
+        "min": -10.5,
+        "default": 0.0,
+        "max": 0.0,
+        "hidden": false,
+        "hvarAffectsAdvanceWidth": false,
+        "zeroReflowContourOnly": true,
+        "cssCustomProperty": "--pg-slnt",
+        "cssSnippet": "'slnt' var(--pg-slnt, 0.0)"
+      },
+      {
+        "index": 3,
+        "tag": "opsz",
+        "nameId": 304,
+        "name": "Optical Size",
+        "min": 6.0,
+        "default": 14.0,
+        "max": 72.0,
+        "hidden": false,
+        "hvarAffectsAdvanceWidth": true,
+        "zeroReflowContourOnly": false,
+        "cssCustomProperty": "--pg-opsz",
+        "cssSnippet": "'opsz' var(--pg-opsz, 14.0)"
+      },
+      {
+        "index": 4,
+        "tag": "SOFT",
+        "nameId": 305,
+        "name": "Felt Cushion",
+        "min": 0.0,
+        "default": 0.0,
+        "max": 1.0,
+        "hidden": false,
+        "hvarAffectsAdvanceWidth": false,
+        "zeroReflowContourOnly": true,
+        "cssCustomProperty": "--pg-soft",
+        "cssSnippet": "'SOFT' var(--pg-soft, 0.0)"
+      },
+      {
+        "index": 5,
+        "tag": "THRM",
+        "nameId": 306,
+        "name": "Thermal Bleed Inset",
+        "min": 0.0,
+        "default": 0.0,
+        "max": 1.0,
+        "hidden": false,
+        "hvarAffectsAdvanceWidth": false,
+        "zeroReflowContourOnly": true,
+        "cssCustomProperty": "--pg-thrm",
+        "cssSnippet": "'THRM' var(--pg-thrm, 0.0)"
+      },
+      {
+        "index": 6,
+        "tag": "APTR",
+        "nameId": 307,
+        "name": "ETDRS Aperture Dilation",
+        "min": 0.0,
+        "default": 0.0,
+        "max": 1.0,
+        "hidden": false,
+        "hvarAffectsAdvanceWidth": true,
+        "zeroReflowContourOnly": false,
+        "cssCustomProperty": "--pg-aptr",
+        "cssSnippet": "'APTR' var(--pg-aptr, 0.0)"
+      },
+      {
+        "index": 7,
+        "tag": "SMRN",
+        "nameId": 308,
+        "name": "ISMP Disambiguation Intensity",
+        "min": 0.0,
+        "default": 0.0,
+        "max": 1.0,
+        "hidden": false,
+        "hvarAffectsAdvanceWidth": true,
+        "zeroReflowContourOnly": false,
+        "cssCustomProperty": "--pg-smrn",
+        "cssSnippet": "'SMRN' var(--pg-smrn, 0.0)"
+      },
+      {
+        "index": 8,
+        "tag": "HLNG",
+        "nameId": 309,
+        "name": "Happy & Healing Restorative Tone",
+        "min": 0.0,
+        "default": 0.0,
+        "max": 1.0,
+        "hidden": false,
+        "hvarAffectsAdvanceWidth": true,
+        "zeroReflowContourOnly": false,
+        "cssCustomProperty": "--pg-hlng",
+        "cssSnippet": "'HLNG' var(--pg-hlng, 0.0)"
+      },
+      {
+        "index": 9,
+        "tag": "BION",
+        "nameId": 310,
+        "name": "Bionic Fixation Anchor",
+        "min": 0.0,
+        "default": 0.0,
+        "max": 1.0,
+        "hidden": false,
+        "hvarAffectsAdvanceWidth": true,
+        "zeroReflowContourOnly": false,
+        "cssCustomProperty": "--pg-bion",
+        "cssSnippet": "'BION' var(--pg-bion, 0.0)"
+      },
+      {
+        "index": 10,
+        "tag": "GRAV",
+        "nameId": 311,
+        "name": "Dyslexia Baseline Gravity",
+        "min": 0.0,
+        "default": 0.0,
+        "max": 1.0,
+        "hidden": false,
+        "hvarAffectsAdvanceWidth": false,
+        "zeroReflowContourOnly": true,
+        "cssCustomProperty": "--pg-grav",
+        "cssSnippet": "'GRAV' var(--pg-grav, 0.0)"
+      },
+      {
+        "index": 11,
+        "tag": "BOUM",
+        "nameId": 312,
+        "name": "Herman Bouma Margin",
+        "min": 0.0,
+        "default": 0.0,
+        "max": 1.0,
+        "hidden": false,
+        "hvarAffectsAdvanceWidth": true,
+        "zeroReflowContourOnly": false,
+        "cssCustomProperty": "--pg-boum",
+        "cssSnippet": "'BOUM' var(--pg-boum, 0.0)"
+      },
+      {
+        "index": 12,
+        "tag": "CHIS",
+        "nameId": 313,
+        "name": "Chisel Nib Angle",
+        "min": 0.0,
+        "default": 0.0,
+        "max": 45.0,
+        "hidden": false,
+        "hvarAffectsAdvanceWidth": false,
+        "zeroReflowContourOnly": true,
+        "cssCustomProperty": "--pg-chis",
+        "cssSnippet": "'CHIS' var(--pg-chis, 0.0)"
+      },
+      {
+        "index": 13,
+        "tag": "NUQT",
+        "nameId": 314,
+        "name": "Nuqta Anti-Clotting",
+        "min": 0.0,
+        "default": 0.0,
+        "max": 1.0,
+        "hidden": false,
+        "hvarAffectsAdvanceWidth": false,
+        "zeroReflowContourOnly": true,
+        "cssCustomProperty": "--pg-nuqt",
+        "cssSnippet": "'NUQT' var(--pg-nuqt, 0.0)"
+      },
+      {
+        "index": 14,
+        "tag": "INUK",
+        "nameId": 315,
+        "name": "Inuktitut Apex Acuity",
+        "min": 0.0,
+        "default": 0.0,
+        "max": 1.0,
+        "hidden": false,
+        "hvarAffectsAdvanceWidth": false,
+        "zeroReflowContourOnly": true,
+        "cssCustomProperty": "--pg-inuk",
+        "cssSnippet": "'INUK' var(--pg-inuk, 0.0)"
+      },
+      {
+        "index": 15,
+        "tag": "BRLS",
+        "nameId": 316,
+        "name": "Braille Tactile Elevation",
+        "min": 40.0,
+        "default": 78.0,
+        "max": 96.0,
+        "hidden": false,
+        "hvarAffectsAdvanceWidth": true,
+        "zeroReflowContourOnly": false,
+        "cssCustomProperty": "--pg-brls",
+        "cssSnippet": "'BRLS' var(--pg-brls, 78.0)"
+      }
+    ],
+    "namedInstances": [
+      {
+        "subfamilyNameId": 330,
+        "name": "Hairline",
+        "postScriptName": "PocketGullVF-Hairline",
+        "coordinates": {
+          "wght": 100.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 0.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 331,
+        "name": "Thin",
+        "postScriptName": "PocketGullVF-Thin",
+        "coordinates": {
+          "wght": 200.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 0.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 332,
+        "name": "Light",
+        "postScriptName": "PocketGullVF-Light",
+        "coordinates": {
+          "wght": 300.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 0.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 333,
+        "name": "Regular",
+        "postScriptName": "PocketGull-VF",
+        "coordinates": {
+          "wght": 400.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 0.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 334,
+        "name": "Medium",
+        "postScriptName": "PocketGullVF-Medium",
+        "coordinates": {
+          "wght": 500.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 0.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 335,
+        "name": "SemiBold",
+        "postScriptName": "PocketGullVF-SemiBold",
+        "coordinates": {
+          "wght": 600.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 0.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 336,
+        "name": "Bold",
+        "postScriptName": "PocketGullVF-Bold",
+        "coordinates": {
+          "wght": 700.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 0.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 337,
+        "name": "ExtraBold",
+        "postScriptName": "PocketGullVF-ExtraBold",
+        "coordinates": {
+          "wght": 800.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 0.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 338,
+        "name": "Black",
+        "postScriptName": "PocketGullVF-Black",
+        "coordinates": {
+          "wght": 900.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 0.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 340,
+        "name": "Soft Hairline",
+        "postScriptName": "PocketGullVF-SoftHairline",
+        "coordinates": {
+          "wght": 100.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 1.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 341,
+        "name": "Soft Thin",
+        "postScriptName": "PocketGullVF-SoftThin",
+        "coordinates": {
+          "wght": 200.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 1.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 342,
+        "name": "Soft Light",
+        "postScriptName": "PocketGullVF-SoftLight",
+        "coordinates": {
+          "wght": 300.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 1.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 343,
+        "name": "Soft Regular",
+        "postScriptName": "PocketGullVF-SoftRegular",
+        "coordinates": {
+          "wght": 400.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 1.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 344,
+        "name": "Soft Medium",
+        "postScriptName": "PocketGullVF-SoftMedium",
+        "coordinates": {
+          "wght": 500.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 1.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 345,
+        "name": "Soft SemiBold",
+        "postScriptName": "PocketGullVF-SoftSemiBold",
+        "coordinates": {
+          "wght": 600.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 1.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 346,
+        "name": "Soft Bold",
+        "postScriptName": "PocketGullVF-SoftBold",
+        "coordinates": {
+          "wght": 700.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 1.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 347,
+        "name": "Soft ExtraBold",
+        "postScriptName": "PocketGullVF-SoftExtraBold",
+        "coordinates": {
+          "wght": 800.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 1.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 348,
+        "name": "Soft Black",
+        "postScriptName": "PocketGullVF-SoftBlack",
+        "coordinates": {
+          "wght": 900.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 1.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 601,
+        "name": "Fineliner EHR",
+        "postScriptName": "PocketGullVF-FinelinerEHR",
+        "coordinates": {
+          "wght": 400.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 12.0,
+          "SOFT": 0.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 603,
+        "name": "Clinical Bold",
+        "postScriptName": "PocketGullVF-ClinicalBold",
+        "coordinates": {
+          "wght": 700.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 24.0,
+          "SOFT": 0.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 605,
+        "name": "Chiseltip",
+        "postScriptName": "PocketGullVF-Chiseltip",
+        "coordinates": {
+          "wght": 900.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 72.0,
+          "SOFT": 0.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 45.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 607,
+        "name": "Condensed Bold",
+        "postScriptName": "PocketGullVF-CondensedBold",
+        "coordinates": {
+          "wght": 700.0,
+          "wdth": 78.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 0.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 609,
+        "name": "Healing Calm",
+        "postScriptName": "PocketGullVF-HealingCalm",
+        "coordinates": {
+          "wght": 500.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 18.0,
+          "SOFT": 0.0,
+          "THRM": 0.0,
+          "APTR": 0.8,
+          "SMRN": 0.0,
+          "HLNG": 1.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.6,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 611,
+        "name": "Recovery 72bpm",
+        "postScriptName": "PocketGullVF-Recovery72bpm",
+        "coordinates": {
+          "wght": 400.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 0.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 1.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.5,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 613,
+        "name": "Thermal Bedside",
+        "postScriptName": "PocketGullVF-ThermalBedside",
+        "coordinates": {
+          "wght": 700.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 6.0,
+          "SOFT": 0.0,
+          "THRM": 1.0,
+          "APTR": 1.0,
+          "SMRN": 1.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 615,
+        "name": "Bionic Speed",
+        "postScriptName": "PocketGullVF-BionicSpeed",
+        "coordinates": {
+          "wght": 600.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 0.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 1.0,
+          "GRAV": 0.0,
+          "BOUM": 0.5,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 617,
+        "name": "Dyslexia Gravity",
+        "postScriptName": "PocketGullVF-DyslexiaGravity",
+        "coordinates": {
+          "wght": 550.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 0.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 1.0,
+          "BOUM": 0.8,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 619,
+        "name": "Arctic Syllabics",
+        "postScriptName": "PocketGullVF-ArcticSyllabics",
+        "coordinates": {
+          "wght": 700.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 0.0,
+          "THRM": 0.0,
+          "APTR": 0.8,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 1.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 621,
+        "name": "Chinuk Pipa",
+        "postScriptName": "PocketGullVF-ChinukPipa",
+        "coordinates": {
+          "wght": 700.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 0.0,
+          "THRM": 0.0,
+          "APTR": 1.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 623,
+        "name": "Tactile Braille",
+        "postScriptName": "PocketGullVF-TactileBraille",
+        "coordinates": {
+          "wght": 700.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 0.0,
+          "THRM": 0.0,
+          "APTR": 1.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 96.0
+        }
+      },
+      {
+        "subfamilyNameId": 625,
+        "name": "Safe MAR Nuqta",
+        "postScriptName": "PocketGullVF-SafeMARNuqta",
+        "coordinates": {
+          "wght": 700.0,
+          "wdth": 100.0,
+          "slnt": 0.0,
+          "opsz": 14.0,
+          "SOFT": 0.0,
+          "THRM": 1.0,
+          "APTR": 0.0,
+          "SMRN": 1.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 1.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 367,
+        "name": "Italic",
+        "postScriptName": "PocketGullVF-Italic",
+        "coordinates": {
+          "wght": 400.0,
+          "wdth": 100.0,
+          "slnt": -10.5,
+          "opsz": 14.0,
+          "SOFT": 0.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      },
+      {
+        "subfamilyNameId": 368,
+        "name": "Bold Italic",
+        "postScriptName": "PocketGullVF-BoldItalic",
+        "coordinates": {
+          "wght": 700.0,
+          "wdth": 100.0,
+          "slnt": -10.5,
+          "opsz": 14.0,
+          "SOFT": 0.0,
+          "THRM": 0.0,
+          "APTR": 0.0,
+          "SMRN": 0.0,
+          "HLNG": 0.0,
+          "BION": 0.0,
+          "GRAV": 0.0,
+          "BOUM": 0.0,
+          "CHIS": 0.0,
+          "NUQT": 0.0,
+          "INUK": 0.0,
+          "BRLS": 78.0
+        }
+      }
+    ],
+    "stat": {
+      "version": "1.1",
+      "designAxes": [
+        {
+          "tag": "wght",
+          "nameId": 627,
+          "name": "Weight",
+          "ordering": 0
+        },
+        {
+          "tag": "wdth",
+          "nameId": 637,
+          "name": "Width",
+          "ordering": 1
+        },
+        {
+          "tag": "slnt",
+          "nameId": 640,
+          "name": "Slant",
+          "ordering": 2
+        },
+        {
+          "tag": "opsz",
+          "nameId": 643,
+          "name": "Optical Size",
+          "ordering": 3
+        },
+        {
+          "tag": "SOFT",
+          "nameId": 649,
+          "name": "Felt Cushion",
+          "ordering": 4
+        },
+        {
+          "tag": "THRM",
+          "nameId": 652,
+          "name": "Thermal Bleed Inset",
+          "ordering": 5
+        },
+        {
+          "tag": "APTR",
+          "nameId": 655,
+          "name": "ETDRS Aperture Dilation",
+          "ordering": 6
+        },
+        {
+          "tag": "SMRN",
+          "nameId": 657,
+          "name": "ISMP Disambiguation",
+          "ordering": 7
+        },
+        {
+          "tag": "HLNG",
+          "nameId": 659,
+          "name": "Restorative Tone",
+          "ordering": 8
+        },
+        {
+          "tag": "BION",
+          "nameId": 662,
+          "name": "Bionic Fixation",
+          "ordering": 9
+        },
+        {
+          "tag": "GRAV",
+          "nameId": 665,
+          "name": "Dyslexia Gravity",
+          "ordering": 10
+        },
+        {
+          "tag": "BOUM",
+          "nameId": 667,
+          "name": "Bouma Margin",
+          "ordering": 11
+        },
+        {
+          "tag": "CHIS",
+          "nameId": 669,
+          "name": "Chisel Nib Angle",
+          "ordering": 12
+        },
+        {
+          "tag": "NUQT",
+          "nameId": 672,
+          "name": "Nuqta Anti-Clotting",
+          "ordering": 13
+        },
+        {
+          "tag": "INUK",
+          "nameId": 674,
+          "name": "Inuktitut Acuity",
+          "ordering": 14
+        },
+        {
+          "tag": "BRLS",
+          "nameId": 676,
+          "name": "Braille Elevation",
+          "ordering": 15
+        }
+      ],
+      "axisValues": [
+        {
+          "format": 1,
+          "axisTag": "wght",
+          "name": "Hairline",
+          "value": 100.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "wght",
+          "name": "Thin",
+          "value": 200.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "wght",
+          "name": "Light",
+          "value": 300.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "wght",
+          "name": "Regular",
+          "value": 400.0,
+          "elidable": true
+        },
+        {
+          "format": 1,
+          "axisTag": "wght",
+          "name": "Medium",
+          "value": 500.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "wght",
+          "name": "SemiBold",
+          "value": 600.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "wght",
+          "name": "Bold",
+          "value": 700.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "wght",
+          "name": "ExtraBold",
+          "value": 800.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "wght",
+          "name": "Black",
+          "value": 900.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "wdth",
+          "name": "Condensed",
+          "value": 75.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "wdth",
+          "name": "Normal",
+          "value": 100.0,
+          "elidable": true
+        },
+        {
+          "format": 1,
+          "axisTag": "slnt",
+          "name": "Upright",
+          "value": 0.0,
+          "elidable": true
+        },
+        {
+          "format": 1,
+          "axisTag": "slnt",
+          "name": "Oblique",
+          "value": -10.5,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "opsz",
+          "name": "6pt Thermal",
+          "value": 6.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "opsz",
+          "name": "12pt EHR",
+          "value": 12.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "opsz",
+          "name": "14pt Body",
+          "value": 14.0,
+          "elidable": true
+        },
+        {
+          "format": 1,
+          "axisTag": "opsz",
+          "name": "24pt Header",
+          "value": 24.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "opsz",
+          "name": "72pt Wayfinding",
+          "value": 72.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "SOFT",
+          "name": "Crisp",
+          "value": 0.0,
+          "elidable": true
+        },
+        {
+          "format": 1,
+          "axisTag": "SOFT",
+          "name": "Soft",
+          "value": 1.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "THRM",
+          "name": "Standard",
+          "value": 0.0,
+          "elidable": true
+        },
+        {
+          "format": 1,
+          "axisTag": "THRM",
+          "name": "203dpi Trap",
+          "value": 1.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "APTR",
+          "name": "Normal",
+          "value": 0.0,
+          "elidable": true
+        },
+        {
+          "format": 1,
+          "axisTag": "APTR",
+          "name": "Dilated",
+          "value": 1.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "SMRN",
+          "name": "Standard",
+          "value": 0.0,
+          "elidable": true
+        },
+        {
+          "format": 1,
+          "axisTag": "SMRN",
+          "name": "Safe MAR",
+          "value": 1.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "HLNG",
+          "name": "Neutral",
+          "value": 0.0,
+          "elidable": true
+        },
+        {
+          "format": 1,
+          "axisTag": "HLNG",
+          "name": "Healing",
+          "value": 1.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "BION",
+          "name": "Off",
+          "value": 0.0,
+          "elidable": true
+        },
+        {
+          "format": 1,
+          "axisTag": "BION",
+          "name": "Bionic",
+          "value": 1.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "GRAV",
+          "name": "Standard",
+          "value": 0.0,
+          "elidable": true
+        },
+        {
+          "format": 1,
+          "axisTag": "GRAV",
+          "name": "Grounded",
+          "value": 1.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "BOUM",
+          "name": "Normal",
+          "value": 0.0,
+          "elidable": true
+        },
+        {
+          "format": 1,
+          "axisTag": "BOUM",
+          "name": "Spacious",
+          "value": 1.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "CHIS",
+          "name": "Round",
+          "value": 0.0,
+          "elidable": true
+        },
+        {
+          "format": 1,
+          "axisTag": "CHIS",
+          "name": "Chisel 45",
+          "value": 45.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "NUQT",
+          "name": "Standard",
+          "value": 0.0,
+          "elidable": true
+        },
+        {
+          "format": 1,
+          "axisTag": "NUQT",
+          "name": "Anti-Clot",
+          "value": 1.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "INUK",
+          "name": "Standard",
+          "value": 0.0,
+          "elidable": true
+        },
+        {
+          "format": 1,
+          "axisTag": "INUK",
+          "name": "High Apex",
+          "value": 1.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "BRLS",
+          "name": "Low",
+          "value": 40.0,
+          "elidable": false
+        },
+        {
+          "format": 1,
+          "axisTag": "BRLS",
+          "name": "Standard",
+          "value": 78.0,
+          "elidable": true
+        },
+        {
+          "format": 1,
+          "axisTag": "BRLS",
+          "name": "Tactile",
+          "value": 96.0,
+          "elidable": false
+        }
+      ]
+    },
+    "gvar": {
+      "majorVersion": 1,
+      "minorVersion": 0,
+      "axisCount": 16,
+      "sharedTupleCount": 17,
+      "glyphCount": 8726,
+      "offsetSizeBytes": 4
+    },
+    "gsubFeatures": [
+      {
+        "tag": "cv05",
+        "description": "ISMP Curved Terminal Foot Lowercase l",
+        "cssSnippet": "font-feature-settings: \"cv05\" 1;"
+      },
+      {
+        "tag": "cv08",
+        "description": "ISMP Anti-Clotting Slashed Zero Character Variant",
+        "cssSnippet": "font-feature-settings: \"cv08\" 1;"
+      },
+      {
+        "tag": "cv09",
+        "description": "Philocardia Lowercase i Heart Tittle Alternate",
+        "cssSnippet": "font-feature-settings: \"cv09\" 1;"
+      },
+      {
+        "tag": "cv10",
+        "description": "Philocardia Lowercase j Heart Tittle Alternate",
+        "cssSnippet": "font-feature-settings: \"cv10\" 1;"
+      },
+      {
+        "tag": "cv12",
+        "description": "Open-Counter Clinical Numeral Four",
+        "cssSnippet": "font-feature-settings: \"cv12\" 1;"
+      },
+      {
+        "tag": "cv19",
+        "description": "High-Acuity Clinical Punctuation Variant",
+        "cssSnippet": "font-feature-settings: \"cv19\" 1;"
+      },
+      {
+        "tag": "liga",
+        "description": "Standard Humanist Ligature Composition",
+        "cssSnippet": "font-feature-settings: \"liga\" 1;"
+      },
+      {
+        "tag": "ss02",
+        "description": "ISMP Bilobe Serifed Capital I (IL-6, IgA disambiguation)",
+        "cssSnippet": "font-feature-settings: \"ss02\" 1;"
+      },
+      {
+        "tag": "ss07",
+        "description": "Philocardia Cardiac Heart Tittle Set (i, j, !, ?)",
+        "cssSnippet": "font-feature-settings: \"ss07\" 1;"
+      },
+      {
+        "tag": "ss08",
+        "description": "Philocardia Blossom Tittle Set",
+        "cssSnippet": "font-feature-settings: \"ss08\" 1;"
+      },
+      {
+        "tag": "ss09",
+        "description": "Philocardia Calligraphic Nuqta Tittle Set",
+        "cssSnippet": "font-feature-settings: \"ss09\" 1;"
+      },
+      {
+        "tag": "ss10",
+        "description": "Philocardia Radiant Star Tittle Set",
+        "cssSnippet": "font-feature-settings: \"ss10\" 1;"
+      },
+      {
+        "tag": "ss11",
+        "description": "Philocardia Hydration Droplet Tittle Set",
+        "cssSnippet": "font-feature-settings: \"ss11\" 1;"
+      },
+      {
+        "tag": "tnum",
+        "description": "Tabular Fixed-Pitch Numerals (0px telemetry jitter)",
+        "cssSnippet": "font-feature-settings: \"tnum\" 1;"
+      },
+      {
+        "tag": "zero",
+        "description": "ISMP Slashed Zero for dosage safety (500 mg)",
+        "cssSnippet": "font-feature-settings: \"zero\" 1;"
+      }
+    ],
+    "gposFeatures": [
+      {
+        "tag": "kern",
+        "description": "Optical Pairwise Kerning",
+        "cssSnippet": "font-feature-settings: \"kern\" 1;"
+      }
+    ]
+  },
+  "cssPolarityCompensation": {
+    "description": "Zero-reflow dark/ICU and 670nm scotopic halation compensation mapped to HVAR-invariant contour inset axes.",
+    "customProperties": {
+      "--pg-grad": {
+        "syntax": "<number>",
+        "lightDefault": 0,
+        "darkIcuDefault": -25,
+        "scotopicPbmDefault": -45
+      },
+      "--pg-thrm": {
+        "syntax": "<number>",
+        "axisTag": "THRM",
+        "lightDefault": 0.0,
+        "darkIcuDefault": 0.35,
+        "scotopicPbmDefault": 0.6,
+        "zeroHorizontalReflow": true
+      }
+    }
+  },
+  "superfamilyCutSummary": [
+    {
+      "file": "fonts/ttf/PocketGull-Regular.ttf",
+      "woff2": "fonts/woff2/PocketGull-Regular.woff2",
+      "familyName": "PocketGull",
+      "subfamilyName": "Regular",
+      "versionString": "Version 4.000; The PocketGull Project Authors; OFL 1.1",
+      "unitsPerEm": 1000,
+      "numGlyphs": 8229,
+      "mappedCodepoints": 8207,
+      "wordAligned2Byte": true,
+      "gsubFeatures": [
+        {
+          "tag": "ccmp",
+          "description": "OpenType Typographic Feature (ccmp)",
+          "cssSnippet": "font-feature-settings: \"ccmp\" 1;"
+        },
+        {
+          "tag": "cv05",
+          "description": "ISMP Curved Terminal Foot Lowercase l",
+          "cssSnippet": "font-feature-settings: \"cv05\" 1;"
+        },
+        {
+          "tag": "cv08",
+          "description": "ISMP Anti-Clotting Slashed Zero Character Variant",
+          "cssSnippet": "font-feature-settings: \"cv08\" 1;"
+        },
+        {
+          "tag": "cv09",
+          "description": "Philocardia Lowercase i Heart Tittle Alternate",
+          "cssSnippet": "font-feature-settings: \"cv09\" 1;"
+        },
+        {
+          "tag": "cv10",
+          "description": "Philocardia Lowercase j Heart Tittle Alternate",
+          "cssSnippet": "font-feature-settings: \"cv10\" 1;"
+        },
+        {
+          "tag": "cv11",
+          "description": "ISMP Crossbar Capital Z (2/Z disambiguation)",
+          "cssSnippet": "font-feature-settings: \"cv11\" 1;"
+        },
+        {
+          "tag": "cv12",
+          "description": "Open-Counter Clinical Numeral Four",
+          "cssSnippet": "font-feature-settings: \"cv12\" 1;"
+        },
+        {
+          "tag": "cv19",
+          "description": "High-Acuity Clinical Punctuation Variant",
+          "cssSnippet": "font-feature-settings: \"cv19\" 1;"
+        },
+        {
+          "tag": "liga",
+          "description": "Standard Humanist Ligature Composition",
+          "cssSnippet": "font-feature-settings: \"liga\" 1;"
+        },
+        {
+          "tag": "ss02",
+          "description": "ISMP Bilobe Serifed Capital I (IL-6, IgA disambiguation)",
+          "cssSnippet": "font-feature-settings: \"ss02\" 1;"
+        },
+        {
+          "tag": "ss07",
+          "description": "Philocardia Cardiac Heart Tittle Set (i, j, !, ?)",
+          "cssSnippet": "font-feature-settings: \"ss07\" 1;"
+        },
+        {
+          "tag": "ss08",
+          "description": "Philocardia Blossom Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss08\" 1;"
+        },
+        {
+          "tag": "ss09",
+          "description": "Philocardia Calligraphic Nuqta Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss09\" 1;"
+        },
+        {
+          "tag": "ss10",
+          "description": "Philocardia Radiant Star Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss10\" 1;"
+        },
+        {
+          "tag": "ss11",
+          "description": "Philocardia Hydration Droplet Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss11\" 1;"
+        },
+        {
+          "tag": "tnum",
+          "description": "Tabular Fixed-Pitch Numerals (0px telemetry jitter)",
+          "cssSnippet": "font-feature-settings: \"tnum\" 1;"
+        },
+        {
+          "tag": "zero",
+          "description": "ISMP Slashed Zero for dosage safety (500 mg)",
+          "cssSnippet": "font-feature-settings: \"zero\" 1;"
+        }
+      ],
+      "gposFeatures": [
+        {
+          "tag": "kern",
+          "description": "Optical Pairwise Kerning",
+          "cssSnippet": "font-feature-settings: \"kern\" 1;"
+        },
+        {
+          "tag": "mark",
+          "description": "Pan-Tribal & Salishan Combining Mark-to-Base Positioning",
+          "cssSnippet": "font-feature-settings: \"mark\" 1;"
+        }
+      ]
+    },
+    {
+      "file": "fonts/ttf/PocketGull-Bold.ttf",
+      "woff2": "fonts/woff2/PocketGull-Bold.woff2",
+      "familyName": "PocketGull",
+      "subfamilyName": "Bold",
+      "versionString": "Version 4.000; The PocketGull Project Authors; OFL 1.1",
+      "unitsPerEm": 1000,
+      "numGlyphs": 8229,
+      "mappedCodepoints": 8207,
+      "wordAligned2Byte": true,
+      "gsubFeatures": [
+        {
+          "tag": "ccmp",
+          "description": "OpenType Typographic Feature (ccmp)",
+          "cssSnippet": "font-feature-settings: \"ccmp\" 1;"
+        },
+        {
+          "tag": "cv05",
+          "description": "ISMP Curved Terminal Foot Lowercase l",
+          "cssSnippet": "font-feature-settings: \"cv05\" 1;"
+        },
+        {
+          "tag": "cv08",
+          "description": "ISMP Anti-Clotting Slashed Zero Character Variant",
+          "cssSnippet": "font-feature-settings: \"cv08\" 1;"
+        },
+        {
+          "tag": "cv09",
+          "description": "Philocardia Lowercase i Heart Tittle Alternate",
+          "cssSnippet": "font-feature-settings: \"cv09\" 1;"
+        },
+        {
+          "tag": "cv10",
+          "description": "Philocardia Lowercase j Heart Tittle Alternate",
+          "cssSnippet": "font-feature-settings: \"cv10\" 1;"
+        },
+        {
+          "tag": "cv11",
+          "description": "ISMP Crossbar Capital Z (2/Z disambiguation)",
+          "cssSnippet": "font-feature-settings: \"cv11\" 1;"
+        },
+        {
+          "tag": "cv12",
+          "description": "Open-Counter Clinical Numeral Four",
+          "cssSnippet": "font-feature-settings: \"cv12\" 1;"
+        },
+        {
+          "tag": "cv19",
+          "description": "High-Acuity Clinical Punctuation Variant",
+          "cssSnippet": "font-feature-settings: \"cv19\" 1;"
+        },
+        {
+          "tag": "liga",
+          "description": "Standard Humanist Ligature Composition",
+          "cssSnippet": "font-feature-settings: \"liga\" 1;"
+        },
+        {
+          "tag": "ss02",
+          "description": "ISMP Bilobe Serifed Capital I (IL-6, IgA disambiguation)",
+          "cssSnippet": "font-feature-settings: \"ss02\" 1;"
+        },
+        {
+          "tag": "ss07",
+          "description": "Philocardia Cardiac Heart Tittle Set (i, j, !, ?)",
+          "cssSnippet": "font-feature-settings: \"ss07\" 1;"
+        },
+        {
+          "tag": "ss08",
+          "description": "Philocardia Blossom Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss08\" 1;"
+        },
+        {
+          "tag": "ss09",
+          "description": "Philocardia Calligraphic Nuqta Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss09\" 1;"
+        },
+        {
+          "tag": "ss10",
+          "description": "Philocardia Radiant Star Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss10\" 1;"
+        },
+        {
+          "tag": "ss11",
+          "description": "Philocardia Hydration Droplet Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss11\" 1;"
+        },
+        {
+          "tag": "tnum",
+          "description": "Tabular Fixed-Pitch Numerals (0px telemetry jitter)",
+          "cssSnippet": "font-feature-settings: \"tnum\" 1;"
+        },
+        {
+          "tag": "zero",
+          "description": "ISMP Slashed Zero for dosage safety (500 mg)",
+          "cssSnippet": "font-feature-settings: \"zero\" 1;"
+        }
+      ],
+      "gposFeatures": [
+        {
+          "tag": "kern",
+          "description": "Optical Pairwise Kerning",
+          "cssSnippet": "font-feature-settings: \"kern\" 1;"
+        },
+        {
+          "tag": "mark",
+          "description": "Pan-Tribal & Salishan Combining Mark-to-Base Positioning",
+          "cssSnippet": "font-feature-settings: \"mark\" 1;"
+        }
+      ]
+    },
+    {
+      "file": "fonts/ttf/PocketGull-Fineliner.ttf",
+      "woff2": "fonts/woff2/PocketGull-Fineliner.woff2",
+      "familyName": "PocketGull",
+      "subfamilyName": "Fineliner",
+      "versionString": "Version 4.000; The PocketGull Project Authors; OFL 1.1",
+      "unitsPerEm": 1000,
+      "numGlyphs": 8227,
+      "mappedCodepoints": 8205,
+      "wordAligned2Byte": true,
+      "gsubFeatures": [
+        {
+          "tag": "ccmp",
+          "description": "OpenType Typographic Feature (ccmp)",
+          "cssSnippet": "font-feature-settings: \"ccmp\" 1;"
+        },
+        {
+          "tag": "cv05",
+          "description": "ISMP Curved Terminal Foot Lowercase l",
+          "cssSnippet": "font-feature-settings: \"cv05\" 1;"
+        },
+        {
+          "tag": "cv08",
+          "description": "ISMP Anti-Clotting Slashed Zero Character Variant",
+          "cssSnippet": "font-feature-settings: \"cv08\" 1;"
+        },
+        {
+          "tag": "cv09",
+          "description": "Philocardia Lowercase i Heart Tittle Alternate",
+          "cssSnippet": "font-feature-settings: \"cv09\" 1;"
+        },
+        {
+          "tag": "cv10",
+          "description": "Philocardia Lowercase j Heart Tittle Alternate",
+          "cssSnippet": "font-feature-settings: \"cv10\" 1;"
+        },
+        {
+          "tag": "cv11",
+          "description": "ISMP Crossbar Capital Z (2/Z disambiguation)",
+          "cssSnippet": "font-feature-settings: \"cv11\" 1;"
+        },
+        {
+          "tag": "cv12",
+          "description": "Open-Counter Clinical Numeral Four",
+          "cssSnippet": "font-feature-settings: \"cv12\" 1;"
+        },
+        {
+          "tag": "cv19",
+          "description": "High-Acuity Clinical Punctuation Variant",
+          "cssSnippet": "font-feature-settings: \"cv19\" 1;"
+        },
+        {
+          "tag": "liga",
+          "description": "Standard Humanist Ligature Composition",
+          "cssSnippet": "font-feature-settings: \"liga\" 1;"
+        },
+        {
+          "tag": "ss02",
+          "description": "ISMP Bilobe Serifed Capital I (IL-6, IgA disambiguation)",
+          "cssSnippet": "font-feature-settings: \"ss02\" 1;"
+        },
+        {
+          "tag": "ss07",
+          "description": "Philocardia Cardiac Heart Tittle Set (i, j, !, ?)",
+          "cssSnippet": "font-feature-settings: \"ss07\" 1;"
+        },
+        {
+          "tag": "ss08",
+          "description": "Philocardia Blossom Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss08\" 1;"
+        },
+        {
+          "tag": "ss09",
+          "description": "Philocardia Calligraphic Nuqta Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss09\" 1;"
+        },
+        {
+          "tag": "ss10",
+          "description": "Philocardia Radiant Star Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss10\" 1;"
+        },
+        {
+          "tag": "ss11",
+          "description": "Philocardia Hydration Droplet Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss11\" 1;"
+        },
+        {
+          "tag": "tnum",
+          "description": "Tabular Fixed-Pitch Numerals (0px telemetry jitter)",
+          "cssSnippet": "font-feature-settings: \"tnum\" 1;"
+        },
+        {
+          "tag": "zero",
+          "description": "ISMP Slashed Zero for dosage safety (500 mg)",
+          "cssSnippet": "font-feature-settings: \"zero\" 1;"
+        }
+      ],
+      "gposFeatures": [
+        {
+          "tag": "kern",
+          "description": "Optical Pairwise Kerning",
+          "cssSnippet": "font-feature-settings: \"kern\" 1;"
+        },
+        {
+          "tag": "mark",
+          "description": "Pan-Tribal & Salishan Combining Mark-to-Base Positioning",
+          "cssSnippet": "font-feature-settings: \"mark\" 1;"
+        }
+      ]
+    },
+    {
+      "file": "fonts/ttf/PocketGull-Chiseltip.ttf",
+      "woff2": "fonts/woff2/PocketGull-Chiseltip.woff2",
+      "familyName": "PocketGull",
+      "subfamilyName": "Chiseltip",
+      "versionString": "Version 4.000; The PocketGull Project Authors; OFL 1.1",
+      "unitsPerEm": 1000,
+      "numGlyphs": 8215,
+      "mappedCodepoints": 8191,
+      "wordAligned2Byte": true,
+      "gsubFeatures": [
+        {
+          "tag": "ccmp",
+          "description": "OpenType Typographic Feature (ccmp)",
+          "cssSnippet": "font-feature-settings: \"ccmp\" 1;"
+        },
+        {
+          "tag": "cv05",
+          "description": "ISMP Curved Terminal Foot Lowercase l",
+          "cssSnippet": "font-feature-settings: \"cv05\" 1;"
+        },
+        {
+          "tag": "cv08",
+          "description": "ISMP Anti-Clotting Slashed Zero Character Variant",
+          "cssSnippet": "font-feature-settings: \"cv08\" 1;"
+        },
+        {
+          "tag": "cv09",
+          "description": "Philocardia Lowercase i Heart Tittle Alternate",
+          "cssSnippet": "font-feature-settings: \"cv09\" 1;"
+        },
+        {
+          "tag": "cv10",
+          "description": "Philocardia Lowercase j Heart Tittle Alternate",
+          "cssSnippet": "font-feature-settings: \"cv10\" 1;"
+        },
+        {
+          "tag": "cv12",
+          "description": "Open-Counter Clinical Numeral Four",
+          "cssSnippet": "font-feature-settings: \"cv12\" 1;"
+        },
+        {
+          "tag": "cv19",
+          "description": "High-Acuity Clinical Punctuation Variant",
+          "cssSnippet": "font-feature-settings: \"cv19\" 1;"
+        },
+        {
+          "tag": "liga",
+          "description": "Standard Humanist Ligature Composition",
+          "cssSnippet": "font-feature-settings: \"liga\" 1;"
+        },
+        {
+          "tag": "ss02",
+          "description": "ISMP Bilobe Serifed Capital I (IL-6, IgA disambiguation)",
+          "cssSnippet": "font-feature-settings: \"ss02\" 1;"
+        },
+        {
+          "tag": "ss07",
+          "description": "Philocardia Cardiac Heart Tittle Set (i, j, !, ?)",
+          "cssSnippet": "font-feature-settings: \"ss07\" 1;"
+        },
+        {
+          "tag": "ss08",
+          "description": "Philocardia Blossom Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss08\" 1;"
+        },
+        {
+          "tag": "ss09",
+          "description": "Philocardia Calligraphic Nuqta Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss09\" 1;"
+        },
+        {
+          "tag": "ss10",
+          "description": "Philocardia Radiant Star Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss10\" 1;"
+        },
+        {
+          "tag": "ss11",
+          "description": "Philocardia Hydration Droplet Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss11\" 1;"
+        },
+        {
+          "tag": "tnum",
+          "description": "Tabular Fixed-Pitch Numerals (0px telemetry jitter)",
+          "cssSnippet": "font-feature-settings: \"tnum\" 1;"
+        },
+        {
+          "tag": "zero",
+          "description": "ISMP Slashed Zero for dosage safety (500 mg)",
+          "cssSnippet": "font-feature-settings: \"zero\" 1;"
+        }
+      ],
+      "gposFeatures": [
+        {
+          "tag": "kern",
+          "description": "Optical Pairwise Kerning",
+          "cssSnippet": "font-feature-settings: \"kern\" 1;"
+        },
+        {
+          "tag": "mark",
+          "description": "Pan-Tribal & Salishan Combining Mark-to-Base Positioning",
+          "cssSnippet": "font-feature-settings: \"mark\" 1;"
+        }
+      ]
+    },
+    {
+      "file": "fonts/ttf/PocketGullMono-Regular.ttf",
+      "woff2": "fonts/woff2/PocketGullMono-Regular.woff2",
+      "familyName": "PocketGull Mono",
+      "subfamilyName": "Regular",
+      "versionString": "Version 4.000; The PocketGull Project Authors; OFL 1.1",
+      "unitsPerEm": 1000,
+      "numGlyphs": 6870,
+      "mappedCodepoints": 6617,
+      "wordAligned2Byte": true,
+      "gsubFeatures": [
+        {
+          "tag": "ccmp",
+          "description": "OpenType Typographic Feature (ccmp)",
+          "cssSnippet": "font-feature-settings: \"ccmp\" 1;"
+        },
+        {
+          "tag": "cv08",
+          "description": "ISMP Anti-Clotting Slashed Zero Character Variant",
+          "cssSnippet": "font-feature-settings: \"cv08\" 1;"
+        },
+        {
+          "tag": "cv09",
+          "description": "Philocardia Lowercase i Heart Tittle Alternate",
+          "cssSnippet": "font-feature-settings: \"cv09\" 1;"
+        },
+        {
+          "tag": "cv10",
+          "description": "Philocardia Lowercase j Heart Tittle Alternate",
+          "cssSnippet": "font-feature-settings: \"cv10\" 1;"
+        },
+        {
+          "tag": "cv11",
+          "description": "ISMP Crossbar Capital Z (2/Z disambiguation)",
+          "cssSnippet": "font-feature-settings: \"cv11\" 1;"
+        },
+        {
+          "tag": "cv12",
+          "description": "Open-Counter Clinical Numeral Four",
+          "cssSnippet": "font-feature-settings: \"cv12\" 1;"
+        },
+        {
+          "tag": "cv19",
+          "description": "High-Acuity Clinical Punctuation Variant",
+          "cssSnippet": "font-feature-settings: \"cv19\" 1;"
+        },
+        {
+          "tag": "dnom",
+          "description": "OpenType Typographic Feature (dnom)",
+          "cssSnippet": "font-feature-settings: \"dnom\" 1;"
+        },
+        {
+          "tag": "frac",
+          "description": "OpenType Typographic Feature (frac)",
+          "cssSnippet": "font-feature-settings: \"frac\" 1;"
+        },
+        {
+          "tag": "locl",
+          "description": "OpenType Typographic Feature (locl)",
+          "cssSnippet": "font-feature-settings: \"locl\" 1;"
+        },
+        {
+          "tag": "numr",
+          "description": "OpenType Typographic Feature (numr)",
+          "cssSnippet": "font-feature-settings: \"numr\" 1;"
+        },
+        {
+          "tag": "rtlm",
+          "description": "OpenType Typographic Feature (rtlm)",
+          "cssSnippet": "font-feature-settings: \"rtlm\" 1;"
+        },
+        {
+          "tag": "ss07",
+          "description": "Philocardia Cardiac Heart Tittle Set (i, j, !, ?)",
+          "cssSnippet": "font-feature-settings: \"ss07\" 1;"
+        },
+        {
+          "tag": "ss08",
+          "description": "Philocardia Blossom Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss08\" 1;"
+        },
+        {
+          "tag": "ss09",
+          "description": "Philocardia Calligraphic Nuqta Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss09\" 1;"
+        },
+        {
+          "tag": "ss10",
+          "description": "Philocardia Radiant Star Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss10\" 1;"
+        },
+        {
+          "tag": "ss11",
+          "description": "Philocardia Hydration Droplet Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss11\" 1;"
+        },
+        {
+          "tag": "tnum",
+          "description": "Tabular Fixed-Pitch Numerals (0px telemetry jitter)",
+          "cssSnippet": "font-feature-settings: \"tnum\" 1;"
+        },
+        {
+          "tag": "zero",
+          "description": "ISMP Slashed Zero for dosage safety (500 mg)",
+          "cssSnippet": "font-feature-settings: \"zero\" 1;"
+        }
+      ],
+      "gposFeatures": [
+        {
+          "tag": "mark",
+          "description": "Pan-Tribal & Salishan Combining Mark-to-Base Positioning",
+          "cssSnippet": "font-feature-settings: \"mark\" 1;"
+        },
+        {
+          "tag": "mkmk",
+          "description": "Stacked Diacritic Mark-to-Mark Elevation (>= 110 UPM)",
+          "cssSnippet": "font-feature-settings: \"mkmk\" 1;"
+        }
+      ]
+    },
+    {
+      "file": "fonts/ttf/PocketGull-Slab-Bold.ttf",
+      "woff2": "fonts/woff2/PocketGull-Slab-Bold.woff2",
+      "familyName": "PocketGull Slab",
+      "subfamilyName": "Bold",
+      "versionString": "Version 4.000; The PocketGull Project Authors; OFL 1.1",
+      "unitsPerEm": 1000,
+      "numGlyphs": 9757,
+      "mappedCodepoints": 9745,
+      "wordAligned2Byte": true,
+      "gsubFeatures": [
+        {
+          "tag": "ccmp",
+          "description": "OpenType Typographic Feature (ccmp)",
+          "cssSnippet": "font-feature-settings: \"ccmp\" 1;"
+        },
+        {
+          "tag": "cv05",
+          "description": "ISMP Curved Terminal Foot Lowercase l",
+          "cssSnippet": "font-feature-settings: \"cv05\" 1;"
+        },
+        {
+          "tag": "cv08",
+          "description": "ISMP Anti-Clotting Slashed Zero Character Variant",
+          "cssSnippet": "font-feature-settings: \"cv08\" 1;"
+        },
+        {
+          "tag": "cv09",
+          "description": "Philocardia Lowercase i Heart Tittle Alternate",
+          "cssSnippet": "font-feature-settings: \"cv09\" 1;"
+        },
+        {
+          "tag": "cv10",
+          "description": "Philocardia Lowercase j Heart Tittle Alternate",
+          "cssSnippet": "font-feature-settings: \"cv10\" 1;"
+        },
+        {
+          "tag": "cv12",
+          "description": "Open-Counter Clinical Numeral Four",
+          "cssSnippet": "font-feature-settings: \"cv12\" 1;"
+        },
+        {
+          "tag": "cv19",
+          "description": "High-Acuity Clinical Punctuation Variant",
+          "cssSnippet": "font-feature-settings: \"cv19\" 1;"
+        },
+        {
+          "tag": "liga",
+          "description": "Standard Humanist Ligature Composition",
+          "cssSnippet": "font-feature-settings: \"liga\" 1;"
+        },
+        {
+          "tag": "ss02",
+          "description": "ISMP Bilobe Serifed Capital I (IL-6, IgA disambiguation)",
+          "cssSnippet": "font-feature-settings: \"ss02\" 1;"
+        },
+        {
+          "tag": "ss07",
+          "description": "Philocardia Cardiac Heart Tittle Set (i, j, !, ?)",
+          "cssSnippet": "font-feature-settings: \"ss07\" 1;"
+        },
+        {
+          "tag": "ss08",
+          "description": "Philocardia Blossom Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss08\" 1;"
+        },
+        {
+          "tag": "ss09",
+          "description": "Philocardia Calligraphic Nuqta Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss09\" 1;"
+        },
+        {
+          "tag": "ss10",
+          "description": "Philocardia Radiant Star Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss10\" 1;"
+        },
+        {
+          "tag": "ss11",
+          "description": "Philocardia Hydration Droplet Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss11\" 1;"
+        },
+        {
+          "tag": "tnum",
+          "description": "Tabular Fixed-Pitch Numerals (0px telemetry jitter)",
+          "cssSnippet": "font-feature-settings: \"tnum\" 1;"
+        },
+        {
+          "tag": "zero",
+          "description": "ISMP Slashed Zero for dosage safety (500 mg)",
+          "cssSnippet": "font-feature-settings: \"zero\" 1;"
+        }
+      ],
+      "gposFeatures": [
+        {
+          "tag": "kern",
+          "description": "Optical Pairwise Kerning",
+          "cssSnippet": "font-feature-settings: \"kern\" 1;"
+        }
+      ]
+    },
+    {
+      "file": "fonts/ttf/PocketGull-Math.ttf",
+      "woff2": "fonts/woff2/PocketGull-Math.woff2",
+      "familyName": "PocketGull Math",
+      "subfamilyName": "Regular",
+      "versionString": "Version 4.000; The PocketGull Project Authors; OFL 1.1",
+      "unitsPerEm": 1000,
+      "numGlyphs": 9911,
+      "mappedCodepoints": 9880,
+      "wordAligned2Byte": true,
+      "gsubFeatures": [
+        {
+          "tag": "ccmp",
+          "description": "OpenType Typographic Feature (ccmp)",
+          "cssSnippet": "font-feature-settings: \"ccmp\" 1;"
+        },
+        {
+          "tag": "cv05",
+          "description": "ISMP Curved Terminal Foot Lowercase l",
+          "cssSnippet": "font-feature-settings: \"cv05\" 1;"
+        },
+        {
+          "tag": "cv08",
+          "description": "ISMP Anti-Clotting Slashed Zero Character Variant",
+          "cssSnippet": "font-feature-settings: \"cv08\" 1;"
+        },
+        {
+          "tag": "cv09",
+          "description": "Philocardia Lowercase i Heart Tittle Alternate",
+          "cssSnippet": "font-feature-settings: \"cv09\" 1;"
+        },
+        {
+          "tag": "cv10",
+          "description": "Philocardia Lowercase j Heart Tittle Alternate",
+          "cssSnippet": "font-feature-settings: \"cv10\" 1;"
+        },
+        {
+          "tag": "cv12",
+          "description": "Open-Counter Clinical Numeral Four",
+          "cssSnippet": "font-feature-settings: \"cv12\" 1;"
+        },
+        {
+          "tag": "cv19",
+          "description": "High-Acuity Clinical Punctuation Variant",
+          "cssSnippet": "font-feature-settings: \"cv19\" 1;"
+        },
+        {
+          "tag": "liga",
+          "description": "Standard Humanist Ligature Composition",
+          "cssSnippet": "font-feature-settings: \"liga\" 1;"
+        },
+        {
+          "tag": "ss02",
+          "description": "ISMP Bilobe Serifed Capital I (IL-6, IgA disambiguation)",
+          "cssSnippet": "font-feature-settings: \"ss02\" 1;"
+        },
+        {
+          "tag": "ss07",
+          "description": "Philocardia Cardiac Heart Tittle Set (i, j, !, ?)",
+          "cssSnippet": "font-feature-settings: \"ss07\" 1;"
+        },
+        {
+          "tag": "ss08",
+          "description": "Philocardia Blossom Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss08\" 1;"
+        },
+        {
+          "tag": "ss09",
+          "description": "Philocardia Calligraphic Nuqta Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss09\" 1;"
+        },
+        {
+          "tag": "ss10",
+          "description": "Philocardia Radiant Star Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss10\" 1;"
+        },
+        {
+          "tag": "ss11",
+          "description": "Philocardia Hydration Droplet Tittle Set",
+          "cssSnippet": "font-feature-settings: \"ss11\" 1;"
+        },
+        {
+          "tag": "tnum",
+          "description": "Tabular Fixed-Pitch Numerals (0px telemetry jitter)",
+          "cssSnippet": "font-feature-settings: \"tnum\" 1;"
+        },
+        {
+          "tag": "zero",
+          "description": "ISMP Slashed Zero for dosage safety (500 mg)",
+          "cssSnippet": "font-feature-settings: \"zero\" 1;"
+        }
+      ],
+      "gposFeatures": [
+        {
+          "tag": "kern",
+          "description": "Optical Pairwise Kerning",
+          "cssSnippet": "font-feature-settings: \"kern\" 1;"
+        }
+      ]
+    },
+    {
+      "file": "fonts/ttf/PocketGull-ASL.ttf",
+      "woff2": "fonts/woff2/PocketGull-ASL.woff2",
+      "familyName": "PocketGull ASL",
+      "subfamilyName": "Regular",
+      "versionString": "Version 4.000; The PocketGull Project Authors; OFL 1.1",
+      "unitsPerEm": 1000,
+      "numGlyphs": 6821,
+      "mappedCodepoints": 6614,
+      "wordAligned2Byte": true,
+      "gsubFeatures": [
+        {
+          "tag": "ccmp",
+          "description": "OpenType Typographic Feature (ccmp)",
+          "cssSnippet": "font-feature-settings: \"ccmp\" 1;"
+        },
+        {
+          "tag": "cv08",
+          "description": "ISMP Anti-Clotting Slashed Zero Character Variant",
+          "cssSnippet": "font-feature-settings: \"cv08\" 1;"
+        },
+        {
+          "tag": "cv11",
+          "description": "ISMP Crossbar Capital Z (2/Z disambiguation)",
+          "cssSnippet": "font-feature-settings: \"cv11\" 1;"
+        },
+        {
+          "tag": "cv12",
+          "description": "Open-Counter Clinical Numeral Four",
+          "cssSnippet": "font-feature-settings: \"cv12\" 1;"
+        },
+        {
+          "tag": "dnom",
+          "description": "OpenType Typographic Feature (dnom)",
+          "cssSnippet": "font-feature-settings: \"dnom\" 1;"
+        },
+        {
+          "tag": "frac",
+          "description": "OpenType Typographic Feature (frac)",
+          "cssSnippet": "font-feature-settings: \"frac\" 1;"
+        },
+        {
+          "tag": "locl",
+          "description": "OpenType Typographic Feature (locl)",
+          "cssSnippet": "font-feature-settings: \"locl\" 1;"
+        },
+        {
+          "tag": "numr",
+          "description": "OpenType Typographic Feature (numr)",
+          "cssSnippet": "font-feature-settings: \"numr\" 1;"
+        },
+        {
+          "tag": "rtlm",
+          "description": "OpenType Typographic Feature (rtlm)",
+          "cssSnippet": "font-feature-settings: \"rtlm\" 1;"
+        },
+        {
+          "tag": "zero",
+          "description": "ISMP Slashed Zero for dosage safety (500 mg)",
+          "cssSnippet": "font-feature-settings: \"zero\" 1;"
+        }
+      ],
+      "gposFeatures": [
+        {
+          "tag": "mark",
+          "description": "Pan-Tribal & Salishan Combining Mark-to-Base Positioning",
+          "cssSnippet": "font-feature-settings: \"mark\" 1;"
+        },
+        {
+          "tag": "mkmk",
+          "description": "Stacked Diacritic Mark-to-Mark Elevation (>= 110 UPM)",
+          "cssSnippet": "font-feature-settings: \"mkmk\" 1;"
+        }
+      ]
+    }
+  ]
+}

@@ -45,7 +45,7 @@ try {
         '--',
         'bash',
         '-c',
-        `cd "${wslWorkDir}" && ${uvBin} run --with fonttools python3 "${wslScriptPath}"`
+        `cd "${wslWorkDir}" && ${uvBin} run --with fonttools --with opentype-sanitizer python3 "${wslScriptPath}"`
       ], {
         stdio: 'inherit',
       });

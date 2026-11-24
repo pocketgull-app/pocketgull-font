@@ -450,6 +450,122 @@ export const SPATIAL_DIRECTIONS = {
   }
 };
 
+export const CEA708_EDGE_STYLES = {
+  none: {
+    id: 'none',
+    name: 'Clean (No Edge)',
+    cssClass: 'cc-edge-none',
+    vttTextShadow: null,
+    hasHaloShield: false
+  },
+  drop_shadow: {
+    id: 'drop_shadow',
+    name: 'Drop Shadow',
+    cssClass: 'cc-edge-drop-shadow',
+    vttTextShadow: '0 2px 6px rgba(0, 0, 0, 0.94), 0 0 2px #000000',
+    hasHaloShield: true
+  },
+  uniform: {
+    id: 'uniform',
+    name: 'Uniform Outline',
+    cssClass: 'cc-edge-uniform',
+    vttTextShadow: '-1.5px -1.5px 0 #000000, 1.5px -1.5px 0 #000000, -1.5px 1.5px 0 #000000, 1.5px 1.5px 0 #000000, 0 2px 5px rgba(0, 0, 0, 0.92)',
+    hasHaloShield: true
+  },
+  raised: {
+    id: 'raised',
+    name: 'Raised Bevel',
+    cssClass: 'cc-edge-raised',
+    vttTextShadow: '0 1px 0 #000000, 0 2px 0 rgba(0, 0, 0, 0.88), 0 3px 6px rgba(0, 0, 0, 0.78)',
+    hasHaloShield: true
+  },
+  depressed: {
+    id: 'depressed',
+    name: 'Depressed Emboss',
+    cssClass: 'cc-edge-depressed',
+    vttTextShadow: '0 -1px 0 #000000, 0 -2px 3px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(255, 255, 255, 0.25)',
+    hasHaloShield: false
+  }
+};
+
+export const PHILOCARDIA_OPENTYPE_TAGS = {
+  heart: 'ss07',
+  blossom: 'ss08',
+  nuqta: 'ss09',
+  star: 'ss10',
+  droplet: 'ss11'
+};
+
+export const SCENE_BACKDROP_RGB = {
+  trauma_bay: [9, 14, 23],
+  blizzard_glare: [219, 234, 254],
+  midnight_noir: [5, 9, 18],
+  eas_alert: [2, 2, 2],
+  sovereign_aptn: [5, 16, 30],
+  narrative_arc: [8, 13, 24]
+};
+
+export function parseCssColorRgba(colorStr, fallback = [0, 0, 0, 1]) {
+  if (!colorStr || typeof colorStr !== 'string') return fallback;
+  const s = colorStr.trim();
+  if (s === 'transparent') return [0, 0, 0, 0];
+  const hexMatch = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(s);
+  if (hexMatch) {
+    let h = hexMatch[1];
+    if (h.length === 3) h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2];
+    return [
+      parseInt(h.slice(0, 2), 16),
+      parseInt(h.slice(2, 4), 16),
+      parseInt(h.slice(4, 6), 16),
+      1
+    ];
+  }
+  const rgbaMatch = /^rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)(?:\s*,\s*([\d.]+))?\s*\)$/i.exec(s);
+  if (rgbaMatch) {
+    return [
+      Math.max(0, Math.min(255, Number(rgbaMatch[1]))),
+      Math.max(0, Math.min(255, Number(rgbaMatch[2]))),
+      Math.max(0, Math.min(255, Number(rgbaMatch[3]))),
+      rgbaMatch[4] !== undefined ? Math.max(0, Math.min(1, Number(rgbaMatch[4]))) : 1
+    ];
+  }
+  return fallback;
+}
+
+export function relativeLuminance(rgb) {
+  const lin = (c) => {
+    const v = Math.max(0, Math.min(255, c)) / 255;
+    return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+  };
+  return 0.2126 * lin(rgb[0]) + 0.7152 * lin(rgb[1]) + 0.0722 * lin(rgb[2]);
+}
+
+export function computeCaptionContrast(fgCss, scrimCss, backdropRgb = [9, 14, 23], hasHaloShield = false) {
+  const fg = parseCssColorRgba(fgCss, [255, 255, 255, 1]);
+  const sc = parseCssColorRgba(scrimCss, [0, 0, 0, 0.82]);
+  const a = sc[3];
+  const compBg = [
+    sc[0] * a + backdropRgb[0] * (1 - a),
+    sc[1] * a + backdropRgb[1] * (1 - a),
+    sc[2] * a + backdropRgb[2] * (1 - a)
+  ];
+  const lFg = relativeLuminance(fg);
+  const lBg = relativeLuminance(compBg);
+  const rawRatio = Number(((Math.max(lFg, lBg) + 0.05) / (Math.min(lFg, lBg) + 0.05)).toFixed(1));
+  let effectiveRatio = rawRatio;
+  let haloProtected = false;
+  if (hasHaloShield && rawRatio < 7.0) {
+    // CEA-708 uniform outline / heavy shadow guarantees dark #000 perimeter boundary around stroke
+    const haloRatio = Number(((lFg + 0.05) / 0.05).toFixed(1));
+    if (haloRatio > rawRatio) {
+      effectiveRatio = Number(Math.min(haloRatio, Math.max(rawRatio, 10.5)).toFixed(1));
+      haloProtected = true;
+    }
+  }
+  const tier = effectiveRatio >= 7.0 ? 'AAA' : effectiveRatio >= 4.5 ? 'AA' : 'LOW';
+  return { ratio: effectiveRatio, rawRatio, tier, haloProtected };
+}
+
 export class ClosedCaptionStudio {
   constructor(options = {}) {
     this.currentSceneId = options.sceneId || 'trauma_bay';
@@ -475,7 +591,11 @@ export class ClosedCaptionStudio {
     // Emotion & Atmospheric Scene Blending
     this.currentEmotion = null;
     this.currentAtmosphericBlend = 'clinical_teal';
+    this.blendActive = false;
     this.currentSpatialDirection = 'center';
+    this.edgeStyle = 'none';
+    this.letterboxMode = false;
+    this.yellowHighContrast = false;
 
     // Philocardia Hearts & Tittle Varieties
     this.philocardiaEnabled = false;
@@ -584,6 +704,30 @@ export class ClosedCaptionStudio {
 
   setScrim(scrim) {
     this.scrimMode = scrim;
+    this.yellowHighContrast = false;
+  }
+
+  setEdgeStyle(styleId) {
+    if (CEA708_EDGE_STYLES[styleId]) {
+      this.edgeStyle = styleId;
+      return CEA708_EDGE_STYLES[styleId];
+    }
+    this.edgeStyle = 'none';
+    return CEA708_EDGE_STYLES.none;
+  }
+
+  setLetterboxMode(enabled) {
+    this.letterboxMode = Boolean(enabled);
+    return this.letterboxMode;
+  }
+
+  setYellowHighContrast(enabled) {
+    this.yellowHighContrast = Boolean(enabled);
+    if (this.yellowHighContrast) {
+      this.scrimMode = 'solid';
+      this.blendActive = false;
+    }
+    return this.yellowHighContrast;
   }
 
   setAbFont(font) {
@@ -602,9 +746,104 @@ export class ClosedCaptionStudio {
   setAtmosphericBlend(id) {
     if (ATMOSPHERIC_BLENDS[id]) {
       this.currentAtmosphericBlend = id;
+      this.blendActive = true;
+      this.yellowHighContrast = false;
       return ATMOSPHERIC_BLENDS[id];
     }
     return ATMOSPHERIC_BLENDS.clinical_teal;
+  }
+
+  resolveCaptionSurface(prosody = 'dialogue') {
+    const edgeSpec = CEA708_EDGE_STYLES[this.edgeStyle] || CEA708_EDGE_STYLES.none;
+    const backdropRgb = SCENE_BACKDROP_RGB[this.currentSceneId] || SCENE_BACKDROP_RGB.trauma_bay;
+
+    if (this.yellowHighContrast) {
+      const fg = prosody === 'soundfx' ? '#4ade80' : '#fde047';
+      const scrimBg = 'rgba(0, 0, 0, 1)';
+      const contrast = computeCaptionContrast(fg, scrimBg, backdropRgb, edgeSpec.hasHaloShield);
+      return {
+        fg,
+        speakerColor: '#fde047',
+        scrimBg,
+        border: '1px solid rgba(253, 224, 71, 0.5)',
+        boxShadow: '0 4px 18px rgba(0, 0, 0, 0.92)',
+        useDiffusion: false,
+        edgeSpec,
+        contrast
+      };
+    }
+
+    if (this.blendActive) {
+      const blend = ATMOSPHERIC_BLENDS[this.currentAtmosphericBlend] || ATMOSPHERIC_BLENDS.clinical_teal;
+      const baseRgba = parseCssColorRgba(blend.scrimBg, [4, 20, 28, 0.85]);
+      const alpha = this.scrimMode === 'solid'
+        ? 1
+        : this.scrimMode === 'minimal'
+          ? 0.45
+          : this.scrimMode === 'clear'
+            ? 0
+            : baseRgba[3];
+      const scrimBg = alpha === 0
+        ? 'rgba(0, 0, 0, 0)'
+        : `rgba(${baseRgba[0]}, ${baseRgba[1]}, ${baseRgba[2]}, ${alpha})`;
+      const isLightScrim = this.currentAtmosphericBlend === 'arctic_frost' && alpha >= 0.45;
+      const fg = prosody === 'soundfx'
+        ? (isLightScrim ? '#0f766e' : '#22d3ee')
+        : (alpha === 0 ? '#ffffff' : blend.textTint);
+      const speakerColor = isLightScrim ? '#92400e' : '';
+      const contrast = computeCaptionContrast(fg, scrimBg, backdropRgb, edgeSpec.hasHaloShield);
+      return {
+        fg,
+        speakerColor,
+        scrimBg,
+        border: alpha === 0 ? 'none' : `1px solid ${blend.scrimBorder}`,
+        boxShadow: alpha === 0 ? 'none' : blend.aura,
+        useDiffusion: alpha > 0,
+        edgeSpec,
+        contrast
+      };
+    }
+
+    const alpha = this.scrimMode === 'solid'
+      ? 1
+      : this.scrimMode === 'minimal'
+        ? 0.45
+        : this.scrimMode === 'clear'
+          ? 0
+          : 0.82;
+    const scrimBg = `rgba(0, 0, 0, ${alpha})`;
+    const border = this.scrimMode === 'clear'
+      ? 'none'
+      : this.scrimMode === 'solid'
+        ? '1px solid rgba(255, 255, 255, 0.2)'
+        : this.scrimMode === 'minimal'
+          ? '1px solid rgba(255, 255, 255, 0.15)'
+          : '1px solid rgba(255, 255, 255, 0.08)';
+    const fg = prosody === 'soundfx' ? '#22d3ee' : '#ffffff';
+    const contrast = computeCaptionContrast(fg, scrimBg, backdropRgb, edgeSpec.hasHaloShield);
+    return {
+      fg,
+      speakerColor: '',
+      scrimBg,
+      border,
+      boxShadow: alpha === 0 ? 'none' : '0 4px 18px rgba(0, 0, 0, 0.85)',
+      useDiffusion: false,
+      edgeSpec,
+      contrast
+    };
+  }
+
+  getOpenTypeFeatureString(includePhilocardia = true) {
+    const features = ['"zero" 1', '"cv08" 1', '"cv05" 1', '"ss02" 1', '"cv11" 1'];
+    if (includePhilocardia && (this.philocardiaEnabled || this.tittleVariety !== 'dot')) {
+      const tag = PHILOCARDIA_OPENTYPE_TAGS[this.tittleVariety];
+      if (tag) features.push(`"${tag}" 1`);
+    }
+    return features.join(', ');
+  }
+
+  usesNativePhilocardiaStillness() {
+    return Boolean((this.philocardiaEnabled || this.tittleVariety !== 'dot') && this.cardiacPacingId === 'stillness');
   }
 
   setSpatialDirection(id) {
@@ -717,15 +956,31 @@ export class ClosedCaptionStudio {
   generateWebVtt(customText = '') {
     const scene = this.getScene();
     const voiceSpec = CAPTION_FONT_VOICES[this.fontVoice] || CAPTION_FONT_VOICES.vf_humanist;
+    const surface = this.resolveCaptionSurface('dialogue');
+    const featureStr = this.getOpenTypeFeatureString(true);
+    const tittleNote = (this.philocardiaEnabled || this.tittleVariety !== 'dot')
+      ? ` | Tittle: ${this.tittleVariety} (${PHILOCARDIA_OPENTYPE_TAGS[this.tittleVariety] || 'ss07'})`
+      : '';
+    const edgeNote = surface.edgeSpec.id !== 'none' ? ` | Edge: ${surface.edgeSpec.name}` : '';
+    const cueRules = [
+      `  font-family: ${voiceSpec.cssFamily};`,
+      `  font-feature-settings: ${featureStr};`,
+      '  font-variant-numeric: slashed-zero;',
+      '  font-synthesis: none;',
+      '  text-wrap: balance;',
+      `  color: ${surface.fg};`,
+      `  background-color: ${surface.scrimBg};`
+    ];
+    if (surface.edgeSpec.vttTextShadow) {
+      cueRules.push(`  text-shadow: ${surface.edgeSpec.vttTextShadow};`);
+    }
     const lines = [
       'WEBVTT - PocketGull Variable Prosody & ISMP Clinical Broadcast Track',
-      `NOTE Scene: ${scene.title} | Protocol: ${this.mode.toUpperCase()} | Voice: ${voiceSpec.name} | License: SIL OFL 1.1`,
+      `NOTE Scene: ${scene.title} | Protocol: ${this.mode.toUpperCase()} | Voice: ${voiceSpec.name}${tittleNote}${edgeNote} | License: SIL OFL 1.1`,
       '',
       'STYLE',
       '::cue {',
-      `  font-family: ${voiceSpec.cssFamily};`,
-      '  font-feature-settings: "zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1;',
-      '  font-variant-numeric: slashed-zero;',
+      ...cueRules,
       '}',
       '::cue(.whisper) { font-variation-settings: "wght" 240, "slnt" -7, "APTR" 0.35, "SOFT" 0.80, "HLNG" 0.60, "BOUM" 0.30; }',
       '::cue(.urgent)  { font-variation-settings: "wght" 700, "wdth" 94, "APTR" 0.90, "SOFT" 0.00, "HLNG" 0.00, "THRM" 0.35; }',
@@ -819,23 +1074,32 @@ export function renderPhilocardiaNodes(container, rawText, pacingClass = 'philoc
     }
     if (typeof container.removeAttribute === 'function') {
       container.removeAttribute('data-tittle-variety');
+      container.removeAttribute('aria-label');
     }
     return;
   }
 
   container.dataset.tittleVariety = variety;
+  if (typeof container.setAttribute === 'function') {
+    container.setAttribute('aria-label', rawText);
+  }
+
+  const charMap = {
+    'i': { cls: 'philocardia-heart', txt: 'ı' },
+    'j': { cls: 'philocardia-j', txt: 'ȷ' },
+    '!': { cls: 'philocardia-excl', txt: '!' },
+    '?': { cls: 'philocardia-question', txt: '?' },
+    '¡': { cls: 'philocardia-excl-down', txt: '¡' },
+    '¿': { cls: 'philocardia-question-down', txt: '¿' },
+  };
 
   for (let i = 0; i < rawText.length; i++) {
     const ch = rawText[i];
-    if (ch === 'i') {
+    const spec = charMap[ch];
+    if (spec) {
       const span = document.createElement('span');
-      span.className = `philocardia-heart ${pacingClass}`;
-      span.textContent = 'ı'; // dotless i
-      container.appendChild(span);
-    } else if (ch === 'j') {
-      const span = document.createElement('span');
-      span.className = `philocardia-j ${pacingClass}`;
-      span.textContent = 'ȷ'; // dotless j
+      span.className = pacingClass ? `${spec.cls} ${pacingClass}` : spec.cls;
+      span.textContent = spec.txt;
       container.appendChild(span);
     } else {
       container.appendChild(document.createTextNode(ch));
@@ -1929,6 +2193,12 @@ if (typeof window !== 'undefined') {
     EMOTION_TOKENS,
     ATMOSPHERIC_BLENDS,
     SPATIAL_DIRECTIONS,
+    CEA708_EDGE_STYLES,
+    PHILOCARDIA_OPENTYPE_TAGS,
+    SCENE_BACKDROP_RGB,
+    parseCssColorRgba,
+    relativeLuminance,
+    computeCaptionContrast,
     TITTLE_VARIETIES,
     CARDIAC_PACING_PRESETS,
     TELETEXT_SPEAKER_PALETTE,

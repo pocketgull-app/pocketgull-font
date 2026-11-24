@@ -3,7 +3,7 @@
 /* --- Inspector & UI Controls --- */
 
     /* PocketGull Forensic Inspector & UI Controls (Pure Webfont Engine) */
-    .samsa-container {
+    .upm-inspector-container {
       display: grid;
       grid-template-columns: 2fr 1fr;
       gap: 1.5rem;
@@ -15,9 +15,9 @@
       box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
     }
     @media (max-width: 900px) {
-      .samsa-container { grid-template-columns: 1fr; }
+      .upm-inspector-container { grid-template-columns: 1fr; }
     }
-    .samsa-canvas-box {
+    .upm-inspector-canvas-box {
       position: relative;
       background: #030712;
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -26,24 +26,24 @@
       display: flex;
       flex-direction: column;
     }
-    .samsa-canvas {
+    .upm-inspector-canvas {
       width: 100%;
       height: 420px;
       display: block;
       cursor: crosshair;
     }
-    .samsa-telemetry-hud {
+    .upm-inspector-telemetry-hud {
       display: flex;
       flex-direction: column;
       gap: 1rem;
     }
-    .samsa-metric-card {
+    .upm-inspector-metric-card {
       background: rgba(15, 23, 42, 0.7);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 10px;
       padding: 1rem;
     }
-    .samsa-metric-row {
+    .upm-inspector-metric-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -51,20 +51,20 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       font-size: 0.825rem;
     }
-    .samsa-metric-row:last-child { border-bottom: none; }
-    .samsa-metric-val {
+    .upm-inspector-metric-row:last-child { border-bottom: none; }
+    .upm-inspector-metric-val {
       font-family: 'PocketGull Mono', monospace;
       color: #38bdf8;
       font-weight: 600;
     }
-    .samsa-ots-seal {
+    .upm-inspector-ots-seal {
       background: rgba(34, 197, 94, 0.1);
       border: 1px solid rgba(34, 197, 94, 0.3);
       border-radius: 10px;
       padding: 1rem;
       font-size: 0.8rem;
     }
-    .samsa-ots-item {
+    .upm-inspector-ots-item {
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -72,7 +72,7 @@
       margin-bottom: 0.4rem;
       font-family: 'PocketGull Mono', monospace;
     }
-    .samsa-glyph-btn {
+    .upm-inspector-glyph-btn {
       background: rgba(15, 23, 42, 0.8);
       border: 1px solid rgba(255, 255, 255, 0.15);
       color: #f1f5f9;
@@ -87,22 +87,22 @@
       justify-content: center;
       transition: all 0.15s ease;
     }
-    .samsa-glyph-btn:hover {
+    .upm-inspector-glyph-btn:hover {
       border-color: #2dd4bf;
       color: #2dd4bf;
       transform: translateY(-2px);
     }
-    .samsa-glyph-btn.active {
+    .upm-inspector-glyph-btn.active {
       background: rgba(45, 212, 191, 0.2);
       border-color: #2dd4bf;
       color: #2dd4bf;
       box-shadow: 0 0 12px rgba(45, 212, 191, 0.4);
     }
-    .samsa-glyph-btn:focus-visible {
+    .upm-inspector-glyph-btn:focus-visible {
       outline: 2px solid #2dd4bf;
       outline-offset: 2px;
     }
-    .samsa-glyph-bar {
+    .upm-inspector-glyph-bar {
       display: flex;
       flex-wrap: wrap;
       gap: 0.6rem;
@@ -250,7 +250,7 @@
     /* Universal PocketGull Typography for All Buttons & Form Controls */
     button, input, optgroup, select, textarea,
     .btn, [class*="btn-"], [class*="-btn"], .weight-btn, .preset-pill,
-    .samsa-glyph-btn, .tab-btn, .prompt-theme-btn, .btn-copy-code,
+    .upm-inspector-glyph-btn, .tab-btn, .prompt-theme-btn, .btn-copy-code,
     .doc-drill-chip, .doc-drill-send, .btn-download-hero, .btn-pbm-toggle,
     .header-nav a, .btn-hero-primary, .btn-hero-secondary, .btn-hero-outline {
       font-family: 'PocketGull Bold', 'PocketGull', sans-serif !important;
@@ -259,7 +259,7 @@
     }
 
     /* Monospace telemetry and code buttons */
-    .btn-mono, button[data-weight="500"], .prompt-theme-btn, .samsa-metric-val, .axis-badge-readout {
+    .btn-mono, button[data-weight="500"], .prompt-theme-btn, .upm-inspector-metric-val, .axis-badge-readout {
       font-family: 'PocketGull Mono', monospace !important;
       font-feature-settings: "tnum" 1, "zero" 1;
     }
@@ -835,49 +835,49 @@
       color: #0F766E;
     }
 
-    [data-theme="washi"] .samsa-container {
+    [data-theme="washi"] .upm-inspector-container {
       box-shadow: 0 4px 20px rgba(50, 40, 30, 0.05);
     }
-    [data-theme="washi"] .samsa-canvas-box {
+    [data-theme="washi"] .upm-inspector-canvas-box {
       border: 1px solid #E2DBD0;
       background: #FFFFFF;
     }
-    [data-theme="washi"] .samsa-canvas-box > div:first-child {
+    [data-theme="washi"] .upm-inspector-canvas-box > div:first-child {
       background: #F4EFE6 !important;
       border-bottom: 1px solid #E2DBD0 !important;
       color: #1F1B16 !important;
     }
-    [data-theme="washi"] .samsa-canvas-box > div:last-child {
+    [data-theme="washi"] .upm-inspector-canvas-box > div:last-child {
       background: #F4EFE6 !important;
       border-top: 1px solid #E2DBD0 !important;
       color: #1F1B16 !important;
     }
-    [data-theme="washi"] .samsa-metric-card {
+    [data-theme="washi"] .upm-inspector-metric-card {
       background: #FAF8F2;
       border: 1px solid #E2DBD0;
     }
-    [data-theme="washi"] .samsa-metric-val {
+    [data-theme="washi"] .upm-inspector-metric-val {
       color: #0F766E;
     }
-    [data-theme="washi"] .samsa-ots-seal {
+    [data-theme="washi"] .upm-inspector-ots-seal {
       background: #F0FDF4;
       border: 1px solid #BBF7D0;
       color: #166534;
     }
-    [data-theme="washi"] .samsa-ots-item {
+    [data-theme="washi"] .upm-inspector-ots-item {
       color: #15803D;
     }
-    [data-theme="washi"] .samsa-glyph-btn {
+    [data-theme="washi"] .upm-inspector-glyph-btn {
       background: #FAF8F2;
       border: 1px solid #E2DBD0;
       color: #1F1B16;
     }
-    [data-theme="washi"] .samsa-glyph-btn:hover {
+    [data-theme="washi"] .upm-inspector-glyph-btn:hover {
       background: #F0EAE1;
       border-color: #C8BFB0;
       color: #000000;
     }
-    [data-theme="washi"] .samsa-glyph-btn.active {
+    [data-theme="washi"] .upm-inspector-glyph-btn.active {
       background: #1F1B16;
       color: #FAF8F2;
       border-color: #1F1B16;
@@ -912,20 +912,20 @@
       background: #0F766E !important;
     }
 
-    [data-theme="washi"] #axisPraxisStrip span[style*="color: #2dd4bf"],
-    [data-theme="washi"] #axisPraxisStrip span[style*="color:#2dd4bf"] {
+    [data-theme="washi"] #vfAxisStrip span[style*="color: #2dd4bf"],
+    [data-theme="washi"] #vfAxisStrip span[style*="color:#2dd4bf"] {
       color: #0F766E !important;
     }
-    [data-theme="washi"] #axisPraxisStrip span[style*="color: #f43f5e"],
-    [data-theme="washi"] #axisPraxisStrip span[style*="color:#f43f5e"] {
+    [data-theme="washi"] #vfAxisStrip span[style*="color: #f43f5e"],
+    [data-theme="washi"] #vfAxisStrip span[style*="color:#f43f5e"] {
       color: #BE123C !important;
     }
-    [data-theme="washi"] #axisPraxisStrip span[style*="color: #38bdf8"],
-    [data-theme="washi"] #axisPraxisStrip span[style*="color:#38bdf8"] {
+    [data-theme="washi"] #vfAxisStrip span[style*="color: #38bdf8"],
+    [data-theme="washi"] #vfAxisStrip span[style*="color:#38bdf8"] {
       color: #0369A1 !important;
     }
-    [data-theme="washi"] #axisPraxisStrip span[style*="color: #f59e0b"],
-    [data-theme="washi"] #axisPraxisStrip span[style*="color:#f59e0b"] {
+    [data-theme="washi"] #vfAxisStrip span[style*="color: #f59e0b"],
+    [data-theme="washi"] #vfAxisStrip span[style*="color:#f59e0b"] {
       color: #B45309 !important;
     }
 
@@ -1023,13 +1023,13 @@
       color: #0F766E;
       text-decoration: underline;
     }
-    [data-theme="washi"] #samsaMouseCoords {
+    [data-theme="washi"] #upmInspectorMouseCoords {
       color: #1F1B16;
     }
-    [data-theme="washi"] .samsa-telemetry-hud .samsa-metric-row span {
+    [data-theme="washi"] .upm-inspector-telemetry-hud .upm-inspector-metric-row span {
       color: #57534E;
     }
-    [data-theme="washi"] .samsa-telemetry-hud .samsa-metric-row strong {
+    [data-theme="washi"] .upm-inspector-telemetry-hud .upm-inspector-metric-row strong {
       color: #1F1B16;
     }
 
@@ -1078,14 +1078,14 @@
     [data-theme="washi"] .site-footer a:hover {
       color: #115E59 !important;
     }
-    [data-theme="washi"] #samsaMouseCoords {
+    [data-theme="washi"] #upmInspectorMouseCoords {
       color: #1F1B16 !important;
     }
-    [data-theme="washi"] .samsa-telemetry-hud .samsa-metric-row span {
+    [data-theme="washi"] .upm-inspector-telemetry-hud .upm-inspector-metric-row span {
       color: #44403C !important;
     }
-    [data-theme="washi"] .samsa-telemetry-hud .samsa-metric-row strong,
-    [data-theme="washi"] .samsa-telemetry-hud .samsa-metric-row .samsa-metric-val {
+    [data-theme="washi"] .upm-inspector-telemetry-hud .upm-inspector-metric-row strong,
+    [data-theme="washi"] .upm-inspector-telemetry-hud .upm-inspector-metric-row .upm-inspector-metric-val {
       color: #1F1B16 !important;
     }
     [data-theme="washi"] .shell-prompt-btn,
@@ -1159,15 +1159,15 @@
     }
 
     
-    /* Washi Axis Praxis & Feature Strip High Contrast */
-    [data-theme="washi"] #axisPraxisStrip {
+    /* Washi Variable-Font Axis & Feature Strip High Contrast */
+    [data-theme="washi"] #vfAxisStrip {
       background: #FAF8F2 !important;
       border-color: #D8D1C4 !important;
     }
-    [data-theme="washi"] #axisPraxisStrip span {
+    [data-theme="washi"] #vfAxisStrip span {
       color: #1A1612;
     }
-    [data-theme="washi"] #axisPraxisStrip .samsa-metric-val {
+    [data-theme="washi"] #vfAxisStrip .upm-inspector-metric-val {
       color: #0F766E !important;
     }
     [data-theme="washi"] .axis-badge-readout {
@@ -1513,7 +1513,7 @@
       color: #ff4d4d !important;
       box-shadow: 0 0 10px rgba(255, 51, 51, 0.3) !important;
     }
-    [data-theme="pbm"] .samsa-metric-val,
+    [data-theme="pbm"] .upm-inspector-metric-val,
     [data-theme="pbm"] #wghtAxisVal,
     [data-theme="pbm"] #opszAxisVal,
     [data-theme="pbm"] #boumaAxisVal {
@@ -1539,22 +1539,22 @@
       color: #ff4d4d !important;
       box-shadow: 0 0 10px rgba(255, 51, 51, 0.35) !important;
     }
-    [data-theme="pbm"] .samsa-glyph-btn {
+    [data-theme="pbm"] .upm-inspector-glyph-btn {
       background: #140000 !important;
       border-color: #380505 !important;
       color: #cc2929 !important;
     }
-    [data-theme="pbm"] .samsa-glyph-btn.active {
+    [data-theme="pbm"] .upm-inspector-glyph-btn.active {
       background: #ff3333 !important;
       color: #050000 !important;
       border-color: #ff3333 !important;
     }
-    [data-theme="pbm"] .samsa-ots-seal {
+    [data-theme="pbm"] .upm-inspector-ots-seal {
       background: rgba(255, 51, 51, 0.12) !important;
       border-color: #ff3333 !important;
       color: #ff6666 !important;
     }
-    [data-theme="pbm"] .samsa-ots-item {
+    [data-theme="pbm"] .upm-inspector-ots-item {
       color: #ff9999 !important;
     }
     [data-theme="pbm"] input[type="range"]::-webkit-slider-thumb {
@@ -3593,7 +3593,7 @@
     .mode-essential #multi-scale,
     .mode-essential #governance,
     .mode-essential #changelog,
-    .mode-essential #samsa-inspector {
+    .mode-essential #upm-inspector {
       display: none !important;
     }
 

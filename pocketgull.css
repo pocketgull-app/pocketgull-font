@@ -128,7 +128,7 @@
     /* Universal PocketGull Typography for All Buttons & Form Controls */
     button, input, optgroup, select, textarea,
     .btn, [class*="btn-"], [class*="-btn"], .weight-btn, .preset-pill,
-    .samsa-glyph-btn, .tab-btn, .prompt-theme-btn, .btn-copy-code,
+    .upm-inspector-glyph-btn, .tab-btn, .prompt-theme-btn, .btn-copy-code,
     .doc-drill-chip, .doc-drill-send, .btn-download-hero, .btn-pbm-toggle,
     .header-nav a, .btn-hero-primary, .btn-hero-secondary, .btn-hero-outline {
       font-family: 'PocketGull Bold', 'PocketGull', sans-serif !important;
@@ -137,7 +137,7 @@
     }
 
     /* Monospace telemetry and code buttons */
-    .btn-mono, button[data-weight="500"], .prompt-theme-btn, .samsa-metric-val, .axis-badge-readout {
+    .btn-mono, button[data-weight="500"], .prompt-theme-btn, .upm-inspector-metric-val, .axis-badge-readout {
       font-family: 'PocketGull Mono', monospace !important;
       font-feature-settings: "tnum" 1, "zero" 1;
     }
@@ -243,7 +243,7 @@ button.theme-nav-btn,
 button.preset-pill,
 button.weight-btn,
 .smoe-preset-btn,
-.samsa-glyph-btn {
+.upm-inspector-glyph-btn {
   min-height: 44px;
   touch-action: manipulation;
 }
@@ -253,7 +253,7 @@ button.weight-btn,
 .tabular-nums,
 .telemetry-val,
 .vitals-figure,
-.samsa-metric-val,
+.upm-inspector-metric-val,
 .smoe-stat-val,
 #smoeTransferredPayload,
 #smoeSavingsPercent {
@@ -713,6 +713,122 @@ button.weight-btn,
   border: 1px dashed #ef4444 !important;
   background: rgba(239, 68, 68, 0.08) !important;
 }
+
+/* ==========================================================================
+   13. ZERO-REFLOW SCOTOPIC & DARK-MODE GRAD / THRM HALATION COMPENSATION
+   - Typed CSS Houdini @property declarations (Roel Nieskens cascade pattern)
+   - Binds ambient polarity ([data-theme="dark"], [data-theme="pbm"], prefers-color-scheme: dark)
+     to --pg-grad and PocketGull-VF's HVAR-invariant 'THRM' contour-inset axis
+   - Counteracts ~8-12% OLED/scotopic irradiation bloom at <= 14px with 0px horizontal reflow
+   ========================================================================== */
+
+@property --pg-wght { syntax: '<number>'; inherits: true; initial-value: 400; }
+@property --pg-wdth { syntax: '<number>'; inherits: true; initial-value: 100; }
+@property --pg-slnt { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --pg-opsz { syntax: '<number>'; inherits: true; initial-value: 14; }
+@property --pg-grad { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --pg-soft { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --pg-thrm { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --pg-aptr { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --pg-smrn { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --pg-hlng { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --pg-bion { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --pg-grav { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --pg-boum { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --pg-chis { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --pg-nuqt { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --pg-inuk { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --pg-brls { syntax: '<number>'; inherits: true; initial-value: 78; }
+
+:root,
+[data-theme="light"],
+[data-theme="washi"] {
+  --pg-wght: 400;
+  --pg-wdth: 100;
+  --pg-slnt: 0;
+  --pg-opsz: 14;
+  --pg-grad: 0;
+  --pg-soft: 0;
+  --pg-thrm: 0;
+  --pg-aptr: 0;
+  --pg-smrn: 0;
+  --pg-hlng: 0;
+  --pg-bion: 0;
+  --pg-grav: 0;
+  --pg-boum: 0;
+  --pg-chis: 0;
+  --pg-nuqt: 0;
+  --pg-inuk: 0;
+  --pg-brls: 78;
+}
+
+/* Automatic OS Dark Preference (when not explicitly pinned to light/washi) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="washi"]) {
+    --pg-grad: -25;
+    --pg-thrm: 0.35;
+  }
+}
+
+/* Explicit ICU Dark Mode: -25 Grade / 0.35 THRM interior stroke inset (0px HVAR reflow) */
+[data-theme="dark"] {
+  --pg-grad: -25;
+  --pg-thrm: 0.35;
+}
+
+/* 670nm Scotopic Photobiomodulation Mode: -45 Grade / 0.60 THRM + 0.15 APTR counter dilation */
+[data-theme="pbm"],
+.scotopic-650nm,
+.pbm-670nm {
+  --pg-grad: -45;
+  --pg-thrm: 0.60;
+}
+
+/* Cascade-Safe Variable Typography Classes (Zero Axis Clobbering, Zero Horizontal Layout Shift) */
+.pg-vf,
+.pg-halation-guard,
+.pg-clinical-table,
+.pg-vitals-vf {
+  font-family: 'PocketGull VF', 'PocketGull', sans-serif;
+  font-variation-settings:
+    'wght' var(--pg-wght, 400),
+    'wdth' var(--pg-wdth, 100),
+    'slnt' var(--pg-slnt, 0),
+    'opsz' var(--pg-opsz, 14),
+    'GRAD' var(--pg-grad, 0),
+    'SOFT' var(--pg-soft, 0),
+    'THRM' var(--pg-thrm, 0),
+    'APTR' var(--pg-aptr, 0),
+    'SMRN' var(--pg-smrn, 0),
+    'HLNG' var(--pg-hlng, 0),
+    'BION' var(--pg-bion, 0),
+    'GRAV' var(--pg-grav, 0),
+    'BOUM' var(--pg-boum, 0),
+    'CHIS' var(--pg-chis, 0),
+    'NUQT' var(--pg-nuqt, 0),
+    'INUK' var(--pg-inuk, 0),
+    'BRLS' var(--pg-brls, 78);
+}
+
+/* Micro-text (<= 14px) extra counter preservation on dark/scotopic screens */
+[data-theme="dark"] .pg-halation-micro,
+[data-theme="pbm"] .pg-halation-micro {
+  --pg-opsz: 11;
+}
+
+/* Orthogonal Weight Utilities (Compose cleanly without wiping parent GRAD / THRM) */
+.pg-vf-regular { --pg-wght: 400; font-weight: 400; }
+.pg-vf-medium  { --pg-wght: 500; font-weight: 500; }
+.pg-vf-bold    { --pg-wght: 700; font-weight: 700; }
+.pg-vf-black   { --pg-wght: 900; font-weight: 900; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .pg-vf,
+  .pg-halation-guard {
+    transition: --pg-grad 180ms ease-out, --pg-thrm 180ms ease-out;
+  }
+}
+
 
 
 

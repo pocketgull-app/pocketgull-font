@@ -65,6 +65,8 @@
             <div class="cc-bezel-controls">
               <span id="ccSignalReadout">1080p60 · CEA-708 · CC1</span>
               <button type="button" class="cc-bezel-btn" id="toggleSafeAreaBtn" aria-pressed="false" title="Toggle SMPTE RP 2046-2 90% Action-Safe and 80% Title-Safe Reticle">⊞ Safe Area</button>
+              <button type="button" class="cc-bezel-btn" id="toggleLetterboxBtn" aria-pressed="false" title="Toggle 2.39:1 Theatrical Scope Cinema Letterbox Matte">▭ 2.39:1</button>
+              <button type="button" class="cc-bezel-btn" id="toggleYellowCcBtn" aria-pressed="false" title="Toggle FCC/CEA-708 High-Contrast Broadcast Yellow (#FDE047 on Black)">🟨 Yellow CC</button>
               <button type="button" class="cc-bezel-btn" id="toggleCardiacAudioBtn" aria-pressed="false" title="Toggle Gentle Low-Frequency S1/S2 Harmonic Stethoscope Pulse">🔇 S1·S2 Audio</button>
             </div>
           </div>
@@ -84,7 +86,19 @@
                 <span id="ccSpo2Readout" style="color: #38bdf8; font-weight: 700;">SpO2 91% · PLETH</span>
               </div>
               <canvas class="cc-trauma-ecg-canvas" id="ccEcgCanvas" role="img" aria-label="Live Physiological Cardiac Lead II Phosphor-Sweep Monitor"></canvas>
+              <!-- Scene-Specific Broadcast Atmosphere Layers -->
+              <div class="cc-snowfield" id="ccSnowfield" style="display: none;" aria-hidden="true"></div>
+              <div class="cc-noir-rain" id="ccNoirRain" style="display: none;" aria-hidden="true"></div>
+              <div class="cc-eas-header-bar" id="ccEasHeaderBar" style="display: none;" aria-hidden="true">
+                <span>⚡ EMERGENCY ALERT SYSTEM · CIVIL BROADCAST</span>
+                <span>EAS · SAME · 853/960 Hz</span>
+              </div>
+              <div class="cc-aurora-curtain" id="ccAuroraCurtain" style="display: none;" aria-hidden="true"></div>
             </div>
+
+            <!-- 2.39:1 Theatrical Cinema Letterbox Matte -->
+            <div class="cc-letterbox-bar cc-letterbox-top" aria-hidden="true"></div>
+            <div class="cc-letterbox-bar cc-letterbox-bottom" aria-hidden="true"></div>
 
             <!-- SMPTE RP 2046-2 Action-Safe (90%) & Title-Safe (80%) Broadcast Reticle -->
             <div class="cc-safe-reticle" id="ccSafeReticle" aria-hidden="true">
@@ -126,9 +140,9 @@
             <div class="cc-safe-area" id="ccSafeArea">
               
               <!-- Pop-On / Paint-On Caption Box -->
-              <div class="cc-caption-box" id="ccCaptionBox">
+              <div class="cc-caption-box" id="ccCaptionBox" aria-live="polite" aria-atomic="true">
                 <div class="cc-speaker" id="ccSpeaker">DR. ARIS</div>
-                <div class="cc-text-line" id="ccTextLine">Patient in severe ventricular tachycardia. Pulse is thready.</div>
+                <div class="cc-text-line cc-edge-none" id="ccTextLine">Patient in severe ventricular tachycardia. Pulse is thready.</div>
                 <div class="cc-sound-cue" id="ccSoundCue" style="display: none;"></div>
               </div>
 
@@ -170,6 +184,10 @@
             <div class="cc-metric-chip">
               <span class="cc-metric-chip-label">Line-Fit Envelope (37 CPL Standard)</span>
               <span class="cc-metric-chip-val" id="ccCplReadout">58 chars · Auto wdth 100%</span>
+            </div>
+            <div class="cc-metric-chip">
+              <span class="cc-metric-chip-label">Optical Contrast (WCAG AAA ≥ 7:1)</span>
+              <span class="cc-metric-chip-val" id="ccContrastReadout" style="color: #10b981;">20.2:1 (AAA · PASS)</span>
             </div>
             <div class="cc-metric-chip">
               <span class="cc-metric-chip-label">Active OpenType VF Coordinates</span>
@@ -324,7 +342,7 @@
           </div>
         </div>
 
-        <!-- Scrim Opacity & Background Box -->
+        <!-- Scrim Opacity, Background Box & CEA-708 Character Edge -->
         <div class="cc-control-group" style="border-top: 1px solid var(--cc-border); padding-top: 0.8rem;">
           <label class="cc-control-label">
             <span>Subtitle Scrim / Box</span>
@@ -334,7 +352,20 @@
             <button type="button" class="cc-pill-btn" data-scrim="solid">⬛ Solid (EIA-608)</button>
             <button type="button" class="cc-pill-btn active" data-scrim="translucent">🪟 Translucent Glass</button>
             <button type="button" class="cc-pill-btn" data-scrim="minimal">◻️ Minimal Rim</button>
-            <button type="button" class="cc-pill-btn" data-scrim="clear">☀️ Scrimless (Shadow)</button>
+            <button type="button" class="cc-pill-btn" data-scrim="clear">☀️ Scrimless (Halo)</button>
+          </div>
+          <div style="margin-top: 6px;">
+            <div class="cc-control-label" style="font-size: 0.72rem; margin-bottom: 4px;">
+              <span>CEA-708 Character Edge</span>
+              <span class="cc-val-readout" id="edgeStyleLabel">Clean (No Edge)</span>
+            </div>
+            <div class="cc-pill-row" id="edgePills">
+              <button type="button" class="cc-pill-btn active" data-edge="none">Clean</button>
+              <button type="button" class="cc-pill-btn" data-edge="drop_shadow">Drop Shadow</button>
+              <button type="button" class="cc-pill-btn" data-edge="uniform">Uniform Outline</button>
+              <button type="button" class="cc-pill-btn" data-edge="raised">Raised</button>
+              <button type="button" class="cc-pill-btn" data-edge="depressed">Depressed</button>
+            </div>
           </div>
         </div>
 
@@ -1258,6 +1289,121 @@ const SPATIAL_DIRECTIONS = {
   }
 };
 
+const CEA708_EDGE_STYLES = {
+  none: {
+    id: 'none',
+    name: 'Clean (No Edge)',
+    cssClass: 'cc-edge-none',
+    vttTextShadow: null,
+    hasHaloShield: false
+  },
+  drop_shadow: {
+    id: 'drop_shadow',
+    name: 'Drop Shadow',
+    cssClass: 'cc-edge-drop-shadow',
+    vttTextShadow: '0 2px 6px rgba(0, 0, 0, 0.94), 0 0 2px #000000',
+    hasHaloShield: true
+  },
+  uniform: {
+    id: 'uniform',
+    name: 'Uniform Outline',
+    cssClass: 'cc-edge-uniform',
+    vttTextShadow: '-1.5px -1.5px 0 #000000, 1.5px -1.5px 0 #000000, -1.5px 1.5px 0 #000000, 1.5px 1.5px 0 #000000, 0 2px 5px rgba(0, 0, 0, 0.92)',
+    hasHaloShield: true
+  },
+  raised: {
+    id: 'raised',
+    name: 'Raised Bevel',
+    cssClass: 'cc-edge-raised',
+    vttTextShadow: '0 1px 0 #000000, 0 2px 0 rgba(0, 0, 0, 0.88), 0 3px 6px rgba(0, 0, 0, 0.78)',
+    hasHaloShield: true
+  },
+  depressed: {
+    id: 'depressed',
+    name: 'Depressed Emboss',
+    cssClass: 'cc-edge-depressed',
+    vttTextShadow: '0 -1px 0 #000000, 0 -2px 3px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(255, 255, 255, 0.25)',
+    hasHaloShield: false
+  }
+};
+
+const PHILOCARDIA_OPENTYPE_TAGS = {
+  heart: 'ss07',
+  blossom: 'ss08',
+  nuqta: 'ss09',
+  star: 'ss10',
+  droplet: 'ss11'
+};
+
+const SCENE_BACKDROP_RGB = {
+  trauma_bay: [9, 14, 23],
+  blizzard_glare: [219, 234, 254],
+  midnight_noir: [5, 9, 18],
+  eas_alert: [2, 2, 2],
+  sovereign_aptn: [5, 16, 30],
+  narrative_arc: [8, 13, 24]
+};
+
+function parseCssColorRgba(colorStr, fallback = [0, 0, 0, 1]) {
+  if (!colorStr || typeof colorStr !== 'string') return fallback;
+  const s = colorStr.trim();
+  if (s === 'transparent') return [0, 0, 0, 0];
+  const hexMatch = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(s);
+  if (hexMatch) {
+    let h = hexMatch[1];
+    if (h.length === 3) h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2];
+    return [
+      parseInt(h.slice(0, 2), 16),
+      parseInt(h.slice(2, 4), 16),
+      parseInt(h.slice(4, 6), 16),
+      1
+    ];
+  }
+  const rgbaMatch = /^rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)(?:\s*,\s*([\d.]+))?\s*\)$/i.exec(s);
+  if (rgbaMatch) {
+    return [
+      Math.max(0, Math.min(255, Number(rgbaMatch[1]))),
+      Math.max(0, Math.min(255, Number(rgbaMatch[2]))),
+      Math.max(0, Math.min(255, Number(rgbaMatch[3]))),
+      rgbaMatch[4] !== undefined ? Math.max(0, Math.min(1, Number(rgbaMatch[4]))) : 1
+    ];
+  }
+  return fallback;
+}
+
+function relativeLuminance(rgb) {
+  const lin = (c) => {
+    const v = Math.max(0, Math.min(255, c)) / 255;
+    return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+  };
+  return 0.2126 * lin(rgb[0]) + 0.7152 * lin(rgb[1]) + 0.0722 * lin(rgb[2]);
+}
+
+function computeCaptionContrast(fgCss, scrimCss, backdropRgb = [9, 14, 23], hasHaloShield = false) {
+  const fg = parseCssColorRgba(fgCss, [255, 255, 255, 1]);
+  const sc = parseCssColorRgba(scrimCss, [0, 0, 0, 0.82]);
+  const a = sc[3];
+  const compBg = [
+    sc[0] * a + backdropRgb[0] * (1 - a),
+    sc[1] * a + backdropRgb[1] * (1 - a),
+    sc[2] * a + backdropRgb[2] * (1 - a)
+  ];
+  const lFg = relativeLuminance(fg);
+  const lBg = relativeLuminance(compBg);
+  const rawRatio = Number(((Math.max(lFg, lBg) + 0.05) / (Math.min(lFg, lBg) + 0.05)).toFixed(1));
+  let effectiveRatio = rawRatio;
+  let haloProtected = false;
+  if (hasHaloShield && rawRatio < 7.0) {
+    const haloRatio = Number(((lFg + 0.05) / 0.05).toFixed(1));
+    if (haloRatio > rawRatio) {
+      effectiveRatio = Number(Math.min(haloRatio, Math.max(rawRatio, 10.5)).toFixed(1));
+      haloProtected = true;
+    }
+  }
+  const tier = effectiveRatio >= 7.0 ? 'AAA' : effectiveRatio >= 4.5 ? 'AA' : 'LOW';
+  return { ratio: effectiveRatio, rawRatio, tier, haloProtected };
+}
+
 class ClosedCaptionStudio {
   constructor(options = {}) {
     this.currentSceneId = options.sceneId || 'trauma_bay';
@@ -1283,7 +1429,11 @@ class ClosedCaptionStudio {
     // Emotion & Atmospheric Scene Blending
     this.currentEmotion = null;
     this.currentAtmosphericBlend = 'clinical_teal';
+    this.blendActive = false;
     this.currentSpatialDirection = 'center';
+    this.edgeStyle = 'none';
+    this.letterboxMode = false;
+    this.yellowHighContrast = false;
 
     // Philocardia Hearts & Tittle Varieties
     this.philocardiaEnabled = false;
@@ -1392,6 +1542,30 @@ class ClosedCaptionStudio {
 
   setScrim(scrim) {
     this.scrimMode = scrim;
+    this.yellowHighContrast = false;
+  }
+
+  setEdgeStyle(styleId) {
+    if (CEA708_EDGE_STYLES[styleId]) {
+      this.edgeStyle = styleId;
+      return CEA708_EDGE_STYLES[styleId];
+    }
+    this.edgeStyle = 'none';
+    return CEA708_EDGE_STYLES.none;
+  }
+
+  setLetterboxMode(enabled) {
+    this.letterboxMode = Boolean(enabled);
+    return this.letterboxMode;
+  }
+
+  setYellowHighContrast(enabled) {
+    this.yellowHighContrast = Boolean(enabled);
+    if (this.yellowHighContrast) {
+      this.scrimMode = 'solid';
+      this.blendActive = false;
+    }
+    return this.yellowHighContrast;
   }
 
   setAbFont(font) {
@@ -1410,9 +1584,104 @@ class ClosedCaptionStudio {
   setAtmosphericBlend(id) {
     if (ATMOSPHERIC_BLENDS[id]) {
       this.currentAtmosphericBlend = id;
+      this.blendActive = true;
+      this.yellowHighContrast = false;
       return ATMOSPHERIC_BLENDS[id];
     }
     return ATMOSPHERIC_BLENDS.clinical_teal;
+  }
+
+  resolveCaptionSurface(prosody = 'dialogue') {
+    const edgeSpec = CEA708_EDGE_STYLES[this.edgeStyle] || CEA708_EDGE_STYLES.none;
+    const backdropRgb = SCENE_BACKDROP_RGB[this.currentSceneId] || SCENE_BACKDROP_RGB.trauma_bay;
+
+    if (this.yellowHighContrast) {
+      const fg = prosody === 'soundfx' ? '#4ade80' : '#fde047';
+      const scrimBg = 'rgba(0, 0, 0, 1)';
+      const contrast = computeCaptionContrast(fg, scrimBg, backdropRgb, edgeSpec.hasHaloShield);
+      return {
+        fg,
+        speakerColor: '#fde047',
+        scrimBg,
+        border: '1px solid rgba(253, 224, 71, 0.5)',
+        boxShadow: '0 4px 18px rgba(0, 0, 0, 0.92)',
+        useDiffusion: false,
+        edgeSpec,
+        contrast
+      };
+    }
+
+    if (this.blendActive) {
+      const blend = ATMOSPHERIC_BLENDS[this.currentAtmosphericBlend] || ATMOSPHERIC_BLENDS.clinical_teal;
+      const baseRgba = parseCssColorRgba(blend.scrimBg, [4, 20, 28, 0.85]);
+      const alpha = this.scrimMode === 'solid'
+        ? 1
+        : this.scrimMode === 'minimal'
+          ? 0.45
+          : this.scrimMode === 'clear'
+            ? 0
+            : baseRgba[3];
+      const scrimBg = alpha === 0
+        ? 'rgba(0, 0, 0, 0)'
+        : `rgba(${baseRgba[0]}, ${baseRgba[1]}, ${baseRgba[2]}, ${alpha})`;
+      const isLightScrim = this.currentAtmosphericBlend === 'arctic_frost' && alpha >= 0.45;
+      const fg = prosody === 'soundfx'
+        ? (isLightScrim ? '#0f766e' : '#22d3ee')
+        : (alpha === 0 ? '#ffffff' : blend.textTint);
+      const speakerColor = isLightScrim ? '#92400e' : '';
+      const contrast = computeCaptionContrast(fg, scrimBg, backdropRgb, edgeSpec.hasHaloShield);
+      return {
+        fg,
+        speakerColor,
+        scrimBg,
+        border: alpha === 0 ? 'none' : `1px solid ${blend.scrimBorder}`,
+        boxShadow: alpha === 0 ? 'none' : blend.aura,
+        useDiffusion: alpha > 0,
+        edgeSpec,
+        contrast
+      };
+    }
+
+    const alpha = this.scrimMode === 'solid'
+      ? 1
+      : this.scrimMode === 'minimal'
+        ? 0.45
+        : this.scrimMode === 'clear'
+          ? 0
+          : 0.82;
+    const scrimBg = `rgba(0, 0, 0, ${alpha})`;
+    const border = this.scrimMode === 'clear'
+      ? 'none'
+      : this.scrimMode === 'solid'
+        ? '1px solid rgba(255, 255, 255, 0.2)'
+        : this.scrimMode === 'minimal'
+          ? '1px solid rgba(255, 255, 255, 0.15)'
+          : '1px solid rgba(255, 255, 255, 0.08)';
+    const fg = prosody === 'soundfx' ? '#22d3ee' : '#ffffff';
+    const contrast = computeCaptionContrast(fg, scrimBg, backdropRgb, edgeSpec.hasHaloShield);
+    return {
+      fg,
+      speakerColor: '',
+      scrimBg,
+      border,
+      boxShadow: alpha === 0 ? 'none' : '0 4px 18px rgba(0, 0, 0, 0.85)',
+      useDiffusion: false,
+      edgeSpec,
+      contrast
+    };
+  }
+
+  getOpenTypeFeatureString(includePhilocardia = true) {
+    const features = ['"zero" 1', '"cv08" 1', '"cv05" 1', '"ss02" 1', '"cv11" 1'];
+    if (includePhilocardia && (this.philocardiaEnabled || this.tittleVariety !== 'dot')) {
+      const tag = PHILOCARDIA_OPENTYPE_TAGS[this.tittleVariety];
+      if (tag) features.push(`"${tag}" 1`);
+    }
+    return features.join(', ');
+  }
+
+  usesNativePhilocardiaStillness() {
+    return Boolean((this.philocardiaEnabled || this.tittleVariety !== 'dot') && this.cardiacPacingId === 'stillness');
   }
 
   setSpatialDirection(id) {
@@ -1524,15 +1793,31 @@ class ClosedCaptionStudio {
   generateWebVtt(customText = '') {
     const scene = this.getScene();
     const voiceSpec = CAPTION_FONT_VOICES[this.fontVoice] || CAPTION_FONT_VOICES.vf_humanist;
+    const surface = this.resolveCaptionSurface('dialogue');
+    const featureStr = this.getOpenTypeFeatureString(true);
+    const tittleNote = (this.philocardiaEnabled || this.tittleVariety !== 'dot')
+      ? ` | Tittle: ${this.tittleVariety} (${PHILOCARDIA_OPENTYPE_TAGS[this.tittleVariety] || 'ss07'})`
+      : '';
+    const edgeNote = surface.edgeSpec.id !== 'none' ? ` | Edge: ${surface.edgeSpec.name}` : '';
+    const cueRules = [
+      `  font-family: ${voiceSpec.cssFamily};`,
+      `  font-feature-settings: ${featureStr};`,
+      '  font-variant-numeric: slashed-zero;',
+      '  font-synthesis: none;',
+      '  text-wrap: balance;',
+      `  color: ${surface.fg};`,
+      `  background-color: ${surface.scrimBg};`
+    ];
+    if (surface.edgeSpec.vttTextShadow) {
+      cueRules.push(`  text-shadow: ${surface.edgeSpec.vttTextShadow};`);
+    }
     const lines = [
       'WEBVTT - PocketGull Variable Prosody & ISMP Clinical Broadcast Track',
-      `NOTE Scene: ${scene.title} | Protocol: ${this.mode.toUpperCase()} | Voice: ${voiceSpec.name} | License: SIL OFL 1.1`,
+      `NOTE Scene: ${scene.title} | Protocol: ${this.mode.toUpperCase()} | Voice: ${voiceSpec.name}${tittleNote}${edgeNote} | License: SIL OFL 1.1`,
       '',
       'STYLE',
       '::cue {',
-      `  font-family: ${voiceSpec.cssFamily};`,
-      '  font-feature-settings: "zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1;',
-      '  font-variant-numeric: slashed-zero;',
+      ...cueRules,
       '}',
       '::cue(.whisper) { font-variation-settings: "wght" 240, "slnt" -7, "APTR" 0.35, "SOFT" 0.80, "HLNG" 0.60, "BOUM" 0.30; }',
       '::cue(.urgent)  { font-variation-settings: "wght" 700, "wdth" 94, "APTR" 0.90, "SOFT" 0.00, "HLNG" 0.00, "THRM" 0.35; }',
@@ -1626,23 +1911,32 @@ function renderPhilocardiaNodes(container, rawText, pacingClass = 'philocardia-p
     }
     if (typeof container.removeAttribute === 'function') {
       container.removeAttribute('data-tittle-variety');
+      container.removeAttribute('aria-label');
     }
     return;
   }
 
   container.dataset.tittleVariety = variety;
+  if (typeof container.setAttribute === 'function') {
+    container.setAttribute('aria-label', rawText);
+  }
+
+  const charMap = {
+    'i': { cls: 'philocardia-heart', txt: 'ı' },
+    'j': { cls: 'philocardia-j', txt: 'ȷ' },
+    '!': { cls: 'philocardia-excl', txt: '!' },
+    '?': { cls: 'philocardia-question', txt: '?' },
+    '¡': { cls: 'philocardia-excl-down', txt: '¡' },
+    '¿': { cls: 'philocardia-question-down', txt: '¿' },
+  };
 
   for (let i = 0; i < rawText.length; i++) {
     const ch = rawText[i];
-    if (ch === 'i') {
+    const spec = charMap[ch];
+    if (spec) {
       const span = document.createElement('span');
-      span.className = `philocardia-heart ${pacingClass}`;
-      span.textContent = 'ı'; // dotless i
-      container.appendChild(span);
-    } else if (ch === 'j') {
-      const span = document.createElement('span');
-      span.className = `philocardia-j ${pacingClass}`;
-      span.textContent = 'ȷ'; // dotless j
+      span.className = pacingClass ? `${spec.cls} ${pacingClass}` : spec.cls;
+      span.textContent = spec.txt;
       container.appendChild(span);
     } else {
       container.appendChild(document.createTextNode(ch));
@@ -2422,6 +2716,12 @@ if (typeof window !== 'undefined') {
     EMOTION_TOKENS,
     ATMOSPHERIC_BLENDS,
     SPATIAL_DIRECTIONS,
+    CEA708_EDGE_STYLES,
+    PHILOCARDIA_OPENTYPE_TAGS,
+    SCENE_BACKDROP_RGB,
+    parseCssColorRgba,
+    relativeLuminance,
+    computeCaptionContrast,
     TITTLE_VARIETIES,
     CARDIAC_PACING_PRESETS,
     NARRATIVE_ARC_GENRES,
@@ -2456,7 +2756,13 @@ if (typeof window !== 'undefined') {
     const teletextWave = document.getElementById('ccTeletextWave');
     const safeReticle = document.getElementById('ccSafeReticle');
     const toggleSafeAreaBtn = document.getElementById('toggleSafeAreaBtn');
+    const toggleLetterboxBtn = document.getElementById('toggleLetterboxBtn');
+    const toggleYellowCcBtn = document.getElementById('toggleYellowCcBtn');
     const toggleCardiacAudioBtn = document.getElementById('toggleCardiacAudioBtn');
+    const snowfieldLayer = document.getElementById('ccSnowfield');
+    const noirRainLayer = document.getElementById('ccNoirRain');
+    const easHeaderLayer = document.getElementById('ccEasHeaderBar');
+    const auroraLayer = document.getElementById('ccAuroraCurtain');
     const vitalsBar = document.getElementById('ccVitalsBar');
     const rhythmStateEl = document.getElementById('ccRhythmState');
     const cardiacDotEl = document.getElementById('ccCardiacDot');
@@ -2464,7 +2770,9 @@ if (typeof window !== 'undefined') {
     const ecgCanvas = document.getElementById('ccEcgCanvas');
     const cpsReadoutEl = document.getElementById('ccCpsReadout');
     const cplReadoutEl = document.getElementById('ccCplReadout');
+    const contrastReadoutEl = document.getElementById('ccContrastReadout');
     const vfVectorReadoutEl = document.getElementById('ccVfVectorReadout');
+    const edgeStyleLabel = document.getElementById('edgeStyleLabel');
     const vttPreviewEl = document.getElementById('ccVttPreview');
     const copyVttBtn = document.getElementById('copyVttBtn');
     const downloadVttBtn = document.getElementById('downloadVttBtn');
@@ -2590,6 +2898,19 @@ if (typeof window !== 'undefined') {
         vttPreviewEl.textContent = studio.generateWebVtt(customInput ? customInput.value : '');
       }
 
+      const activeCue = studio.getCurrentCue();
+      const surface = studio.resolveCaptionSurface(activeCue ? activeCue.prosody : 'dialogue');
+      if (contrastReadoutEl && surface && surface.contrast) {
+        const c = surface.contrast;
+        const badge = c.tier === 'AAA'
+          ? (c.haloProtected ? 'AAA · HALO SHIELD' : 'AAA · PASS')
+          : c.tier === 'AA'
+            ? 'AA · CHECK'
+            : 'LOW — ADD OUTLINE';
+        contrastReadoutEl.textContent = `${c.ratio}:1 (${badge})`;
+        contrastReadoutEl.style.color = c.tier === 'AAA' ? '#10b981' : c.tier === 'AA' ? '#f59e0b' : '#f43f5e';
+      }
+
       const cardiac = studio.resolveCueCardiacState(manualPacingOverride);
       if (ecgMonitor) {
         ecgMonitor.setConfig({
@@ -2614,13 +2935,57 @@ if (typeof window !== 'undefined') {
       }
     }
 
+    const ALL_EDGE_CLASSES = Object.values(CEA708_EDGE_STYLES).map(e => e.cssClass);
+
+    function applyCaptionPresentation(prosody = 'dialogue', auraOverride = null) {
+      const surface = studio.resolveCaptionSurface(prosody);
+      captionBox.classList.toggle('cc-photometric-diffusion', surface.useDiffusion);
+      captionBox.style.background = surface.scrimBg;
+      captionBox.style.border = surface.border;
+      captionBox.style.boxShadow = auraOverride || surface.boxShadow;
+      captionBox.style.backdropFilter = surface.scrimBg === 'rgba(0, 0, 0, 0)' ? 'none' : '';
+      captionBox.style.webkitBackdropFilter = surface.scrimBg === 'rgba(0, 0, 0, 0)' ? 'none' : '';
+      textLineEl.style.color = surface.fg;
+      textLineEl.style.textShadow = '';
+      textLineEl.style.webkitTextStroke = '';
+      textLineEl.classList.remove(...ALL_EDGE_CLASSES);
+      textLineEl.classList.add(surface.edgeSpec.cssClass);
+      if (speakerEl) {
+        speakerEl.style.color = surface.speakerColor || '';
+        speakerEl.style.textShadow = surface.scrimBg === 'rgba(0, 0, 0, 0)'
+          ? (surface.edgeSpec.vttTextShadow || '0 1px 4px rgba(0, 0, 0, 0.95)')
+          : '';
+      }
+      rollupContainer.querySelectorAll('.cc-rollup-line').forEach((lineEl) => {
+        lineEl.classList.remove(...ALL_EDGE_CLASSES);
+        lineEl.classList.add(surface.edgeSpec.cssClass);
+        lineEl.style.color = studio.yellowHighContrast ? '#fde047' : '';
+      });
+      return surface;
+    }
+
+    function updateSceneLayers(sceneClass) {
+      if (snowfieldLayer) snowfieldLayer.style.display = sceneClass === 'cc-scene-blizzard' ? 'block' : 'none';
+      if (noirRainLayer) noirRainLayer.style.display = sceneClass === 'cc-scene-noir' ? 'block' : 'none';
+      if (easHeaderLayer) easHeaderLayer.style.display = sceneClass === 'cc-scene-eas' ? 'flex' : 'none';
+      if (auroraLayer) auroraLayer.style.display = sceneClass === 'cc-scene-aptn' ? 'block' : 'none';
+    }
+
     function renderCaptionTextNodes(el, text) {
       if (!el) return;
-      if (studio.philocardiaEnabled || studio.tittleVariety !== 'dot') {
+      if (studio.usesNativePhilocardiaStillness()) {
+        el.textContent = text;
+        el.removeAttribute('data-tittle-variety');
+        el.removeAttribute('aria-label');
+        el.style.fontFeatureSettings = studio.getOpenTypeFeatureString(true);
+      } else if (studio.philocardiaEnabled || studio.tittleVariety !== 'dot') {
+        el.style.fontFeatureSettings = studio.getOpenTypeFeatureString(false);
         renderPhilocardiaNodes(el, text, studio.cardiacPacing, studio.tittleVariety);
       } else {
         el.textContent = text;
         el.removeAttribute('data-tittle-variety');
+        el.removeAttribute('aria-label');
+        el.style.fontFeatureSettings = studio.getOpenTypeFeatureString(false);
       }
     }
 
@@ -2632,7 +2997,7 @@ if (typeof window !== 'undefined') {
       el.style.fontStretch = `${axes.width}%`;
       el.style.fontStyle = axes.slant < 0 ? `oblique ${axes.slant}deg` : 'normal';
       el.style.fontVariationSettings = buildVariationString(axes);
-      el.style.fontFeatureSettings = '"zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1';
+      el.style.fontFeatureSettings = studio.getOpenTypeFeatureString(studio.usesNativePhilocardiaStillness());
       el.style.fontVariantNumeric = 'slashed-zero';
     }
 
@@ -2801,11 +3166,10 @@ if (typeof window !== 'undefined') {
         if (cue.prosody === 'soundfx') {
           soundCueEl.style.display = 'flex';
           soundCueEl.textContent = `${cue.icon || '♪'} Non-Speech Audio Event`;
-          textLineEl.style.color = 'var(--cc-accent-cyan)';
         } else {
           soundCueEl.style.display = 'none';
-          textLineEl.style.color = '#ffffff';
         }
+        applyCaptionPresentation(cue.prosody, activeEmotionToken ? activeEmotionToken.aura : null);
 
         sampleFallback.textContent = cue.text;
 
@@ -2828,6 +3192,7 @@ if (typeof window !== 'undefined') {
           lineDiv.style.letterSpacing = textLineEl.style.letterSpacing || '0.015em';
           rollupContainer.appendChild(lineDiv);
         }
+        applyCaptionPresentation(cue.prosody, activeEmotionToken ? activeEmotionToken.aura : null);
 
       } else if (studio.mode === 'paint-on') {
         captionBox.style.display = 'block';
@@ -2837,6 +3202,7 @@ if (typeof window !== 'undefined') {
         textLineEl.textContent = '';
         soundCueEl.style.display = 'none';
         captionBox.classList.toggle('cc-philocardia-active', studio.philocardiaEnabled || studio.tittleVariety !== 'dot');
+        applyCaptionPresentation(cue.prosody, activeEmotionToken ? activeEmotionToken.aura : null);
 
         let charIdx = 0;
         const fullText = cue.text;
@@ -2887,9 +3253,10 @@ if (typeof window !== 'undefined') {
       studio.setScene(sceneId);
       const scene = studio.getScene();
       
-      // Update Scene Background
+      // Update Scene Background & Atmospheric Stage Layers
       sceneBg.className = `cc-scene-layer ${scene.sceneClass}`;
       activeSceneLabel.textContent = scene.title.replace(/^[^\s]+\s*/, '');
+      updateSceneLayers(scene.sceneClass);
 
       // Show/hide Trauma ICU telemetry canvas & vitals bar
       const showTraumaHud = sceneId === 'trauma_bay' || sceneId === 'narrative_arc';
@@ -3079,6 +3446,15 @@ if (typeof window !== 'undefined') {
       });
     });
 
+    // Helper to refresh surface presentation, contrast chip & live WebVTT
+    function syncPresentationAndTelemetry() {
+      const cue = studio.getCurrentCue();
+      const activeEmotionToken = studio.currentEmotion ? EMOTION_TOKENS[studio.currentEmotion] : null;
+      applyCaptionPresentation(cue ? cue.prosody : 'dialogue', activeEmotionToken ? activeEmotionToken.aura : null);
+      const activeText = customInput && customInput.value.trim() ? customInput.value.trim() : (cue ? cue.text : '');
+      updateTelemetryAndVtt(activeText, activeFontAxes.weight, activeFontAxes.width, activeFontAxes.slant, activeFontAxes.aptr);
+    }
+
     // Scrim buttons
     document.querySelectorAll('[data-scrim]').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -3086,22 +3462,30 @@ if (typeof window !== 'undefined') {
         btn.classList.add('active');
         const s = btn.dataset.scrim;
         studio.setScrim(s);
+        if (toggleYellowCcBtn) {
+          toggleYellowCcBtn.classList.remove('active');
+          toggleYellowCcBtn.setAttribute('aria-pressed', 'false');
+        }
         scrimLabel.textContent = btn.textContent.replace(/^[^\s]+\s*/, '');
 
-        if (s === 'solid') {
-          captionBox.style.background = 'rgba(0, 0, 0, 1.0)';
-          captionBox.style.border = '1px solid rgba(255, 255, 255, 0.2)';
-        } else if (s === 'translucent') {
-          captionBox.style.background = 'rgba(0, 0, 0, 0.82)';
-          captionBox.style.border = '1px solid rgba(255, 255, 255, 0.08)';
-        } else if (s === 'minimal') {
-          captionBox.style.background = 'rgba(0, 0, 0, 0.45)';
-          captionBox.style.border = '1px solid rgba(255, 255, 255, 0.15)';
-        } else if (s === 'clear') {
-          captionBox.style.background = 'transparent';
-          captionBox.style.border = 'none';
-          textLineEl.style.textShadow = '0 2px 10px rgba(0, 0, 0, 0.95), 0 0 3px #000000';
+        // When entering Scrimless mode from Clean edge, auto-engage CEA-708 Uniform Outline for optical safety
+        if (s === 'clear' && studio.edgeStyle === 'none') {
+          const edge = studio.setEdgeStyle('uniform');
+          if (edgeStyleLabel) edgeStyleLabel.textContent = edge.name;
+          document.querySelectorAll('[data-edge]').forEach(b => b.classList.toggle('active', b.dataset.edge === 'uniform'));
         }
+        syncPresentationAndTelemetry();
+      });
+    });
+
+    // CEA-708 Character Edge buttons
+    document.querySelectorAll('[data-edge]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-edge]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const edge = studio.setEdgeStyle(btn.dataset.edge);
+        if (edgeStyleLabel) edgeStyleLabel.textContent = edge.name;
+        syncPresentationAndTelemetry();
       });
     });
 
@@ -3183,13 +3567,11 @@ if (typeof window !== 'undefined') {
         const blendId = btn.dataset.blend;
         const blend = studio.setAtmosphericBlend(blendId);
         activeBlendLabel.textContent = blend.name;
-
-        // Apply photometric diffusion to caption box
-        captionBox.classList.add('cc-photometric-diffusion');
-        captionBox.style.background = blend.scrimBg;
-        captionBox.style.borderColor = blend.scrimBorder;
-        captionBox.style.boxShadow = blend.aura;
-        textLineEl.style.color = blend.textTint;
+        if (toggleYellowCcBtn) {
+          toggleYellowCcBtn.classList.remove('active');
+          toggleYellowCcBtn.setAttribute('aria-pressed', 'false');
+        }
+        syncPresentationAndTelemetry();
       });
     });
 
@@ -3252,9 +3634,10 @@ if (typeof window !== 'undefined') {
         manualPacingOverride = true;
         const pacing = studio.setCardiacPacing(btn.dataset.pacing);
         pacingReadout.textContent = pacing.name;
-        if (ecgCanvas) ecgCanvas.style.display = 'block';
-        if (vitalsBar) vitalsBar.style.display = 'flex';
-        if (ecgMonitor) requestAnimationFrame(() => ecgMonitor.resize());
+        const showTraumaHud = studio.currentSceneId === 'trauma_bay' || studio.currentSceneId === 'narrative_arc';
+        if (ecgCanvas) ecgCanvas.style.display = showTraumaHud ? 'block' : 'none';
+        if (vitalsBar) vitalsBar.style.display = showTraumaHud ? 'flex' : 'none';
+        if (ecgMonitor && showTraumaHud) requestAnimationFrame(() => ecgMonitor.resize());
         renderCue();
       });
     });
@@ -3330,13 +3713,8 @@ if (typeof window !== 'undefined') {
 
       if (val.length > 0) {
         speakerEl.textContent = 'USER INPUT';
-        if (studio.philocardiaEnabled || studio.tittleVariety !== 'dot') {
-          renderPhilocardiaNodes(textLineEl, customInput.value, studio.cardiacPacing, studio.tittleVariety);
-          renderPhilocardiaNodes(samplePocketgull, customInput.value, studio.cardiacPacing, studio.tittleVariety);
-        } else {
-          textLineEl.textContent = customInput.value;
-          samplePocketgull.textContent = customInput.value;
-        }
+        renderCaptionTextNodes(textLineEl, customInput.value);
+        renderCaptionTextNodes(samplePocketgull, customInput.value);
         sampleFallback.textContent = customInput.value;
 
         // Auto-calculate line-fit width while keeping active emotional slant/axes intact
@@ -3406,11 +3784,7 @@ if (typeof window !== 'undefined') {
         btn.classList.add('active');
         const key = btn.dataset.sampleText;
         const text = SAMPLE_STRINGS[key] || SAMPLE_STRINGS.dosage;
-        if (studio.philocardiaEnabled || studio.tittleVariety !== 'dot') {
-          renderPhilocardiaNodes(samplePocketgull, text, studio.cardiacPacing, studio.tittleVariety);
-        } else {
-          samplePocketgull.textContent = text;
-        }
+        renderCaptionTextNodes(samplePocketgull, text);
         sampleFallback.textContent = text;
       });
     });
@@ -3422,6 +3796,30 @@ if (typeof window !== 'undefined') {
         safeReticle.classList.toggle('visible', studio.safeAreaVisible);
         toggleSafeAreaBtn.classList.toggle('active', studio.safeAreaVisible);
         toggleSafeAreaBtn.setAttribute('aria-pressed', String(studio.safeAreaVisible));
+      });
+    }
+
+    // 2.39:1 Theatrical Scope Cinema Letterbox Matte Toggle
+    if (toggleLetterboxBtn && screen) {
+      toggleLetterboxBtn.addEventListener('click', () => {
+        const active = studio.setLetterboxMode(!studio.letterboxMode);
+        screen.classList.toggle('cc-letterbox-active', active);
+        toggleLetterboxBtn.classList.toggle('active', active);
+        toggleLetterboxBtn.setAttribute('aria-pressed', String(active));
+      });
+    }
+
+    // FCC / CEA-708 Broadcast Yellow High-Contrast Toggle (#FDE047 on Black)
+    if (toggleYellowCcBtn) {
+      toggleYellowCcBtn.addEventListener('click', () => {
+        const active = studio.setYellowHighContrast(!studio.yellowHighContrast);
+        toggleYellowCcBtn.classList.toggle('active', active);
+        toggleYellowCcBtn.setAttribute('aria-pressed', String(active));
+        if (active) {
+          document.querySelectorAll('[data-scrim]').forEach(b => b.classList.toggle('active', b.dataset.scrim === 'solid'));
+          scrimLabel.textContent = 'Solid (Broadcast Yellow)';
+        }
+        syncPresentationAndTelemetry();
       });
     }
 
@@ -3521,6 +3919,7 @@ if (typeof window !== 'undefined') {
       studio.currentCueIndex = Math.max(0, Math.min(currentGeneratedArc.cues.length - 1, beatIndex));
       sceneBg.className = `cc-scene-layer ${currentGeneratedArc.sceneClass}`;
       activeSceneLabel.textContent = currentGeneratedArc.title;
+      updateSceneLayers(currentGeneratedArc.sceneClass);
 
       if (ecgCanvas) ecgCanvas.style.display = 'block';
       if (vitalsBar) vitalsBar.style.display = 'flex';

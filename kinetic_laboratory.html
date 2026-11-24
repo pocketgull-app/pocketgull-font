@@ -68,6 +68,29 @@
       --canvas-bg: #f1f5f9;
     }
 
+    [data-theme="scotopic"] {
+      --bg: #080000;
+      --card-bg: #120202;
+      --card-border: #3b0a0a;
+      --surface-inner: #1a0303;
+      --text-main: #ff6b6b;
+      --text-muted: #cc4444;
+      --cyan: #ff4d4d;
+      --cyan-glow: rgba(255, 77, 77, 0.28);
+      --amber: #ff3b3b;
+      --amber-glow: rgba(255, 59, 59, 0.28);
+      --emerald: #ff6b6b;
+      --emerald-glow: rgba(255, 107, 107, 0.25);
+      --rose: #ff8585;
+      --purple: #d93838;
+      --gold: #ff4d4d;
+      --canvas-bg: #050000;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -255,10 +278,11 @@
       display: flex;
       gap: 8px;
       pointer-events: auto;
+      flex-wrap: wrap;
     }
 
     .hud-chip {
-      background: rgba(13, 21, 34, 0.85);
+      background: color-mix(in srgb, var(--card-bg) 88%, transparent);
       backdrop-filter: blur(8px);
       border: 1px solid var(--card-border);
       border-radius: 8px;
@@ -269,6 +293,15 @@
       font-family: var(--mono-stack);
       font-size: 11px;
       color: var(--text-muted);
+    }
+
+    .hud-chip.goal-complete {
+      border-color: var(--emerald);
+      color: var(--emerald);
+    }
+
+    .hud-chip.goal-complete strong {
+      color: var(--emerald);
     }
 
     .hud-chip strong {
@@ -297,7 +330,7 @@
       display: flex;
       gap: 12px;
       align-items: center;
-      background: rgba(13, 21, 34, 0.9);
+      background: color-mix(in srgb, var(--card-bg) 92%, transparent);
       backdrop-filter: blur(12px);
       border: 1px solid var(--card-border);
       border-radius: 12px;
@@ -341,6 +374,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      flex-wrap: wrap;
     }
 
     .btn-fire {
@@ -388,6 +422,11 @@
     .btn-secondary:hover {
       border-color: var(--cyan);
       color: var(--cyan);
+    }
+
+    .btn-secondary:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
     }
 
     /* Right Control Drawer */
@@ -574,13 +613,106 @@
       color: var(--text-muted);
     }
 
+    .btn-run {
+      background: var(--emerald);
+      color: #03150e;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-family: var(--display-stack);
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 10px var(--emerald-glow);
+      transition: all 0.15s ease;
+    }
+
+    .btn-run.running {
+      background: var(--rose);
+      color: #1c050a;
+    }
+
+    .btn-drawer-toggle {
+      display: none;
+    }
+
+    .parts-tray {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .btn-share-blueprint {
+      width: 100%;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .selection-panel {
+      background: var(--surface-inner);
+      border: 1px solid var(--amber);
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .selection-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--amber);
+    }
+
+    .selection-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .selection-actions .btn-secondary {
+      flex: 1;
+      justify-content: center;
+      padding: 6px 8px;
+      font-size: 11px;
+    }
+
+    .section-spacer {
+      margin-top: 14px;
+    }
+
+    .tim-controls-hidden {
+      display: none;
+    }
+
     .info-card strong {
       color: var(--text-main);
     }
 
     @media (max-width: 900px) {
+      .btn-drawer-toggle {
+        display: inline-flex;
+      }
       .control-sidebar {
-        display: none;
+        position: fixed;
+        top: 60px;
+        right: 0;
+        bottom: 0;
+        width: min(320px, 88vw);
+        transform: translateX(100%);
+        transition: transform 0.22s ease;
+        box-shadow: -8px 0 28px rgba(0, 0, 0, 0.45);
+        z-index: 90;
+      }
+      .control-sidebar.drawer-open {
+        transform: translateX(0);
       }
       .stage-bottom-bar {
         flex-direction: column;
@@ -623,8 +755,11 @@
       <button type="button" class="btn-nav-pill" id="btnAudioMute" title="Toggle Audio (Mute / Unmute)">
         <span id="audioMuteIcon">🔊</span> Audio: ON
       </button>
-      <button type="button" class="btn-nav-pill" id="btnThemeToggle" title="Toggle Theme (Dark, Washi, Light)">
+      <button type="button" class="btn-nav-pill" id="btnThemeToggle" title="Toggle Theme (Dark, Washi, Light, Scotopic 650nm)">
         <span id="themeIcon">◐</span> Dark
+      </button>
+      <button type="button" class="btn-nav-pill btn-drawer-toggle" id="btnDrawerToggle" aria-expanded="false" aria-controls="controlSidebar" title="Toggle Controls Drawer">
+        <span>🎛️</span> Controls
       </button>
       <a href="index.html" class="btn-nav-pill" title="Return to Main Typeface Specimen">
         📖 Specimen
@@ -653,6 +788,9 @@
           <div class="hud-chip">
             <span>BALLS:</span> <strong id="hudBallCount">0</strong>
           </div>
+          <div class="hud-chip hidden" id="hudGoalChip">
+            <span>GOAL:</span> <strong id="hudGoalLabel">BLUEPRINT</strong>
+          </div>
         </div>
 
         <div class="hud-chip-group">
@@ -676,6 +814,9 @@
         </div>
 
         <div class="action-btn-group">
+          <button type="button" class="btn-run hidden" id="btnRunStop" title="Run or Stop &amp; Reset Contraption Blueprint">
+            <span>▶</span> Run Contraption
+          </button>
           <button type="button" class="btn-fire" id="btnFireBall" title="Launch ballistic spheres or drop marble (Shortcut: Space)">
             <span id="fireIcon">⚡</span> <span id="fireText">Launch Canon</span>
           </button>
@@ -691,7 +832,7 @@
     </div>
 
     <!-- Right Control & Acoustics Sidebar -->
-    <aside class="control-sidebar" aria-label="Kinetic Controls">
+    <aside class="control-sidebar" id="controlSidebar" aria-label="Kinetic Controls">
       <div class="sidebar-header">
         <div class="sidebar-title">
           <span id="sidebarIcon">🎶</span> <span id="sidebarTitleText">Acoustic Synthesizer</span>
@@ -739,7 +880,7 @@
             <input type="range" id="sliderGrav" min="0.1" max="1.5" step="0.05" value="0.45">
           </div>
 
-          <div class="control-section-title" style="margin-top: 14px;">
+          <div class="control-section-title section-spacer">
             <span>🎼</span> Melodic Scale
           </div>
 
@@ -753,7 +894,34 @@
         </div>
 
         <!-- TIM Controls Group -->
-        <div id="timControls" style="display: none;">
+        <div id="timControls" class="tim-controls-hidden">
+          <div class="control-section-title title-tim">
+            <span>🧰</span> Parts Palette (Blueprint)
+          </div>
+
+          <div class="parts-tray">
+            <button type="button" class="btn-preset" data-addpart="ramp">+ Ramp Chute</button>
+            <button type="button" class="btn-preset" data-addpart="bumper">+ Spring Bumper</button>
+            <button type="button" class="btn-preset" data-addpart="fan">+ Pneumatic Fan</button>
+            <button type="button" class="btn-preset" data-addpart="bell">+ Target Bell</button>
+          </div>
+
+          <button type="button" class="btn-secondary btn-share-blueprint" id="btnShareBlueprint" title="Copy zero-backend shareable blueprint URL to clipboard">
+            <span>🔗</span> Copy Blueprint Link
+          </button>
+
+          <div class="selection-panel hidden" id="timSelectionControls">
+            <div class="selection-header">
+              <span>Selected Part</span>
+              <span id="selectedPartLabel">Ramp</span>
+            </div>
+            <div class="selection-actions">
+              <button type="button" class="btn-secondary" id="btnPartRotateLeft" title="Rotate Counter-Clockwise (Q)">↺ -15°</button>
+              <button type="button" class="btn-secondary" id="btnPartRotateRight" title="Rotate Clockwise (E)">↻ +15°</button>
+              <button type="button" class="btn-secondary" id="btnPartDelete" title="Delete Selected Part (Del)">🗑 Delete</button>
+            </div>
+          </div>
+
           <div class="control-section-title title-tim">
             <span>⚙️</span> Mechanical Physics
           </div>
@@ -790,7 +958,7 @@
             <input type="range" id="sliderGear" min="0" max="180" step="10" value="60">
           </div>
 
-          <div class="control-section-title title-tim" style="margin-top: 14px;">
+          <div class="control-section-title title-tim section-spacer">
             <span>🕹️</span> Contraption Presets
           </div>
 
@@ -814,7 +982,7 @@
 
         <!-- Explanatory Typography Card -->
         <div class="info-card" id="infoCardText">
-          <strong>Animusic Mode:</strong> Letter stems and counters act as tuned marimba bars, crystalline bell tines, and laser harps. Polished ballistic chrome spheres bounce rhythmically off glyph contours, triggering physical-modeling WebAudio synthesis and corona light blooms.
+          <strong>Animusic Mode:</strong> Letter stems and counters act as tuned marimba bars, crystalline bell tines, and laser harps. Polished ballistic chrome spheres bounce rhythmically off real offscreen glyph contours, triggering physical-modeling WebAudio synthesis and corona light blooms.
         </div>
 
       </div>
@@ -822,1439 +990,6 @@
 
   </main>
 
-  <!-- Simulation & Physical Modeling Engine -->
-  <script>
-    (function() {
-      'use strict';
-
-      // --- Global State ---
-      const state = {
-        mode: 'animusic', // 'animusic' | 'tim'
-        text: 'POCKETGULL',
-        audioEnabled: true,
-        continuous: false,
-        theme: 'dark',
-        fps: 60,
-        // Animusic parameters
-        reso: 0.85,
-        bpm: 96,
-        timbre: 0, // 0: Marimba, 1: Glockenspiel/Bell, 2: Laser Harp, 3: Resonant String
-        gravAnimusic: 0.45,
-        scale: 'pentatonic',
-        // TIM parameters
-        gravTim: 1.0,
-        restitution: 0.70,
-        friction: 0.08,
-        gearRpm: 60,
-        timPreset: 'dosage',
-        // Interactive state
-        balls: [],
-        particles: [],
-        glyphs: [],
-        dominoes: [],
-        seesaws: [],
-        gears: [],
-        impactRipples: [],
-        lastBallTime: 0,
-        lastFrameTime: performance.now()
-      };
-
-      // Scales in Hz (Middle Octave Anchors)
-      const SCALES = {
-        pentatonic: [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25, 783.99, 880.00, 1046.50],
-        dorian:     [261.63, 293.66, 311.13, 349.23, 392.00, 440.00, 466.16, 523.25, 587.33, 622.25, 698.46],
-        lydian:     [261.63, 293.66, 329.63, 369.99, 392.00, 440.00, 493.88, 523.25, 587.33, 659.25, 739.99],
-        maqam:      [261.63, 277.18, 329.63, 349.23, 392.00, 415.30, 493.88, 523.25, 554.37, 659.25, 698.46], // Maqam Hijaz
-        vitals:     [130.81, 164.81, 196.00, 246.94, 261.63, 329.63, 392.00, 493.88, 523.25, 659.25, 783.99]
-      };
-
-      // --- WebAudio Physical-Modeling Engine ---
-      let audioCtx = null;
-      let masterGain = null;
-      let analyser = null;
-
-      function initAudio() {
-        if (audioCtx) {
-          if (audioCtx.state === 'suspended') {
-            audioCtx.resume();
-          }
-          return;
-        }
-        try {
-          const AudioContext = window.AudioContext || window.webkitAudioContext;
-          audioCtx = new AudioContext();
-          analyser = audioCtx.createAnalyser();
-          analyser.fftSize = 128;
-
-          masterGain = audioCtx.createGain();
-          masterGain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-
-          masterGain.connect(analyser);
-          analyser.connect(audioCtx.destination);
-        } catch (e) {
-          console.warn('WebAudio not available', e);
-        }
-      }
-
-      // Play Animusic Harmonic Chime
-      function playAnimusicChime(freq, velocity = 0.8) {
-        if (!state.audioEnabled) return;
-        initAudio();
-        if (!audioCtx) return;
-
-        const now = audioCtx.currentTime;
-        const dur = Math.max(0.2, state.reso * 2.8);
-
-        if (state.timbre === 0) {
-          // --- 1. Padauk Wood Marimba (Dual-Sine FM with Hollow Body) ---
-          const carrier = audioCtx.createOscillator();
-          const modulator = audioCtx.createOscillator();
-          const modGain = audioCtx.createGain();
-          const carrierGain = audioCtx.createGain();
-
-          carrier.type = 'sine';
-          carrier.frequency.setValueAtTime(freq, now);
-
-          modulator.type = 'triangle';
-          modulator.frequency.setValueAtTime(freq * 3.84, now); // Inharmonic marimba node
-
-          modGain.gain.setValueAtTime(freq * 1.5 * velocity, now);
-          modGain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
-
-          modulator.connect(modGain);
-          modGain.connect(carrier.frequency);
-
-          carrierGain.gain.setValueAtTime(0.5 * velocity, now);
-          carrierGain.gain.exponentialRampToValueAtTime(0.001, now + dur * 0.7);
-
-          carrier.connect(carrierGain);
-          carrierGain.connect(masterGain);
-
-          carrier.start(now);
-          modulator.start(now);
-          carrier.stop(now + dur);
-          modulator.stop(now + dur);
-
-        } else if (state.timbre === 1) {
-          // --- 2. Crystalline Glockenspiel / Vibraphone (Inharmonic Additive Partials) ---
-          const partials = [1.0, 2.76, 5.40, 8.93];
-          const weights = [0.6, 0.35, 0.15, 0.08];
-
-          partials.forEach((mult, i) => {
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(freq * mult, now);
-
-            gain.gain.setValueAtTime(weights[i] * velocity * 0.4, now);
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + dur * (1.2 / (i + 1)));
-
-            osc.connect(gain);
-            gain.connect(masterGain);
-
-            osc.start(now);
-            osc.stop(now + dur * 1.5);
-          });
-
-        } else if (state.timbre === 2) {
-          // --- 3. Laser Harp (Chirp Pitch Down with Resonance) ---
-          const osc = audioCtx.createOscillator();
-          const filter = audioCtx.createBiquadFilter();
-          const gain = audioCtx.createGain();
-
-          osc.type = 'sawtooth';
-          osc.frequency.setValueAtTime(freq * 1.8, now);
-          osc.frequency.exponentialRampToValueAtTime(freq, now + 0.04);
-
-          filter.type = 'bandpass';
-          filter.frequency.setValueAtTime(freq * 2, now);
-          filter.Q.setValueAtTime(8, now);
-
-          gain.gain.setValueAtTime(0.4 * velocity, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + dur * 0.5);
-
-          osc.connect(filter);
-          filter.connect(gain);
-          gain.connect(masterGain);
-
-          osc.start(now);
-          osc.stop(now + dur * 0.6);
-
-        } else {
-          // --- 4. Resonant Cello String (Filtered Sawtooth with Body Resonance) ---
-          const osc = audioCtx.createOscillator();
-          const filter = audioCtx.createBiquadFilter();
-          const gain = audioCtx.createGain();
-
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(freq / 2, now);
-
-          filter.type = 'lowpass';
-          filter.frequency.setValueAtTime(freq * 4, now);
-          filter.frequency.exponentialRampToValueAtTime(freq, now + dur);
-
-          gain.gain.setValueAtTime(0.6 * velocity, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
-
-          osc.connect(filter);
-          filter.connect(gain);
-          gain.connect(masterGain);
-
-          osc.start(now);
-          osc.stop(now + dur);
-        }
-      }
-
-      // Play TIM Mechanical Foley (Ball Impact, Wood Knock, Domino Click, Ratchet)
-      function playTimFoley(type = 'bounce', intensity = 0.5) {
-        if (!state.audioEnabled) return;
-        initAudio();
-        if (!audioCtx) return;
-
-        const now = audioCtx.currentTime;
-
-        if (type === 'bounce') {
-          // Steel marble impact click
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          const pitch = 580 + Math.random() * 240;
-
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(pitch, now);
-          osc.frequency.exponentialRampToValueAtTime(pitch * 0.5, now + 0.03);
-
-          gain.gain.setValueAtTime(0.35 * intensity, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
-
-          osc.connect(gain);
-          gain.connect(masterGain);
-
-          osc.start(now);
-          osc.stop(now + 0.08);
-
-        } else if (type === 'domino') {
-          // Crisp wooden domino click
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          const pitch = 1200 + Math.random() * 400;
-
-          osc.type = 'square';
-          osc.frequency.setValueAtTime(pitch, now);
-
-          gain.gain.setValueAtTime(0.2 * intensity, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.025);
-
-          osc.connect(gain);
-          gain.connect(masterGain);
-
-          osc.start(now);
-          osc.stop(now + 0.03);
-
-        } else if (type === 'ratchet') {
-          // Gear tooth escapement tick
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-
-          osc.type = 'sawtooth';
-          osc.frequency.setValueAtTime(800 + (Math.random() * 100), now);
-
-          gain.gain.setValueAtTime(0.12 * intensity, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.015);
-
-          osc.connect(gain);
-          gain.connect(masterGain);
-
-          osc.start(now);
-          osc.stop(now + 0.02);
-
-        } else if (type === 'seesaw') {
-          // Wooden seesaw pivot clunk
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(140, now);
-          osc.frequency.exponentialRampToValueAtTime(60, now + 0.08);
-
-          gain.gain.setValueAtTime(0.5 * intensity, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
-
-          osc.connect(gain);
-          gain.connect(masterGain);
-
-          osc.start(now);
-          osc.stop(now + 0.14);
-        }
-      }
-
-      // --- Canvas Setup & High DPI Handling ---
-      const canvas = document.getElementById('kineticCanvas');
-      const ctx = canvas.getContext('2d');
-      let width = 0;
-      let height = 0;
-      let dpr = 1;
-
-      function resizeCanvas() {
-        dpr = window.devicePixelRatio || 1;
-        const rect = canvas.getBoundingClientRect();
-        width = rect.width;
-        height = rect.height;
-        canvas.width = width * dpr;
-        canvas.height = height * dpr;
-        ctx.scale(dpr, dpr);
-        buildLayout();
-      }
-      window.addEventListener('resize', resizeCanvas);
-
-      // --- Kinetic Models & Data Structures ---
-
-      // Ball Bearing Object
-      class Ball {
-        constructor(x, y, vx, vy, radius, isChrome = true) {
-          this.x = x;
-          this.y = y;
-          this.vx = vx;
-          this.vy = vy;
-          this.radius = radius;
-          this.isChrome = isChrome;
-          this.life = 0;
-          this.color = isChrome ? '#38bdf8' : '#f59e0b';
-          this.glow = isChrome ? 'rgba(56, 189, 248, 0.4)' : 'rgba(245, 158, 11, 0.4)';
-          this.history = [];
-        }
-
-        update(dt) {
-          this.life += dt;
-
-          // Apply Gravity
-          const g = (state.mode === 'animusic' ? state.gravAnimusic : state.gravTim) * 980;
-          this.vy += g * dt;
-
-          // Apply Air Resistance
-          this.vx *= 0.999;
-          this.vy *= 0.999;
-
-          // Position Step
-          this.x += this.vx * dt;
-          this.y += this.vy * dt;
-
-          // Store trail history
-          if (this.life % 0.03 < 0.016) {
-            this.history.push({ x: this.x, y: this.y });
-            if (this.history.length > 8) this.history.shift();
-          }
-
-          // Boundary Collisions (Canvas Floor & Walls)
-          if (this.x - this.radius < 0) {
-            this.x = this.radius;
-            this.vx = -this.vx * (state.mode === 'animusic' ? 0.8 : state.restitution);
-          } else if (this.x + this.radius > width) {
-            this.x = width - this.radius;
-            this.vx = -this.vx * (state.mode === 'animusic' ? 0.8 : state.restitution);
-          }
-
-          // Floor bounce
-          const floorY = height - 70;
-          if (this.y + this.radius > floorY) {
-            this.y = floorY - this.radius;
-            this.vy = -this.vy * (state.mode === 'animusic' ? 0.75 : state.restitution);
-            this.vx *= (1 - state.friction);
-
-            if (Math.abs(this.vy) > 30) {
-              if (state.mode === 'animusic') {
-                playAnimusicChime(220, Math.min(1, Math.abs(this.vy) / 500));
-              } else {
-                playTimFoley('bounce', Math.min(1, Math.abs(this.vy) / 500));
-              }
-            }
-          }
-        }
-
-        draw(c) {
-          // Draw trail
-          if (this.history.length > 1) {
-            c.beginPath();
-            c.moveTo(this.history[0].x, this.history[0].y);
-            for (let i = 1; i < this.history.length; i++) {
-              c.lineTo(this.history[i].x, this.history[i].y);
-            }
-            c.strokeStyle = this.glow;
-            c.lineWidth = this.radius * 0.6;
-            c.lineCap = 'round';
-            c.stroke();
-          }
-
-          // Draw Sphere
-          c.save();
-          c.beginPath();
-          c.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-
-          // Metallic Gradient Shading
-          const grad = c.createRadialGradient(
-            this.x - this.radius * 0.3, this.y - this.radius * 0.3, this.radius * 0.1,
-            this.x, this.y, this.radius
-          );
-          if (this.isChrome) {
-            grad.addColorStop(0, '#ffffff');
-            grad.addColorStop(0.3, '#bae6fd');
-            grad.addColorStop(0.7, '#0284c7');
-            grad.addColorStop(1, '#0c4a6e');
-          } else {
-            grad.addColorStop(0, '#fef08a');
-            grad.addColorStop(0.4, '#f59e0b');
-            grad.addColorStop(0.8, '#b45309');
-            grad.addColorStop(1, '#451a03');
-          }
-
-          c.fillStyle = grad;
-          c.shadowColor = this.glow;
-          c.shadowBlur = 10;
-          c.fill();
-          c.restore();
-        }
-      }
-
-      // Typographic Instrument Glyph (A, B, C... as tone bars and collision boundaries)
-      class InstrumentGlyph {
-        constructor(char, x, y, size, index) {
-          this.char = char;
-          this.x = x;
-          this.y = y;
-          this.size = size;
-          this.index = index;
-          this.hitTime = 0;
-          this.squash = 1.0;
-          this.oscillation = 0;
-
-          // Assign musical frequency based on scale and index
-          const activeScale = SCALES[state.scale] || SCALES.pentatonic;
-          this.freq = activeScale[index % activeScale.length];
-
-          // Collision Geometry approximation (Tone bar segments)
-          this.segments = this.computeSegments();
-        }
-
-        computeSegments() {
-          const s = this.size;
-          const left = this.x - s * 0.35;
-          const right = this.x + s * 0.35;
-          const top = this.y - s * 0.45;
-          const bottom = this.y + s * 0.45;
-          const midY = this.y;
-
-          // Character-specific geometric collision bars
-          const segs = [];
-
-          if (this.char === 'A') {
-            segs.push({ x1: left, y1: bottom, x2: this.x, y2: top });
-            segs.push({ x1: this.x, y1: top, x2: right, y2: bottom });
-            segs.push({ x1: left + s*0.1, y1: midY, x2: right - s*0.1, y2: midY, isBar: true });
-          } else if (this.char === 'O' || this.char === '0') {
-            // Hexagonal round approximation
-            segs.push({ x1: left, y1: midY, x2: left + s*0.1, y2: top });
-            segs.push({ x1: left + s*0.1, y1: top, x2: right - s*0.1, y2: top, isBar: true });
-            segs.push({ x1: right - s*0.1, y1: top, x2: right, y2: midY });
-            segs.push({ x1: right, y1: midY, x2: right - s*0.1, y2: bottom });
-            segs.push({ x1: right - s*0.1, y1: bottom, x2: left + s*0.1, y2: bottom, isBar: true });
-            segs.push({ x1: left + s*0.1, y1: bottom, x2: left, y2: midY });
-          } else if (this.char === 'T') {
-            segs.push({ x1: left - s*0.1, y1: top, x2: right + s*0.1, y2: top, isBar: true });
-            segs.push({ x1: this.x, y1: top, x2: this.x, y2: bottom });
-          } else if (this.char === 'P' || this.char === 'R') {
-            segs.push({ x1: left, y1: top, x2: left, y2: bottom });
-            segs.push({ x1: left, y1: top, x2: right, y2: top, isBar: true });
-            segs.push({ x1: right, y1: top, x2: right, y2: midY });
-            segs.push({ x1: right, y1: midY, x2: left, y2: midY, isBar: true });
-            if (this.char === 'R') {
-              segs.push({ x1: left + s*0.1, y1: midY, x2: right, y2: bottom });
-            }
-          } else {
-            // General tone bar crossbar and upright
-            segs.push({ x1: left, y1: top + s*0.1, x2: right, y2: top + s*0.1, isBar: true });
-            segs.push({ x1: left, y1: bottom, x2: right, y2: bottom, isBar: true });
-            segs.push({ x1: left, y1: top, x2: left, y2: bottom });
-          }
-
-          return segs;
-        }
-
-        triggerHit(hitX, hitY, normalX, normalY, velocity) {
-          this.hitTime = performance.now();
-          this.squash = 0.85; // Area-conserving Squash
-
-          if (state.mode === 'animusic') {
-            playAnimusicChime(this.freq, Math.min(1, velocity / 400));
-            // Add visual bloom ripple
-            state.impactRipples.push({
-              x: hitX,
-              y: hitY,
-              radius: 5,
-              maxRadius: 40 + (velocity / 15),
-              color: '#38bdf8',
-              life: 1.0
-            });
-          } else {
-            playTimFoley('bounce', Math.min(1, velocity / 400));
-            state.impactRipples.push({
-              x: hitX,
-              y: hitY,
-              radius: 5,
-              maxRadius: 35,
-              color: '#f59e0b',
-              life: 1.0
-            });
-          }
-        }
-
-        update(dt) {
-          // Rebound from squash back to 1.0 with harmonic oscillation
-          const timeSinceHit = (performance.now() - this.hitTime) / 1000;
-          if (timeSinceHit < 1.0) {
-            const decay = Math.exp(-timeSinceHit * 5);
-            this.oscillation = Math.sin(timeSinceHit * 40) * decay * 0.15;
-            this.squash = 1.0 + this.oscillation;
-          } else {
-            this.squash = 1.0;
-            this.oscillation = 0;
-          }
-        }
-
-        draw(c) {
-          c.save();
-          c.translate(this.x, this.y);
-
-          // Apply Squash & Stretch (Conservation of em-area: sx * sy = 1)
-          const sx = 1.0 / this.squash;
-          const sy = this.squash;
-          c.scale(sx, sy);
-
-          // Draw Acoustic Tone Bar Skeletons
-          const isGlowing = (performance.now() - this.hitTime) < 350;
-
-          c.font = `800 ${this.size}px 'PocketGull Bold', 'PocketGull Arabic', 'Noto Sans Arabic', 'PocketGull Mono', 'Segoe UI', sans-serif`;
-          c.textAlign = 'center';
-          c.textBaseline = 'middle';
-
-          if (state.mode === 'animusic') {
-            // Animusic Metallic/Wood Polished Look
-            if (isGlowing) {
-              c.shadowColor = '#38bdf8';
-              c.shadowBlur = 24;
-              c.fillStyle = '#ffffff';
-            } else {
-              c.fillStyle = 'rgba(248, 250, 252, 0.85)';
-            }
-          } else {
-            // TIM Industrial Mechanical Look
-            if (isGlowing) {
-              c.shadowColor = '#f59e0b';
-              c.shadowBlur = 20;
-              c.fillStyle = '#ffffff';
-            } else {
-              c.fillStyle = 'rgba(245, 158, 11, 0.85)';
-            }
-          }
-
-          c.fillText(this.char, 0, 0);
-
-          // In Animusic Mode: Draw standing-wave laser guides
-          if (state.mode === 'animusic' && isGlowing) {
-            c.strokeStyle = 'rgba(56, 189, 248, 0.6)';
-            c.lineWidth = 2;
-            c.beginPath();
-            c.moveTo(-this.size * 0.4, 0);
-            c.lineTo(this.size * 0.4, 0);
-            c.stroke();
-          }
-
-          c.restore();
-
-          // Render underlying collision bars if in TIM mode
-          if (state.mode === 'tim') {
-            c.save();
-            c.strokeStyle = 'rgba(245, 158, 11, 0.25)';
-            c.lineWidth = 3;
-            c.lineCap = 'round';
-            this.segments.forEach(seg => {
-              c.beginPath();
-              c.moveTo(seg.x1, seg.y1);
-              c.lineTo(seg.x2, seg.y2);
-              c.stroke();
-            });
-            c.restore();
-          }
-        }
-      }
-
-      // TIM Domino Block Object
-      class Domino {
-        constructor(x, y, w, h) {
-          this.x = x;
-          this.y = y;
-          this.w = w;
-          this.h = h;
-          this.angle = 0; // 0 is vertical, ~70 deg is toppled
-          this.angularVelocity = 0;
-          this.toppled = false;
-        }
-
-        update(dt) {
-          if (this.toppled && this.angle < Math.PI / 2.6) {
-            this.angularVelocity += 14 * dt;
-            this.angle += this.angularVelocity * dt;
-            if (this.angle >= Math.PI / 2.6) {
-              this.angle = Math.PI / 2.6;
-              this.angularVelocity = 0;
-            }
-          }
-        }
-
-        trip() {
-          if (!this.toppled) {
-            this.toppled = true;
-            this.angularVelocity = 2.5;
-            playTimFoley('domino', 0.8);
-          }
-        }
-
-        draw(c) {
-          c.save();
-          c.translate(this.x, this.y + this.h);
-          c.rotate(this.angle);
-
-          c.fillStyle = this.toppled ? '#b45309' : '#f59e0b';
-          c.strokeStyle = '#78350f';
-          c.lineWidth = 2;
-
-          c.beginPath();
-          c.roundRect(-this.w / 2, -this.h, this.w, this.h, 3);
-          c.fill();
-          c.stroke();
-
-          // White pip dot in center
-          c.fillStyle = '#ffffff';
-          c.beginPath();
-          c.arc(0, -this.h / 2, 2.5, 0, Math.PI * 2);
-          c.fill();
-
-          c.restore();
-        }
-      }
-
-      // TIM Seesaw Fulcrum Object
-      class Seesaw {
-        constructor(x, y, length) {
-          this.x = x;
-          this.y = y;
-          this.length = length;
-          this.angle = -0.15; // Balanced slight slant
-          this.angularVelocity = 0;
-        }
-
-        update(dt) {
-          this.angularVelocity *= 0.96; // Damping
-          this.angle += this.angularVelocity * dt;
-
-          // Clamped tilt bounds (-35 deg to +35 deg)
-          const limit = Math.PI / 5;
-          if (this.angle > limit) {
-            this.angle = limit;
-            if (Math.abs(this.angularVelocity) > 0.5) playTimFoley('seesaw', 0.6);
-            this.angularVelocity = -this.angularVelocity * 0.2;
-          } else if (this.angle < -limit) {
-            this.angle = -limit;
-            if (Math.abs(this.angularVelocity) > 0.5) playTimFoley('seesaw', 0.6);
-            this.angularVelocity = -this.angularVelocity * 0.2;
-          }
-        }
-
-        draw(c) {
-          c.save();
-          // Fulcrum Triangle
-          c.fillStyle = '#64748b';
-          c.beginPath();
-          c.moveTo(this.x, this.y);
-          c.lineTo(this.x - 14, this.y + 24);
-          c.lineTo(this.x + 14, this.y + 24);
-          c.closePath();
-          c.fill();
-
-          // Rotating Plank
-          c.translate(this.x, this.y);
-          c.rotate(this.angle);
-
-          c.fillStyle = '#f59e0b';
-          c.strokeStyle = '#92400e';
-          c.lineWidth = 2;
-          c.beginPath();
-          c.roundRect(-this.length / 2, -5, this.length, 10, 4);
-          c.fill();
-          c.stroke();
-
-          c.restore();
-        }
-      }
-
-      // TIM Rotating Spur Gear Object with Physics Collision
-      class Gear {
-        constructor(x, y, radius, teeth = 8, direction = 1, speedRatio = 1.0) {
-          this.x = x;
-          this.y = y;
-          this.radius = radius;
-          this.teeth = teeth;
-          this.direction = direction; // 1 = clockwise, -1 = counter-clockwise
-          this.speedRatio = speedRatio;
-          this.angle = 0;
-          this.lastTickAngle = 0;
-          this.angularVelocity = 0;
-          this.pulsing = 0;
-          this.isMotor = (direction === 1);
-        }
-
-        update(dt) {
-          const rps = (state.gearRpm / 60) * this.direction * this.speedRatio;
-          this.angle += rps * Math.PI * 2 * dt;
-          this.angularVelocity = rps * Math.PI * 2;
-
-          if (this.pulsing > 0) {
-            this.pulsing = Math.max(0, this.pulsing - dt * 3.5);
-          }
-
-          // Sound tick on gear tooth escapement
-          const toothStep = (Math.PI * 2) / this.teeth;
-          if (Math.abs(this.angle - this.lastTickAngle) > toothStep) {
-            this.lastTickAngle = this.angle;
-            playTimFoley('ratchet', 0.15);
-          }
-        }
-
-        collide(ball) {
-          const dx = ball.x - this.x;
-          const dy = ball.y - this.y;
-          const distSq = dx * dx + dy * dy;
-          const effectiveR = this.radius + 8; // outer tooth perimeter
-          const minDist = effectiveR + ball.radius;
-
-          if (distSq < minDist * minDist) {
-            const dist = Math.sqrt(distSq) || 1;
-            const nx = dx / dist;
-            const ny = dy / dist;
-
-            // Separate ball from gear surface
-            ball.x = this.x + nx * minDist;
-            ball.y = this.y + ny * minDist;
-
-            // Calculate tangential surface velocity of gear teeth at contact point:
-            // v_tangent = omega x r = (-ny * omega * r, nx * omega * r)
-            const tangentSpeed = this.angularVelocity * effectiveR;
-            const tx = -ny * tangentSpeed;
-            const ty = nx * tangentSpeed;
-
-            // Reflect normal velocity with restitution + transfer gear tangential propulsion
-            const normalVel = ball.vx * nx + ball.vy * ny;
-            if (normalVel < 0) {
-              ball.vx = (ball.vx - 1.7 * normalVel * nx) + tx * 0.75;
-              ball.vy = (ball.vy - 1.7 * normalVel * ny) + ty * 0.75;
-            } else {
-              ball.vx += tx * 0.6;
-              ball.vy += ty * 0.6;
-            }
-
-            this.pulsing = 1.0;
-            playTimFoley('bounce', 0.6);
-            playTimFoley('ratchet', 0.5);
-
-            // Add mechanical spark ripple
-            state.impactRipples.push({
-              x: ball.x,
-              y: ball.y,
-              radius: 4,
-              maxRadius: 30,
-              color: this.isMotor ? '#f59e0b' : '#ec4899',
-              life: 0.8
-            });
-            return true;
-          }
-          return false;
-        }
-
-        draw(c) {
-          c.save();
-          c.translate(this.x, this.y);
-
-          // Gear housing glow when engaged by marble
-          if (this.pulsing > 0) {
-            c.strokeStyle = `rgba(245, 158, 11, ${this.pulsing * 0.8})`;
-            c.lineWidth = 4 + this.pulsing * 6;
-            c.beginPath();
-            c.arc(0, 0, this.radius + 12, 0, Math.PI * 2);
-            c.stroke();
-          }
-
-          c.rotate(this.angle);
-
-          // Gear body fill
-          c.fillStyle = this.isMotor ? 'rgba(245, 158, 11, 0.22)' : 'rgba(236, 72, 153, 0.18)';
-          c.strokeStyle = this.isMotor ? '#f59e0b' : '#ec4899';
-          c.lineWidth = 3;
-
-          // Core circle
-          c.beginPath();
-          c.arc(0, 0, this.radius, 0, Math.PI * 2);
-          c.fill();
-          c.stroke();
-
-          // Internal mechanical spokes
-          c.strokeStyle = this.isMotor ? 'rgba(245, 158, 11, 0.5)' : 'rgba(236, 72, 153, 0.5)';
-          c.lineWidth = 2;
-          for (let s = 0; s < 4; s++) {
-            const sa = (s * Math.PI) / 2;
-            c.beginPath();
-            c.moveTo(-Math.cos(sa) * (this.radius - 4), -Math.sin(sa) * (this.radius - 4));
-            c.lineTo(Math.cos(sa) * (this.radius - 4), Math.sin(sa) * (this.radius - 4));
-            c.stroke();
-          }
-
-          // Sturdy Cog Teeth
-          const step = (Math.PI * 2) / this.teeth;
-          for (let i = 0; i < this.teeth; i++) {
-            const a = i * step;
-            const tx = Math.cos(a) * (this.radius + 6);
-            const ty = Math.sin(a) * (this.radius + 6);
-            c.fillStyle = this.isMotor ? '#b45309' : '#be185d';
-            c.beginPath();
-            c.arc(tx, ty, 5, 0, Math.PI * 2);
-            c.fill();
-            c.stroke();
-          }
-
-          // Center Hub & Axle Pin
-          c.fillStyle = '#0f172a';
-          c.strokeStyle = '#ffffff';
-          c.lineWidth = 2;
-          c.beginPath();
-          c.arc(0, 0, 8, 0, Math.PI * 2);
-          c.fill();
-          c.stroke();
-
-          c.fillStyle = '#f8fafc';
-          c.beginPath();
-          c.arc(0, 0, 3, 0, Math.PI * 2);
-          c.fill();
-
-          c.restore();
-        }
-      }
-
-      // --- Layout Reconstruction ---
-      function buildLayout() {
-        state.glyphs = [];
-        state.dominoes = [];
-        state.seesaws = [];
-        state.gears = [];
-
-        // Check for Right-to-Left script (Arabic, Hebrew, Syriac, Thaana)
-        const isRtl = /[\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC]/.test(state.text);
-        
-        // Preserve case and diacritics for non-Latin; uppercase standard Latin
-        const rawText = isRtl ? state.text : (/^[a-zA-Z0-9\s.,!?:;'\-_\/\\()]+$/.test(state.text) ? state.text.toUpperCase() : state.text);
-        
-        // Grapheme cluster segmentation to respect Arabic tashkil and combining characters
-        let chars = [];
-        if (typeof Intl !== 'undefined' && Intl.Segmenter) {
-          const segmenter = new Intl.Segmenter(undefined, { granularity: 'grapheme' });
-          chars = Array.from(segmenter.segment(rawText)).map(s => s.segment);
-        } else {
-          chars = Array.from(rawText);
-        }
-
-        const count = chars.length;
-        if (count === 0) return;
-
-        const availWidth = width - 80;
-        const glyphSize = Math.max(32, Math.min(84, availWidth / count));
-        const startX = (width - (count * glyphSize)) / 2 + glyphSize / 2;
-        const centerY = height * 0.44;
-
-        chars.forEach((ch, i) => {
-          // If RTL, lay out glyphs right-to-left so reading direction is authentic
-          const colIndex = isRtl ? (count - 1 - i) : i;
-          const gx = startX + colIndex * glyphSize;
-          const gy = centerY + Math.sin(colIndex * 0.5) * 20; // Gentle sine wave contour
-          state.glyphs.push(new InstrumentGlyph(ch, gx, gy, glyphSize, i));
-        });
-
-        // If TIM mode, build extra mechanical apparatus (Seesaws, domino runs, gears)
-        if (state.mode === 'tim') {
-          // Domino run on lower left
-          const dominoCount = 7;
-          const dominoStartX = Math.max(40, startX - 120);
-          for (let d = 0; d < dominoCount; d++) {
-            state.dominoes.push(new Domino(dominoStartX + d * 22, height - 120, 8, 38));
-          }
-
-          // Balanced seesaw under middle glyphs
-          state.seesaws.push(new Seesaw(width * 0.5, height - 150, Math.min(260, width * 0.4)));
-
-          // Incredible Machine Spur Gear Train on right flank
-          const g1X = Math.max(width - 150, startX + count * glyphSize + 30);
-          const g1Y = centerY - 50;
-          const g2X = g1X + 58;
-          const g2Y = g1Y + 10;
-          const g3X = g2X + 44;
-          const g3Y = g2Y - 36;
-          
-          state.gears.push(new Gear(g1X, g1Y, 36, 12, 1, 1.0));
-          state.gears.push(new Gear(g2X, g2Y, 26, 9, -1, 1.333));
-          state.gears.push(new Gear(g3X, g3Y, 18, 6, 1, 2.0));
-        }
-
-        // Update HUD
-        document.getElementById('hudGlyphCount').textContent = count;
-      }
-
-      // --- Ballistic Sphere Spawner ---
-      function fireBall() {
-        initAudio();
-        const startX = width * 0.2 + (Math.random() * width * 0.6);
-        const radius = state.mode === 'animusic' ? 7 : 11;
-        const isChrome = state.mode === 'animusic';
-        const vy = state.mode === 'animusic' ? (50 + Math.random() * 80) : (10 + Math.random() * 40);
-        const vx = (Math.random() - 0.5) * 120;
-
-        const ball = new Ball(startX, 30, vx, vy, radius, isChrome);
-        state.balls.push(ball);
-
-        if (state.balls.length > 25) {
-          state.balls.shift();
-        }
-      }
-
-      // --- Collision Solver ---
-      function solveCollisions(dt) {
-        state.balls.forEach(ball => {
-          // 1. Collide against Instrument Glyphs (Tone Bars)
-          state.glyphs.forEach(glyph => {
-            glyph.segments.forEach(seg => {
-              // Line-Circle Closest Point Distance
-              const dx = seg.x2 - seg.x1;
-              const dy = seg.y2 - seg.y1;
-              const lenSq = dx * dx + dy * dy;
-              if (lenSq === 0) return;
-
-              let t = ((ball.x - seg.x1) * dx + (ball.y - seg.y1) * dy) / lenSq;
-              t = Math.max(0, Math.min(1, t));
-
-              const nearestX = seg.x1 + t * dx;
-              const nearestY = seg.y1 + t * dy;
-
-              const distX = ball.x - nearestX;
-              const distY = ball.y - nearestY;
-              const distSq = distX * distX + distY * distY;
-
-              if (distSq < ball.radius * ball.radius && distSq > 0.0001) {
-                const dist = Math.sqrt(distSq);
-                const nx = distX / dist;
-                const ny = distY / dist;
-
-                // Push ball out of contour
-                ball.x = nearestX + nx * ball.radius;
-                ball.y = nearestY + ny * ball.radius;
-
-                // Reflect velocity
-                const dot = ball.vx * nx + ball.vy * ny;
-                if (dot < 0) {
-                  const rest = state.mode === 'animusic' ? 0.95 : state.restitution;
-                  ball.vx = (ball.vx - 2 * dot * nx) * rest;
-                  ball.vy = (ball.vy - 2 * dot * ny) * rest;
-
-                  const impactVelocity = Math.sqrt(ball.vx * ball.vx + ball.vy * ball.vy);
-                  glyph.triggerHit(nearestX, nearestY, nx, ny, impactVelocity);
-                }
-              }
-            });
-          });
-
-          // 2. TIM Mode: Collide against Seesaw Plank
-          if (state.mode === 'tim') {
-            state.seesaws.forEach(seesaw => {
-              const halfL = seesaw.length / 2;
-              const cosA = Math.cos(seesaw.angle);
-              const sinA = Math.sin(seesaw.angle);
-
-              const p1x = seesaw.x - halfL * cosA;
-              const p1y = seesaw.y - halfL * sinA;
-              const p2x = seesaw.x + halfL * cosA;
-              const p2y = seesaw.y + halfL * sinA;
-
-              const dx = p2x - p1x;
-              const dy = p2y - p1y;
-              const lenSq = dx * dx + dy * dy;
-              let t = ((ball.x - p1x) * dx + (ball.y - p1y) * dy) / lenSq;
-              t = Math.max(0, Math.min(1, t));
-
-              const nearestX = p1x + t * dx;
-              const nearestY = p1y + t * dy;
-
-              const distX = ball.x - nearestX;
-              const distY = ball.y - nearestY;
-              const distSq = distX * distX + distY * distY;
-
-              if (distSq < ball.radius * ball.radius) {
-                const dist = Math.sqrt(distSq);
-                const nx = distX / dist;
-                const ny = distY / dist;
-
-                ball.x = nearestX + nx * ball.radius;
-                ball.y = nearestY + ny * ball.radius;
-
-                // Apply lever torque to seesaw
-                const arm = (t - 0.5) * seesaw.length;
-                seesaw.angularVelocity += arm * 0.08;
-
-                const dot = ball.vx * nx + ball.vy * ny;
-                if (dot < 0) {
-                  ball.vx = (ball.vx - 2 * dot * nx) * state.restitution;
-                  ball.vy = (ball.vy - 2 * dot * ny) * state.restitution;
-                  playTimFoley('bounce', 0.5);
-                }
-              }
-            });
-
-            // 3. TIM Mode: Collide against Dominoes
-            state.dominoes.forEach(dom => {
-              if (ball.x + ball.radius > dom.x - dom.w &&
-                  ball.x - ball.radius < dom.x + dom.w &&
-                  ball.y + ball.radius > dom.y &&
-                  ball.y - ball.radius < dom.y + dom.h) {
-                dom.trip();
-                ball.vx *= -0.5;
-              }
-            });
-
-            // Cascade domino to domino
-            for (let i = 0; i < state.dominoes.length - 1; i++) {
-              if (state.dominoes[i].toppled && state.dominoes[i].angle > 0.35) {
-                state.dominoes[i + 1].trip();
-              }
-            }
-
-            // 4. TIM Mode: Collide against Rotating Spur Gears (Catapult & Ejector)
-            state.gears.forEach(gear => {
-              gear.collide(ball);
-            });
-          }
-        });
-      }
-
-      // --- Animation & Physics Render Loop ---
-      function animate(now) {
-        requestAnimationFrame(animate);
-
-        const dt = Math.min(0.04, (now - state.lastFrameTime) / 1000);
-        state.lastFrameTime = now;
-
-        // Calculate FPS
-        state.fps = Math.round(1 / dt);
-        document.getElementById('hudFps').textContent = state.fps;
-        document.getElementById('hudBallCount').textContent = state.balls.length;
-
-        // Continuous Spawner
-        if (state.continuous) {
-          const spawnInterval = (60 / state.bpm) * 1000;
-          if (now - state.lastBallTime > spawnInterval) {
-            state.lastBallTime = now;
-            fireBall();
-          }
-        }
-
-        // Clear Stage
-        ctx.clearRect(0, 0, width, height);
-
-        // Update & Draw Background Grid (Subtle Monospace Telemetry Lines)
-        ctx.strokeStyle = state.mode === 'animusic' ? 'rgba(6, 182, 212, 0.05)' : 'rgba(245, 158, 11, 0.05)';
-        ctx.lineWidth = 1;
-        const gridStep = 40;
-        ctx.beginPath();
-        for (let x = 0; x < width; x += gridStep) {
-          ctx.moveTo(x, 0);
-          ctx.lineTo(x, height);
-        }
-        for (let y = 0; y < height; y += gridStep) {
-          ctx.moveTo(0, y);
-          ctx.lineTo(width, y);
-        }
-        ctx.stroke();
-
-        // Draw Stage Floor Track
-        const floorY = height - 70;
-        ctx.fillStyle = state.mode === 'animusic' ? 'rgba(6, 182, 212, 0.1)' : 'rgba(245, 158, 11, 0.1)';
-        ctx.strokeStyle = state.mode === 'animusic' ? 'rgba(6, 182, 212, 0.4)' : 'rgba(245, 158, 11, 0.4)';
-        ctx.lineWidth = 2;
-        ctx.fillRect(0, floorY, width, 70);
-        ctx.strokeRect(0, floorY, width, 1);
-
-        // Update & Render Glyphs
-        state.glyphs.forEach(glyph => {
-          glyph.update(dt);
-          glyph.draw(ctx);
-        });
-
-        // Update & Render TIM Apparatus
-        if (state.mode === 'tim') {
-          state.dominoes.forEach(d => { d.update(dt); d.draw(ctx); });
-          state.seesaws.forEach(s => { s.update(dt); s.draw(ctx); });
-          state.gears.forEach(g => { g.update(dt); g.draw(ctx); });
-        }
-
-        // Update & Render Balls
-        state.balls.forEach(ball => {
-          ball.update(dt);
-          ball.draw(ctx);
-        });
-
-        // Run Collision Solver
-        solveCollisions(dt);
-
-        // Draw Shockwave Impact Ripples
-        for (let i = state.impactRipples.length - 1; i >= 0; i--) {
-          const r = state.impactRipples[i];
-          r.radius += 80 * dt;
-          r.life -= 1.8 * dt;
-
-          if (r.life <= 0 || r.radius >= r.maxRadius) {
-            state.impactRipples.splice(i, 1);
-            continue;
-          }
-
-          ctx.save();
-          ctx.beginPath();
-          ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
-          ctx.strokeStyle = r.color;
-          ctx.globalAlpha = r.life;
-          ctx.lineWidth = 2.5;
-          ctx.stroke();
-          ctx.restore();
-        }
-
-        // Render Live Audio Oscilloscope
-        renderOscilloscope();
-      }
-
-      // --- Oscilloscope Renderer ---
-      const scopeCanvas = document.getElementById('scopeCanvas');
-      const scopeCtx = scopeCanvas.getContext('2d');
-
-      function renderOscilloscope() {
-        const sw = scopeCanvas.width;
-        const sh = scopeCanvas.height;
-        scopeCtx.clearRect(0, 0, sw, sh);
-
-        if (!analyser || !state.audioEnabled) {
-          // Flat rest line
-          scopeCtx.strokeStyle = 'rgba(148, 163, 184, 0.2)';
-          scopeCtx.lineWidth = 1;
-          scopeCtx.beginPath();
-          scopeCtx.moveTo(0, sh / 2);
-          scopeCtx.lineTo(sw, sh / 2);
-          scopeCtx.stroke();
-          return;
-        }
-
-        const bufferLength = analyser.frequencyBinCount;
-        const dataArray = new Uint8Array(bufferLength);
-        analyser.getByteTimeDomainData(dataArray);
-
-        scopeCtx.lineWidth = 1.5;
-        scopeCtx.strokeStyle = state.mode === 'animusic' ? '#38bdf8' : '#f59e0b';
-        scopeCtx.beginPath();
-
-        const sliceWidth = sw / bufferLength;
-        let x = 0;
-
-        for (let i = 0; i < bufferLength; i++) {
-          const v = dataArray[i] / 128.0;
-          const y = (v * sh) / 2;
-          if (i === 0) {
-            scopeCtx.moveTo(x, y);
-          } else {
-            scopeCtx.lineTo(x, y);
-          }
-          x += sliceWidth;
-        }
-
-        scopeCtx.lineTo(sw, sh / 2);
-        scopeCtx.stroke();
-      }
-
-      // --- Mode Switching ---
-      function switchMode(newMode) {
-        state.mode = newMode;
-        const tabAnimusic = document.getElementById('tabAnimusic');
-        const tabTim = document.getElementById('tabTim');
-        const animusicControls = document.getElementById('animusicControls');
-        const timControls = document.getElementById('timControls');
-        const sidebarTitle = document.getElementById('sidebarTitleText');
-        const sidebarIcon = document.getElementById('sidebarIcon');
-        const sidebarBadge = document.getElementById('sidebarBadge');
-        const hudMode = document.getElementById('hudModeLabel');
-        const fireBtn = document.getElementById('btnFireBall');
-        const fireIcon = document.getElementById('fireIcon');
-        const fireText = document.getElementById('fireText');
-        const inputLabel = document.getElementById('inputLabel');
-        const infoCard = document.getElementById('infoCardText');
-        const body = document.getElementById('labBody');
-
-        if (newMode === 'animusic') {
-          body.className = 'animusic-mode';
-          tabAnimusic.classList.add('active');
-          tabTim.classList.remove('active');
-          animusicControls.style.display = 'block';
-          timControls.style.display = 'none';
-
-          sidebarTitle.textContent = 'Acoustic Synthesizer';
-          sidebarIcon.textContent = '🎶';
-          sidebarBadge.textContent = 'Physical FM';
-          hudMode.textContent = 'Animusic Pipe Dream';
-
-          fireBtn.className = 'btn-fire';
-          fireIcon.textContent = '⚡';
-          fireText.textContent = 'Launch Canon';
-          inputLabel.textContent = 'INSTRUMENT SCORE';
-          infoCard.innerHTML = '<strong>Animusic Mode:</strong> Letter stems and counters act as tuned marimba bars, crystalline bell tines, and laser harps. Polished ballistic chrome spheres bounce rhythmically off glyph contours, triggering physical-modeling WebAudio synthesis and corona light blooms.';
-        } else {
-          body.className = 'tim-mode';
-          tabTim.classList.add('active');
-          tabAnimusic.classList.remove('active');
-          animusicControls.style.display = 'none';
-          timControls.style.display = 'block';
-
-          sidebarTitle.textContent = 'Mechanical Workbench';
-          sidebarIcon.textContent = '⚙️';
-          sidebarBadge.textContent = 'Verlet 2D';
-          hudMode.textContent = 'TIM Rube Goldberg';
-
-          fireBtn.className = 'btn-fire fire-tim';
-          fireIcon.textContent = '🎳';
-          fireText.textContent = 'Drop Marble';
-          inputLabel.textContent = 'CONTRAPTION WORD';
-          infoCard.innerHTML = '<strong>The Incredible Machine Mode:</strong> PocketGull Mono glyphs act as mechanical ramps, seesaw levers, and funnel loops. Marbles roll across crossbars, trip domino cascades, and mesh rotating spur gears with authentic physical foley acoustics.';
-        }
-
-        buildLayout();
-      }
-
-      // --- Interactive Event Listeners ---
-      document.getElementById('tabAnimusic').addEventListener('click', () => switchMode('animusic'));
-      document.getElementById('tabTim').addEventListener('click', () => switchMode('tim'));
-
-      const contraptionInput = document.getElementById('contraptionText');
-      contraptionInput.addEventListener('input', (e) => {
-        state.text = e.target.value || 'A';
-        const isRtl = /[\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC]/.test(state.text);
-        contraptionInput.dir = isRtl ? 'rtl' : 'ltr';
-        buildLayout();
-      });
-
-      document.getElementById('btnFireBall').addEventListener('click', () => fireBall());
-
-      const streamBtn = document.getElementById('btnContinuousStream');
-      const streamText = document.getElementById('streamText');
-      streamBtn.addEventListener('click', () => {
-        initAudio();
-        state.continuous = !state.continuous;
-        streamText.textContent = `Continuous: ${state.continuous ? 'ON' : 'OFF'}`;
-        streamBtn.style.borderColor = state.continuous ? 'var(--cyan)' : 'var(--card-border)';
-      });
-
-      document.getElementById('btnClearStage').addEventListener('click', () => {
-        state.balls = [];
-        state.impactRipples = [];
-        state.dominoes.forEach(d => { d.toppled = false; d.angle = 0; d.angularVelocity = 0; });
-      });
-
-      // Canvas click/touch to drop ball at cursor position or interact with gears
-      canvas.addEventListener('pointerdown', (e) => {
-        initAudio();
-        const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        // If clicked directly on a gear in TIM mode, reverse its rotation and emit mechanical spark
-        let clickedGear = false;
-        if (state.mode === 'tim') {
-          for (const gear of state.gears) {
-            const gdx = x - gear.x;
-            const gdy = y - gear.y;
-            if (gdx * gdx + gdy * gdy < (gear.radius + 15) * (gear.radius + 15)) {
-              gear.pulsing = 1.0;
-              gear.direction = -gear.direction;
-              playTimFoley('ratchet', 0.8);
-              state.impactRipples.push({
-                x: gear.x,
-                y: gear.y,
-                radius: 10,
-                maxRadius: gear.radius * 1.8,
-                color: gear.isMotor ? '#f59e0b' : '#ec4899',
-                life: 0.9
-              });
-              clickedGear = true;
-              break;
-            }
-          }
-        }
-
-        if (!clickedGear) {
-          const radius = state.mode === 'animusic' ? 7 : 11;
-          const isChrome = state.mode === 'animusic';
-          state.balls.push(new Ball(x, y, (Math.random() - 0.5) * 60, 20, radius, isChrome));
-        }
-      });
-
-      // Audio Mute Toggle
-      const muteBtn = document.getElementById('btnAudioMute');
-      const muteIcon = document.getElementById('audioMuteIcon');
-      muteBtn.addEventListener('click', () => {
-        state.audioEnabled = !state.audioEnabled;
-        if (state.audioEnabled) {
-          initAudio();
-          muteBtn.innerHTML = `<span>🔊</span> Audio: ON`;
-          muteBtn.style.color = 'var(--text-main)';
-        } else {
-          muteBtn.innerHTML = `<span>🔇</span> Audio: MUTED`;
-          muteBtn.style.color = 'var(--rose)';
-        }
-      });
-
-      // Theme Switcher (Dark -> Washi -> Light)
-      const themeBtn = document.getElementById('btnThemeToggle');
-      const themeIcon = document.getElementById('themeIcon');
-      themeBtn.addEventListener('click', () => {
-        const themes = ['dark', 'washi', 'light'];
-        const currentIdx = themes.indexOf(state.theme);
-        const nextTheme = themes[(currentIdx + 1) % themes.length];
-        state.theme = nextTheme;
-        document.documentElement.setAttribute('data-theme', nextTheme);
-        themeBtn.innerHTML = `<span>◐</span> ${nextTheme.charAt(0).toUpperCase() + nextTheme.slice(1)}`;
-      });
-
-      // Sliders Binding
-      const sliderReso = document.getElementById('sliderReso');
-      sliderReso.addEventListener('input', (e) => {
-        state.reso = parseFloat(e.target.value);
-        document.getElementById('valReso').textContent = state.reso.toFixed(2);
-        document.getElementById('hudReso').textContent = state.reso.toFixed(2);
-      });
-
-      const sliderBpm = document.getElementById('sliderBpm');
-      sliderBpm.addEventListener('input', (e) => {
-        state.bpm = parseInt(e.target.value, 10);
-        document.getElementById('valBpm').textContent = `${state.bpm} bpm`;
-      });
-
-      const sliderTimbre = document.getElementById('sliderTimbre');
-      const timbreNames = ['Padauk Marimba', 'Crystalline Bell', 'Laser Harp', 'Resonant Cello'];
-      sliderTimbre.addEventListener('input', (e) => {
-        state.timbre = parseInt(e.target.value, 10);
-        document.getElementById('valTimbre').textContent = timbreNames[state.timbre];
-      });
-
-      const sliderGrav = document.getElementById('sliderGrav');
-      sliderGrav.addEventListener('input', (e) => {
-        state.gravAnimusic = parseFloat(e.target.value);
-        document.getElementById('valGrav').textContent = `${state.gravAnimusic.toFixed(2)} g`;
-      });
-
-      // TIM Sliders
-      const sliderTimGrav = document.getElementById('sliderTimGrav');
-      sliderTimGrav.addEventListener('input', (e) => {
-        state.gravTim = parseFloat(e.target.value);
-        document.getElementById('valTimGrav').textContent = `${state.gravTim.toFixed(2)} g`;
-      });
-
-      const sliderRest = document.getElementById('sliderRest');
-      sliderRest.addEventListener('input', (e) => {
-        state.restitution = parseFloat(e.target.value);
-        document.getElementById('valRest').textContent = state.restitution.toFixed(2);
-      });
-
-      const sliderFric = document.getElementById('sliderFric');
-      sliderFric.addEventListener('input', (e) => {
-        state.friction = parseFloat(e.target.value);
-        document.getElementById('valFric').textContent = state.friction.toFixed(2);
-      });
-
-      const sliderGear = document.getElementById('sliderGear');
-      sliderGear.addEventListener('input', (e) => {
-        state.gearRpm = parseInt(e.target.value, 10);
-        document.getElementById('valGear').textContent = `${state.gearRpm} RPM`;
-      });
-
-      // Melodic Scale Buttons
-      document.querySelectorAll('[data-scale]').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          document.querySelectorAll('[data-scale]').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          state.scale = btn.getAttribute('data-scale');
-          buildLayout();
-        });
-      });
-
-      // TIM Preset Buttons
-      document.querySelectorAll('[data-timpreset]').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          document.querySelectorAll('[data-timpreset]').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          const p = btn.getAttribute('data-timpreset');
-          if (p === 'dosage') {
-            state.text = '500MG';
-            state.gravTim = 1.0;
-          } else if (p === 'cascade') {
-            state.text = 'FALL';
-            state.gravTim = 1.2;
-          } else if (p === 'seesaw') {
-            state.text = 'VITAL72';
-            state.gravTim = 0.8;
-          } else if (p === 'funnel') {
-            state.text = '0̸0̸0̸';
-            state.gravTim = 1.4;
-          } else if (p === 'arabic') {
-            state.text = 'شِفَاء';
-            state.scale = 'maqam';
-            state.gravTim = 1.0;
-            document.querySelectorAll('[data-scale]').forEach(b => {
-              b.classList.toggle('active', b.getAttribute('data-scale') === 'maqam');
-            });
-          }
-          contraptionInput.value = state.text;
-          const isRtl = /[\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC]/.test(state.text);
-          contraptionInput.dir = isRtl ? 'rtl' : 'ltr';
-          buildLayout();
-        });
-      });
-
-      // Keyboard Shortcuts
-      window.addEventListener('keydown', (e) => {
-        if (e.target.tagName === 'INPUT') return;
-        if (e.code === 'Space') {
-          e.preventDefault();
-          fireBall();
-        } else if (e.key === 'r' || e.key === 'R') {
-          state.balls = [];
-          state.dominoes.forEach(d => { d.toppled = false; d.angle = 0; });
-        } else if (e.key === 't' || e.key === 'T') {
-          switchMode(state.mode === 'animusic' ? 'tim' : 'animusic');
-        } else if (e.key === 'm' || e.key === 'M') {
-          muteBtn.click();
-        }
-      });
-
-      // Init
-      resizeCanvas();
-      requestAnimationFrame(animate);
-
-    })();
-  </script>
+  <script src="js/kinetic_lab.js" defer></script>
 </body>
 </html>

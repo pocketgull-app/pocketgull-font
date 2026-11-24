@@ -32,7 +32,8 @@ IUPAC_PERIODIC_CATEGORIES = {
         "group": "3-12",
         "elements": ["Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn",
                      "Y", "Zr", "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd",
-                     "Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Hg"],
+                     "Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Hg",
+                     "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds", "Rg", "Cn"],
         "role": "d-block catalytic, metallic & enzyme cofactors"
     },
     "post-transition": {
@@ -40,7 +41,7 @@ IUPAC_PERIODIC_CATEGORIES = {
         "hex": "#0ea5e9", # Sky Blue
         "text": "#ffffff",
         "group": "13-16",
-        "elements": ["Al", "Ga", "In", "Sn", "Tl", "Pb", "Bi", "Po"],
+        "elements": ["Al", "Ga", "In", "Sn", "Tl", "Pb", "Bi", "Po", "Nh", "Fl", "Mc", "Lv"],
         "role": "p-block poor metals with covalent tendencies"
     },
     "metalloids": {

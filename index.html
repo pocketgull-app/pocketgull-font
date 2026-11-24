@@ -78,6 +78,7 @@
   }
   </script>
   <script src="js/sinus_telemetry_engine.js?v=4.0.0" defer></script>
+  <script src="js/binary_gvar_inspector.js?v=4.0.0" defer></script>
   <style>
     /* Critical Above-the-Fold Optotypes (Zero-Render-Blocking Initial Paint) */
     @font-face {
@@ -1983,6 +1984,11 @@
       color: var(--emerald);
       font-feature-settings: "ss07" 1;
     }
+    [data-tittle-variety="blossom"] .ismp-feat-heart { font-feature-settings: "ss08" 1; }
+    [data-tittle-variety="nuqta"] .ismp-feat-heart { font-feature-settings: "ss09" 1; }
+    [data-tittle-variety="star"] .ismp-feat-heart { font-feature-settings: "ss10" 1; }
+    [data-tittle-variety="droplet"] .ismp-feat-heart { font-feature-settings: "ss11" 1; }
+    [data-tittle-variety="dot"] .ismp-feat-heart { font-feature-settings: normal; }
 
     .tittle-variety-mini-selector {
       display: flex;
@@ -5428,6 +5434,50 @@
           <span>Type anywhere above to test variable interpolation across the 1000 UPM em-square.</span>
           <span style="color: var(--sky-accent, #38bdf8);">Variable OpenType Engine</span>
         </div>
+
+        <!-- Live Binary loca + glyf + gvar Delta-Vector Telemetry Drawer -->
+        <details id="upmInspectorDetails" style="margin-top: 16px; border: 1px solid var(--card-border); border-radius: 10px; background: rgba(15, 23, 42, 0.35); padding: 12px 16px;">
+          <summary style="cursor: pointer; font-size: 12px; font-weight: 700; color: #38bdf8; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; list-style: none;">
+            <span>🔬 Live Binary SFNT Contour &amp; <code>gvar</code> Delta-Vector Telemetry (<code>loca[i] % 2 == 0</code> + Zero-Reflow Polarity Proof)</span>
+            <span id="upmInspectorPolarityBadge" style="font-family: 'PocketGull Mono', monospace; font-size: 11px; color: #34d399; background: rgba(52, 211, 153, 0.12); padding: 2px 8px; border-radius: 999px;">Polarity: Dark ICU (--pg-grad: -25 | THRM: 0.35 | 0px reflow)</span>
+          </summary>
+          <div style="margin-top: 14px;">
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; align-items: center;">
+              <span style="font-size: 11px; color: var(--text-muted); font-family: 'PocketGull Mono', monospace; margin-right: 4px;">Inspect Binary Glyph:</span>
+              <button type="button" class="vf-chip vf-chip-cyan upm-inspector-glyph-btn active" data-glyph="0" data-name="zero (ISMP dosage)" aria-selected="true">0 Slashed/Base</button>
+              <button type="button" class="vf-chip vf-chip-emerald upm-inspector-glyph-btn" data-glyph="e" data-name="e (aperture &amp; halation)" aria-selected="false">e Aperture</button>
+              <button type="button" class="vf-chip vf-chip-emerald upm-inspector-glyph-btn" data-glyph="a" data-name="a (double-storey)" aria-selected="false">a Counter</button>
+              <button type="button" class="vf-chip vf-chip-cyan upm-inspector-glyph-btn" data-glyph="l" data-name="l (ISMP curved foot)" aria-selected="false">l Curved Foot</button>
+              <button type="button" class="vf-chip vf-chip-cyan upm-inspector-glyph-btn" data-glyph="I" data-name="I (ISMP bilobe serifs)" aria-selected="false">I Bilobe</button>
+              <button type="button" class="vf-chip vf-chip-amber upm-inspector-glyph-btn" data-glyph="i" data-name="i (48 UPM tittle gap)" aria-selected="false">i Tittle</button>
+              <button type="button" class="vf-chip vf-chip-blue upm-inspector-glyph-btn" data-glyph="ᐃ" data-name="uni1403 (Inuktitut)" aria-selected="false">ᐃ Syllabic</button>
+              <button type="button" class="vf-chip vf-chip-purple upm-inspector-glyph-btn" data-glyph="⠁" data-name="uni2801 (Braille)" aria-selected="false">⠁ Braille</button>
+            </div>
+            <div style="display: grid; grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr); gap: 14px; align-items: start;">
+              <div style="border: 1px solid var(--card-border); border-radius: 8px; overflow: hidden; background: #030712;">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 12px; border-bottom: 1px solid rgba(255,255,255,0.08); font-family: 'PocketGull Mono', monospace; font-size: 11px; color: var(--text-muted);">
+                  <span id="upmInspectorGlyphTitle" style="color: #38bdf8; font-weight: 700;">gid 19 ('0' • zero)</span>
+                  <span id="upmInspectorMouseCoords">X: 0, Y: 0 UPM</span>
+                </div>
+                <canvas id="upmInspectorCanvas" width="720" height="360" style="width: 100%; height: auto; display: block; cursor: crosshair;" aria-describedby="upmInspectorCanvasDesc"></canvas>
+                <div id="upmInspectorCanvasDesc" style="padding: 6px 12px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 10px; font-family: 'PocketGull Mono', monospace; color: var(--text-muted);">
+                  ● On-curve quadratic node • ○ Off-curve control point • Red arrows = live gvar vector displacement (Δx, Δy)
+                </div>
+              </div>
+              <div style="border: 1px solid var(--card-border); border-radius: 8px; padding: 12px; font-size: 11px; font-family: 'PocketGull Mono', monospace; display: flex; flex-direction: column; gap: 8px;">
+                <div style="display: flex; justify-content: space-between; gap: 8px;"><span style="color: var(--text-muted);">loca[gid]:</span><strong id="upmInspectorMetricLoca" style="color: #34d399;">EVEN %2==0 ✓</strong></div>
+                <div style="display: flex; justify-content: space-between; gap: 8px;"><span style="color: var(--text-muted);">Advance Width:</span><strong id="upmInspectorMetricAw" style="color: #38bdf8;">572 UPM (Δaw 0)</strong></div>
+                <div style="display: flex; justify-content: space-between; gap: 8px;"><span style="color: var(--text-muted);">Side Bearings:</span><span>LSB <strong id="upmInspectorMetricLsb">52</strong> • RSB <strong id="upmInspectorMetricRsb">52</strong></span></div>
+                <div style="display: flex; justify-content: space-between; gap: 8px;"><span style="color: var(--text-muted);">Bounding Box:</span><strong id="upmInspectorMetricBbox">[52, -14, 520, 714]</strong></div>
+                <div style="display: flex; justify-content: space-between; gap: 8px;"><span style="color: var(--text-muted);">Contours / Pts:</span><span><strong id="upmInspectorMetricContours">2</strong> / <strong id="upmInspectorMetricPoints">33</strong></span></div>
+                <div style="display: flex; justify-content: space-between; gap: 8px;"><span style="color: var(--text-muted);">Max |Δgvar|:</span><strong id="upmInspectorMaxDelta" style="color: #f43f5e;">0 UPM</strong></div>
+                <div style="margin-top: 4px; padding-top: 8px; border-top: 1px dashed var(--card-border); font-size: 10px; color: var(--text-muted); line-height: 1.5;">
+                  Drag any of the 16 sliders above (try <strong>THRM</strong> for 0px-reflow halation inset or <strong>wght</strong> / <strong>APTR</strong>) to inspect real binary SFNT displacement vectors.
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
       </div>
     </section>
 
@@ -5598,7 +5648,7 @@
         <!-- 11. Philocardia Heart Tittle Card -->
         <div class="ismp-card" id="ismpCardHeart" data-inspect="philocardia_hearts" tabindex="0" role="region" aria-label="Philocardia Hearts and Healer Alternates" style="border-color: rgba(16, 185, 129, 0.35); background: linear-gradient(180deg, rgba(16, 185, 129, 0.05) 0%, var(--card-bg) 100%);">
           <div class="ismp-title" style="color: var(--emerald); display: flex; justify-content: space-between; align-items: center;">
-            <span>Philocardia Hearts • The Healer Font (cv09 / ss07)</span>
+            <span>Philocardia Tittles • The Healer Font (cv09 / cv10 / ss07–ss11)</span>
             <div style="display: flex; gap: 6px; align-items: center;">
               <span class="ismp-inspect-badge" style="background: rgba(16, 185, 129, 0.18); color: var(--emerald); border: 1px solid rgba(16, 185, 129, 0.3);">🔬 Inspect</span>
               <button type="button" id="heartBpmBadge" title="Click to cycle cardiac pacing: 72 BPM -> 60 BPM -> Static" style="background: rgba(16, 185, 129, 0.18); border: 1px solid rgba(16, 185, 129, 0.4); color: var(--emerald); font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; cursor: pointer;">72 BPM</button>
@@ -5606,7 +5656,7 @@
           </div>
           <div class="ismp-comparison" style="font-size: 1.35rem; display: flex; justify-content: space-around; align-items: center; white-space: nowrap; gap: 8px;">
             <span class="ismp-standard" style="white-space: nowrap; font-size: 1.35rem;">clinical</span>
-            <span class="ismp-safe ismp-feat-heart" id="ismpHeartComparison" style="color: var(--emerald); white-space: nowrap; font-size: 1.35rem;">cl<span class="philocardia-heart philocardia-pacing-72" title="Philocardia Heart Tittle">ı</span>n<span class="philocardia-heart philocardia-pacing-72" title="Philocardia Heart Tittle">ı</span>cal</span>
+            <span class="ismp-safe ismp-feat-heart" id="ismpHeartComparison" aria-label="clinical" style="color: var(--emerald); white-space: nowrap; font-size: 1.35rem;">cl<span class="philocardia-heart philocardia-pacing-72" title="Philocardia Heart Tittle">ı</span>n<span class="philocardia-heart philocardia-pacing-72" title="Philocardia Heart Tittle">ı</span>cal</span>
           </div>
           <div class="tittle-variety-mini-selector" id="tittleVarietyMini">
             <button type="button" class="tittle-variety-pill active" data-v="heart" title="Heart (♥): Bedside warmth &amp; lovingkindness">♥</button>
@@ -5727,10 +5777,10 @@
             <span data-inspect="asclepius" style="cursor: pointer; padding: 1px 6px; border-radius: 4px; border: 1px solid rgba(45, 212, 191, 0.4); color: var(--teal-accent); font-size: 10px;" title="Inspect Rod of Asclepius procedural vector heraldry">⚕ Staff of Epidauros</span>
           </div>
           <div id="philocardiaInteractiveText" class="font-sample-bold" contenteditable="true" spellcheck="false" style="font-size: clamp(22px, 2.6vw, 32px); color: var(--sample-text); outline: none; line-height: 1.3;" title="Click to edit and test heart tittles in real time">
-            Ped<span class="philocardia-heart philocardia-pacing-72">ı</span>atr<span class="philocardia-heart philocardia-pacing-72">ı</span>c Care • Fl<span class="philocardia-heart philocardia-pacing-72">ı</span>ght Sanctuary!
+            Ped<span class="philocardia-heart philocardia-pacing-72">ı</span>atr<span class="philocardia-heart philocardia-pacing-72">ı</span>c Care • Fl<span class="philocardia-heart philocardia-pacing-72">ı</span>ght Sanctuary<span class="philocardia-excl philocardia-pacing-72">!</span>
           </div>
           <div style="font-size: 12px; color: var(--text-muted); margin-top: 8px;" id="healerBannerMeaning">
-            💚 <strong>Philocardia:</strong> Bedside warmth, pediatric comfort, and lovingkindness. Type lowercase <code>i</code>, <code>j</code>, or <code>!</code> above.
+            💚 <strong>Philocardia:</strong> Bedside warmth, pediatric comfort, and lovingkindness. Type lowercase <code>i</code>, <code>j</code>, <code>!</code>, <code>?</code>, <code>¡</code>, or <code>¿</code> above.
           </div>
         </div>
         <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-end;">
@@ -9113,6 +9163,46 @@
         }
       }
 
+      const PHILOCARDIA_SPAN_MAP = {
+        'i': { cls: 'philocardia-heart', txt: 'ı' },
+        'j': { cls: 'philocardia-j', txt: 'ȷ' },
+        '!': { cls: 'philocardia-excl', txt: '!' },
+        '?': { cls: 'philocardia-question', txt: '?' },
+        '¡': { cls: 'philocardia-excl-down', txt: '¡' },
+        '¿': { cls: 'philocardia-question-down', txt: '¿' },
+      };
+
+      function renderPhilocardiaText(el, rawText, pacingClass, variety, includeBraille = false) {
+        if (!el) return;
+        const clean = (rawText || '').replace(/ı/g, 'i').replace(/ȷ/g, 'j');
+        if (variety === 'dot') {
+          el.removeAttribute('aria-label');
+          if (el.textContent !== clean) {
+            el.textContent = clean;
+          }
+          return;
+        }
+        el.setAttribute('aria-label', clean);
+        el.replaceChildren();
+        const classBraille = pacingClass ? `philocardia-braille ${pacingClass}` : 'philocardia-braille';
+        for (const ch of clean) {
+          const spec = PHILOCARDIA_SPAN_MAP[ch];
+          if (spec) {
+            const span = document.createElement('span');
+            span.className = pacingClass ? `${spec.cls} ${pacingClass}` : spec.cls;
+            span.textContent = spec.txt;
+            el.appendChild(span);
+          } else if (includeBraille && ch >= '\u2801' && ch <= '\u28FF') {
+            const span = document.createElement('span');
+            span.className = classBraille;
+            span.textContent = ch;
+            el.appendChild(span);
+          } else {
+            el.appendChild(document.createTextNode(ch));
+          }
+        }
+      }
+
       function updateAllAxes() {
         if (!vfText) return;
         const parts = [];
@@ -9157,7 +9247,14 @@
 
         const feats = [];
         if (smrnVal >= 0.5) feats.push('"zero" 1', '"cv08" 1', '"cv05" 1', '"cv11" 1', '"ss02" 1');
-        if (hlngVal >= 0.5) feats.push('"ss07" 1', '"cv09" 1');
+        if (hlngVal >= 0.5) {
+          const activeVar = typeof currentVariety !== 'undefined' ? currentVariety : 'heart';
+          if (activeVar === 'heart') feats.push('"ss07" 1', '"cv09" 1', '"cv10" 1');
+          else if (activeVar === 'blossom') feats.push('"ss08" 1');
+          else if (activeVar === 'nuqta') feats.push('"ss09" 1');
+          else if (activeVar === 'star') feats.push('"ss10" 1');
+          else if (activeVar === 'droplet') feats.push('"ss11" 1');
+        }
         vfText.style.fontFeatureSettings = feats.join(', ');
 
         // Philocardia ISMP-grade clarity rendering across all variable axes
@@ -9166,50 +9263,113 @@
         const isPhilocardiaActive = activePreset === 'philocardia' || activePreset === 'braille_philocardia' || hlngVal >= 0.5;
         const rawText = vfText.dataset.rawText || vfText.textContent || '';
         if (isPhilocardiaActive) {
-          const clean = rawText.replace(/ı/g, 'i').replace(/ȷ/g, 'j');
-          if (typeof currentVariety !== 'undefined' && currentVariety === 'dot') {
-            if (vfText.textContent !== clean) {
-              vfText.textContent = clean;
-            }
-          } else {
-            const cadence = typeof currentCadence !== 'undefined' ? currentCadence : '72';
-            let pacingClass = '';
-            if (cadence === '72') pacingClass = 'philocardia-pacing-72';
-            else if (cadence === '60') pacingClass = 'philocardia-pacing-60';
-
-            const classI = pacingClass ? `philocardia-heart ${pacingClass}` : 'philocardia-heart';
-            const classJ = pacingClass ? `philocardia-j ${pacingClass}` : 'philocardia-j';
-            const classExcl = pacingClass ? `philocardia-excl ${pacingClass}` : 'philocardia-excl';
-            const classBraille = pacingClass ? `philocardia-braille ${pacingClass}` : 'philocardia-braille';
-
-            vfText.textContent = '';
-            for (let char of clean) {
-              if (char === 'i' || char === 'j' || char === '!') {
-                const span = document.createElement('span');
-                span.className = (char === 'i') ? classI : (char === 'j') ? classJ : classExcl;
-                span.textContent = (char === 'i') ? 'ı' : (char === 'j') ? 'ȷ' : '!';
-                vfText.appendChild(span);
-              } else if (char >= '\u2801' && char <= '\u28FF') {
-                const span = document.createElement('span');
-                span.className = classBraille;
-                span.textContent = char;
-                vfText.appendChild(span);
-              } else {
-                vfText.appendChild(document.createTextNode(char));
-              }
-            }
-          }
+          const activeVar = typeof currentVariety !== 'undefined' ? currentVariety : 'heart';
+          const cadence = typeof currentCadence !== 'undefined' ? currentCadence : '72';
+          let pacingClass = '';
+          if (cadence === '72') pacingClass = 'philocardia-pacing-72';
+          else if (cadence === '60') pacingClass = 'philocardia-pacing-60';
+          renderPhilocardiaText(vfText, rawText, pacingClass, activeVar, true);
         } else {
-          const clean = rawText.replace(/ı/g, 'i').replace(/ȷ/g, 'j');
-          if (vfText.textContent !== clean) {
-            vfText.textContent = clean;
-          }
+          renderPhilocardiaText(vfText, rawText, '', 'dot', false);
         }
 
         if (readout) {
           readout.innerHTML = `Active 16-Axis Engine: <strong style="color: var(--cyan);">${parts.slice(0, 4).join(', ')}</strong> | <span style="color: #34d399;">${parts.slice(4, 9).join(', ')}</span><br><code style="font-size: 10px; color: var(--text-muted);">font-variation-settings: ${fvs}</code>`;
         }
+        renderLiveBinaryInspector();
       }
+
+      // Live Binary SFNT Contour & gvar Delta-Vector Controller (Lazy-loaded on expand)
+      const upmDetails = document.getElementById('upmInspectorDetails');
+      const upmCanvas = document.getElementById('upmInspectorCanvas');
+      const upmPolarityBadge = document.getElementById('upmInspectorPolarityBadge');
+      let upmBinaryEngine = null;
+      let upmActiveChar = '0';
+      let upmActiveName = 'zero (ISMP dosage)';
+      let upmLastTf = { ox: 220, oy: 270, scale: 0.30 };
+
+      function syncPolarityBadge() {
+        if (!upmPolarityBadge) return;
+        const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+        if (theme === 'pbm') {
+          upmPolarityBadge.textContent = 'Polarity: 670nm Scotopic (--pg-grad: -45 | THRM: 0.60 | 0px reflow)';
+        } else if (theme === 'washi' || theme === 'light') {
+          upmPolarityBadge.textContent = 'Polarity: Daylight Washi (--pg-grad: 0 | THRM: 0.00 | 0px reflow)';
+        } else {
+          upmPolarityBadge.textContent = 'Polarity: Dark ICU (--pg-grad: -25 | THRM: 0.35 | 0px reflow)';
+        }
+      }
+
+      function renderLiveBinaryInspector() {
+        syncPolarityBadge();
+        if (!upmDetails || !upmDetails.open || !upmCanvas || !window.PocketGullBinaryInspector) return;
+        if (!upmBinaryEngine) {
+          window.PocketGullBinaryInspector.loadDefaultVfEngine().then(eng => {
+            upmBinaryEngine = eng;
+            renderLiveBinaryInspector();
+          }).catch(() => {});
+          return;
+        }
+        const axisMap = {};
+        axes.forEach(a => {
+          const s = document.getElementById(a.el);
+          if (s) axisMap[a.id] = parseFloat(s.value);
+        });
+        const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+        const info = upmBinaryEngine.inspectGlyph(upmActiveChar, axisMap);
+        const tf = window.PocketGullBinaryInspector.renderGlyphDeltaCanvas(upmCanvas, info, theme);
+        if (tf) upmLastTf = tf;
+
+        const onPts = info.points.filter(p => p.onCurve).length;
+        const offPts = info.points.length - onPts;
+        const setTxt = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+        setTxt('upmInspectorGlyphTitle', `gid ${info.gid} ('${upmActiveChar}' • ${upmActiveName})`);
+        setTxt('upmInspectorMetricLoca', `0x${info.locaOffset.toString(16).toUpperCase()} (${info.wordAligned ? 'EVEN %2==0 ✓' : 'ODD ✗'})`);
+        setTxt('upmInspectorMetricAw', `${info.variedAw} UPM (Δaw ${info.variedAw - info.baseAw})`);
+        setTxt('upmInspectorMetricLsb', `${info.lsb}`);
+        setTxt('upmInspectorMetricRsb', `${info.rsb}`);
+        setTxt('upmInspectorMetricBbox', `[${info.bbox.join(', ')}]`);
+        setTxt('upmInspectorMetricContours', `${info.endPts.length}`);
+        setTxt('upmInspectorMetricPoints', `${info.points.length} (${onPts}●/${offPts}○)`);
+        setTxt('upmInspectorMaxDelta', `${info.maxDeltaMag} UPM (${info.activeTupleCount} tuples)`);
+      }
+
+      if (upmDetails) {
+        upmDetails.addEventListener('toggle', () => {
+          if (upmDetails.open) renderLiveBinaryInspector();
+        });
+      }
+      document.querySelectorAll('#upmInspectorDetails .upm-inspector-glyph-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('#upmInspectorDetails .upm-inspector-glyph-btn').forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-selected', 'false');
+          });
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+          upmActiveChar = btn.dataset.glyph || '0';
+          upmActiveName = btn.dataset.name || upmActiveChar;
+          renderLiveBinaryInspector();
+        });
+      });
+      if (upmCanvas) {
+        upmCanvas.addEventListener('mousemove', e => {
+          const rect = upmCanvas.getBoundingClientRect();
+          const sx = upmCanvas.width / (rect.width || upmCanvas.width);
+          const sy = upmCanvas.height / (rect.height || upmCanvas.height);
+          const fx = Math.round(((e.clientX - rect.left) * sx - upmLastTf.ox) / upmLastTf.scale);
+          const fy = Math.round((upmLastTf.oy - (e.clientY - rect.top) * sy) / upmLastTf.scale);
+          const coordsEl = document.getElementById('upmInspectorMouseCoords');
+          if (coordsEl) coordsEl.textContent = `X: ${fx}, Y: ${fy} UPM`;
+        });
+      }
+      if ('MutationObserver' in window) {
+        new MutationObserver(() => renderLiveBinaryInspector()).observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ['data-theme']
+        });
+      }
+      syncPolarityBadge();
 
       function resetVfPresets() {
         document.querySelectorAll('#vfPresetControls .preset-pill').forEach(p => {
@@ -9482,44 +9642,19 @@
         if (currentCadence === '72') pacingClass = 'philocardia-pacing-72';
         else if (currentCadence === '60') pacingClass = 'philocardia-pacing-60';
 
-        let raw = textEl.textContent || '';
-        raw = raw.replace(/ı/g, 'i').replace(/ȷ/g, 'j');
-
-        if (currentVariety === 'dot') {
-          textEl.textContent = raw;
-        } else {
-          const classI = pacingClass ? `philocardia-heart ${pacingClass}` : 'philocardia-heart';
-          const classJ = pacingClass ? `philocardia-j ${pacingClass}` : 'philocardia-j';
-          const classExcl = pacingClass ? `philocardia-excl ${pacingClass}` : 'philocardia-excl';
-          
-          textEl.textContent = '';
-          for (let char of raw) {
-            if (char === 'i' || char === 'j' || char === '!') {
-              const span = document.createElement('span');
-              span.className = (char === 'i') ? classI : (char === 'j') ? classJ : classExcl;
-              span.textContent = (char === 'i') ? 'ı' : (char === 'j') ? 'ȷ' : '!';
-              textEl.appendChild(span);
-            } else {
-              textEl.appendChild(document.createTextNode(char));
-            }
-          }
-        }
+        const raw = (textEl.textContent || '').replace(/ı/g, 'i').replace(/ȷ/g, 'j');
+        renderPhilocardiaText(textEl, raw, pacingClass, currentVariety, false);
 
         const compEl = document.getElementById('ismpHeartComparison');
         if (compEl) {
-          const classI = pacingClass ? `philocardia-heart ${pacingClass}` : 'philocardia-heart';
-          compEl.textContent = '';
-          compEl.appendChild(document.createTextNode('cl'));
-          const span1 = document.createElement('span');
-          span1.className = classI;
-          span1.textContent = 'ı';
-          compEl.appendChild(span1);
-          compEl.appendChild(document.createTextNode('n'));
-          const span2 = document.createElement('span');
-          span2.className = classI;
-          span2.textContent = 'ı';
-          compEl.appendChild(span2);
-          compEl.appendChild(document.createTextNode('cal'));
+          if (currentVariety === 'dot') {
+            compEl.style.fontFeatureSettings = 'normal';
+            compEl.removeAttribute('aria-label');
+            compEl.textContent = 'clinical';
+          } else {
+            compEl.style.fontFeatureSettings = '';
+            renderPhilocardiaText(compEl, 'clinical', pacingClass, currentVariety, false);
+          }
         }
       }
 
@@ -9541,7 +9676,7 @@
         const descEl = document.getElementById('tittleVarietyDesc');
         if (descEl) descEl.innerHTML = varietyMeanings[v] || '';
         const bannerDesc = document.getElementById('healerBannerMeaning');
-        if (bannerDesc) bannerDesc.innerHTML = `${varietyMeanings[v] || ''} Type lowercase <code>i</code>, <code>j</code>, or <code>!</code> above.`;
+        if (bannerDesc) bannerDesc.innerHTML = `${varietyMeanings[v] || ''} Type lowercase <code>i</code>, <code>j</code>, <code>!</code>, <code>?</code>, <code>¡</code>, or <code>¿</code> above.`;
 
         updateHealerSpecimen();
         updateAllAxes();
@@ -11630,10 +11765,10 @@
           "philocardia_hearts": {
             badge: "TRAUMA-INFORMED",
             badgeColor: "#10b981",
-            title: "Philocardia Hearts (cv09 / ss07 / U+2665)",
-            failureMode: "Eliminates acute visual threat stimuli; restores bedside empathy and pediatric calming.",
-            neuro: "Cushioned 28 UPM rounded apex fillet replaces sharp 1-pixel needle vertices, mitigating amygdala threat response.",
-            aperture: "Cleft angle 120° with broad humanist lobes centered directly over lowercase stems.",
+            title: "Philocardia Tittles (cv09 / cv10 / cv19 / ss07–ss11)",
+            failureMode: "Eliminates acute visual threat stimuli across i, j, !, ?, ¡, and ¿; restores bedside empathy and pediatric calming.",
+            neuro: "Cushioned 28 UPM rounded apex fillet replaces sharp 1-pixel needle vertices, mitigating amygdala threat response across Heart (ss07), Blossom (ss08), Nuqṭa (ss09), Star (ss10), and Droplet (ss11).",
+            aperture: "Cleft angle 120° with broad humanist lobes centered over bit-identical stems (cv19 dotless isolation, 0 CLS).",
             gravOffset: "28 UPM Cushioned Apex",
             clause: "PocketGull Invariant 6; Dieter Rams Law 3 & 4",
             vectors: [
@@ -12031,11 +12166,11 @@
           mission: [
             'Locate the Philocardia Healer Banner with the beating green heart.',
             'Click the "72 BPM", "60 BPM", and "Static" cadence buttons to feel the pacing shift.',
-            'Click into the live text editor and type lowercase "i", "j", or "!" to witness procedural heart tittles.'
+            'Click into the live text editor and type "i", "j", "!", "?", "¡", or "¿" across all 6 tittle varieties.'
           ],
-          discovery: 'Features cv09 and ss07 replace standard square dots with humanist felt-marker hearts, paced to parasympathetic heart cadences (60–72 BPM) for pediatric comfort.',
+          discovery: 'OpenType features cv09 (i, j), cv10 (!, ?, ¡, ¿), cv19 (dotless stems), and stylistic suites ss07 (Heart), ss08 (Blossom), ss09 (Nuqṭa), ss10 (Star), and ss11 (Droplet) replace standard dots with calibrated felt-marker vectors across all 38 cuts.',
           chips: ['What is 72 BPM cadence?', 'How do heart tittles work (cv09)?', 'Why pediatric empathy matters', 'Test live typing'],
-          content: '<h3>I. The Philocardia Healing DNA</h3><p>In pediatric units and trauma recovery, traditional clinical typography feels cold, sterile, and intimidating. Philocardia introduces humanist heart tittles across lowercase <code>i</code> and <code>j</code>, exclamation points, and telemetry badges.</p><h3>II. Heartbeat Animation &amp; Parasympathetic Entrainment</h3><p>The interactive studio offers selectable cardiac cadences: <strong>72 BPM (Standard Rest)</strong>, <strong>60 BPM (Deep Sleep / Meditation)</strong>, and <strong>Static</strong>. By entraining visual pulsing to healthy cardiac rhythms, clinical interfaces can actively soothe acute patient anxiety.</p><h3>III. Stem Preservation Invariant</h3><p>Under OpenType feature <code>cv09</code> (Heart Tittles), the stem contour of <code>i</code> and <code>j</code> remains 100% bit-identical to the standard glyphs with zero collision, ensuring clinical legibility is never compromised.</p>'
+          content: '<h3>I. The Philocardia Healing DNA</h3><p>In pediatric units and trauma recovery, traditional clinical typography feels cold, sterile, and intimidating. Philocardia introduces 5 native OpenType tittle suites across <code>i</code>, <code>j</code>, and expressive punctuation <code>! ? ¡ ¿</code>: <strong>Heart</strong> (<code>cv09</code> / <code>cv10</code> / <code>ss07</code>), <strong>Blossom</strong> (<code>ss08</code>), <strong>Nuqṭa</strong> (<code>ss09</code>), <strong>Star</strong> (<code>ss10</code>), and <strong>Droplet</strong> (<code>ss11</code>), plus dotless stems (<code>cv19</code>) for animated web overlays.</p><h3>II. Heartbeat Animation &amp; Parasympathetic Entrainment</h3><p>The interactive studio offers selectable cardiac cadences: <strong>72 BPM (Standard Rest)</strong>, <strong>60 BPM (Deep Sleep / Meditation)</strong>, and <strong>Static</strong>. By entraining visual pulsing to healthy cardiac rhythms, clinical interfaces can actively soothe acute patient anxiety.</p><h3>III. Stem Preservation Invariant</h3><p>Under OpenType features <code>cv09</code>, <code>cv10</code>, <code>cv19</code>, and <code>ss07</code>–<code>ss11</code>, base stem contours remain 100% bit-identical with zero collision and <code>0.000</code> Cumulative Layout Shift, ensuring clinical legibility is never compromised.</p>'
         },
         scotopic: {
           title: '650nm Scotopic Night Observatory Telemetry',
@@ -12843,12 +12978,12 @@ Keep answers clear, educational, and structured in 2-3 paragraphs with markdown 
           }
           // 25b. PHILOCARDIA HEARTS & 72 BPM CADENCE
           else if (qLower.includes('philocardia') || qLower.includes('heart') || qLower.includes('pediatric') || qLower.includes('bpm')) {
-            answer = `<h4 style="color: var(--emerald); margin-bottom: 6px; font-size: 0.9rem;">💚 Philocardia Hearts &amp; 72 BPM Cardiac Pacing</h4>
-            <p>Philocardia introduces humanist heart-shaped tittles across lowercase <code>i</code> and <code>j</code>, exclamation points, and telemetry badges for pediatric care and trauma recovery.</p>
+            answer = `<h4 style="color: var(--emerald); margin-bottom: 6px; font-size: 0.9rem;">💚 Philocardia Tittles &amp; 72 BPM Cardiac Pacing</h4>
+            <p>Philocardia introduces 5 native OpenType tittle suites across lowercase <code>i</code>, <code>j</code>, and expressive punctuation (<code>! ? ¡ ¿</code>) for pediatric care and trauma recovery.</p>
             <div style="background: rgba(16, 185, 129, 0.08); border-left: 3px solid var(--emerald); padding: 8px 12px; margin: 8px 0; font-family: var(--font-code); font-size: 0.74rem;">
-              • Resting Heart Pacing: 72 BPM (standard rest) and 60 BPM (calming relaxation)<br>
-              • OpenType Feature: cv09 replaces dots with cardstock felt-marker hearts<br>
-              • Stem Invariant: Stem contours are 100% bit-identical to standard glyphs with 0 collision
+              • Resting Heart Pacing: 72 BPM (standard rest), 60 BPM (calming relaxation), and Static<br>
+              • OpenType Suites: cv09 (i, j) &amp; cv10 (! ? ¡ ¿) Hearts • ss07 Heart • ss08 Blossom • ss09 Nuqṭa • ss10 Star • ss11 Droplet • cv19 Dotless Stems<br>
+              • Stem Invariant: Base stem contours are 100% bit-identical to standard glyphs with 0 collision &amp; 0.000 CLS
             </div>
             <p>This gentle biological entrainment soothes acute patient anxiety without altering underlying clinical legibility.</p>`;
           }

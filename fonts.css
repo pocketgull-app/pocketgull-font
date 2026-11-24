@@ -1550,6 +1550,30 @@
 .font-feature-slow {
   font-feature-settings: "ss15" 1;
 }
+.font-feature-hearts {
+  font-feature-settings: "cv09" 1;
+}
+.font-feature-hearts-punct {
+  font-feature-settings: "cv10" 1;
+}
+.font-feature-hearts-suite {
+  font-feature-settings: "ss07" 1;
+}
+.font-feature-blossom {
+  font-feature-settings: "ss08" 1;
+}
+.font-feature-nuqta {
+  font-feature-settings: "ss09" 1;
+}
+.font-feature-star {
+  font-feature-settings: "ss10" 1;
+}
+.font-feature-droplet {
+  font-feature-settings: "ss11" 1;
+}
+.font-feature-punct-dotless {
+  font-feature-settings: "cv19" 1;
+}
 
 /* ==========================================================================
    5. PHILOCARDIA: THE PHIL GEAR CARDIAC CHRONOMETER & HEART ALTERNATE
@@ -1569,8 +1593,12 @@
   --tittle-font-size: 0.28em;
   --tittle-top-i: 13%;
   --tittle-top-j: 13%;
+  --tittle-top-excl-down: 31%;
+  --tittle-top-question-down: 31%;
   --tittle-bottom-excl: 0.08em;
+  --tittle-bottom-question: 0.08em;
   --tittle-base-scale: 1;
+  --tittle-translate: translate(-50%, -50%);
 }
 
 [data-tittle-variety="heart"], .tittle-variety-heart {
@@ -1580,7 +1608,10 @@
   --tittle-font-size: 0.32em;
   --tittle-top-i: 13%;
   --tittle-top-j: 13%;
+  --tittle-top-excl-down: 31%;
+  --tittle-top-question-down: 31%;
   --tittle-bottom-excl: 0.08em;
+  --tittle-bottom-question: 0.08em;
   --tittle-base-scale: 1;
 }
 
@@ -1591,7 +1622,10 @@
   --tittle-font-size: 0.32em;
   --tittle-top-i: 13%;
   --tittle-top-j: 13%;
+  --tittle-top-excl-down: 31%;
+  --tittle-top-question-down: 31%;
   --tittle-bottom-excl: 0.08em;
+  --tittle-bottom-question: 0.08em;
   --tittle-base-scale: 1;
 }
 
@@ -1602,7 +1636,10 @@
   --tittle-font-size: 0.28em;
   --tittle-top-i: 13%;
   --tittle-top-j: 13%;
+  --tittle-top-excl-down: 31%;
+  --tittle-top-question-down: 31%;
   --tittle-bottom-excl: 0.08em;
+  --tittle-bottom-question: 0.08em;
   --tittle-base-scale: 1;
 }
 
@@ -1613,7 +1650,10 @@
   --tittle-font-size: 0.32em;
   --tittle-top-i: 13%;
   --tittle-top-j: 13%;
+  --tittle-top-excl-down: 31%;
+  --tittle-top-question-down: 31%;
   --tittle-bottom-excl: 0.08em;
+  --tittle-bottom-question: 0.08em;
   --tittle-base-scale: 1;
 }
 
@@ -1624,7 +1664,10 @@
   --tittle-font-size: 0.28em;
   --tittle-top-i: 13%;
   --tittle-top-j: 13%;
+  --tittle-top-excl-down: 31%;
+  --tittle-top-question-down: 31%;
   --tittle-bottom-excl: 0.07em;
+  --tittle-bottom-question: 0.07em;
   --tittle-base-scale: 1;
 }
 
@@ -1635,7 +1678,10 @@
   --tittle-font-size: 0.28em;
   --tittle-top-i: 13%;
   --tittle-top-j: 13%;
+  --tittle-top-excl-down: 31%;
+  --tittle-top-question-down: 31%;
   --tittle-bottom-excl: 0.08em;
+  --tittle-bottom-question: 0.08em;
   --tittle-base-scale: 1;
 }
 
@@ -1652,125 +1698,138 @@
 .iphillyg-heart,
 .philocardia-j,
 .philocardia-excl,
+.philocardia-question,
+.philocardia-excl-down,
+.philocardia-question-down,
 .philocardia-arabic-heart {
   --tittle-glyph: '♥';
 }
 
-[data-tittle-variety="heart"] :is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-arabic-heart),
+[data-tittle-variety="heart"] :is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-question, .philocardia-excl-down, .philocardia-question-down, .philocardia-arabic-heart),
+[data-tittle-variety="heart"]:is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-question, .philocardia-excl-down, .philocardia-question-down, .philocardia-arabic-heart),
 [data-tittle-variety="heart"].philocardia-heart {
   --tittle-glyph: '♥';
 }
 
-[data-tittle-variety="blossom"] :is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-arabic-heart),
+[data-tittle-variety="blossom"] :is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-question, .philocardia-excl-down, .philocardia-question-down, .philocardia-arabic-heart),
+[data-tittle-variety="blossom"]:is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-question, .philocardia-excl-down, .philocardia-question-down, .philocardia-arabic-heart),
 [data-tittle-variety="blossom"].philocardia-heart {
   --tittle-glyph: '✤';
 }
 
-[data-tittle-variety="nuqta"] :is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-arabic-heart),
+[data-tittle-variety="nuqta"] :is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-question, .philocardia-excl-down, .philocardia-question-down, .philocardia-arabic-heart),
+[data-tittle-variety="nuqta"]:is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-question, .philocardia-excl-down, .philocardia-question-down, .philocardia-arabic-heart),
 [data-tittle-variety="nuqta"].philocardia-heart {
   --tittle-glyph: '◆';
 }
 
-[data-tittle-variety="star"] :is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-arabic-heart),
+[data-tittle-variety="star"] :is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-question, .philocardia-excl-down, .philocardia-question-down, .philocardia-arabic-heart),
+[data-tittle-variety="star"]:is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-question, .philocardia-excl-down, .philocardia-question-down, .philocardia-arabic-heart),
 [data-tittle-variety="star"].philocardia-heart {
   --tittle-glyph: '✦';
 }
 
-[data-tittle-variety="droplet"] :is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-arabic-heart),
+[data-tittle-variety="droplet"] :is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-question, .philocardia-excl-down, .philocardia-question-down, .philocardia-arabic-heart),
+[data-tittle-variety="droplet"]:is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-question, .philocardia-excl-down, .philocardia-question-down, .philocardia-arabic-heart),
 [data-tittle-variety="droplet"].philocardia-heart {
   --tittle-glyph: '💧';
 }
 
-[data-tittle-variety="dot"] :is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-arabic-heart),
+[data-tittle-variety="dot"] :is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-question, .philocardia-excl-down, .philocardia-question-down, .philocardia-arabic-heart),
+[data-tittle-variety="dot"]:is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-question, .philocardia-excl-down, .philocardia-question-down, .philocardia-arabic-heart),
 [data-tittle-variety="dot"].philocardia-heart {
   --tittle-glyph: '●';
 }
 
 .philocardia-heart,
-.iphillyg-heart {
+.iphillyg-heart,
+.philocardia-j,
+.philocardia-excl,
+.philocardia-question,
+.philocardia-excl-down,
+.philocardia-question-down {
   display: inline-block;
   position: relative;
   line-height: 1;
   vertical-align: baseline;
   font-family: inherit;
+  font-feature-settings: "ss07" 0, "cv09" 0, "cv10" 0, "ss08" 0, "ss09" 0, "ss10" 0, "ss11" 0, "cv19" 1;
+}
+
+.philocardia-heart::after,
+.iphillyg-heart::after,
+.philocardia-j::after,
+.philocardia-excl::after,
+.philocardia-question::after,
+.philocardia-excl-down::after,
+.philocardia-question-down::after,
+.philocardia-arabic-heart::after {
+  content: var(--tittle-glyph, '●');
+  position: absolute;
+  width: var(--tittle-box-width, 1em);
+  height: var(--tittle-box-height, 1em);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--tittle-font-size, 0.32em);
+  font-variant-emoji: text;
+  line-height: 1;
+  color: var(--aura-color, var(--teal-accent, currentColor));
+  -webkit-text-fill-color: initial;
+  pointer-events: none;
+  filter: drop-shadow(0 0 var(--aura-glow, 1.5px) rgba(45, 212, 191, 0.45));
+  transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.2s ease, filter 0.2s ease;
 }
 
 .philocardia-heart::after,
 .iphillyg-heart::after {
-  content: var(--tittle-glyph, '●');
-  position: absolute;
   top: var(--tittle-top-i, 13%);
   left: 50%;
-  width: var(--tittle-box-width, 1em);
-  height: var(--tittle-box-height, 1em);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transform: translate(-50%, -50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1)));
-  font-size: var(--tittle-font-size, 0.32em);
-  line-height: 1;
-  color: var(--aura-color, var(--teal-accent, currentColor));
-  -webkit-text-fill-color: initial;
-  pointer-events: none;
-  filter: drop-shadow(0 0 var(--aura-glow, 1.5px) rgba(45, 212, 191, 0.45));
-  transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.2s ease, filter 0.2s ease;
+  --tittle-translate: translate(-50%, -50%);
+  transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1)));
 }
 
 /* Lowercase j (dotless ȷ U+0237): Centered over the straight upper stem */
-.philocardia-j {
-  display: inline-block;
-  position: relative;
-  line-height: 1;
-  vertical-align: baseline;
-  font-family: inherit;
-}
-
 .philocardia-j::after {
-  content: var(--tittle-glyph, '●');
-  position: absolute;
   top: var(--tittle-top-j, 13%);
   left: 50%;
-  width: var(--tittle-box-width, 1em);
-  height: var(--tittle-box-height, 1em);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transform: translate(-50%, -50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1)));
-  font-size: var(--tittle-font-size, 0.32em);
-  line-height: 1;
-  color: var(--aura-color, var(--teal-accent, currentColor));
-  -webkit-text-fill-color: initial;
-  pointer-events: none;
-  filter: drop-shadow(0 0 var(--aura-glow, 1.5px) rgba(45, 212, 191, 0.45));
-  transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.2s ease, filter 0.2s ease;
+  --tittle-translate: translate(-50%, -50%);
+  transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1)));
 }
 
 /* Exclamation Mark Terminal Heart/Tittle: Replaces baseline period dot */
-.philocardia-excl {
-  display: inline-block;
-  position: relative;
-  line-height: inherit;
-  font-family: inherit;
-}
-
 .philocardia-excl::after {
-  content: var(--tittle-glyph, '●');
-  position: absolute;
   bottom: var(--tittle-bottom-excl, 0.08em);
   left: 50%;
-  width: var(--tittle-box-width, 1em);
-  height: var(--tittle-box-height, 1em);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transform: translateX(-50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1)));
+  --tittle-translate: translateX(-50%);
+  transform: var(--tittle-translate, translateX(-50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1)));
   font-size: var(--tittle-font-size, 0.28em);
-  line-height: 1;
-  color: var(--aura-color, var(--teal-accent, currentColor));
-  -webkit-text-fill-color: initial;
-  pointer-events: none;
-  filter: drop-shadow(0 0 var(--aura-glow, 1.5px) rgba(45, 212, 191, 0.45));
-  transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.2s ease, filter 0.2s ease;
+}
+
+/* Question Mark Terminal Heart/Tittle: Centered over period axis (~41%) */
+.philocardia-question::after {
+  bottom: var(--tittle-bottom-question, 0.08em);
+  left: 41%;
+  --tittle-translate: translateX(-50%);
+  transform: var(--tittle-translate, translateX(-50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1)));
+  font-size: var(--tittle-font-size, 0.28em);
+}
+
+/* Inverted Punctuation Terminal Heart/Tittles (¡, ¿): Centered over top dot axes */
+.philocardia-excl-down::after {
+  top: var(--tittle-top-excl-down, 31%);
+  left: 50%;
+  --tittle-translate: translate(-50%, -50%);
+  transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1)));
+  font-size: var(--tittle-font-size, 0.28em);
+}
+
+.philocardia-question-down::after {
+  top: var(--tittle-top-question-down, 31%);
+  left: 54%;
+  --tittle-translate: translate(-50%, -50%);
+  transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1)));
+  font-size: var(--tittle-font-size, 0.28em);
 }
 
 /* Arabic Heart Nuqṭa (خ, ج, غ, ف, ن): Placed above apex of letterhead */
@@ -1782,39 +1841,19 @@
 }
 
 .philocardia-arabic-heart::after {
-  content: var(--tittle-glyph, '●');
-  position: absolute;
   top: var(--tittle-top-i, -0.04em);
   right: 32%;
-  width: var(--tittle-box-width, 1em);
-  height: var(--tittle-box-height, 1em);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   transform: translateX(50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1)));
   font-size: var(--tittle-font-size, 0.28em);
-  line-height: 1;
-  color: var(--aura-color, var(--teal-accent, currentColor));
-  -webkit-text-fill-color: initial;
-  pointer-events: none;
-  filter: drop-shadow(0 0 var(--aura-glow, 1.5px) rgba(45, 212, 191, 0.45));
-  transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.2s ease, filter 0.2s ease;
 }
 
-.night-flight .philocardia-heart::after,
-body.night-flight .philocardia-heart::after,
-body.red-dash .philocardia-heart::after,
-.night-flight .iphillyg-heart::after,
-body.night-flight .iphillyg-heart::after,
-body.red-dash .iphillyg-heart::after {
+:is(.night-flight, body.night-flight, body.red-dash) :is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-question, .philocardia-excl-down, .philocardia-question-down, .philocardia-arabic-heart)::after {
   color: var(--teal-accent, #f87171);
   filter: drop-shadow(0 0 4px rgba(248, 113, 113, 0.5));
 }
 
-.philocardia-heart:hover::after,
-.iphillyg-heart:hover::after,
-.philocardia-j:hover::after {
-  transform: translate(-50%, -50%) scale(1.22);
+:is(.philocardia-heart, .iphillyg-heart, .philocardia-j, .philocardia-excl, .philocardia-question, .philocardia-excl-down, .philocardia-question-down):hover::after {
+  transform: var(--tittle-translate, translate(-50%, -50%)) scale(1.22);
   color: #10b981;
   filter: drop-shadow(0 0 5px rgba(16, 185, 129, 0.8));
 }
@@ -1827,41 +1866,41 @@ body.red-dash .iphillyg-heart::after {
 
 /* Physiological S1/S2 Cardiac Pulse Animation (72 BPM = 0.833s period) */
 @keyframes philocardia-beat-72 {
-  0%, 100% { transform: translate(-50%, -50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1))); }
-  14%      { transform: translate(-50%, -50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 1.15)); } /* S1 Systole "lub" */
-  22%      { transform: translate(-50%, -50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 1.03)); }
-  32%      { transform: translate(-50%, -50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 1.09)); } /* S2 Diastole "dub" */
-  45%      { transform: translate(-50%, -50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1))); }
+  0%, 100% { transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1))); }
+  14%      { transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 1.15)); } /* S1 Systole "lub" */
+  22%      { transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 1.03)); }
+  32%      { transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 1.09)); } /* S2 Diastole "dub" */
+  45%      { transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1))); }
 }
 
 /* Calibrated 60 BPM Cardiac Pulse (1.000s period) */
 @keyframes philocardia-beat-60 {
-  0%, 100% { transform: translate(-50%, -50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1))); }
-  12%      { transform: translate(-50%, -50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 1.15)); }
-  20%      { transform: translate(-50%, -50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 1.04)); }
-  30%      { transform: translate(-50%, -50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 1.10)); }
-  42%      { transform: translate(-50%, -50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1))); }
+  0%, 100% { transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1))); }
+  12%      { transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 1.15)); }
+  20%      { transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 1.04)); }
+  30%      { transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 1.10)); }
+  42%      { transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1))); }
 }
 
 /* Somatic 4-7-8 Box Breathing Resonance (16s cycle) */
 @keyframes philocardia-box-breath {
-  0%, 100% { transform: translate(-50%, -50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1))); filter: drop-shadow(0 0 2px rgba(45,212,191,0.3)); color: #2dd4bf; }
-  25%, 50% { transform: translate(-50%, -50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 1.18)); filter: drop-shadow(0 0 6px rgba(45,212,191,0.8)); color: #38bdf8; }
-  75%      { transform: translate(-50%, -50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 0.95)); filter: drop-shadow(0 0 1px rgba(45,212,191,0.2)); color: #14b8a6; }
+  0%, 100% { transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1))); filter: drop-shadow(0 0 2px rgba(45,212,191,0.3)); color: #2dd4bf; }
+  25%, 50% { transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 1.18)); filter: drop-shadow(0 0 6px rgba(45,212,191,0.8)); color: #38bdf8; }
+  75%      { transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 0.95)); filter: drop-shadow(0 0 1px rgba(45,212,191,0.2)); color: #14b8a6; }
 }
 
 @keyframes philocardia-vagal-sanctuary {
-  0%, 100% { transform: translate(-50%, -50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1))); filter: drop-shadow(0 0 2px rgba(45,212,191,0.25)); color: #2dd4bf; }
-  50%      { transform: translate(-50%, -50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 1.15)); filter: drop-shadow(0 0 8px rgba(45,212,191,0.85)); color: #34d399; }
+  0%, 100% { transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1))); filter: drop-shadow(0 0 2px rgba(45,212,191,0.25)); color: #2dd4bf; }
+  50%      { transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 1.15)); filter: drop-shadow(0 0 8px rgba(45,212,191,0.85)); color: #34d399; }
 }
 
 /* Sporty Spice HIIT Cardio Sprint: 140 BPM Explosive Athletic Cadence (0.428s period) */
 @keyframes philocardia-hiit-sprint {
-  0%, 100% { transform: translate(-50%, -50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1))); }
-  18%      { transform: translate(-50%, -50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 1.25)); color: #fb7185; filter: drop-shadow(0 0 6px rgba(251, 113, 133, 0.9)); }
-  35%      { transform: translate(-50%, -50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 0.95)); }
-  52%      { transform: translate(-50%, -50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 1.15)); color: #2dd4bf; filter: drop-shadow(0 0 5px rgba(45, 212, 191, 0.8)); }
-  70%      { transform: translate(-50%, -50%) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1))); }
+  0%, 100% { transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1))); }
+  18%      { transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 1.25)); color: #fb7185; filter: drop-shadow(0 0 6px rgba(251, 113, 133, 0.9)); }
+  35%      { transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 0.95)); }
+  52%      { transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1) * 1.15)); color: #2dd4bf; filter: drop-shadow(0 0 5px rgba(45, 212, 191, 0.8)); }
+  70%      { transform: var(--tittle-translate, translate(-50%, -50%)) scale(calc(var(--aura-scale, 1) * var(--tittle-base-scale, 1))); }
 }
 
 .philocardia-pacing-hiit::after {
@@ -1882,6 +1921,10 @@ body.red-dash .iphillyg-heart::after {
 
 .philocardia-pacing-sanctuary::after {
   animation: philocardia-vagal-sanctuary 10s infinite ease-in-out;
+}
+
+.philocardia-stillness::after {
+  animation: none !important;
 }
 
 /* Tactile Braille Philocardia: Paced Cardiac Sinus Rhythm & Optic Healing Sanctuary */
@@ -2769,3 +2812,50 @@ body.eco-dark-canopy {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
+
+/* Zero-Reflow Ambient Polarity & Scotopic Halation Compensation (Nieskens @property Cascade) */
+@property --pg-wght { syntax: '<number>'; inherits: true; initial-value: 400; }
+@property --pg-wdth { syntax: '<number>'; inherits: true; initial-value: 100; }
+@property --pg-slnt { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --pg-opsz { syntax: '<number>'; inherits: true; initial-value: 14; }
+@property --pg-grad { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --pg-thrm { syntax: '<number>'; inherits: true; initial-value: 0; }
+
+:root,
+[data-theme="light"],
+[data-theme="washi"] {
+  --pg-grad: 0;
+  --pg-thrm: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="washi"]) {
+    --pg-grad: -25;
+    --pg-thrm: 0.35;
+  }
+}
+
+[data-theme="dark"] {
+  --pg-grad: -25;
+  --pg-thrm: 0.35;
+}
+
+[data-theme="pbm"],
+.scotopic-650nm,
+.pbm-670nm {
+  --pg-grad: -45;
+  --pg-thrm: 0.60;
+}
+
+.pg-vf,
+.pg-halation-guard {
+  font-family: 'PocketGull VF', 'PocketGull', sans-serif;
+  font-variation-settings:
+    'wght' var(--pg-wght, 400),
+    'wdth' var(--pg-wdth, 100),
+    'slnt' var(--pg-slnt, 0),
+    'opsz' var(--pg-opsz, 14),
+    'GRAD' var(--pg-grad, 0),
+    'THRM' var(--pg-thrm, 0);
+}
+

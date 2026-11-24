@@ -597,4 +597,76 @@ test('Soft & Named Variations + Companion Superfamily Script Voices', async () =
   assert.ok(ccHtml.includes('id="ccFontVoicePills"'), 'HTML must expose Companion Superfamily Voice pills');
 });
 
+test('Broadcast Visual Quality: CEA-708 Edges, Contrast Math, Arctic Frost Preservation, Native Stillness & WebVTT Parity', async () => {
+  const {
+    CEA708_EDGE_STYLES,
+    PHILOCARDIA_OPENTYPE_TAGS,
+    computeCaptionContrast,
+    ClosedCaptionStudio
+  } = await import('../js/closed_caption_studio.js');
+
+  // 1. All 5 CEA-708 edge styles registered
+  assert.deepEqual(Object.keys(CEA708_EDGE_STYLES).sort(), ['depressed', 'drop_shadow', 'none', 'raised', 'uniform']);
+  assert.deepEqual(PHILOCARDIA_OPENTYPE_TAGS, {
+    heart: 'ss07',
+    blossom: 'ss08',
+    nuqta: 'ss09',
+    star: 'ss10',
+    droplet: 'ss11'
+  });
+
+  // 2. Contrast engine detects low-contrast white-on-blizzard vs Uniform Outline halo shield
+  const rawBlizzard = computeCaptionContrast('#ffffff', 'rgba(0, 0, 0, 0)', [219, 234, 254], false);
+  assert.equal(rawBlizzard.tier, 'LOW', 'Scrimless white text on bright snow with no edge must flag LOW contrast');
+  const shieldedBlizzard = computeCaptionContrast('#ffffff', 'rgba(0, 0, 0, 0)', [219, 234, 254], true);
+  assert.equal(shieldedBlizzard.tier, 'AAA', 'CEA-708 Uniform Outline halo shield must rescue scrimless snow contrast to AAA');
+  assert.equal(shieldedBlizzard.haloProtected, true);
+
+  // 3. Arctic Frost preserves dark navy ink (#032541) across dialogue cues (no white-on-white reset)
+  const studio = new ClosedCaptionStudio();
+  studio.setAtmosphericBlend('arctic_frost');
+  const frostSurface = studio.resolveCaptionSurface('dialogue');
+  assert.equal(frostSurface.fg, '#032541', 'Arctic Frost light scrim must preserve dark navy ink');
+  assert.equal(frostSurface.contrast.tier, 'AAA', 'Arctic Frost navy-on-ice contrast must achieve WCAG AAA');
+
+  // 4. FCC Broadcast Yellow high-contrast preset
+  studio.setYellowHighContrast(true);
+  const yellowSurface = studio.resolveCaptionSurface('dialogue');
+  assert.equal(yellowSurface.fg, '#fde047');
+  assert.equal(yellowSurface.scrimBg, 'rgba(0, 0, 0, 1)');
+  assert.equal(yellowSurface.contrast.tier, 'AAA');
+
+  // 5. Native OpenType Stillness + WebVTT ::cue parity (ss07..ss11 + CEA-708 text-shadow)
+  studio.setTittleVariety('blossom');
+  studio.setCardiacPacing('stillness');
+  studio.setEdgeStyle('uniform');
+  assert.equal(studio.usesNativePhilocardiaStillness(), true, 'Stillness + non-dot variety must engage zero-span native OpenType');
+  assert.ok(studio.getOpenTypeFeatureString(true).includes('"ss08" 1'), 'Blossom variety must emit native OpenType ss08');
+
+  const vtt = studio.generateWebVtt();
+  assert.ok(vtt.includes('"ss08" 1'), 'WebVTT ::cue must export active Philocardia OpenType suite');
+  assert.ok(vtt.includes('text-wrap: balance;'), 'WebVTT ::cue must declare balanced line wrapping');
+  assert.ok(vtt.includes('text-shadow:'), 'WebVTT ::cue must export active CEA-708 character edge');
+  assert.ok(vtt.includes('background-color: rgba(0, 0, 0, 1);'), 'WebVTT ::cue must export active scrim background');
+
+  // 6. CSS tokens, balanced wrapping, font-synthesis, letterbox, and DOM stage layers verified
+  const css = fs.readFileSync(path.join(ROOT_DIR, 'css', 'closed_caption_studio.css'), 'utf8');
+  assert.ok(css.includes('--cc-card:'), 'CSS must define --cc-card token');
+  assert.ok(css.includes('--cc-muted:'), 'CSS must define --cc-muted token');
+  assert.ok(css.includes('--cc-radius:'), 'CSS must define --cc-radius token');
+  assert.ok(css.includes('text-wrap: balance'), 'CSS must balance caption line wrapping');
+  assert.ok(css.includes('font-synthesis: none'), 'CSS must disable browser faux-bold/oblique synthesis');
+  assert.ok(css.includes('.cc-edge-uniform'), 'CSS must define CEA-708 Uniform Outline halo');
+  assert.ok(css.includes('.cc-letterbox-bar'), 'CSS must define 2.39:1 Cinema Letterbox matte');
+
+  const html = fs.readFileSync(path.join(ROOT_DIR, 'closed_caption_studio.html'), 'utf8');
+  assert.ok(html.includes('id="ccSnowfield"'), 'HTML must mount dormant Blizzard snowfield layer');
+  assert.ok(html.includes('id="ccEasHeaderBar"'), 'HTML must mount dormant EAS header layer');
+  assert.ok(html.includes('id="ccContrastReadout"'), 'HTML must expose live WCAG AAA Contrast telemetry chip');
+  assert.ok(html.includes('id="toggleLetterboxBtn"'), 'HTML must expose 2.39:1 Letterbox matte toggle');
+  assert.ok(html.includes('id="toggleYellowCcBtn"'), 'HTML must expose Broadcast Yellow CC toggle');
+  assert.ok(html.includes('id="edgePills"'), 'HTML must expose CEA-708 Character Edge pills');
+  assert.ok(!html.includes('.innerHTML ='), 'HTML must remain strictly free of .innerHTML assignments');
+});
+
 

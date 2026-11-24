@@ -122,6 +122,7 @@ public/
 private/
 local/
 temp/
+experiments/
 *.local
 *.secret
 

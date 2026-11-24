@@ -23,6 +23,7 @@ import 'foundry/compliance_auditor.dart';
 import 'foundry/osv_auditor.dart';
 import 'foundry/master_superfamily_compiler.dart';
 import 'foundry/font_scaffolder.dart';
+import 'foundry/opentype_manifest_emitter.dart';
 
 const fontStems = [
   'PocketGull-Regular',
@@ -914,6 +915,7 @@ Commands:
   osv               Audit dependencies & lockfiles against Google OSV-Scanner database
   subset-service    Launch dynamic SMoE font subsetting microservice (Cloud Run ready)
   mentor [font]     Thomas Phinney Forensic Type Mentor & FontLab masterclass inspection
+  manifest          Emit deterministic OpenType Capability Manifest (fonts/opentype-manifest.json)
 ''');
 }
 
@@ -930,6 +932,16 @@ Future<void> main(List<String> args) async {
       final auditor = OsvAuditor(projectRoot: Directory(findProjectRoot()));
       final ok = await auditor.run();
       if (!ok) exitCode = 1;
+      break;
+    case 'manifest':
+    case 'opentype-manifest':
+      final out = await OpenTypeManifestEmitter.emit(
+        projectRoot: Directory(findProjectRoot()),
+      );
+      print('\n======================================================================');
+      print('  POCKETGULL FOUNDRY: OPENTYPE CAPABILITY MANIFEST EMITTED');
+      print('======================================================================');
+      print('  Output: ${out.path} (${out.lengthSync()} bytes)\n');
       break;
     case 'subset-service':
     case 'subsetter':

@@ -6,14 +6,19 @@ and telemetry matplotlib stylesheets.
 """
 
 import os
-import matplotlib.pyplot as plt
-import matplotlib.font_manager as fm
+
+try:
+    import matplotlib.pyplot as plt
+    import matplotlib.font_manager as fm
+except ImportError:
+    plt = None
+    fm = None
 
 __version__ = "4.0.0"
 
 _PACKAGE_DIR = os.path.dirname(os.path.abspath(__file__))
-_REPO_FONTS_DIR = os.path.abspath(os.path.join(_PACKAGE_DIR, "..", "..", "fonts", "ttf"))
-_REPO_STYLES_DIR = os.path.abspath(os.path.join(_PACKAGE_DIR, "..", "matplotlib"))
+_REPO_FONTS_DIR = os.path.abspath(os.path.join(_PACKAGE_DIR, "..", "..", "..", "fonts", "ttf"))
+_REPO_STYLES_DIR = os.path.abspath(os.path.join(_PACKAGE_DIR, "..", "..", "matplotlib"))
 
 def get_font_path(font_name="PocketGull-Math.ttf"):
     """Returns absolute path to specified PocketGull font."""
@@ -23,13 +28,20 @@ def get_font_path(font_name="PocketGull-Math.ttf"):
     repo_font = os.path.join(_REPO_FONTS_DIR, font_name)
     if os.path.isfile(repo_font):
         return repo_font
-    user_font = os.path.join(r"c:\Users\philg\Pocketgull\pocketgull\public\fonts", font_name)
-    if os.path.isfile(user_font):
-        return user_font
+    for sys_dir in (
+        os.path.expanduser("~/Library/Fonts"),
+        os.path.expanduser("~/.local/share/fonts"),
+        os.path.join(os.environ.get("LOCALAPPDATA", ""), "Microsoft", "Windows", "Fonts"),
+    ):
+        candidate = os.path.join(sys_dir, font_name)
+        if sys_dir and os.path.isfile(candidate):
+            return candidate
     return None
 
 def register_font(font_name="PocketGull-Math.ttf"):
     """Registers font into matplotlib's font manager."""
+    if fm is None:
+        return False
     path = get_font_path(font_name)
     if path and os.path.isfile(path):
         fm.fontManager.addfont(path)
@@ -49,6 +61,8 @@ def use(theme="dark", vector_paths=True):
     - vector_paths: If True, sets svg.fonttype='path' to guarantee 100% visual
                     parity on viewers without the font installed.
     """
+    if plt is None:
+        raise RuntimeError("matplotlib is required for pocketgull_math.use()")
     register_font("PocketGull-Math.ttf")
     register_font("PocketGullMono-Regular.ttf")
     register_font("PocketGull-Chem.ttf")

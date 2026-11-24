@@ -348,12 +348,24 @@
 
     function updateOtFeatures() {
       const activeFeats = [];
+      const otVarietyTagMap = {
+        heart: '"ss07" 1',
+        blossom: '"ss08" 1',
+        nuqta: '"ss09" 1',
+        star: '"ss10" 1',
+        droplet: '"ss11" 1',
+      };
 
       otButtons.forEach(btn => {
         const feat = btn.dataset.feat;
         if (btn.classList.contains('active')) {
           if (feat && feat !== 'philocardia' && feat !== 'iphillyg') {
-            activeFeats.push(`"${feat}" 1`);
+            if (feat === 'ss07') {
+              const varietyTag = otVarietyTagMap[typeof currentTittleVariety !== 'undefined' ? currentTittleVariety : 'heart'];
+              if (varietyTag) activeFeats.push(varietyTag);
+            } else {
+              activeFeats.push(`"${feat}" 1`);
+            }
             if (feat === 'cv08') {
               activeFeats.push('"zero" 1');
             }
@@ -495,6 +507,9 @@
         clone.querySelectorAll('.philocardia-heart').forEach(el => el.replaceWith('i'));
         clone.querySelectorAll('.philocardia-j').forEach(el => el.replaceWith('j'));
         clone.querySelectorAll('.philocardia-excl').forEach(el => el.replaceWith('!'));
+        clone.querySelectorAll('.philocardia-question').forEach(el => el.replaceWith('?'));
+        clone.querySelectorAll('.philocardia-excl-down').forEach(el => el.replaceWith('¡'));
+        clone.querySelectorAll('.philocardia-question-down').forEach(el => el.replaceWith('¿'));
         clone.querySelectorAll('.philocardia-arabic-heart').forEach(el => el.replaceWith('خ'));
         rawText = clone.textContent.replace(/ı/g, 'i').replace(/ȷ/g, 'j');
       } else {
@@ -503,27 +518,43 @@
 
       if (currentLoveLevel === 'none' || currentTittleVariety === 'dot' || currentHealerMode === 'off') {
         // Level 0 / Pure Clinical (Dieter Rams Rest): 100% pure clinical discipline, traditional circular tittles
+        testerOutput.removeAttribute('aria-label');
         testerOutput.textContent = rawText;
-      } else if (currentLoveLevel === 'half') {
-        // Level 1 / Half Love (Sporty Zone 2 Aerobic Cadence): Focused rhythmic pacing on primary anchor 'i'
-        const pacingClass = HEALER_CONFIG[currentHealerMode]?.pacingClass || 'philocardia-pacing-72';
-        const classI = pacingClass ? `philocardia-heart ${pacingClass}` : 'philocardia-heart';
-        const escaped = escapeHtml(rawText);
-        testerOutput.innerHTML = escaped.replace(/i/g, `<span class="${classI}">ı</span>`);
-      } else {
-        // Level 2 / Super Love (Sporty HIIT Sprint): Full squad active ('i', 'j', '!', 'خ') with athletic spring
-        const pacingClass = HEALER_CONFIG[currentHealerMode]?.pacingClass || 'philocardia-pacing-72';
-        const classI = pacingClass ? `philocardia-heart ${pacingClass}` : 'philocardia-heart';
-        const classJ = pacingClass ? `philocardia-j ${pacingClass}` : 'philocardia-j';
-        const classExcl = pacingClass ? `philocardia-excl ${pacingClass}` : 'philocardia-excl';
-        const classArabic = pacingClass ? `philocardia-arabic-heart ${pacingClass}` : 'philocardia-arabic-heart';
-        const escaped = escapeHtml(rawText);
-        const transformed = escaped
-          .replace(/i/g, `<span class="${classI}">ı</span>`)
-          .replace(/j/g, `<span class="${classJ}">ȷ</span>`)
-          .replace(/!/g, `<span class="${classExcl}">!</span>`)
-          .replace(/خ/g, `<span class="${classArabic}">خ</span>`);
-        testerOutput.innerHTML = transformed;
+        return;
+      }
+
+      const pacingClass = HEALER_CONFIG[currentHealerMode]?.pacingClass || 'philocardia-pacing-72';
+      const makeSpan = (cls, txt) => {
+        const span = document.createElement('span');
+        span.className = pacingClass ? `${cls} ${pacingClass}` : cls;
+        span.textContent = txt;
+        return span;
+      };
+      const superMap = {
+        'i': ['philocardia-heart', 'ı'],
+        'j': ['philocardia-j', 'ȷ'],
+        '!': ['philocardia-excl', '!'],
+        '?': ['philocardia-question', '?'],
+        '¡': ['philocardia-excl-down', '¡'],
+        '¿': ['philocardia-question-down', '¿'],
+        'خ': ['philocardia-arabic-heart', 'خ'],
+      };
+
+      testerOutput.setAttribute('aria-label', rawText);
+      testerOutput.replaceChildren();
+      for (const ch of rawText) {
+        if (currentLoveLevel === 'half') {
+          if (ch === 'i') {
+            testerOutput.appendChild(makeSpan('philocardia-heart', 'ı'));
+          } else {
+            testerOutput.appendChild(document.createTextNode(ch));
+          }
+        } else if (superMap[ch]) {
+          const [cls, txt] = superMap[ch];
+          testerOutput.appendChild(makeSpan(cls, txt));
+        } else {
+          testerOutput.appendChild(document.createTextNode(ch));
+        }
       }
     }
 
@@ -722,7 +753,7 @@
 
     function updateAmbientAura(x, y) {
       const isAuraActive = (currentHealerMode === 'aura');
-      const hearts = document.querySelectorAll('.philocardia-heart, .philocardia-arabic-heart, .philocardia-j, .philocardia-excl');
+      const hearts = document.querySelectorAll('.philocardia-heart, .philocardia-arabic-heart, .philocardia-j, .philocardia-excl, .philocardia-question, .philocardia-excl-down, .philocardia-question-down');
       const vH = window.innerHeight;
       let maxFactor = 0;
 

@@ -500,7 +500,12 @@
       line-height: 1.4;
     }
 
-    .latin-mirror-strip .philocardia-heart {
+    .latin-mirror-strip .philocardia-heart,
+    .latin-mirror-strip .philocardia-j,
+    .latin-mirror-strip .philocardia-excl,
+    .latin-mirror-strip .philocardia-question,
+    .latin-mirror-strip .philocardia-excl-down,
+    .latin-mirror-strip .philocardia-question-down {
       color: var(--emerald);
       filter: drop-shadow(0 0 4px var(--emerald-glow));
     }
@@ -1114,8 +1119,8 @@
           <div class="braille-display-strip" id="brailleStage" aria-label="Braille output stage">
             ⠠⠁⠍⠕⠭⠊⠉⠊⠇⠇⠊⠝⠀⠼⠑⠚⠚⠀⠍⠛⠀•⠀⠠⠽⠕⠥⠀⠁⠗⠑⠀⠎⠁⠋⠑⠀⠁⠝⠙⠀⠇⠕⠧⠑⠙
           </div>
-          <div class="latin-mirror-strip" id="latinMirror">
-            Amox<span class="philocardia-heart">ı</span>c<span class="philocardia-heart">ı</span>ll<span class="philocardia-heart">ı</span>n 500 mg • You are safe and loved
+          <div class="latin-mirror-strip" id="latinMirror" aria-label="Amoxicillin 500 mg • You are safe and loved">
+            Amox<span class="philocardia-heart" aria-hidden="true">ı</span>c<span class="philocardia-heart" aria-hidden="true">ı</span>ll<span class="philocardia-heart" aria-hidden="true">ı</span>n 500 mg • You are safe and loved
           </div>
         </div>
 
@@ -2007,14 +2012,25 @@
       const braille = translateToUEB(val);
       document.getElementById('brailleStage').textContent = braille;
 
-      // Update Latin Mirror with Philocardia Heart Tittles for 'i'
+      // Update Latin Mirror with Philocardia Heart Tittles across i, j, !, ?, ¡, ¿
       const mirror = document.getElementById('latinMirror');
-      mirror.textContent = '';
+      mirror.replaceChildren();
+      mirror.setAttribute('aria-label', val);
+      const tittleMap = {
+        'i': { cls: 'philocardia-heart', txt: 'ı' },
+        'j': { cls: 'philocardia-j', txt: 'ȷ' },
+        '!': { cls: 'philocardia-excl', txt: '!' },
+        '?': { cls: 'philocardia-question', txt: '?' },
+        '¡': { cls: 'philocardia-excl-down', txt: '¡' },
+        '¿': { cls: 'philocardia-question-down', txt: '¿' },
+      };
       for (const char of val) {
-        if (char === 'i' || char === 'j' || char === '!') {
+        const spec = tittleMap[char];
+        if (spec) {
           const span = document.createElement('span');
-          span.className = 'philocardia-heart';
-          span.textContent = (char === 'i') ? 'ı' : (char === 'j') ? 'ȷ' : '!';
+          span.className = spec.cls;
+          span.setAttribute('aria-hidden', 'true');
+          span.textContent = spec.txt;
           mirror.appendChild(span);
         } else {
           mirror.appendChild(document.createTextNode(char));

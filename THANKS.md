@@ -127,6 +127,11 @@ In PocketGull, Thomas Phinney serves not merely as a passive validator, but as o
 ### 🛠️ The FontLab Engineering Team
 We also thank **Yuri Yarmola**, **Adam Twardoch**, and the engineers at **[FontLab](https://www.fontlab.com)** for decades of advancing state-of-the-art type design software. Their innovations in multi-master variable font interpolation, the open JSON-based `.vfj` font exchange format, non-destructive contour filtering, and TrueType visual hinting have empowered independent foundries worldwide to engineer professional-grade typefaces.
 
+### 🎚️ Laurence Penney & Roel Nieskens — Variable Font Inspection & Web Typographic Tooling
+We honor two pioneering web typography engineers whose conceptual models inspired PocketGull's first-party variable axis controls and 1000 UPM contour inspection architecture:
+- **[Laurence Penney](https://lorp.org)** (`@Lorp`): Co-architect of the OpenType 1.8 Variable Fonts specification and creator of **[Axis-Praxis](https://www.axis-praxis.org)** (the original interactive web playground for OpenType variable fonts) and **[Samsa](https://github.com/Lorp/samsa)** (the open-source `Apache-2.0` variable font tuple and contour inspector supported by Google Fonts).
+- **[Roel Nieskens](https://pixelambacht.nl)** (*PixelAmbacht*): Creator of **[Wakamai Fondue](https://wakamaifondue.com)** and pioneer of CSS Custom Property (`--var`) axis inheritance patterns, demonstrating how web authors can compose `font-variation-settings` cleanly across the DOM cascade without clobbering orthogonal OpenType axes.
+
 ---
 
 *“To see clearly is poetry, prophecy, and religion, all in one.”* — John Ruskin

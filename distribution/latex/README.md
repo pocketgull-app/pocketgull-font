@@ -1,7 +1,7 @@
 # pocketgull-math — Humanist Clinical OpenType Math Font for LaTeX
 
 * **Package Name**: `pocketgull-math`
-* **Version**: 3.100 (2026/09/15)
+* **Version**: 4.0.0 (2026/09/15)
 * **Author**: The PocketGull Project Authors
 * **License**: SIL Open Font License 1.1 (Font) / LaTeX Project Public License 1.3c (Package code)
 * **CTAN Archive Location**: `macros/latex/contrib/pocketgull-math`

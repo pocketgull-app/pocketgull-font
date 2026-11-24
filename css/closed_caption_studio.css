@@ -10,11 +10,14 @@
 :root {
   --cc-bg: #070b14;
   --cc-surface: rgba(15, 23, 42, 0.85);
+  --cc-card: var(--cc-surface);
   --cc-surface-elevated: #1e293b;
   --cc-border: rgba(255, 255, 255, 0.12);
   --cc-border-focus: #38bdf8;
+  --cc-radius: 12px;
   --cc-text: #f8fafc;
   --cc-text-muted: #94a3b8;
+  --cc-muted: var(--cc-text-muted);
   --cc-accent-cyan: #06b6d4;
   --cc-accent-sky: #38bdf8;
   --cc-accent-amber: #f59e0b;
@@ -173,6 +176,13 @@ body.cc-studio-body {
   align-items: start;
 }
 
+@media (min-width: 1025px) {
+  .cc-monitor-column {
+    position: sticky;
+    top: 76px;
+  }
+}
+
 @media (max-width: 1024px) {
   .cc-workbench-grid {
     grid-template-columns: 1fr;
@@ -194,16 +204,26 @@ body.cc-studio-body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 4px 8px 10px 8px;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  padding: 4px 6px 10px 6px;
   font-family: var(--cc-font-mono);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--cc-text-muted);
+  font-variant-numeric: tabular-nums slashed-zero;
+  font-feature-settings: "tnum" 1, "zero" 1, "cv08" 1;
 }
 
 .cc-monitor-status-leds {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
+  white-space: nowrap;
+}
+
+#ccTimecode,
+#ccSignalReadout {
+  white-space: nowrap;
 }
 
 .cc-led {
@@ -459,7 +479,7 @@ body.cc-studio-body {
 .cc-metrics-strip {
   margin-top: 8px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
   gap: 8px;
   font-family: var(--cc-font-mono);
   font-size: 0.75rem;
@@ -485,6 +505,8 @@ body.cc-studio-body {
 .cc-metric-chip-val {
   color: var(--cc-text);
   font-weight: 700;
+  font-variant-numeric: tabular-nums slashed-zero;
+  font-feature-settings: "tnum" 1, "zero" 1, "cv08" 1;
 }
 
 /* Live WebVTT + Variable ::cue Exporter Card */
@@ -538,30 +560,52 @@ body.cc-studio-body {
 
 /* Scene 3: Midnight Noir */
 .cc-scene-noir {
-  background: radial-gradient(circle at 50% 120%, rgba(56, 189, 248, 0.12), transparent 70%),
+  background: radial-gradient(circle at 50% 120%, rgba(56, 189, 248, 0.14), transparent 70%),
               linear-gradient(180deg, #020408 0%, #080d1a 100%);
+}
+
+.cc-noir-rain {
+  position: absolute;
+  inset: -40px 0 0 0;
+  background-image: repeating-linear-gradient(
+    102deg,
+    transparent 0px,
+    transparent 24px,
+    rgba(148, 163, 184, 0.08) 24px,
+    rgba(148, 163, 184, 0.08) 25px
+  );
+  background-size: 56px 56px;
+  opacity: 0.55;
+  animation: cc-noir-drift 1.8s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes cc-noir-drift {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-12px, 40px, 0); }
 }
 
 /* Scene 4: EAS Emergency Alert */
 .cc-scene-eas {
   background: #020202;
-  border-top: 18px solid #ef4444;
 }
 
 .cc-eas-header-bar {
   position: absolute;
-  top: 12px;
+  top: 0;
   left: 0;
   right: 0;
-  background: #ef4444;
+  background: #dc2626;
+  border-bottom: 2px solid #fca5a5;
   color: #ffffff;
   font-family: var(--cc-font-mono);
   font-weight: 700;
-  padding: 6px 14px;
-  font-size: 0.85rem;
+  padding: 7px 14px;
+  font-size: 0.82rem;
   letter-spacing: 0.05em;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   z-index: 2;
 }
 
@@ -570,6 +614,45 @@ body.cc-studio-body {
   background: radial-gradient(ellipse at 40% 0%, rgba(16, 185, 129, 0.35) 0%, transparent 60%),
               radial-gradient(ellipse at 80% 20%, rgba(168, 85, 247, 0.25) 0%, transparent 50%),
               linear-gradient(180deg, #05101e 0%, #010409 100%);
+}
+
+.cc-aurora-curtain {
+  position: absolute;
+  inset: 0 0 38% 0;
+  background:
+    radial-gradient(ellipse 65% 45% at 32% 18%, rgba(16, 185, 129, 0.28), transparent 70%),
+    radial-gradient(ellipse 55% 40% at 72% 24%, rgba(168, 85, 247, 0.22), transparent 68%);
+  filter: blur(18px);
+  animation: cc-aurora-sway 12s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes cc-aurora-sway {
+  0% { transform: translateX(-3%) scaleY(0.96); opacity: 0.72; }
+  100% { transform: translateX(3%) scaleY(1.06); opacity: 1; }
+}
+
+/* 2.39:1 Theatrical Scope Cinema Letterbox Matte */
+.cc-letterbox-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  background: #000000;
+  z-index: 6;
+  pointer-events: none;
+  transition: height 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cc-letterbox-top { top: 0; }
+.cc-letterbox-bottom { bottom: 0; }
+
+.cc-screen.cc-letterbox-active .cc-letterbox-bar {
+  height: 12.5%;
+}
+
+.cc-screen.cc-letterbox-active .cc-safe-area {
+  padding-bottom: 0.75rem;
 }
 
 /* Subtitle Safe Area & Display Zone */
@@ -618,9 +701,13 @@ body.cc-studio-body {
   color: #ffffff;
   font-feature-settings: "zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1;
   font-variant-numeric: slashed-zero;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
   letter-spacing: 0.015em;
-  --tittle-top-i: 18%;
-  --tittle-top-j: 18%;
+  text-wrap: balance;
+  max-width: 40ch;
+  margin-inline: auto;
   transition: font-variation-settings 0.36s cubic-bezier(0.16, 1, 0.3, 1),
               letter-spacing 0.36s cubic-bezier(0.16, 1, 0.3, 1),
               color 0.25s ease,
@@ -628,6 +715,33 @@ body.cc-studio-body {
               font-stretch 0.36s ease,
               font-style 0.36s ease;
   word-wrap: break-word;
+}
+
+/* CEA-708 Broadcast Character Edge Attributes */
+.cc-edge-none {
+  text-shadow: none;
+  -webkit-text-stroke: 0 transparent;
+}
+
+.cc-edge-drop-shadow {
+  -webkit-text-stroke: 0 transparent;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.94), 0 0 2px #000000;
+}
+
+.cc-edge-uniform {
+  -webkit-text-stroke: 0.085em #000000;
+  paint-order: stroke fill;
+  text-shadow: 0 0 3px #000000, 0 1px 4px rgba(0, 0, 0, 0.92);
+}
+
+.cc-edge-raised {
+  -webkit-text-stroke: 0 transparent;
+  text-shadow: 0 1px 0 #000000, 0 2px 0 rgba(0, 0, 0, 0.88), 0 3px 6px rgba(0, 0, 0, 0.78);
+}
+
+.cc-edge-depressed {
+  -webkit-text-stroke: 0 transparent;
+  text-shadow: 0 -1px 0 #000000, 0 -2px 3px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 /* Non-Speech Audio / Sound Effects Line */
@@ -662,6 +776,8 @@ body.cc-studio-body {
   border-left: 3px solid var(--cc-accent-cyan);
   font-feature-settings: "zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1;
   font-variant-numeric: slashed-zero;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
   transition: font-variation-settings 0.36s cubic-bezier(0.16, 1, 0.3, 1),
               letter-spacing 0.36s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -696,7 +812,11 @@ body.cc-studio-body {
 @media (prefers-reduced-motion: reduce) {
   .cc-caption-box.cc-filter-vibe,
   .cc-rollup-container.cc-filter-vibe,
-  .cc-text-line.cc-acoustic-bloom {
+  .cc-text-line.cc-acoustic-bloom,
+  .cc-snowfield,
+  .cc-noir-rain,
+  .cc-aurora-curtain,
+  .cc-led.live {
     animation: none !important;
   }
 }
@@ -918,14 +1038,18 @@ body.cc-studio-body {
   font-family: var(--cc-font-sans);
   font-feature-settings: "zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1;
   font-variant-numeric: slashed-zero;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
   letter-spacing: 0.015em;
-  --tittle-top-i: 18%;
-  --tittle-top-j: 18%;
 }
 
 /* Philocardia Heart Tittle Alternate in Closed Captions (Zero Stem Jitter Lock) */
 .philocardia-heart,
-.philocardia-j {
+.philocardia-j,
+.philocardia-excl,
+.philocardia-question,
+.philocardia-excl-down,
+.philocardia-question-down {
   transform: none !important;
 }
 
@@ -1239,17 +1363,19 @@ body.cc-studio-body {
   color: #f8fafc;
   font-feature-settings: "zero" 1, "cv08" 1, "cv05" 1, "ss02" 1, "cv11" 1;
   font-variant-numeric: slashed-zero;
+  font-synthesis: none;
   word-break: break-word;
 }
 
 /* Writer & Screenplay Auto-Tagging Importer */
 .cc-script-card {
-  max-width: 1440px;
-  margin: 0 auto 1.25rem auto;
-  background: var(--cc-card);
+  grid-column: 1 / -1;
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--cc-surface);
   border: 1px solid var(--cc-border);
   border-radius: var(--cc-radius);
-  padding: 1.25rem 1.4rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.95rem;

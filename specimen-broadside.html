@@ -371,6 +371,11 @@
       color: var(--emerald);
       font-feature-settings: "ss07" 1;
     }
+    [data-tittle-variety="blossom"] .ismp-feat-heart { font-feature-settings: "ss08" 1; }
+    [data-tittle-variety="nuqta"] .ismp-feat-heart { font-feature-settings: "ss09" 1; }
+    [data-tittle-variety="star"] .ismp-feat-heart { font-feature-settings: "ss10" 1; }
+    [data-tittle-variety="droplet"] .ismp-feat-heart { font-feature-settings: "ss11" 1; }
+    [data-tittle-variety="dot"] .ismp-feat-heart { font-feature-settings: normal; }
 
     .tittle-variety-mini-selector {
       display: flex;
@@ -1338,23 +1343,23 @@
           <span style="font-family: 'PocketGull Mono'; font-size: 11px; color: #34d399;">[SCIENCE × ENGINEERING × ARTS]</span>
         </div>
         <p class="steam-challenge-prompt">
-          <strong>Focused Hypothesis:</strong> Why must every alternate tittle on <code>i</code> and <code>j</code> (`heart`, `blossom`, `nuqta`, `star`, `droplet`) maintain a mandatory <code>48 UPM</code> air gap above the stem ($y_{\text{stem}} = 536\text{ UPM}$, $y_{\text{tittleMin}} = 584\text{ UPM}$)? Test the 6 tittle varieties below:
+          <strong>Focused Hypothesis:</strong> Why must every alternate tittle on <code>i</code>, <code>j</code>, and expressive punctuation (<code>! ? ¡ ¿</code>) across all 5 native OpenType suites (<code>ss07</code> Heart, <code>ss08</code> Blossom, <code>ss09</code> Nuqṭa, <code>ss10</code> Star, <code>ss11</code> Droplet) maintain a mandatory <code>48 UPM</code> air gap above the stem ($y_{\text{stem}} = 536\text{ UPM}$, $y_{\text{tittleMin}} = 584\text{ UPM}$)? Test the 6 tittle varieties below:
         </p>
         <div class="steam-challenge-actions">
           <button type="button" class="steam-exp-btn" onclick="document.querySelector('#broadsideTittleVarietyMini [data-v=&quot;heart&quot;]')?.click()">
-            ♥ Activate Philocardia Heart (cv09)
+            ♥ Activate Philocardia Heart (cv09 / cv10 / ss07)
           </button>
           <button type="button" class="steam-exp-btn" onclick="document.querySelector('#broadsideTittleVarietyMini [data-v=&quot;nuqta&quot;]')?.click()">
-            ◆ Activate Calligraphic Nuqṭa
+            ◆ Activate Calligraphic Nuqṭa (ss09)
           </button>
           <button type="button" class="steam-exp-btn" onclick="document.querySelector('#broadsideTittleVarietyMini [data-v=&quot;droplet&quot;]')?.click()">
-            💧 Activate Hydration Droplet
+            💧 Activate Hydration Droplet (ss11)
           </button>
         </div>
         <details class="steam-solution-details">
           <summary>▸ View Optometric Derivation &amp; Barbara Oakley Key Chunk</summary>
           <div class="steam-solution-body">
-            <strong>Stem Preservation &amp; Tittle Elevation Invariant:</strong> At small sizes ($\le 14\text{ px}$) or under astigmatic blur, a tittle closer than $48\text{ UPM}$ merges with the vertical stem ($x \in [85, 173]\text{ UPM}$), turning <code>i</code> into a tall <code>l</code> or <code>1</code>. Locking contour 0 (`stem`) to $y \in [0, 536]$ and elevating contour 1 (`tittle`) to $y \in [584, 704]$ guarantees instant foveal separation.<br>
+            <strong>Stem Preservation &amp; Tittle Elevation Invariant:</strong> At small sizes ($\le 14\text{ px}$) or under astigmatic blur, a tittle closer than $48\text{ UPM}$ merges with the vertical stem ($x \in [85, 173]\text{ UPM}$), turning <code>i</code> into a tall <code>l</code> or <code>1</code>. Locking contour 0 (`stem`, also isolated via <code>cv19</code> dotless stems for animated overlays) to $y \in [0, 536]$ and elevating contour 1 (`tittle`) to $y \in [584, 704]$ guarantees instant foveal separation.<br>
             <div class="oakley-chunk-pill">🧠 Oakley Key Chunk: 48 UPM air-gap clearance prevents vertical stem-to-tittle crowding while preserving bedside warmth.</div>
           </div>
         </details>
@@ -1418,12 +1423,12 @@
         <!-- Philocardia Heart Tittle Card -->
         <div class="ismp-card" id="ismpCardHeart" style="border-color: rgba(16, 185, 129, 0.35); background: linear-gradient(180deg, rgba(16, 185, 129, 0.05) 0%, var(--card-bg) 100%);">
           <div class="ismp-title" style="color: var(--emerald); display: flex; justify-content: space-between; align-items: center;">
-            <span>Philocardia Hearts (cv09 / ss07)</span>
-            <button type="button" id="broadsideHeartBpmBadge" title="72 BPM Sinus Rhythm" style="background: rgba(16, 185, 129, 0.25); border: 1.5px solid #10b981; color: #d1fae5; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; cursor: pointer;">72 BPM</button>
+            <span>Philocardia Tittles (cv09 / cv10 / ss07–ss11)</span>
+            <button type="button" id="broadsideHeartBpmBadge" title="Click to cycle cardiac pacing: 72 BPM -> 60 BPM -> Static" style="background: rgba(16, 185, 129, 0.25); border: 1.5px solid #10b981; color: #d1fae5; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; cursor: pointer;">72 BPM</button>
           </div>
           <div class="ismp-comparison">
             <span class="ismp-standard">clinical</span>
-            <span class="ismp-safe ismp-feat-heart" id="broadsideHeartComparison" style="color: var(--emerald);">cl<span class="philocardia-heart philocardia-pacing-72" title="Philocardia Heart Tittle">ı</span>n<span class="philocardia-heart philocardia-pacing-72" title="Philocardia Heart Tittle">ı</span>cal</span>
+            <span class="ismp-safe ismp-feat-heart" id="broadsideHeartComparison" aria-label="clinical" style="color: var(--emerald);">cl<span class="philocardia-heart philocardia-pacing-72" title="Philocardia Heart Tittle">ı</span>n<span class="philocardia-heart philocardia-pacing-72" title="Philocardia Heart Tittle">ı</span>cal</span>
           </div>
           <div class="tittle-variety-mini-selector" id="broadsideTittleVarietyMini">
             <button type="button" class="tittle-variety-pill active" data-v="heart" title="Heart (♥): Bedside warmth & lovingkindness">♥</button>
@@ -2135,26 +2140,80 @@
         });
       }
 
-      // Philocardia Tittle Varieties
+      // Philocardia Tittle Varieties & Cardiac Cadence
       const broadsideMeanings = {
-        heart: '💚 <strong>Philocardia:</strong> Bedside warmth, pediatric comfort, and lovingkindness.',
-        blossom: '🌸 <strong>Blossom:</strong> Re-wilding, ecological rebirth, and native pollinator sanctuaries.',
-        nuqta: '💎 <strong>Nuqṭa:</strong> Authentic calligraphic reed-pen footprint and sacred geometric origin.',
-        star: '✨ <strong>Star:</strong> Orientation and calm in dark, anxious times.',
-        droplet: '💧 <strong>Droplet:</strong> Watershed care, clean hydration, and patient comfort.',
-        dot: '⚪ <strong>Dot:</strong> Humble clarity and patient, steady clinical fundamentals.'
+        heart: ['💚 ', 'Philocardia (cv09 / cv10 / ss07):', ' Bedside warmth, pediatric comfort, and lovingkindness.'],
+        blossom: ['🌸 ', 'Blossom (ss08):', ' Re-wilding, ecological rebirth, and native pollinator sanctuaries.'],
+        nuqta: ['💎 ', 'Nuqṭa (ss09):', ' Authentic calligraphic reed-pen footprint and sacred geometric origin.'],
+        star: ['✨ ', 'Star (ss10):', ' Orientation and calm in dark, anxious times.'],
+        droplet: ['💧 ', 'Droplet (ss11):', ' Watershed care, clean hydration, and patient comfort.'],
+        dot: ['⚪ ', 'Dot:', ' Humble clarity and patient, steady clinical fundamentals.']
       };
+
+      let broadsideVariety = 'heart';
+      let broadsideCadence = '72';
+
+      function renderBroadsideHeartCard() {
+        const comp = document.getElementById('broadsideHeartComparison');
+        const pacingClass = broadsideCadence === '72'
+          ? 'philocardia-pacing-72'
+          : broadsideCadence === '60'
+            ? 'philocardia-pacing-60'
+            : 'philocardia-stillness';
+        if (comp) {
+          if (broadsideVariety === 'dot') {
+            comp.style.fontFeatureSettings = 'normal';
+            comp.removeAttribute('aria-label');
+            comp.textContent = 'clinical';
+          } else {
+            comp.style.fontFeatureSettings = '';
+            comp.setAttribute('aria-label', 'clinical');
+            comp.replaceChildren();
+            comp.appendChild(document.createTextNode('cl'));
+            const s1 = document.createElement('span');
+            s1.className = `philocardia-heart ${pacingClass}`;
+            s1.title = 'Philocardia Tittle';
+            s1.textContent = 'ı';
+            comp.appendChild(s1);
+            comp.appendChild(document.createTextNode('n'));
+            const s2 = document.createElement('span');
+            s2.className = `philocardia-heart ${pacingClass}`;
+            s2.title = 'Philocardia Tittle';
+            s2.textContent = 'ı';
+            comp.appendChild(s2);
+            comp.appendChild(document.createTextNode('cal'));
+          }
+        }
+        const desc = document.getElementById('broadsideTittleDesc');
+        const parts = broadsideMeanings[broadsideVariety];
+        if (desc && parts) {
+          desc.replaceChildren();
+          desc.appendChild(document.createTextNode(parts[0]));
+          const strong = document.createElement('strong');
+          strong.textContent = parts[1];
+          desc.appendChild(strong);
+          desc.appendChild(document.createTextNode(parts[2]));
+        }
+      }
 
       document.querySelectorAll('#broadsideTittleVarietyMini .tittle-variety-pill').forEach(btn => {
         btn.addEventListener('click', () => {
-          const v = btn.dataset.v;
+          broadsideVariety = btn.dataset.v;
           document.querySelectorAll('#broadsideTittleVarietyMini .tittle-variety-pill').forEach(b => b.classList.toggle('active', b === btn));
           const card = document.getElementById('ismpCardHeart');
-          if (card) card.setAttribute('data-tittle-variety', v);
-          const desc = document.getElementById('broadsideTittleDesc');
-          if (desc) desc.innerHTML = broadsideMeanings[v] || '';
+          if (card) card.setAttribute('data-tittle-variety', broadsideVariety);
+          renderBroadsideHeartCard();
         });
       });
+
+      const broadsideBpmBadge = document.getElementById('broadsideHeartBpmBadge');
+      if (broadsideBpmBadge) {
+        broadsideBpmBadge.addEventListener('click', () => {
+          broadsideCadence = broadsideCadence === '72' ? '60' : broadsideCadence === '60' ? 'static' : '72';
+          broadsideBpmBadge.textContent = broadsideCadence === '72' ? '72 BPM' : broadsideCadence === '60' ? '60 BPM' : 'Static';
+          renderBroadsideHeartCard();
+        });
+      }
 
       updateEcoCalc();
       updateAll();

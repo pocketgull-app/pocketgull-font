@@ -37,6 +37,9 @@
 
 % Determine active math font binary
 \def\PGM@fontname{PocketGull-Math.ttf}
+\ifPGM@soft
+  \def\PGM@fontname{PocketGull-Soft.ttf}
+\fi
 \ifPGM@chem
   \def\PGM@fontname{PocketGull-Chem.ttf}
 \fi

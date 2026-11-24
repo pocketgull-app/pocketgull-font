@@ -674,9 +674,12 @@
       updateSmoeUI();
     })();
 
-        // Axis-Praxis Parametric Controller & Samsa Inspector Script
+    // First-Party PocketGull Parametric Axis Controller & 1000 UPM Contour Inspector
+    // Clean-room vanilla JS implementation (zero third-party code vendored).
+    // Conceptual homage: Inspired by Laurence Penney's Axis-Praxis & Samsa
+    // and Roel Nieskens' CSS Custom Property (--var) axis inheritance pattern.
     (function() {
-      // 1. Roel Nieskens CSS Variable Axis Controller
+      // 1. CSS Custom Property Variable-Axis Controller (Inspired by Roel Nieskens' cascade pattern)
       const wghtSlider = document.getElementById('wghtAxisSlider');
       const slntSlider = document.getElementById('slntAxisSlider');
       const opszSlider = document.getElementById('opszAxisSlider');
@@ -728,151 +731,95 @@
       if (wdthSlider) wdthSlider.addEventListener('input', updateAxisVariables);
       if (boumaSlider) boumaSlider.addEventListener('input', updateAxisVariables);
 
-      // 2. Samsa Forensic Glyph Canvas Visualizer
-      const canvas = document.getElementById('samsaCanvas');
+      // 2. First-Party 1000 UPM Forensic Glyph Canvas Visualizer (Live Binary loca + glyf + gvar Reader)
+      const canvas = document.getElementById('upmInspectorCanvas');
       if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const glyphBtns = document.querySelectorAll('.samsa-glyph-btn');
-      const titleEl = document.getElementById('samsaGlyphTitle');
-      const coordsEl = document.getElementById('samsaMouseCoords');
+      const glyphBtns = document.querySelectorAll('.upm-inspector-glyph-btn');
+      const titleEl = document.getElementById('upmInspectorGlyphTitle');
+      const coordsEl = document.getElementById('upmInspectorMouseCoords');
 
-      // Metric elements
-      const mAw = document.getElementById('samsaMetricAw');
-      const mLsb = document.getElementById('samsaMetricLsb');
-      const mRsb = document.getElementById('samsaMetricRsb');
-      const mBbox = document.getElementById('samsaMetricBbox');
-      const mContours = document.getElementById('samsaMetricContours');
-      const mPts = document.getElementById('samsaMetricPoints');
+      const mAw = document.getElementById('upmInspectorMetricAw');
+      const mLsb = document.getElementById('upmInspectorMetricLsb');
+      const mRsb = document.getElementById('upmInspectorMetricRsb');
+      const mBbox = document.getElementById('upmInspectorMetricBbox');
+      const mContours = document.getElementById('upmInspectorMetricContours');
+      const mPts = document.getElementById('upmInspectorMetricPoints');
+      const mLoca = document.getElementById('upmInspectorMetricLoca');
+      const mDelta = document.getElementById('upmInspectorMaxDelta');
 
-      let currentGlyphData = {
-        char: '0',
-        name: 'zero.slashed',
-        gid: 55,
-        aw: 600,
-        lsb: 65,
-        rsb: 65,
-        bbox: [65, -20, 535, 720],
-        pts: 36,
-        contours: 3
-      };
+      let activeChar = '0';
+      let activeLabel = 'zero';
+      let binaryEngine = null;
+      let lastTransform = { ox: 220, oy: 300, scale: 0.32 };
 
-      function drawSamsaGrid() {
-        const w = canvas.width;
-        const h = canvas.height;
-        const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-        const isWashi = currentTheme === 'washi';
-        const isPbm = currentTheme === 'pbm';
-
-        ctx.clearRect(0, 0, w, h);
-        if (isWashi) {
-          ctx.fillStyle = '#FAF6EE';
-          ctx.fillRect(0, 0, w, h);
-        } else if (isPbm) {
-          ctx.fillStyle = '#080000';
-          ctx.fillRect(0, 0, w, h);
-        }
-
-        // Coordinate transformation: UPM 1000 to canvas (scale ~ 0.36, offset x=220, y=320)
-        const scale = 0.36;
-        const ox = 220;
-        const oy = 320;
-
-        // Grid background lines
-        ctx.strokeStyle = isWashi ? 'rgba(31, 27, 22, 0.06)' : (isPbm ? 'rgba(239, 68, 68, 0.08)' : 'rgba(255, 255, 255, 0.04)');
-        ctx.lineWidth = 1;
-        for (let x = 0; x <= w; x += 40) {
-          ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
-        }
-        for (let y = 0; y <= h; y += 40) {
-          ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
-        }
-
-        // TrueType Metric Guidelines
-        function drawGuide(yVal, label, color) {
-          const cy = oy - yVal * scale;
-          ctx.strokeStyle = color;
-          ctx.lineWidth = 1;
-          ctx.setLineDash([4, 4]);
-          ctx.beginPath();
-          ctx.moveTo(40, cy);
-          ctx.lineTo(w - 40, cy);
-          ctx.stroke();
-          ctx.setLineDash([]);
-          ctx.fillStyle = color;
-          ctx.font = "10px 'PocketGull Mono', monospace";
-          ctx.fillText(`${label} (y=${yVal})`, 45, cy - 4);
-        }
-
-        const ascColor = isWashi ? 'rgba(2, 132, 199, 0.75)' : (isPbm ? 'rgba(239, 68, 68, 0.6)' : 'rgba(56, 189, 248, 0.4)');
-        const capColor = isWashi ? 'rgba(219, 39, 119, 0.75)' : (isPbm ? 'rgba(248, 113, 113, 0.6)' : 'rgba(244, 114, 182, 0.4)');
-        const xColor = isWashi ? 'rgba(124, 58, 237, 0.75)' : (isPbm ? 'rgba(220, 38, 38, 0.6)' : 'rgba(167, 139, 250, 0.4)');
-        const baseColor = isWashi ? 'rgba(15, 118, 110, 0.95)' : (isPbm ? 'rgba(239, 68, 68, 0.95)' : 'rgba(45, 212, 191, 0.8)');
-        const descColor = isWashi ? 'rgba(185, 28, 28, 0.75)' : (isPbm ? 'rgba(153, 27, 27, 0.6)' : 'rgba(248, 113, 113, 0.4)');
-
-        drawGuide(750, 'Ascender', ascColor);
-        drawGuide(700, 'Cap-Height', capColor);
-        drawGuide(480, 'x-Height', xColor);
-        drawGuide(0, 'Baseline', baseColor);
-        drawGuide(-250, 'Descender', descColor);
-
-        // Advance Width boundaries
-        const awX = ox + currentGlyphData.aw * scale;
-        const awStroke = isWashi ? 'rgba(194, 65, 12, 0.6)' : (isPbm ? 'rgba(248, 113, 113, 0.5)' : 'rgba(251, 146, 60, 0.5)');
-        const awFill = isWashi ? 'rgba(194, 65, 12, 0.85)' : (isPbm ? 'rgba(248, 113, 113, 0.85)' : 'rgba(251, 146, 60, 0.7)');
-
-        ctx.strokeStyle = awStroke;
-        ctx.setLineDash([3, 3]);
-        ctx.beginPath(); ctx.moveTo(ox, 40); ctx.lineTo(ox, h - 40); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(awX, 40); ctx.lineTo(awX, h - 40); ctx.stroke();
-        ctx.setLineDash([]);
-        ctx.fillStyle = awFill;
-        ctx.fillText(`aw: ${currentGlyphData.aw}`, awX + 4, oy - 20);
-
-        // Draw Stylized Glyph Vector Outline
-        ctx.save();
-        ctx.translate(ox, oy);
-        ctx.scale(scale, -scale); // Flip y for font coordinates
-
-        ctx.font = "bold 700px 'PocketGull Bold', 'PocketGull', sans-serif";
-        ctx.fillStyle = isWashi ? 'rgba(15, 118, 110, 0.12)' : (isPbm ? 'rgba(239, 68, 68, 0.15)' : 'rgba(45, 212, 191, 0.15)');
-        ctx.strokeStyle = isWashi ? '#0f766e' : (isPbm ? '#ef4444' : '#2dd4bf');
-        ctx.lineWidth = 4 / scale;
-
-        // Draw path with filled contours
-        ctx.save();
-        ctx.scale(1, -1);
-        ctx.fillText(currentGlyphData.char, 0, 0);
-        ctx.restore();
-
-        ctx.restore();
-
-        // Draw Synthetic Anchor Points for Samsa Inspection
-        const samplePoints = [
-          { x: currentGlyphData.bbox[0], y: currentGlyphData.bbox[1], on: true },
-          { x: currentGlyphData.bbox[0], y: currentGlyphData.bbox[3], on: true },
-          { x: currentGlyphData.bbox[2], y: currentGlyphData.bbox[3], on: true },
-          { x: currentGlyphData.bbox[2], y: currentGlyphData.bbox[1], on: true },
-          { x: (currentGlyphData.bbox[0] + currentGlyphData.bbox[2]) / 2, y: currentGlyphData.bbox[3] + 25, on: false },
-          { x: (currentGlyphData.bbox[0] + currentGlyphData.bbox[2]) / 2, y: currentGlyphData.bbox[1] - 25, on: false },
+      function collectActiveAxisMap() {
+        const map = {};
+        const sliderIds = [
+          'wght', 'wdth', 'slnt', 'opsz', 'SOFT', 'THRM', 'APTR', 'SMRN',
+          'HLNG', 'BION', 'GRAV', 'BOUM', 'CHIS', 'NUQT', 'INUK', 'BRLS'
         ];
-
-        samplePoints.forEach(p => {
-          const px = ox + p.x * scale;
-          const py = oy - p.y * scale;
-          ctx.beginPath();
-          ctx.arc(px, py, p.on ? 5 : 4, 0, Math.PI * 2);
-          const onColor = isWashi ? '#0f766e' : (isPbm ? '#ef4444' : '#2dd4bf');
-          const offColor = isWashi ? '#d97706' : (isPbm ? '#f87171' : '#f59e0b');
-          ctx.fillStyle = p.on ? onColor : offColor;
-          ctx.fill();
-          ctx.strokeStyle = isWashi ? '#FAF6EE' : (isPbm ? '#1a0000' : '#090d16');
-          ctx.lineWidth = 1.5;
-          ctx.stroke();
-        });
+        for (let i = 0; i < sliderIds.length; i++) {
+          const tag = sliderIds[i];
+          const el = document.getElementById('slider-' + tag);
+          if (el) map[tag] = parseFloat(el.value);
+        }
+        if (wghtSlider && map.wght === undefined) map.wght = parseFloat(wghtSlider.value);
+        if (wdthSlider && map.wdth === undefined) map.wdth = parseFloat(wdthSlider.value);
+        if (slntSlider && map.slnt === undefined) map.slnt = parseFloat(slntSlider.value);
+        if (opszSlider && map.opsz === undefined) map.opsz = parseFloat(opszSlider.value);
+        return map;
       }
 
+      function drawUpmInspectorGrid() {
+        if (!window.PocketGullBinaryInspector) return;
+        if (!binaryEngine) {
+          window.PocketGullBinaryInspector.loadDefaultVfEngine().then((eng) => {
+            binaryEngine = eng;
+            drawUpmInspectorGrid();
+          }).catch(() => {});
+          return;
+        }
+
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        const axisMap = collectActiveAxisMap();
+        const info = binaryEngine.inspectGlyph(activeChar, axisMap);
+        const tf = window.PocketGullBinaryInspector.renderGlyphDeltaCanvas(canvas, info, currentTheme);
+        if (tf) lastTransform = tf;
+
+        const onPts = info.points.filter((pt) => pt.onCurve).length;
+        const offPts = info.points.length - onPts;
+        if (titleEl) titleEl.textContent = `gid ${info.gid} ('${activeChar}' • ${activeLabel})`;
+        if (mAw) mAw.textContent = `${info.variedAw} UPM (Δaw ${info.variedAw - info.baseAw})`;
+        if (mLsb) mLsb.textContent = `${info.lsb} UPM`;
+        if (mRsb) mRsb.textContent = `${info.rsb} UPM`;
+        if (mBbox) mBbox.textContent = `[${info.bbox.join(', ')}]`;
+        if (mContours) mContours.textContent = `${info.endPts.length}`;
+        if (mPts) mPts.textContent = `${info.points.length} (${onPts}● / ${offPts}○)`;
+        if (mLoca) {
+          mLoca.textContent = `0x${info.locaOffset.toString(16).toUpperCase()} (${info.wordAligned ? 'EVEN %2==0 ✓' : 'ODD ✗'})`;
+        }
+        if (mDelta) {
+          mDelta.textContent = `${info.maxDeltaMag} UPM (${info.activeTupleCount} active gvar tuples)`;
+        }
+
+        canvas.setAttribute(
+          'aria-label',
+          `Binary TrueType 1000 UPM contour and gvar delta canvas for gid ${info.gid} (${activeLabel})`
+        );
+        const descEl = document.getElementById('upmInspectorCanvasDesc');
+        if (descEl) {
+          descEl.textContent = `Live SFNT binary inspection of gid ${info.gid} (${activeLabel}) at loca byte offset ${info.locaOffset} with ${info.endPts.length} contours, ${onPts} on-curve points, ${offPts} off-curve quadratic control points, advance width ${info.variedAw} UPM, and max gvar vector displacement ${info.maxDeltaMag} UPM.`;
+        }
+      }
+
+      if (wghtSlider) wghtSlider.addEventListener('input', drawUpmInspectorGrid);
+      if (slntSlider) slntSlider.addEventListener('input', drawUpmInspectorGrid);
+      if (opszSlider) opszSlider.addEventListener('input', drawUpmInspectorGrid);
+      if (wdthSlider) wdthSlider.addEventListener('input', drawUpmInspectorGrid);
+      if (boumaSlider) boumaSlider.addEventListener('input', drawUpmInspectorGrid);
+
       window.addEventListener('siteThemeChanged', () => {
-        drawSamsaGrid();
+        drawUpmInspectorGrid();
       });
 
       glyphBtns.forEach(btn => {
@@ -883,50 +830,24 @@
           });
           btn.classList.add('active');
           btn.setAttribute('aria-selected', 'true');
-
-          currentGlyphData = {
-            char: btn.dataset.glyph,
-            name: btn.dataset.name,
-            gid: btn.dataset.gid,
-            aw: parseInt(btn.dataset.aw),
-            lsb: parseInt(btn.dataset.lsb),
-            rsb: parseInt(btn.dataset.rsb),
-            bbox: btn.dataset.bbox.split(',').map(n => parseInt(n.trim())),
-            pts: parseInt(btn.dataset.pts),
-            contours: parseInt(btn.dataset.contours)
-          };
-
-          if (titleEl) titleEl.textContent = `glyph ${currentGlyphData.gid} (${currentGlyphData.name})`;
-          if (mAw) mAw.textContent = `${currentGlyphData.aw} UPM`;
-          if (mLsb) mLsb.textContent = `${currentGlyphData.lsb} UPM`;
-          if (mRsb) mRsb.textContent = `${currentGlyphData.rsb} UPM`;
-          if (mBbox) mBbox.textContent = `[${currentGlyphData.bbox.join(', ')}]`;
-          if (mContours) mContours.textContent = currentGlyphData.contours;
-          if (mPts) mPts.textContent = currentGlyphData.pts;
-
-          canvas.setAttribute('aria-label', `TrueType 1000 UPM vector Bézier contour canvas for glyph ${currentGlyphData.gid} (${currentGlyphData.name})`);
-          const descEl = document.getElementById('samsaCanvasDesc');
-          if (descEl) {
-            descEl.textContent = `Vector Bézier contour inspection rendering glyph ${currentGlyphData.gid} (${currentGlyphData.name}) on a 1000 UPM TrueType coordinate grid with ${currentGlyphData.contours} contours, ${currentGlyphData.pts} anchor points, advance width ${currentGlyphData.aw} UPM, left side bearing ${currentGlyphData.lsb} UPM, and right side bearing ${currentGlyphData.rsb} UPM.`;
-          }
-
-          drawSamsaGrid();
+          activeChar = btn.dataset.glyph || '0';
+          activeLabel = btn.dataset.name || activeChar;
+          drawUpmInspectorGrid();
         });
       });
 
       canvas.addEventListener('mousemove', (e) => {
         const rect = canvas.getBoundingClientRect();
-        const mx = e.clientX - rect.left;
-        const my = e.clientY - rect.top;
-        const scale = 0.36;
-        const ox = 220;
-        const oy = 320;
-        const fontX = Math.round((mx - ox) / scale);
-        const fontY = Math.round((oy - my) / scale);
+        const scaleX = canvas.width / (rect.width || canvas.width);
+        const scaleY = canvas.height / (rect.height || canvas.height);
+        const mx = (e.clientX - rect.left) * scaleX;
+        const my = (e.clientY - rect.top) * scaleY;
+        const fontX = Math.round((mx - lastTransform.ox) / lastTransform.scale);
+        const fontY = Math.round((lastTransform.oy - my) / lastTransform.scale);
         if (coordsEl) coordsEl.textContent = `X: ${fontX}, Y: ${fontY} UPM`;
       });
 
-      if ('requestAnimationFrame' in window) { requestAnimationFrame(drawSamsaGrid); } else { drawSamsaGrid(); }
+      if ('requestAnimationFrame' in window) { requestAnimationFrame(drawUpmInspectorGrid); } else { drawUpmInspectorGrid(); }
     })();
 
     // 3.6 Master Interactive 7 Sovereign Case Studies Showcase Hub Controller
@@ -1282,7 +1203,7 @@
 
       const deepSections = [
         'eco-lab', 'italics', 'braille', 'bionic', 'terminal', 'smoe',
-        'multilingual', 'multi-scale', 'governance', 'changelog', 'samsa-inspector'
+        'multilingual', 'multi-scale', 'governance', 'changelog', 'upm-inspector'
       ];
 
       const categoryMap = {
@@ -1290,7 +1211,7 @@
         eco: ['eco-lab', 'playground', 'ismp'],
         sovereign: ['smoe', 'multilingual'],
         telemetry: ['terminal', 'bionic', 'braille'],
-        foundry: ['developers', 'governance', 'changelog', 'sources', 'samsa-inspector']
+        foundry: ['developers', 'governance', 'changelog', 'sources', 'upm-inspector']
       };
 
       let currentMode = 'essential';
