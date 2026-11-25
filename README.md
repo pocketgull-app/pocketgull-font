@@ -7,6 +7,7 @@
 [![Fonts: SIL OFL 1.1](https://img.shields.io/badge/Fonts-SIL_OFL_1.1-blue.svg?style=flat-square)](OFL.txt)
 [![Code: Apache 2.0](https://img.shields.io/badge/Code-Apache_2.0-teal.svg?style=flat-square)](LICENSE-APACHE-2.0.txt)
 [![SemVer 4.0.0](https://img.shields.io/badge/SemVer-4.0.0-blue.svg?style=flat-square)](CHANGELOG.md)
+[![npm @pocketgull/font](https://img.shields.io/npm/v/@pocketgull/font.svg?style=flat-square&color=emerald)](https://www.npmjs.com/package/@pocketgull/font)
 [![W3C OTS Validated](https://img.shields.io/badge/W3C_OTS-100%25_Valid-emerald.svg?style=flat-square)](https://github.com/googlefonts/ots)
 [![WCAG 2.1 AAA](https://img.shields.io/badge/WCAG_2.1-AAA_100%25-emerald.svg?style=flat-square)](index.html)
 
@@ -53,6 +54,23 @@ PocketGull systematically eliminates look-alike character collisions identified 
 ---
 
 ## 🚀 Quickstart
+
+### Self-Hosted npm (`@pocketgull/font`)
+Install the lean WOFF2 package directly (zero external font requests, Observatory A+ CSP-safe):
+```bash
+npm install @pocketgull/font
+```
+```js
+// Full lean core superfamily (Sans, Slab, Mono, Serif — WOFF2-only, 7.8 MB)
+import '@pocketgull/font';
+
+// Or granular CSS entrypoints:
+import '@pocketgull/font/core.css';   // ~132 KB ultra-fast Latin/clinical core
+import '@pocketgull/font/sans.css';
+import '@pocketgull/font/slab.css';
+import '@pocketgull/font/mono.css';
+import '@pocketgull/font/serif.css';
+```
 
 ### Public Edge CDN (jsDelivr)
 Add the global, high-performance webfont stylesheet directly to your `<head>`:
@@ -104,7 +122,7 @@ Add the global, high-performance webfont stylesheet directly to your `<head>`:
 | :--- | :--- | :--- |
 | **macOS (Homebrew Tap)** | `brew install --cask pocketgull-app/tap/font-pocketgull` | 39-style TrueType superfamily cask |
 | **Windows (Winget)** | `winget install PocketGull.Font` | Native Windows NSIS font installer ([PR #451307](https://github.com/microsoft/winget-pkgs/pull/451307)) |
-| **Web (NPM)** | `npm install @fontsource/pocketgull` | Self-hosted zero-CLS webfonts ([Issue #168](https://github.com/fontsource/font-files/issues/168)) |
+| **Web (NPM)** | `npm install @pocketgull/font` | Official lean WOFF2 package with granular CSS exports ([npmjs](https://www.npmjs.com/package/@pocketgull/font) · [Fontsource #168](https://github.com/fontsource/font-files/issues/168)) |
 | **Scientific (PyPI)** | `pip install pocketgull-math` | Matplotlib stylesheets &amp; telemetry |
 | **Typesetting (Typst)** | `#import "@preview/pocketgull-math:4.0.0": *` | Academic STEM paper typesetting |
 
