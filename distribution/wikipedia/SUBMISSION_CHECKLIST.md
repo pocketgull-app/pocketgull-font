@@ -17,9 +17,9 @@ Then replace the `repo` and `specimen` refs with these where possible.
 - [ ] Discuss changes on the article Talk page
 
 ## 3. Assets
-- [ ] Upload a specimen image to Wikimedia Commons under a free license, then add `| image =` to the infobox
-- [ ] Optionally add a disambiguation-matrix SVG
+- [x] Generate path-outlined Wikimedia Commons specimen (`PocketGull_Specimen_Commons.svg`, zero `<text>` dependencies) and wire `| image = PocketGull_Specimen_Commons.svg` into `{{Infobox font}}`
+- [ ] Upload `PocketGull_Specimen_Commons.svg` via https://commons.wikimedia.org/wiki/Special:UploadWizard under `CC0` or `CC BY-SA 4.0`
 
 ## 4. Verify before submitting
-- [ ] Confirm the "about 14,000 glyphs" figure against the released fonts (audited at about 14,200 in the Bold, Fineliner and Chiseltip styles)
-- [ ] Confirm the OTS statement against a current `npm run test:unit` run
+- [x] Confirm glyph counts against `v4.0.0` TTF binaries (`8,229` glyphs in `PocketGull-Regular` / `PocketGull-Bold`; up to `9,880` codepoints in `PocketGull-Math`)
+- [x] Confirm the OTS statement against a current `npm run test:unit` run (`149/149` passing)

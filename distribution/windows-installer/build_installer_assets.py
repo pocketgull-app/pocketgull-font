@@ -403,7 +403,7 @@ def write_nsis_script(font_entries: list[tuple[str, str]]) -> Path:
         '!define MUI_WELCOMEPAGE_TITLE "PocketGull Typeface Superfamily (v4.0.0)"',
         (
             f'!define MUI_WELCOMEPAGE_TEXT "This package installs {count} PocketGull TrueType fonts '
-            "(Sans, Serif, Slab, Rounded, Fixed-Width Monospace, Mathematics, Sciences, Braille, and Sign Language) "
+            "(Sans, Serif, Slab, Rounded, Fixed-Width Monospace, Upcycled Display, Mathematics, Sciences, Braille, and Sign Language) "
             "to your Windows Fonts folder.$\\r$\\n$\\r$\\n"
             "Designed by Phil Gear (The PocketGull Project Authors) with explicit character disambiguation "
             "(0/O, 1/l/I, Z/2, b/d, p/q).$\\r$\\n$\\r$\\n"

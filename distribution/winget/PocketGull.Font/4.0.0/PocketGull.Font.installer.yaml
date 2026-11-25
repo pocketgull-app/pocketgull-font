@@ -17,6 +17,6 @@ ReleaseDate: 2026-11-10
 Installers:
 - Architecture: x64
   InstallerUrl: https://github.com/pocketgull-app/pocketgull-font/releases/download/v4.0.0/PocketGull-Font-Setup-v4.0.0.exe
-  InstallerSha256: 937D33843F4BC28CEBE93431472DB3668631B1BAC7CAB47020631325C592DE00
+  InstallerSha256: 250EEF667E1A30AF77B59D5BA99E255CB1727C042D82F2F7461A366A93C162C1
 ManifestType: installer
 ManifestVersion: 1.12.0

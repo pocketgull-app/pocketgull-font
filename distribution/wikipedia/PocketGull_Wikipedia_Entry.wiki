@@ -1,5 +1,9 @@
 {{Infobox font
 | name           = PocketGull
+| image          = PocketGull_Specimen_Commons.svg
+| image_size     = 300px
+| alt            = Typeface specimen of PocketGull showing humanist sans-serif letterforms, clinical character disambiguation, superfamily weights, and multi-script glyphs
+| caption        = Specimen showing humanist proportions, clinical disambiguation, superfamily weights and multi-script coverage
 | style          = [[Sans-serif]], [[Display typeface|Display]], [[Monospaced font|Monospace]]
 | classifications= [[Humanist sans-serif|Humanist]]
 | creator        = Phil Gear
@@ -7,7 +11,7 @@
 | date-released  = 2026
 | latest_release_version = 4.0.0
 | latest_release_date    = 2026
-| glyph-count    = About 14,000 in the main styles
+| glyph-count    = 8,229 in main sans-serif styles; up to 9,880 in specialty styles
 | characters     = Latin, Greek, Cyrillic, Cherokee, Canadian Aboriginal syllabics, Duployan, Braille patterns
 | license        = [[SIL Open Font License]] 1.1
 | website        = {{URL|https://font.pocketgull.app}}
@@ -45,7 +49,9 @@ The PocketGull superfamily encompasses multiple weights and specialized optical 
 {| class="wikitable"
 ! Style / File !! Weight (wght) !! Intended Application !! Key Characteristics
 |-
-| '''PocketGull Fineliner'''<br />{{mono|PocketGull-Fineliner.ttf}} || 400 (Regular) || EHR clinical records, body text, patient discharge documentation || High counter aperture, optical legibility at small sizes (8–12 pt).
+| '''PocketGull Regular'''<br />{{mono|PocketGull-Regular.ttf}} || 400 (Regular) || Primary UI body text, documentation, general clinical interfaces || Balanced humanist stroke weight, open apertures, default character disambiguation.
+|-
+| '''PocketGull Fineliner'''<br />{{mono|PocketGull-Fineliner.ttf}} || 400 (Light/Book) || High-density clinical charts, long-form reading, discharge summaries || Finer felt-pen stroke weight, high counter aperture at small sizes.
 |-
 | '''PocketGull Bold'''<br />{{mono|PocketGull-Bold.ttf}} || 700 / 800 || Display titling, clinical alarm banners, Bionic reading anchors || High visual impact without loss of internal counter-space.
 |-
