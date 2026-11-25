@@ -54,7 +54,6 @@
     "benchmark": "node --test test/system_provisions_benchmark.test.mjs"
   },
   "files": [
-    "fonts/ttf/*.ttf",
     "fonts/woff2/*.woff2",
     "fonts.css",
     "pocketgull.css",
