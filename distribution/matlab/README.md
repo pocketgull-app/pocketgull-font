@@ -11,7 +11,7 @@ addpath('path/to/pocketgull-font/distribution/matlab');
 savepath;
 ```
 
-Ensure the PocketGull font files from `fonts/ttf/` are installed on your operating system (or installed via Winget: `winget install PocketGull.Typeface`).
+Ensure the PocketGull font files from `fonts/ttf/` are installed on your operating system (or installed via Winget: `winget install PocketGull.Font`).
 
 ## Usage
 

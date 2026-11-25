@@ -1,11 +1,13 @@
+# Created using wingetcreate 1.12.13.0
 # yaml-language-server: $schema=https://aka.ms/winget-manifest.defaultLocale.1.12.0.schema.json
-PackageIdentifier: PocketGull.Typeface
+
+PackageIdentifier: PocketGull.Font
 PackageVersion: 4.0.0
 PackageLocale: en-US
 Publisher: The PocketGull Project Authors
 PublisherUrl: https://github.com/pocketgull-app
 PublisherSupportUrl: https://github.com/pocketgull-app/pocketgull-font/issues
-PackageName: PocketGull Typeface
+PackageName: PocketGull Font
 PackageUrl: https://font.pocketgull.app
 License: OFL-1.1
 LicenseUrl: https://raw.githubusercontent.com/pocketgull-app/pocketgull-font/main/OFL.txt
@@ -17,17 +19,17 @@ Description: |-
   telemetry ergonomics, 256 tactile Braille domes, and out-of-the-box ISMP character disambiguation
   (curved clinical l, bilateral serifed I, slashed zero, slashed Z).
 Moniker: pocketgull
+ReleaseNotesUrl: https://github.com/pocketgull-app/pocketgull-font/releases/tag/v4.0.0
 Tags:
-  - font
-  - typeface
-  - typography
-  - monospace
-  - clinical
-  - braille
-  - math
-  - chemistry
-  - genomics
-  - music
-ReleaseDate: 2026-11-10
+- font
+- typeface
+- typography
+- monospace
+- clinical
+- braille
+- math
+- chemistry
+- genomics
+- music
 ManifestType: defaultLocale
 ManifestVersion: 1.12.0

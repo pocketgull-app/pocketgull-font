@@ -103,7 +103,7 @@ Add the global, high-performance webfont stylesheet directly to your `<head>`:
 | Platform | Command | Notes |
 | :--- | :--- | :--- |
 | **macOS (Homebrew Tap)** | `brew install --cask pocketgull-app/tap/font-pocketgull` | 39-style TrueType superfamily cask |
-| **Windows (Winget)** | `winget install PocketGull.Typeface` | Native Windows font installation ([PR #441164](https://github.com/microsoft/winget-pkgs/pull/441164)) |
+| **Windows (Winget)** | `winget install PocketGull.Font` | Native Windows NSIS font installer ([PR #451307](https://github.com/microsoft/winget-pkgs/pull/451307)) |
 | **Web (NPM)** | `npm install @fontsource/pocketgull` | Self-hosted zero-CLS webfonts ([Issue #168](https://github.com/fontsource/font-files/issues/168)) |
 | **Scientific (PyPI)** | `pip install pocketgull-math` | Matplotlib stylesheets &amp; telemetry |
 | **Typesetting (Typst)** | `#import "@preview/pocketgull-math:4.0.0": *` | Academic STEM paper typesetting |

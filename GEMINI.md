@@ -90,7 +90,7 @@ All future glyphs, icons, indicators, and symbols synthesized into PocketGull mu
 PocketGull maintains independent typefoundry distribution governed by Phil Gear:
 - **Global Package Registries**:
   - **Homebrew Tap**: `distribution/homebrew/font-pocketgull.rb` (`brew install --cask pocketgull-app/tap/font-pocketgull`)
-  - **Windows Package Manager (Winget)**: `distribution/winget/PocketGull.Typeface.yaml` (`winget install PocketGull.Typeface`)
+  - **Windows Package Manager (Winget)**: `distribution/winget/PocketGull.Font/` (`winget install PocketGull.Font`)
   - **Fontsource (NPM)**: `distribution/fontsource/metadata.json` (`npm install @fontsource/pocketgull`)
   - **Adobe Fonts Partner Portfolio**: `distribution/adobe/ADOBE_FONTS_PORTFOLIO.md`
 - **Minimalist Versioning (`nameID 5`)**: `Version 3.1.0; The PocketGull Project Authors; OFL 1.1`. `head.fontRevision` locked to exact float `3.1`.
@@ -132,7 +132,7 @@ dart run tool/pocketgull_foundry.dart sync
 
 1. **Multi-Channel Distribution Baseline**:
    - **Homebrew Tap**: `pocketgull-app/tap/font-pocketgull` (32 styles).
-   - **Windows Package Manager**: `PocketGull.Typeface` (manifests in `distribution/winget/`).
+   - **Windows Package Manager**: `PocketGull.Font` (manifests in `distribution/winget/PocketGull.Font/`).
    - **Global Edge CDN (jsDelivr)**: `https://cdn.jsdelivr.net/gh/pocketgull-app/pocketgull-font@3.1.0/fonts.css` (CORS-enabled, zero-quota edge delivery).
 2. **Dependabot & CI Python Environment Lock**:
    - CI environment is pinned to Python 3.11. Never merge dependency bumps that require Python >= 3.12 (e.g. `networkx >= 3.7`) without migrating the CI runner first.
@@ -156,7 +156,7 @@ dart run tool/pocketgull_foundry.dart sync
 3. **Multi-Channel Distribution Parity**:
    - Any version release MUST synchronize simultaneously across:
      - **Homebrew Tap**: `distribution/homebrew/font-pocketgull.rb`
-     - **Windows Package Manager**: `distribution/winget/PocketGull.Typeface/`
+     - **Windows Package Manager**: `distribution/winget/PocketGull.Font/`
      - **LaTeX CTAN Package**: `distribution/latex/` (`pocketgull-math.sty`)
      - **Python Telemetry Package**: `distribution/python/` (`pocketgull_math/__init__.py`)
      - **Cryptographic Hashes**: `fonts/sri-hashes.json`, `fonts/SHA256SUMS`, and `CHECKSUMS.sha256`

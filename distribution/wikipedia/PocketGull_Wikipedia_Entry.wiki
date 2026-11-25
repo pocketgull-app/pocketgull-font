@@ -67,7 +67,7 @@ PocketGull is libre software licensed under the [[SIL Open Font License]] 1.1 wi
 * Official website and interactive specimen broadside ({{URL|https://font.pocketgull.app}})
 * [[GitHub]] repository ({{mono|pocketgull-app/pocketgull-font}})
 * [[Homebrew (package manager)|Homebrew]] Cask ({{mono|pocketgull-app/tap/font-pocketgull}})
-* [[Windows Package Manager]] ({{mono|winget install PocketGull.Typeface}})
+* [[Windows Package Manager]] ({{mono|winget install PocketGull.Font}})
 * [[Node Package Manager|NPM]] via Fontsource ({{mono|@fontsource/pocketgull}})
 * [[LaTeX]] CTAN package ({{mono|pocketgull-math.sty}})
 * Global edge [[content delivery network]] mirrors via [[jsDelivr]]

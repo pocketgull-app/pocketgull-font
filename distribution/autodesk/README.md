@@ -8,7 +8,7 @@ Brings **Louise Sloan 5:1 optotypic legibility** and **ISMP character disambigua
 
 ## AutoCAD Quick Setup (`pocketgull_setup.lsp`)
 
-1. Ensure PocketGull TrueType fonts are installed on Windows (`winget install PocketGull.Typeface` or install from `fonts/ttf/`).
+1. Ensure PocketGull TrueType fonts are installed on Windows (`winget install PocketGull.Font` or install from `fonts/ttf/`).
 2. In AutoCAD, run the `APPLOAD` command (or type `(load "pocketgull_setup.lsp")`).
 3. Three standard styles are automatically created and assigned:
    * `POCKETGULL-STANDARD`: General dimensions and room labels (`PocketGull-Fineliner.ttf`).

@@ -43,6 +43,7 @@ Source: "stage_ttf\PocketGull-Algo.ttf"; DestDir: "{autofonts}"; FontInstall: "P
 Source: "stage_ttf\PocketGull-Black.ttf"; DestDir: "{autofonts}"; FontInstall: "PocketGull Black"; Flags: ignoreversion restartreplace
 Source: "stage_ttf\PocketGull-Bold.ttf"; DestDir: "{autofonts}"; FontInstall: "PocketGull Bold"; Flags: ignoreversion restartreplace
 Source: "stage_ttf\PocketGull-BoldItalic.ttf"; DestDir: "{autofonts}"; FontInstall: "PocketGull Bold Italic"; Flags: ignoreversion restartreplace
+Source: "stage_ttf\PocketGull-Botanica.ttf"; DestDir: "{autofonts}"; FontInstall: "PocketGull Botanica"; Flags: ignoreversion restartreplace
 Source: "stage_ttf\PocketGull-Chem.ttf"; DestDir: "{autofonts}"; FontInstall: "PocketGull Chem"; Flags: ignoreversion restartreplace
 Source: "stage_ttf\PocketGull-Chiseltip.ttf"; DestDir: "{autofonts}"; FontInstall: "PocketGull Chiseltip"; Flags: ignoreversion restartreplace
 Source: "stage_ttf\PocketGull-CondensedBold.ttf"; DestDir: "{autofonts}"; FontInstall: "PocketGull Condensed Bold"; Flags: ignoreversion restartreplace
@@ -52,6 +53,7 @@ Source: "stage_ttf\PocketGull-Genome.ttf"; DestDir: "{autofonts}"; FontInstall: 
 Source: "stage_ttf\PocketGull-Halftone.ttf"; DestDir: "{autofonts}"; FontInstall: "PocketGull Halftone"; Flags: ignoreversion restartreplace
 Source: "stage_ttf\PocketGull-Inline.ttf"; DestDir: "{autofonts}"; FontInstall: "PocketGull Inline"; Flags: ignoreversion restartreplace
 Source: "stage_ttf\PocketGull-Italic.ttf"; DestDir: "{autofonts}"; FontInstall: "PocketGull Italic"; Flags: ignoreversion restartreplace
+Source: "stage_ttf\PocketGull-Kintsugi.ttf"; DestDir: "{autofonts}"; FontInstall: "PocketGull Kintsugi"; Flags: ignoreversion restartreplace
 Source: "stage_ttf\PocketGull-Lab.ttf"; DestDir: "{autofonts}"; FontInstall: "PocketGull Lab"; Flags: ignoreversion restartreplace
 Source: "stage_ttf\PocketGull-Learn.ttf"; DestDir: "{autofonts}"; FontInstall: "PocketGull Learn"; Flags: ignoreversion restartreplace
 Source: "stage_ttf\PocketGull-MarkerRaw.ttf"; DestDir: "{autofonts}"; FontInstall: "PocketGull Marker Raw"; Flags: ignoreversion restartreplace
@@ -74,5 +76,3 @@ Source: "stage_ttf\PocketGull-VF.ttf"; DestDir: "{autofonts}"; FontInstall: "Poc
 Source: "stage_ttf\PocketGullMono-Bold.ttf"; DestDir: "{autofonts}"; FontInstall: "PocketGull Mono Bold"; Flags: ignoreversion restartreplace
 Source: "stage_ttf\PocketGullMono-Italic.ttf"; DestDir: "{autofonts}"; FontInstall: "PocketGull Mono Italic"; Flags: ignoreversion restartreplace
 Source: "stage_ttf\PocketGullMono-Regular.ttf"; DestDir: "{autofonts}"; FontInstall: "PocketGull Mono"; Flags: ignoreversion restartreplace
-Source: "stage_ttf\PocketGull-Botanica.ttf"; DestDir: "{autofonts}"; FontInstall: "PocketGull Botanica"; Flags: ignoreversion restartreplace
-Source: "stage_ttf\PocketGull-Kintsugi.ttf"; DestDir: "{autofonts}"; FontInstall: "PocketGull Kintsugi"; Flags: ignoreversion restartreplace
