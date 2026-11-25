@@ -5,18 +5,29 @@ import path from 'node:path';
 
 test('Kinetic Laboratory CSP Compliance: external js/kinetic_lab.js and zero inline scripts', () => {
   const html = fs.readFileSync('kinetic_laboratory.html', 'utf8');
-  assert.match(
-    html,
-    /<script\s+src="js\/kinetic_lab\.js"\s+defer><\/script>/,
-    'kinetic_laboratory.html must load external js/kinetic_lab.js with defer'
+  const externalScriptTag = '<script src="js/kinetic_lab.js" defer></script>';
+  const lowerHtml = html.toLowerCase();
+
+  // Enforce deterministic string boundaries (CodeQL Alerts #80 / #82 safe tag inspection):
+  // verify strictly one <script ... </script> element exists and matches externalScriptTag byte-for-byte.
+  const firstOpenIdx = lowerHtml.indexOf('<script');
+  const lastOpenIdx = lowerHtml.lastIndexOf('<script');
+  assert.notEqual(firstOpenIdx, -1, 'kinetic_laboratory.html must include external script tag');
+  assert.equal(
+    firstOpenIdx,
+    lastOpenIdx,
+    'kinetic_laboratory.html must contain strictly one <script> element (zero inline <script> blocks for Observatory CSP compliance)'
+  );
+  assert.equal(
+    html.slice(firstOpenIdx, firstOpenIdx + externalScriptTag.length),
+    externalScriptTag,
+    'kinetic_laboratory.html sole <script> tag must load external js/kinetic_lab.js with defer'
   );
 
-  // Strip the single external script tag and ensure no inline <script> remains
-  const withoutExternal = html.replace(/<script\s+src="js\/kinetic_lab\.js"\s+defer><\/script>/, '');
-  assert.ok(
-    !/<script\b/i.test(withoutExternal),
-    'kinetic_laboratory.html must contain zero inline <script> blocks for Observatory CSP compliance'
-  );
+  const firstCloseIdx = lowerHtml.indexOf('</script>');
+  const lastCloseIdx = lowerHtml.lastIndexOf('</script>');
+  assert.equal(firstCloseIdx, lastCloseIdx, 'kinetic_laboratory.html must contain strictly one closing </script> tag');
+
   assert.match(html, /\[data-theme="scotopic"\]/, 'kinetic_laboratory.html must define scotopic 650nm theme CSS variables');
 });
 

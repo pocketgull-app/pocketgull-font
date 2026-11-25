@@ -228,6 +228,18 @@ test('Kinetic Synesthetic Laboratory Invariant: Multi-Script Font Stacks, Intl.S
   assert.match(jsCode, /\\u0591-\\u07FF/, 'js/kinetic_lab.js must include RTL Unicode block detection');
   assert.match(htmlCode, /data-scale="maqam"/, 'kinetic_laboratory.html must provide Maqam scale preset');
   assert.match(htmlCode, /data-timpreset="arabic"/, 'kinetic_laboratory.html must provide Arabic contraption preset');
+
+  // 4. CodeQL Alert #82 Invariant (js/incomplete-multi-character-sanitization):
+  // Never strip <script tags via single-pass .replace(/<script...) in test suites; use indexOf/lastIndexOf boundaries.
+  const testDirFiles = fs.readdirSync('test').filter((f) => f.endsWith('.mjs') || f.endsWith('.js'));
+  for (const tf of testDirFiles) {
+    if (tf === 'security_and_ci_invariants.test.mjs') continue;
+    const tfContent = fs.readFileSync(path.join('test', tf), 'utf8');
+    assert.ok(
+      !tfContent.includes('.replace(/<script'),
+      `test/${tf} must not use single-pass .replace(/<script...) (triggers CodeQL js/incomplete-multi-character-sanitization)`
+    );
+  }
 });
 
 test('Font Binary Security Scanner Invariant: rejects TrueType bytecode & HarfBuzz Wasm shaper VM tables (CVE-2026-113679 / CVE-2026-113680)', async () => {
