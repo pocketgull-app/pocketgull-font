@@ -3,22 +3,28 @@
   "version": "4.0.0",
   "type": "module",
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   },
   "description": "Optotypically calibrated clinical and ophthalmological vector font superfamily bridging tactile humanist warmth with zero-error clinical precision.",
-  "main": "fonts.css",
-  "style": "fonts.css",
+  "main": "./css/npm/index.css",
+  "style": "./css/npm/index.css",
+  "sideEffects": [
+    "*.css"
+  ],
   "exports": {
-    ".": "./fonts.css",
-    "./fonts.css": "./fonts.css",
+    ".": "./css/npm/index.css",
+    "./core.css": "./css/npm/core.css",
+    "./sans.css": "./css/npm/sans.css",
+    "./slab.css": "./css/npm/slab.css",
+    "./mono.css": "./css/npm/mono.css",
+    "./serif.css": "./css/npm/serif.css",
     "./pocketgull.css": "./pocketgull.css",
-    "./fonts/*": "./fonts/*",
+    "./fonts/woff2/*": "./fonts/woff2/*",
     "./package.json": "./package.json"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pocketgull-app/pocketgull-font.git"
+    "url": "git+https://github.com/pocketgull-app/pocketgull-font.git"
   },
   "keywords": [
     "font",
@@ -54,9 +60,22 @@
     "benchmark": "node --test test/system_provisions_benchmark.test.mjs"
   },
   "files": [
-    "fonts/woff2/*.woff2",
-    "fonts.css",
+    "css/npm/*.css",
     "pocketgull.css",
+    "fonts/woff2/PocketGull-Regular-Core.woff2",
+    "fonts/woff2/PocketGull-Bold-Core.woff2",
+    "fonts/woff2/PocketGull-Micro-Core.woff2",
+    "fonts/woff2/PocketGull-Regular.woff2",
+    "fonts/woff2/PocketGull-Bold.woff2",
+    "fonts/woff2/PocketGull-Italic.woff2",
+    "fonts/woff2/PocketGull-BoldItalic.woff2",
+    "fonts/woff2/PocketGull-Slab-Regular.woff2",
+    "fonts/woff2/PocketGull-Slab-Bold.woff2",
+    "fonts/woff2/PocketGullMono-Regular.woff2",
+    "fonts/woff2/PocketGullMono-Bold.woff2",
+    "fonts/woff2/PocketGullMono-Italic.woff2",
+    "fonts/woff2/PocketGull-Serif-Regular.woff2",
+    "fonts/woff2/PocketGull-Serif-Bold.woff2",
     "OFL.txt",
     "LICENSE-APACHE-2.0.txt",
     "CITATION.cff"

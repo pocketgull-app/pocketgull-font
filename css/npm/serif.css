@@ -1,0 +1,28 @@
+/**
+ * @pocketgull/font/serif.css — PocketGull Serif Family (WOFF2)
+ * SIL Open Font License 1.1 | https://font.pocketgull.app
+ */
+
+@font-face {
+  font-family: 'PocketGull Serif';
+  src: url('../../fonts/woff2/PocketGull-Serif-Regular.woff2') format('woff2');
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 108%;
+  ascent-override: 96%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'PocketGull Serif';
+  src: url('../../fonts/woff2/PocketGull-Serif-Bold.woff2') format('woff2');
+  font-weight: 700 800;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 108%;
+  ascent-override: 96%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}

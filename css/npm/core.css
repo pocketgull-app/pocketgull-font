@@ -1,0 +1,64 @@
+/**
+ * @pocketgull/font/core.css — Lightweight Core Latin/Clinical Subsets (~132 KB)
+ * SIL Open Font License 1.1 | https://font.pocketgull.app
+ */
+
+@font-face {
+  font-family: 'PocketGull';
+  src: url('../../fonts/woff2/PocketGull-Regular-Core.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 108%;
+  ascent-override: 96%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'PocketGull';
+  src: url('../../fonts/woff2/PocketGull-Regular-Core.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 108%;
+  ascent-override: 96%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'PocketGull';
+  src: url('../../fonts/woff2/PocketGull-Bold-Core.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 108%;
+  ascent-override: 96%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'PocketGull';
+  src: url('../../fonts/woff2/PocketGull-Bold-Core.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 108%;
+  ascent-override: 96%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'PocketGull Micro';
+  src: url('../../fonts/woff2/PocketGull-Micro-Core.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 108%;
+  ascent-override: 96%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}

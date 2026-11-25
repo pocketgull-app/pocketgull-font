@@ -1,0 +1,40 @@
+/**
+ * @pocketgull/font/mono.css — PocketGull Mono Tabular Family (WOFF2)
+ * SIL Open Font License 1.1 | https://font.pocketgull.app
+ */
+
+@font-face {
+  font-family: 'PocketGull Mono';
+  src: url('../../fonts/woff2/PocketGullMono-Regular.woff2') format('woff2');
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 108%;
+  ascent-override: 96%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'PocketGull Mono';
+  src: url('../../fonts/woff2/PocketGullMono-Bold.woff2') format('woff2');
+  font-weight: 700 800;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 108%;
+  ascent-override: 96%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'PocketGull Mono';
+  src: url('../../fonts/woff2/PocketGullMono-Italic.woff2') format('woff2');
+  font-weight: 400 500;
+  font-style: italic;
+  font-display: swap;
+  size-adjust: 108%;
+  ascent-override: 96%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
