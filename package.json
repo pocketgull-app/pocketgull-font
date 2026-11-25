@@ -2,9 +2,20 @@
   "name": "@pocketgull/font",
   "version": "4.0.0",
   "type": "module",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "description": "Optotypically calibrated clinical and ophthalmological vector font superfamily bridging tactile humanist warmth with zero-error clinical precision.",
   "main": "fonts.css",
   "style": "fonts.css",
+  "exports": {
+    ".": "./fonts.css",
+    "./fonts.css": "./fonts.css",
+    "./pocketgull.css": "./pocketgull.css",
+    "./fonts/*": "./fonts/*",
+    "./package.json": "./package.json"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/pocketgull-app/pocketgull-font.git"
@@ -48,7 +59,7 @@
     "fonts.css",
     "pocketgull.css",
     "OFL.txt",
-    "LICENSE.txt",
+    "LICENSE-APACHE-2.0.txt",
     "CITATION.cff"
   ],
   "devDependencies": {
