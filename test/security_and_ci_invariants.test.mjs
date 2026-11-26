@@ -281,6 +281,11 @@ test('CI Invariant: deploy-pages.yml splits build/deploy jobs and waits for arti
   const deploySection = yml.slice(deployIdx);
 
   assert.match(buildSection, /persist-credentials:\s*false/, 'actions/checkout in build must set persist-credentials: false');
+  assert.match(
+    buildSection,
+    /for dir in fonts css js assets web documentation standards data; do/,
+    'build job must exclude unused duplicate public/ and article/ directories from _site'
+  );
   assert.ok(!/pages:\s*write/.test(buildSection), 'build job must not request pages: write');
   assert.ok(!/id-token:\s*write/.test(buildSection), 'build job must not request id-token: write');
 

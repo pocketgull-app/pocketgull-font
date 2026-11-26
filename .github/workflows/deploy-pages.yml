@@ -46,7 +46,7 @@ jobs:
         run: |
           mkdir -p _site
           cp -r *.html *.css *.svg *.txt *.json *.xml *.pb *.cff CNAME _headers _site/ 2>/dev/null || true
-          for dir in fonts css js assets public web documentation standards article data; do
+          for dir in fonts css js assets web documentation standards data; do
             if [ -d "$dir" ]; then cp -r "$dir" _site/; fi
           done
 
