@@ -265,3 +265,36 @@ test('Font Binary Security Scanner Invariant: rejects TrueType bytecode & HarfBu
   assert.equal(wasmRes.hasActiveBytecodeVm, true, 'Scanner must classify Wasm table as active in-font VM');
   assert.equal(wasmRes.valid, false, 'Scanner must mark fonts containing Wasm shaper tables invalid');
 });
+
+test('CI Invariant: deploy-pages.yml splits build/deploy jobs and waits for artifact metadata readiness', () => {
+  const workflowPath = path.join('.github', 'workflows', 'deploy-pages.yml');
+  assert.ok(fs.existsSync(workflowPath), 'deploy-pages.yml must exist');
+  const yml = fs.readFileSync(workflowPath, 'utf8');
+
+  assert.match(yml, /^concurrency:\s*\r?\n\s+group:\s*"pages"\s*\r?\n\s+cancel-in-progress:\s*false/m, 'concurrency must set cancel-in-progress: false');
+
+  const buildIdx = yml.search(/^\s{2}build:\s*$/m);
+  const deployIdx = yml.search(/^\s{2}deploy:\s*$/m);
+  assert.ok(buildIdx !== -1 && deployIdx > buildIdx, 'jobs must define separate build and deploy jobs in order');
+
+  const buildSection = yml.slice(buildIdx, deployIdx);
+  const deploySection = yml.slice(deployIdx);
+
+  assert.match(buildSection, /persist-credentials:\s*false/, 'actions/checkout in build must set persist-credentials: false');
+  assert.ok(!/pages:\s*write/.test(buildSection), 'build job must not request pages: write');
+  assert.ok(!/id-token:\s*write/.test(buildSection), 'build job must not request id-token: write');
+
+  assert.match(deploySection, /^\s{4}needs:\s*build\s*$/m, 'deploy job must declare needs: build');
+  assert.match(deploySection, /pages:\s*write/, 'deploy job must declare pages: write');
+  assert.match(deploySection, /id-token:\s*write/, 'deploy job must declare id-token: write');
+
+  const waitStepIdx = deploySection.indexOf('Wait for github-pages Artifact Metadata');
+  const deployStepIdx = deploySection.indexOf('actions/deploy-pages');
+  assert.ok(waitStepIdx !== -1 && deployStepIdx > waitStepIdx, 'Wait for github-pages Artifact Metadata step must precede actions/deploy-pages');
+
+  const waitStep = deploySection.slice(waitStepIdx, deployStepIdx);
+  assert.match(waitStep, /actions\/runs\/\$\{RUN_ID\}\/artifacts\?name=github-pages/, 'artifact readiness check must poll actions/runs/${RUN_ID}/artifacts?name=github-pages');
+  const runBlockIdx = waitStep.indexOf('run:');
+  assert.ok(runBlockIdx !== -1, 'Wait step must contain a run block');
+  assert.ok(!waitStep.slice(runBlockIdx).includes('${{'), 'run block must not interpolate raw ${{ expressions (use env: variables)');
+});

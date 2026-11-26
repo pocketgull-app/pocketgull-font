@@ -9,22 +9,20 @@ permissions: read-all
 
 concurrency:
   group: "pages"
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
+    name: Build, Test & Stage Pages Artifact
     runs-on: ubuntu-latest
     permissions:
-      actions: read
       contents: read
-      pages: write
-      id-token: write
+      pages: read
     steps:
       - name: Checkout Repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Set up Node.js 24
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
@@ -57,8 +55,36 @@ jobs:
         with:
           path: '_site'
 
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      pages: write
+      id-token: write
+    steps:
+      - name: Wait for github-pages Artifact Metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 12); do
+            count=$(gh api "repos/${REPO}/actions/runs/${RUN_ID}/artifacts?name=github-pages" --jq '[.artifacts[] | select(.expired == false)] | length')
+            echo "Attempt ${attempt}/12: found ${count} active github-pages artifact(s)"
+            if [ "${count}" -ge 1 ]; then
+              exit 0
+            fi
+            sleep 3
+          done
+          echo "::error::github-pages artifact metadata did not appear within 36s"
+          exit 1
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
-
-
