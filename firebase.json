@@ -1,10 +1,41 @@
 {
   "hosting": {
+    "site": "font-pocketgull-app",
     "public": ".",
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      "**/.venv/**",
+      "**/__pycache__/**",
+      "apache/**",
+      "api/**",
+      "apps/**",
+      "article/**",
+      "dist/**",
+      "distribution/**",
+      "experiments/**",
+      "flutter/**",
+      "local/**",
+      "ofl/**",
+      "private/**",
+      "public/**",
+      "scratch/**",
+      "scripts/**",
+      "sources/**",
+      "test/**",
+      "test-results/**",
+      "tests/**",
+      "tool/**",
+      "Dockerfile*",
+      "package*.json",
+      "requirements*.lock",
+      "requirements*.txt",
+      "*.py",
+      "*.md",
+      "*.toml",
+      "*.yml",
+      "*.yaml"
     ],
     "headers": [
       {
@@ -27,6 +58,10 @@
             "value": "credentialless"
           },
           {
+            "key": "Origin-Agent-Cluster",
+            "value": "?1"
+          },
+          {
             "key": "Referrer-Policy",
             "value": "strict-origin-when-cross-origin"
           },
@@ -39,8 +74,12 @@
             "value": "nosniff"
           },
           {
+            "key": "Permissions-Policy",
+            "value": "geolocation=(), microphone=(), camera=(), payment=(), tools=(self), usb=()"
+          },
+          {
             "key": "Content-Security-Policy",
-            "value": "default-src 'self'; script-src 'self' 'sha256-ULPN4HruT8vjHphTixK2casCTJ+GQt0c7I5nXtjooWU=' 'sha256-E0Au/lAq/HndgLuUKXtkLe9PSbDMRZVQS7BByxi3RoU=' 'sha256-Lx9JGAwUuJlxr7nKLBdzqfCJurvIuieViumi3DFzT48=' 'sha256-UQAY79FsWWvvXgZvtutrOfZG+xx5hlHySYTt6Adaw+4=' 'sha256-ju4hhOU5McZ7iV9Mvw1xKGaJmsn2rqnRQahlmXXoK80=' 'sha256-bDZIg0/NzwIKLpzU2RL0yzBMAtP6kuMmvAJtlTJRBpk=' 'sha256-HOJDCYZ66nu8+6lQUzptfbJ5WZCBTqtAn7kuWRaQHb4=' 'sha256-wdKj9k3GS9LA7Wg+MKenXeGY6/aPHVjBNLrF/XwHnXg=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.paypal.com https://maps.googleapis.com https://*.googleapis.com https://*.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https:; worker-src 'self' blob:; frame-src 'self' https://www.paypal.com https://*.paypal.com https://*.google.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self';"
+            "value": "default-src 'none'; script-src 'self' 'sha256-Sr3Cc6oo3+usSIYAVOyRuNUErWvaqH8HGe2RMSdrLfU=' 'sha256-v3xyCo3kv7u0LBFvL4HnS7yb79Hzkovd5FLPJU6+1O8=' 'sha256-eM8/uLPn+slwOk3wpF/ntZOBxpmyaCiOj6ODCpPUL0Y=' 'sha256-dE9xBZMAvfxGiXYmB7WLzljtbk5ziwWqb6Y5L+xzs38=' 'sha256-cAn7ZXqx6kxLzTtHmDzcZx1KUbwEp9EH+4BQtDxjPHo=' 'sha256-lV1atztDwmcspgXB5copApUX8/JoPlbmF+jbuvUcpBE=' 'sha256-tUd5FWxl/PKOqqmVJ53o0CGss/mt+CIJ9yOJvkT0isY=' 'sha256-bTzy8CmoxVDcNfDlB2SyiBCJE3iceYDe0G8XDlGh88M=' 'sha256-+IyXuhcKsjSfsD+1sfNAIev3bXbFuqClx5RtQFakNcI=' 'sha256-OymJ6Lvug7YiqMCcp48h6p1GOwLw8SSTGqsf2UODq/c=' 'sha256-ujlahzrRYpzNhJuplcO12OtvEqJ4nEE8+OUPaXAhlNg=' 'sha256-xnPyAn1Kwu1t3wlRXfRuK/iQmiT0pbN6zru7iRd7S74=' 'sha256-J1H6m1DzDQdaeQ5U+L513vRdKdQxoffvViWfgZGbfws=' 'sha256-Xy85nmvXTcYAVPqqN2eDSYJ9n98uBSjQ7OfZI4t2Dgk=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://generativelanguage.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; worker-src 'self' blob:; object-src 'none'; frame-src 'self' https://www.paypal.com https://*.paypal.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self';"
           }
         ]
       },
@@ -54,6 +93,10 @@
           {
             "key": "Access-Control-Allow-Origin",
             "value": "*"
+          },
+          {
+            "key": "Cross-Origin-Resource-Policy",
+            "value": "cross-origin"
           }
         ]
       },
@@ -67,6 +110,10 @@
           {
             "key": "Access-Control-Allow-Origin",
             "value": "*"
+          },
+          {
+            "key": "Cross-Origin-Resource-Policy",
+            "value": "cross-origin"
           }
         ]
       },
@@ -80,6 +127,10 @@
           {
             "key": "Access-Control-Allow-Origin",
             "value": "*"
+          },
+          {
+            "key": "Cross-Origin-Resource-Policy",
+            "value": "cross-origin"
           }
         ]
       },
@@ -102,6 +153,10 @@
           {
             "key": "Access-Control-Allow-Origin",
             "value": "*"
+          },
+          {
+            "key": "Cross-Origin-Resource-Policy",
+            "value": "cross-origin"
           }
         ]
       },
