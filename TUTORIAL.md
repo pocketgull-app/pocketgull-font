@@ -54,6 +54,53 @@ Ignore the full 39-file catalog until you need a specialty cut. **95% of users o
 | **2. Everyday Reading, Docs & EHR Notes** | [`fonts/ttf/PocketGull-Fineliner.ttf`](fonts/ttf/PocketGull-Fineliner.ttf) | Warm **25-UPM felt-marker corner radii** reduce harsh digital glare during long-form reading. |
 | **3. Websites & Web Apps** | [`fonts/woff2/PocketGull-VF.woff2`](fonts/woff2/PocketGull-VF.woff2) | One single compressed Variable Font file covering every weight (`100`–`900`) with zero layout shift (`size-adjust: 108%`). |
 
+### Binary Font-Picker Tree (Sloan-5 Harmonic Typographic Scale: `20px → 15px → 12.5px`)
+
+> **Why `20px → 15px → 12.5px`?** Because PocketGull is built on a `1000 UPM` em-square with a **Louise Sloan `5:1` (`200 UPM`)** stroke and a **`600 UPM` (`3/5 em`)** monospace cell, stepping font sizes in multiples of `2.5px` (`20px`, `15px`, `12.5px`) locks every `600 UPM` column (`12px`, `9px`, `7.5px`), every `200 UPM` Sloan stroke (`4px`, `3px`, `2.5px`), and every `40 UPM` box hairline (`1.0` physical Retina pixel at `12.5px`) onto exact integer pixel boundaries.
+
+```mermaid
+%%{init: {
+  'theme': 'base',
+  'flowchart': {
+    'nodeSpacing': 20,
+    'rankSpacing': 45,
+    'padding': 14,
+    'curve': 'stepAfter'
+  },
+  'themeVariables': {
+    'fontFamily': 'PocketGull, PocketGull Mono, sans-serif',
+    'fontSize': '12.5px',
+    'primaryColor': '#FDFAF2',
+    'primaryTextColor': '#1F2E4C',
+    'primaryBorderColor': '#1F2E4C',
+    'lineColor': '#1F2E4C',
+    'edgeLabelBackground': '#E2DACB'
+  }
+}}%%
+flowchart LR
+    classDef root fill:#FDFAF2,stroke:#b45309,stroke-width:2px,color:#1F2E4C,font-size:18px,font-weight:700;
+    classDef branch fill:#F3EFE6,stroke:#1F2E4C,stroke-width:1.5px,color:#1F2E4C,font-size:15px,font-weight:600;
+    classDef leaf fill:#FDFAF2,stroke:#1F2E4C,stroke-width:1px,color:#2C2C2C,font-size:12.5px;
+
+    Q0[["PocketGull v4.0
+Which font file?"]]:::root
+
+    Q0 -->|"0 · Reading & UI"| Q1["Proportional
+Desktop or Web"]:::branch
+    Q0 -->|"1 · Code & STEM"| Q2["Fixed 600 UPM
+Grid or Math"]:::branch
+
+    Q1 -->|"00 · Docs & EHR"| L00["PocketGull-Fineliner.ttf
+25u Warmth · 0̸ l I Safe"]:::leaf
+    Q1 -->|"01 · Web & Apps"| L01["PocketGull-VF.woff2
+16-Axis VF · ♥ 72 BPM"]:::leaf
+
+    Q2 -->|"10 · Code & ICU"| R10["PocketGullMono-Regular.ttf
+600 UPM Grid · ▁▂▄█▂▁ · [!]"]:::leaf
+    Q2 -->|"11 · LaTeX & Plots"| R11["PocketGull-Math.ttf
+ISO MATH 68u · ∑ ∫ √ ℒ"]:::leaf
+```
+
 ---
 
 ## Level 4: Cognitive Offloading (Safety Baked Into the File)
@@ -69,6 +116,52 @@ Once you install a PocketGull font from Level 3, its binary safety guarantees ha
    ```powershell
    node scripts/scan-font-security.mjs .
    ```
+
+### Binary Poka-Yoke Safety Tree (Sloan-5 Scale: `18px → 15px → 12.5px`)
+
+```mermaid
+%%{init: {
+  'theme': 'base',
+  'flowchart': {
+    'nodeSpacing': 20,
+    'rankSpacing': 45,
+    'padding': 14,
+    'curve': 'stepAfter'
+  },
+  'themeVariables': {
+    'fontFamily': 'PocketGull Mono, PocketGull Math, monospace',
+    'fontSize': '12.5px',
+    'primaryColor': '#FDFAF2',
+    'primaryTextColor': '#1F2E4C',
+    'primaryBorderColor': '#1F2E4C',
+    'lineColor': '#1F2E4C',
+    'edgeLabelBackground': '#E2DACB'
+  }
+}}%%
+flowchart LR
+    classDef root fill:#FDFAF2,stroke:#b45309,stroke-width:2px,color:#1F2E4C,font-size:18px,font-weight:700;
+    classDef gate fill:#F3EFE6,stroke:#1F2E4C,stroke-width:1.5px,color:#1F2E4C,font-size:15px,font-weight:600;
+    classDef leaf fill:#FDFAF2,stroke:#1F2E4C,stroke-width:1px,color:#2C2C2C,font-size:12.5px;
+    classDef stitched fill:#FDFAF2,stroke:#b45309,stroke-width:1px,stroke-dasharray:4 2,color:#2C2C2C,font-size:12.5px;
+
+    SFNT[["SFNT 0x00010000
+Poka-Yoke Engine"]]:::root
+
+    SFNT -->|"0 · Binary Gate"| MEM["Memory Safety
+Zero Crash"]:::gate
+    SFNT -->|"1 · Optical Gate"| VIS["Visual Safety
+Zero Drift"]:::gate
+
+    MEM -->|"00"| M00["loca[i] % 2 == 0
+2-Byte Padded · W3C OTS"]:::leaf
+    MEM -->|"01"| M01["instructionLength == 0
+Zero VM · Bit-7 Masked"]:::leaf
+
+    VIS -->|"10"| V10["[!] SpoofGuard
+U+202E / U+3164 Salience"]:::stitched
+    VIS -->|"11"| V11["600 UPM NESW Joinery
+Full-Bleed Box & Math"]:::leaf
+```
 
 ---
 
